@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.tgz
+.env*
+.track/
+.h2a/
+.agents/
+.codex/
+proofs/tmp/
