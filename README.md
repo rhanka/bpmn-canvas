@@ -26,7 +26,7 @@ never calls the network.
 | Import | Content |
 |---|---|
 | `@sentropic/bpmn-canvas` | `createBpmnCanvas`, `renderDiagrams`, `analyzeXml`. Importable without a DOM; the engine loads when a canvas or render is created. |
-| `@sentropic/bpmn-canvas/react` | `<BpmnCanvas>`. Optional peer: `react` 18.2 or newer. |
+| `@sentropic/bpmn-canvas/react` | `<BpmnCanvas>`. Optional peer: `react` 19 (qualified with 19.3.0). |
 | `@sentropic/bpmn-canvas/assistant-ui` | `createBpmnToolkit`, `BpmnToolCard`. Structural coupling only: no import of `@assistant-ui/react`. Checked against 0.15.22. |
 | `@sentropic/bpmn-canvas/styles.css` | The same CSS the canvas installs itself, for `styles: "external"` hosts. |
 
