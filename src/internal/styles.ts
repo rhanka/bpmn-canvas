@@ -14,9 +14,9 @@ const STYLE_MARK = "data-bpmn-canvas-styles";
  * them. A directory URL would not be rewritten.
  */
 function fontFaceCss(): string {
-  const woff2 = new URL("./assets/bpmn-font/font/bpmn.woff2", import.meta.url).href;
-  const woff = new URL("./assets/bpmn-font/font/bpmn.woff", import.meta.url).href;
-  const ttf = new URL("./assets/bpmn-font/font/bpmn.ttf", import.meta.url).href;
+  const woff2 = new URL("../assets/bpmn-font/font/bpmn.woff2", import.meta.url).href;
+  const woff = new URL("../assets/bpmn-font/font/bpmn.woff", import.meta.url).href;
+  const ttf = new URL("../assets/bpmn-font/font/bpmn.ttf", import.meta.url).href;
   return `@font-face{font-family:'bpmn';src:url('${woff2}') format('woff2'),url('${woff}') format('woff'),url('${ttf}') format('truetype');font-weight:normal;font-style:normal;}`;
 }
 

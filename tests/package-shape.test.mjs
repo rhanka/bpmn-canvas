@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (p) => readFileSync(root + p);
@@ -112,4 +112,18 @@ test("no Python, no AI trailer files, no private markers in tree", () => {
     const text = read(f).toString("utf8");
     assert.ok(!/DS_TOKENS|D[2]dRender|localStorage/.test(text), `${f} has a banned symbol`);
   }
+});
+
+test("every new URL(..., import.meta.url) in dist points to a shipped file", () => {
+  const files = execFileSync("find", ["dist", "-type", "f", "-name", "*.js"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean);
+  let checked = 0;
+  for (const f of files) {
+    const text = read(f).toString("utf8");
+    for (const m of text.matchAll(/new URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)/g)) {
+      const target = fileURLToPath(new URL(m[1], pathToFileURL(root + f)));
+      assert.ok(existsSync(target), `${f}: ${m[1]} -> ${target} is missing`);
+      checked++;
+    }
+  }
+  assert.ok(checked >= 3, "the font URLs must be checked");
 });

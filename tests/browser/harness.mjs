@@ -11,20 +11,22 @@ const root = fileURLToPath(new URL("../../", import.meta.url));
 
 export async function bundlePage(entry, name) {
   const outdir = join(root, "proofs-profile-build", name);
-  mkdirSync(outdir, { recursive: true });
+  const pagedir = join(outdir, "page");
+  mkdirSync(pagedir, { recursive: true });
   await build({
     entryPoints: [entry],
     bundle: true,
     format: "esm",
-    outfile: join(outdir, "page.js"),
+    outfile: join(pagedir, "page.js"),
     logLevel: "warning",
     absWorkingDir: root,
     define: { "process.env.NODE_ENV": '"development"' },
   });
-  // The bundle resolves `new URL("./assets/...", import.meta.url)` next to itself.
+  // dist/internal/styles.js resolves `../assets/...` from its own directory; a bundle one level
+  // below the assets reproduces the package layout (page/page.js next to assets/).
   cpSync(join(root, "dist/assets"), join(outdir, "assets"), { recursive: true });
-  writeFileSync(join(outdir, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${name}</title></head><body><div id="app"></div><script type="module" src="./page.js"></script></body></html>`);
-  return { url: pathToFileURL(join(outdir, "index.html")).href, outdir };
+  writeFileSync(join(pagedir, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${name}</title></head><body><div id="app"></div><script type="module" src="./page.js"></script></body></html>`);
+  return { url: pathToFileURL(join(pagedir, "index.html")).href, outdir };
 }
 
 export async function runInBrowser(entry, name, fn) {
