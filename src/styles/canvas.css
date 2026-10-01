@@ -1,0 +1,17 @@
+.bpmn-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  outline: none;
+}
+
+.bpmn-canvas:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.bpmn-canvas--readonly .djs-palette,
+.bpmn-canvas--readonly .djs-context-pad {
+  display: none;
+}

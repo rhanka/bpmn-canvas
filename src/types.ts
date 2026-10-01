@@ -12,6 +12,7 @@ export type DiagnosticCode =
   | "comments-present"
   | "missing-di"
   | "partial-di"
+  | "incomplete-io-specification"
   | "filtered-small"
   | "render-failed"
   | "layout-unsupported"
@@ -62,7 +63,8 @@ export interface SetXmlOptions {
 
 export type SetXmlResult =
   | { readonly applied: true }
-  | { readonly applied: false; readonly reason: "echo" };
+  /** `echo`: revision already applied or emitted. `invalid`: not imported; the reason is in the diagnostics and the last good document stays. */
+  | { readonly applied: false; readonly reason: "echo" | "invalid" };
 
 export interface LayoutResult {
   readonly changed: number;
@@ -91,7 +93,7 @@ export interface BpmnCanvasHandle {
   /** Resolves once the first load attempt has finished, whatever its outcome. Never rejects. */
   readonly ready: Promise<void>;
   readonly state: CanvasState;
-  /** Resolves `{applied:false}` for an echo; rejects with an `AbortError` when superseded or destroyed. */
+  /** Resolves `{applied:false}` for an echo or an invalid document; rejects with an `AbortError` when superseded or destroyed. */
   setXml(xml: string, options?: SetXmlOptions): Promise<SetXmlResult>;
   /**
    * Complete current document. Returns the exact input bytes while no command has run

@@ -8,3 +8,4 @@ dist/
 .codex/
 proofs/tmp/
 proofs-profile-*/
+src/internal/css.generated.ts
