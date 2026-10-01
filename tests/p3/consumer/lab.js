@@ -34,6 +34,12 @@ async function mount(name, options = {}) {
     onDiagnostic: (d) => log.diagnostics.push(d),
     onStateChange: (s) => log.states.push(s),
   });
+  const button = document.createElement("button");
+  button.type = "button";
+  button.id = `export-${id}`;
+  button.textContent = "Export";
+  button.addEventListener("click", () => window.lab.exportDownload(id));
+  wrap.appendChild(button);
   instances.set(id, { id, handle, xml, wrap, el, log });
   await handle.ready;
   return { id, hostId: el.id, state: handle.state };
@@ -175,7 +181,7 @@ window.lab = {
 
   // E9: a host with its own bpmn-js: our canvas (legend profile) must not change the host's behavior.
   async e9() {
-    const xml = await corpusText("ce4-two-pools-message");
+    const xml = await corpusText("notation");
     const hostA = makeHost();
     const hostModeler = new Modeler({ container: hostA.el });
     await hostModeler.importXML(xml);
@@ -188,11 +194,11 @@ window.lab = {
       }
     };
     const protoFns = () => Object.getOwnPropertyNames(BpmnUpdater.prototype).filter((k) => typeof BpmnUpdater.prototype[k] === "function").map((k) => `${k}:${BpmnUpdater.prototype[k].toString().length}`).join("|");
-    const before = { dataInput: createDataInput(), proto: protoFns(), badges: document.querySelectorAll(".bjs-powered-by").length, updaterClass: hostModeler.get("bpmnUpdater").constructor.name };
-    hostModeler.get("commandStack").undo();
-    const { id } = await mount("ce4-two-pools-message", { profile: "legend" });
+    const before = { dataInput: createDataInput(), proto: protoFns(), badges: document.querySelectorAll(".bjs-powered-by").length, updaterIsUpstream: Object.getPrototypeOf(hostModeler.get("bpmnUpdater")) === BpmnUpdater.prototype };
+    try { hostModeler.get("commandStack").undo(); } catch { /* nothing to undo after the upstream error */ }
+    const { id } = await mount("notation", { profile: "legend" });
     const ours = get(id).handle;
-    const after = { dataInput: createDataInput(), proto: protoFns(), badges: document.querySelectorAll(".bjs-powered-by").length, updaterClass: hostModeler.get("bpmnUpdater").constructor.name };
+    const after = { dataInput: createDataInput(), proto: protoFns(), badges: document.querySelectorAll(".bjs-powered-by").length, updaterIsUpstream: Object.getPrototypeOf(hostModeler.get("bpmnUpdater")) === BpmnUpdater.prototype };
     const badge = hostA.el.querySelector(".bjs-powered-by");
     const cs = badge && getComputedStyle(badge);
     return { before, after, hostBadgeVisible: !!badge && cs.display !== "none" && cs.visibility !== "hidden", ourState: ours.state };

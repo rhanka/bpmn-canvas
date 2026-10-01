@@ -108,7 +108,7 @@ try {
     await page.mouse.click(c.x, c.y);
   };
 
-  async function criterion(id, title, path, fn) {
+  async function criterion(id, title, path, fn, { allowConsole } = {}) {
     if (ONLY && !ONLY.includes(String(id))) return;
     const rec = { id, title, pass: false, url: null, checks: [], screenshots: [], consoleErrors: [], extra: {}, error: null };
     const start = consoleLines.length;
@@ -129,7 +129,8 @@ try {
       rec.error = String(e?.stack ?? e).split("\n").slice(0, 4).join(" | ");
       check("criterion ran to completion", false, rec.error);
     }
-    rec.consoleErrors = consoleLines.slice(start).filter((l) => /^\[(error|pageerror)\]/.test(l));
+    rec.consoleErrors = consoleLines.slice(start).filter((l) => /^\[(error|pageerror)\]/.test(l) && !(allowConsole && allowConsole.test(l)));
+    check("no console error or page error", rec.consoleErrors.length === 0, rec.consoleErrors);
     rec.pass = rec.checks.length > 0 && rec.checks.every((c) => c.pass);
     evidence.criteria.push(rec);
     console.log(`${rec.pass ? "PASS" : "FAIL"} criterion ${id}: ${title} (${rec.checks.filter((c) => c.pass).length}/${rec.checks.length})`);
@@ -303,7 +304,7 @@ try {
     let downloaded = null;
     let how = "download-event";
     try {
-      const [dl] = await Promise.all([page.waitForEvent("download", { timeout: 8000 }), ev((i) => window.lab.exportDownload(i), id)]);
+      const [dl] = await Promise.all([page.waitForEvent("download", { timeout: 8000 }), page.click(`#export-${id}`)]);
       const target = join(proofs, "export.bpmn");
       const failure = await dl.failure();
       rec.extra.downloadFailure = failure;
@@ -371,9 +372,22 @@ try {
     await shot("axe-page");
   });
 
+  // ---- E9: a host with its own bpmn-js ---------------------------------------------------------
+  await criterion("E9", "a page with its own bpmn-js Modeler is unaffected by a canvas using the legend profile", "lab.html", async ({ check, rec, shot }) => {
+    const r = await ev(() => window.lab.e9());
+    rec.extra.e9 = r;
+    check("the host's DataInput behavior is identical before and after our canvas exists", r.before.dataInput === r.after.dataInput, { before: r.before.dataInput, after: r.after.dataInput });
+    check("BpmnUpdater.prototype is not modified by our canvas", r.before.proto === r.after.proto && r.before.proto.length > 0);
+    check("the host's updater is still an instance of the unmodified upstream BpmnUpdater", r.before.updaterIsUpstream === true && r.after.updaterIsUpstream === true, r);
+    check("the host's bpmn.io badge stays visible, and each instance has its own (2 on the page)", r.hostBadgeVisible && r.before.badges === 1 && r.after.badges === 2, { before: r.before.badges, after: r.after.badges });
+    check("our canvas is ready next to it", r.ourState === "ready");
+    await shot("host-and-canvas");
+  }, { allowConsole: /no parent for <undefined> in <P>|Cannot use 'in' operator to search for 'ioSpecification' in null/ });
+
   // ---- finish ----------------------------------------------------------------------------
   evidence.consoleTotal = consoleLines.length;
   evidence.server.requests = server.requests.length;
+  evidence.server.notFound = server.requests.filter((q) => q.status === 404);
   evidence.allCriteriaPass = evidence.criteria.length > 0 && evidence.criteria.every((c) => c.pass);
 } finally {
   if (CDP_URL) {
