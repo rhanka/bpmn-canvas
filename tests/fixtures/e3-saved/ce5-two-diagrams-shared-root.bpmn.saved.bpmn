@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://example.org/e3">
+  <bpmn:message id="MsgShared" name="Shared" />
+  <bpmn:collaboration id="CA">
+    <bpmn:participant id="PaA" name="Sender" processRef="PS" />
+    <bpmn:participant id="PbA" name="Receiver" processRef="PR" />
+    <bpmn:messageFlow id="MFA" sourceRef="TS" targetRef="ER" messageRef="MsgShared" />
+  </bpmn:collaboration>
+  <bpmn:collaboration id="CB">
+    <bpmn:participant id="PaB" name="Other" processRef="PO" />
+  </bpmn:collaboration>
+  <bpmn:process id="PS" isExecutable="false">
+    <bpmn:task id="TS" name="Send-EDITED" />
+  </bpmn:process>
+  <bpmn:process id="PR" isExecutable="false">
+    <bpmn:startEvent id="ER" name="Receive">
+      <bpmn:messageEventDefinition id="MEDR" messageRef="MsgShared" />
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmn:process id="PO" isExecutable="false">
+    <bpmn:task id="TO" name="Other-EDITED" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="DiagA" name="Exchange">
+    <bpmndi:BPMNPlane id="PlA" bpmnElement="CA">
+      <bpmndi:BPMNShape id="SPaA" bpmnElement="PaA" isHorizontal="true">
+        <dc:Bounds x="100" y="50" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="STS" bpmnElement="TS">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SPbA" bpmnElement="PbA" isHorizontal="true">
+        <dc:Bounds x="100" y="300" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SER" bpmnElement="ER">
+        <dc:Bounds x="282" y="342" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="EMFA" bpmnElement="MFA">
+        <di:waypoint x="300" y="160" />
+        <di:waypoint x="300" y="342" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="DiagB" name="Other">
+    <bpmndi:BPMNPlane id="PlB" bpmnElement="CB">
+      <bpmndi:BPMNShape id="SPaB" bpmnElement="PaB" isHorizontal="true">
+        <dc:Bounds x="100" y="100" width="400" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="STO" bpmnElement="TO">
+        <dc:Bounds x="210" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

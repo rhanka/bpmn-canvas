@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://example.org/e3">
+  <bpmn:collaboration id="C1"><bpmn:participant id="P1" name="Pool A" processRef="PA"/></bpmn:collaboration>
+  <bpmn:collaboration id="C2"><bpmn:participant id="P2" name="Pool B" processRef="PB"/></bpmn:collaboration>
+  <bpmn:process id="PA" name="Review" isExecutable="false"><bpmn:task id="TA" name="A-task"/></bpmn:process>
+  <bpmn:process id="PB" name="Review" isExecutable="false"><bpmn:task id="TB" name="B-task"/></bpmn:process>
+  <bpmndi:BPMNDiagram id="DA" name="Review"><bpmndi:BPMNPlane id="PlA" bpmnElement="C1">
+    <bpmndi:BPMNShape id="SP1" bpmnElement="P1" isHorizontal="true"><dc:Bounds x="100" y="100" width="400" height="200"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="STA" bpmnElement="TA"><dc:Bounds x="200" y="160" width="100" height="80"/></bpmndi:BPMNShape>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="DB" name="Review"><bpmndi:BPMNPlane id="PlB" bpmnElement="C2">
+    <bpmndi:BPMNShape id="SP2" bpmnElement="P2" isHorizontal="true"><dc:Bounds x="100" y="100" width="400" height="200"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="STB" bpmnElement="TB"><dc:Bounds x="200" y="160" width="100" height="80"/></bpmndi:BPMNShape>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

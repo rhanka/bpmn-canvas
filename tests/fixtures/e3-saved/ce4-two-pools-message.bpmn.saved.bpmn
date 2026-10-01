@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://example.org/e3">
+  <bpmn:message id="Msg1" name="Msg" />
+  <bpmn:collaboration id="C">
+    <bpmn:participant id="Pa" name="Pool A" processRef="PX" />
+    <bpmn:participant id="Pb" name="Pool B" processRef="PY" />
+    <bpmn:messageFlow id="MF" sourceRef="T1" targetRef="T2" messageRef="Msg1" />
+  </bpmn:collaboration>
+  <bpmn:process id="PX" isExecutable="false">
+    <bpmn:task id="T1" name="Send-EDITED" />
+  </bpmn:process>
+  <bpmn:process id="PY" isExecutable="false">
+    <bpmn:startEvent id="T2" name="Receive-EDITED">
+      <bpmn:messageEventDefinition id="MED" messageRef="Msg1" />
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BD">
+    <bpmndi:BPMNPlane id="Pl" bpmnElement="C">
+      <bpmndi:BPMNShape id="SPa" bpmnElement="Pa" isHorizontal="true">
+        <dc:Bounds x="100" y="50" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ST1" bpmnElement="T1">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SPb" bpmnElement="Pb" isHorizontal="true">
+        <dc:Bounds x="100" y="300" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ST2" bpmnElement="T2">
+        <dc:Bounds x="292" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="268" y="378" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="EMF" bpmnElement="MF">
+        <di:waypoint x="310" y="160" />
+        <di:waypoint x="310" y="342" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://example.org/e3">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:subProcess id="Sub_1" name="Sub"><bpmn:task id="Inner" name="Inner-task"/></bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BD1" name="Main"><bpmndi:BPMNPlane id="Pl1" bpmnElement="Process_1">
+    <bpmndi:BPMNShape id="SSub" bpmnElement="Sub_1"><dc:Bounds x="200" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BD2" name="Sub"><bpmndi:BPMNPlane id="Pl2" bpmnElement="Sub_1">
+    <bpmndi:BPMNShape id="SInner" bpmnElement="Inner"><dc:Bounds x="200" y="100" width="100" height="80"/></bpmndi:BPMNShape>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>
