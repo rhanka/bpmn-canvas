@@ -1,9 +1,7 @@
 # Third-party notices
 
-This package depends on, or will carry, the third-party material below. Exact
-license texts are in `licenses/`. The AFM and font entries describe material
-that is added to this tree in a later phase; this file states the terms that
-apply once those files are present.
+This package depends on, or carries, the third-party material below. Exact
+license texts are in `licenses/`.
 
 ## bpmn-js (declared dependency)
 
@@ -37,17 +35,19 @@ apply once those files are present.
 - Treatment: kept as an external npm dependency, never vendored or bundled.
   Bundling it would require resolving this missing notice first.
 
-## BPMN font (to be added unmodified in a later phase)
+## BPMN font (shipped unmodified)
 
 - Source: `bpmn-font` 0.13.0 (npm integrity
   `sha512-NrD6fhpCIPyQQmgPJcFUFm55oXD3EIwRhP5bdXTDNTEAfg9HwuvhXThOuM/XPUrruJoATi2ROeOfFeCIM+ftSw==`).
 - Copyright (c) 2014-present, Camunda Services GmbH.
 - License: **SIL Open Font License 1.1** (not MIT). Text:
   `licenses/bpmn-font.OFL-1.1.txt`.
-- Treatment: font bytes are shipped unmodified, with the copyright notice and
-  license text alongside.
+- Treatment: the font files and `bpmn.css` are copied byte for byte to
+  `dist/assets/bpmn-font/`; a test compares their sha256 to the official
+  tarball. The copyright notice and license text are in
+  `licenses/bpmn-font.OFL-1.1.txt`.
 
-## Adobe Helvetica metrics (to be added in a later phase)
+## Adobe Helvetica metrics (in `src/internal/textMetrics.ts`)
 
 - Source: Adobe PostScript AFM data for Helvetica and Helvetica-Bold, as
   redistributed in the Matplotlib v3.10.7 `pdfcorefonts` directory.
@@ -72,3 +72,17 @@ published here. The Python code, its vendored tree and its fixtures are not.
 
 No brand tokens, brand fonts, logos or proprietary reference diagrams are part
 of this package.
+
+## Test-only material (not distributed)
+
+These are used by the test suite only. They are not in the npm tarball and not
+in `dist/`; the pack test enforces that.
+
+- **xmllint-wasm** 5.3.0 (devDependency), MIT. Copyright 1998-2018 libxml and
+  libxml.js authors. It is a WebAssembly port of libxml2 (2.13.8 per its README),
+  also MIT.
+- **OMG BPMN 2.0 XSD** (BPMN20, Semantic, BPMNDI, DC, DI; formal/13-12-09).
+  Test-only, not distributed, and **not stored in this repository**: the OMG terms
+  for redistribution are unclear, so the tests download them into an untracked
+  cache and verify their sha256. Source URLs, retrieval date and hashes:
+  `tests/fixtures/xsd/SOURCE.md`.
