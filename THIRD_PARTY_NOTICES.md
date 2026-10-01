@@ -81,6 +81,10 @@ in `dist/`; the pack test enforces that.
 - **xmllint-wasm** 5.3.0 (devDependency), MIT. Copyright 1998-2018 libxml and
   libxml.js authors. It is a WebAssembly port of libxml2 (2.13.8 per its README),
   also MIT.
+- **axe-core** 4.13.0 (devDependency), MPL-2.0. Used by the accessibility check in `tests/p3/run.mjs`;
+  never bundled or shipped.
+- **Vite** (installed at run time into a scratch consumer outside this repository by
+  `tests/p3/prepare.mjs`), MIT. It builds the consumer pages that import the packed tarball.
 - **OMG BPMN 2.0 XSD** (BPMN20, Semantic, BPMNDI, DC, DI; formal/13-12-09).
   Test-only, not distributed, and **not stored in this repository**: the OMG terms
   for redistribution are unclear, so the tests download them into an untracked
