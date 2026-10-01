@@ -92,11 +92,31 @@ for every diagram it did not return, including `filtered-small`. It needs a brow
 `styleNonce`. For a strict CSP use `styles: "external"` and load `styles.css`; font files are
 separate assets, not `data:` URIs.
 
-## Limits
+## Errors and edge cases
 
-No DI generation, no Draw.io or Sparx export, no PNG/PDF export, no server-side rendering, no BPMN
-execution, no complete BPMN conformance claim. The Sentropic mount adapter and a diagram-core
-projection are not part of this version.
+| Situation | Result |
+|---|---|
+| `setXml` superseded by a later `setXml`, or pending at `destroy()` | Rejects with an `AbortError`. |
+| Any `setXml`, `selectDiagram`, `autoLayout` or `getXml` after `destroy()` | Rejects with an `AbortError`. |
+| `selectDiagram(id)` with an id that is not in the document | Rejects with an error named `UnknownDiagramError`. |
+| `setXml` with invalid XML or a document without DI | Resolves `{ applied: false, reason: "invalid" }`, emits the diagnostics, keeps the last good document. |
+| `setXml` with a revision already applied or emitted | Resolves `{ applied: false, reason: "echo" }`; nothing is re-imported. |
+| Initial `xml` invalid | `createBpmnCanvas` still returns a handle, in state `error`; `ready` resolves. |
+| `autoLayout` on a read-only canvas, or with nothing placeable | Resolves `{ changed: 0, skipped }` and emits `layout-unsupported`. |
+| `autoLayout` while the canvas is destroyed or the document replaced | Rejects with an `AbortError`; nothing is moved. |
+| `getXml()` while nothing is displayed | Returns the last XML the host supplied. |
+
+## Known limitations
+
+- No DI generation, no Draw.io or Sparx export, no PNG/PDF export, no server-side rendering, no BPMN
+  execution, no complete BPMN conformance claim.
+- No undo across a diagram switch (`open()` clears the stack).
+- Layout does not reposition boundary events, data stores, groups or pools without a `processRef`;
+  it lists them in `skipped`. A boundary event keeps its old position when its host moves.
+- The `legend` profile has no token for a second gradient tone or a distinct flow stroke.
+- The assistant-ui adapter is structural and renders static previews; the host mounts the editable canvas.
+- The Sentropic mount adapter and a diagram-core projection are not part of this version.
+- Only React 19.3.0 and assistant-ui 0.15.22 are qualified.
 
 ## License
 
