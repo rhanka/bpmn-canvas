@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { chromium } from "playwright-core";
@@ -42,6 +42,23 @@ test("the live demo page loads the diagram and switches looks", { timeout: 18000
     await page.waitForFunction(() => document.querySelectorAll(".legend-shape").length === 0);
     assert.ok((await page.locator(".djs-element").count()) > 30);
     assert.deepEqual(errors, []);
+
+    // The page bundles third-party code: the site carries the license texts, and the footer links them.
+    for (const f of ["LICENSE.txt", "THIRD_PARTY_NOTICES.md", "licenses/index.html", "licenses/bundled-packages.txt", "licenses/bpmn-js.LICENSE", "licenses/bpmn-font.OFL-1.1.txt"]) {
+      assert.ok(existsSync(join(root, "site", f)), `site/${f}`);
+    }
+    assert.match(readFileSync(join(root, "site/licenses/bundled-packages.txt"), "utf8"), /== bpmn-js /);
+    const links = await page.$$eval("footer a", (as) => as.map((a) => a.getAttribute("href")));
+    for (const must of ["https://creativecommons.org/licenses/by/3.0/", "https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/Reference/B.1.0.bpmn", "LICENSE.txt", "THIRD_PARTY_NOTICES.md", "licenses/"]) {
+      assert.ok(links.includes(must), `footer links ${must}`);
+    }
+    assert.match(await page.textContent("footer"), /re-encoded from ISO-8859-1 to UTF-8/);
+    for (const rel of links.filter((h) => !/^https?:/.test(h))) {
+      const res = await page.request.get(`${server.origin}/${rel === "licenses/" ? "licenses/index.html" : rel}`);
+      assert.equal(res.status(), 200, `${rel} served`);
+    }
+    const listed = await (await page.request.get(`${server.origin}/licenses/index.html`)).text();
+    for (const f of readdirSync(join(root, "site/licenses")).filter((f) => f !== "index.html")) assert.ok(listed.includes(`href="${f}"`), `licenses/index.html lists ${f}`);
   } finally {
     await ctx.close();
     await server.close();
