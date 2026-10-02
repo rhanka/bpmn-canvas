@@ -4,7 +4,7 @@
 // With CDP_URL it opens ONE tab in the existing browser, closes only that tab, and never
 // launches or closes the browser. A criterion that cannot run is reported as failed.
 import { chromium } from "playwright-core";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -55,7 +55,7 @@ try {
     page = await context.newPage();
   } else {
     profile = mkdtempSync(join(repo, "proofs-profile-"));
-    context = await chromium.launchPersistentContext(profile, { downloadsPath: join(profile, "dl"), acceptDownloads: true, executablePath: process.env.CHROMIUM ?? "/snap/bin/chromium", headless: true, args: ["--no-first-run", "--no-default-browser-check"] });
+    context = await chromium.launchPersistentContext(profile, { downloadsPath: join(profile, "dl"), acceptDownloads: true, executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined), headless: true, args: ["--no-first-run", "--no-default-browser-check"] });
     evidence.browser.mode = "headless-dev";
     page = context.pages()[0] ?? (await context.newPage());
   }

@@ -2,7 +2,7 @@
 // Never touches the owner's Chrome on CDP 9222.
 import { chromium } from "playwright-core";
 import { build } from "esbuild";
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { join } from "node:path";
@@ -11,7 +11,7 @@ const here = fileURLToPath(new URL("./", import.meta.url));
 const root = join(here, "../../");
 const outDir = join(root, "proofs/e3");
 mkdirSync(outDir, { recursive: true });
-const executablePath = process.env.CHROMIUM ?? "/snap/bin/chromium";
+const executablePath = process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined);
 
 await build({
   entryPoints: [join(here, "page.mjs")],

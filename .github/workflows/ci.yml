@@ -1,0 +1,75 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the attribution test reads the whole history
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - run: npm ci
+
+      # The OMG schemas are downloaded on demand (their redistribution terms are unclear) and
+      # checked against pinned sha256. Cache them so a run needs no network for them.
+      - uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/bpmn-xsd
+          key: bpmn-xsd-${{ hashFiles('tests/fixtures/xsd/SOURCE.md') }}
+
+      - name: Install Chromium for the browser tests
+        run: npx playwright-core install --with-deps chromium
+
+      - run: npm run typecheck
+      - run: npm run typecheck:compat
+      - run: npm test
+
+  consumer:
+    # The packed tarball, installed outside the repository and driven with real gestures.
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright-core install --with-deps chromium
+      - uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/bpmn-xsd
+          key: bpmn-xsd-${{ hashFiles('tests/fixtures/xsd/SOURCE.md') }}
+      - name: Acceptance criteria on the packed tarball
+        run: node tests/p3/run.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p3-evidence
+          path: proofs/p3/
+          if-no-files-found: ignore

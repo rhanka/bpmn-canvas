@@ -1,9 +1,9 @@
 # @sentropic/bpmn-canvas
 
-Provisional name. A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
+A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
 framework-independent core, optional React and assistant-ui adapters.
 
-Status: pre-release, not published. The API below is implemented and tested but not frozen.
+Status: 0.1.0, the first release. The API below is implemented and tested but not frozen.
 
 ```ts
 import { createBpmnCanvas } from "@sentropic/bpmn-canvas";

@@ -1,9 +1,27 @@
 {
   "name": "@sentropic/bpmn-canvas",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Framework-independent BPMN 2.0 editing canvas built on bpmn-js, with React and assistant-ui adapters.",
   "license": "MIT",
-  "private": true,
+  "author": "Fabien Antoine <fabien.antoine@m4x.org>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhanka/bpmn-canvas.git"
+  },
+  "homepage": "https://github.com/rhanka/bpmn-canvas#readme",
+  "bugs": {
+    "url": "https://github.com/rhanka/bpmn-canvas/issues"
+  },
+  "keywords": [
+    "bpmn",
+    "bpmn-js",
+    "bpmn2",
+    "diagram",
+    "editor",
+    "canvas",
+    "react",
+    "assistant-ui"
+  ],
   "type": "module",
   "sideEffects": [
     "./dist/styles.css",
@@ -74,5 +92,9 @@
     "react": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
