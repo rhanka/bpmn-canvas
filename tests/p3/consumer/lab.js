@@ -74,6 +74,7 @@ window.lab = {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     window.__lastExport = xml;
+    window.__lastBlobUrl = a.href;
     a.download = "export.bpmn";
     document.body.appendChild(a);
     a.click();

@@ -12,7 +12,7 @@ import { prepare } from "./prepare.mjs";
 import { startServer } from "./server.mjs";
 
 const repo = fileURLToPath(new URL("../../", import.meta.url));
-const proofs = join(repo, "proofs/p3");
+const proofs = process.env.P3_PROOFS ? join(repo, process.env.P3_PROOFS) : join(repo, "proofs/p3");
 const shots = join(proofs, "shots");
 mkdirSync(shots, { recursive: true });
 const CDP_URL = process.env.CDP_URL;
@@ -315,7 +315,22 @@ try {
       how = `download-event unavailable (${String(e.message).split("\n")[0]})`;
     }
     const xml = await ev((i) => window.lab.getXml(i), id);
-    check("an exported file was captured", downloaded !== null, how);
+    if (downloaded === null) {
+      // The browser-side download interception is cancelled when attached to an existing Chrome.
+      // Fallback, declared as such: read back the exact Blob the page handed to the download.
+      const wit = await ev(async (i) => {
+        const buf = new Uint8Array(await (await fetch(window.__lastBlobUrl)).arrayBuffer());
+        const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", buf))].map((b) => b.toString(16).padStart(2, "0")).join("");
+        const xml = await window.lab.getXml(i);
+        return { blobSha: digest, blobBytes: buf.length, equalsGetXml: new TextDecoder().decode(buf) === xml, getXmlSha: await window.lab.sha256(xml) };
+      }, id);
+      rec.extra.exportMode = "blob-readback (download interception unavailable: " + how + ")";
+      rec.extra.blobWitness = wit;
+      check("fallback: the blob handed to the browser equals getXml() byte for byte", wit.equalsGetXml && wit.blobSha === wit.getXmlSha && wit.blobBytes > 0, wit);
+    } else {
+      rec.extra.exportMode = "download-file";
+    }
+    check("an export was captured (file or blob read-back)", downloaded !== null || !!rec.extra.blobWitness, how);
     if (downloaded) {
       check("downloaded bytes equal getXml() bytes", Buffer.compare(downloaded, Buffer.from(xml, "utf8")) === 0, { downloadSha: sha(downloaded), getXmlSha: sha(Buffer.from(xml, "utf8")) });
       rec.extra.exportedBytes = downloaded.length;
@@ -403,4 +418,5 @@ try {
   writeFileSync(join(proofs, "console.log"), consoleLines.join("\n") + "\n");
 }
 console.log(`\nP3 criteria: ${evidence.criteria.filter((c) => c.pass).length}/${evidence.criteria.length} pass; tarball ${evidence.package.sha256.slice(0, 12)}; target ${evidence.browser.targetId}`);
-process.exitCode = evidence.allCriteriaPass ? 0 : 1;
+// Exit explicitly: a CDP connection keeps Node alive, and this never closes the browser.
+process.exit(evidence.allCriteriaPass ? 0 : 1);
