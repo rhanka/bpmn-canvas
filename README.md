@@ -48,6 +48,7 @@ never calls the network.
 | `@sentropic/bpmn-canvas/layout` | Pure swimlane layout: `layoutProcess`, `parseProcesses`, `textWidth`, `wrapText`. |
 | `@sentropic/bpmn-canvas/io` | Draw.io and Sparx codecs: `exportDiagram`, `importDiagram`, `encodeDrawio`, `decodeDrawio`, `bpmnGraph`, `graphBpmn`, `validateNativeBpmn`, `IoError`. Needs a browser DOM (or jsdom). |
 | `@sentropic/bpmn-canvas/styles.css` | The same CSS the canvas installs itself, for `styles: "external"` hosts. |
+| `@sentropic/bpmn-canvas/browser` | The self-contained browser build (ESM), see [Browser / CDN](#browser--cdn). `/browser/iife` is the same as a script-tag global. |
 
 ## Contract
 
@@ -211,8 +212,50 @@ asserted there, only DOM and state.
 ## Styles and CSP
 
 `styles: "auto"` installs the CSS once per root node (document or shadow root) at mount and honors
-`styleNonce`. For a strict CSP use `styles: "external"` and load `styles.css`; font files are
-separate assets, not `data:` URIs.
+`styleNonce`. For a strict CSP use `styles: "external"` and load `styles.css`. Fonts and images
+are separate files under `dist/assets/` (no `data:` URI), so `img-src` and `font-src` need no `data:`.
+
+## Browser / CDN
+
+`dist/browser/` holds a self-contained build for pages without a bundler, loadable from any CDN that serves
+the npm package files as they are (jsDelivr, unpkg):
+
+- `bpmn-canvas.min.js` (ESM) and `bpmn-canvas.iife.min.js` (script tag, global `BpmnCanvas`), minified,
+  with source maps. All runtime dependencies are inside (bpmn-js, diagram-js, bpmn-moddle,
+  bpmn-auto-layout, tiny-svg and theirs).
+- Content: the framework-free API, that is `createBpmnCanvas`, `renderDiagrams`, `analyzeXml`, the
+  legend and colored token helpers, `/layout` and `/io`. The React and assistant-ui adapters are not in it.
+- Fonts and images stay files under `dist/assets/`, resolved next to the bundle: any versioned CDN path
+  works, with no `data:` URI and no network call of its own. Fonts and mask images are fetched with CORS,
+  which jsDelivr and unpkg send.
+- `dist/browser/sri.json` gives, for that version, each file's size (raw, gzip, brotli) and its
+  `integrity` hash (sha384). At 0.2: about 764 kB raw, 223 kB gzip, 187 kB brotli.
+- Licenses of every bundled package: `dist/browser/bpmn-canvas.licenses.txt`.
+
+```html
+<script type="module">
+  import { createBpmnCanvas } from "https://cdn.jsdelivr.net/npm/@sentropic/bpmn-canvas@<version>/dist/browser/bpmn-canvas.min.js";
+  const canvas = createBpmnCanvas(document.getElementById("host"), { xml, profile: "legend" });
+</script>
+
+<!-- or, as a global -->
+<script src="https://cdn.jsdelivr.net/npm/@sentropic/bpmn-canvas@<version>/dist/browser/bpmn-canvas.iife.min.js"
+        integrity="<sha384 from sri.json>" crossorigin="anonymous"></script>
+<script>BpmnCanvas.createBpmnCanvas(document.getElementById("host"), { xml });</script>
+```
+
+- Pin an exact version and take the `integrity` value from that version's `sri.json`.
+- The IIFE finds its assets from its own `<script src>`: load it with a script tag of its own, not
+  concatenated into another file.
+- Strict CSP, no `'unsafe-inline'` and no `data:`: `script-src <cdn>; style-src 'nonce-…' <cdn>;
+  font-src <cdn>; img-src <cdn>` with the `styleNonce` option, or `styles: "external"` with
+  `<link rel="stylesheet" href="<cdn path>/dist/styles.css">` (no nonce needed). No `connect-src` is needed.
+- Stability: 0.x. The browser build follows the package version; its file names, global name and content
+  may change before 1.0.
+
+The test `tests/browser-dist.browser.test.mjs` serves the packed package from a second origin under a
+nested versioned path and loads only the minified file: ESM, IIFE, strict CSP with nonce, strict CSP with
+the external stylesheet, each with the legend look, an edit read back through `getXml()` and the watermark option.
 
 ## Errors and edge cases
 

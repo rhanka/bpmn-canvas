@@ -17,7 +17,9 @@ test("package identity and license", () => {
 });
 
 test("exports name only implemented entries", () => {
-  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./io", "./layout", "./package.json", "./react", "./styles.css"]);
+  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./react", "./styles.css"]);
+  assert.equal(pkg.unpkg, "./dist/browser/bpmn-canvas.iife.min.js");
+  assert.equal(pkg.jsdelivr, "./dist/browser/bpmn-canvas.iife.min.js");
   for (const [key, target] of Object.entries(pkg.exports)) {
     const files = typeof target === "string" ? [target] : Object.values(target);
     for (const f of files) assert.ok(existsSync(root + f), `${key} -> ${f} must exist after build`);
@@ -92,11 +94,11 @@ test("npm pack contents stay inside the positive allowlist", () => {
     assert.ok(allowed.some((re) => re.test(f.path)), `unexpected packed file: ${f.path}`);
   }
   assert.ok(info.files.some((f) => f.path === "dist/index.js"));
-  for (const must of ["dist/react/index.js", "dist/assistant-ui/index.js", "dist/styles.css", "dist/assets/bpmn-font/font/bpmn.woff2", "licenses/bpmn-font.OFL-1.1.txt"]) {
+  for (const must of ["dist/react/index.js", "dist/assistant-ui/index.js", "dist/styles.css", "dist/assets/bpmn-font/font/bpmn.woff2", "licenses/bpmn-font.OFL-1.1.txt", "dist/browser/bpmn-canvas.min.js", "dist/browser/bpmn-canvas.iife.min.js", "dist/browser/bpmn-canvas.licenses.txt", "dist/browser/sri.json", "dist/assets/inline/inline-01.svg"]) {
     assert.ok(info.files.some((f) => f.path === must), `${must} must be packed`);
   }
   assert.ok(info.files.some((f) => f.path === "LICENSE"));
-  assert.ok(!info.files.some((f) => /\.map$/.test(f.path)), "no source maps");
+  assert.ok(!info.files.some((f) => /\.map$/.test(f.path) && !/^dist\/browser\/bpmn-canvas(\.iife)?\.min\.js\.map$/.test(f.path)), "source maps only for the browser build");
   assert.ok(!info.files.some((f) => f.path.startsWith("tests/")), "no test files in the tarball");
   assert.ok(!info.files.some((f) => /\.xsd$/i.test(f.path)), "no XSD in the tarball (test-only)");
 });

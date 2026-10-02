@@ -3,9 +3,26 @@
  * `@font-face` is always declared at document level because Chrome ignores it inside a
  * shadow root; the remaining rules go to the node that actually holds the canvas.
  */
-import { BASE_CSS } from "./css.generated.js";
+import { inlineAssetUrls } from "./assets.generated.js";
+import { ASSET_PLACEHOLDER, BASE_CSS } from "./css.generated.js";
 
 const installed = new WeakSet<Node>();
+let resolvedCss: string | undefined;
+
+/** The base rules with each shipped image file resolved next to this module (no data: URI). */
+function baseCss(): string {
+  if (resolvedCss === undefined) {
+    const urls = inlineAssetUrls();
+    resolvedCss = BASE_CSS.split(ASSET_PLACEHOLDER).map((part, i) => {
+      if (i === 0) return part;
+      const name = /^inline-\d{2}\.svg/.exec(part)?.[0];
+      const url = name ? urls[name] : undefined;
+      if (!name || !url) throw new Error("unknown inline asset in the generated CSS");
+      return url + part.slice(name.length);
+    }).join("");
+  }
+  return resolvedCss;
+}
 const FONT_MARK = "data-bpmn-canvas-font";
 const STYLE_MARK = "data-bpmn-canvas-styles";
 
@@ -42,6 +59,6 @@ export function installStyles(host: HTMLElement, nonce?: string): void {
   if (installed.has(target)) return;
   installed.add(target);
   if (target instanceof ShadowRoot || !doc.head.querySelector(`style[${STYLE_MARK}]`)) {
-    addStyle(target as Node & { appendChild<T extends Node>(n: T): T }, STYLE_MARK, BASE_CSS, nonce);
+    addStyle(target as Node & { appendChild<T extends Node>(n: T): T }, STYLE_MARK, baseCss(), nonce);
   }
 }

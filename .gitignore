@@ -10,3 +10,6 @@ proofs/tmp/
 proofs-profile-*/
 src/internal/css.generated.ts
 site/
+.gen/
+src/internal/assets.generated.ts
+proofs/

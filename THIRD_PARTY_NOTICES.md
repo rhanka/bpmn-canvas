@@ -32,8 +32,10 @@ license texts are in `licenses/`.
 - Limit: the upstream tree at that commit contains no `LICENSE`, `COPYING` or
   `NOTICE` file, so no upstream full license text or copyright year is
   available to reproduce. None is invented here.
-- Treatment: kept as an external npm dependency, never vendored or bundled.
-  Bundling it would require resolving this missing notice first.
+- Treatment: an external npm dependency of the module build. The browser build
+  (`dist/browser/`) bundles it; `dist/browser/bpmn-canvas.licenses.txt` then states
+  the declared license, the declared author and the standard MIT text, without a
+  copyright line since upstream publishes none.
 
 ## BPMN font (shipped unmodified)
 
@@ -93,3 +95,13 @@ in `dist/`; the pack test enforces that.
 - **BPMN MIWG reference model B.1.0** (`docs/demo/B.1.0.bpmn`), CC BY 3.0, OMG BPMN Model Interchange Working Group,
   https://github.com/bpmn-miwg/bpmn-miwg-test-suite. Re-encoded from ISO-8859-1 to UTF-8 (the XML declaration says so);
   nothing else changed. It feeds the demo images and the live demo page; it is not part of the npm package.
+
+## Browser build (`dist/browser/`)
+
+- `bpmn-canvas.min.js` and `bpmn-canvas.iife.min.js` bundle the runtime dependencies (bpmn-js,
+  diagram-js, bpmn-moddle, bpmn-auto-layout, tiny-svg and their own dependencies). The list and
+  each package's license text, copied from the package at build time, are in
+  `dist/browser/bpmn-canvas.licenses.txt`; the build fails if a bundled package has no license
+  text and no recorded treatment.
+- bpmn-js and diagram-js are under the bpmn.io license: the bpmn.io watermark code is bundled
+  unchanged and stays visible by default (see the README for the licensed `watermark` option).
