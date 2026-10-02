@@ -17,7 +17,7 @@ const iconRules = fontCss
   .trim();
 
 import { existsSync } from "node:fs";
-const legendCss = existsSync(root + "src/styles/legend-palette.css") ? read("src/styles/legend-palette.css") : "";
+const legendCss = ["legend-palette.css", "palette-colors.css"].map((f) => (existsSync(root + "src/styles/" + f) ? read("src/styles/" + f) : "")).join("\n");
 const base = [
   read("node_modules/diagram-js/assets/diagram-js.css"),
   read("node_modules/bpmn-js/dist/assets/bpmn-js.css"),

@@ -63,11 +63,17 @@ export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>)
     const mod = (await import("../profiles/legend/index.js")) as unknown as { legendProfile(tokens?: Partial<LegendTokens>): ProfileDefinition };
     return mod.legendProfile(tokens);
   }
+  if (id === "colored") {
+    const mod = (await import("../profiles/colored/index.js")) as unknown as { coloredProfile(tokens?: Partial<LegendTokens>): ProfileDefinition };
+    return mod.coloredProfile(tokens);
+  }
   return { id: "standard", modelerModules: [], viewerModules: [] };
 }
 
-export function profileConfig(instanceId: string, profile: ProfileDefinition): BpmnCanvasConfig {
-  return profile.tokens ? { instanceId, legend: profile.tokens } : { instanceId };
+export function profileConfig(instanceId: string, profile: ProfileDefinition, paletteColumns?: "auto" | 1 | 2): BpmnCanvasConfig {
+  const columns = paletteColumns ? { paletteColumns } : {};
+  if (!profile.tokens) return { instanceId, ...columns };
+  return profile.id === "colored" ? { instanceId, colored: profile.tokens, ...columns } : { instanceId, legend: profile.tokens, ...columns };
 }
 
 /** Unique per canvas or render. Prefixes any id a profile or module creates. */

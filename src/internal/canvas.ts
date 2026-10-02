@@ -61,7 +61,7 @@ interface ZoomScrollLike {
 
 /** Selectors of the sub-process expansion marker and drill-down icon, for both profiles. */
 const MARKER_SELECTOR = ".bjs-drilldown, [data-marker='sub-process'], [data-marker='process-icon'], .legend-marker";
-const PALETTE_FLOOR: Record<ProfileId, number> = { standard: 56, legend: 112 };
+const PALETTE_FLOOR: Record<ProfileId, number> = { standard: 56, legend: 112, colored: 56 };
 const ZOOM_STEP_IN = 1.15;
 const ZOOM_STEP_OUT = 0.87;
 const DEFAULT_ZOOM_MIN = 0.2;
@@ -96,7 +96,7 @@ export class CanvasController implements BpmnCanvasHandle {
   private drilldownListener: ((e: MouseEvent) => void) | undefined;
   private abortListener: (() => void) | undefined;
   private profileId: ProfileId;
-  private legendTokens: Partial<LegendTokens> | undefined;
+  private tokens: Partial<LegendTokens> | undefined;
   private fitMode: FitMode;
   private fittedOnce = false;
   private resizeObserver: ResizeObserver | undefined;
@@ -108,7 +108,7 @@ export class CanvasController implements BpmnCanvasHandle {
     this.options = options;
     this.hostReadOnly = options.readOnly === true;
     this.profileId = options.profile ?? "standard";
-    this.legendTokens = options.legendTokens;
+    this.tokens = options.profile === "colored" ? options.coloredTokens : options.legendTokens;
     this.fitMode = options.fitMode ?? "readable";
     this.baseRevision = options.revision;
     this.root = host.ownerDocument.createElement("div");
@@ -165,9 +165,13 @@ export class CanvasController implements BpmnCanvasHandle {
     return p;
   }
 
+  private tokensFor(_profile: ProfileId): Partial<LegendTokens> | undefined {
+    return this.tokens;
+  }
+
   private async init(): Promise<void> {
     try {
-      const [engine, profile] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.legendTokens)]);
+      const [engine, profile] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.tokensFor(this.profileId))]);
       if (this.destroyed) return;
       await this.createModeler(engine, profile);
       this.setupResizeObserver();
@@ -185,7 +189,7 @@ export class CanvasController implements BpmnCanvasHandle {
     const modeler = new engine.Modeler({
       container: this.root,
       additionalModules: [ReadOnlyModule, ...profile.modelerModules, ...(await this.layoutModules())],
-      bpmnCanvas: profileConfig(this.instanceId, profile),
+      bpmnCanvas: profileConfig(this.instanceId, profile, this.options.paletteColumns),
       ...(limits ? { zoomScroll: { ...(limits.min !== undefined ? { minZoom: limits.min } : {}), ...(limits.max !== undefined ? { maxZoom: limits.max } : {}) } } : {}),
     });
     this.modeler = modeler;
@@ -550,11 +554,11 @@ export class CanvasController implements BpmnCanvasHandle {
     this.zoomTo(this.getZoom() * factor, center);
   }
 
-  setProfile(profile: ProfileId, legendTokens?: Partial<LegendTokens>): Promise<void> {
+  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>): Promise<void> {
     if (this.destroyed) return Promise.reject(abortError());
     const epoch = this.epoch;
     return this.enqueue(epoch, async () => {
-      const [engine, next] = await Promise.all([loadEngine(), loadProfile(profile, legendTokens)]);
+      const [engine, next] = await Promise.all([loadEngine(), loadProfile(profile, tokens)]);
       this.assertLive(epoch);
       const old = this.modeler;
       const hadDocument = !!old && this.diagrams.length > 0;
@@ -574,7 +578,7 @@ export class CanvasController implements BpmnCanvasHandle {
         old?.destroy();
         this.modeler = undefined;
         this.profileId = profile;
-        this.legendTokens = legendTokens;
+        this.tokens = tokens;
         const modeler = await this.createModeler(engine, next);
         if (hadDocument) {
           await modeler.importXML(xml, this.activeId);

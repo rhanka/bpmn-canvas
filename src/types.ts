@@ -3,7 +3,10 @@
 import type { LegendTokens } from "./internal/contracts.js";
 
 export type { LegendTokens };
-export type ProfileId = "standard" | "legend";
+/** `standard`: upstream bpmn-js. `legend`: the legend look. `colored`: upstream notation, drawn by upstream, recoloured by tokens. */
+export type ProfileId = "standard" | "legend" | "colored";
+
+export type PaletteColumns = 1 | 2 | "auto";
 
 export type DiagnosticCode =
   | "invalid-xml"
@@ -108,6 +111,10 @@ export interface BpmnCanvasOptions {
   readonly profile?: ProfileId;
   /** Look inputs for the `legend` profile. Missing keys fall back to neutral defaults. */
   readonly legendTokens?: Partial<LegendTokens>;
+  /** Colours of the `colored` profile, same fields as the legend tokens. Missing keys fall back to neutral defaults. */
+  readonly coloredTokens?: Partial<LegendTokens>;
+  /** Palette layout: one column, two, or diagram-js default (`auto`, which switches on the available height). */
+  readonly paletteColumns?: PaletteColumns;
   readonly readOnly?: boolean;
   /** Allow editing even when the import is lossy. Default false: lossy documents open read-only. */
   readonly allowLossyEdit?: boolean;
@@ -168,7 +175,7 @@ export interface BpmnCanvasHandle {
    * active diagram and viewbox. The undo stack is lost. Emits `onChange` with cause `profile-switch`
    * and no new content revision.
    */
-  setProfile(profile: ProfileId, legendTokens?: Partial<LegendTokens>): Promise<void>;
+  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>): Promise<void>;
   canUndo(): boolean;
   canRedo(): boolean;
   undo(): void;
@@ -182,6 +189,7 @@ export interface BpmnCanvasHandle {
 export interface RenderOptions {
   readonly profile?: ProfileId;
   readonly legendTokens?: Partial<LegendTokens>;
+  readonly coloredTokens?: Partial<LegendTokens>;
   /** Diagrams whose SVG is smaller than this edge length in px are reported as `filtered-small` (default 20). */
   readonly minSize?: number;
   readonly signal?: AbortSignal;

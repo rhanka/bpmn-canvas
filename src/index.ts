@@ -17,6 +17,7 @@ export type {
   HistoryState,
   LayoutResult,
   LegendTokens,
+  PaletteColumns,
   ProfileId,
   RenderOptions,
   RenderResult,

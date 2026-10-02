@@ -12,6 +12,9 @@ export interface BpmnCanvasConfig {
   readonly instanceId: string;
   /** Present only for the `legend` profile. */
   readonly legend?: LegendTokens;
+  /** Present only for the `colored` profile. */
+  readonly colored?: LegendTokens;
+  readonly paletteColumns?: 1 | 2 | "auto";
 }
 
 /**
@@ -63,7 +66,7 @@ export interface LegendTokens {
 }
 
 export interface ProfileDefinition {
-  readonly id: "standard" | "legend";
+  readonly id: "standard" | "legend" | "colored";
   /** diagram-js modules added to the Modeler. Empty for `standard`. */
   readonly modelerModules: readonly unknown[];
   /** diagram-js modules added to the render-only Viewer. */
