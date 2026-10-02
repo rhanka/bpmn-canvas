@@ -60,3 +60,15 @@ test("an empty process is laid out without throwing", async () => {
   const lay = await layout.layoutProcess({ name: "Empty", lanes: [], connections: [] });
   assert.deepEqual(lay.nodes, {});
 });
+
+test("regression pin: three lanes and a gateway loop keep their layout (a pin of this package, not a parity reference)", async () => {
+  const { readFileSync } = await import("node:fs");
+  const pin = JSON.parse(readFileSync(root + "tests/fixtures/layout/loop-pin.json", "utf8"));
+  const lay = await layout.layoutProcess(structuredClone(pin.input));
+  assert.deepEqual(JSON.parse(JSON.stringify(lay)), pin.output);
+  // Structural sanity that does not depend on the pin: the loop-back flow exists and bends.
+  const back = lay.connections.findIndex((c) => c.source === "Fix form" && c.target === "Review");
+  assert.ok(back >= 0);
+  assert.ok(lay.edges[back].length >= 2);
+  assert.equal(lay.lanes.length, 3);
+});

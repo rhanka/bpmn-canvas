@@ -26,7 +26,7 @@ never calls the network.
 | Import | Content |
 |---|---|
 | `@sentropic/bpmn-canvas` | `createBpmnCanvas`, `renderDiagrams`, `analyzeXml`. Importable without a DOM; the engine loads when a canvas or render is created. |
-| `@sentropic/bpmn-canvas/react` | `<BpmnCanvas>`. Optional peer: `react` 19 (qualified with 19.3.0). |
+| `@sentropic/bpmn-canvas/react` | `<BpmnCanvas>` (the canvas alone) and `<BpmnWorkshop>` (the complete editor). Optional peer: `react` 19 (qualified with 19.3.0). |
 | `@sentropic/bpmn-canvas/assistant-ui` | `createBpmnToolkit`, `BpmnToolCard`. Structural coupling only: no import of `@assistant-ui/react`. Checked against 0.15.22. |
 | `@sentropic/bpmn-canvas/layout` | Pure swimlane layout: `layoutProcess`, `parseProcesses`, `textWidth`, `wrapText`. |
 | `@sentropic/bpmn-canvas/io` | Draw.io and Sparx codecs: `exportDiagram`, `importDiagram`, `encodeDrawio`, `decodeDrawio`, `bpmnGraph`, `graphBpmn`, `validateNativeBpmn`, `IoError`. Needs a browser DOM (or jsdom). |
@@ -76,6 +76,46 @@ Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-
 BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in look (rounded task
 boxes, `[App]`/`[Doc]` annotations, a legend palette) that draws only the shapes it can draw
 faithfully; everything else falls through to the upstream renderer.
+
+## The workshop (`/react`)
+
+`<BpmnWorkshop>` is a complete, generic editor around the canvas: toolbar, diagram tabs, busy veil, format switch,
+export and import. No UI library is needed on the host: the menu, the tabs and the icons are part of the package.
+
+```tsx
+import { BpmnWorkshop } from "@sentropic/bpmn-canvas/react";
+
+<BpmnWorkshop
+  xml={xml}
+  revision={revision}
+  onXmlChange={(next, change) => { setXml(next); setRevision(change.revision); }}
+  readOnly={busy}
+  formats={[{ id: "bpmn", label: "BPMN", profile: "standard" }, { id: "legend", label: "Legend", profile: "legend", tokens }]}
+  labels={{ undo: "Annuler", export: "Exporter" /* …every text is a prop */ }}
+/>
+```
+
+- **Toolbar** (`role="toolbar"`): undo and redo (disabled until there is something to undo, following the canvas
+  history), zoom out and in, a fit menu (fit, 50 %, 100 %), auto-layout, the format menu (only when more than one
+  `formats` entry is given), export (BPMN, Draw.io, Sparx) and import, plus a `toolbarTrailing` slot.
+- **Tabs**: one per diagram (`tablist`, `tab`, `tabpanel`, roving tabindex, arrows, Home and End, with wrapping).
+  A click on a sub-process marker or drill-down button opens the diagram `resolveTarget(click, diagrams, activeId)`
+  returns. The default looks at the called element, then at the exact name; a host can bring its own, fuzzier rule.
+- **Busy** (`readOnly`): editing is locked, the canvas is `inert`, a veil with a status message covers it and the toolbar
+  is disabled. Navigation by tabs is the host's choice, not the veil's.
+- **Format**: switching recreates the modeler with the same document, diagram and view, and the undo stack is lost.
+  `format` and `onFormatChange` make it controlled; the host persists the choice if it wants to.
+- **Export** gives the exact BPMN bytes (Sparx included) or a Draw.io projection, with the fidelity notice shown as a
+  message; a refusal is shown as an alert and nothing is downloaded. `onDownload(file)` replaces the default Blob link.
+- **Import** (a file field): native BPMN or Draw.io. With `onImport(result)` the host receives the validated result and
+  stores it; without it the workshop applies it to its own canvas. Fidelity notices and refusals are shown as messages.
+- **Documents**: `onXmlChange(xml, change)` is called after every edit with the complete document (pulled once per
+  change, in order). Pass the xml and the `revision` back so the echo is ignored and the undo stack survives. The `ref`
+  gives `{ getXml(), canvas }`; `getXml()` waits for pending saves.
+- **Links** inside the editor are inert, except the bpmn.io badge, which stays visible and active.
+- **Texts**: `labels` is a typed set of every string (English by default, `DEFAULT_LABELS`). **Theme**: CSS custom
+  properties `--bpmn-workshop-bg`, `-fg`, `-muted`, `-border`, `-accent`, `-focus`, `-hover`, `-radius`, with light and dark
+  defaults, visible focus rings and a forced-colors mode. It works inside a shadow root and under React StrictMode.
 
 ## Draw.io and Sparx (`/io`)
 

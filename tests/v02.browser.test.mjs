@@ -9,6 +9,7 @@ const r = (p) => readFileSync(root + p, "utf8");
 const ce3 = r("experiments/e3/corpus/ce3-collapsed-subprocess.bpmn");
 const ce4 = r("experiments/e3/corpus/ce4-two-pools-message.bpmn");
 const ce5 = r("experiments/e3/corpus/ce5-two-diagrams-shared-root.bpmn");
+const poolLanes = r("tests/fixtures/io/pool-lanes.bpmn");
 
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 const centre = (b) => ({ x: b.x + b.width / 2, y: b.y + b.height / 2 });
@@ -171,6 +172,11 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
       try { await pr; return "resolved"; } catch (e) { return e.name; }
     }, [ab.id]);
 
+    // ---- implicit sub-process planes are not diagrams of the document
+    const imp = await ev(([x]) => window.v02.mount(x), [poolLanes]);
+    o.implicitPlanes = await ev(([i]) => window.v02.get(i).handle.getDiagrams().map((d) => [d.id, d.name]), [imp.id]);
+    await ev(([i]) => window.v02.destroy(i), [imp.id]);
+
     // ---- L8: history ------------------------------------------------------------------------------------
     const h = await ev(([x]) => window.v02.mount(x), [ce5]);
     await ev(([i]) => window.v02.edit(i, "TS", "H1"), [h.id]);
@@ -262,6 +268,9 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.equal(out.untouchedBytes, true);
     assert.equal(out.readOnlyKept, true);
     assert.equal(out.abortedSwitch, "AbortError");
+  });
+  await t.test("getDiagrams lists only the diagrams the document declares (bpmn-js implicit sub-process planes are excluded)", () => {
+    assert.deepEqual(out.implicitPlanes, [["Dia", "Request"]]);
   });
   await t.test("L8 onHistoryChange follows edit, undo, redo and the clearing diagram switch", () => {
     assert.deepEqual(out.history.map((x) => `${x.canUndo}/${x.canRedo}`), ["false/false", "true/false", "false/true", "true/false", "false/false"]);

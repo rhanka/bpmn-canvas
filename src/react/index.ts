@@ -86,3 +86,8 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
 }
 
 export type { BpmnCanvasHandle, BpmnCanvasOptions, BpmnChange, CanvasState, Diagnostic, ProfileId, WheelMode } from "../types.js";
+
+export { BpmnWorkshop, defaultResolveTarget } from "./workshop.js";
+export type { BpmnWorkshopProps, FormatOption, WorkshopHandle, WorkshopNotice } from "./workshop.js";
+export { DEFAULT_LABELS } from "./labels.js";
+export type { WorkshopLabels } from "./labels.js";

@@ -1,0 +1,136 @@
+/* Shell of the BPMN workshop: toolbar, buttons, notices, panel, canvas and the busy veil.
+   Themed by the same custom properties as the primitives (see workshop.css). */
+.bpmn-workshop {
+  --bw-bg: var(--bpmn-workshop-bg, #ffffff);
+  --bw-fg: var(--bpmn-workshop-fg, #1f2328);
+  --bw-border: var(--bpmn-workshop-border, #6b7280);
+  --bw-muted: var(--bpmn-workshop-muted, #4b5563);
+  --bw-accent: var(--bpmn-workshop-accent, #0b5cad);
+  --bw-focus: var(--bpmn-workshop-focus, #0b5cad);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bw-bg);
+  color: var(--bw-fg);
+  font: inherit;
+}
+
+.bpmn-workshop__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--bw-border);
+}
+
+.bpmn-workshop__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  min-width: 28px;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: var(--bpmn-workshop-radius, 6px);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.bpmn-workshop__button:hover:not(:disabled) {
+  border-color: var(--bw-border);
+  background: color-mix(in srgb, var(--bw-fg) 8%, transparent);
+}
+
+.bpmn-workshop__button:focus-visible {
+  outline: 2px solid var(--bw-focus);
+  outline-offset: 1px;
+}
+
+.bpmn-workshop__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bpmn-workshop__notices {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--bw-border);
+}
+
+.bpmn-workshop__notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 6px;
+  border-left: 3px solid var(--bw-accent);
+  font-size: 0.9em;
+}
+
+.bpmn-workshop__notice--error {
+  border-left-color: #b42318;
+}
+
+.bpmn-workshop__notice--warning {
+  border-left-color: #a15c00;
+}
+
+.bpmn-workshop__panel {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.bpmn-workshop__panel:focus-visible {
+  outline: 2px solid var(--bw-focus);
+  outline-offset: -2px;
+}
+
+.bpmn-workshop__canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.bpmn-workshop__veil {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12px;
+  background: color-mix(in srgb, var(--bw-bg) 55%, transparent);
+  pointer-events: all;
+}
+
+.bpmn-workshop__busy {
+  padding: 4px 10px;
+  border: 1px solid var(--bw-border);
+  border-radius: 999px;
+  background: var(--bw-bg);
+  color: var(--bw-fg);
+  font-size: 0.9em;
+}
+
+/* While busy the palette is hidden and nothing can be picked. */
+.bpmn-workshop--busy .djs-palette,
+.bpmn-workshop--busy .djs-context-pad {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bpmn-workshop {
+    --bw-bg: var(--bpmn-workshop-bg, #0d1117);
+    --bw-fg: var(--bpmn-workshop-fg, #e6edf3);
+    --bw-border: var(--bpmn-workshop-border, #8b949e);
+    --bw-muted: var(--bpmn-workshop-muted, #9aa4ae);
+    --bw-accent: var(--bpmn-workshop-accent, #58a6ff);
+    --bw-focus: var(--bpmn-workshop-focus, #58a6ff);
+  }
+}

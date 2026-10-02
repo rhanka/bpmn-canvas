@@ -88,6 +88,7 @@ export class CanvasController implements BpmnCanvasHandle {
   private lastRevision: string | undefined;
   private activeId: string | undefined;
   private diagrams: DiagramInfo[] = [];
+  private planeIds = new Map<string, string>();
   private diagnostics: Diagnostic[] = [];
   private hostReadOnly: boolean;
   private lossyGate = false;
@@ -288,10 +289,10 @@ export class CanvasController implements BpmnCanvasHandle {
   private onRootSet(root: ElementLike | undefined): void {
     if (this.destroyed || this.loading > 0 || !this.modeler) return;
     const id = (root?.businessObject as { id?: string } | undefined)?.id;
-    const diagram = this.modeler.getDefinitions().diagrams?.find((d) => d.plane.bpmnElement?.id === id);
-    if (!diagram || diagram.id === this.activeId) return;
-    this.activeId = diagram.id;
-    this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "diagram-switch", diagramId: diagram.id });
+    const diagramId = [...this.planeIds].find(([, element]) => element === id)?.[0];
+    if (!diagramId || diagramId === this.activeId) return;
+    this.activeId = diagramId;
+    this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "diagram-switch", diagramId });
   }
 
   private onElementClick(e: { element?: ElementLike; originalEvent?: MouseEvent }): void {
@@ -372,7 +373,11 @@ export class CanvasController implements BpmnCanvasHandle {
       this.baseRevision = revision;
       this.lastRevision = undefined;
       this.diagnostics = diagnostics;
-      this.diagrams = (modeler.getDefinitions().diagrams ?? []).map((d) => ({ id: d.id, name: diagramName(d) }));
+      // From the document as parsed: bpmn-js adds implicit, id-less diagrams for collapsed sub-processes
+      // that have no plane of their own, and those are not diagrams of the document.
+      const declared = (defs.diagrams ?? []).filter((d) => typeof d.id === "string" && d.id !== "");
+      this.diagrams = declared.map((d) => ({ id: d.id, name: diagramName(d) }));
+      this.planeIds = new Map(declared.map((d) => [d.id, d.plane.bpmnElement?.id ?? ""]));
       this.activeId = this.diagrams[0]?.id;
       this.lossyGate = isLossy(diagnostics) && this.options.allowLossyEdit !== true;
       this.applyReadOnly();

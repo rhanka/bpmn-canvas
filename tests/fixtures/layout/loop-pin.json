@@ -1,0 +1,340 @@
+{
+ "note": "Regression pin produced by this package. It is NOT a parity reference.",
+ "input": {
+  "name": "Loop",
+  "lanes": [
+   {
+    "name": "Requester",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "Need"
+     },
+     {
+      "type": "TASK",
+      "label": "Fill form"
+     },
+     {
+      "type": "TASK",
+      "label": "Fix form"
+     }
+    ]
+   },
+   {
+    "name": "Reviewer",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "Review"
+     },
+     {
+      "type": "GATEWAY",
+      "label": "OK?"
+     }
+    ]
+   },
+   {
+    "name": "Archive",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "File it"
+     },
+     {
+      "type": "END",
+      "label": "Done"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "Need",
+    "target": "Fill form"
+   },
+   {
+    "source": "Fill form",
+    "target": "Review"
+   },
+   {
+    "source": "Review",
+    "target": "OK?"
+   },
+   {
+    "source": "OK?",
+    "target": "File it",
+    "label": "yes"
+   },
+   {
+    "source": "OK?",
+    "target": "Fix form",
+    "label": "no"
+   },
+   {
+    "source": "Fix form",
+    "target": "Review"
+   },
+   {
+    "source": "File it",
+    "target": "Done"
+   }
+  ]
+ },
+ "output": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 1030,
+   "h": 600
+  },
+  "lanes": [
+   [
+    "Requester",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 1000,
+     "h": 200
+    }
+   ],
+   [
+    "Reviewer",
+    {
+     "x": 30,
+     "y": 200,
+     "w": 1000,
+     "h": 200
+    }
+   ],
+   [
+    "Archive",
+    {
+     "x": 30,
+     "y": 400,
+     "w": 1000,
+     "h": 200
+    }
+   ]
+  ],
+  "nodes": {
+   "Need": {
+    "x": 100,
+    "y": 41,
+    "w": 50,
+    "h": 50
+   },
+   "Fill form": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "Fix form": {
+    "x": 720,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "Review": {
+    "x": 410,
+    "y": 226,
+    "w": 120,
+    "h": 80
+   },
+   "OK?": {
+    "x": 600,
+    "y": 241,
+    "w": 50,
+    "h": 50
+   },
+   "File it": {
+    "x": 720,
+    "y": 426,
+    "w": 120,
+    "h": 80
+   },
+   "Done": {
+    "x": 910,
+    "y": 441,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     66
+    ],
+    [
+     220,
+     66
+    ]
+   ],
+   [
+    [
+     340,
+     66
+    ],
+    [
+     375,
+     66
+    ],
+    [
+     375,
+     266
+    ],
+    [
+     410,
+     266
+    ]
+   ],
+   [
+    [
+     530,
+     266
+    ],
+    [
+     600,
+     266
+    ]
+   ],
+   [
+    [
+     650,
+     266
+    ],
+    [
+     685,
+     266
+    ],
+    [
+     685,
+     466
+    ],
+    [
+     720,
+     466
+    ]
+   ],
+   [
+    [
+     650,
+     266
+    ],
+    [
+     685,
+     266
+    ],
+    [
+     685,
+     66
+    ],
+    [
+     720,
+     66
+    ]
+   ],
+   [
+    [
+     780,
+     26
+    ],
+    [
+     780,
+     8
+    ],
+    [
+     470,
+     8
+    ],
+    [
+     470,
+     226
+    ]
+   ],
+   [
+    [
+     840,
+     466
+    ],
+    [
+     910,
+     466
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null,
+   {
+    "x": 694,
+    "y": 448,
+    "w": 22,
+    "h": 16
+   },
+   {
+    "x": 699,
+    "y": 48,
+    "w": 17,
+    "h": 16
+   },
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "Need",
+    "target": "Fill form"
+   },
+   {
+    "source": "Fill form",
+    "target": "Review"
+   },
+   {
+    "source": "Review",
+    "target": "OK?"
+   },
+   {
+    "source": "OK?",
+    "target": "File it",
+    "label": "yes"
+   },
+   {
+    "source": "OK?",
+    "target": "Fix form",
+    "label": "no"
+   },
+   {
+    "source": "Fix form",
+    "target": "Review"
+   },
+   {
+    "source": "File it",
+    "target": "Done"
+   }
+  ],
+  "apps": {},
+  "labels": {
+   "Need": {
+    "x": 110,
+    "y": 95,
+    "w": 31,
+    "h": 16
+   },
+   "OK?": {
+    "x": 612,
+    "y": 295,
+    "w": 27,
+    "h": 16
+   },
+   "Done": {
+    "x": 920,
+    "y": 495,
+    "w": 31,
+    "h": 16
+   }
+  }
+ }
+}

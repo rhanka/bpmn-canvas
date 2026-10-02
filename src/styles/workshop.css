@@ -1,0 +1,182 @@
+/* Workshop primitives: menu and tabs. Themed by custom properties; neutral light defaults,
+   a dark set under prefers-color-scheme, and system colours in forced-colors mode. */
+.bpmn-workshop,
+.bpmn-workshop-menu,
+.bpmn-workshop-tabs {
+  --bpmn-workshop-bg: #ffffff;
+  --bpmn-workshop-fg: #1f2328;
+  --bpmn-workshop-muted: #57606a;
+  --bpmn-workshop-border: #8c959f;
+  --bpmn-workshop-accent: #0550ae;
+  --bpmn-workshop-focus: #0969da;
+  --bpmn-workshop-hover: #eaeef2;
+  --bpmn-workshop-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bpmn-workshop,
+  .bpmn-workshop-menu,
+  .bpmn-workshop-tabs {
+    --bpmn-workshop-bg: #1f2328;
+    --bpmn-workshop-fg: #e6edf3;
+    --bpmn-workshop-muted: #9da7b3;
+    --bpmn-workshop-border: #6e7681;
+    --bpmn-workshop-accent: #79c0ff;
+    --bpmn-workshop-focus: #58a6ff;
+    --bpmn-workshop-hover: #30363d;
+  }
+}
+
+.bpmn-workshop-menu {
+  position: relative;
+  display: inline-block;
+  font: inherit;
+  color: var(--bpmn-workshop-fg);
+}
+
+.bpmn-workshop-menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: inherit;
+  color: var(--bpmn-workshop-fg);
+  background: var(--bpmn-workshop-bg);
+  border: 1px solid var(--bpmn-workshop-border);
+  border-radius: var(--bpmn-workshop-radius);
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.bpmn-workshop-menu__trigger:disabled {
+  color: var(--bpmn-workshop-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.bpmn-workshop-menu__popup {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 20;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(320px, 90vw);
+  padding: 4px;
+  background: var(--bpmn-workshop-bg);
+  color: var(--bpmn-workshop-fg);
+  border: 1px solid var(--bpmn-workshop-border);
+  border-radius: var(--bpmn-workshop-radius);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.18);
+}
+
+.bpmn-workshop-menu__popup[hidden] {
+  display: none;
+}
+
+.bpmn-workshop-menu__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: calc(var(--bpmn-workshop-radius) - 2px);
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.bpmn-workshop-menu__item:hover,
+.bpmn-workshop-menu__item:focus {
+  background: var(--bpmn-workshop-hover);
+}
+
+.bpmn-workshop-menu__item[aria-disabled="true"] {
+  color: var(--bpmn-workshop-muted);
+  cursor: not-allowed;
+}
+
+.bpmn-workshop-menu__mark {
+  display: inline-flex;
+  width: 16px;
+  flex: none;
+  color: var(--bpmn-workshop-accent);
+}
+
+.bpmn-workshop-menu__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.bpmn-workshop-menu__desc {
+  font-size: 0.85em;
+  color: var(--bpmn-workshop-muted);
+  white-space: normal;
+}
+
+.bpmn-workshop-tabs {
+  display: flex;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--bpmn-workshop-border);
+  font: inherit;
+  color: var(--bpmn-workshop-fg);
+}
+
+.bpmn-workshop-tabs__tab {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 220px;
+  font: inherit;
+  color: var(--bpmn-workshop-muted);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--bpmn-workshop-radius) var(--bpmn-workshop-radius) 0 0;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.bpmn-workshop-tabs__tab[aria-selected="true"] {
+  color: var(--bpmn-workshop-fg);
+  border-bottom-color: var(--bpmn-workshop-accent);
+  font-weight: 600;
+}
+
+.bpmn-workshop-tabs__tab:hover {
+  background: var(--bpmn-workshop-hover);
+}
+
+.bpmn-workshop-tabs__label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bpmn-workshop-menu__trigger:focus-visible,
+.bpmn-workshop-menu__item:focus-visible,
+.bpmn-workshop-tabs__tab:focus-visible {
+  outline: 2px solid var(--bpmn-workshop-focus);
+  outline-offset: 1px;
+}
+
+@media (forced-colors: active) {
+  .bpmn-workshop-menu__trigger,
+  .bpmn-workshop-menu__popup {
+    border-color: CanvasText;
+  }
+  .bpmn-workshop-menu__item:focus,
+  .bpmn-workshop-tabs__tab[aria-selected="true"] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+  .bpmn-workshop-tabs {
+    border-bottom-color: CanvasText;
+  }
+}
