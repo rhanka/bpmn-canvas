@@ -213,6 +213,19 @@ separate assets, not `data:` URIs.
 - The assistant-ui adapter is structural and renders static previews; the host mounts the editable canvas.
 - The Sentropic mount adapter and a diagram-core projection are not part of this version.
 - Only React 19.3.0 and assistant-ui 0.15.22 are qualified.
+- The palette (creating elements) is mouse-driven: bpmn-js has no keyboard creation, so full keyboard editing is
+  not claimed. The workshop's toolbar, menus, tabs, import and export are keyboard-operable.
+- Accessibility was checked with axe-core and real keyboard input in Chromium; no screen reader and no other
+  browser engine was tried.
+- The workshop has no persistence of its own: the chosen format, the document and the downloads belong to the host.
+  There is no BPMN-in-Color popover, no `onModeler` escape hatch and no snapshot callback (use the `ref`).
+- The format menu appears only when more than one `formats` entry is given.
+- The `colored` profile changes colours only: no `strokeWidth`, no gradient (`taskFillEnd`), no fonts, and groups and
+  plain markers keep the upstream colours. Only nine palette entries of the upstream palette are recoloured.
+- The `legend` palette icons are monochrome masks: only line colours feed them, not fills.
+- Layout parity with the original Python implementation is proven on two golden cases only; boundary events have no
+  golden because the original does not handle them.
+- Draw.io import regenerates ids and DI and turns data links into associations (declared in `fidelity`).
 
 ## License
 
