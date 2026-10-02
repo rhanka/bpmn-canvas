@@ -217,3 +217,43 @@ no asset file) and only matches `data-action^="legend."`; recolor with `--bpmn-c
 The collapsed sub-process `[+]` and the external-process icon carry `data-marker` and the class
 `legend-marker`. The lib's CSS lets a click land on the marker itself and keeps the body of the element
 selectable and draggable, so a host can tell a body click from a marker click.
+
+## Palette layout and icon colours
+
+- `paletteColumns: 1 | 2 | "auto"`: one column, two columns, or the diagram-js default (`auto`, which switches to two
+  columns when the canvas is short). The choice survives resizes, read-only toggles and `setProfile`. The measured
+  palette width (48 px in one column, 94 px in two) is what `fit` keeps clear.
+- For the `legend` and `colored` profiles the palette icons take their colour from tokens, through CSS custom
+  properties set on the canvas root (`--bpmn-canvas-icon-start`, `-end`, `-intermediate` from `eventLine`; `-task`,
+  `-subprocess` from `taskLine`; `-external` from `externalLine`; `-gateway` from `gatewayLine`; `-data` from
+  `dataLine`; `-document` from `docLine`; `-application` from `appLine`; `-lane` from `laneLine`; `-pool` from
+  `poolLine`; `-flow` from `flow`). They are set with the CSSOM, so a strict `style-src` CSP is not violated, and they are
+  scoped to one instance. In the `colored` profile the upstream palette entries carry the class `bpmn-canvas--colored`.
+  A canvas without tokens keeps the neutral defaults. The `standard` profile palette is exactly upstream.
+
+## Colored profile
+
+`profile: "colored"` keeps the **upstream bpmn-js notation** and recolours it per element kind from tokens. The
+upstream renderer draws every element, its inner decorations and its markers; this profile only chooses the
+`fill` and `stroke` it is given, then sets the text colour. No geometry changes, so inclusive, event-based and
+complex gateways, boundary events, groups, data stores and transactions keep their standard notation.
+
+```ts
+createBpmnCanvas(host, { xml, profile: "colored", coloredTokens: { taskLine: "#1f3a5f", taskFill: "#eaf1fb", flow: "#37475a" } });
+renderDiagrams(xml, { profile: "colored", coloredTokens });
+await canvas.setProfile("colored", coloredTokens);
+```
+
+- **Tokens** are the 28 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
+  (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
+  no module and draws exactly like `standard`.
+- **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data
+  input and output), data (data object and data store), doc and app (text annotations starting `[Doc]` / `[App]`),
+  flow (sequence and message flows), link (associations and data associations). Plain annotations use `stroke`; groups
+  keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`.
+- Colours set on an element itself (BPMN-in-Color) keep priority over the tokens.
+- Markers (arrowheads, message-flow ends, conditional markers) are created by the upstream renderer with the flow
+  colour and with ids unique to the instance, so two instances with different tokens never share one.
+- Not applied: `strokeWidth` (it would also change the inner decorations), `taskFillEnd` (no gradient is drawn) and the
+  font tokens. The `[Doc]`/`[App]` background is the only thing added to the upstream drawing: a fill on the existing
+  annotation box.

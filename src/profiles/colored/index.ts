@@ -1,6 +1,19 @@
 import type { LegendTokens, ProfileDefinition } from "../../internal/contracts.js";
+import { ColoredRendererModule } from "./renderer.js";
+import { DEFAULT_COLORED_TOKENS, hasTokens, resolveColoredTokens } from "./tokens.js";
 
-/** Placeholder until the renderer lands: behaves like the standard profile. */
-export function coloredProfile(_tokens?: Partial<LegendTokens>): ProfileDefinition {
-  return { id: "colored", modelerModules: [], viewerModules: [] };
+export { DEFAULT_COLORED_TOKENS, resolveColoredTokens };
+
+/**
+ * The `colored` profile: upstream notation, recoloured per kind from tokens. Without any token the profile adds no
+ * module at all, so it draws exactly like `standard`. Core injects the tokens as `config.bpmnCanvas.colored`.
+ */
+export function coloredProfile(tokens?: Partial<LegendTokens>): ProfileDefinition {
+  if (!hasTokens(tokens)) return { id: "colored", modelerModules: [], viewerModules: [] };
+  return {
+    id: "colored",
+    modelerModules: [ColoredRendererModule],
+    viewerModules: [ColoredRendererModule],
+    tokens: resolveColoredTokens(tokens),
+  };
 }

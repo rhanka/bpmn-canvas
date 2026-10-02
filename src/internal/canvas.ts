@@ -17,6 +17,7 @@ import type { BpmnCanvasLayoutService } from "./contracts.js";
 import { analyzeDefinitions, classifyWarnings, hasXmlComment, isLossy } from "./diagnostics.js";
 import { diagramName, loadEngine, loadProfile, newInstanceId, profileConfig } from "./engine.js";
 import type { DefinitionsLike, EventBusLike, ModdleLike, ViewerLike } from "./engine.js";
+import { PaletteSupportModule } from "./palette.js";
 import { ReadOnlyModule } from "./readonly.js";
 import type { ReadOnlyService } from "./readonly.js";
 import { installStyles } from "./styles.js";
@@ -188,7 +189,7 @@ export class CanvasController implements BpmnCanvasHandle {
     const limits = this.options.zoomLimits;
     const modeler = new engine.Modeler({
       container: this.root,
-      additionalModules: [ReadOnlyModule, ...profile.modelerModules, ...(await this.layoutModules())],
+      additionalModules: [ReadOnlyModule, PaletteSupportModule, ...profile.modelerModules, ...(await this.layoutModules())],
       bpmnCanvas: profileConfig(this.instanceId, profile, this.options.paletteColumns),
       ...(limits ? { zoomScroll: { ...(limits.min !== undefined ? { minZoom: limits.min } : {}), ...(limits.max !== undefined ? { maxZoom: limits.max } : {}) } } : {}),
     });

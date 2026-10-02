@@ -69,11 +69,11 @@
 }
 
 .djs-palette .entry[data-action="legend.data-input"] {
-  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%204h12l6%206v18H7z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%204v6h6'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M8%2010h11l5%205v14H8z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%2010v5h5'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M16%201v7M13%205l3%203l3-3'%20stroke-width%3D'1.8'%2F%3E%3C%2Fsvg%3E");
 }
 
 .djs-palette .entry[data-action="legend.data-output"] {
-  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%204h12l6%206v18H7z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%204v6h6'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M8%2010h11l5%205v14H8z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%2010v5h5'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M16%208V1M13%204l3-3l3%203'%20stroke-width%3D'1.8'%2F%3E%3C%2Fsvg%3E");
 }
 
 .djs-palette .entry[data-action="legend.external-input"] {

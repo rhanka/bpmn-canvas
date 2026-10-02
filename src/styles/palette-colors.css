@@ -1,0 +1,107 @@
+/*
+ * Token-driven palette colours. The variables --bpmn-canvas-icon-<group> are set per canvas instance from the
+ * profile tokens (see src/internal/palette.ts). Without tokens every rule falls back to the neutral values
+ * below, so a canvas without tokens renders as before. The standard profile is never touched: the upstream
+ * rules are scoped to .bpmn-canvas--colored, which only the colored profile (with tokens) adds.
+ */
+
+.djs-palette .entry[data-action="legend.start"]::before {
+  background-color: var(--bpmn-canvas-icon-start, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.end"]::before {
+  background-color: var(--bpmn-canvas-icon-end, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.intermediate-event"]::before {
+  background-color: var(--bpmn-canvas-icon-intermediate, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.task"]::before {
+  background-color: var(--bpmn-canvas-icon-task, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.subprocess"]::before {
+  background-color: var(--bpmn-canvas-icon-subprocess, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.external-process"]::before {
+  background-color: var(--bpmn-canvas-icon-external, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.gateway-or"]::before {
+  background-color: var(--bpmn-canvas-icon-gateway, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.gateway-and"]::before {
+  background-color: var(--bpmn-canvas-icon-gateway, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.data-input"]::before {
+  background-color: var(--bpmn-canvas-icon-data, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.data-output"]::before {
+  background-color: var(--bpmn-canvas-icon-data, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.external-input"]::before {
+  background-color: var(--bpmn-canvas-icon-external, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.process-output"]::before {
+  background-color: var(--bpmn-canvas-icon-external, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.document"]::before {
+  background-color: var(--bpmn-canvas-icon-document, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.application"]::before {
+  background-color: var(--bpmn-canvas-icon-application, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.lane"]::before {
+  background-color: var(--bpmn-canvas-icon-lane, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.djs-palette .entry[data-action="legend.sequence-flow"]::before {
+  background-color: var(--bpmn-canvas-icon-flow, var(--bpmn-canvas-legend-icon, #333333));
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.start-event"] {
+  color: var(--bpmn-canvas-icon-start);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.intermediate-event"] {
+  color: var(--bpmn-canvas-icon-intermediate);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.end-event"] {
+  color: var(--bpmn-canvas-icon-end);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.exclusive-gateway"] {
+  color: var(--bpmn-canvas-icon-gateway);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.task"] {
+  color: var(--bpmn-canvas-icon-task);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.data-object"] {
+  color: var(--bpmn-canvas-icon-data);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.data-store"] {
+  color: var(--bpmn-canvas-icon-data);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.subprocess-expanded"] {
+  color: var(--bpmn-canvas-icon-subprocess);
+}
+
+.bpmn-canvas--colored .djs-palette .entry[data-action="create.participant-expanded"] {
+  color: var(--bpmn-canvas-icon-pool);
+}
+
