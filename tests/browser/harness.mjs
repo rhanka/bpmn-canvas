@@ -3,7 +3,7 @@
 // existing browser and uses ONE task-owned tab that it closes itself (never the browser).
 import { chromium } from "playwright-core";
 import { build } from "esbuild";
-import { cpSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { join } from "node:path";
 import { startServer } from "../p3/server.mjs";
@@ -45,7 +45,7 @@ export async function runInBrowser(entry, name, fn) {
     } else {
       profile = mkdtempSync(join(root, "proofs-profile-"));
       context = await chromium.launchPersistentContext(profile, {
-        executablePath: process.env.CHROMIUM ?? "/snap/bin/chromium",
+        executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined),
         headless: true,
         args: ["--no-first-run", "--no-default-browser-check", "--allow-file-access-from-files"],
       });

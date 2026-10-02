@@ -22,5 +22,7 @@ SOFTWARE.
 
 This license covers the original and adapted source of this package only.
 Third-party components keep their own terms; see THIRD_PARTY_NOTICES.md.
-In particular, the bpmn.io watermark required by bpmn-js MUST remain visible
-and unmodified when this package is used.
+In particular, bpmn-js requires the bpmn.io watermark to stay visible and
+unmodified. This package keeps it so by default; it hides it only when the host
+asks for it through the explicit `watermark` option and names a license that
+allows it (see README.md). That license, and the decision, are the host's.

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { chromium } from "playwright-core";
@@ -25,7 +25,7 @@ test("the live demo page loads the diagram and switches looks", { timeout: 18000
   execFileSync("node", ["scripts/build-demo.mjs"], { cwd: root, stdio: "pipe" });
   const server = await startServer(join(root, "site"));
   const profile = mkdtempSync(join(root, "proofs-profile-"));
-  const ctx = await chromium.launchPersistentContext(profile, { executablePath: process.env.CHROMIUM ?? "/snap/bin/chromium", headless: true });
+  const ctx = await chromium.launchPersistentContext(profile, { executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined), headless: true });
   const errors = [];
   try {
     const page = ctx.pages()[0] ?? (await ctx.newPage());

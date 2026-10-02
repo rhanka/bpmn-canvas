@@ -1,9 +1,27 @@
 {
   "name": "@sentropic/bpmn-canvas",
-  "version": "0.2.0-local",
+  "version": "0.2.0",
   "description": "Framework-independent BPMN 2.0 editing canvas built on bpmn-js, with React and assistant-ui adapters.",
   "license": "MIT",
-  "private": true,
+  "author": "Fabien Antoine <fabien.antoine@m4x.org>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhanka/bpmn-canvas.git"
+  },
+  "homepage": "https://github.com/rhanka/bpmn-canvas#readme",
+  "bugs": {
+    "url": "https://github.com/rhanka/bpmn-canvas/issues"
+  },
+  "keywords": [
+    "bpmn",
+    "bpmn-js",
+    "bpmn2",
+    "diagram",
+    "editor",
+    "canvas",
+    "react",
+    "assistant-ui"
+  ],
   "type": "module",
   "sideEffects": [
     "./dist/styles.css",
@@ -58,7 +76,7 @@
     "gen": "node scripts/gen-css.mjs",
     "build": "npm run clean && npm run gen && tsc -p tsconfig.build.json && node scripts/build-assets.mjs && node scripts/build-browser.mjs",
     "typecheck": "npm run gen && tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node --test \"tests/*.test.mjs\"",
+    "test": "npm run build && node --test tests/*.test.mjs",
     "e3": "node experiments/e3/run.mjs",
     "typecheck:compat": "tsc -p tests/types/tsconfig.json"
   },
@@ -91,5 +109,9 @@
     "react": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

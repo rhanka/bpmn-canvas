@@ -44,8 +44,10 @@ function fontFaceCss(base: URL | undefined): string {
  * Throws when it is not an absolute http(s) or file URL: an inlined bundle has no base to resolve against.
  */
 export function assetBaseUrl(assetBase: string): URL {
-  const url = new URL(assetBase.endsWith("/") ? assetBase : assetBase + "/");
+  const url = new URL(assetBase);
   if (!/^(https?|file):$/.test(url.protocol)) throw new Error(`assetBase must be an absolute http(s) URL, got ${assetBase}`);
+  if (url.search || url.hash) throw new Error(`assetBase must name a directory, without query or fragment, got ${assetBase}`);
+  if (!url.pathname.endsWith("/")) url.pathname += "/";
   return url;
 }
 

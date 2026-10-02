@@ -1,9 +1,10 @@
 # @sentropic/bpmn-canvas
 
-Provisional name. A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
+A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
 framework-independent core, optional React and assistant-ui adapters.
 
-Status: pre-release, not published. The API below is implemented and tested but not frozen.
+Status: 0.2.0. The API below is implemented and tested but not frozen (0.x). Changes since 0.1.0: see
+[Upgrading from 0.1](#upgrading-from-01).
 
 ## Demo
 
@@ -283,6 +284,20 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 | Styles not applied after the first import (`styles.css` not loaded, or blocked by a CSP) | `styles-missing` (error), reported once and written in the canvas itself. |
 | Icon font or images not loadable (wrong `assetBase`, inlined bundle without `assetBase`, `font-src`/`img-src`) | `asset-load-failed` (error) naming the URL, reported once and written in the canvas. The diagram stays editable. |
 
+## Upgrading from 0.1
+
+0.2 keeps every 0.1 entry and call, and changes some behaviour and types:
+
+- Wider unions: `ProfileId` (`colored`), `WheelMode` (`zoom-cursor`), `ChangeCause` (`profile-switch`),
+  `DiagnosticCode` (new codes, including `watermark-refused`, `styles-missing`, `asset-load-failed`). Exhaustive
+  `switch` statements may need a case.
+- `BpmnCanvasHandle` has new methods (`zoomTo`, `zoomBy`, `getZoom`, `setFitMode`, `setProfile`): host mocks
+  implementing it need them.
+- The first view is `fitMode: "readable"` (was the upstream fit-viewport); `fit()` fits the whole diagram beside
+  the palette.
+- `getDiagrams()` lists the diagrams of the document only: bpmn-js's implicit, id-less planes are left out.
+- New entries `/io`, `/layout`, `/browser`, `/browser/iife`; images of the CSS are files, no longer `data:` URIs.
+
 ## Known limitations
 
 - No DI generation, no Draw.io or Sparx export, no PNG/PDF export, no server-side rendering, no BPMN
@@ -361,8 +376,9 @@ A BPMN-in-Color fill or stroke set on an element in the XML wins over the token.
 ### Palette action ids
 
 The legend palette replaces the default palette. Each entry carries a stable `data-action` equal to its id, also
-exported as `LEGEND_ACTION_IDS` from the profile module. The icon CSS ships with the package (monochrome masks,
-no asset file) and only matches `data-action^="legend."`; recolor with `--bpmn-canvas-legend-icon` and
+exported as `LEGEND_ACTION_IDS` by `@sentropic/bpmn-canvas/browser` (the profile module itself is not a public entry).
+The icon CSS ships with the package (monochrome masks, SVG files under `dist/assets/inline/`) and only matches
+`data-action^="legend."`; recolor with `--bpmn-canvas-legend-icon` and
 `--bpmn-canvas-legend-accent`.
 
 `legend.start`, `legend.end`, `legend.intermediate-event`, `legend.task`, `legend.subprocess`,

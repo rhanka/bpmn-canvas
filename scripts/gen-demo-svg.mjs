@@ -1,7 +1,7 @@
 // Regenerates docs/demo/{standard,legend,colored}.svg from docs/demo/B.1.0.bpmn with the static renderer.
 // Needs `npm run build` first and a Chromium (CHROMIUM, default /snap/bin/chromium).
 import { chromium } from "playwright-core";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { bundlePage } from "../tests/browser/harness.mjs";
@@ -13,7 +13,7 @@ const xml = readFileSync(join(root, "docs/demo/B.1.0.bpmn"), "utf8");
 const { outdir } = await bundlePage(join(root, "tests/browser/page-demo.mjs"), "demo");
 const server = await startServer(outdir);
 const profile = mkdtempSync(join(root, "proofs-profile-"));
-const ctx = await chromium.launchPersistentContext(profile, { executablePath: process.env.CHROMIUM ?? "/snap/bin/chromium", headless: true });
+const ctx = await chromium.launchPersistentContext(profile, { executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined), headless: true });
 try {
   const page = ctx.pages()[0] ?? (await ctx.newPage());
   await page.goto(`${server.origin}/page/index.html`);

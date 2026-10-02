@@ -15,8 +15,8 @@ const entry = join(out, "entry.js");
 if (!existsSync(entry)) throw new Error("dist/browser/entry.js missing: run tsc first");
 
 const banner = `/*! ${pkg.name} ${pkg.version} browser build | MIT, Copyright (c) 2026 Fabien Antoine
- * Bundles bpmn-js and diagram-js (bpmn.io license: it requires the bpmn.io watermark) and the other
- * packages listed, with their license texts, in bpmn-canvas.licenses.txt next to this file. */`;
+ * Bundles bpmn-js (bpmn.io license, which requires the bpmn.io watermark) and other packages under
+ * their own licenses (MIT, ISC, Apache-2.0); all texts are in bpmn-canvas.licenses.txt next to this file. */`;
 
 const common = {
   entryPoints: [entry],
@@ -56,7 +56,24 @@ for (const input of Object.keys({ ...esm.metafile.inputs, ...iife.metafile.input
   packages.set(m[1], { version: meta.version, license: meta.license ?? "UNKNOWN", text: file ? readFileSync(join(dir, file), "utf8").trim() : null });
 }
 // Packages that declare a license but ship no license file: a factual notice, nothing invented.
-const MIT_BODY = readFileSync(join(root, "LICENSE"), "utf8").replace(/^MIT License\s*/, "").replace(/^Copyright[^\n]*\n+/m, "").trim();
+// The standard MIT text only (no copyright line, nothing from this package's own LICENSE).
+const MIT_BODY = `Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`;
 const DECLARED_ONLY = {
   "bpmn-auto-layout": (p) => [
     "License: MIT, as declared in the package's package.json (\"license\": \"MIT\") and in its README (License section: \"MIT\").",

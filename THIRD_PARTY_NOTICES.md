@@ -12,7 +12,12 @@ license texts are in `licenses/`.
   must stay fully visible and not visually overlapped by other elements.
 - Text: `licenses/bpmn-js.LICENSE`.
 - Treatment here: the badge is kept visible with its working link on every
-  canvas instance. No stylesheet or script in this package hides or removes it.
+  canvas instance by default. The watermark code is never removed or changed.
+  The package hides the badge of one canvas only when the host passes
+  `watermark: { hidden: true, license: "<reference>" }`, naming a license that
+  allows it; without a non-blank reference the request is refused (diagnostic
+  `watermark-refused`) and the badge stays. The package does not check that
+  license: whether hiding is allowed is the host's responsibility.
 
 ## diagram-js, tiny-svg, bpmn-moddle (declared dependencies)
 
@@ -103,5 +108,7 @@ in `dist/`; the pack test enforces that.
   each package's license text, copied from the package at build time, are in
   `dist/browser/bpmn-canvas.licenses.txt`; the build fails if a bundled package has no license
   text and no recorded treatment.
-- bpmn-js and diagram-js are under the bpmn.io license: the bpmn.io watermark code is bundled
-  unchanged and stays visible by default (see the README for the licensed `watermark` option).
+- bpmn-js is under the bpmn.io license (MIT-style grant plus the watermark condition); diagram-js
+  and the other bundled packages are under their own licenses (MIT, ISC, Apache-2.0), as listed.
+  The bpmn.io watermark code is bundled unchanged and the badge stays visible by default (see the
+  README for the explicit, licensed `watermark` option).
