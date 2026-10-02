@@ -74,6 +74,9 @@ export const PALETTE_ENTRIES: readonly PaletteEntry[] = [
   { id: "legend.sequence-flow", title: "Sequence flow", bpmnType: "bpmn:SequenceFlow", group: "flows", tool: "connect" },
 ];
 
+/** Stable palette action ids (the `data-action` of each palette entry and the keys of the icon CSS). */
+export const LEGEND_ACTION_IDS: readonly string[] = Object.freeze(PALETTE_ENTRIES.map((e) => e.id));
+
 /** diagram-js palette provider: click/drag creates the legend element. */
 export class LegendPaletteProvider {
   static $inject = ["palette", "create", "elementFactory", "globalConnect"];

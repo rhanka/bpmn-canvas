@@ -31,7 +31,6 @@ import {
   legendConnectionKind,
   legendKind,
   POOL_STRIP,
-  shade,
   waypointsPath,
   type LegendBoLike,
   type LegendShapeKind,
@@ -165,15 +164,15 @@ export class LegendRenderer extends BaseRenderer {
       svgAttr(path, {
         d: waypointsPath(el.waypoints),
         fill: "none",
-        stroke: getStrokeColor(el as never, t.stroke),
+        stroke: getStrokeColor(el as never, t.flow),
         "stroke-width": t.strokeWidth,
         "stroke-linejoin": "round",
-        "marker-end": `url(#${this.arrowMarker(getStrokeColor(el as never, t.stroke))})`,
+        "marker-end": `url(#${this.arrowMarker(getStrokeColor(el as never, t.flow))})`,
       });
       svgClasses(path).add("legend-flow");
     } else {
       // Associations. Data associations carry a direction, so they keep their arrow.
-      const colour = getStrokeColor(el as never, t.stroke);
+      const colour = getStrokeColor(el as never, t.link);
       svgAttr(path, {
         d: waypointsPath(el.waypoints),
         fill: "none",
@@ -207,7 +206,7 @@ export class LegendRenderer extends BaseRenderer {
     const defaultFill = this.defaultFill(kind);
     const custom = getFillColor(element as never, NO_COLOUR);
     const fill = custom === NO_COLOUR ? defaultFill : custom;
-    const stroke = getStrokeColor(element as never, t.stroke);
+    const stroke = getStrokeColor(element as never, this.lineFor(kind));
     const sw = t.strokeWidth;
     const w = element.width;
     const h = element.height;
@@ -342,15 +341,54 @@ export class LegendRenderer extends BaseRenderer {
   private defaultFill(kind: LegendShapeKind): string {
     const t = this.tokens;
     switch (kind) {
+      case "task":
+      case "subprocess":
+        return t.taskFill;
+      case "external":
+      case "input":
+      case "output":
+        return t.externalFill;
+      case "event":
+        return t.eventFill;
+      case "gateway":
+        return t.gatewayFill;
+      case "data":
+        return t.dataFill;
       case "document":
-        return t.doc;
+        return t.docFill;
       case "application":
-        return t.app;
+        return t.appFill;
       case "lane":
-      case "pool":
         return t.laneFill;
-      default:
-        return t.fill;
+      case "pool":
+        return t.poolFill;
+    }
+  }
+
+  private lineFor(kind: LegendShapeKind): string {
+    const t = this.tokens;
+    switch (kind) {
+      case "task":
+      case "subprocess":
+        return t.taskLine;
+      case "external":
+      case "input":
+      case "output":
+        return t.externalLine;
+      case "event":
+        return t.eventLine;
+      case "gateway":
+        return t.gatewayLine;
+      case "data":
+        return t.dataLine;
+      case "document":
+        return t.docLine;
+      case "application":
+        return t.appLine;
+      case "lane":
+        return t.laneLine;
+      case "pool":
+        return t.poolLine;
     }
   }
 
@@ -370,7 +408,7 @@ export class LegendRenderer extends BaseRenderer {
         : appBoxes(names, element.width, element.height);
     boxes.forEach((box, i) => {
       const app = apps[i] as DiagramElement;
-      this.appBox(gfx, box, getFillColor(app as never, this.tokens.app), getStrokeColor(app as never, this.tokens.stroke));
+      this.appBox(gfx, box, getFillColor(app as never, this.tokens.appFill), getStrokeColor(app as never, this.tokens.appLine));
     });
   }
 
@@ -418,7 +456,7 @@ export class LegendRenderer extends BaseRenderer {
 
   /** Classic end arrow, one per canvas and colour. The id is prefixed by the instance id. */
   private arrowMarker(colour: string): string {
-    const id = colour === this.tokens.stroke ? this.arrowId : `${this.arrowId}-${colour.replace(/[^0-9a-zA-Z]/g, "")}`;
+    const id = colour === this.tokens.flow ? this.arrowId : `${this.arrowId}-${colour.replace(/[^0-9a-zA-Z]/g, "")}`;
     const defs = this.defsFor(id);
     if (!defs) return id;
     const marker = svgCreate("marker");
@@ -437,8 +475,8 @@ export class LegendRenderer extends BaseRenderer {
     const gradient = svgCreate("linearGradient");
     svgAttr(gradient, { id, x1: "0", y1: "0", x2: "1", y2: "0" });
     for (const [offset, colour] of [
-      ["0", this.tokens.fill],
-      ["1", shade(this.tokens.fill, 0.95)],
+      ["0", this.tokens.taskFill],
+      ["1", this.tokens.taskFillEnd],
     ] as const) {
       const stop = svgCreate("stop");
       svgAttr(stop, { offset, "stop-color": colour });
@@ -469,7 +507,7 @@ export class LegendRenderer extends BaseRenderer {
       box: { width: h, height: width },
       align: "center-middle",
       padding: 6,
-      style: { fill: getLabelColor(element as never, t.text), fontSize, fontFamily: t.fontFamily, fontWeight: 700 },
+      style: { fill: getLabelColor(element as never, t.headerText), fontSize, fontFamily: t.fontFamily, fontWeight: 700 },
     });
     svgAttr(label, { transform: `translate(0 ${h}) rotate(-90)` });
     svgClasses(label).add("djs-label");

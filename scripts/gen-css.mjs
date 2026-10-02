@@ -16,11 +16,14 @@ const iconRules = fontCss
   .replace(/\/\*[\s\S]*?\*\//g, "")
   .trim();
 
+import { existsSync } from "node:fs";
+const legendCss = existsSync(root + "src/styles/legend-palette.css") ? read("src/styles/legend-palette.css") : "";
 const base = [
   read("node_modules/diagram-js/assets/diagram-js.css"),
   read("node_modules/bpmn-js/dist/assets/bpmn-js.css"),
   iconRules,
   read("src/styles/canvas.css"),
+  legendCss,
 ].join("\n");
 
 const FONT_BASE = "__FONT_BASE__";

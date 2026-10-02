@@ -1,9 +1,9 @@
 import type { LegendTokens, ProfileDefinition } from "../../internal/contracts.js";
-import { LegendPaletteModule } from "./palette.js";
+import { LEGEND_ACTION_IDS, LegendPaletteModule } from "./palette.js";
 import { LegendFollowModule, LegendRendererModule } from "./renderer.js";
 import { DEFAULT_LEGEND_TOKENS, resolveLegendTokens } from "./tokens.js";
 
-export { DEFAULT_LEGEND_TOKENS, resolveLegendTokens };
+export { DEFAULT_LEGEND_TOKENS, LEGEND_ACTION_IDS, resolveLegendTokens };
 export type { LegendTokens };
 
 /**

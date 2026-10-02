@@ -127,9 +127,28 @@ test("tokens: neutral defaults, overridable, frozen", () => {
   const merged = tokens.resolveLegendTokens({ stroke: "#112233", fontSize: undefined });
   assert.equal(merged.stroke, "#112233");
   assert.equal(merged.fontSize, 12, "undefined override is ignored");
-  for (const key of ["fontFamily", "fontSize", "stroke", "strokeWidth", "fill", "text", "app", "doc", "laneFill"]) {
-    assert.ok(key in t, key);
+  const keys = ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "headerText", "flow", "link", "taskLine", "taskFill", "taskFillEnd",
+    "eventLine", "eventFill", "gatewayLine", "gatewayFill", "poolLine", "poolFill", "laneLine", "laneFill", "externalLine", "externalFill",
+    "docLine", "docFill", "dataLine", "dataFill", "appLine", "appFill"];
+  assert.deepEqual(Object.keys(t).sort(), [...keys].sort(), "the public token list");
+});
+
+test("tokens: stroke feeds every line, fill feeds the task, the gradient end is derived", () => {
+  const m = tokens.resolveLegendTokens({ stroke: "#112233", fill: "#808080" });
+  for (const k of ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"]) {
+    assert.equal(m[k], "#112233", k);
   }
+  assert.equal(m.link, tokens.DEFAULT_LEGEND_TOKENS.link, "link is not fed by stroke");
+  assert.equal(m.taskFill, "#808080");
+  assert.equal(m.taskFillEnd, style.shade("#808080", 0.95), "derived second tone");
+  assert.equal(m.eventFill, tokens.DEFAULT_LEGEND_TOKENS.eventFill, "fill does not leak into other types");
+});
+
+test("tokens: an explicit per-type value wins over the conveniences", () => {
+  const m = tokens.resolveLegendTokens({ stroke: "#112233", taskLine: "#445566", taskFill: "#808080", taskFillEnd: "#707070" });
+  assert.equal(m.taskLine, "#445566");
+  assert.equal(m.eventLine, "#112233");
+  assert.equal(m.taskFillEnd, "#707070");
 });
 
 test("legend sources contain no banned symbol", () => {

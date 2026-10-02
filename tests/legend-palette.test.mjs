@@ -102,6 +102,12 @@ test("other types are delegated to upstream", () => {
   assert.equal(globalThis.__upstreamCalled, true);
 });
 
+test("exported action ids are exactly the palette entry ids, stable and prefixed", () => {
+  assert.deepEqual([...palette.LEGEND_ACTION_IDS], palette.PALETTE_ENTRIES.map((e) => e.id));
+  assert.ok(Object.isFrozen(palette.LEGEND_ACTION_IDS));
+  assert.equal(palette.LEGEND_ACTION_IDS.length, 16);
+});
+
 test("tokens module is independent of bpmn-js and neutral", () => {
   assert.equal(index.DEFAULT_LEGEND_TOKENS.fill, "#ffffff");
 });

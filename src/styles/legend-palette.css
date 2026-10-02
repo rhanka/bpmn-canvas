@@ -1,0 +1,124 @@
+/*
+ * Legend palette (profile "legend" only). Every rule is scoped to entries whose data-action starts
+ * with "legend.", so the default palette of the "standard" profile is never touched.
+ * Icons are monochrome masks authored for this package; the colour comes from
+ * --bpmn-canvas-legend-icon (default #333333), the hover ring from --bpmn-canvas-legend-accent.
+ * Action ids are listed in the README ("Legend profile").
+ */
+
+.djs-palette:has(.entry[data-action^="legend."]) {
+  border-radius: 6px;
+}
+
+.djs-palette .entry[data-action^="legend."] {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 2px;
+  border-radius: 4px;
+  transition: box-shadow 0.12s ease;
+}
+
+.djs-palette .entry[data-action^="legend."]::before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 7px;
+  font: normal 0/0 sans-serif;
+  background-color: var(--bpmn-canvas-legend-icon, #333333);
+  -webkit-mask: var(--bpmn-canvas-legend-glyph) center / 26px 26px no-repeat;
+  mask: var(--bpmn-canvas-legend-glyph) center / 26px 26px no-repeat;
+}
+
+.djs-palette .entry[data-action^="legend."]:hover,
+.djs-palette .highlighted-entry[data-action^="legend."] {
+  box-shadow: 0 0 0 2px var(--bpmn-canvas-legend-accent, #4a6fa5);
+}
+
+.djs-palette .entry[data-action="legend.start"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'11'%20stroke-width%3D'2'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.end"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'11'%20stroke-width%3D'4'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.intermediate-event"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'11'%20stroke-width%3D'1.5'%2F%3E%3Ccircle%20cx%3D'16'%20cy%3D'16'%20r%3D'8'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.task"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'6'%20width%3D'26'%20height%3D'20'%20rx%3D'4'%20stroke-width%3D'2'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.subprocess"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'6'%20width%3D'26'%20height%3D'20'%20rx%3D'4'%20stroke-width%3D'2'%2F%3E%3Crect%20x%3D'12'%20y%3D'18'%20width%3D'8'%20height%3D'6'%20stroke-width%3D'1'%2F%3E%3Cpath%20d%3D'M16%2019.5v3M14.5%2021h3'%20stroke-width%3D'1'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.external-process"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'3'%20y%3D'6'%20width%3D'26'%20height%3D'20'%20rx%3D'4'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%2010h4v-2l4%203l-4%203v-2h-4Z'%20stroke-width%3D'1.2'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.gateway-or"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpolygon%20points%3D'16%2C3%2029%2C16%2016%2C29%203%2C16'%20stroke-width%3D'2'%2F%3E%3Cpath%20d%3D'M12%2012l8%208M20%2012l-8%208'%20stroke-width%3D'2.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.gateway-and"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpolygon%20points%3D'16%2C3%2029%2C16%2016%2C29%203%2C16'%20stroke-width%3D'2'%2F%3E%3Cpath%20d%3D'M16%2010v12M10%2016h12'%20stroke-width%3D'2.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.data-input"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%204h12l6%206v18H7z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%204v6h6'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.data-output"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%204h12l6%206v18H7z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%204v6h6'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.external-input"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%204h12l6%206v18H7z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%204v6h6'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M10%2011h4v-2.5l5%203.5l-5%203.5v-2.5h-4Z'%20stroke-width%3D'1.2'%20fill%3D'none'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.process-output"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M7%204h12l6%206v18H7z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M19%204v6h6'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M10%2011h4v-2.5l5%203.5l-5%203.5v-2.5h-4Z'%20stroke-width%3D'1.2'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.document"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M6%205h20v18.7q-5%20-4.8%20-10%200q-5%204.8%20-10%200Z'%20stroke-width%3D'1.5'%2F%3E%3Cpath%20d%3D'M6%2010h20'%20stroke-width%3D'1.2'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.application"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'7'%20y%3D'5'%20width%3D'22'%20height%3D'22'%20rx%3D'2'%20stroke-width%3D'2'%2F%3E%3Crect%20x%3D'3'%20y%3D'9'%20width%3D'7'%20height%3D'4'%20stroke-width%3D'1.5'%2F%3E%3Crect%20x%3D'3'%20y%3D'18'%20width%3D'7'%20height%3D'4'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.lane"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Crect%20x%3D'4'%20y%3D'6'%20width%3D'24'%20height%3D'20'%20stroke-width%3D'2'%2F%3E%3Cpath%20d%3D'M11%206v20'%20stroke-width%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+}
+
+.djs-palette .entry[data-action="legend.sequence-flow"] {
+  --bpmn-canvas-legend-glyph: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M4%2022L20%2010'%20stroke-width%3D'2'%2F%3E%3Cpolygon%20points%3D'28%2C6%2020%2C8%2024%2C14'%20fill%3D'black'%20stroke-width%3D'1'%2F%3E%3C%2Fsvg%3E");
+}
+
+/*
+ * Navigation markers (collapsed sub-process [+], external process icon). diagram-js draws a transparent
+ * hit rectangle over the whole element; without these rules it swallows every click and a marker can never
+ * be the event target. With them, a click on the body targets the body, a click on the marker targets the marker.
+ */
+.legend-marker {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.djs-element:has(.legend-marker) > .djs-hit-all {
+  pointer-events: none;
+}
+
+.djs-element:has(.legend-marker) > .djs-visual,
+.djs-element:has(.legend-marker) > .djs-visual > * {
+  pointer-events: auto;
+}
+
+.djs-element:has(.legend-marker) > .djs-visual > .legend-task {
+  cursor: move;
+}

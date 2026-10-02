@@ -14,17 +14,52 @@ export interface BpmnCanvasConfig {
   readonly legend?: LegendTokens;
 }
 
-/** Neutral, host-overridable look inputs for the `legend` profile. No brand values live in this package. */
+/**
+ * Neutral, host-overridable look inputs for the `legend` profile. No brand values live in this
+ * package. A host passes a `Partial`; missing keys fall back to neutral defaults, with two
+ * convenience fallbacks: `stroke` feeds every `*Line` and `flow` not given, and `fill`
+ * feeds `taskFill` when not given. `taskFillEnd` is derived from `taskFill` when not given.
+ */
 export interface LegendTokens {
   readonly fontFamily: string;
   readonly fontSize: number;
-  readonly stroke: string;
   readonly strokeWidth: number;
+  /** Generic line colour (fallback for the per-type lines, flows and links). */
+  readonly stroke: string;
+  /** Generic light colour: fallback of `taskFill` and text colour on dark fills. */
   readonly fill: string;
   readonly text: string;
-  readonly app: string;
-  readonly doc: string;
+  /** Text colour of pool and lane header columns. */
+  readonly headerText: string;
+  /** Sequence flow stroke. */
+  readonly flow: string;
+  /** Association and data-link stroke. */
+  readonly link: string;
+  readonly taskLine: string;
+  /** Start tone of the horizontal task gradient. */
+  readonly taskFill: string;
+  /** End tone of the task gradient. */
+  readonly taskFillEnd: string;
+  readonly eventLine: string;
+  readonly eventFill: string;
+  readonly gatewayLine: string;
+  readonly gatewayFill: string;
+  readonly poolLine: string;
+  readonly poolFill: string;
+  readonly laneLine: string;
   readonly laneFill: string;
+  /** External (call) process, external input and process output. */
+  readonly externalLine: string;
+  readonly externalFill: string;
+  /** `[Doc]` annotation (document). */
+  readonly docLine: string;
+  readonly docFill: string;
+  /** Task input and output (data object). */
+  readonly dataLine: string;
+  readonly dataFill: string;
+  /** `[App]` annotation (application component box). */
+  readonly appLine: string;
+  readonly appFill: string;
 }
 
 export interface ProfileDefinition {
