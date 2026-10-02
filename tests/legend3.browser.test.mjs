@@ -22,6 +22,14 @@ test("legend tokens, data IO lifecycle and hit outlines in a real browser", { ti
     assert.deepEqual(o.given.directional, { stroke: "#b85450", dash: "3 4" });
     assert.equal(o.neutral.directional.note, null, "upstream draws it");
   });
+  await t.test("dataLinkArrow: arrow by default (the notation), none when the host turns it off", () => {
+    assert.equal(o.arrow.neutral, true);
+    assert.equal(o.arrow.off, false);
+  });
+  await t.test("labelText colours external labels; without it they keep the upstream colour", () => {
+    assert.equal(o.labels.neutral, "#22242a");
+    assert.equal(o.labels.named, "#445566");
+  });
   await t.test("without docLink the [Doc] association follows the host's link", () => {
     assert.deepEqual(o.followed.doc, { stroke: "#112233", dash: "5 5" });
   });

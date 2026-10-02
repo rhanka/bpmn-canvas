@@ -255,7 +255,7 @@ when you do not name it. An explicit per-type value always wins.
 
 | Group | Keys |
 |---|---|
-| Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns) |
+| Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns), `labelText` (labels outside their shape; `colored`: follows `text`, `legend`: upstream colour unless named) |
 | Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Doc]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
 | Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
 | Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
@@ -311,13 +311,13 @@ renderDiagrams(xml, { profile: "colored", coloredTokens });
 await canvas.setProfile("colored", coloredTokens);
 ```
 
-- **Tokens** are the 31 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
+- **Tokens** are the 33 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
   (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
   no module and draws exactly like `standard`.
 - **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data
   input and output), data (data object and data store), doc and app (text annotations starting `[Doc]` / `[App]`),
   flow (sequence and message flows), link (associations and data associations). Plain annotations use `stroke`; groups
-  keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`.
+  keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`, external labels use `labelText` (default: `text`). `dataLinkArrow: false` (legend look) draws task input and output associations without the arrow head.
 - Colours set on an element itself (BPMN-in-Color) keep priority over the tokens.
 - Markers (arrowheads, message-flow ends, conditional markers) are created by the upstream renderer with the flow
   colour and with ids unique to the instance, so two instances with different tokens never share one.

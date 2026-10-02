@@ -104,7 +104,7 @@ export class ColoredRenderer extends BaseRenderer {
     if (!kind || kind === "flow" || kind === "link") return;
     const t = this.tokens;
     if (!userColour(element, "label")) {
-      const colour = kind === "pool" || kind === "lane" ? t.headerText : t.text;
+      const colour = kind === "pool" || kind === "lane" ? t.headerText : kind === "label" ? t.labelText : t.text;
       for (const text of svgSelectAll(visuals, "text") as SVGElement[]) {
         svgAttr(text, { fill: colour });
         for (const span of svgSelectAll(text, "tspan") as SVGElement[]) if (span.style.fill) svgAttr(span, { fill: colour });

@@ -8,8 +8,9 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
   <bpmn:collaboration id="C"><bpmn:participant id="PA" name="Pool" processRef="P"/></bpmn:collaboration>
   <bpmn:process id="P" isExecutable="false">
     <bpmn:laneSet id="LS"><bpmn:lane id="L1" name="Lane"><bpmn:flowNodeRef>T</bpmn:flowNodeRef><bpmn:flowNodeRef>S</bpmn:flowNodeRef><bpmn:flowNodeRef>G</bpmn:flowNodeRef></bpmn:lane></bpmn:laneSet>
-    <bpmn:startEvent id="S"/>
-    <bpmn:task id="T" name="Task"/>
+    <bpmn:startEvent id="S" name="Begin"/>
+    <bpmn:task id="T" name="Task"><bpmn:dataOutputAssociation id="DA"><bpmn:targetRef>DO</bpmn:targetRef></bpmn:dataOutputAssociation></bpmn:task>
+    <bpmn:dataObjectReference id="DO" name="Out"/>
     <bpmn:exclusiveGateway id="G"/>
     <bpmn:textAnnotation id="DOC"><bpmn:text>[Doc] Form</bpmn:text></bpmn:textAnnotation>
     <bpmn:textAnnotation id="NOTE"><bpmn:text>plain note</bpmn:text></bpmn:textAnnotation>
@@ -21,7 +22,9 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
   <bpmndi:BPMNDiagram id="BD"><bpmndi:BPMNPlane id="PL" bpmnElement="C">
     <bpmndi:BPMNShape id="dPA" bpmnElement="PA" isHorizontal="true"><dc:Bounds x="100" y="50" width="800" height="300"/></bpmndi:BPMNShape>
     <bpmndi:BPMNShape id="dL1" bpmnElement="L1" isHorizontal="true"><dc:Bounds x="130" y="50" width="770" height="300"/></bpmndi:BPMNShape>
-    <bpmndi:BPMNShape id="dS" bpmnElement="S"><dc:Bounds x="180" y="122" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dS" bpmnElement="S"><dc:Bounds x="180" y="122" width="36" height="36"/><bpmndi:BPMNLabel><dc:Bounds x="176" y="160" width="44" height="14"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dDO" bpmnElement="DO"><dc:Bounds x="290" y="270" width="36" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="dDA" bpmnElement="DA"><di:waypoint x="320" y="180"/><di:waypoint x="308" y="270"/></bpmndi:BPMNEdge>
     <bpmndi:BPMNShape id="dT" bpmnElement="T"><dc:Bounds x="260" y="100" width="120" height="80"/></bpmndi:BPMNShape>
     <bpmndi:BPMNShape id="dG" bpmnElement="G" isMarkerVisible="true"><dc:Bounds x="440" y="115" width="50" height="50"/></bpmndi:BPMNShape>
     <bpmndi:BPMNShape id="dDOC" bpmnElement="DOC"><dc:Bounds x="400" y="220" width="120" height="50"/></bpmndi:BPMNShape>
@@ -54,6 +57,14 @@ const linkOf = (host, id) => {
   const cs = getComputedStyle(p);
   return { stroke: hex(cs.stroke), dash: cs.strokeDasharray.replace(/px/g, "").replace(/,\s*/g, " ") };
 };
+const dataArrow = (host, id) => {
+  const p = visual(host, id)?.querySelector("path.legend-link");
+  return p ? getComputedStyle(p).markerEnd !== "none" : null;
+};
+const labelFill = (host) => {
+  const t = host.querySelector('.djs-element[data-element-id="S_label"] text');
+  return t ? hex(getComputedStyle(t).fill) : null;
+};
 const headerFill = (host) => {
   const r = host.querySelector(".legend-lane-header");
   return r ? hex(getComputedStyle(r).fill) : null;
@@ -72,6 +83,12 @@ window.runLegend3 = async () => {
   out.neutral = { directional: { doc: linkOf(neutral.host, "AO"), note: linkOf(neutral.host, "AP") }, doc: linkOf(neutral.host, "AD"), note: linkOf(neutral.host, "AN"), header: headerFill(neutral.host), warnings: neutral.warnings };
   const given = await make({ link: "#112233", docLink: "#b85450", docLinkDash: "3 4", laneFill: "#aabbcc", laneHeaderFill: "#fbf9f6" });
   out.given = { directional: linkOf(given.host, "AO"), doc: linkOf(given.host, "AD"), note: linkOf(given.host, "AN"), header: headerFill(given.host) };
+  out.arrow = { neutral: dataArrow(neutral.host, "DA") };
+  out.labels = { neutral: labelFill(neutral.host) };
+  const plainer = await make({ dataLinkArrow: false, labelText: "#445566" });
+  out.arrow.off = dataArrow(plainer.host, "DA");
+  out.labels.named = labelFill(plainer.host);
+  plainer.m.destroy(); plainer.host.remove();
   const followed = await make({ link: "#112233", laneFill: "#aabbcc" });
   out.followed = { doc: linkOf(followed.host, "AD"), note: linkOf(followed.host, "AN"), header: headerFill(followed.host) };
 

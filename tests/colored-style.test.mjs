@@ -14,12 +14,12 @@ test("coloredProfile without tokens adds no module and no tokens: it is the upst
   }
 });
 
-test("coloredProfile with tokens adds the renderer to the modeler and to the viewer, and resolves the 31 tokens", async () => {
+test("coloredProfile with tokens adds the renderer to the modeler and to the viewer, and resolves the 33 tokens", async () => {
   const { coloredProfile } = await dist("index.js");
   const p = coloredProfile({ taskLine: "#101010" });
   assert.equal(p.modelerModules.length, 1);
   assert.equal(p.viewerModules.length, 1);
-  assert.equal(Object.keys(p.tokens).length, 31);
+  assert.equal(Object.keys(p.tokens).length, 33);
   assert.equal(p.tokens.taskLine, "#101010");
 });
 
@@ -67,4 +67,10 @@ test("the profile sources and build carry no banned word, no storage, no prototy
   for (const dir of ["src/profiles/colored/", "dist/profiles/colored/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
   assert.ok(files.length >= 6);
   for (const f of files) assert.ok(!banned.test(readFileSync(root + f, "utf8")), `${f} has a banned pattern`);
+});
+
+test("colored tokens: labelText follows text unless named", async () => {
+  const { resolveColoredTokens } = await import("../dist/profiles/colored/tokens.js");
+  assert.equal(resolveColoredTokens({ text: "#111111" }).labelText, "#111111");
+  assert.equal(resolveColoredTokens({ text: "#111111", labelText: "#22242a" }).labelText, "#22242a");
 });

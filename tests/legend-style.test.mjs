@@ -127,7 +127,7 @@ test("tokens: neutral defaults, overridable, frozen", () => {
   const merged = tokens.resolveLegendTokens({ stroke: "#112233", fontSize: undefined });
   assert.equal(merged.stroke, "#112233");
   assert.equal(merged.fontSize, 12, "undefined override is ignored");
-  const keys = ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "headerText", "flow", "link", "docLink", "docLinkDash", "taskLine", "taskFill", "taskFillEnd",
+  const keys = ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "headerText", "labelText", "flow", "link", "docLink", "docLinkDash", "dataLinkArrow", "taskLine", "taskFill", "taskFillEnd",
     "eventLine", "eventFill", "gatewayLine", "gatewayFill", "poolLine", "poolFill", "laneLine", "laneFill", "laneHeaderFill", "externalLine", "externalFill",
     "docLine", "docFill", "dataLine", "dataFill", "appLine", "appFill"];
   assert.deepEqual(Object.keys(t).sort(), [...keys].sort(), "the public token list");

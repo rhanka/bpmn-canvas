@@ -32,6 +32,11 @@ export interface LegendTokens {
   /** Generic light colour: fallback of `taskFill` and text colour on dark fills. */
   readonly fill: string;
   readonly text: string;
+  /**
+   * Colour of the labels placed outside their shape (events, gateways, flows). `colored` look: falls back to `text`.
+   * `legend` look: the upstream colour (`#22242a`) is kept unless the host names this token.
+   */
+  readonly labelText: string;
   /** Text colour of pool and lane header columns. */
   readonly headerText: string;
   /** Sequence flow stroke. */
@@ -42,6 +47,8 @@ export interface LegendTokens {
   readonly docLink: string;
   /** `stroke-dasharray` of that association, for instance `5 5`. */
   readonly docLinkDash: string;
+  /** Legend look only: draw the arrow head on task input and output associations (the BPMN notation does). */
+  readonly dataLinkArrow: boolean;
   readonly taskLine: string;
   /** Start tone of the horizontal task gradient. */
   readonly taskFill: string;

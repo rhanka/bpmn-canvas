@@ -15,7 +15,7 @@ import CommandInterceptor from "diagram-js/lib/command/CommandInterceptor.js";
 import { getDi, is } from "bpmn-js/lib/util/ModelUtil.js";
 import { isExpanded, isHorizontal } from "bpmn-js/lib/util/DiUtil.js";
 import { getFillColor, getLabelColor, getStrokeColor } from "bpmn-js/lib/draw/BpmnRenderUtil.js";
-import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as svgCreate } from "tiny-svg";
+import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as svgCreate, selectAll as svgSelectAll } from "tiny-svg";
 
 import type { BpmnCanvasConfig, LegendTokens } from "../../internal/contracts.js";
 import {
@@ -124,15 +124,17 @@ function shapeKindOf(element: object): LegendShapeKind | undefined {
 // --- renderer ------------------------------------------------------------------
 
 export class LegendRenderer extends BaseRenderer {
-  static $inject = ["eventBus", "textRenderer", "canvas", "config.bpmnCanvas"];
+  static $inject = ["eventBus", "textRenderer", "canvas", "config.bpmnCanvas", "bpmnRenderer"];
 
+  private readonly upstream: Any;
   private readonly textRenderer: Any;
   private readonly canvas: Any;
   private readonly instanceId: string;
   private readonly tokens: LegendTokens;
 
-  constructor(eventBus: Any, textRenderer: Any, canvas: Any, config: BpmnCanvasConfig | undefined) {
+  constructor(eventBus: Any, textRenderer: Any, canvas: Any, config: BpmnCanvasConfig | undefined, bpmnRenderer: Any) {
     super(eventBus, RENDER_PRIORITY);
+    this.upstream = bpmnRenderer;
     this.textRenderer = textRenderer;
     this.canvas = canvas;
     this.instanceId = config?.instanceId ?? `legend-${Math.random().toString(36).slice(2, 8)}`;
@@ -149,8 +151,9 @@ export class LegendRenderer extends BaseRenderer {
 
   override canRender(element: Any): boolean {
     const el = element as DiagramElement;
-    // External labels are separate diagram-js elements: the upstream renderer draws them.
-    if (el.type === "label" || !el.businessObject) return false;
+    // External labels are separate diagram-js elements: the upstream renderer draws them, recoloured only when asked.
+    if (el.type === "label") return this.recolorsLabels && Boolean(el.businessObject);
+    if (!el.businessObject) return false;
     if (el.waypoints) return this.connectionKind(el) !== undefined;
     return shapeKindOf(element) !== undefined;
   }
@@ -167,6 +170,10 @@ export class LegendRenderer extends BaseRenderer {
     const kind = legendConnectionKind(el.businessObject);
     if (kind === undefined && el.businessObject?.$type === "bpmn:Association" && this.endsOnDocument(el)) return "link";
     return kind;
+  }
+
+  private get recolorsLabels(): boolean {
+    return this.tokens.labelText !== DEFAULT_LEGEND_TOKENS.labelText;
   }
 
   override drawConnection(parentGfx: Any, connection: Any): SVGElement {
@@ -194,7 +201,7 @@ export class LegendRenderer extends BaseRenderer {
         stroke: colour,
         "stroke-width": t.strokeWidth,
         "stroke-dasharray": toDoc ? t.docLinkDash : "5 5",
-        ...(kind === "data-link" ? { "marker-end": `url(#${this.arrowMarker(colour)})` } : {}),
+        ...(kind === "data-link" && t.dataLinkArrow ? { "marker-end": `url(#${this.arrowMarker(colour)})` } : {}),
       });
       svgClasses(path).add("legend-link");
     }
@@ -202,11 +209,30 @@ export class LegendRenderer extends BaseRenderer {
     return path as unknown as SVGElement;
   }
 
+  /** Upstream label, with the colour of the `labelText` token unless the user coloured that label. */
+  private drawLabel(parentGfx: Any, shape: Any): SVGElement {
+    const drawn = this.upstream.drawShape(parentGfx, shape) as SVGElement;
+    let userColoured = false;
+    try {
+      userColoured = !!getDi(shape.labelTarget ?? shape).get("label")?.get("color:color");
+    } catch {
+      /* no DI: keep the token */
+    }
+    if (!userColoured) {
+      for (const text of svgSelectAll(parentGfx, "text") as SVGElement[]) {
+        svgAttr(text, { fill: this.tokens.labelText });
+        for (const span of svgSelectAll(text, "tspan") as SVGElement[]) if (span.style.fill) svgAttr(span, { fill: this.tokens.labelText });
+      }
+    }
+    return drawn;
+  }
+
   override getConnectionPath(connection: Any): string {
     return waypointsPath((connection as DiagramElement).waypoints);
   }
 
   override drawShape(parentGfx: Any, shape: Any): SVGElement {
+    if ((shape as DiagramElement).type === "label") return this.drawLabel(parentGfx, shape);
     const gfx = svgCreate("g");
     svgClasses(gfx).add("legend-shape");
     svgAppend(parentGfx, gfx);
