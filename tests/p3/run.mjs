@@ -364,9 +364,8 @@ try {
     await shot("shadow-host", "#app");
   });
 
-  // ---- 10. accessibility ------------------------------------------------------------------
-  await criterion(10, "axe: no serious or critical issue; keyboard reach of the canvas", "lab.html", async ({ check, rec, shot }) => {
-    await ev(() => window.lab.mount("ce1-homonyms"));
+  // ---- 10. accessibility: the toolbar and the tabs of the packed workshop ---------------------------------
+  await criterion(10, "axe on the workshop page; the toolbar, its menus and the tabs work from the keyboard", "workshop.html", async ({ check, rec, shot }) => {
     await page.addScriptTag({ path: join(repo, "node_modules/axe-core/axe.min.js") });
     const axe = await ev(async () => {
       const r = await window.axe.run(document, { resultTypes: ["violations"] });
@@ -374,17 +373,56 @@ try {
     });
     rec.extra.axeViolations = axe;
     const bad = axe.filter((v) => v.impact === "serious" || v.impact === "critical");
-    check("axe: no serious or critical violation", bad.length === 0, bad);
-    const tabbed = [];
+    check("axe: no serious or critical violation on the whole page", bad.length === 0, bad);
+
+    const names = await ev(() => ({
+      toolbar: document.querySelector('[role="toolbar"]')?.getAttribute("aria-label"),
+      buttons: [...document.querySelectorAll('[role="toolbar"] button')].map((b) => b.getAttribute("aria-label") || b.textContent.trim()),
+      tabs: [...document.querySelectorAll('[role="tab"]')].map((t) => [t.textContent, t.getAttribute("aria-selected")]),
+      panel: document.querySelector('[role="tabpanel"]')?.getAttribute("aria-labelledby") === document.querySelector('[role="tab"][aria-selected="true"]')?.id,
+      containers: document.querySelectorAll(".djs-container").length,
+    }));
+    check("a labelled toolbar with named buttons, two tabs with the first selected, one canvas", names.toolbar === "Diagram" && names.buttons.every(Boolean) && names.tabs.length === 2 && names.tabs[0][1] === "true" && names.panel && names.containers === 1, names);
+
+    // Tab walks forward from the top of the page: every toolbar control is reached before the tabs.
     await page.evaluate(() => document.activeElement?.blur());
-    for (let i = 0; i < 6; i++) {
+    const order = [];
+    for (let k = 0; k < 9; k++) {
       await page.keyboard.press("Tab");
-      tabbed.push(await ev(() => { const a = document.activeElement; return a ? `${a.tagName}${a.className ? "." + String(a.className.baseVal ?? a.className).split(" ")[0] : ""}` : "none"; }));
+      order.push(await ev(() => { const a = document.activeElement; return a ? (a.getAttribute("role") === "tab" ? "tab:" + a.textContent : a.getAttribute("data-testid") || a.tagName) : "none"; }));
     }
-    rec.extra.tabOrder = tabbed;
-    check("keyboard: Tab moves focus into or past the canvas without trapping", tabbed.length === 6, tabbed);
-    rec.extra.notShipped = "This package ships no toolbar or tab strip, so 'navigable bar and tabs' has nothing to test; reported as not applicable, not as a pass.";
-    await shot("axe-page");
+    rec.extra.tabOrder = order;
+    const bar = ["bpmn-workshop-zoom-out", "bpmn-workshop-zoom-in", "bpmn-workshop-fit", "bpmn-workshop-auto-layout", "bpmn-workshop-export", "bpmn-workshop-import"];
+    const reached = order.filter((x) => bar.includes(x) || x === "BUTTON");
+    check("Tab reaches the toolbar controls (disabled undo and redo are skipped) and then a tab", reached.length >= 6 && order.some((x) => x.startsWith("tab:")), order);
+
+    // A menu opens from the keyboard, focus moves into it, Escape closes it and gives the focus back.
+    await page.locator('[data-testid="bpmn-workshop-export"] button').first().focus();
+    await page.keyboard.press("Enter");
+    const opened = await ev(() => ({ expanded: document.querySelector('[data-testid="bpmn-workshop-export"] button').getAttribute("aria-expanded"), focusRole: document.activeElement?.getAttribute("role") }));
+    check("Enter opens the export menu and focuses its first item", opened.expanded === "true" && opened.focusRole === "menuitem", opened);
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Escape");
+    const closed = await ev(() => ({ expanded: document.querySelector('[data-testid="bpmn-workshop-export"] button').getAttribute("aria-expanded"), onTrigger: document.activeElement === document.querySelector('[data-testid="bpmn-workshop-export"] button') }));
+    check("Escape closes the menu and returns the focus to its trigger", closed.expanded === "false" && closed.onTrigger, closed);
+
+    // Choosing an item from the keyboard runs the action (export), using the packed code end to end.
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Enter");
+    await page.waitForFunction(() => window.workshopTest.downloads.length > 0, null, { timeout: 8000 }).catch(() => undefined);
+    const dl = await ev(() => window.workshopTest.downloads);
+    check("Enter on a menu item exports (BPMN file requested)", dl.length === 1 && dl[0] === "diagram.bpmn", dl);
+
+    // Tabs: arrows move the selection and wrap.
+    await page.locator('[role="tab"][aria-selected="true"]').focus();
+    await page.keyboard.press("ArrowRight");
+    await page.waitForTimeout(250);
+    const second = await ev(() => document.querySelector('[role="tab"][aria-selected="true"]')?.textContent);
+    await page.keyboard.press("ArrowRight");
+    await page.waitForTimeout(250);
+    const wrapped = await ev(() => document.querySelector('[role="tab"][aria-selected="true"]')?.textContent);
+    check("ArrowRight selects the next diagram and wraps to the first", second === "Other" && wrapped === "Exchange", { second, wrapped });
+    await shot("workshop");
   });
 
   // ---- E9: a host with its own bpmn-js ---------------------------------------------------------
