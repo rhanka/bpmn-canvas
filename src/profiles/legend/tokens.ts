@@ -38,7 +38,7 @@ export const DEFAULT_LEGEND_TOKENS: LegendTokens = Object.freeze({
   appFill: "#e8eef7",
 });
 
-const LINE_KEYS = ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"] as const;
+export const LINE_KEYS = ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"] as const;
 
 /** Defaults, then the host's `stroke`/`fill` conveniences, then the host's explicit per-type values. */
 export function resolveLegendTokens(overrides?: Partial<LegendTokens>): LegendTokens {

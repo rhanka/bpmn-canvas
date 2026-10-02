@@ -60,6 +60,12 @@ test("colored profile in a real browser", { timeout: 400000 }, async (t) => {
     out.user = await ev(([i]) => window.col.facts(i), [u.id]);
     await ev(([i]) => window.col.destroy(i), [u.id]);
 
+    // a token the host did not name leaves the upstream colour
+    const sp = await mount(pool, { profile: "standard" });
+    const pp = await mount(pool, { profile: "colored", coloredTokens: { taskFill: "#aa0001" } });
+    out.partial = { std: await ev(([i]) => window.col.facts(i), [sp.id]), part: await ev(([i]) => window.col.facts(i), [pp.id]) };
+    for (const x of [sp, pp]) await ev(([i]) => window.col.destroy(i), [x.id]);
+
     // (d) two instances with different tokens
     const a = await mount(pool, { profile: "colored", coloredTokens: TOK });
     const b = await mount(pool, { profile: "colored", coloredTokens: TOK2 });
@@ -131,6 +137,18 @@ test("colored profile in a real browser", { timeout: 400000 }, async (t) => {
     });
   }
 
+  await t.test("only the named tokens recolour: with taskFill alone, flows, links and texts keep the standard look", () => {
+    const { std, part } = o.partial;
+    assert.equal(part.Fill.firstFill, rgb("#aa0001"), "the named token applies");
+    assert.equal(part.Approve.firstFill, rgb("#aa0001"));
+    for (const [id, f] of Object.entries(part)) {
+      assert.deepEqual(f.strokes, std[id].strokes, `${id} strokes`);
+      assert.deepEqual(f.texts, std[id].texts, `${id} texts`);
+      // Activities take the named taskFill; nothing else changes its fill.
+      if (f.firstFill !== rgb("#aa0001")) assert.equal(f.firstFill, std[id].firstFill, `${id} fill`);
+      else assert.equal(f.firstFill !== std[id].firstFill, true);
+    }
+  });
   await t.test("(b) negative controls: the standard profile does not carry the token colours, and the checked texts exist", () => {
     const std = o.tok.pool.stdFacts;
     assert.ok(!std.Fill.strokes.includes(rgb(TOK.taskLine)));

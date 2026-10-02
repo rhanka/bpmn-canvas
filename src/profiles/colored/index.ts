@@ -1,6 +1,6 @@
 import type { LegendTokens, ProfileDefinition } from "../../internal/contracts.js";
 import { ColoredRendererModule } from "./renderer.js";
-import { DEFAULT_COLORED_TOKENS, hasTokens, resolveColoredTokens } from "./tokens.js";
+import { DEFAULT_COLORED_TOKENS, hasTokens, namedColoredTokens, resolveColoredTokens } from "./tokens.js";
 
 export { DEFAULT_COLORED_TOKENS, resolveColoredTokens };
 
@@ -15,5 +15,6 @@ export function coloredProfile(tokens?: Partial<LegendTokens>): ProfileDefinitio
     modelerModules: [ColoredRendererModule],
     viewerModules: [ColoredRendererModule],
     tokens: resolveColoredTokens(tokens),
+    named: namedColoredTokens(tokens),
   };
 }

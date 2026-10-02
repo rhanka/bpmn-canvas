@@ -318,6 +318,7 @@ await canvas.setProfile("colored", coloredTokens);
   input and output), data (data object and data store), doc and app (text annotations starting `[Doc]` / `[App]`),
   flow (sequence and message flows), link (associations and data associations). Plain annotations use `stroke`; groups
   keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`, external labels use `labelText` (default: `text`). `dataLinkArrow: false` (legend look) draws task input and output associations without the arrow head.
+- Only the tokens the host names recolour: a kind whose token is missing keeps the upstream colour (name `taskFill` alone and flows, events and texts stay as in `standard`). `stroke` names every line colour, `fill` the task fill, `text` the labels too.
 - Colours set on an element itself (BPMN-in-Color) keep priority over the tokens.
 - Markers (arrowheads, message-flow ends, conditional markers) are created by the upstream renderer with the flow
   colour and with ids unique to the instance, so two instances with different tokens never share one.

@@ -86,7 +86,7 @@ export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>)
 export function profileConfig(instanceId: string, profile: ProfileDefinition, paletteColumns?: "auto" | 1 | 2): BpmnCanvasConfig {
   const columns = paletteColumns ? { paletteColumns } : {};
   if (!profile.tokens) return { instanceId, ...columns };
-  return profile.id === "colored" ? { instanceId, colored: profile.tokens, ...columns } : { instanceId, legend: profile.tokens, ...columns };
+  return profile.id === "colored" ? { instanceId, colored: profile.tokens, ...(profile.named ? { coloredNamed: profile.named } : {}), ...columns } : { instanceId, legend: profile.tokens, ...columns };
 }
 
 /** Unique per canvas or render. Prefixes any id a profile or module creates. */

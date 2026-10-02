@@ -60,20 +60,42 @@ function userColour(element: Any, what: "fill" | "stroke" | "label"): boolean {
   }
 }
 
+/** The token behind the fill and the stroke of each kind, to leave the upstream colour when it was not named. */
+const TOKENS_OF: Partial<Record<ColoredKind, { fill?: keyof LegendTokens; stroke?: keyof LegendTokens }>> = {
+  task: { fill: "taskFill", stroke: "taskLine" },
+  event: { fill: "eventFill", stroke: "eventLine" },
+  gateway: { fill: "gatewayFill", stroke: "gatewayLine" },
+  pool: { fill: "poolFill", stroke: "poolLine" },
+  lane: { fill: "laneFill", stroke: "laneLine" },
+  external: { fill: "externalFill", stroke: "externalLine" },
+  doc: { stroke: "docLine" },
+  app: { stroke: "appLine" },
+  data: { fill: "dataFill", stroke: "dataLine" },
+  annotation: { stroke: "stroke" },
+  flow: { stroke: "flow" },
+  link: { stroke: "link" },
+};
+
 export class ColoredRenderer extends BaseRenderer {
   static $inject = ["eventBus", "bpmnRenderer", "config.bpmnCanvas"];
 
   private readonly upstream: Any;
   private readonly tokens: LegendTokens;
+  private readonly named: ReadonlySet<string> | undefined;
 
   constructor(eventBus: Any, bpmnRenderer: Any, config: BpmnCanvasConfig | undefined) {
     super(eventBus, RENDER_PRIORITY);
     this.upstream = bpmnRenderer;
     this.tokens = config?.colored ?? resolveColoredTokens();
+    this.named = config?.coloredNamed ? new Set(config.coloredNamed) : undefined;
   }
 
   override canRender(element: Any): boolean {
     return !!element?.businessObject && is(element, "bpmn:BaseElement");
+  }
+
+  private isNamed(token: keyof LegendTokens): boolean {
+    return this.named === undefined || this.named.has(token);
   }
 
   private coloursOf(kind: ColoredKind | undefined, element: Any): Colours {
@@ -94,6 +116,11 @@ export class ColoredRenderer extends BaseRenderer {
       case "link": colours = { stroke: t.link }; break;
       default: colours = {};
     }
+    const used = TOKENS_OF[kind ?? "label"];
+    if (used) {
+      if (used.fill && !this.isNamed(used.fill)) delete colours.fill;
+      if (used.stroke && !this.isNamed(used.stroke)) delete colours.stroke;
+    }
     if (colours.fill !== undefined && userColour(element, "fill")) delete colours.fill;
     if (colours.stroke !== undefined && userColour(element, "stroke")) delete colours.stroke;
     return colours;
@@ -103,14 +130,15 @@ export class ColoredRenderer extends BaseRenderer {
   private finish(visuals: Any, element: Any, kind: ColoredKind | undefined): void {
     if (!kind || kind === "flow" || kind === "link") return;
     const t = this.tokens;
-    if (!userColour(element, "label")) {
-      const colour = kind === "pool" || kind === "lane" ? t.headerText : kind === "label" ? t.labelText : t.text;
+    const textToken = kind === "pool" || kind === "lane" ? "headerText" : kind === "label" ? "labelText" : "text";
+    if (this.isNamed(textToken) && !userColour(element, "label")) {
+      const colour = t[textToken];
       for (const text of svgSelectAll(visuals, "text") as SVGElement[]) {
         svgAttr(text, { fill: colour });
         for (const span of svgSelectAll(text, "tspan") as SVGElement[]) if (span.style.fill) svgAttr(span, { fill: colour });
       }
     }
-    if ((kind === "doc" || kind === "app") && !userColour(element, "fill")) {
+    if ((kind === "doc" || kind === "app") && this.isNamed(kind === "doc" ? "docFill" : "appFill") && !userColour(element, "fill")) {
       const box = svgSelect(visuals, "rect") as SVGElement | null;
       if (box) svgAttr(box, { fill: kind === "doc" ? t.docFill : t.appFill });
     }

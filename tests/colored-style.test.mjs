@@ -74,3 +74,12 @@ test("colored tokens: labelText follows text unless named", async () => {
   assert.equal(resolveColoredTokens({ text: "#111111" }).labelText, "#111111");
   assert.equal(resolveColoredTokens({ text: "#111111", labelText: "#22242a" }).labelText, "#22242a");
 });
+
+test("namedColoredTokens: the names the host gave, with stroke, fill and text expanded", async () => {
+  const { namedColoredTokens } = await dist("tokens.js");
+  assert.deepEqual(namedColoredTokens({ taskFill: "#aa0001" }), ["taskFill"]);
+  const named = namedColoredTokens({ stroke: "#000000", fill: "#ffffff", text: "#111111" });
+  for (const k of ["flow", "taskLine", "appLine", "taskFill", "labelText", "text"]) assert.ok(named.includes(k), k);
+  assert.ok(!named.includes("link"), "link is not a line key");
+  assert.deepEqual(namedColoredTokens({ taskFill: undefined }), []);
+});

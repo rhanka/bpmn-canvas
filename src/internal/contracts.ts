@@ -14,6 +14,8 @@ export interface BpmnCanvasConfig {
   readonly legend?: LegendTokens;
   /** Present only for the `colored` profile. */
   readonly colored?: LegendTokens;
+  /** `colored` only: the token names the host gave. Only those recolour; the others keep the upstream colour. */
+  readonly coloredNamed?: readonly string[];
   readonly paletteColumns?: 1 | 2 | "auto";
 }
 
@@ -86,6 +88,8 @@ export interface ProfileDefinition {
   readonly viewerModules: readonly unknown[];
   /** Extra Modeler/Viewer options merged under `bpmnCanvas`. */
   readonly tokens?: LegendTokens;
+  /** `colored` only: names of the tokens the host gave, with the `stroke`/`fill` conveniences expanded. */
+  readonly named?: readonly string[];
 }
 
 /** Service registered by the layout module under the name `bpmnCanvasLayout`. */
