@@ -183,6 +183,14 @@ labels are identical.
 `renderDiagrams(xml, { profile?, minSize?, signal? })` returns one SVG per diagram and a diagnostic
 for every diagram it did not return, including `filtered-small`. It needs a browser DOM.
 
+## Testing a host with vitest
+
+bpmn-js ships ES modules whose relative imports have no file extension, which Node cannot resolve natively. Vitest
+therefore must process the package instead of loading it as an external dependency:
+`test: { server: { deps: { inline: ["@sentropic/bpmn-canvas"] } } }`. The canvas needs SVG APIs that jsdom lacks (`getBBox`,
+`getTotalLength`, `transform`, `createSVGMatrix`, ...): polyfill them in the test setup; jsdom has no layout, so geometry cannot be
+asserted there, only DOM and state.
+
 ## Styles and CSP
 
 `styles: "auto"` installs the CSS once per root node (document or shadow root) at mount and honors

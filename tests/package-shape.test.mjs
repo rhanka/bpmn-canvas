@@ -127,3 +127,16 @@ test("every new URL(..., import.meta.url) in dist points to a shipped file", () 
   }
   assert.ok(checked >= 3, "the font URLs must be checked");
 });
+
+test("every deep import of bpmn-js, diagram-js and tiny-svg in dist has an explicit .js extension, like the rest of the package", () => {
+  const files = execFileSync("find", ["dist", "-type", "f", "-name", "*.js"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean);
+  const bad = [];
+  for (const f of files) {
+    const text = read(f).toString("utf8");
+    for (const m of text.matchAll(/(?:from\s*|import\s*\(\s*)["']((?:bpmn-js|diagram-js|tiny-svg|min-dash|min-dom)\/[^"']+)["']/g)) {
+      if (!/\.(js|css|json)$/.test(m[1])) bad.push(`${f}: ${m[1]}`);
+    }
+  }
+  assert.deepEqual(bad, []);
+});
+

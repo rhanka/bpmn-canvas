@@ -3,9 +3,9 @@
 // waypoints and their DI as one undoable command). Each pool keeps its position;
 // BPMN semantics are untouched. Existing DI is moved, DI is never generated.
 
-import { getDi } from "bpmn-js/lib/util/ModelUtil";
-import { getExternalLabelMid } from "bpmn-js/lib/util/LabelUtil";
-import { getMid } from "diagram-js/lib/layout/LayoutUtil";
+import { getDi } from "bpmn-js/lib/util/ModelUtil.js";
+import { getExternalLabelMid } from "bpmn-js/lib/util/LabelUtil.js";
+import { getMid } from "diagram-js/lib/layout/LayoutUtil.js";
 
 import type { BpmnCanvasLayoutService } from "../contracts.js";
 import { isAppAnnotation } from "../annotations.js";

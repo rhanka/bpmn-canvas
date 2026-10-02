@@ -48,7 +48,7 @@ interface Engine {
 let enginePromise: Promise<Engine> | undefined;
 
 export function loadEngine(): Promise<Engine> {
-  enginePromise ??= Promise.all([import("bpmn-js/lib/Modeler"), import("bpmn-js/lib/Viewer")]).then(
+  enginePromise ??= Promise.all([import("bpmn-js/lib/Modeler.js"), import("bpmn-js/lib/Viewer.js")]).then(
     ([m, v]) => ({ Modeler: m.default as unknown as ViewerCtor, Viewer: v.default as unknown as ViewerCtor }),
     (error) => {
       enginePromise = undefined;
