@@ -24,7 +24,8 @@ export type DiagnosticCode =
   | "layout-unsupported"
   | "layout-failed"
   | "read-only-lossy"
-  | "save-failed";
+  | "save-failed"
+  | "watermark-refused";
 
 export type DiagnosticSeverity = "info" | "warning" | "error";
 
@@ -105,6 +106,17 @@ export interface LayoutResult {
   readonly skipped: readonly string[];
 }
 
+/**
+ * The bpmn.io logo that bpmn-js draws is part of its license: it stays visible by default. Hiding it is an explicit
+ * choice of the host, which must hold a license that allows it and names it here. The package does not check the
+ * license; it refuses the request (diagnostic `watermark-refused`, logo kept) when `license` is missing or blank.
+ */
+export interface WatermarkOptions {
+  readonly hidden?: boolean;
+  /** Reference of the license that allows hiding the logo, supplied by the host. Required when `hidden` is true. */
+  readonly license?: string;
+}
+
 export interface BpmnCanvasOptions {
   readonly xml?: string;
   readonly revision?: string;
@@ -119,6 +131,8 @@ export interface BpmnCanvasOptions {
   /** Allow editing even when the import is lossy. Default false: lossy documents open read-only. */
   readonly allowLossyEdit?: boolean;
   readonly signal?: AbortSignal;
+  /** The bpmn.io logo stays visible unless the host asks to hide it and names its license. See `WatermarkOptions`. */
+  readonly watermark?: WatermarkOptions;
   /** `zoom` captures the wheel like diagram-js. `page-scroll` lets the page scroll and zooms on Ctrl/Meta+wheel only. */
   readonly wheel?: WheelMode;
   /** Fit used after import and diagram switch, and re-applied on every resize when `whole`. Default `readable`. */

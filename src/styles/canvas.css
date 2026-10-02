@@ -15,3 +15,8 @@
 .bpmn-canvas--readonly .djs-context-pad {
   display: none;
 }
+
+/* Hidden only when the host asked for it and named its license (options.watermark). */
+.bpmn-canvas[data-bpmn-canvas-watermark="hidden"] .bjs-powered-by {
+  display: none !important;
+}

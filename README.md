@@ -252,10 +252,29 @@ separate assets, not `data:` URIs.
   golden because the original does not handle them.
 - Draw.io import regenerates ids and DI and turns data links into associations (declared in `fidelity`).
 
+## The bpmn.io logo
+
+bpmn-js draws a bpmn.io logo in the corner of every canvas, and its license requires it to stay visible. This package keeps
+it visible and active by default, for every consumer.
+
+A host that holds a license allowing it to hide the logo can ask for that, explicitly:
+
+```ts
+createBpmnCanvas(host, { xml, watermark: { hidden: true, license: "<your license reference>" } });
+// React: <BpmnCanvas watermark={{ hidden: true, license: "..." }} />, <BpmnWorkshop watermark={...} />
+```
+
+- `license` is a reference the host supplies (a contract or a license identifier). The package does not check it and does not
+  judge it: **whether hiding the logo is allowed is the host's responsibility**, and so is the license it needs.
+- Without a non-blank `license` the request is refused: the logo stays, and a `watermark-refused` diagnostic (warning) is
+  reported through `onDiagnostic` and `getDiagnostics()`.
+- It is a creation-time option (for the React components, changing it recreates the canvas). It hides the logo of that
+  instance only. The static renderer `renderDiagrams` draws no logo.
+
 ## License
 
 MIT for this package's own source. The bpmn.io watermark required by bpmn-js stays visible and
-linked on every instance. Third-party terms, including the OFL-1.1 BPMN font and Adobe AFM metrics,
+linked on every instance by default (see below to hide it under a license that allows it). Third-party terms, including the OFL-1.1 BPMN font and Adobe AFM metrics,
 are in `THIRD_PARTY_NOTICES.md` and `licenses/`.
 
 ## Legend profile

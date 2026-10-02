@@ -54,7 +54,9 @@ test("dist carries no brand, no storage, no global render hook, no watermark sup
   for (const f of files) {
     const text = read(f).toString("utf8");
     assert.ok(!/localStorage|sessionStorage|D[2]dRender|DS_TOKENS|d[2]d/i.test(text), `${f} has a banned symbol`);
-    const hides = /bjs-powered-by[^}]*display\s*:\s*none/.test(text) || /bjs-powered-by[^;]*\.remove\(/.test(text);
+    // The one allowed rule is gated by the host's explicit request (options.watermark with a license).
+    const ungated = text.replace(/\[data-bpmn-canvas-watermark=\\?"hidden\\?"\]\s*\.bjs-powered-by\s*\{[^}]*\}/g, "");
+    const hides = /bjs-powered-by[^}]*display\s*:\s*none/.test(ungated) || /bjs-powered-by[^;]*\.remove\(/.test(ungated);
     assert.ok(!hides, `${f} hides the bpmn.io watermark`);
   }
 });

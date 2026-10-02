@@ -17,6 +17,7 @@ import type {
   LegendTokens,
   PaletteColumns,
   ProfileId,
+  WatermarkOptions,
   WheelMode,
 } from "../types.js";
 import { DEFAULT_LABELS } from "./labels.js";
@@ -63,6 +64,8 @@ export interface BpmnWorkshopProps {
   readonly allowLossyEdit?: boolean;
   readonly fitMode?: FitMode;
   readonly wheel?: WheelMode;
+  /** The bpmn.io logo stays visible unless the host names a license that allows hiding it (creation-time option). */
+  readonly watermark?: WatermarkOptions;
   readonly paletteColumns?: PaletteColumns;
   readonly zoomLimits?: { readonly min?: number; readonly max?: number };
   readonly styles?: "auto" | "external";
@@ -185,6 +188,8 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
   }, []);
 
   const { paletteColumns, wheel, styles, styleNonce, allowLossyEdit } = props;
+  const wmHidden = props.watermark?.hidden === true;
+  const wmLicense = props.watermark?.license;
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return undefined;
@@ -202,6 +207,7 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       ...(styleNonce !== undefined ? { styleNonce } : {}),
       ...(allowLossyEdit !== undefined ? { allowLossyEdit } : {}),
       ...(p.fitMode !== undefined ? { fitMode: p.fitMode } : {}),
+      ...(wmHidden ? { watermark: { hidden: true, ...(wmLicense !== undefined ? { license: wmLicense } : {}) } } : {}),
       wheel: wheel ?? "zoom-cursor",
       zoomLimits: p.zoomLimits ?? { min: 0.05, max: 4 },
       drilldown: "event",
@@ -241,7 +247,7 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       handle.destroy();
       if (handleRef.current === handle) handleRef.current = null;
     };
-  }, [paletteColumns, wheel, styles, styleNonce, allowLossyEdit, addNotice, pullXml, refreshView]);
+  }, [paletteColumns, wheel, styles, styleNonce, allowLossyEdit, wmHidden, wmLicense, addNotice, pullXml, refreshView]);
 
   useEffect(() => {
     const h = handleRef.current;

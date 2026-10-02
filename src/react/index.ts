@@ -3,7 +3,7 @@
 import { createElement, useEffect, useRef } from "react";
 import type { CSSProperties, ReactElement } from "react";
 import { createBpmnCanvas } from "../internal/canvas.js";
-import type { BpmnCanvasHandle, BpmnCanvasOptions, BpmnChange, CanvasState, Diagnostic, ProfileId, WheelMode } from "../types.js";
+import type { BpmnCanvasHandle, BpmnCanvasOptions, BpmnChange, CanvasState, Diagnostic, ProfileId, WatermarkOptions, WheelMode } from "../types.js";
 
 export interface BpmnCanvasProps {
   readonly xml: string;
@@ -13,6 +13,8 @@ export interface BpmnCanvasProps {
   readonly readOnly?: boolean;
   readonly allowLossyEdit?: boolean;
   readonly wheel?: WheelMode;
+  /** The bpmn.io logo stays visible unless the host names a license that allows hiding it (creation-time option). */
+  readonly watermark?: WatermarkOptions;
   readonly styles?: "auto" | "external";
   readonly styleNonce?: string;
   readonly className?: string;
@@ -36,6 +38,8 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
   const latest = useRef(props);
   latest.current = props;
   const { profile, wheel, styles, styleNonce, allowLossyEdit } = props;
+  const wmHidden = props.watermark?.hidden === true;
+  const wmLicense = props.watermark?.license;
 
   useEffect(() => {
     const host = hostRef.current;
@@ -46,6 +50,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
       ...(p.revision !== undefined ? { revision: p.revision } : {}),
       ...(profile !== undefined ? { profile } : {}),
       ...(wheel !== undefined ? { wheel } : {}),
+      ...(wmHidden ? { watermark: { hidden: true, ...(wmLicense !== undefined ? { license: wmLicense } : {}) } } : {}),
       ...(styles !== undefined ? { styles } : {}),
       ...(styleNonce !== undefined ? { styleNonce } : {}),
       ...(allowLossyEdit !== undefined ? { allowLossyEdit } : {}),
@@ -62,7 +67,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
       handle.destroy();
       if (handleRef.current === handle) handleRef.current = null;
     };
-  }, [profile, wheel, styles, styleNonce, allowLossyEdit]);
+  }, [profile, wheel, styles, styleNonce, allowLossyEdit, wmHidden, wmLicense]);
 
   useEffect(() => {
     const handle = handleRef.current;
@@ -85,7 +90,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
   });
 }
 
-export type { BpmnCanvasHandle, BpmnCanvasOptions, BpmnChange, CanvasState, Diagnostic, ProfileId, WheelMode } from "../types.js";
+export type { BpmnCanvasHandle, BpmnCanvasOptions, BpmnChange, CanvasState, Diagnostic, ProfileId, WatermarkOptions, WheelMode } from "../types.js";
 
 export { BpmnWorkshop, defaultResolveTarget } from "./workshop.js";
 export type { BpmnWorkshopProps, FormatOption, WorkshopHandle, WorkshopNotice } from "./workshop.js";

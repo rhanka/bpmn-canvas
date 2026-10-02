@@ -104,6 +104,7 @@ export class CanvasController implements BpmnCanvasHandle {
   private resizeObserver: ResizeObserver | undefined;
   private lastSize = "";
   private lastHistory = "";
+  private watermarkRefusal: Diagnostic | undefined;
 
   constructor(host: HTMLElement, options: BpmnCanvasOptions) {
     this.host = host;
@@ -116,6 +117,10 @@ export class CanvasController implements BpmnCanvasHandle {
     this.root = host.ownerDocument.createElement("div");
     this.root.className = "bpmn-canvas";
     this.root.dataset["bpmnCanvasInstance"] = this.instanceId;
+    if (options.watermark?.hidden === true) {
+      if (String(options.watermark.license ?? "").trim() !== "") this.root.dataset["bpmnCanvasWatermark"] = "hidden";
+      else this.watermarkRefusal = { code: "watermark-refused", severity: "warning", message: "The bpmn.io logo stays visible: hiding it needs watermark.license, the reference of the license that allows it." };
+    }
     host.appendChild(this.root);
     if ((options.styles ?? "auto") === "auto") installStyles(host, options.styleNonce);
 
@@ -129,6 +134,10 @@ export class CanvasController implements BpmnCanvasHandle {
 
     const epoch = ++this.epoch;
     this.queue = this.init();
+    if (this.watermarkRefusal) {
+      const refusal = this.watermarkRefusal;
+      void Promise.resolve().then(() => { if (!this.destroyed) this.emit(refusal); });
+    }
     const initial = options.xml !== undefined ? this.enqueue(epoch, () => this.applyXml(options.xml as string, options.revision, epoch)) : this.queue;
     this.ready = initial.then(
       () => undefined,
@@ -474,7 +483,7 @@ export class CanvasController implements BpmnCanvasHandle {
   }
 
   getDiagnostics(): readonly Diagnostic[] {
-    return this.diagnostics;
+    return this.watermarkRefusal ? [this.watermarkRefusal, ...this.diagnostics] : this.diagnostics;
   }
 
   setReadOnly(value: boolean): void {

@@ -24,5 +24,6 @@ export type {
   RenderedDiagram,
   SetXmlOptions,
   SetXmlResult,
+  WatermarkOptions,
   WheelMode,
 } from "./types.js";
