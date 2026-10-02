@@ -25,7 +25,11 @@
       "import": "./dist/assistant-ui/index.js"
     },
     "./styles.css": "./dist/styles.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./io": {
+      "types": "./dist/io/index.d.ts",
+      "import": "./dist/io/index.js"
+    }
   },
   "files": [
     "dist/**",

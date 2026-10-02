@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://example.org/io">
+  <bpmn:collaboration id="Collab"><bpmn:participant id="Pool" name="Request pool" processRef="Proc"/></bpmn:collaboration>
+  <bpmn:process id="Proc" name="Request" isExecutable="false">
+    <bpmn:laneSet id="Lanes">
+      <bpmn:lane id="LaneA" name="Requester"><bpmn:flowNodeRef>Start</bpmn:flowNodeRef><bpmn:flowNodeRef>Fill</bpmn:flowNodeRef></bpmn:lane>
+      <bpmn:lane id="LaneB" name="Approver"><bpmn:flowNodeRef>Gate</bpmn:flowNodeRef><bpmn:flowNodeRef>Approve</bpmn:flowNodeRef><bpmn:flowNodeRef>Sub</bpmn:flowNodeRef><bpmn:flowNodeRef>Call</bpmn:flowNodeRef><bpmn:flowNodeRef>End</bpmn:flowNodeRef></bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start" name="Need"/>
+    <bpmn:task id="Fill" name="Fill form"/>
+    <bpmn:exclusiveGateway id="Gate" name="Valid?"/>
+    <bpmn:task id="Approve" name="Approve"/>
+    <bpmn:subProcess id="Sub" name="Check"/>
+    <bpmn:callActivity id="Call" name="Notify" calledElement="Notify_Proc"/>
+    <bpmn:endEvent id="End" name="Done"/>
+    <bpmn:dataObject id="DObj"/>
+    <bpmn:dataObjectReference id="Data" name="Form data" dataObjectRef="DObj"/>
+    <bpmn:textAnnotation id="App"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="AppLink" sourceRef="Fill" targetRef="App"/>
+    <bpmn:sequenceFlow id="F1" sourceRef="Start" targetRef="Fill"/>
+    <bpmn:sequenceFlow id="F2" name="submit" sourceRef="Fill" targetRef="Gate"/>
+    <bpmn:sequenceFlow id="F3" name="yes" sourceRef="Gate" targetRef="Approve"/>
+    <bpmn:sequenceFlow id="F4" sourceRef="Approve" targetRef="Sub"/>
+    <bpmn:sequenceFlow id="F5" sourceRef="Sub" targetRef="Call"/>
+    <bpmn:sequenceFlow id="F6" sourceRef="Call" targetRef="End"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Dia" name="Request"><bpmndi:BPMNPlane id="Pl" bpmnElement="Collab">
+    <bpmndi:BPMNShape id="dPool" bpmnElement="Pool" isHorizontal="true"><dc:Bounds x="20" y="20" width="980" height="400"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dLaneA" bpmnElement="LaneA" isHorizontal="true"><dc:Bounds x="50" y="20" width="950" height="200"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dLaneB" bpmnElement="LaneB" isHorizontal="true"><dc:Bounds x="50" y="220" width="950" height="200"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dStart" bpmnElement="Start"><dc:Bounds x="100" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dFill" bpmnElement="Fill"><dc:Bounds x="200" y="78" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dGate" bpmnElement="Gate"><dc:Bounds x="380" y="240" width="50" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dApprove" bpmnElement="Approve"><dc:Bounds x="480" y="225" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dSub" bpmnElement="Sub" isExpanded="false"><dc:Bounds x="640" y="225" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dCall" bpmnElement="Call"><dc:Bounds x="800" y="225" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dEnd" bpmnElement="End"><dc:Bounds x="940" y="340" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dData" bpmnElement="Data"><dc:Bounds x="240" y="170" width="36" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dApp" bpmnElement="App"><dc:Bounds x="330" y="30" width="90" height="30"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="dAppLink" bpmnElement="AppLink"><di:waypoint x="290" y="78"/><di:waypoint x="375" y="60"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dF1" bpmnElement="F1"><di:waypoint x="136" y="118"/><di:waypoint x="200" y="118"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dF2" bpmnElement="F2"><di:waypoint x="320" y="118"/><di:waypoint x="405" y="118"/><di:waypoint x="405" y="240"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dF3" bpmnElement="F3"><di:waypoint x="430" y="265"/><di:waypoint x="480" y="265"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dF4" bpmnElement="F4"><di:waypoint x="600" y="265"/><di:waypoint x="640" y="265"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dF5" bpmnElement="F5"><di:waypoint x="760" y="265"/><di:waypoint x="800" y="265"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dF6" bpmnElement="F6"><di:waypoint x="920" y="265"/><di:waypoint x="958" y="265"/><di:waypoint x="958" y="340"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

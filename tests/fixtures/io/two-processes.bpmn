@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="http://example.org/io">
+  <bpmn:process id="PA" name="First" isExecutable="false"><bpmn:startEvent id="SA"/><bpmn:task id="TA" name="Review"/><bpmn:endEvent id="EA"/>
+    <bpmn:sequenceFlow id="FA1" sourceRef="SA" targetRef="TA"/><bpmn:sequenceFlow id="FA2" sourceRef="TA" targetRef="EA"/></bpmn:process>
+  <bpmn:process id="PB" name="Second" isExecutable="false"><bpmn:startEvent id="SB"/><bpmn:task id="TB" name="Review"/><bpmn:endEvent id="EB"/>
+    <bpmn:sequenceFlow id="FB1" sourceRef="SB" targetRef="TB"/><bpmn:sequenceFlow id="FB2" sourceRef="TB" targetRef="EB"/></bpmn:process>
+  <bpmndi:BPMNDiagram id="DA" name="First"><bpmndi:BPMNPlane id="PlA" bpmnElement="PA">
+    <bpmndi:BPMNShape id="dSA" bpmnElement="SA"><dc:Bounds x="100" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dTA" bpmnElement="TA"><dc:Bounds x="200" y="78" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dEA" bpmnElement="EA"><dc:Bounds x="380" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="dFA1" bpmnElement="FA1"><di:waypoint x="136" y="118"/><di:waypoint x="200" y="118"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dFA2" bpmnElement="FA2"><di:waypoint x="320" y="118"/><di:waypoint x="380" y="118"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="DB" name="Second"><bpmndi:BPMNPlane id="PlB" bpmnElement="PB">
+    <bpmndi:BPMNShape id="dSB" bpmnElement="SB"><dc:Bounds x="100" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dTB" bpmnElement="TB"><dc:Bounds x="200" y="78" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dEB" bpmnElement="EB"><dc:Bounds x="380" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="dFB1" bpmnElement="FB1"><di:waypoint x="136" y="118"/><di:waypoint x="200" y="118"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dFB2" bpmnElement="FB2"><di:waypoint x="320" y="118"/><di:waypoint x="380" y="118"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -28,6 +28,7 @@ never calls the network.
 | `@sentropic/bpmn-canvas` | `createBpmnCanvas`, `renderDiagrams`, `analyzeXml`. Importable without a DOM; the engine loads when a canvas or render is created. |
 | `@sentropic/bpmn-canvas/react` | `<BpmnCanvas>`. Optional peer: `react` 19 (qualified with 19.3.0). |
 | `@sentropic/bpmn-canvas/assistant-ui` | `createBpmnToolkit`, `BpmnToolCard`. Structural coupling only: no import of `@assistant-ui/react`. Checked against 0.15.22. |
+| `@sentropic/bpmn-canvas/io` | Draw.io and Sparx codecs: `exportDiagram`, `importDiagram`, `encodeDrawio`, `decodeDrawio`, `bpmnGraph`, `graphBpmn`, `validateNativeBpmn`, `IoError`. Needs a browser DOM (or jsdom). |
 | `@sentropic/bpmn-canvas/styles.css` | The same CSS the canvas installs itself, for `styles: "external"` hosts. |
 
 ## Contract
@@ -74,6 +75,31 @@ Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-
 BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in look (rounded task
 boxes, `[App]`/`[Doc]` annotations, a legend palette) that draws only the shapes it can draw
 faithfully; everything else falls through to the upstream renderer.
+
+## Draw.io and Sparx (`/io`)
+
+```ts
+import { exportDiagram, importDiagram, IoError } from "@sentropic/bpmn-canvas/io";
+
+const file = exportDiagram(await canvas.getXml(), "drawio"); // { xml, filename, mimeType, fidelity }
+const result = await importDiagram(text);                       // { xml, projected, fidelity }
+```
+
+- `bpmn` and `sparx` return the exact input bytes (Sparx accepts BPMN 2.0 XML as an interchange format; no EA/XMI
+  conversion is performed). `drawio` is a **projection**: one participant per page, no nested sub-process content,
+  no conditional flows or boundary events, every element with its DI. Anything else is refused.
+- A conversion never returns a partial result. It returns the file and a `fidelity` list (what it kept or
+  regenerated), or throws an `IoError` with a stable `code` (`unsupported-element`, `nested-subprocess`,
+  `multiple-participants`, `element-without-di`, `missing-endpoint`, `too-large`, `dtd`, `duplicate-id`,
+  `not-bpmn`, `missing-di`, `import-warning`, `unsupported-shape`, `unsupported-structure`, and others) and the
+  `ids` involved.
+- Importing Draw.io decodes pages (raw or compressed) and regenerates BPMN: ids and DI are regenerated, data links
+  become associations, HTML labels become text. The regenerated BPMN is valid against the OMG schema (flow elements
+  before artifacts, every root element before the diagrams). Native BPMN is validated by importing every diagram
+  in an off-screen viewer and is returned unchanged.
+- Raw and decompressed input is bounded (8 MiB by default, `maxBytes`), and DTDs and entities are refused.
+- Options carry file-format names so a host can keep reading files written by earlier tools: `kindAttribute`
+  (default `bpmnKind`), `legacyKindAttributes`, `host`, `targetNamespace`.
 
 ## View, zoom and navigation (0.2)
 
