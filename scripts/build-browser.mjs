@@ -23,6 +23,8 @@ const common = {
   bundle: true,
   minify: true,
   sourcemap: true,
+  // The maps name the sources without embedding them: the npm tarball stays small; CDN users fetch the .min.js.
+  sourcesContent: false,
   platform: "browser",
   target: ["es2020"],
   legalComments: "eof",

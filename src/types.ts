@@ -25,7 +25,9 @@ export type DiagnosticCode =
   | "layout-failed"
   | "read-only-lossy"
   | "save-failed"
-  | "watermark-refused";
+  | "watermark-refused"
+  | "styles-missing"
+  | "asset-load-failed";
 
 export type DiagnosticSeverity = "info" | "warning" | "error";
 
@@ -152,6 +154,14 @@ export interface BpmnCanvasOptions {
   /** `auto` installs styles at mount. `external` leaves the host to load `styles.css`. */
   readonly styles?: "auto" | "external";
   readonly styleNonce?: string;
+  /**
+   * Absolute URL of the package's `dist/assets/` directory (fonts and images), for example
+   * `https://cdn.jsdelivr.net/npm/@sentropic/bpmn-canvas@<version>/dist/assets/`. By default they are
+   * resolved next to the module (or, for the IIFE build, next to its script tag). Set it when the code
+   * runs from a place that cannot locate itself: a bundle inlined in an `iframe srcdoc`, a copied file.
+   * Used with `styles: "auto"` only; the first canvas of a document sets the fonts for that document.
+   */
+  readonly assetBase?: string;
   readonly onChange?: (change: BpmnChange) => void;
   readonly onDiagnostic?: (diagnostic: Diagnostic) => void;
   readonly onStateChange?: (state: CanvasState) => void;

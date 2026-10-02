@@ -21,7 +21,8 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
 export async function runProof(api, variant) {
   const nonce = document.querySelector('meta[name="csp-nonce"]')?.content;
   const external = document.querySelector('meta[name="bpmn-styles"]')?.content === "external";
-  const styleOpts = external ? { styles: "external" } : nonce ? { styleNonce: nonce } : {};
+  const assetBase = document.querySelector('meta[name="asset-base"]')?.content;
+  const styleOpts = { ...(external ? { styles: "external" } : nonce ? { styleNonce: nonce } : {}), ...(assetBase ? { assetBase } : {}) };
   const changes = [];
   const main = api.createBpmnCanvas(document.getElementById("canvas"), {
     xml: XML,
@@ -33,7 +34,8 @@ export async function runProof(api, variant) {
   await main.ready;
   const hidden = api.createBpmnCanvas(document.getElementById("canvas2"), { xml: XML, watermark: { hidden: true, license: "proof-license" }, ...styleOpts });
   await hidden.ready;
-  await document.fonts.load("14px bpmn");
+  await document.fonts.load("14px bpmn").catch(() => []);
+  await new Promise((r) => setTimeout(r, 1500)); // the canvas checks its styles, font and images after the first import
   window.__api = { main, changes, getXml: () => main.getXml() };
   const glyph = getComputedStyle(document.querySelector(".djs-palette .entry[data-action^='legend.']")).getPropertyValue("--bpmn-canvas-legend-glyph").trim();
   const badge = (sel) => { const b = document.querySelector(`${sel} .bjs-powered-by`); return b ? getComputedStyle(b).display !== "none" : null; };
@@ -47,5 +49,9 @@ export async function runProof(api, variant) {
     badgeDefaultVisible: badge("#canvas"),
     badgeHiddenWithLicense: badge("#canvas2") === false,
     styleTags: [...document.querySelectorAll("style")].map((s) => s.nonce || s.getAttribute("nonce") || "no-nonce"),
+    diagnostics: main.getDiagnostics().map((d) => d.code),
+    notice: document.querySelector("#canvas .bpmn-canvas__asset-notice")?.textContent ?? null,
+    noticeVisible: (() => { const n = document.querySelector("#canvas .bpmn-canvas__asset-notice"); if (!n) return false; const r = n.getBoundingClientRect(); return r.width > 0 && r.height > 0 && n.getAttribute("role") === "alert"; })(),
+    canvasHeight: document.querySelector("#canvas .bpmn-canvas").getBoundingClientRect().height,
   };
 }

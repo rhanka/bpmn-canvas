@@ -13,6 +13,8 @@ export interface BpmnCanvasProps {
   readonly readOnly?: boolean;
   readonly allowLossyEdit?: boolean;
   readonly wheel?: WheelMode;
+  /** Absolute URL of the package's `dist/assets/` (see `BpmnCanvasOptions.assetBase`). Creation-time option. */
+  readonly assetBase?: string;
   /** The bpmn.io logo stays visible unless the host names a license that allows hiding it (creation-time option). */
   readonly watermark?: WatermarkOptions;
   readonly styles?: "auto" | "external";
@@ -37,7 +39,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
   const applied = useRef<{ xml: string; revision: string | undefined } | null>(null);
   const latest = useRef(props);
   latest.current = props;
-  const { profile, wheel, styles, styleNonce, allowLossyEdit } = props;
+  const { profile, wheel, styles, styleNonce, allowLossyEdit, assetBase } = props;
   const wmHidden = props.watermark?.hidden === true;
   const wmLicense = props.watermark?.license;
 
@@ -53,6 +55,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
       ...(wmHidden ? { watermark: { hidden: true, ...(wmLicense !== undefined ? { license: wmLicense } : {}) } } : {}),
       ...(styles !== undefined ? { styles } : {}),
       ...(styleNonce !== undefined ? { styleNonce } : {}),
+      ...(assetBase !== undefined ? { assetBase } : {}),
       ...(allowLossyEdit !== undefined ? { allowLossyEdit } : {}),
       readOnly: p.readOnly === true,
       onChange: (c) => latest.current.onChange?.(c),
@@ -67,7 +70,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
       handle.destroy();
       if (handleRef.current === handle) handleRef.current = null;
     };
-  }, [profile, wheel, styles, styleNonce, allowLossyEdit, wmHidden, wmLicense]);
+  }, [profile, wheel, styles, styleNonce, allowLossyEdit, assetBase, wmHidden, wmLicense]);
 
   useEffect(() => {
     const handle = handleRef.current;

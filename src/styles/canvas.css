@@ -1,4 +1,6 @@
 .bpmn-canvas {
+  /* Read by the canvas to detect styles that never arrived (diagnostic styles-missing). */
+  --bpmn-canvas-styles: 1;
   position: relative;
   width: 100%;
   height: 100%;

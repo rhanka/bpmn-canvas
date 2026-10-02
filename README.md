@@ -86,7 +86,7 @@ never calls the network.
 Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-reference`,
 `unparsable-content`, `duplicate-id`, `comments-present`, `missing-di`, `partial-di`,
 `incomplete-io-specification`, `filtered-small`, `render-failed`, `layout-unsupported`,
-`layout-failed`, `read-only-lossy`, `save-failed`.
+`layout-failed`, `read-only-lossy`, `save-failed`, `watermark-refused`, `styles-missing`, `asset-load-failed`.
 
 ## Profiles
 
@@ -214,6 +214,10 @@ asserted there, only DOM and state.
 `styles: "auto"` installs the CSS once per root node (document or shadow root) at mount and honors
 `styleNonce`. For a strict CSP use `styles: "external"` and load `styles.css`. Fonts and images
 are separate files under `dist/assets/` (no `data:` URI), so `img-src` and `font-src` need no `data:`.
+They are resolved next to the module; `assetBase` (absolute URL of the package's `dist/assets/`) overrides that.
+After the first import the canvas checks that its styles apply and that the font and images load; a failure
+is a diagnostic (`styles-missing`, `asset-load-failed`) and a notice inside the canvas (it does not block
+editing), never a blank or iconless canvas without explanation.
 
 ## Browser / CDN
 
@@ -229,7 +233,8 @@ the npm package files as they are (jsDelivr, unpkg):
   works, with no `data:` URI and no network call of its own. Fonts and mask images are fetched with CORS,
   which jsDelivr and unpkg send.
 - `dist/browser/sri.json` gives, for that version, each file's size (raw, gzip, brotli) and its
-  `integrity` hash (sha384). At 0.2: about 764 kB raw, 223 kB gzip, 187 kB brotli.
+  `integrity` hash (sha384). At 0.2: about 768 kB raw, 224 kB gzip, 188 kB brotli. The source maps name
+  the sources without embedding them.
 - Licenses of every bundled package: `dist/browser/bpmn-canvas.licenses.txt`.
 
 ```html
@@ -245,8 +250,11 @@ the npm package files as they are (jsDelivr, unpkg):
 ```
 
 - Pin an exact version and take the `integrity` value from that version's `sri.json`.
-- The IIFE finds its assets from its own `<script src>`: load it with a script tag of its own, not
-  concatenated into another file.
+- The IIFE finds its assets from its own `<script src>`. Inlined (no `src`: concatenated into another file,
+  or written into an `iframe srcdoc`, as an agent-supplied HTML panel does) it cannot locate itself: pass
+  `assetBase`, the absolute URL of the package's `dist/assets/` on the CDN:
+  `createBpmnCanvas(host, { xml, assetBase: "https://cdn.jsdelivr.net/npm/@sentropic/bpmn-canvas@<version>/dist/assets/" })`.
+  Without it the canvas shows an `asset-load-failed` notice naming the URL it tried.
 - Strict CSP, no `'unsafe-inline'` and no `data:`: `script-src <cdn>; style-src 'nonce-…' <cdn>;
   font-src <cdn>; img-src <cdn>` with the `styleNonce` option, or `styles: "external"` with
   `<link rel="stylesheet" href="<cdn path>/dist/styles.css">` (no nonce needed). No `connect-src` is needed.
@@ -255,7 +263,9 @@ the npm package files as they are (jsDelivr, unpkg):
 
 The test `tests/browser-dist.browser.test.mjs` serves the packed package from a second origin under a
 nested versioned path and loads only the minified file: ESM, IIFE, strict CSP with nonce, strict CSP with
-the external stylesheet, each with the legend look, an edit read back through `getXml()` and the watermark option.
+the external stylesheet, the IIFE inlined in an `iframe srcdoc` under `connect-src 'none'` with `assetBase`,
+each with the legend look, an edit read back through `getXml()` and the watermark option. It also checks the
+visible diagnostics: inlined without `assetBase`, `assetBase` to a missing directory, stylesheet not loaded.
 
 ## Errors and edge cases
 
@@ -270,6 +280,8 @@ the external stylesheet, each with the legend look, an edit read back through `g
 | `autoLayout` on a read-only canvas, or with nothing placeable | Resolves `{ changed: 0, skipped }` and emits `layout-unsupported`. |
 | `autoLayout` while the canvas is destroyed or the document replaced | Rejects with an `AbortError`; nothing is moved. |
 | `getXml()` while nothing is displayed | Returns the last XML the host supplied. |
+| Styles not applied after the first import (`styles.css` not loaded, or blocked by a CSP) | `styles-missing` (error), reported once and written in the canvas itself. |
+| Icon font or images not loadable (wrong `assetBase`, inlined bundle without `assetBase`, `font-src`/`img-src`) | `asset-load-failed` (error) naming the URL, reported once and written in the canvas. The diagram stays editable. |
 
 ## Known limitations
 

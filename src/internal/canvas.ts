@@ -20,7 +20,7 @@ import type { DefinitionsLike, EventBusLike, ModdleLike, ViewerLike } from "./en
 import { PaletteSupportModule } from "./palette.js";
 import { ReadOnlyModule } from "./readonly.js";
 import type { ReadOnlyService } from "./readonly.js";
-import { installStyles } from "./styles.js";
+import { assetBaseUrl, fontUrl, imageUrl, installStyles } from "./styles.js";
 import { initialView } from "./viewbox.js";
 import type { ShapeLike } from "./viewbox.js";
 
@@ -105,6 +105,9 @@ export class CanvasController implements BpmnCanvasHandle {
   private lastSize = "";
   private lastHistory = "";
   private watermarkRefusal: Diagnostic | undefined;
+  private assetProblems: Diagnostic[] = [];
+  private assetBase: URL | undefined;
+  private assetsChecked = false;
 
   constructor(host: HTMLElement, options: BpmnCanvasOptions) {
     this.host = host;
@@ -122,7 +125,21 @@ export class CanvasController implements BpmnCanvasHandle {
       else this.watermarkRefusal = { code: "watermark-refused", severity: "warning", message: "The bpmn.io logo stays visible: hiding it needs watermark.license, the reference of the license that allows it." };
     }
     host.appendChild(this.root);
-    if ((options.styles ?? "auto") === "auto") installStyles(host, options.styleNonce);
+    const setup: Diagnostic[] = [];
+    if (options.assetBase !== undefined) {
+      try {
+        this.assetBase = assetBaseUrl(options.assetBase);
+      } catch (error) {
+        setup.push({ code: "asset-load-failed", severity: "error", message: `assetBase is not usable (${errorText(error)}); fonts and images are looked up next to the bundle instead.` });
+      }
+    }
+    if ((options.styles ?? "auto") === "auto") {
+      try {
+        installStyles(host, options.styleNonce, this.assetBase);
+      } catch (error) {
+        setup.push({ code: "styles-missing", severity: "error", message: `The canvas styles could not be installed (${errorText(error)}). Set assetBase to the absolute URL of the package's dist/assets/ directory.` });
+      }
+    }
 
     if (options.signal) {
       if (options.signal.aborted) this.destroy();
@@ -138,6 +155,7 @@ export class CanvasController implements BpmnCanvasHandle {
       const refusal = this.watermarkRefusal;
       void Promise.resolve().then(() => { if (!this.destroyed) this.emit(refusal); });
     }
+    for (const d of setup) void Promise.resolve().then(() => this.reportAsset(d));
     const initial = options.xml !== undefined ? this.enqueue(epoch, () => this.applyXml(options.xml as string, options.revision, epoch)) : this.queue;
     this.ready = initial.then(
       () => undefined,
@@ -157,6 +175,79 @@ export class CanvasController implements BpmnCanvasHandle {
 
   private emit(diagnostic: Diagnostic): void {
     this.options.onDiagnostic?.(diagnostic);
+  }
+
+  /** A styles, font or image problem: kept in getDiagnostics(), emitted, and written in the canvas itself. */
+  private reportAsset(diagnostic: Diagnostic): void {
+    if (this.destroyed) return;
+    this.assetProblems.push(diagnostic);
+    this.emit(diagnostic);
+    const doc = this.root.ownerDocument;
+    let box = this.root.querySelector<HTMLElement>(":scope > .bpmn-canvas__asset-notice");
+    if (!box) {
+      box = doc.createElement("div");
+      box.className = "bpmn-canvas__asset-notice";
+      box.setAttribute("role", "alert");
+      // CSSOM only: the stylesheet may be the missing piece, and a strict CSP refuses style attributes.
+      // It never blocks the diagram: the user can keep working under it.
+      Object.assign(box.style, { position: "absolute", left: "8px", right: "8px", top: "8px", zIndex: "10", pointerEvents: "none", padding: "8px 10px", background: "#fff4e5", color: "#5f3700", border: "1px solid #e0a050", borderRadius: "4px", font: "13px/1.4 system-ui, sans-serif" });
+      this.root.style.position = "relative";
+      this.root.append(box);
+    }
+    const line = doc.createElement("div");
+    line.textContent = `BPMN canvas: ${diagnostic.message}`;
+    box.append(line);
+    if (this.root.getBoundingClientRect().height < 64) this.root.style.minHeight = "120px";
+  }
+
+  private scheduleAssetCheck(): void {
+    if (this.assetsChecked) return;
+    this.assetsChecked = true;
+    void this.checkAssets().catch(() => undefined);
+  }
+
+  /** After the first import: are the styles applied, and do the icon font and the images load? */
+  private async checkAssets(): Promise<void> {
+    const doc = this.root.ownerDocument;
+    const win = doc.defaultView;
+    const fonts = (doc as Document & { fonts?: FontFaceSet }).fonts;
+    if (!win || !fonts) return; // no layout engine (jsdom): nothing to measure
+    const external = this.options.styles === "external";
+    const styled = (): boolean => win.getComputedStyle(this.root).getPropertyValue("--bpmn-canvas-styles").trim() === "1";
+    if (!styled()) await waitForLoad(win, 5000);
+    if (this.destroyed || this.assetProblems.some((d) => d.code === "styles-missing")) return;
+    if (!styled()) {
+      this.reportAsset({
+        code: "styles-missing",
+        severity: "error",
+        message: external
+          ? "the stylesheet is not applied: load styles.css from the package, or use styles: \"auto\"."
+          : "the styles are not applied: a Content-Security-Policy may block them (pass styleNonce).",
+      });
+      return;
+    }
+    let fontLoaded = false;
+    try {
+      const faces = await fonts.load("14px bpmn");
+      fontLoaded = faces.length > 0 && faces.every((f) => f.status === "loaded");
+    } catch {
+      fontLoaded = false;
+    }
+    if (this.destroyed) return;
+    const where = external ? "next to styles.css" : this.assetBase ? `under ${this.assetBase.href}` : "next to the bundle";
+    if (!fontLoaded) {
+      let url = "";
+      try { url = external ? "" : fontUrl(this.assetBase); } catch { /* no base to resolve against */ }
+      this.reportAsset({ code: "asset-load-failed", severity: "error", message: `the BPMN icon font did not load ${url ? `from ${url}` : where}, so palette and marker icons are missing. Set assetBase, or allow it in font-src.` });
+    }
+    if (external) return;
+    let probe = "";
+    try { probe = imageUrl("inline-01.svg", this.assetBase); } catch { /* no base to resolve against */ }
+    const imageOk = probe !== "" && (await loadImage(win, probe, 8000));
+    if (this.destroyed) return;
+    if (!imageOk) {
+      this.reportAsset({ code: "asset-load-failed", severity: "error", message: `the images did not load ${probe ? `from ${probe}` : where}, so palette icons are missing. Set assetBase, or allow it in img-src.` });
+    }
   }
 
   private assertLive(epoch: number): void {
@@ -395,6 +486,7 @@ export class CanvasController implements BpmnCanvasHandle {
       this.setState("ready");
       this.emitHistory();
       for (const d of diagnostics) this.emit(d);
+      this.scheduleAssetCheck();
       if (this.lossyGate) {
         this.emit({ code: "read-only-lossy", severity: "warning", message: "The document would lose content on save, so it is open read-only. Set allowLossyEdit to edit anyway." });
       }
@@ -483,7 +575,7 @@ export class CanvasController implements BpmnCanvasHandle {
   }
 
   getDiagnostics(): readonly Diagnostic[] {
-    return this.watermarkRefusal ? [this.watermarkRefusal, ...this.diagnostics] : this.diagnostics;
+    return [...(this.watermarkRefusal ? [this.watermarkRefusal] : []), ...this.assetProblems, ...this.diagnostics];
   }
 
   setReadOnly(value: boolean): void {
@@ -692,4 +784,27 @@ export class CanvasController implements BpmnCanvasHandle {
 
 export function createBpmnCanvas(host: HTMLElement, options: BpmnCanvasOptions = {}): BpmnCanvasHandle {
   return new CanvasController(host, options);
+}
+
+function errorText(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function waitForLoad(win: Window, ms: number): Promise<void> {
+  if (win.document.readyState === "complete") return new Promise((r) => win.setTimeout(r, 50));
+  return new Promise((resolve) => {
+    const done = (): void => { win.removeEventListener("load", done); resolve(); };
+    win.addEventListener("load", done);
+    win.setTimeout(done, ms);
+  });
+}
+
+function loadImage(win: Window, url: string, ms: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const img = new (win as Window & typeof globalThis).Image();
+    const timer = win.setTimeout(() => resolve(false), ms);
+    img.onload = () => { win.clearTimeout(timer); resolve(true); };
+    img.onerror = () => { win.clearTimeout(timer); resolve(false); };
+    img.src = url;
+  });
 }
