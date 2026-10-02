@@ -61,7 +61,7 @@
     "gen": "node scripts/gen-css.mjs",
     "build": "npm run clean && npm run gen && tsc -p tsconfig.build.json && node scripts/build-assets.mjs",
     "typecheck": "npm run gen && tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node --test \"tests/*.test.mjs\"",
+    "test": "npm run build && node --test tests/*.test.mjs",
     "e3": "node experiments/e3/run.mjs",
     "typecheck:compat": "tsc -p tests/types/tsconfig.json"
   },
