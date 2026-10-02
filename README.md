@@ -256,10 +256,10 @@ when you do not name it. An explicit per-type value always wins.
 | Group | Keys |
 |---|---|
 | Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns) |
-| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links) |
+| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Doc]`, default: same as `link`, `5 5`) |
 | Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
 | Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
-| Pool, lane | `poolLine`, `poolFill`, `laneLine`, `laneFill` |
+| Pool, lane | `poolLine`, `poolFill`, `laneLine`, `laneFill`, `laneHeaderFill` (header column, default: `laneFill`) |
 | External process, external input, process output | `externalLine`, `externalFill` |
 | `[Doc]` annotation | `docLine`, `docFill` |
 | Task input and output (data object) | `dataLine`, `dataFill` |
@@ -311,7 +311,7 @@ renderDiagrams(xml, { profile: "colored", coloredTokens });
 await canvas.setProfile("colored", coloredTokens);
 ```
 
-- **Tokens** are the 28 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
+- **Tokens** are the 31 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
   (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
   no module and draws exactly like `standard`.
 - **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data

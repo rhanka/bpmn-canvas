@@ -14,12 +14,12 @@ test("coloredProfile without tokens adds no module and no tokens: it is the upst
   }
 });
 
-test("coloredProfile with tokens adds the renderer to the modeler and to the viewer, and resolves the 28 tokens", async () => {
+test("coloredProfile with tokens adds the renderer to the modeler and to the viewer, and resolves the 31 tokens", async () => {
   const { coloredProfile } = await dist("index.js");
   const p = coloredProfile({ taskLine: "#101010" });
   assert.equal(p.modelerModules.length, 1);
   assert.equal(p.viewerModules.length, 1);
-  assert.equal(Object.keys(p.tokens).length, 28);
+  assert.equal(Object.keys(p.tokens).length, 31);
   assert.equal(p.tokens.taskLine, "#101010");
 });
 

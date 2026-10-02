@@ -172,13 +172,14 @@ export class LegendRenderer extends BaseRenderer {
       svgClasses(path).add("legend-flow");
     } else {
       // Associations. Data associations carry a direction, so they keep their arrow.
-      const colour = getStrokeColor(el as never, t.link);
+      const toDoc = [el.source, el.target].some((end) => end?.businessObject && legendKind(end.businessObject as LegendBoLike) === "document");
+      const colour = getStrokeColor(el as never, toDoc ? t.docLink : t.link);
       svgAttr(path, {
         d: waypointsPath(el.waypoints),
         fill: "none",
         stroke: colour,
         "stroke-width": t.strokeWidth,
-        "stroke-dasharray": "5 5",
+        "stroke-dasharray": toDoc ? t.docLinkDash : "5 5",
         ...(kind === "data-link" ? { "marker-end": `url(#${this.arrowMarker(colour)})` } : {}),
       });
       svgClasses(path).add("legend-link");
@@ -318,7 +319,7 @@ export class LegendRenderer extends BaseRenderer {
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, fill: "none", stroke, "stroke-width": sw });
         svgAppend(gfx, rect);
         const header = svgCreate("rect");
-        svgAttr(header, { x: 0, y: 0, width: LANE_HEADER, height: h, fill, stroke, "stroke-width": sw });
+        svgAttr(header, { x: 0, y: 0, width: LANE_HEADER, height: h, fill: t.laneHeaderFill, stroke, "stroke-width": sw });
         svgClasses(header).add("legend-lane-header");
         svgAppend(gfx, header);
         this.verticalHeader(gfx, element, h, LANE_HEADER, t.fontSize + 2);

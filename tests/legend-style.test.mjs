@@ -127,8 +127,8 @@ test("tokens: neutral defaults, overridable, frozen", () => {
   const merged = tokens.resolveLegendTokens({ stroke: "#112233", fontSize: undefined });
   assert.equal(merged.stroke, "#112233");
   assert.equal(merged.fontSize, 12, "undefined override is ignored");
-  const keys = ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "headerText", "flow", "link", "taskLine", "taskFill", "taskFillEnd",
-    "eventLine", "eventFill", "gatewayLine", "gatewayFill", "poolLine", "poolFill", "laneLine", "laneFill", "externalLine", "externalFill",
+  const keys = ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "headerText", "flow", "link", "docLink", "docLinkDash", "taskLine", "taskFill", "taskFillEnd",
+    "eventLine", "eventFill", "gatewayLine", "gatewayFill", "poolLine", "poolFill", "laneLine", "laneFill", "laneHeaderFill", "externalLine", "externalFill",
     "docLine", "docFill", "dataLine", "dataFill", "appLine", "appFill"];
   assert.deepEqual(Object.keys(t).sort(), [...keys].sort(), "the public token list");
 });
@@ -161,4 +161,13 @@ test("legend sources contain no banned symbol", () => {
     assert.ok(!/\bd[2]d[A-Z-]|d[2]d\./.test(text), `${f} keeps a d[2]d identifier`);
     assert.ok(!/#[0-9a-fA-F]{6}\b/.test(f === "tokens.ts" ? "" : text), `${f} hard-codes a colour outside tokens.ts`);
   }
+});
+
+test("tokens: docLink follows link and laneHeaderFill follows laneFill unless named", () => {
+  const a = tokens.resolveLegendTokens({ link: "#010203", laneFill: "#040506" });
+  assert.equal(a.docLink, "#010203");
+  assert.equal(a.laneHeaderFill, "#040506");
+  assert.equal(a.docLinkDash, "5 5");
+  const b = tokens.resolveLegendTokens({ link: "#010203", docLink: "#b85450", docLinkDash: "3 4", laneFill: "#040506", laneHeaderFill: "#fbf9f6" });
+  assert.deepEqual([b.docLink, b.docLinkDash, b.laneHeaderFill, b.link, b.laneFill], ["#b85450", "3 4", "#fbf9f6", "#010203", "#040506"]);
 });

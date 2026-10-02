@@ -12,6 +12,8 @@ export const DEFAULT_LEGEND_TOKENS: LegendTokens = Object.freeze({
   headerText: "#222222",
   flow: "#333333",
   link: "#666666",
+  docLink: "#666666",
+  docLinkDash: "5 5",
   taskLine: "#333333",
   taskFill: "#ffffff",
   taskFillEnd: "#f2f2f2",
@@ -23,6 +25,7 @@ export const DEFAULT_LEGEND_TOKENS: LegendTokens = Object.freeze({
   poolFill: "#efefef",
   laneLine: "#333333",
   laneFill: "#f6f6f6",
+  laneHeaderFill: "#f6f6f6",
   externalLine: "#333333",
   externalFill: "#f3f1e7",
   docLine: "#333333",
@@ -43,6 +46,9 @@ export function resolveLegendTokens(overrides?: Partial<LegendTokens>): LegendTo
   if (typeof given["stroke"] === "string") for (const key of LINE_KEYS) out[key] = given["stroke"];
   if (typeof given["fill"] === "string") out["taskFill"] = given["fill"];
   Object.assign(out, given);
+  // `[Doc]` links follow the plain links and the lane header follows the lane unless the host names them.
+  if (given["docLink"] === undefined) out["docLink"] = out["link"];
+  if (given["laneHeaderFill"] === undefined) out["laneHeaderFill"] = out["laneFill"];
   // The gradient end is derived from the start tone unless the host names it.
   if (given["taskFillEnd"] === undefined && typeof out["taskFill"] === "string" && out["taskFill"] !== DEFAULT_LEGEND_TOKENS.taskFill) {
     out["taskFillEnd"] = shade(out["taskFill"], 0.95);

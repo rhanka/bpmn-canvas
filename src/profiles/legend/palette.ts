@@ -199,6 +199,8 @@ export class LegendBpmnUpdater extends BpmnUpdater {
   static override $inject: string[] = (BpmnUpdater as Any).$inject;
 
   private readonly bpmnFactory: Any;
+  /** Specifications this updater created: only those are removed again when they end up empty. */
+  private readonly created = new WeakSet<object>();
 
   constructor(eventBus: Any, bpmnFactory: Any, connectionDocking: Any) {
     super(eventBus, bpmnFactory, connectionDocking);
@@ -210,7 +212,9 @@ export class LegendBpmnUpdater extends BpmnUpdater {
       super.updateSemanticParent(businessObject, newParent, visualParent);
       return;
     }
+    const previous = businessObject.$parent;
     detachDataIo(businessObject);
+    this.dropEmptySpecification(previous);
     if (!newParent) return;
     const proc = resolveProcess(newParent);
     if (!proc) return;
@@ -219,6 +223,7 @@ export class LegendBpmnUpdater extends BpmnUpdater {
       ioSpec = this.bpmnFactory.create("bpmn:InputOutputSpecification");
       proc.set("ioSpecification", ioSpec);
       ioSpec.$parent = proc;
+      this.created.add(ioSpec);
     }
     this.ensureSets(ioSpec);
     const input = businessObject.$type === "bpmn:DataInput";
@@ -227,6 +232,26 @@ export class LegendBpmnUpdater extends BpmnUpdater {
     // Put the item in the first set so it belongs to at least one, as BPMN requires.
     const set = ioSpec.get(input ? "inputSets" : "outputSets")[0];
     set?.get(input ? "dataInputRefs" : "dataOutputRefs").push(businessObject);
+  }
+
+  /**
+   * Undoing a creation, or deleting the last item, must give back the document it started from:
+   * an ioSpecification created here that holds no item and no set member is removed with it.
+   * One from the imported document is never touched.
+   */
+  private dropEmptySpecification(ioSpec: Any): void {
+    if (!ioSpec || !this.created.has(ioSpec)) return;
+    const empty =
+      ioSpec.get("dataInputs").length === 0 &&
+      ioSpec.get("dataOutputs").length === 0 &&
+      [...ioSpec.get("inputSets"), ...ioSpec.get("outputSets")].every(
+        (set: Any) => (set.get("dataInputRefs")?.length ?? 0) + (set.get("dataOutputRefs")?.length ?? 0) + (set.get("optionalInputRefs")?.length ?? 0) + (set.get("optionalOutputRefs")?.length ?? 0) + (set.get("whileExecutingInputRefs")?.length ?? 0) + (set.get("whileExecutingOutputRefs")?.length ?? 0) === 0,
+      );
+    const owner = ioSpec.$parent;
+    if (empty && owner && owner.ioSpecification === ioSpec) {
+      owner.set("ioSpecification", undefined);
+      ioSpec.$parent = null;
+    }
   }
 
   /** An ioSpecification needs at least one inputSet and one outputSet. */

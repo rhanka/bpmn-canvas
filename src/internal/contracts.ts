@@ -38,6 +38,10 @@ export interface LegendTokens {
   readonly flow: string;
   /** Association and data-link stroke. */
   readonly link: string;
+  /** Stroke of an association that ends on a `[Doc]` annotation. Falls back to `link`. */
+  readonly docLink: string;
+  /** `stroke-dasharray` of that association, for instance `5 5`. */
+  readonly docLinkDash: string;
   readonly taskLine: string;
   /** Start tone of the horizontal task gradient. */
   readonly taskFill: string;
@@ -51,6 +55,8 @@ export interface LegendTokens {
   readonly poolFill: string;
   readonly laneLine: string;
   readonly laneFill: string;
+  /** Fill of the header column of a lane (legend look). Falls back to `laneFill`. */
+  readonly laneHeaderFill: string;
   /** External (call) process, external input and process output. */
   readonly externalLine: string;
   readonly externalFill: string;
