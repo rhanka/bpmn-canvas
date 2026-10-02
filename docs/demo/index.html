@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@sentropic/bpmn-canvas demo</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { color-scheme: light dark; --bg: #fff; --fg: #1f2937; --line: #d1d5db; --accent: #2f5fa8; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #14171c; --fg: #e5e7eb; --line: #374151; --accent: #7aa7e8; } }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  #looks { display: flex; gap: 6px; }
+  button { font: inherit; color: inherit; background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+  button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  #status, footer { color: #6b7280; font-size: 12px; }
+  #canvas { flex: 1; min-height: 0; background: #fff; }
+  footer { padding: 6px 16px; border-top: 1px solid var(--line); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>@sentropic/bpmn-canvas</h1>
+  <div id="looks" role="group" aria-label="Look">
+    <button type="button" data-profile="standard" aria-pressed="true">Standard</button>
+    <button type="button" data-profile="legend" aria-pressed="false">Legend</button>
+    <button type="button" data-profile="colored" aria-pressed="false">Colored</button>
+  </div>
+  <button type="button" id="layout">Auto-layout</button>
+  <span id="status" role="status">Loading…</span>
+</header>
+<div id="canvas"></div>
+<footer>Diagram: BPMN MIWG reference model B.1.0, CC BY 3.0 (OMG BPMN Model Interchange Working Group). Drag, edit and undo with Ctrl+Z; the wheel zooms.</footer>
+<script type="module" src="./page/page.js"></script>
+</body>
+</html>

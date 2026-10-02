@@ -5,6 +5,23 @@ framework-independent core, optional React and assistant-ui adapters.
 
 Status: pre-release, not published. The API below is implemented and tested but not frozen.
 
+## Demo
+
+**[Try it in the browser](https://rhanka.github.io/bpmn-canvas/)**: one diagram, three looks, editable, with auto-layout.
+
+The same diagram drawn by the static renderer (`renderDiagrams`, no editing engine, plain SVG), in the `standard`,
+`legend` and `colored` looks:
+
+<p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/standard.svg" alt="standard look: upstream bpmn-js notation" width="100%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/legend.svg" alt="legend look: hand-drawn renderer driven by tokens" width="100%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/colored.svg" alt="colored look: upstream notation recoloured by tokens" width="100%"></p>
+
+Diagram: reference model B.1.0 of the OMG BPMN Model Interchange Working Group
+([bpmn-miwg-test-suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite)), CC BY 3.0. Two sub-processes (expanded and
+collapsed), three call activities, two lanes and a second pool. The colours of the `legend` and `colored` images are
+the neutral palette of `docs/demo/palette.mjs`. Regenerate the images with `node scripts/gen-demo-svg.mjs` after
+`npm run build`; the live page is built by `node scripts/build-demo.mjs`.
+
 ```ts
 import { createBpmnCanvas } from "@sentropic/bpmn-canvas";
 
