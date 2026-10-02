@@ -81,6 +81,9 @@ export interface BpmnWorkshopProps {
    */
   readonly onImport?: (result: ImportResult) => void;
   readonly ioOptions?: IoOptions;
+  /** Hide the built-in export menu or import button when the host provides its own. */
+  readonly hideExport?: boolean;
+  readonly hideImport?: boolean;
   /** Which diagram a sub-process marker click opens. Default: called element, then exact name. */
   readonly resolveTarget?: (click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined) => string | null | undefined;
   /** Make links inside the editor inert, except the bpmn.io badge. Default true. */
@@ -376,12 +379,13 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
         <Menu label={<><IconFit /> {labels.fit}</>} ariaLabel={labels.fit} items={fitItems} disabled={busy} testId="bpmn-workshop-fit" title={labels.fitAuto} />
         {btn("auto-layout", labels.autoLayout, () => void doLayout(), <IconLayout />, busy, labels.autoLayoutHint)}
         {formats.length > 1 && <Menu label={<><IconFormat /> {format?.label}</>} ariaLabel={labels.format} items={formatItems} disabled={busy} testId="bpmn-workshop-format" title={labels.formatHint} />}
-        <Menu label={<><IconDownload /> {labels.export}</>} ariaLabel={labels.export} items={exportItems} testId="bpmn-workshop-export" />
-        {btn("import", labels.import, () => fileRef.current?.click(), <IconUpload />, busy)}
+        {!props.hideExport && <Menu label={<><IconDownload /> {labels.export}</>} ariaLabel={labels.export} items={exportItems} testId="bpmn-workshop-export" />}
+        {!props.hideImport && btn("import", labels.import, () => fileRef.current?.click(), <IconUpload />, busy)}
         <input
           ref={fileRef}
           type="file"
-          hidden
+          hidden={true}
+          disabled={props.hideImport === true}
           accept=".bpmn,.xml,.drawio,application/xml,text/xml"
           aria-label={labels.import}
           data-testid="bpmn-workshop-file"

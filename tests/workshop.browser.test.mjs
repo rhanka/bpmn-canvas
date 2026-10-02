@@ -235,6 +235,10 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
       document.querySelectorAll(".backdrop, .bjs-powered-by-lightbox").forEach((b) => b.remove());
       return { foreignPrevented: ev1.defaultPrevented, badgeReachedBpmnIo: lightbox === 1 };
     }, [l.id]);
+    // ---- hidden export and import
+    const hx = await mount(ce1, { extra: { hideExport: true, hideImport: true } });
+    o.hidden = await ev(([i]) => ({ exportMenu: window.ws.q(i, '[data-testid="bpmn-workshop-export"]'), importButton: window.ws.q(i, '[data-testid="bpmn-workshop-import"]'), fileInputDisabled: window.ws.it(i).mountEl.querySelector('[data-testid="bpmn-workshop-file"]').disabled }), [hx.id]);
+    await ev(([i]) => window.ws.unmount(i), [hx.id]);
     // ---- 12 custom labels, ref ------------------------------------------------------------------------------------
     await ev(([i]) => window.ws.setExtra(i, { labels: { undo: "Annuler", toolbar: "Schéma", export: "Exporter" } }), [l.id]);
     await sleep(150);
@@ -375,6 +379,9 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
   });
   await t.test("links inside the editor are inert, except the bpmn.io badge", () => {
     assert.deepEqual(o.links, { foreignPrevented: true, badgeReachedBpmnIo: true });
+  });
+  await t.test("hideExport and hideImport remove the built-in export menu and import button", () => {
+    assert.deepEqual(o.hidden, { exportMenu: false, importButton: false, fileInputDisabled: true });
   });
   await t.test("labels come from props; the ref gives the document and the canvas handle", () => {
     assert.deepEqual({ ...o.labels, exportMenu: o.labels.exportMenu.trim() }, { toolbar: "Schéma", undo: "Annuler", exportMenu: "Exporter" });
