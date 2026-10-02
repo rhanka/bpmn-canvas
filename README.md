@@ -75,6 +75,30 @@ BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in l
 boxes, `[App]`/`[Doc]` annotations, a legend palette) that draws only the shapes it can draw
 faithfully; everything else falls through to the upstream renderer.
 
+## View, zoom and navigation (0.2)
+
+- `fitMode: "readable" | "whole"` and `fit({ mode, inset })`: `whole` fits the whole diagram; `readable` fits it when
+  it stays readable, otherwise zooms on the start of the process. The canvas observes its own size: the first
+  fit happens once it has one, later resizes keep the user's view in `readable`, and `whole` re-fits on every
+  resize. `setFitMode(mode)` re-fits after a layout change (maximise, minimise).
+- `zoomTo(scale)`, `zoomBy(factor)`, `getZoom()`, and `zoomLimits: { min, max }` (defaults 0.2 and 4).
+- `wheel: "zoom-cursor"`: a plain wheel zooms around the cursor (x1.15 in, x0.87 out, within the limits);
+  Ctrl/Meta+wheel and pinch stay native. `"page-scroll"` and `"zoom"` are unchanged.
+- `onElementClick({ id, type, name, calledElement?, marker })`: fires for clicks on elements, also when read-only,
+  never for the empty canvas. `marker` is true for a click on a sub-process expansion marker (`legend` profile)
+  or on the bpmn-js drill-down button (both profiles). The host decides what a marker click means, for
+  instance a lookup by `name`/`calledElement` followed by `selectDiagram(id)`.
+- `drilldown: "native" | "event"`: `native` (default) lets bpmn-js navigate to the sub-process plane; the active
+  diagram follows and `onChange` fires with cause `diagram-switch`. `event` reports the drill-down click as a marker
+  click and navigates nowhere.
+- `onHistoryChange({ canUndo, canRedo })`: fires when undo/redo availability may have changed, including after a
+  diagram or profile switch, so toolbar buttons need no polling.
+- `setProfile(profile, legendTokens?)`: changes the look without changing the document. The modeler is recreated
+  with the same XML, active diagram and viewbox; read-only is kept. **The undo stack is lost.** `onChange` fires
+  with cause `profile-switch` and no new content revision. If nothing was edited, `getXml()` still returns the
+  input bytes. A switch pending at `destroy()` rejects with an `AbortError`.
+- `legendTokens` on `createBpmnCanvas` and `renderDiagrams`: see "Legend profile".
+
 ## Layout
 
 `autoLayout()` re-positions existing DI in one undo step and returns `{ changed, skipped }`. Boundary
@@ -113,7 +137,7 @@ separate assets, not `data:` URIs.
 - No undo across a diagram switch (`open()` clears the stack).
 - Layout does not reposition boundary events, data stores, groups or pools without a `processRef`;
   it lists them in `skipped`. A boundary event keeps its old position when its host moves.
-- The `legend` profile has no token for a second gradient tone or a distinct flow stroke.
+- Switching profile (`setProfile`) loses the undo stack.
 - The assistant-ui adapter is structural and renders static previews; the host mounts the editable canvas.
 - The Sentropic mount adapter and a diagram-core projection are not part of this version.
 - Only React 19.3.0 and assistant-ui 0.15.22 are qualified.
@@ -123,3 +147,47 @@ separate assets, not `data:` URIs.
 MIT for this package's own source. The bpmn.io watermark required by bpmn-js stays visible and
 linked on every instance. Third-party terms, including the OFL-1.1 BPMN font and Adobe AFM metrics,
 are in `THIRD_PARTY_NOTICES.md` and `licenses/`.
+
+## Legend profile
+
+Opt-in look: `createBpmnCanvas(host, { profile: "legend", legendTokens })` and
+`renderDiagrams(xml, { profile: "legend", legendTokens })`. No brand value ships in this package; the host
+supplies its own.
+
+### Tokens
+
+`legendTokens` is a `Partial<LegendTokens>`. Missing keys use neutral defaults. Two conveniences: `stroke` feeds
+every `*Line` and `flow` you did not name, `fill` feeds `taskFill`; `taskFillEnd` is derived from `taskFill`
+when you do not name it. An explicit per-type value always wins.
+
+| Group | Keys |
+|---|---|
+| Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns) |
+| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links) |
+| Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
+| Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
+| Pool, lane | `poolLine`, `poolFill`, `laneLine`, `laneFill` |
+| External process, external input, process output | `externalLine`, `externalFill` |
+| `[Doc]` annotation | `docLine`, `docFill` |
+| Task input and output (data object) | `dataLine`, `dataFill` |
+| `[App]` annotation (component box) | `appLine`, `appFill` |
+
+A BPMN-in-Color fill or stroke set on an element in the XML wins over the token.
+
+### Palette action ids
+
+The legend palette replaces the default palette. Each entry carries a stable `data-action` equal to its id, also
+exported as `LEGEND_ACTION_IDS` from the profile module. The icon CSS ships with the package (monochrome masks,
+no asset file) and only matches `data-action^="legend."`; recolor with `--bpmn-canvas-legend-icon` and
+`--bpmn-canvas-legend-accent`.
+
+`legend.start`, `legend.end`, `legend.intermediate-event`, `legend.task`, `legend.subprocess`,
+`legend.external-process`, `legend.gateway-or`, `legend.gateway-and`, `legend.data-input`,
+`legend.data-output`, `legend.external-input`, `legend.process-output`, `legend.document`,
+`legend.application`, `legend.lane`, `legend.sequence-flow`.
+
+### Navigation markers
+
+The collapsed sub-process `[+]` and the external-process icon carry `data-marker` and the class
+`legend-marker`. The lib's CSS lets a click land on the marker itself and keeps the body of the element
+selectable and draggable, so a host can tell a body click from a marker click.

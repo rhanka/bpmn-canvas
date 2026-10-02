@@ -1,6 +1,6 @@
 {
   "name": "@sentropic/bpmn-canvas",
-  "version": "0.0.0",
+  "version": "0.2.0-local",
   "description": "Framework-independent BPMN 2.0 editing canvas built on bpmn-js, with React and assistant-ui adapters.",
   "license": "MIT",
   "private": true,
@@ -61,10 +61,12 @@
     "@types/react-dom": "^19.3.0",
     "axe-core": "^4.13.0",
     "esbuild": "^0.28.2",
+    "jsdom": "^25.0.1",
     "playwright-core": "^1.63.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "typescript": "^5.6.0",
+    "vitest": "^3.2.4",
     "xmllint-wasm": "^5.3.0"
   },
   "peerDependencies": {

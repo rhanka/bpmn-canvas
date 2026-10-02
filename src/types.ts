@@ -1,5 +1,8 @@
 /** Public types. Nothing here references bpmn-js, diagram-js or any DOM-only global at runtime. */
 
+import type { LegendTokens } from "./internal/contracts.js";
+
+export type { LegendTokens };
 export type ProfileId = "standard" | "legend";
 
 export type DiagnosticCode =
@@ -38,12 +41,12 @@ export interface DiagramInfo {
   readonly name: string;
 }
 
-export type ChangeCause = "edit" | "undo" | "redo" | "layout" | "diagram-switch";
+export type ChangeCause = "edit" | "undo" | "redo" | "layout" | "diagram-switch" | "profile-switch";
 
 export interface BpmnChange {
   /**
    * Local content revision of this canvas. Opaque token. It does not change on
-   * `diagram-switch`, which carries the current content revision.
+   * `diagram-switch` or `profile-switch`, which carry the current content revision.
    */
   readonly revision: string;
   /** Host revision supplied with the last applied `setXml` (or the initial option), if any. */
@@ -54,7 +57,35 @@ export interface BpmnChange {
 
 export type CanvasState = "loading" | "ready" | "error" | "destroyed";
 
-export type WheelMode = "zoom" | "page-scroll";
+/**
+ * `zoom`: diagram-js default. `page-scroll`: the page scrolls, Ctrl/Meta+wheel zooms.
+ * `zoom-cursor`: a plain wheel zooms around the cursor (x1.15 / x0.87, within the zoom limits);
+ * Ctrl/Meta+wheel and pinch stay native.
+ */
+export type WheelMode = "zoom" | "page-scroll" | "zoom-cursor";
+
+/** `whole` fits the whole diagram. `readable` fits it when it stays readable, else zooms on the process start. */
+export type FitMode = "readable" | "whole";
+
+export interface FitOptions {
+  readonly mode?: FitMode;
+  /** Left px kept clear for the palette. Default: the measured palette width, with a per-profile floor. */
+  readonly inset?: number;
+}
+
+export interface ElementClick {
+  readonly id: string;
+  readonly type: string;
+  readonly name: string;
+  readonly calledElement?: string;
+  /** True when the click hit a sub-process expansion marker or drill-down icon, not the element body. */
+  readonly marker: boolean;
+}
+
+export interface HistoryState {
+  readonly canUndo: boolean;
+  readonly canRedo: boolean;
+}
 
 export interface SetXmlOptions {
   /** Host revision of this document. Re-sending a revision already applied or emitted is an echo and is ignored. */
@@ -75,12 +106,28 @@ export interface BpmnCanvasOptions {
   readonly xml?: string;
   readonly revision?: string;
   readonly profile?: ProfileId;
+  /** Look inputs for the `legend` profile. Missing keys fall back to neutral defaults. */
+  readonly legendTokens?: Partial<LegendTokens>;
   readonly readOnly?: boolean;
   /** Allow editing even when the import is lossy. Default false: lossy documents open read-only. */
   readonly allowLossyEdit?: boolean;
   readonly signal?: AbortSignal;
   /** `zoom` captures the wheel like diagram-js. `page-scroll` lets the page scroll and zooms on Ctrl/Meta+wheel only. */
   readonly wheel?: WheelMode;
+  /** Fit used after import and diagram switch, and re-applied on every resize when `whole`. Default `readable`. */
+  readonly fitMode?: FitMode;
+  /**
+   * What the bpmn-js drill-down button of a collapsed sub-process does. `native` (default): bpmn-js
+   * navigates to the sub-process plane; the active diagram follows and an `onChange` with cause
+   * `diagram-switch` is emitted. `event`: the click is reported through `onElementClick` with
+   * `marker: true` and nothing navigates, so the host decides (for instance with `selectDiagram`).
+   */
+  readonly drilldown?: "native" | "event";
+  readonly zoomLimits?: { readonly min?: number; readonly max?: number };
+  /** Fires for clicks on elements, with marker detection done for both profiles. Also fires when read-only. */
+  readonly onElementClick?: (click: ElementClick) => void;
+  /** Fires whenever the undo/redo availability may have changed. */
+  readonly onHistoryChange?: (history: HistoryState) => void;
   /** `auto` installs styles at mount. `external` leaves the host to load `styles.css`. */
   readonly styles?: "auto" | "external";
   readonly styleNonce?: string;
@@ -110,7 +157,18 @@ export interface BpmnCanvasHandle {
   isReadOnly(): boolean;
   /** Why the canvas is read-only: `host` (option or setReadOnly) or `lossy` (diagnostic gate). */
   getReadOnlyReason(): "host" | "lossy" | undefined;
-  fit(): void;
+  /** Default mode `whole`. */
+  fit(options?: FitOptions): void;
+  setFitMode(mode: FitMode): void;
+  zoomTo(scale: number): void;
+  zoomBy(factor: number): void;
+  getZoom(): number;
+  /**
+   * Switches the look without changing the document: the modeler is recreated with the same XML,
+   * active diagram and viewbox. The undo stack is lost. Emits `onChange` with cause `profile-switch`
+   * and no new content revision.
+   */
+  setProfile(profile: ProfileId, legendTokens?: Partial<LegendTokens>): Promise<void>;
   canUndo(): boolean;
   canRedo(): boolean;
   undo(): void;
@@ -123,6 +181,7 @@ export interface BpmnCanvasHandle {
 
 export interface RenderOptions {
   readonly profile?: ProfileId;
+  readonly legendTokens?: Partial<LegendTokens>;
   /** Diagrams whose SVG is smaller than this edge length in px are reported as `filtered-small` (default 20). */
   readonly minSize?: number;
   readonly signal?: AbortSignal;

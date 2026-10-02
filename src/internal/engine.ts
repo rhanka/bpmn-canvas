@@ -3,7 +3,7 @@
  * the engine is loaded when a canvas or a render is actually created.
  */
 import type { BpmnCanvasConfig, ProfileDefinition } from "./contracts.js";
-import type { ProfileId } from "../types.js";
+import type { LegendTokens, ProfileId } from "../types.js";
 
 export interface ModdleLike {
   fromXML(xml: string): Promise<{ rootElement: DefinitionsLike; warnings: Array<{ message: string; element?: { id?: string }; value?: string }> }>;
@@ -58,10 +58,10 @@ export function loadEngine(): Promise<Engine> {
   return enginePromise;
 }
 
-export async function loadProfile(id: ProfileId): Promise<ProfileDefinition> {
+export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>): Promise<ProfileDefinition> {
   if (id === "legend") {
-    const mod = (await import("../profiles/legend/index.js")) as unknown as { legendProfile(): ProfileDefinition };
-    return mod.legendProfile();
+    const mod = (await import("../profiles/legend/index.js")) as unknown as { legendProfile(tokens?: Partial<LegendTokens>): ProfileDefinition };
+    return mod.legendProfile(tokens);
   }
   return { id: "standard", modelerModules: [], viewerModules: [] };
 }

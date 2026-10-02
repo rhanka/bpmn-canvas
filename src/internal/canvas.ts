@@ -5,7 +5,11 @@ import type {
   ChangeCause,
   Diagnostic,
   DiagramInfo,
+  FitMode,
+  FitOptions,
   LayoutResult,
+  LegendTokens,
+  ProfileId,
   SetXmlOptions,
   SetXmlResult,
 } from "../types.js";
@@ -16,6 +20,8 @@ import type { DefinitionsLike, EventBusLike, ModdleLike, ViewerLike } from "./en
 import { ReadOnlyModule } from "./readonly.js";
 import type { ReadOnlyService } from "./readonly.js";
 import { installStyles } from "./styles.js";
+import { initialView } from "./viewbox.js";
+import type { ShapeLike } from "./viewbox.js";
 
 export function abortError(): Error {
   const e = new Error("Operation aborted: superseded or canvas destroyed");
@@ -23,6 +29,12 @@ export function abortError(): Error {
   return e;
 }
 
+interface ElementLike {
+  readonly id: string;
+  readonly type: string;
+  readonly parent?: unknown;
+  readonly businessObject?: { name?: unknown; calledElement?: unknown };
+}
 interface DirectEditingLike {
   isActive(): boolean;
   complete(): void;
@@ -34,12 +46,26 @@ interface CommandStackLike {
   redo(): void;
 }
 interface CanvasLike {
-  zoom(level: string, center?: string): unknown;
+  zoom(level?: string | number, center?: string | { x: number; y: number }): unknown;
+  viewbox(box?: { x: number; y: number; width: number; height: number }): { x: number; y: number; width: number; height: number };
+  getSize(): { width: number; height: number };
+  resized(): void;
+}
+interface RegistryLike {
+  getAll(): Array<{ type: string; x?: number; y?: number; width?: number; height?: number; waypoints?: Array<{ x: number; y: number }> }>;
 }
 interface ZoomScrollLike {
   toggle(enabled: boolean): void;
   stepZoom(delta: number, position?: { x: number; y: number }): void;
 }
+
+/** Selectors of the sub-process expansion marker and drill-down icon, for both profiles. */
+const MARKER_SELECTOR = ".bjs-drilldown, [data-marker='sub-process'], [data-marker='process-icon'], .legend-marker";
+const PALETTE_FLOOR: Record<ProfileId, number> = { standard: 56, legend: 112 };
+const ZOOM_STEP_IN = 1.15;
+const ZOOM_STEP_OUT = 0.87;
+const DEFAULT_ZOOM_MIN = 0.2;
+const DEFAULT_ZOOM_MAX = 4;
 
 export class CanvasController implements BpmnCanvasHandle {
   readonly ready: Promise<void>;
@@ -66,12 +92,24 @@ export class CanvasController implements BpmnCanvasHandle {
   private lossyGate = false;
   private inLayout = false;
   private wheelListener: ((e: WheelEvent) => void) | undefined;
+  private wheelCapture = false;
+  private drilldownListener: ((e: MouseEvent) => void) | undefined;
   private abortListener: (() => void) | undefined;
+  private profileId: ProfileId;
+  private legendTokens: Partial<LegendTokens> | undefined;
+  private fitMode: FitMode;
+  private fittedOnce = false;
+  private resizeObserver: ResizeObserver | undefined;
+  private lastSize = "";
+  private lastHistory = "";
 
   constructor(host: HTMLElement, options: BpmnCanvasOptions) {
     this.host = host;
     this.options = options;
     this.hostReadOnly = options.readOnly === true;
+    this.profileId = options.profile ?? "standard";
+    this.legendTokens = options.legendTokens;
+    this.fitMode = options.fitMode ?? "readable";
     this.baseRevision = options.revision;
     this.root = host.ownerDocument.createElement("div");
     this.root.className = "bpmn-canvas";
@@ -129,24 +167,36 @@ export class CanvasController implements BpmnCanvasHandle {
 
   private async init(): Promise<void> {
     try {
-      const [engine, profile] = await Promise.all([loadEngine(), loadProfile(this.options.profile ?? "standard")]);
+      const [engine, profile] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.legendTokens)]);
       if (this.destroyed) return;
-      const modeler = new engine.Modeler({
-        container: this.root,
-        additionalModules: [ReadOnlyModule, ...profile.modelerModules, ...(await this.layoutModules())],
-        bpmnCanvas: profileConfig(this.instanceId, profile),
-      });
-      this.modeler = modeler;
-      const bus = modeler.get<EventBusLike>("eventBus");
-      bus.on("commandStack.changed", (e: { trigger?: string }) => this.onStackChanged(e.trigger));
-      this.setupWheel(modeler);
-      this.applyReadOnly();
+      await this.createModeler(engine, profile);
+      this.setupResizeObserver();
     } catch (error) {
       const d: Diagnostic = { code: "import-failed", severity: "error", message: `Engine failed to load: ${String((error as Error)?.message ?? error)}` };
       this.diagnostics = [d];
       this.setState("error");
       this.emit(d);
     }
+  }
+
+  /** Creates the modeler for a profile and wires this controller's listeners. Used at start and by setProfile. */
+  private async createModeler(engine: Awaited<ReturnType<typeof loadEngine>>, profile: Awaited<ReturnType<typeof loadProfile>>): Promise<ViewerLike> {
+    const limits = this.options.zoomLimits;
+    const modeler = new engine.Modeler({
+      container: this.root,
+      additionalModules: [ReadOnlyModule, ...profile.modelerModules, ...(await this.layoutModules())],
+      bpmnCanvas: profileConfig(this.instanceId, profile),
+      ...(limits ? { zoomScroll: { ...(limits.min !== undefined ? { minZoom: limits.min } : {}), ...(limits.max !== undefined ? { maxZoom: limits.max } : {}) } } : {}),
+    });
+    this.modeler = modeler;
+    const bus = modeler.get<EventBusLike>("eventBus");
+    bus.on("commandStack.changed", (e: { trigger?: string }) => this.onStackChanged(e.trigger));
+    bus.on("element.click", (e: { element?: ElementLike; originalEvent?: MouseEvent }) => this.onElementClick(e));
+    bus.on("root.set", (e: { element?: ElementLike }) => this.onRootSet(e.element));
+    this.setupDrilldown(modeler);
+    this.setupWheel(modeler);
+    this.applyReadOnly();
+    return modeler;
   }
 
   private async layoutModules(): Promise<unknown[]> {
@@ -158,22 +208,115 @@ export class CanvasController implements BpmnCanvasHandle {
     }
   }
 
+  private removeWheel(): void {
+    if (this.wheelListener) this.root.removeEventListener("wheel", this.wheelListener, { capture: this.wheelCapture });
+    this.wheelListener = undefined;
+  }
+
   private setupWheel(modeler: ViewerLike): void {
-    if ((this.options.wheel ?? "zoom") !== "page-scroll") return;
+    this.removeWheel();
+    const mode = this.options.wheel ?? "zoom";
+    if (mode === "zoom") return;
     const zoomScroll = modeler.get<ZoomScrollLike | undefined>("zoomScroll");
-    if (!zoomScroll) return;
-    zoomScroll.toggle(false);
+    if (mode === "page-scroll") {
+      if (!zoomScroll) return;
+      zoomScroll.toggle(false);
+      this.wheelListener = (e: WheelEvent) => {
+        if (!e.ctrlKey && !e.metaKey) return;
+        e.preventDefault();
+        const r = this.root.getBoundingClientRect();
+        zoomScroll.stepZoom(e.deltaY < 0 ? 1 : -1, { x: e.clientX - r.left, y: e.clientY - r.top });
+      };
+      this.wheelCapture = false;
+      this.root.addEventListener("wheel", this.wheelListener, { passive: false });
+      return;
+    }
+    // zoom-cursor: a plain wheel zooms around the cursor; Ctrl/Meta+wheel and pinch stay native.
     this.wheelListener = (e: WheelEvent) => {
-      if (!e.ctrlKey && !e.metaKey) return;
+      if (e.ctrlKey || e.metaKey || e.deltaY === 0) return;
       e.preventDefault();
+      e.stopPropagation();
       const r = this.root.getBoundingClientRect();
-      zoomScroll.stepZoom(e.deltaY < 0 ? 1 : -1, { x: e.clientX - r.left, y: e.clientY - r.top });
+      this.zoomBy(e.deltaY < 0 ? ZOOM_STEP_IN : ZOOM_STEP_OUT, { x: e.clientX - r.left, y: e.clientY - r.top });
     };
-    this.root.addEventListener("wheel", this.wheelListener, { passive: false });
+    this.wheelCapture = true;
+    this.root.addEventListener("wheel", this.wheelListener, { passive: false, capture: true });
+  }
+
+  private setupResizeObserver(): void {
+    if (typeof ResizeObserver === "undefined") return;
+    this.resizeObserver = new ResizeObserver(([entry]) => {
+      const box = entry?.contentRect;
+      if (this.destroyed || !box || box.width === 0 || box.height === 0) return;
+      const key = `${Math.round(box.width)}x${Math.round(box.height)}`;
+      if (key === this.lastSize) return;
+      this.lastSize = key;
+      if (!this.modeler || this.diagrams.length === 0) return;
+      this.modeler.get<CanvasLike>("canvas").resized();
+      if (!this.fittedOnce || this.fitMode === "whole") this.applyFit(this.fitMode);
+    });
+    this.resizeObserver.observe(this.root);
+  }
+
+  private removeDrilldown(): void {
+    if (this.drilldownListener) this.root.removeEventListener("click", this.drilldownListener, { capture: true });
+    this.drilldownListener = undefined;
+  }
+
+  /** `event` mode: the drill-down button reports a marker click instead of navigating. */
+  private setupDrilldown(modeler: ViewerLike): void {
+    this.removeDrilldown();
+    if ((this.options.drilldown ?? "native") !== "event") return;
+    this.drilldownListener = (e: MouseEvent) => {
+      const button = (e.target as Element | null)?.closest?.(".bjs-drilldown");
+      if (!button) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const id = button.closest("[data-container-id]")?.getAttribute("data-container-id");
+      const element = id ? modeler.get<{ get(id: string): ElementLike | undefined }>("elementRegistry").get(id) : undefined;
+      if (element) this.onElementClick({ element, originalEvent: e });
+    };
+    this.root.addEventListener("click", this.drilldownListener, { capture: true });
+  }
+
+  /** The displayed diagram can change without selectDiagram (native drill-down): keep the state true. */
+  private onRootSet(root: ElementLike | undefined): void {
+    if (this.destroyed || this.loading > 0 || !this.modeler) return;
+    const id = (root?.businessObject as { id?: string } | undefined)?.id;
+    const diagram = this.modeler.getDefinitions().diagrams?.find((d) => d.plane.bpmnElement?.id === id);
+    if (!diagram || diagram.id === this.activeId) return;
+    this.activeId = diagram.id;
+    this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "diagram-switch", diagramId: diagram.id });
+  }
+
+  private onElementClick(e: { element?: ElementLike; originalEvent?: MouseEvent }): void {
+    const el = e.element;
+    const bo = el?.businessObject;
+    if (!el || !bo || !el.parent || !this.options.onElementClick) return;
+    const target = e.originalEvent?.target as Element | null | undefined;
+    const calledElement = typeof bo.calledElement === "string" && bo.calledElement ? bo.calledElement : undefined;
+    this.options.onElementClick({
+      id: el.id,
+      type: el.type,
+      name: typeof bo.name === "string" ? bo.name : "",
+      ...(calledElement !== undefined ? { calledElement } : {}),
+      marker: !!target?.closest?.(MARKER_SELECTOR),
+    });
+  }
+
+  private emitHistory(): void {
+    if (this.destroyed || !this.options.onHistoryChange) return;
+    const state = { canUndo: this.canUndo(), canRedo: this.canRedo() };
+    const key = `${state.canUndo}${state.canRedo}`;
+    if (key === this.lastHistory) return;
+    this.lastHistory = key;
+    this.options.onHistoryChange(state);
   }
 
   private onStackChanged(trigger: string | undefined): void {
-    if (this.destroyed || this.loading > 0 || trigger === "clear" || !this.activeId) return;
+    if (this.destroyed) return;
+    this.emitHistory();
+    if (this.loading > 0 || trigger === "clear" || !this.activeId) return;
     this.touched = true;
     const cause: ChangeCause = this.inLayout ? "layout" : trigger === "undo" ? "undo" : trigger === "redo" ? "redo" : "edit";
     this.lastRevision = `${this.instanceId}:${++this.revisionCounter}`;
@@ -228,8 +371,10 @@ export class CanvasController implements BpmnCanvasHandle {
       this.activeId = this.diagrams[0]?.id;
       this.lossyGate = isLossy(diagnostics) && this.options.allowLossyEdit !== true;
       this.applyReadOnly();
-      this.fit();
+      this.fittedOnce = false;
+      this.initialFit();
       this.setState("ready");
+      this.emitHistory();
       for (const d of diagnostics) this.emit(d);
       if (this.lossyGate) {
         this.emit({ code: "read-only-lossy", severity: "warning", message: "The document would lose content on save, so it is open read-only. Set allowLossyEdit to edit anyway." });
@@ -312,7 +457,8 @@ export class CanvasController implements BpmnCanvasHandle {
       this.assertLive(epoch);
       if (nav !== this.navSeq) throw abortError();
       this.activeId = id;
-      this.fit();
+      this.applyFit(this.fitMode);
+      this.emitHistory();
       this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "diagram-switch", diagramId: id });
     });
   }
@@ -335,9 +481,122 @@ export class CanvasController implements BpmnCanvasHandle {
     return this.hostReadOnly ? "host" : this.lossyGate ? "lossy" : undefined;
   }
 
-  fit(): void {
+  /** First fit after an import: only once the canvas has a size, otherwise the resize observer does it. */
+  private initialFit(): void {
+    const box = this.root.getBoundingClientRect();
+    if (box.width > 0 && box.height > 0) this.applyFit(this.fitMode);
+  }
+
+  private applyFit(mode: FitMode, inset?: number): void {
+    const modeler = this.modeler;
+    if (this.destroyed || !modeler || this.diagrams.length === 0) return;
+    const canvas = modeler.get<CanvasLike>("canvas");
+    try {
+      const shapes: ShapeLike[] = [];
+      for (const e of modeler.get<RegistryLike>("elementRegistry").getAll()) {
+        if (e.type === "bpmn:Process" || e.type === "bpmn:Collaboration") continue;
+        if (typeof e.x === "number" && typeof e.y === "number" && typeof e.width === "number" && typeof e.height === "number") {
+          shapes.push({ x: e.x, y: e.y, width: e.width, height: e.height, type: e.type });
+        } else if (Array.isArray(e.waypoints)) {
+          for (const wp of e.waypoints) shapes.push({ x: wp.x, y: wp.y, width: 1, height: 1, type: e.type });
+        }
+      }
+      const palette = this.root.querySelector(".djs-palette")?.getBoundingClientRect();
+      const left = this.root.getBoundingClientRect().left;
+      const measured = palette && palette.width > 0 ? palette.right - left + 8 : 0;
+      const view = initialView(shapes, canvas.getSize(), inset ?? Math.max(measured, PALETTE_FLOOR[this.profileId]), mode === "whole");
+      if (!view) canvas.zoom("fit-viewport", "auto");
+      else canvas.viewbox(view.viewbox);
+      this.fittedOnce = true;
+    } catch {
+      // Geometry unavailable (for instance jsdom): keep the default view.
+    }
+  }
+
+  fit(options: FitOptions = {}): void {
+    this.applyFit(options.mode ?? "whole", options.inset);
+  }
+
+  setFitMode(mode: FitMode): void {
+    if (this.destroyed) return;
+    this.fitMode = mode;
+    if (!this.modeler || this.diagrams.length === 0) return;
+    const win = this.root.ownerDocument.defaultView;
+    const refit = (): void => {
+      if (this.destroyed || !this.modeler) return;
+      this.modeler.get<CanvasLike>("canvas").resized();
+      this.applyFit(mode);
+    };
+    if (win?.requestAnimationFrame) win.requestAnimationFrame(refit);
+    else refit();
+  }
+
+  private zoomLimits(): { min: number; max: number } {
+    return { min: this.options.zoomLimits?.min ?? DEFAULT_ZOOM_MIN, max: this.options.zoomLimits?.max ?? DEFAULT_ZOOM_MAX };
+  }
+
+  getZoom(): number {
+    const z = this.modeler && this.diagrams.length > 0 ? this.modeler.get<CanvasLike>("canvas").zoom() : 1;
+    return typeof z === "number" ? z : 1;
+  }
+
+  zoomTo(scale: number, center: "auto" | { x: number; y: number } = "auto"): void {
     if (this.destroyed || !this.modeler || this.diagrams.length === 0) return;
-    this.modeler.get<CanvasLike>("canvas").zoom("fit-viewport", "auto");
+    const { min, max } = this.zoomLimits();
+    this.modeler.get<CanvasLike>("canvas").zoom(Math.min(max, Math.max(min, scale)), center);
+  }
+
+  zoomBy(factor: number, center: "auto" | { x: number; y: number } = "auto"): void {
+    this.zoomTo(this.getZoom() * factor, center);
+  }
+
+  setProfile(profile: ProfileId, legendTokens?: Partial<LegendTokens>): Promise<void> {
+    if (this.destroyed) return Promise.reject(abortError());
+    const epoch = this.epoch;
+    return this.enqueue(epoch, async () => {
+      const [engine, next] = await Promise.all([loadEngine(), loadProfile(profile, legendTokens)]);
+      this.assertLive(epoch);
+      const old = this.modeler;
+      const hadDocument = !!old && this.diagrams.length > 0;
+      let xml = this.inputXml;
+      let view: { x: number; y: number; width: number; height: number } | undefined;
+      if (old && hadDocument) {
+        const de = old.get<DirectEditingLike | undefined>("directEditing");
+        if (de?.isActive()) de.complete();
+        if (this.touched) xml = (await old.saveXML({ format: true })).xml;
+        view = old.get<CanvasLike>("canvas").viewbox();
+        this.assertLive(epoch);
+      }
+      this.loading++;
+      try {
+        this.removeWheel();
+        this.removeDrilldown();
+        old?.destroy();
+        this.modeler = undefined;
+        this.profileId = profile;
+        this.legendTokens = legendTokens;
+        const modeler = await this.createModeler(engine, next);
+        if (hadDocument) {
+          await modeler.importXML(xml, this.activeId);
+          this.assertLive(epoch);
+          if (view) modeler.get<CanvasLike>("canvas").viewbox({ x: view.x, y: view.y, width: view.width, height: view.height });
+        }
+      } catch (error) {
+        if ((error as Error)?.name === "AbortError") throw error;
+        this.setState("error");
+        this.emit({ code: "import-failed", severity: "error", message: `Profile switch failed: ${String((error as Error)?.message ?? error)}` });
+        throw error;
+      } finally {
+        this.loading--;
+      }
+      this.assertLive(epoch);
+      if (hadDocument && this.activeId) {
+        this.inputXml = xml;
+        this.touched = false;
+        this.emitHistory();
+        this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "profile-switch", diagramId: this.activeId });
+      }
+    });
   }
 
   private stack(): CommandStackLike | undefined {
@@ -398,7 +657,10 @@ export class CanvasController implements BpmnCanvasHandle {
     this.epoch++;
     this.navSeq++;
     if (this.options.signal && this.abortListener) this.options.signal.removeEventListener("abort", this.abortListener);
-    if (this.wheelListener) this.root.removeEventListener("wheel", this.wheelListener);
+    this.removeWheel();
+    this.removeDrilldown();
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = undefined;
     try {
       this.modeler?.destroy();
     } finally {
