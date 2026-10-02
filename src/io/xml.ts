@@ -1,5 +1,5 @@
 // Native BPMN checks shared by import and export. Adapted from an internal implementation.
-import { loadEngine } from "../internal/engine.js";
+import { loadViewer } from "../internal/engine.js";
 import { IoError, resolveIoOptions } from "./errors.js";
 import type { IoOptions } from "./errors.js";
 
@@ -46,7 +46,7 @@ export function nativeBpmnDocument(xml: string, options?: IoOptions): Document {
 /** Imports every diagram in an off-screen viewer before the document is accepted. Returns the input unchanged. */
 export async function validateNativeBpmn(xml: string, options?: IoOptions): Promise<string> {
   const doc = nativeBpmnDocument(xml, options);
-  const { Viewer } = await loadEngine();
+  const Viewer = await loadViewer();
   const viewer = new Viewer({ container: document.createElement("div") });
   try {
     for (const diagram of diagramElements(doc)) {

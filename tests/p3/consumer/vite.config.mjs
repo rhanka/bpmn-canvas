@@ -20,6 +20,7 @@ export default defineConfig({
         shadow: join(here, "shadow.html"),
         react: join(here, "react.html"),
         workshop: join(here, "workshop.html"),
+        render: join(here, "render.html"),
       },
     },
   },

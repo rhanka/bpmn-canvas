@@ -1,7 +1,7 @@
 import type { Diagnostic, RenderOptions, RenderResult, RenderedDiagram } from "../types.js";
 import { abortError } from "./canvas.js";
 import { analyzeDefinitions, classifyWarnings, hasXmlComment } from "./diagnostics.js";
-import { diagramName, loadEngine, loadProfile, newInstanceId, profileConfig } from "./engine.js";
+import { diagramName, loadProfile, loadViewer, newInstanceId, profileConfig } from "./engine.js";
 import type { ModdleLike } from "./engine.js";
 
 /**
@@ -16,7 +16,7 @@ export async function renderDiagrams(xml: string, options: RenderOptions = {}): 
   };
   check();
   const minSize = options.minSize ?? 20;
-  const [engine, profile] = await Promise.all([loadEngine(), loadProfile(options.profile ?? "standard", options.profile === "colored" ? options.coloredTokens : options.legendTokens)]);
+  const [Viewer, profile] = await Promise.all([loadViewer(), loadProfile(options.profile ?? "standard", options.profile === "colored" ? options.coloredTokens : options.legendTokens)]);
   check();
 
   const diagnostics: Diagnostic[] = [];
@@ -24,7 +24,7 @@ export async function renderDiagrams(xml: string, options: RenderOptions = {}): 
   const host = document.createElement("div");
   host.style.cssText = "position:absolute;left:-20000px;top:0;width:1600px;height:1200px";
   document.body.appendChild(host);
-  const viewer = new engine.Viewer({
+  const viewer = new Viewer({
     container: host,
     additionalModules: [...profile.viewerModules],
     bpmnCanvas: profileConfig(newInstanceId(), profile),

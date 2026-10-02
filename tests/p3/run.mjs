@@ -425,6 +425,18 @@ try {
     await shot("workshop");
   });
 
+  // ---- R: static render and import validation do not load the editing engine ---------------------------------
+  await criterion("R", "a page that only renders and validates never fetches the editing engine (Modeler)", "render.html", async ({ check, rec }) => {
+    const r = await ev(() => window.renderTest);
+    check("two diagrams rendered with their sizes, import validated unchanged", r.diagrams.length === 2 && r.diagrams.every((d) => d[1] > 0 && d[2] > 0) && r.importedSame, r);
+    const js = server.requests.filter((q) => /^\/assets\/.*\.js$/.test(q.path)).map((q) => q.path);
+    rec.extra.chunksRequestedByAllPagesSoFar = js.length;
+    const afterRender = await page.evaluate(() => performance.getEntriesByType("resource").map((e) => new URL(e.name).pathname).filter((p) => /\/assets\/.*\.js$/.test(p)));
+    rec.extra.chunks = afterRender;
+    check("the Viewer chunk was fetched", afterRender.some((p) => /Viewer-/.test(p)), afterRender);
+    check("the Modeler chunk was NOT fetched", !afterRender.some((p) => /Modeler-/.test(p)), afterRender);
+  });
+
   // ---- E9: a host with its own bpmn-js ---------------------------------------------------------
   await criterion("E9", "a page with its own bpmn-js Modeler is unaffected by a canvas using the legend profile", "lab.html", async ({ check, rec, shot }) => {
     const r = await ev(() => window.lab.e9());

@@ -42,20 +42,33 @@ type ViewerCtor = new (options: Record<string, unknown>) => ViewerLike;
 
 interface Engine {
   readonly Modeler: ViewerCtor;
-  readonly Viewer: ViewerCtor;
 }
 
 let enginePromise: Promise<Engine> | undefined;
+let viewerPromise: Promise<ViewerCtor> | undefined;
 
+/** The editing engine. Loaded only when a canvas is created. */
 export function loadEngine(): Promise<Engine> {
-  enginePromise ??= Promise.all([import("bpmn-js/lib/Modeler.js"), import("bpmn-js/lib/Viewer.js")]).then(
-    ([m, v]) => ({ Modeler: m.default as unknown as ViewerCtor, Viewer: v.default as unknown as ViewerCtor }),
+  enginePromise ??= import("bpmn-js/lib/Modeler.js").then(
+    (m) => ({ Modeler: m.default as unknown as ViewerCtor }),
     (error) => {
       enginePromise = undefined;
       throw error;
     },
   );
   return enginePromise;
+}
+
+/** The read-only engine, much lighter than the Modeler: static renders and import validation use it alone. */
+export function loadViewer(): Promise<ViewerCtor> {
+  viewerPromise ??= import("bpmn-js/lib/Viewer.js").then(
+    (m) => m.default as unknown as ViewerCtor,
+    (error) => {
+      viewerPromise = undefined;
+      throw error;
+    },
+  );
+  return viewerPromise;
 }
 
 export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>): Promise<ProfileDefinition> {
