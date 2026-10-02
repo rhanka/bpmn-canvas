@@ -18,6 +18,10 @@ test("legend tokens, data IO lifecycle and hit outlines in a real browser", { ti
     assert.deepEqual(o.given.doc, { stroke: "#b85450", dash: "3 4" });
     assert.deepEqual(o.given.note, { stroke: "#112233", dash: "5 5" });
   });
+  await t.test("a directional association to a [Doc] is drawn the same way (no arrow); to a plain note it stays upstream's", () => {
+    assert.deepEqual(o.given.directional, { stroke: "#b85450", dash: "3 4" });
+    assert.equal(o.neutral.directional.note, null, "upstream draws it");
+  });
   await t.test("without docLink the [Doc] association follows the host's link", () => {
     assert.deepEqual(o.followed.doc, { stroke: "#112233", dash: "5 5" });
   });

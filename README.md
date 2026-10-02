@@ -256,7 +256,7 @@ when you do not name it. An explicit per-type value always wins.
 | Group | Keys |
 |---|---|
 | Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns) |
-| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Doc]`, default: same as `link`, `5 5`) |
+| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Doc]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
 | Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
 | Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
 | Pool, lane | `poolLine`, `poolFill`, `laneLine`, `laneFill`, `laneHeaderFill` (header column, default: `laneFill`) |

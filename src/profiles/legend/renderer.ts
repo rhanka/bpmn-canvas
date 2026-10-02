@@ -151,13 +151,27 @@ export class LegendRenderer extends BaseRenderer {
     const el = element as DiagramElement;
     // External labels are separate diagram-js elements: the upstream renderer draws them.
     if (el.type === "label" || !el.businessObject) return false;
-    if (el.waypoints) return legendConnectionKind(el.businessObject) !== undefined;
+    if (el.waypoints) return this.connectionKind(el) !== undefined;
     return shapeKindOf(element) !== undefined;
+  }
+
+  private endsOnDocument(el: DiagramElement): boolean {
+    return [el.source, el.target].some((end) => end?.businessObject && legendKind(end.businessObject as LegendBoLike) === "document");
+  }
+
+  /**
+   * The legend draws plain associations, and every association to a `[Doc]` annotation, whatever its
+   * direction (the reference look has no arrow on it). Other directional ones stay upstream's.
+   */
+  private connectionKind(el: DiagramElement): ReturnType<typeof legendConnectionKind> {
+    const kind = legendConnectionKind(el.businessObject);
+    if (kind === undefined && el.businessObject?.$type === "bpmn:Association" && this.endsOnDocument(el)) return "link";
+    return kind;
   }
 
   override drawConnection(parentGfx: Any, connection: Any): SVGElement {
     const el = connection as DiagramElement;
-    const kind = legendConnectionKind(el.businessObject);
+    const kind = this.connectionKind(el);
     const t = this.tokens;
     const path = svgCreate("path");
     if (kind === "sequence") {
@@ -172,7 +186,7 @@ export class LegendRenderer extends BaseRenderer {
       svgClasses(path).add("legend-flow");
     } else {
       // Associations. Data associations carry a direction, so they keep their arrow.
-      const toDoc = [el.source, el.target].some((end) => end?.businessObject && legendKind(end.businessObject as LegendBoLike) === "document");
+      const toDoc = this.endsOnDocument(el);
       const colour = getStrokeColor(el as never, toDoc ? t.docLink : t.link);
       svgAttr(path, {
         d: waypointsPath(el.waypoints),

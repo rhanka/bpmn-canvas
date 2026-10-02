@@ -15,6 +15,8 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
     <bpmn:textAnnotation id="NOTE"><bpmn:text>plain note</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="AD" sourceRef="T" targetRef="DOC"/>
     <bpmn:association id="AN" sourceRef="T" targetRef="NOTE"/>
+    <bpmn:association id="AO" associationDirection="One" sourceRef="G" targetRef="DOC"/>
+    <bpmn:association id="AP" associationDirection="One" sourceRef="G" targetRef="NOTE"/>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BD"><bpmndi:BPMNPlane id="PL" bpmnElement="C">
     <bpmndi:BPMNShape id="dPA" bpmnElement="PA" isHorizontal="true"><dc:Bounds x="100" y="50" width="800" height="300"/></bpmndi:BPMNShape>
@@ -25,6 +27,8 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
     <bpmndi:BPMNShape id="dDOC" bpmnElement="DOC"><dc:Bounds x="400" y="220" width="120" height="50"/></bpmndi:BPMNShape>
     <bpmndi:BPMNShape id="dNOTE" bpmnElement="NOTE"><dc:Bounds x="560" y="220" width="100" height="40"/></bpmndi:BPMNShape>
     <bpmndi:BPMNEdge id="dAD" bpmnElement="AD"><di:waypoint x="340" y="180"/><di:waypoint x="400" y="230"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dAO" bpmnElement="AO"><di:waypoint x="465" y="165"/><di:waypoint x="465" y="220"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="dAP" bpmnElement="AP"><di:waypoint x="490" y="140"/><di:waypoint x="600" y="220"/></bpmndi:BPMNEdge>
     <bpmndi:BPMNEdge id="dAN" bpmnElement="AN"><di:waypoint x="380" y="150"/><di:waypoint x="560" y="230"/></bpmndi:BPMNEdge>
   </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
@@ -65,9 +69,9 @@ window.runLegend3 = async () => {
 
   // (1) [Doc] link and lane header tokens.
   const neutral = await make();
-  out.neutral = { doc: linkOf(neutral.host, "AD"), note: linkOf(neutral.host, "AN"), header: headerFill(neutral.host), warnings: neutral.warnings };
+  out.neutral = { directional: { doc: linkOf(neutral.host, "AO"), note: linkOf(neutral.host, "AP") }, doc: linkOf(neutral.host, "AD"), note: linkOf(neutral.host, "AN"), header: headerFill(neutral.host), warnings: neutral.warnings };
   const given = await make({ link: "#112233", docLink: "#b85450", docLinkDash: "3 4", laneFill: "#aabbcc", laneHeaderFill: "#fbf9f6" });
-  out.given = { doc: linkOf(given.host, "AD"), note: linkOf(given.host, "AN"), header: headerFill(given.host) };
+  out.given = { directional: linkOf(given.host, "AO"), doc: linkOf(given.host, "AD"), note: linkOf(given.host, "AN"), header: headerFill(given.host) };
   const followed = await make({ link: "#112233", laneFill: "#aabbcc" });
   out.followed = { doc: linkOf(followed.host, "AD"), note: linkOf(followed.host, "AN"), header: headerFill(followed.host) };
 
