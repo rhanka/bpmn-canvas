@@ -28,6 +28,7 @@ never calls the network.
 | `@sentropic/bpmn-canvas` | `createBpmnCanvas`, `renderDiagrams`, `analyzeXml`. Importable without a DOM; the engine loads when a canvas or render is created. |
 | `@sentropic/bpmn-canvas/react` | `<BpmnCanvas>`. Optional peer: `react` 19 (qualified with 19.3.0). |
 | `@sentropic/bpmn-canvas/assistant-ui` | `createBpmnToolkit`, `BpmnToolCard`. Structural coupling only: no import of `@assistant-ui/react`. Checked against 0.15.22. |
+| `@sentropic/bpmn-canvas/layout` | Pure swimlane layout: `layoutProcess`, `parseProcesses`, `textWidth`, `wrapText`. |
 | `@sentropic/bpmn-canvas/io` | Draw.io and Sparx codecs: `exportDiagram`, `importDiagram`, `encodeDrawio`, `decodeDrawio`, `bpmnGraph`, `graphBpmn`, `validateNativeBpmn`, `IoError`. Needs a browser DOM (or jsdom). |
 | `@sentropic/bpmn-canvas/styles.css` | The same CSS the canvas installs itself, for `styles: "external"` hosts. |
 
@@ -127,9 +128,15 @@ const result = await importDiagram(text);                       // { xml, projec
 
 ## Layout
 
-`autoLayout()` re-positions existing DI in one undo step and returns `{ changed, skipped }`. Boundary
-events, data stores, groups and pools without `processRef` are listed in `skipped`, not moved.
-Never runs implicitly.
+`autoLayout()` re-positions existing DI in one undo step and returns `{ changed, skipped }`. Boundary events stay
+on the border of their host, on the same side and at the same fraction along it, and the connections that start or
+end on them are routed afresh, all in the same command. Data stores, groups and pools without `processRef` are listed
+in `skipped`, not moved. Never runs implicitly, never creates DI.
+
+`@sentropic/bpmn-canvas/layout` exposes the pure layout (`layoutProcess`, `parseProcesses`, `textWidth`, `wrapText`)
+with no modeler. `layoutProcess` also runs in Node. It is checked against two golden cases produced by the original
+Python implementation of the algorithm: nodes, labels, applications, lanes, pool, connections, edges and edge
+labels are identical.
 
 ## Static render
 
@@ -161,8 +168,7 @@ separate assets, not `data:` URIs.
 - No DI generation, no Draw.io or Sparx export, no PNG/PDF export, no server-side rendering, no BPMN
   execution, no complete BPMN conformance claim.
 - No undo across a diagram switch (`open()` clears the stack).
-- Layout does not reposition boundary events, data stores, groups or pools without a `processRef`;
-  it lists them in `skipped`. A boundary event keeps its old position when its host moves.
+- Layout does not reposition data stores, groups or pools without a `processRef`; it lists them in `skipped`.
 - Switching profile (`setProfile`) loses the undo stack.
 - The assistant-ui adapter is structural and renders static previews; the host mounts the editable canvas.
 - The Sentropic mount adapter and a diagram-core projection are not part of this version.

@@ -17,7 +17,7 @@ test("package identity and license", () => {
 });
 
 test("exports name only implemented entries", () => {
-  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./io", "./package.json", "./react", "./styles.css"]);
+  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./io", "./layout", "./package.json", "./react", "./styles.css"]);
   for (const [key, target] of Object.entries(pkg.exports)) {
     const files = typeof target === "string" ? [target] : Object.values(target);
     for (const f of files) assert.ok(existsSync(root + f), `${key} -> ${f} must exist after build`);

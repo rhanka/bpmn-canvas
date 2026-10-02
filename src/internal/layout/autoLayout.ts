@@ -5,10 +5,12 @@
 
 import { getDi } from "bpmn-js/lib/util/ModelUtil";
 import { getExternalLabelMid } from "bpmn-js/lib/util/LabelUtil";
+import { getMid } from "diagram-js/lib/layout/LayoutUtil";
 
 import type { BpmnCanvasLayoutService } from "../contracts.js";
 import { isAppAnnotation } from "../annotations.js";
 import { parseProcesses } from "../processModel.js";
+import { boundaryChanges } from "./boundary.js";
 import { layoutProcess, type Box, type LayoutProcessInput, type Point, type ProcessLayout } from "../swimlaneLayout.js";
 
 // bpmn-js / diagram-js elements are not typed at this boundary.
@@ -176,7 +178,11 @@ export class AutoLayoutHandler {
     }
     // Connections between pools follow their moved ends (docking cropped like the modeler does).
     for (const conn of context.reroute ?? []) {
-      const raw = this.layouter.layoutConnection(conn, {});
+      // The layouter keeps an existing first and last waypoint as docking points. A connection that
+      // starts or ends on a boundary event just moved with its host, so it is routed afresh.
+      const onBoundary = conn.source?.type === "bpmn:BoundaryEvent" || conn.target?.type === "bpmn:BoundaryEvent";
+      const hints = onBoundary ? { connectionStart: getMid(conn.source), connectionEnd: getMid(conn.target), waypoints: [] } : {};
+      const raw = this.layouter.layoutConnection(conn, hints);
       const probe = { ...conn, waypoints: raw };
       this.setWaypoints(conn, this.docking.getCroppedWaypoints(probe, conn.source, conn.target), saved);
       const label = conn.label;
@@ -266,8 +272,10 @@ export class BpmnCanvasLayout implements BpmnCanvasLayoutService {
       changes.push(...layoutChanges(this.registry, participant, lay, missing));
     }
 
+    const boundary = boundaryChanges(this.registry, changes);
+    changes.push(...boundary.changes);
     const reroute: El[] = changes.length
-      ? this.registry.getAll().filter((e: El) => e.type === "bpmn:MessageFlow" && e.source && e.target)
+      ? [...new Set<El>([...this.registry.getAll().filter((e: El) => e.type === "bpmn:MessageFlow" && e.source && e.target), ...boundary.reroute])]
       : [];
     const placed = new Set<string>([...changes.map((c) => ownerId(c.element)), ...reroute.map((e: El) => e.id)]);
     const effective = changes.filter((c) => (c.bounds ? !sameBounds(c.element, c.bounds) : c.waypoints ? !sameWaypoints(c.element, c.waypoints) : false));
