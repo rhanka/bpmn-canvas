@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { brandTokens, hashOf } from "./helpers/brand.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (p) => readFileSync(root + p);
@@ -55,7 +56,8 @@ test("dist carries no brand, no storage, no global render hook, no watermark sup
   assert.ok(files.length > 10);
   for (const f of files) {
     const text = read(f).toString("utf8");
-    assert.ok(!/localStorage|sessionStorage|D[2]dRender|DS_TOKENS|d[2]d/i.test(text), `${f} has a banned symbol`);
+    assert.ok(!/localStorage|sessionStorage/i.test(text), `${f} uses browser storage`);
+    assert.deepEqual(brandTokens(text), [], `${f} has a banned identifier`);
     // The one allowed rule is gated by the host's explicit request (options.watermark with a license).
     const ungated = text.replace(/\[data-bpmn-canvas-watermark=\\?"hidden\\?"\]\s*\.bjs-powered-by\s*\{[^}]*\}/g, "");
     const hides = /bjs-powered-by[^}]*display\s*:\s*none/.test(ungated) || /bjs-powered-by[^;]*\.remove\(/.test(ungated);
@@ -114,7 +116,7 @@ test("no Python, no AI trailer files, no private markers in tree", () => {
   for (const f of tracked) {
     if (!/\.(ts|mjs|json|md|css)$/.test(f) || f.startsWith("tests/")) continue;
     const text = read(f).toString("utf8");
-    assert.ok(!/DS_TOKENS|D[2]dRender|localStorage/.test(text), `${f} has a banned symbol`);
+    assert.ok(!/localStorage/.test(text), `${f} uses localStorage`);
   }
 });
 
@@ -144,3 +146,17 @@ test("every deep import of bpmn-js, diagram-js and tiny-svg in dist has an expli
   assert.deepEqual(bad, []);
 });
 
+test("no banned identifier anywhere: tracked files (tests and docs included) and every commit message", () => {
+  // Positive control with a neutral probe word, so the guard is known to fire.
+  assert.deepEqual(brandTokens("const probeWordX = 1; probe_word_x.y", [hashOf("probewordx")]), ["probeWordX"]);
+  const git = (...a) => execFileSync("git", a, { cwd: root, encoding: "utf8", maxBuffer: 1 << 28 });
+  const files = git("ls-files").split("\n").filter(Boolean).filter((f) => f !== "package-lock.json" && !/\.(png|woff2?|ttf|eot|tgz)$/.test(f));
+  const hits = [];
+  for (const f of files) {
+    if (!existsSync(root + f)) continue;
+    if (brandTokens(readFileSync(root + f, "utf8")).length) hits.push(f);
+  }
+  assert.deepEqual(hits, [], "tracked files with a banned identifier");
+  const messages = git("log", "--all", "--format=%H %B%x00").split("\0").filter((m) => brandTokens(m).length).map((m) => m.slice(0, 8));
+  assert.deepEqual(messages, [], "commit messages with a banned identifier");
+});

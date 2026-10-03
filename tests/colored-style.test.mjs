@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { brandTokens } from "./helpers/brand.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = (p) => import(root + "dist/profiles/colored/" + p);
@@ -62,11 +63,15 @@ test("kind mapping of element types", async () => {
 });
 
 test("the profile sources and build carry no banned word, no storage, no prototype patch, no watermark handling", () => {
-  const banned = new RegExp([["DS_", "TOKENS"], ["d2", "d"], ["D2", "dRender"], ["local", "Storage"], ["session", "Storage"], ["@/", "lib"], ["bjs-powered", "-by"], ["prototype\\.\\w+\\s*", "="]].map((p) => p.join("")).join("|"), "i");
+  const banned = /localStorage|sessionStorage|@\/lib|bjs-powered-by|prototype\.\w+\s*=/i;
   const files = [];
   for (const dir of ["src/profiles/colored/", "dist/profiles/colored/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
   assert.ok(files.length >= 6);
-  for (const f of files) assert.ok(!banned.test(readFileSync(root + f, "utf8")), `${f} has a banned pattern`);
+  for (const f of files) {
+    const text = readFileSync(root + f, "utf8");
+    assert.ok(!banned.test(text), `${f} has a banned pattern`);
+    assert.deepEqual(brandTokens(text), [], `${f} has a banned identifier`);
+  }
 });
 
 test("colored tokens: labelText follows text unless named", async () => {
