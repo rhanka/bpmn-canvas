@@ -296,7 +296,8 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 
 ## Upgrading from 0.2
 
-0.3 changes the default look of the `legend` profile; the API is unchanged.
+0.3 changes the default look of the `legend` profile and the outcome of superseded work; entries, types and methods
+are unchanged.
 
 - `DEFAULT_LEGEND_TOKENS` is now the reference Custom look (see [Legend profile](#legend-profile)): a legend canvas
   without tokens draws black lines, a beige task gradient, red events, green gateways, yellow external processes and
@@ -311,6 +312,14 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 - Undo and redo now survive `setProfile` (format switch in the workshop); they were lost in 0.2.
 - A new version of the same document (`setXml`, an agent update) keeps the active diagram when it still exists;
   0.2 went back to the first diagram.
+- `getXml()` (and `WorkshopHandle.getXml()`) now rejects with an `AbortError` when a later `setXml` supersedes it,
+  while it waits for pending work or while it saves; 0.2 returned the XML of the replaced document, or emitted
+  `save-failed` for it. Treat that `AbortError` as nothing to save, not as a failure: the newer document came from
+  the host. `BpmnWorkshop` does so for `onXmlChange`, and `onSaveError` no longer receives it.
+- Work interrupted by `destroy()` or superseded by a later `setXml` (a profile switch before it replaces its
+  modeler, an undo or redo across a switch, `autoLayout`) writes nothing back and emits nothing: no snapshot, no
+  `onChange`, no diagnostic, no layout step; `setProfile` and `autoLayout` reject with an `AbortError`. A profile
+  switch already replacing its modeler completes, and the `setXml` runs right after it.
 
 ## Upgrading from 0.1
 
