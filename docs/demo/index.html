@@ -3,37 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@sentropic/bpmn-canvas demo</title>
-<link rel="icon" href="data:,">
+<title>bpmn-canvas demo</title>
+<link rel="icon" href="assets/inline/inline-04.svg" type="image/svg+xml">
 <style>
-  :root { color-scheme: light dark; --bg: #fff; --fg: #1f2937; --line: #d1d5db; --accent: #2f5fa8; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #14171c; --fg: #e5e7eb; --line: #374151; --accent: #7aa7e8; } }
-  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, sans-serif; }
+  :root { color-scheme: light; --bg: #f7f7f8; --panel: #ffffff; --fg: #1f2937; --muted: #6b7280; --line: #e5e7eb; --accent: #2f5fa8; --user: #eaf1fb; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   body { display: flex; flex-direction: column; }
-  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--line); }
-  h1 { font-size: 15px; margin: 0; font-weight: 600; }
-  #looks { display: flex; gap: 6px; }
-  button { font: inherit; color: inherit; background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
-  button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
-  #status, footer { color: #6b7280; font-size: 12px; }
-  #canvas { flex: 1; min-height: 0; background: #fff; }
-  footer { padding: 6px 16px; border-top: 1px solid var(--line); }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header span, header a { color: var(--muted); font-size: 12px; }
   a { color: var(--accent); }
+  #app { flex: 1; min-height: 0; }
+  .app { display: grid; grid-template-columns: minmax(280px, 360px) 1fr; height: 100%; min-height: 0; }
+  .chat { border-right: 1px solid var(--line); background: var(--panel); min-height: 0; display: flex; }
+  .canvas { min-width: 0; min-height: 0; display: flex; }
+  .canvas > * { flex: 1; min-width: 0; }
+  .thread { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .viewport { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .welcome p { color: var(--muted); margin: 0 0 8px; }
+  .suggestions { display: flex; flex-direction: column; gap: 6px; }
+  .suggestions button { text-align: left; font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+  .suggestions button:hover { border-color: var(--accent); }
+  .msg { max-width: 92%; padding: 8px 10px; border-radius: 10px; }
+  .msg p { margin: 0; white-space: pre-wrap; }
+  .msg.user { align-self: flex-end; background: var(--user); }
+  .msg.assistant { align-self: flex-start; background: var(--bg); border: 1px solid var(--line); }
+  .msg [data-bpmn-tool-card] { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .msg [data-bpmn-tool-card] img { background: #fff; border: 1px solid var(--line); border-radius: 6px; max-height: 180px; object-fit: contain; }
+  .msg [data-bpmn-tool-card] button { align-self: flex-start; font: inherit; color: #fff; background: var(--accent); border: 0; border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+  .composer { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--line); }
+  .composer-input { flex: 1; resize: none; font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; min-height: 38px; max-height: 120px; }
+  .composer-send { font: inherit; color: #fff; background: var(--accent); border: 0; border-radius: 8px; padding: 0 14px; cursor: pointer; }
+  .composer-send:disabled { opacity: .5; cursor: default; }
+  footer { padding: 6px 16px; border-top: 1px solid var(--line); background: var(--panel); color: var(--muted); font-size: 12px; }
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: minmax(420px, 62vh) minmax(300px, 1fr); height: auto; }
+    .chat { border-right: 0; border-top: 1px solid var(--line); order: 2; }
+    .canvas { order: 1; }
+    #app { flex: none; }
+  }
 </style>
 </head>
 <body>
 <header>
   <h1>@sentropic/bpmn-canvas</h1>
-  <div id="looks" role="group" aria-label="Look">
-    <button type="button" data-profile="standard" aria-pressed="true">Standard</button>
-    <button type="button" data-profile="legend" aria-pressed="false">Legend</button>
-    <button type="button" data-profile="colored" aria-pressed="false">Colored</button>
-  </div>
-  <button type="button" id="layout">Auto-layout</button>
-  <span id="status" role="status">Loading…</span>
+  <span>The complete canvas (tabs, looks, editing, auto-layout, import and export) next to a chat. The assistant is simulated: no model, no network.</span>
+  <a href="https://github.com/rhanka/bpmn-canvas">Source</a>
+  <a href="https://www.npmjs.com/package/@sentropic/bpmn-canvas">npm</a>
 </header>
-<div id="canvas"></div>
-<footer>Diagram: BPMN MIWG reference model B.1.0 (<a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/Reference/B.1.0.bpmn">source</a>), OMG BPMN Model Interchange Working Group, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>; re-encoded from ISO-8859-1 to UTF-8, nothing else changed. Drag, edit and undo with Ctrl+Z; the wheel zooms. · <a href="LICENSE.txt">License (MIT)</a> · <a href="THIRD_PARTY_NOTICES.md">Third-party notices</a> · <a href="licenses/">All license texts</a></footer>
+<div id="app"></div>
+<footer>Diagrams: BPMN MIWG reference models C.4.0, C.5.0 and B.1.0 (<a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/tree/master/Reference">source</a>), OMG BPMN Model Interchange Working Group, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>; C.4.0 and C.5.0 without their BPMN-in-Color attributes (white fills, black borders and texts) so that the looks apply; B.1.0 re-encoded from ISO-8859-1 to UTF-8; nothing else changed. · <a href="LICENSE.txt">License (MIT)</a> · <a href="THIRD_PARTY_NOTICES.md">Third-party notices</a> · <a href="licenses/">All license texts</a></footer>
 <script type="module" src="./page/page.js"></script>
 </body>
 </html>

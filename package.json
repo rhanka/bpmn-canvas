@@ -1,6 +1,6 @@
 {
   "name": "@sentropic/bpmn-canvas",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Framework-independent BPMN 2.0 editing canvas built on bpmn-js, with React and assistant-ui adapters.",
   "license": "MIT",
   "author": "Fabien Antoine <fabien.antoine@m4x.org>",

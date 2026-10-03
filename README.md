@@ -3,25 +3,28 @@
 A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
 framework-independent core, optional React and assistant-ui adapters.
 
-Status: 0.2.0. The API below is implemented and tested but not frozen (0.x). Changes since 0.1.0: see
-[Upgrading from 0.1](#upgrading-from-01).
+Status: 0.3.0. The API below is implemented and tested but not frozen (0.x). Changes: see
+[Upgrading from 0.2](#upgrading-from-02) and [Upgrading from 0.1](#upgrading-from-01).
 
 ## Demo
 
-**[Try it in the browser](https://rhanka.github.io/bpmn-canvas/)**: one diagram, three looks, editable, with auto-layout.
+**[Try it in the browser](https://rhanka.github.io/bpmn-canvas/)**: the complete canvas in an app. The workshop
+(multi-tab document, Custom and BPMN looks, editing, undo, auto-layout, import and export) sits next to an
+assistant-ui chat whose assistant is simulated (no model, no network): it drafts processes as tool calls with a
+preview card (`/assistant-ui` adapter), opens them in the canvas, arranges the open diagram and switches looks.
 
 The same diagram drawn by the static renderer (`renderDiagrams`, no editing engine, plain SVG), in the `standard`,
-`legend` and `colored` looks:
+`legend` (its default look, no token) and `colored` looks:
 
 <p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/standard.svg" alt="standard look: upstream bpmn-js notation" width="100%"></p>
-<p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/legend.svg" alt="legend look: hand-drawn renderer driven by tokens" width="100%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/legend.svg" alt="legend look: the default Custom look" width="100%"></p>
 <p align="center"><img src="https://raw.githubusercontent.com/rhanka/bpmn-canvas/main/docs/demo/colored.svg" alt="colored look: upstream notation recoloured by tokens" width="100%"></p>
 
-Diagram: reference model B.1.0 of the OMG BPMN Model Interchange Working Group
-([bpmn-miwg-test-suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite)), CC BY 3.0. Two sub-processes (expanded and
-collapsed), three call activities, two lanes and a second pool. The colours of the `legend` and `colored` images are
-the neutral palette of `docs/demo/palette.mjs`. Regenerate the images with `node scripts/gen-demo-svg.mjs` after
-`npm run build`; the live page is built by `node scripts/build-demo.mjs`.
+Diagrams: reference models B.1.0, C.4.0 and C.5.0 of the OMG BPMN Model Interchange Working Group
+([bpmn-miwg-test-suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite)), CC BY 3.0 (changes listed in
+`THIRD_PARTY_NOTICES.md`). The images show B.1.0: two sub-processes (expanded and collapsed), three call activities,
+two lanes and a second pool. The `colored` image uses the neutral palette of `docs/demo/palette.mjs`. Regenerate the
+images with `node scripts/gen-demo-svg.mjs` after `npm run build`; the live app is built by `node scripts/build-demo.mjs`.
 
 ```ts
 import { createBpmnCanvas } from "@sentropic/bpmn-canvas";
@@ -283,6 +286,21 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 | `getXml()` while nothing is displayed | Returns the last XML the host supplied. |
 | Styles not applied after the first import (`styles.css` not loaded, or blocked by a CSP) | `styles-missing` (error), reported once and written in the canvas itself. |
 | Icon font or images not loadable (wrong `assetBase`, inlined bundle without `assetBase`, `font-src`/`img-src`) | `asset-load-failed` (error) naming the URL, reported once and written in the canvas. The diagram stays editable. |
+
+## Upgrading from 0.2
+
+0.3 changes the default look of the `legend` profile; the API is unchanged.
+
+- `DEFAULT_LEGEND_TOKENS` is now the reference Custom look (see [Legend profile](#legend-profile)): a legend canvas
+  without tokens draws black lines, a beige task gradient, red events, green gateways, yellow external processes and
+  documents, red dashed links and white lane headers. To keep the 0.2 neutral look, pass the neutral values, which
+  remain the colored profile's defaults: `legendTokens: DEFAULT_COLORED_TOKENS` (exported by
+  `@sentropic/bpmn-canvas/browser`).
+- `dataLinkArrow` defaults to `false` in the legend profile (plain dashed task input and output links); pass `true`
+  for the BPMN arrow head.
+- `docLink` follows `link`, and `laneHeaderFill` follows `laneFill`, only when the host names `link` or `laneFill`
+  without them; otherwise both keep their defaults.
+- The colored profile is unchanged: neutral defaults, only the named tokens recolour.
 
 ## Upgrading from 0.1
 

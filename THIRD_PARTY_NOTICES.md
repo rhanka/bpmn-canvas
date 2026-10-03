@@ -97,9 +97,12 @@ in `dist/`; the pack test enforces that.
   for redistribution are unclear, so the tests download them into an untracked
   cache and verify their sha256. Source URLs, retrieval date and hashes:
   `tests/fixtures/xsd/SOURCE.md`.
-- **BPMN MIWG reference model B.1.0** (`docs/demo/B.1.0.bpmn`), CC BY 3.0, OMG BPMN Model Interchange Working Group,
-  https://github.com/bpmn-miwg/bpmn-miwg-test-suite. Re-encoded from ISO-8859-1 to UTF-8 (the XML declaration says so);
-  nothing else changed. It feeds the demo images and the live demo page; it is not part of the npm package.
+- **BPMN MIWG reference models B.1.0, C.4.0 and C.5.0** (`docs/demo/*.bpmn`), CC BY 3.0, OMG BPMN Model Interchange
+  Working Group, https://github.com/bpmn-miwg/bpmn-miwg-test-suite (folder `Reference`). B.1.0 is re-encoded from
+  ISO-8859-1 to UTF-8 (the XML declaration says so). C.4.0 and C.5.0 lose their BPMN-in-Color attributes
+  (`color:background-color="#ffffff"`, `color:border-color="#000000"`, `color:color="#000000"`), which would
+  otherwise override the looks. Nothing else changed. They feed the demo images and the live demo; they are not part
+  of the npm package.
 
 ## Browser build (`dist/browser/`)
 

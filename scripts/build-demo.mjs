@@ -1,6 +1,7 @@
 // Builds the static demo site into site/ (served by GitHub Pages). Needs `npm run build` first.
 import { build } from "esbuild";
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { bundledPackages, licensesDocument } from "./licenses.mjs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
@@ -8,8 +9,11 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const site = join(root, "site");
 rmSync(site, { recursive: true, force: true });
 mkdirSync(join(site, "page"), { recursive: true });
-await build({
-  entryPoints: [join(root, "docs/demo/page.mjs")],
+if (!existsSync(join(root, "dist/react/index.js"))) throw new Error("dist/ missing: run npm run build first");
+const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+// The app: the workshop (multi-tab) and an assistant-ui chat with a simulated model.
+const result = await build({
+  entryPoints: [join(root, "docs/demo/app.mjs")],
   bundle: true,
   format: "esm",
   minify: true,
@@ -17,19 +21,19 @@ await build({
   loader: { ".bpmn": "text" },
   define: { "process.env.NODE_ENV": '"production"' },
   legalComments: "eof",
-  banner: { js: "/*! @sentropic/bpmn-canvas demo | MIT, Copyright (c) 2026 Fabien Antoine | bundles bpmn-js (bpmn.io license) and other packages: see licenses/ next to this page */" },
+  metafile: true,
+  banner: { js: "/*! @sentropic/bpmn-canvas demo | MIT, Copyright (c) 2026 Fabien Antoine | bundles bpmn-js (bpmn.io license), React, assistant-ui and other packages under their own licenses: see licenses/ next to this page */" },
   logLevel: "warning",
 });
 // dist/internal/styles.js resolves ../assets/ from its own directory: page/page.js next to assets/ reproduces it.
 cpSync(join(root, "dist/assets"), join(site, "assets"), { recursive: true });
 cpSync(join(root, "docs/demo/index.html"), join(site, "index.html"));
-// The page bundles third-party code: its license texts travel with it.
-const browserLicenses = join(root, "dist/browser/bpmn-canvas.licenses.txt");
-if (!existsSync(browserLicenses)) throw new Error("dist/browser/bpmn-canvas.licenses.txt missing: run npm run build first");
+// The page bundles third-party code: the license text of every bundled package travels with it.
+const packages = bundledPackages(root, Object.keys(result.metafile.inputs));
 cpSync(join(root, "LICENSE"), join(site, "LICENSE.txt"));
 cpSync(join(root, "THIRD_PARTY_NOTICES.md"), join(site, "THIRD_PARTY_NOTICES.md"));
 cpSync(join(root, "licenses"), join(site, "licenses"), { recursive: true });
-cpSync(browserLicenses, join(site, "licenses/bundled-packages.txt"));
+writeFileSync(join(site, "licenses/bundled-packages.txt"), licensesDocument({ heading: `Licenses of the code in the demo page (page/page.js), built from ${pkg.name} ${pkg.version}.`, root, pkg, packages }));
 const files = readdirSync(join(site, "licenses")).sort();
 const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 writeFileSync(join(site, "licenses/index.html"), `<!doctype html>
@@ -42,8 +46,8 @@ writeFileSync(join(site, "licenses/index.html"), `<!doctype html>
 <li><a href="bundled-packages.txt">bundled-packages.txt</a>: every package bundled into the page, with its license text</li>
 ${files.filter((f) => f !== "index.html" && f !== "bundled-packages.txt").map((f) => `<li><a href="${esc(f)}">${esc(f)}</a></li>`).join("\n")}
 </ul>
-<p>Demo diagram: BPMN MIWG reference model B.1.0, <a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/Reference/B.1.0.bpmn">source</a>,
-<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, OMG BPMN Model Interchange Working Group; re-encoded from ISO-8859-1 to UTF-8, nothing else changed.</p>
+<p>Demo diagrams: BPMN MIWG reference models C.4.0, C.5.0 and B.1.0, <a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/tree/master/Reference">source</a>,
+<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, OMG BPMN Model Interchange Working Group; C.4.0 and C.5.0 without their BPMN-in-Color attributes (white fills, black borders and texts) so that the looks apply; B.1.0 re-encoded from ISO-8859-1 to UTF-8; nothing else changed.</p>
 </body></html>
 `);
-console.log("demo site built in site/");
+console.log(`demo site built in site/: ${packages.size} bundled packages, licenses in site/licenses/`);
