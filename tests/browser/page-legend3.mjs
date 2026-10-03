@@ -85,8 +85,8 @@ window.runLegend3 = async () => {
   out.given = { directional: linkOf(given.host, "AO"), doc: linkOf(given.host, "AD"), note: linkOf(given.host, "AN"), header: headerFill(given.host) };
   out.arrow = { neutral: dataArrow(neutral.host, "DA") };
   out.labels = { neutral: labelFill(neutral.host) };
-  const plainer = await make({ dataLinkArrow: false, labelText: "#445566" });
-  out.arrow.off = dataArrow(plainer.host, "DA");
+  const plainer = await make({ dataLinkArrow: true, labelText: "#445566" });
+  out.arrow.on = dataArrow(plainer.host, "DA");
   out.labels.named = labelFill(plainer.host);
   plainer.m.destroy(); plainer.host.remove();
   const followed = await make({ link: "#112233", laneFill: "#aabbcc" });

@@ -350,12 +350,14 @@ are in `THIRD_PARTY_NOTICES.md` and `licenses/`.
 ## Legend profile
 
 Opt-in look: `createBpmnCanvas(host, { profile: "legend", legendTokens })` and
-`renderDiagrams(xml, { profile: "legend", legendTokens })`. No brand value ships in this package; the host
-supplies its own.
+`renderDiagrams(xml, { profile: "legend", legendTokens })`. Without tokens it draws the reference Custom look:
+black lines, beige task gradient (`#f6f1ea` → `#ECE2D4`), red events (`#E27676`), green gateways (`#60BE89`), yellow
+external processes (`#ffff99`) and documents (`#ffe599`), cyan application boxes (`#99ffff`), pool strip `#eee7df`,
+white lane headers, red dashed links (`#b85450`, `5 5`, no arrow head on task input/output links). Any token overrides it.
 
 ### Tokens
 
-`legendTokens` is a `Partial<LegendTokens>`. Missing keys use neutral defaults. Two conveniences: `stroke` feeds
+`legendTokens` is a `Partial<LegendTokens>`. Missing keys use the defaults above (`DEFAULT_LEGEND_TOKENS`). Two conveniences: `stroke` feeds
 every `*Line` and `flow` you did not name, `fill` feeds `taskFill`; `taskFillEnd` is derived from `taskFill`
 when you do not name it. An explicit per-type value always wins.
 
@@ -403,7 +405,8 @@ selectable and draggable, so a host can tell a body click from a marker click.
   `dataLine`; `-document` from `docLine`; `-application` from `appLine`; `-lane` from `laneLine`; `-pool` from
   `poolLine`; `-flow` from `flow`). They are set with the CSSOM, so a strict `style-src` CSP is not violated, and they are
   scoped to one instance. In the `colored` profile the upstream palette entries carry the class `bpmn-canvas--colored`.
-  A canvas without tokens keeps the neutral defaults. The `standard` profile palette is exactly upstream.
+  A legend canvas without tokens uses the reference Custom look; a colored canvas without tokens is exactly upstream.
+  The `standard` profile palette is exactly upstream.
 
 ## Colored profile
 
@@ -419,7 +422,7 @@ await canvas.setProfile("colored", coloredTokens);
 ```
 
 - **Tokens** are the 33 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
-  (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
+  (`DEFAULT_COLORED_TOKENS`; only the named keys recolour) (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
   no module and draws exactly like `standard`.
 - **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data
   input and output), data (data object and data store), doc and app (text annotations starting `[Doc]` / `[App]`),

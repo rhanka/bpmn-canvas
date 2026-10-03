@@ -10,8 +10,6 @@ const CUSTOM = {
   laneFill: "#aa0011", externalLine: "#aa0012", externalFill: "#aa0013", docLine: "#aa0014", docFill: "#aa0015", dataLine: "#aa0016", dataFill: "#aa0017",
   appLine: "#aa0018", appFill: "#aa0019",
 };
-// Seed brand palette. None of it may appear in the neutral defaults.
-const BRAND = ["#e27676", "#60be89", "#0f3180", "#f6f1ea", "#ece2d4", "#ffff99", "#99ffff", "#ffe599", "#eee7df"];
 
 test("legend profile parity in a real browser", { timeout: 180000 }, async (t) => {
   const { result: o, consoleLines } = await runInBrowser(root + "tests/browser/page-legend2.mjs", "legend2", (page) => page.evaluate(() => window.runLegend2()));
@@ -73,10 +71,16 @@ test("legend profile parity in a real browser", { timeout: 180000 }, async (t) =
     assert.notEqual(o.defaults.gradient[0], o.defaults.gradient[1], "two gradient tones by default");
   });
 
-  await t.test("defaults are neutral: no brand value, every field present", () => {
-    const values = Object.values(o.defaults.tokens).map((v) => String(v).toLowerCase());
-    for (const b of BRAND) assert.ok(!values.includes(b), `default token equals brand value ${b}`);
-    assert.ok(Object.keys(o.defaults.tokens).length >= 28);
+  await t.test("defaults are the reference Custom look, exactly, every field present", () => {
+    assert.deepEqual(o.defaults.tokens, {
+      fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif", fontSize: 12, strokeWidth: 1,
+      stroke: "#000000", fill: "#ffffff", text: "#000000", labelText: "#22242a", headerText: "#595959", flow: "#000000",
+      link: "#b85450", docLink: "#b85450", docLinkDash: "5 5", dataLinkArrow: false,
+      taskLine: "#000000", taskFill: "#f6f1ea", taskFillEnd: "#ECE2D4", eventLine: "#000000", eventFill: "#E27676",
+      gatewayLine: "#000000", gatewayFill: "#60BE89", poolLine: "#000000", poolFill: "#eee7df", laneLine: "#000000",
+      laneFill: "#f6f6f6", laneHeaderFill: "#ffffff", externalLine: "#000000", externalFill: "#ffff99",
+      docLine: "#000000", docFill: "#ffe599", dataLine: "#000000", dataFill: "#f6f1ea", appLine: "#000000", appFill: "#99ffff",
+    });
   });
 
   await t.test("palette: entries equal the exported action ids, each styled by the lib CSS", () => {

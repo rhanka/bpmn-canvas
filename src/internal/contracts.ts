@@ -20,8 +20,8 @@ export interface BpmnCanvasConfig {
 }
 
 /**
- * Neutral, host-overridable look inputs for the `legend` profile. No brand values live in this
- * package. A host passes a `Partial`; missing keys fall back to neutral defaults, with two
+ * Host-overridable look inputs for the `legend` and `colored` profiles. A host passes a `Partial`; missing keys
+ * fall back to the profile defaults (legend: the reference Custom look; colored: neutral values), with two
  * convenience fallbacks: `stroke` feeds every `*Line` and `flow` not given, and `fill`
  * feeds `taskFill` when not given. `taskFillEnd` is derived from `taskFill` when not given.
  */
@@ -49,7 +49,10 @@ export interface LegendTokens {
   readonly docLink: string;
   /** `stroke-dasharray` of that association, for instance `5 5`. */
   readonly docLinkDash: string;
-  /** Legend look only: draw the arrow head on task input and output associations (the BPMN notation does). */
+  /**
+   * Legend look only: draw the arrow head on task input and output associations. Default false (the reference
+   * look draws plain dashed lines); true follows the BPMN notation.
+   */
   readonly dataLinkArrow: boolean;
   readonly taskLine: string;
   /** Start tone of the horizontal task gradient. */

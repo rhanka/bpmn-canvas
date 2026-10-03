@@ -1,11 +1,11 @@
 import type { LegendTokens } from "../../internal/contracts.js";
-import { DEFAULT_LEGEND_TOKENS, LINE_KEYS, resolveLegendTokens } from "../legend/tokens.js";
+import { LINE_KEYS, NEUTRAL_TOKENS, resolveTokens } from "../legend/tokens.js";
 
-/** Neutral defaults: the same 33 fields and fallbacks as the legend tokens. */
-export const DEFAULT_COLORED_TOKENS: LegendTokens = DEFAULT_LEGEND_TOKENS;
+/** Neutral defaults: the same 33 fields and fallbacks as the legend tokens, without the reference Custom look. */
+export const DEFAULT_COLORED_TOKENS: LegendTokens = NEUTRAL_TOKENS;
 /** As the legend tokens, except that external labels follow `text` unless `labelText` is named. */
 export function resolveColoredTokens(overrides?: Partial<LegendTokens>): LegendTokens {
-  const resolved = resolveLegendTokens(overrides);
+  const resolved = resolveTokens(DEFAULT_COLORED_TOKENS, overrides);
   return overrides?.labelText === undefined ? ({ ...resolved, labelText: resolved.text } as LegendTokens) : resolved;
 }
 

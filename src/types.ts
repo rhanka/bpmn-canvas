@@ -123,9 +123,9 @@ export interface BpmnCanvasOptions {
   readonly xml?: string;
   readonly revision?: string;
   readonly profile?: ProfileId;
-  /** Look inputs for the `legend` profile. Missing keys fall back to neutral defaults. */
+  /** Look inputs for the `legend` profile. Missing keys fall back to its defaults, the reference Custom look. */
   readonly legendTokens?: Partial<LegendTokens>;
-  /** Colours of the `colored` profile, same fields as the legend tokens. Missing keys fall back to neutral defaults. */
+  /** Colours of the `colored` profile, same fields as the legend tokens. Only the keys given recolour; see the README. */
   readonly coloredTokens?: Partial<LegendTokens>;
   /** Palette layout: one column, two, or diagram-js default (`auto`, which switches on the available height). */
   readonly paletteColumns?: PaletteColumns;

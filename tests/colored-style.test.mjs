@@ -88,3 +88,15 @@ test("namedColoredTokens: the names the host gave, with stroke, fill and text ex
   assert.ok(!named.includes("link"), "link is not a line key");
   assert.deepEqual(namedColoredTokens({ taskFill: undefined }), []);
 });
+
+test("colored defaults stay neutral; the legend defaults are the reference Custom look", async () => {
+  const { DEFAULT_COLORED_TOKENS } = await dist("tokens.js");
+  const { DEFAULT_LEGEND_TOKENS } = await import(root + "dist/profiles/legend/tokens.js");
+  assert.equal(DEFAULT_COLORED_TOKENS.stroke, "#333333");
+  assert.equal(DEFAULT_COLORED_TOKENS.taskFill, "#ffffff");
+  assert.equal(DEFAULT_COLORED_TOKENS.dataLinkArrow, true);
+  assert.equal(DEFAULT_LEGEND_TOKENS.taskFill, "#f6f1ea");
+  assert.equal(DEFAULT_LEGEND_TOKENS.eventFill, "#E27676");
+  const shared = Object.keys(DEFAULT_COLORED_TOKENS).filter((k) => typeof DEFAULT_COLORED_TOKENS[k] === "string" && DEFAULT_COLORED_TOKENS[k].startsWith("#") && DEFAULT_COLORED_TOKENS[k] === DEFAULT_LEGEND_TOKENS[k]);
+  assert.deepEqual(shared.sort(), ["fill", "labelText", "laneFill"], "only white fill, upstream label colour and lane fill coincide");
+});
