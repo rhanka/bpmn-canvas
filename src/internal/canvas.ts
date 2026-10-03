@@ -214,7 +214,8 @@ export class CanvasController implements BpmnCanvasHandle {
     void this.checkAssets().catch(() => undefined);
   }
 
-  /** After the first import: are the styles applied, and do the icon font and the images load? */
+  /** After the first import: are the styles applied, and do the icon font and the images load? Canvas-wide, not tied
+   * to a document, so only destroy() stops it; a new document does not. */
   private async checkAssets(): Promise<void> {
     const doc = this.root.ownerDocument;
     const win = doc.defaultView;
@@ -281,11 +282,12 @@ export class CanvasController implements BpmnCanvasHandle {
 
   private async init(): Promise<void> {
     try {
-      const [engine, profile] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.tokensFor(this.profileId))]);
+      const [engine, profile, layout] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.tokensFor(this.profileId)), this.layoutModules()]);
       if (this.destroyed) return;
-      await this.createModeler(engine, profile);
+      this.createModeler(engine, profile, layout);
       this.setupResizeObserver();
     } catch (error) {
+      if (this.destroyed) return;
       const d: Diagnostic = { code: "import-failed", severity: "error", message: `Engine failed to load: ${String((error as Error)?.message ?? error)}` };
       this.diagnostics = [d];
       this.setState("error");
@@ -293,12 +295,13 @@ export class CanvasController implements BpmnCanvasHandle {
     }
   }
 
-  /** Creates the modeler for a profile and wires this controller's listeners. Used at start and by setProfile. */
-  private async createModeler(engine: Awaited<ReturnType<typeof loadEngine>>, profile: Awaited<ReturnType<typeof loadProfile>>): Promise<ViewerLike> {
+  /** Creates the modeler for a profile and wires this controller's listeners. Used at start and by setProfile.
+   * Synchronous: everything it needs is loaded before, so nothing can be superseded or destroyed meanwhile. */
+  private createModeler(engine: Engine, profile: LoadedProfile, layout: unknown[]): ViewerLike {
     const limits = this.options.zoomLimits;
     const modeler = new engine.Modeler({
       container: this.root,
-      additionalModules: [ReadOnlyModule, PaletteSupportModule, ...profile.modelerModules, ...(await this.layoutModules())],
+      additionalModules: [ReadOnlyModule, PaletteSupportModule, ...profile.modelerModules, ...layout],
       bpmnCanvas: profileConfig(this.instanceId, profile, this.options.paletteColumns),
       ...(limits ? { zoomScroll: { ...(limits.min !== undefined ? { minZoom: limits.min } : {}), ...(limits.max !== undefined ? { maxZoom: limits.max } : {}) } } : {}),
     });
@@ -548,21 +551,25 @@ export class CanvasController implements BpmnCanvasHandle {
   }
 
   async getXml(): Promise<string> {
-    const q = this.queue;
-    await q;
-    if (this.destroyed) throw abortError();
+    const epoch = this.epoch;
+    await this.queue;
+    this.assertLive(epoch);
     const modeler = this.modeler;
     if (!modeler || this.diagrams.length === 0) return this.inputXml;
     const de = modeler.get<DirectEditingLike | undefined>("directEditing");
     if (de?.isActive()) de.complete();
     if (!this.touched) return this.inputXml;
+    let xml: string;
     try {
-      return (await modeler.saveXML({ format: true })).xml;
+      xml = await this.saveLive(modeler, epoch);
     } catch (error) {
+      this.assertLive(epoch);
       const d: Diagnostic = { code: "save-failed", severity: "error", message: String((error as Error)?.message ?? error) };
       this.emit(d);
       throw error;
     }
+    this.assertLive(epoch);
+    return xml;
   }
 
   getDiagrams(): readonly DiagramInfo[] {
@@ -696,25 +703,27 @@ export class CanvasController implements BpmnCanvasHandle {
     if (this.destroyed) return Promise.reject(abortError());
     const epoch = this.epoch;
     return this.enqueue(epoch, async () => {
-      const [engine, next] = await Promise.all([loadEngine(), loadProfile(profile, tokens)]);
+      let prepared: PreparedSwitch;
+      try {
+        prepared = await this.prepareSwitch(epoch, profile, tokens);
+      } catch (error) {
+        // Nothing has changed yet: once the canvas is destroyed or the switch superseded, any failure here (a module
+        // that does not load, a failed save or capture) is an AbortError.
+        this.assertLive(epoch);
+        throw error;
+      }
+      // Nothing is written back once the canvas is destroyed or the work superseded.
       this.assertLive(epoch);
-      const old = this.modeler;
-      const hadDocument = !!old && this.diagrams.length > 0;
-      let xml = this.inputXml;
-      let view: { x: number; y: number; width: number; height: number } | undefined;
-      if (old && hadDocument) {
-        const de = old.get<DirectEditingLike | undefined>("directEditing");
-        if (de?.isActive()) de.complete();
-        if (this.touched) xml = (await old.saveXML({ format: true })).xml;
-        view = old.get<CanvasLike>("canvas").viewbox();
-        const captured = await this.captureHistory(old);
+      const { engine, next, layout, old, hadDocument, xml, view, captured } = prepared;
+      if (hadDocument) {
         this.history = {
           past: [...captured.past, ...this.history.past],
           future: captured.future.length > 0 ? captured.future : this.history.future,
         };
         this.capHistory();
-        this.assertLive(epoch);
       }
+      // Commit point: past it the old modeler is gone, so the switch completes unless the canvas is destroyed. A
+      // setXml queued meanwhile runs right after, on the new modeler.
       this.loading++;
       try {
         this.removeWheel();
@@ -723,21 +732,21 @@ export class CanvasController implements BpmnCanvasHandle {
         this.modeler = undefined;
         this.profileId = profile;
         this.tokens = tokens;
-        const modeler = await this.createModeler(engine, next);
+        const modeler = this.createModeler(engine, next, layout);
         if (hadDocument) {
           await modeler.importXML(xml, this.activeId);
-          this.assertLive(epoch);
+          if (this.destroyed) throw abortError();
           if (view) modeler.get<CanvasLike>("canvas").viewbox({ x: view.x, y: view.y, width: view.width, height: view.height });
         }
       } catch (error) {
-        if ((error as Error)?.name === "AbortError") throw error;
+        if (this.destroyed || (error as Error)?.name === "AbortError") throw abortError();
         this.setState("error");
         this.emit({ code: "import-failed", severity: "error", message: `Profile switch failed: ${String((error as Error)?.message ?? error)}` });
         throw error;
       } finally {
         this.loading--;
       }
-      this.assertLive(epoch);
+      if (this.destroyed) throw abortError();
       if (hadDocument && this.activeId) {
         this.inputXml = xml;
         this.touched = false;
@@ -745,6 +754,28 @@ export class CanvasController implements BpmnCanvasHandle {
         this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "profile-switch", diagramId: this.activeId });
       }
     });
+  }
+
+  /** What a profile switch needs, read before its commit point. Changes nothing but the old stack's position, which
+   * captureHistory puts back. */
+  private async prepareSwitch(epoch: number, profile: ProfileId, tokens: Partial<LegendTokens> | undefined): Promise<PreparedSwitch> {
+    const [engine, next, layout] = await Promise.all([loadEngine(), loadProfile(profile, tokens), this.layoutModules()]);
+    this.assertLive(epoch);
+    const old = this.modeler;
+    const hadDocument = !!old && this.diagrams.length > 0;
+    let xml = this.inputXml;
+    let view: PreparedSwitch["view"];
+    let captured: PreparedSwitch["captured"] = { past: [], future: [] };
+    if (old && hadDocument) {
+      const de = old.get<DirectEditingLike | undefined>("directEditing");
+      if (de?.isActive()) de.complete();
+      if (this.touched) xml = await this.saveLive(old, epoch);
+      this.assertLive(epoch);
+      view = old.get<CanvasLike>("canvas").viewbox();
+      captured = await this.captureHistory(old, epoch);
+      this.assertLive(epoch);
+    }
+    return { engine, next, layout, old, hadDocument, xml, view, captured };
   }
 
   private stack(): CommandStackLike | undefined {
@@ -788,13 +819,26 @@ export class CanvasController implements BpmnCanvasHandle {
     }
   }
 
+  /** The document as XML; once the canvas is destroyed or the work superseded, an AbortError whatever the save did. */
+  private async saveLive(modeler: ViewerLike, epoch: number): Promise<string> {
+    let xml: string;
+    try {
+      xml = (await modeler.saveXML({ format: true })).xml;
+    } catch (error) {
+      this.assertLive(epoch);
+      throw error;
+    }
+    this.assertLive(epoch);
+    return xml;
+  }
+
   /** Every undo and redo step of a modeler as XML snapshots; the stack is left where it was and nothing is emitted. */
-  private async captureHistory(modeler: ViewerLike): Promise<{ past: string[]; future: string[] }> {
+  private async captureHistory(modeler: ViewerLike, epoch: number): Promise<{ past: string[]; future: string[] }> {
     const stack = modeler.get<CommandStackLike>("commandStack");
     if (!stack.canUndo() && !stack.canRedo()) return { past: [], future: [] };
     const readOnly = modeler.get<ReadOnlyService | undefined>("bpmnCanvasReadOnly");
     const wasReadOnly = readOnly?.isReadOnly() ?? false;
-    const save = async (): Promise<string> => (await modeler.saveXML({ format: true })).xml;
+    const save = (): Promise<string> => this.saveLive(modeler, epoch);
     this.capturing = true;
     this.loading++;
     readOnly?.setReadOnly(false);
@@ -807,6 +851,7 @@ export class CanvasController implements BpmnCanvasHandle {
         stack.undo();
         offset--;
         past.push(await save());
+        this.assertLive(epoch);
       }
       while (offset < 0) {
         stack.redo();
@@ -817,6 +862,7 @@ export class CanvasController implements BpmnCanvasHandle {
         stack.redo();
         offset++;
         future.push(await save());
+        this.assertLive(epoch);
       }
       while (offset > 0) {
         stack.undo();
@@ -825,11 +871,12 @@ export class CanvasController implements BpmnCanvasHandle {
       return { past, future };
     } finally {
       try {
-        while (offset < 0) {
+        // A destroyed canvas has destroyed its modeler: there is no stack left to put back.
+        while (!this.destroyed && offset < 0) {
           stack.redo();
           offset++;
         }
-        while (offset > 0) {
+        while (!this.destroyed && offset > 0) {
           stack.undo();
           offset--;
         }
@@ -851,10 +898,11 @@ export class CanvasController implements BpmnCanvasHandle {
       if (this.isEffectivelyReadOnly()) return;
       const target = direction === "undo" ? this.history.past[0] : this.history.future[0];
       if (target === undefined) return;
-      const current = (await modeler.saveXML({ format: true })).xml;
+      const current = await this.saveLive(modeler, epoch);
+      this.assertLive(epoch);
       // The re-import below clears the native stack: its remaining steps (redo steps when going back, undo steps
       // when going forward) become snapshots first, so no step is lost when crossing from native to snapshots.
-      const native = await this.captureHistory(modeler);
+      const native = await this.captureHistory(modeler, epoch);
       this.assertLive(epoch);
       const view = modeler.get<CanvasLike>("canvas").viewbox();
       this.loading++;
@@ -862,6 +910,7 @@ export class CanvasController implements BpmnCanvasHandle {
         try {
           await modeler.importXML(target, this.activeId);
         } catch {
+          this.assertLive(epoch);
           await modeler.importXML(target);
         }
       } finally {
@@ -901,13 +950,14 @@ export class CanvasController implements BpmnCanvasHandle {
       }
       this.inLayout = true;
       try {
-        const result = await service.run();
+        const result = await service.run(() => !this.destroyed && epoch === this.epoch);
         this.assertLive(epoch);
         if (result.changed === 0 || result.skipped.length > 0) {
           this.emit({ code: "layout-unsupported", severity: "warning", ids: result.skipped, message: result.changed === 0 ? "Nothing could be laid out." : `${result.skipped.length} element(s) were not placed.` });
         }
         return result;
       } catch (error) {
+        this.assertLive(epoch);
         if ((error as Error)?.name === "AbortError") throw error;
         this.emit({ code: "layout-failed", severity: "error", message: String((error as Error)?.message ?? error) });
         throw error;
@@ -944,6 +994,20 @@ export function createBpmnCanvas(host: HTMLElement, options: BpmnCanvasOptions =
 
 /** Snapshots kept across profile switches, past and future together; each is a full copy of the document. */
 const HISTORY_MAX = 100;
+
+type Engine = Awaited<ReturnType<typeof loadEngine>>;
+type LoadedProfile = Awaited<ReturnType<typeof loadProfile>>;
+
+interface PreparedSwitch {
+  engine: Engine;
+  next: LoadedProfile;
+  layout: unknown[];
+  old: ViewerLike | undefined;
+  hadDocument: boolean;
+  xml: string;
+  view: { x: number; y: number; width: number; height: number } | undefined;
+  captured: { past: string[]; future: string[] };
+}
 
 function errorText(error: unknown): string {
   return error instanceof Error ? error.message : String(error);

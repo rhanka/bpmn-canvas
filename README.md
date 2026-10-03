@@ -58,7 +58,7 @@ never calls the network.
 
 - **Handle.** `createBpmnCanvas` returns synchronously. `ready` resolves after the first load
   attempt whatever its outcome. `state` is `loading | ready | error | destroyed`.
-- **Superseded work.** A `setXml`, `selectDiagram` or `autoLayout` that is superseded or pending at
+- **Superseded work.** A `setXml`, `selectDiagram`, `autoLayout` or `getXml` that is superseded or pending at
   `destroy()` rejects with an `AbortError`. A later `setXml` supersedes every earlier operation; a later
   `selectDiagram` supersedes earlier ones. Operations otherwise run in order.
 - **Exact bytes.** While no command has run since the last `setXml`, `getXml()` returns the input

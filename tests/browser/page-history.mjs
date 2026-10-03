@@ -140,6 +140,137 @@ window.hist = {
       out.cap.afterDestroy = h.history.past.length + h.history.future.length;
       host.remove();
     }
+    // destroy() during the capture of setProfile: no snapshot written back, no modeler created, nothing emitted.
+    // The save that destroys is the document save (1), a capture save (2), or a capture save that then fails (3);
+    // each case runs 3 times.
+    out.destroyDuringCapture = [];
+    for (const [at, fail] of [[1, false], [2, false], [3, true]]) {
+      for (let run = 0; run < 3; run++) {
+        const host = mount();
+        const changes = [];
+        const diagnostics = [];
+        const h = createBpmnCanvas(host, { xml: TWO(), onChange: (c) => changes.push(c.cause), onDiagnostic: (d) => diagnostics.push(d.code) });
+        await h.ready;
+        rename(h, "P1_T", "A");
+        rename(h, "P1_T", "B");
+        rename(h, "P1_T", "C");
+        const real = h.modeler.saveXML.bind(h.modeler);
+        let calls = 0;
+        h.modeler.saveXML = (...a) => {
+          if (++calls !== at) return real(...a);
+          const pending = real(...a);
+          h.destroy();
+          return fail ? pending.then(() => Promise.reject(new Error("save after destroy"))) : pending;
+        };
+        const changesBefore = changes.length;
+        const diagnosticsBefore = diagnostics.length;
+        let error = null;
+        try { await h.setProfile("legend"); } catch (e) { error = e?.name ?? String(e); }
+        await sleep(50);
+        out.destroyDuringCapture.push({
+          at, fail, calls, error, state: h.state,
+          snapshots: h.history.past.length + h.history.future.length,
+          modeler: h.modeler === undefined ? "none" : "present",
+          canUndo: h.canUndo(), canRedo: h.canRedo(),
+          newChanges: changes.length - changesBefore, newDiagnostics: diagnostics.length - diagnosticsBefore,
+          rootInHost: host.childElementCount,
+        });
+        host.remove();
+      }
+    }
+    // destroy() while setProfile imports into the new modeler, the import then failing: the canvas stays destroyed.
+    {
+      const host = mount();
+      const diagnostics = [];
+      const h = createBpmnCanvas(host, { xml: TWO(), onDiagnostic: (d) => diagnostics.push(d.code) });
+      await h.ready;
+      rename(h, "P1_T", "A");
+      // The modeler is hooked whether it is created synchronously or not.
+      let reached = false;
+      const hook = (m) => {
+        const imp = m.importXML.bind(m);
+        m.importXML = (...b) => imp(...b).then(() => { reached = true; h.destroy(); throw new Error("import failed after destroy"); });
+        return m;
+      };
+      const create = h.createModeler.bind(h);
+      h.createModeler = (...a) => { const m = create(...a); return typeof m?.then === "function" ? m.then(hook) : hook(m); };
+      const before = diagnostics.length;
+      let error = null;
+      try { await h.setProfile("legend"); } catch (e) { error = e?.name ?? String(e); }
+      out.destroyDuringImport = { reached, error, state: h.state, newDiagnostics: diagnostics.length - before };
+      host.remove();
+    }
+    // destroy() while setProfile loads its modules, the load then failing: AbortError, still destroyed, nothing emitted.
+    {
+      const host = mount();
+      const diagnostics = [];
+      const h = createBpmnCanvas(host, { xml: TWO(), onDiagnostic: (d) => diagnostics.push(d.code) });
+      await h.ready;
+      rename(h, "P1_T", "A");
+      let reached = false;
+      h.layoutModules = () => { reached = true; h.destroy(); return Promise.reject(new Error("module failed after destroy")); };
+      const before = diagnostics.length;
+      let error = null;
+      try { await h.setProfile("legend"); } catch (e) { error = e?.name ?? String(e); }
+      out.destroyDuringLoad = { reached, error, state: h.state, newDiagnostics: diagnostics.length - before };
+      host.remove();
+    }
+    // getXml superseded by a later setXml, while queued and while saving: AbortError, no stale save-failed.
+    {
+      const host = mount();
+      const diagnostics = [];
+      const h = createBpmnCanvas(host, { xml: TWO(), onDiagnostic: (d) => diagnostics.push(d.code) });
+      await h.ready;
+      rename(h, "P1_T", "A");
+      const queued = h.getXml();
+      const first = h.setXml(TWO("Second"));
+      let queuedError = null;
+      try { await queued; } catch (e) { queuedError = e?.name ?? String(e); }
+      await first;
+      rename(h, "P1_T", "B");
+      const real = h.modeler.saveXML.bind(h.modeler);
+      let called;
+      const saving = new Promise((r) => (called = r));
+      h.modeler.saveXML = () => { called(); return new Promise((_, reject) => setTimeout(() => reject(new Error("late save failure")), 50)); };
+      const before = diagnostics.length;
+      const inFlight = h.getXml();
+      await saving;
+      const second = h.setXml(TWO("Third"));
+      let inFlightError = null;
+      try { await inFlight; } catch (e) { inFlightError = e?.name ?? String(e); }
+      await second;
+      h.modeler.saveXML = real;
+      out.getXmlSuperseded = { queuedError, inFlightError, saveFailed: diagnostics.slice(before).filter((c) => c === "save-failed").length, after: /Task of Third/.test(await h.getXml()) };
+      h.destroy(); host.remove();
+    }
+    // autoLayout superseded by a setXml while it computes: AbortError, no layout command, no onChange.
+    {
+      const host = mount();
+      const causes = [];
+      const h = createBpmnCanvas(host, { xml: POOL, onChange: (c) => causes.push(c.cause) });
+      await h.ready;
+      const service = h.modeler.get("bpmnCanvasLayout");
+      const run = service.run.bind(service);
+      let started;
+      const running = new Promise((r) => (started = r));
+      service.run = (...a) => { const p = run(...a); started(); return p; };
+      const layout = h.autoLayout();
+      await running;
+      const replaced = h.setXml(POOL);
+      let error = null;
+      try { await layout; } catch (e) { error = e?.name ?? String(e); }
+      await replaced;
+      out.layoutSuperseded = { error, causes, canUndo: h.canUndo() };
+      // Superseded right after the computation: the check after it stops the command (no step, no onChange).
+      const stack = h.modeler.get("commandStack");
+      const idx = stack._stackIdx;
+      const before = causes.length;
+      let checks = 0;
+      let computeError = null;
+      try { await h.modeler.get("bpmnCanvasLayout").run(() => ++checks < 2); } catch (e) { computeError = e?.name ?? String(e); }
+      out.layoutComputeSuperseded = { error: computeError, checks, executed: stack._stackIdx !== idx, causes: causes.slice(before) };
+      h.destroy(); host.remove();
+    }
     // F5: an undo queued before the lock does not touch the locked document.
     {
       const host = mount();

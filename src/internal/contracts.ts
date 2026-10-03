@@ -100,6 +100,8 @@ export interface BpmnCanvasLayoutService {
   /**
    * Re-positions existing DI. One undo step. Never creates DI.
    * `skipped` lists the ids it could not place, with no silent drop.
+   * `isCurrent`, checked after every await with the service's own checks: false rejects with an AbortError and
+   * moves nothing.
    */
-  run(): Promise<{ changed: number; skipped: string[] }>;
+  run(isCurrent?: () => boolean): Promise<{ changed: number; skipped: string[] }>;
 }

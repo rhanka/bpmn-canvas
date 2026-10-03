@@ -184,6 +184,8 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
         const xml = await h.getXml();
         latest.current.onXmlChange?.(xml, change);
       } catch (error) {
+        // Superseded by a newer document from the host, or the canvas is gone: nothing to save.
+        if ((error as Error)?.name === "AbortError") return;
         latest.current.onSaveError?.(error);
       }
     });

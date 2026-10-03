@@ -256,10 +256,10 @@ export class BpmnCanvasLayout implements BpmnCanvasLayoutService {
     });
   }
 
-  async run(): Promise<{ changed: number; skipped: string[] }> {
+  async run(isCurrent: () => boolean = () => true): Promise<{ changed: number; skipped: string[] }> {
     if (this.destroyed) throw abortError();
     const gen = ++this.generation;
-    const alive = (): boolean => !this.destroyed && gen === this.generation;
+    const alive = (): boolean => !this.destroyed && gen === this.generation && isCurrent();
 
     const { xml } = await this.bpmnjs.saveXML();
     if (!alive()) throw abortError();

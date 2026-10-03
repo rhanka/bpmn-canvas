@@ -160,6 +160,33 @@ test("active diagram across a new document version; undo and redo across a profi
     assert.ok(x.cap.afterMove <= 100);
     assert.equal(x.cap.afterDestroy, 0);
   });
+  await t.test("destroy() during the capture of setProfile: AbortError, no snapshot, no modeler, nothing emitted (3 cases, 3 runs each)", () => {
+    const runs = x.destroyDuringCapture;
+    assert.equal(runs.length, 9);
+    for (const r of runs) {
+      assert.deepEqual(
+        { error: r.error, state: r.state, snapshots: r.snapshots, modeler: r.modeler, canUndo: r.canUndo, canRedo: r.canRedo, newChanges: r.newChanges, newDiagnostics: r.newDiagnostics, rootInHost: r.rootInHost },
+        { error: "AbortError", state: "destroyed", snapshots: 0, modeler: "none", canUndo: false, canRedo: false, newChanges: 0, newDiagnostics: 0, rootInHost: 0 },
+        `destroy at save ${r.at}${r.fail ? " (failing)" : ""}`,
+      );
+      assert.equal(r.calls, r.at, "no save after the destroying one");
+    }
+  });
+  await t.test("destroy() during the import of setProfile, then a failed import: AbortError, still destroyed, nothing emitted", () => {
+    assert.deepEqual(x.destroyDuringImport, { reached: true, error: "AbortError", state: "destroyed", newDiagnostics: 0 });
+  });
+  await t.test("destroy() while setProfile loads its modules, then a failed load: AbortError, still destroyed, nothing emitted", () => {
+    assert.deepEqual(x.destroyDuringLoad, { reached: true, error: "AbortError", state: "destroyed", newDiagnostics: 0 });
+  });
+  await t.test("getXml superseded by a later setXml, queued or saving: AbortError and no stale save-failed", () => {
+    assert.deepEqual(x.getXmlSuperseded, { queuedError: "AbortError", inFlightError: "AbortError", saveFailed: 0, after: true });
+  });
+  await t.test("autoLayout superseded by a setXml while it computes: AbortError, no layout step, no onChange", () => {
+    assert.deepEqual(x.layoutSuperseded, { error: "AbortError", causes: [], canUndo: false });
+  });
+  await t.test("layout superseded right after its computation: the check after it stops the command", () => {
+    assert.deepEqual(x.layoutComputeSuperseded, { error: "AbortError", checks: 2, executed: false, causes: [] });
+  });
   await t.test("F5: an undo queued before setReadOnly(true) does not change the locked document", () => {
     assert.deepEqual(x.readOnlyQueued, { name: "A", newRevisions: 0, past: 1 });
   });
