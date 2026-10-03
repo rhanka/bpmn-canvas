@@ -196,7 +196,8 @@ export interface BpmnCanvasHandle {
   getZoom(): number;
   /**
    * Switches the look without changing the document: the modeler is recreated with the same XML,
-   * active diagram and viewbox. The undo stack is lost. Emits `onChange` with cause `profile-switch`
+   * active diagram and viewbox. Undo and redo keep working across the switch (the previous steps are kept as
+   * document snapshots, up to 100). Emits `onChange` with cause `profile-switch`
    * and no new content revision.
    */
   setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>): Promise<void>;

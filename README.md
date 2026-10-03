@@ -125,7 +125,7 @@ import { BpmnWorkshop } from "@sentropic/bpmn-canvas/react";
   returns. The default looks at the called element, then at the exact name; a host can bring its own, fuzzier rule.
 - **Busy** (`readOnly`): editing is locked, the canvas is `inert`, a veil with a status message covers it and the toolbar
   is disabled. Navigation by tabs is the host's choice, not the veil's.
-- **Format**: switching recreates the modeler with the same document, diagram and view, and the undo stack is lost.
+- **Format**: switching recreates the modeler with the same document, diagram and view; Undo and Redo keep working.
   `format` and `onFormatChange` make it controlled; the host persists the choice if it wants to.
 - **Export** gives the exact BPMN bytes (Sparx included) or a Draw.io projection, with the fidelity notice shown as a
   message; a refusal is shown as an alert and nothing is downloaded. `onDownload(file)` replaces the default Blob link.
@@ -183,7 +183,10 @@ const result = await importDiagram(text);                       // { xml, projec
 - `onHistoryChange({ canUndo, canRedo })`: fires when undo/redo availability may have changed, including after a
   diagram or profile switch, so toolbar buttons need no polling.
 - `setProfile(profile, legendTokens?)`: changes the look without changing the document. The modeler is recreated
-  with the same XML, active diagram and viewbox; read-only is kept. **The undo stack is lost.** `onChange` fires
+  with the same XML, active diagram and viewbox; read-only is kept. Undo and redo keep working across the switch:
+  the previous steps are replayed into document snapshots (up to 100) and one step back re-imports the previous
+  snapshot on the same diagram and view (`onChange` cause `undo`/`redo`); a new edit drops the redo steps, a new
+  document or a diagram switch drops them all. `onChange` fires
   with cause `profile-switch` and no new content revision. If nothing was edited, `getXml()` still returns the
   input bytes. A switch pending at `destroy()` rejects with an `AbortError`.
 - `legendTokens` on `createBpmnCanvas` and `renderDiagrams`: see "Legend profile".
@@ -301,6 +304,9 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 - `docLink` follows `link`, and `laneHeaderFill` follows `laneFill`, only when the host names `link` or `laneFill`
   without them; otherwise both keep their defaults.
 - The colored profile is unchanged: neutral defaults, only the named tokens recolour.
+- Undo and redo now survive `setProfile` (format switch in the workshop); they were lost in 0.2.
+- A new version of the same document (`setXml`, an agent update) keeps the active diagram when it still exists;
+  0.2 went back to the first diagram.
 
 ## Upgrading from 0.1
 
@@ -322,7 +328,6 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
   execution, no complete BPMN conformance claim.
 - No undo across a diagram switch (`open()` clears the stack).
 - Layout does not reposition data stores, groups or pools without a `processRef`; it lists them in `skipped`.
-- Switching profile (`setProfile`) loses the undo stack.
 - The assistant-ui adapter is structural and renders static previews; the host mounts the editable canvas.
 - The Sentropic mount adapter and a diagram-core projection are not part of this version.
 - Only React 19.3.0 and assistant-ui 0.15.22 are qualified.

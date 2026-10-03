@@ -335,10 +335,10 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     assert.equal(o.busyBytes, true);
     assert.deepEqual(o.busyOff, { veil: false, readOnly: false });
   });
-  await t.test("format switch: menu radio, look changes live, document and tab kept, undo lost, host notified; controlled mode follows the prop", () => {
+  await t.test("format switch: menu radio, look changes live, document, tab and undo kept, host notified; controlled mode follows the prop", () => {
     assert.equal(o.format.legend, true);
     assert.equal(o.format.xml, true);
-    assert.equal(o.format.canUndo, false);
+    assert.equal(o.format.canUndo, true, "undo survives the switch");
     assert.equal(o.format.containers, 1);
     assert.deepEqual(o.format.onFormatChange, ["leg"]);
     assert.equal(o.format.triggerText.trim(), "Legend");

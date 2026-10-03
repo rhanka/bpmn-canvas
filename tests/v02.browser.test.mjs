@@ -236,7 +236,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.equal(out.wheelCeiling, 3, JSON.stringify(out.wheel));
     assert.equal(out.wheelPrevented, true);
   });
-  await t.test("L6 setProfile keeps XML, edits, active diagram, viewbox and read-only; clears undo; one container and one badge", () => {
+  await t.test("L6 setProfile keeps XML, edits, active diagram, viewbox, read-only and undo; one container and one badge", () => {
     const s = out.profileSwitch;
     assert.ok(s.hasEdits, "both edits survive the switch");
     assert.equal(s.after.active, "DiagB");
@@ -245,7 +245,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.ok(s.after.legendShapes > 0, "legend look applied");
     assert.equal(s.after.containers, 1);
     assert.equal(s.after.badges, 1);
-    assert.equal(s.after.canUndo, false, "undo stack is lost (documented)");
+    assert.equal(s.after.canUndo, true, "the edits can still be undone after the switch");
     assert.ok(Math.abs(s.after.zoom - 1.7) < 0.02, `zoom ${s.after.zoom}`);
     assert.ok(Math.abs(s.after.viewboxX - s.preX) < 1, `viewbox x ${s.preX} -> ${s.after.viewboxX}`);
     assert.equal(s.after.state, "ready");

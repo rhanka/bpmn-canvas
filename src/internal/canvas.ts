@@ -22,6 +22,7 @@ import { ReadOnlyModule } from "./readonly.js";
 import type { ReadOnlyService } from "./readonly.js";
 import { assetBaseUrl, fontUrl, imageUrl, installStyles } from "./styles.js";
 import { initialView } from "./viewbox.js";
+import { isRedo, isUndo } from "diagram-js/lib/features/keyboard/KeyboardUtil.js";
 import type { ShapeLike } from "./viewbox.js";
 
 export function abortError(): Error {
@@ -108,6 +109,13 @@ export class CanvasController implements BpmnCanvasHandle {
   private assetProblems: Diagnostic[] = [];
   private assetBase: URL | undefined;
   private assetsChecked = false;
+  /**
+   * Undo and redo steps kept as whole documents across a profile switch: the new modeler starts with an empty
+   * command stack, so the steps of the previous one are replayed into XML snapshots before it is destroyed.
+   * `past[0]` is the state one step back, `future[0]` one step forward. A new document or a diagram switch clears them.
+   */
+  private history: { past: string[]; future: string[] } = { past: [], future: [] };
+  private capturing = false;
 
   constructor(host: HTMLElement, options: BpmnCanvasOptions) {
     this.host = host;
@@ -299,6 +307,20 @@ export class CanvasController implements BpmnCanvasHandle {
     bus.on("commandStack.changed", (e: { trigger?: string }) => this.onStackChanged(e.trigger));
     bus.on("element.click", (e: { element?: ElementLike; originalEvent?: MouseEvent }) => this.onElementClick(e));
     bus.on("root.set", (e: { element?: ElementLike }) => this.onRootSet(e.element));
+    bus.on("keyboard.keydown", 2000, (e: { keyEvent?: KeyboardEvent }) => {
+      const ev = e.keyEvent;
+      if (!ev) return undefined;
+      const stack = modeler.get<CommandStackLike>("commandStack");
+      if (isUndo(ev) && !stack.canUndo() && this.history.past.length > 0) {
+        this.undo();
+        return true;
+      }
+      if (isRedo(ev) && !stack.canRedo() && this.history.future.length > 0) {
+        this.redo();
+        return true;
+      }
+      return undefined;
+    });
     this.setupDrilldown(modeler);
     this.setupWheel(modeler);
     this.applyReadOnly();
@@ -411,7 +433,7 @@ export class CanvasController implements BpmnCanvasHandle {
   }
 
   private emitHistory(): void {
-    if (this.destroyed || !this.options.onHistoryChange) return;
+    if (this.destroyed || this.capturing || !this.options.onHistoryChange) return;
     const state = { canUndo: this.canUndo(), canRedo: this.canRedo() };
     const key = `${state.canUndo}${state.canRedo}`;
     if (key === this.lastHistory) return;
@@ -420,7 +442,8 @@ export class CanvasController implements BpmnCanvasHandle {
   }
 
   private onStackChanged(trigger: string | undefined): void {
-    if (this.destroyed) return;
+    if (this.destroyed || this.capturing) return;
+    if (this.loading === 0 && trigger === "execute") this.history.future = [];
     this.emitHistory();
     if (this.loading > 0 || trigger === "clear" || !this.activeId) return;
     this.touched = true;
@@ -459,8 +482,11 @@ export class CanvasController implements BpmnCanvasHandle {
       this.assertLive(epoch);
       if ((defs.diagrams ?? []).length === 0) return this.reject(epoch, xml, diagnostics);
 
+      // A new version of the same document (an agent update) keeps the diagram the user is looking at.
+      const previous = this.activeId;
+      const keep = previous !== undefined && (defs.diagrams ?? []).some((d) => d.id === previous) ? previous : undefined;
       try {
-        await modeler.importXML(xml);
+        await modeler.importXML(xml, keep);
       } catch (error) {
         this.assertLive(epoch);
         this.setState("error");
@@ -478,7 +504,8 @@ export class CanvasController implements BpmnCanvasHandle {
       const declared = (defs.diagrams ?? []).filter((d) => typeof d.id === "string" && d.id !== "");
       this.diagrams = declared.map((d) => ({ id: d.id, name: diagramName(d) }));
       this.planeIds = new Map(declared.map((d) => [d.id, d.plane.bpmnElement?.id ?? ""]));
-      this.activeId = this.diagrams[0]?.id;
+      this.activeId = keep ?? this.diagrams[0]?.id;
+      this.history = { past: [], future: [] };
       this.lossyGate = isLossy(diagnostics) && this.options.allowLossyEdit !== true;
       this.applyReadOnly();
       this.fittedOnce = false;
@@ -568,6 +595,8 @@ export class CanvasController implements BpmnCanvasHandle {
       this.assertLive(epoch);
       if (nav !== this.navSeq) throw abortError();
       this.activeId = id;
+      // bpmn-js clears the command stack on a diagram switch; the snapshots go with it.
+      this.history = { past: [], future: [] };
       this.applyFit(this.fitMode);
       this.emitHistory();
       this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "diagram-switch", diagramId: id });
@@ -676,6 +705,11 @@ export class CanvasController implements BpmnCanvasHandle {
         if (de?.isActive()) de.complete();
         if (this.touched) xml = (await old.saveXML({ format: true })).xml;
         view = old.get<CanvasLike>("canvas").viewbox();
+        const captured = await this.captureHistory(old);
+        this.history = {
+          past: [...captured.past, ...this.history.past].slice(0, HISTORY_MAX),
+          future: captured.future.length > 0 ? captured.future : this.history.future,
+        };
         this.assertLive(epoch);
       }
       this.loading++;
@@ -715,19 +749,94 @@ export class CanvasController implements BpmnCanvasHandle {
   }
 
   canUndo(): boolean {
-    return this.stack()?.canUndo() ?? false;
+    return (this.stack()?.canUndo() ?? false) || this.history.past.length > 0;
   }
 
   canRedo(): boolean {
-    return this.stack()?.canRedo() ?? false;
+    return (this.stack()?.canRedo() ?? false) || this.history.future.length > 0;
   }
 
   undo(): void {
-    if (!this.destroyed) this.stack()?.undo();
+    if (this.destroyed) return;
+    const stack = this.stack();
+    if (stack?.canUndo()) stack.undo();
+    else if (this.history.past.length > 0 && !this.isEffectivelyReadOnly()) void this.moveHistory("undo").catch(() => undefined);
   }
 
   redo(): void {
-    if (!this.destroyed) this.stack()?.redo();
+    if (this.destroyed) return;
+    const stack = this.stack();
+    if (stack?.canRedo()) stack.redo();
+    else if (this.history.future.length > 0 && !this.isEffectivelyReadOnly()) void this.moveHistory("redo").catch(() => undefined);
+  }
+
+  /** Every undo and redo step of a modeler as XML snapshots; the stack is left where it was and nothing is emitted. */
+  private async captureHistory(modeler: ViewerLike): Promise<{ past: string[]; future: string[] }> {
+    const stack = modeler.get<CommandStackLike>("commandStack");
+    if (!stack.canUndo() && !stack.canRedo()) return { past: [], future: [] };
+    const readOnly = modeler.get<ReadOnlyService | undefined>("bpmnCanvasReadOnly");
+    const wasReadOnly = readOnly?.isReadOnly() ?? false;
+    const save = async (): Promise<string> => (await modeler.saveXML({ format: true })).xml;
+    this.capturing = true;
+    this.loading++;
+    readOnly?.setReadOnly(false);
+    try {
+      const past: string[] = [];
+      while (stack.canUndo() && past.length < HISTORY_MAX) {
+        stack.undo();
+        past.push(await save());
+      }
+      for (let i = 0; i < past.length; i++) stack.redo();
+      const future: string[] = [];
+      while (stack.canRedo() && future.length < HISTORY_MAX) {
+        stack.redo();
+        future.push(await save());
+      }
+      for (let i = 0; i < future.length; i++) stack.undo();
+      return { past, future };
+    } finally {
+      readOnly?.setReadOnly(wasReadOnly);
+      this.loading--;
+      this.capturing = false;
+    }
+  }
+
+  /** One undo or redo step from the snapshots: the document is re-imported on the same diagram and view. */
+  private moveHistory(direction: "undo" | "redo"): Promise<void> {
+    const epoch = this.epoch;
+    return this.enqueue(epoch, async () => {
+      const modeler = this.modeler;
+      if (!modeler || this.diagrams.length === 0) return;
+      const target = direction === "undo" ? this.history.past[0] : this.history.future[0];
+      if (target === undefined) return;
+      const current = (await modeler.saveXML({ format: true })).xml;
+      this.assertLive(epoch);
+      const view = modeler.get<CanvasLike>("canvas").viewbox();
+      this.loading++;
+      try {
+        try {
+          await modeler.importXML(target, this.activeId);
+        } catch {
+          await modeler.importXML(target);
+        }
+      } finally {
+        this.loading--;
+      }
+      this.assertLive(epoch);
+      modeler.get<CanvasLike>("canvas").viewbox({ x: view.x, y: view.y, width: view.width, height: view.height });
+      if (direction === "undo") {
+        this.history.past.shift();
+        this.history.future.unshift(current);
+      } else {
+        this.history.future.shift();
+        this.history.past.unshift(current);
+      }
+      this.inputXml = target;
+      this.touched = false;
+      this.lastRevision = `${this.instanceId}:${++this.revisionCounter}`;
+      this.emitHistory();
+      if (this.activeId) this.options.onChange?.({ revision: this.lastRevision, baseRevision: this.baseRevision, cause: direction, diagramId: this.activeId });
+    });
   }
 
   autoLayout(): Promise<LayoutResult> {
@@ -785,6 +894,9 @@ export class CanvasController implements BpmnCanvasHandle {
 export function createBpmnCanvas(host: HTMLElement, options: BpmnCanvasOptions = {}): BpmnCanvasHandle {
   return new CanvasController(host, options);
 }
+
+/** Snapshots kept across profile switches, most recent first. */
+const HISTORY_MAX = 100;
 
 function errorText(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
