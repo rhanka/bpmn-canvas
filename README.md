@@ -184,9 +184,13 @@ const result = await importDiagram(text);                       // { xml, projec
   diagram or profile switch, so toolbar buttons need no polling.
 - `setProfile(profile, legendTokens?)`: changes the look without changing the document. The modeler is recreated
   with the same XML, active diagram and viewbox; read-only is kept. Undo and redo keep working across the switch:
-  the previous steps are replayed into document snapshots (up to 100) and one step back re-imports the previous
-  snapshot on the same diagram and view (`onChange` cause `undo`/`redo`); a new edit drops the redo steps, a new
-  document or a diagram switch drops them all. `onChange` fires
+  the previous steps are replayed into document snapshots and one step back re-imports the previous snapshot on the
+  same diagram and view (`onChange` cause `undo`/`redo`). Edits made after the switch stay native steps; crossing
+  from them to the snapshots keeps every redo step. At most 100 snapshots are kept in all (undo and redo together, the
+  farthest dropped first); each is a full copy of the document, so memory grows with document size. A new edit drops
+  the redo steps; a new document, a diagram switch (tabs or the drill-down into a sub-process) or `destroy()` drops
+  them all. A step queued before `setReadOnly(true)` does not run on the locked document. If the capture fails, the
+  switch rejects and the canvas, its undo stack and its revision stay as they were. `onChange` fires
   with cause `profile-switch` and no new content revision. If nothing was edited, `getXml()` still returns the
   input bytes. A switch pending at `destroy()` rejects with an `AbortError`.
 - `legendTokens` on `createBpmnCanvas` and `renderDiagrams`: see "Legend profile".

@@ -414,6 +414,8 @@ export class CanvasController implements BpmnCanvasHandle {
     const diagramId = [...this.planeIds].find(([, element]) => element === id)?.[0];
     if (!diagramId || diagramId === this.activeId) return;
     this.activeId = diagramId;
+    // Like selectDiagram: snapshots belong to the diagram they were taken on.
+    this.resetHistory();
     this.options.onChange?.({ revision: this.lastRevision ?? `${this.instanceId}:${this.revisionCounter}`, baseRevision: this.baseRevision, cause: "diagram-switch", diagramId });
   }
 
@@ -707,9 +709,10 @@ export class CanvasController implements BpmnCanvasHandle {
         view = old.get<CanvasLike>("canvas").viewbox();
         const captured = await this.captureHistory(old);
         this.history = {
-          past: [...captured.past, ...this.history.past].slice(0, HISTORY_MAX),
+          past: [...captured.past, ...this.history.past],
           future: captured.future.length > 0 ? captured.future : this.history.future,
         };
+        this.capHistory();
         this.assertLive(epoch);
       }
       this.loading++;
@@ -770,6 +773,21 @@ export class CanvasController implements BpmnCanvasHandle {
     else if (this.history.future.length > 0 && !this.isEffectivelyReadOnly()) void this.moveHistory("redo").catch(() => undefined);
   }
 
+  private resetHistory(): void {
+    if (this.history.past.length === 0 && this.history.future.length === 0) return;
+    this.history = { past: [], future: [] };
+    this.emitHistory();
+  }
+
+  /** At most HISTORY_MAX snapshots in all; the steps farthest from the current state go first. */
+  private capHistory(): void {
+    const { past, future } = this.history;
+    while (past.length + future.length > HISTORY_MAX) {
+      if (past.length >= future.length) past.pop();
+      else future.pop();
+    }
+  }
+
   /** Every undo and redo step of a modeler as XML snapshots; the stack is left where it was and nothing is emitted. */
   private async captureHistory(modeler: ViewerLike): Promise<{ past: string[]; future: string[] }> {
     const stack = modeler.get<CommandStackLike>("commandStack");
@@ -780,24 +798,46 @@ export class CanvasController implements BpmnCanvasHandle {
     this.capturing = true;
     this.loading++;
     readOnly?.setReadOnly(false);
+    // Steps moved away from the starting point: negative = undone, positive = redone. Whatever happens
+    // (a failed save included), the stack goes back to where it was before the host gets control again.
+    let offset = 0;
     try {
       const past: string[] = [];
       while (stack.canUndo() && past.length < HISTORY_MAX) {
         stack.undo();
+        offset--;
         past.push(await save());
       }
-      for (let i = 0; i < past.length; i++) stack.redo();
+      while (offset < 0) {
+        stack.redo();
+        offset++;
+      }
       const future: string[] = [];
       while (stack.canRedo() && future.length < HISTORY_MAX) {
         stack.redo();
+        offset++;
         future.push(await save());
       }
-      for (let i = 0; i < future.length; i++) stack.undo();
+      while (offset > 0) {
+        stack.undo();
+        offset--;
+      }
       return { past, future };
     } finally {
-      readOnly?.setReadOnly(wasReadOnly);
-      this.loading--;
-      this.capturing = false;
+      try {
+        while (offset < 0) {
+          stack.redo();
+          offset++;
+        }
+        while (offset > 0) {
+          stack.undo();
+          offset--;
+        }
+      } finally {
+        readOnly?.setReadOnly(wasReadOnly);
+        this.loading--;
+        this.capturing = false;
+      }
     }
   }
 
@@ -807,9 +847,14 @@ export class CanvasController implements BpmnCanvasHandle {
     return this.enqueue(epoch, async () => {
       const modeler = this.modeler;
       if (!modeler || this.diagrams.length === 0) return;
+      // Queued before a lock: a locked document is never changed.
+      if (this.isEffectivelyReadOnly()) return;
       const target = direction === "undo" ? this.history.past[0] : this.history.future[0];
       if (target === undefined) return;
       const current = (await modeler.saveXML({ format: true })).xml;
+      // The re-import below clears the native stack: its remaining steps (redo steps when going back, undo steps
+      // when going forward) become snapshots first, so no step is lost when crossing from native to snapshots.
+      const native = await this.captureHistory(modeler);
       this.assertLive(epoch);
       const view = modeler.get<CanvasLike>("canvas").viewbox();
       this.loading++;
@@ -826,11 +871,12 @@ export class CanvasController implements BpmnCanvasHandle {
       modeler.get<CanvasLike>("canvas").viewbox({ x: view.x, y: view.y, width: view.width, height: view.height });
       if (direction === "undo") {
         this.history.past.shift();
-        this.history.future.unshift(current);
+        this.history.future = [current, ...native.future, ...this.history.future];
       } else {
         this.history.future.shift();
-        this.history.past.unshift(current);
+        this.history.past = [current, ...native.past, ...this.history.past];
       }
+      this.capHistory();
       this.inputXml = target;
       this.touched = false;
       this.lastRevision = `${this.instanceId}:${++this.revisionCounter}`;
@@ -874,6 +920,7 @@ export class CanvasController implements BpmnCanvasHandle {
   destroy(): void {
     if (this.destroyed) return;
     this.destroyed = true;
+    this.history = { past: [], future: [] };
     this.epoch++;
     this.navSeq++;
     if (this.options.signal && this.abortListener) this.options.signal.removeEventListener("abort", this.abortListener);
@@ -895,7 +942,7 @@ export function createBpmnCanvas(host: HTMLElement, options: BpmnCanvasOptions =
   return new CanvasController(host, options);
 }
 
-/** Snapshots kept across profile switches, most recent first. */
+/** Snapshots kept across profile switches, past and future together; each is a full copy of the document. */
 const HISTORY_MAX = 100;
 
 function errorText(error: unknown): string {

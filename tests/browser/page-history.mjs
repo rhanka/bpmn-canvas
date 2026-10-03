@@ -3,6 +3,7 @@ import { createElement, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { createBpmnCanvas } from "../../dist/index.js";
 import { BpmnWorkshop } from "../../dist/react/index.js";
+import ce3 from "../../experiments/e3/corpus/ce3-collapsed-subprocess.bpmn";
 
 const NS = 'xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"';
 const proc = (p, name, y) => `
@@ -52,7 +53,131 @@ const mount = (w = 900, h = 520) => {
 const shown = (host) => [...host.querySelectorAll(".djs-element[data-element-id]")].map((g) => g.getAttribute("data-element-id")).filter((id) => /^P\d_T$/.test(id));
 const taskX = (xml, p) => Number(new RegExp(`id="${p}_dT"[^>]*>\\s*<dc:Bounds x="([\\d.]+)"`).exec(xml)?.[1]);
 
+const nameOf = (h, id) => h.modeler.get("elementRegistry").get(id)?.businessObject?.name;
+const rename = (h, id, name) => h.modeler.get("modeling").updateLabel(h.modeler.get("elementRegistry").get(id), name);
+const settle = () => new Promise((r) => setTimeout(r, 30));
+async function waitChange(log, cause, n) {
+  for (let i = 0; i < 200 && log.filter((c) => c === cause).length < n; i++) await sleep(15);
+}
+
 window.hist = {
+  async extra() {
+    const out = {};
+    // F1: edits on both sides of a switch; two undos, two redos come back to the second edit.
+    {
+      const host = mount();
+      const log = [];
+      const h = createBpmnCanvas(host, { xml: TWO(), onChange: (c) => log.push(c.cause) });
+      await h.ready;
+      rename(h, "P1_T", "A");
+      await h.setProfile("legend");
+      rename(h, "P1_T", "B");
+      h.undo(); await settle();
+      const afterU1 = nameOf(h, "P1_T");
+      // The first undo was native and already emitted "undo": the snapshot undo is the second one.
+      h.undo(); await waitChange(log, "undo", 2);
+      const afterU2 = nameOf(h, "P1_T");
+      h.redo(); await waitChange(log, "redo", 1);
+      const afterR1 = nameOf(h, "P1_T");
+      const canRedoAfterR1 = h.canRedo();
+      h.redo(); await waitChange(log, "redo", 2); await settle();
+      out.mixed = { afterU1, afterU2, afterR1, canRedoAfterR1, afterR2: nameOf(h, "P1_T"), canRedoEnd: h.canRedo() };
+      h.destroy(); host.remove();
+    }
+    // F1, branch made after a snapshot undo.
+    {
+      const host = mount();
+      const log = [];
+      const h = createBpmnCanvas(host, { xml: TWO(), onChange: (c) => log.push(c.cause) });
+      await h.ready;
+      rename(h, "P1_T", "A1");
+      rename(h, "P1_T", "A2");
+      await h.setProfile("colored", { taskFill: "#eeeeff" });
+      h.undo(); await waitChange(log, "undo", 1);
+      const afterSnapshotUndo = nameOf(h, "P1_T");
+      rename(h, "P1_T", "C");
+      const futureDropped = h.history.future.length === 0;
+      h.undo(); await settle();
+      h.undo(); await waitChange(log, "undo", 3);
+      const back = nameOf(h, "P1_T");
+      h.redo(); await waitChange(log, "redo", 1);
+      h.redo(); await waitChange(log, "redo", 2); await settle();
+      out.branch = { afterSnapshotUndo, futureDropped, back, end: nameOf(h, "P1_T"), canRedo: h.canRedo() };
+      h.destroy(); host.remove();
+    }
+    // F3: a failed save during the capture leaves the old modeler exactly as it was.
+    {
+      const host = mount();
+      const h = createBpmnCanvas(host, { xml: TWO() });
+      await h.ready;
+      rename(h, "P1_T", "A");
+      rename(h, "P1_T", "B");
+      const stack = h.modeler.get("commandStack");
+      const before = { name: nameOf(h, "P1_T"), idx: stack._stackIdx, canUndo: h.canUndo(), canRedo: h.canRedo(), xml: await h.getXml(), rev: h.lastRevision };
+      const real = h.modeler.saveXML.bind(h.modeler);
+      let calls = 0;
+      h.modeler.saveXML = (...a) => (++calls === 2 ? Promise.reject(new Error("injected save failure")) : real(...a));
+      let error = null;
+      try { await h.setProfile("legend"); } catch (e) { error = String(e.message); }
+      h.modeler.saveXML = real;
+      out.captureFailure = { error, before: { ...before, xml: undefined }, after: { name: nameOf(h, "P1_T"), idx: stack._stackIdx, canUndo: h.canUndo(), canRedo: h.canRedo(), rev: h.lastRevision }, sameXml: (await h.getXml()) === before.xml, sameModeler: h.modeler.get("commandStack") === stack };
+      h.destroy(); host.remove();
+    }
+    // F4: at most 100 snapshots in all, released by destroy.
+    {
+      const host = mount();
+      const h = createBpmnCanvas(host, { xml: TWO() });
+      await h.ready;
+      for (let i = 1; i <= 205; i++) rename(h, "P1_T", "N" + i);
+      for (let i = 0; i < 102; i++) h.undo();
+      const current = nameOf(h, "P1_T");
+      await h.setProfile("legend");
+      out.cap = { current, kept: nameOf(h, "P1_T"), past: h.history.past.length, future: h.history.future.length };
+      h.undo();
+      await sleep(300);
+      out.cap.afterMove = h.history.past.length + h.history.future.length;
+      h.destroy();
+      out.cap.afterDestroy = h.history.past.length + h.history.future.length;
+      host.remove();
+    }
+    // F5: an undo queued before the lock does not touch the locked document.
+    {
+      const host = mount();
+      const log = [];
+      const h = createBpmnCanvas(host, { xml: TWO(), onChange: (c) => log.push(c.revision) });
+      await h.ready;
+      rename(h, "P1_T", "A");
+      await h.setProfile("legend");
+      const revs = log.length;
+      h.undo();
+      h.setReadOnly(true);
+      await h.getXml();
+      await sleep(200);
+      out.readOnlyQueued = { name: nameOf(h, "P1_T"), newRevisions: log.length - revs, past: h.history.past.length };
+      h.destroy(); host.remove();
+    }
+    // F2: the native drill-down into a collapsed sub-process drops the snapshots of the parent diagram.
+    {
+      const host = mount();
+      const histories = [];
+      const h = createBpmnCanvas(host, { xml: ce3, onHistoryChange: (x) => histories.push(x) });
+      await h.ready;
+      rename(h, "Sub_1", "Sub edited");
+      await h.setProfile("legend");
+      const before = { active: h.getActiveDiagramId(), past: h.history.past.length, canUndo: h.canUndo() };
+      window.__drill = { h, before, histories, host };
+      out.drillReady = before;
+    }
+    return out;
+  },
+  drillAfter() {
+    const { h, histories } = window.__drill;
+    const r = { active: h.getActiveDiagramId(), past: h.history.past.length, canUndo: h.canUndo(), lastHistory: histories[histories.length - 1] };
+    h.destroy();
+    window.__drill.host.remove();
+    return r;
+  },
+
   TWO: TWO(),
   async core() {
     const out = {};

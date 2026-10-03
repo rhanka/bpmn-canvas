@@ -21,6 +21,7 @@ export async function bundlePage(entry, name) {
     outfile: join(pagedir, "page.js"),
     logLevel: "warning",
     absWorkingDir: root,
+    loader: { ".bpmn": "text" },
     define: { "process.env.NODE_ENV": '"development"' },
   });
   // dist/internal/styles.js resolves `../assets/...` from its own directory; a bundle one level
