@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-exporter" exporterVersion="9.9">
+    <bpmn:process id="Request_review" name="Request review" isExecutable="false">
+        <bpmn:laneSet id="LaneSet_Request_review">
+            <bpmn:lane id="Office" name="Office">
+                <bpmn:flowNodeRef>Received</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Prepare</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Review</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Closed</bpmn:flowNodeRef>
+            </bpmn:lane>
+        </bpmn:laneSet>
+        <bpmn:startEvent id="Received" name="Received"/>
+        <bpmn:task id="Prepare" name="Prepare"/>
+        <bpmn:textAnnotation id="Guide">
+            <bpmn:text>Guide</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:dataObjectReference id="Request_file" name="Request file"/>
+        <bpmn:task id="Review" name="Review"/>
+        <bpmn:endEvent id="Closed" name="Closed"/>
+        <bpmn:textAnnotation id="App_Prepare">
+            <bpmn:text>[App] File tool</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:sequenceFlow id="Received_Prepare" name="" sourceRef="Received" targetRef="Prepare"/>
+        <bpmn:sequenceFlow id="Prepare_Review" name="" sourceRef="Prepare" targetRef="Review"/>
+        <bpmn:sequenceFlow id="Review_Closed" name="" sourceRef="Review" targetRef="Closed"/>
+        <bpmn:association id="Prepare_Request_file" sourceRef="Prepare" targetRef="Request_file"/>
+        <bpmn:association id="Request_file_Review" sourceRef="Request_file" targetRef="Review"/>
+        <bpmn:association id="Guide_Prepare" sourceRef="Guide" targetRef="Prepare"/>
+        <bpmn:association id="Guide_Review" sourceRef="Guide" targetRef="Review"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_Request_review" name="Request review - Diagram">
+        <bpmndi:BPMNPlane id="BPMNPlane_Request_review" bpmnElement="Request_review">
+            <bpmndi:BPMNShape id="Office_gui" bpmnElement="Office" isHorizontal="true">
+                <dc:Bounds x="30" y="0" width="811" height="299"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Received_gui" bpmnElement="Received">
+                <dc:Bounds x="100" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Prepare_gui" bpmnElement="Prepare">
+                <dc:Bounds x="290" y="91" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Guide_gui" bpmnElement="Guide">
+                <dc:Bounds x="220" y="26" width="120" height="51"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Request_file_gui" bpmnElement="Request_file">
+                <dc:Bounds x="409" y="205" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Review_gui" bpmnElement="Review">
+                <dc:Bounds x="531" y="91" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Closed_gui" bpmnElement="Closed">
+                <dc:Bounds x="721" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="App_Prepare_gui" bpmnElement="App_Prepare">
+                <dc:Bounds x="310" y="161" width="80" height="30"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="Received_Prepare_gui" bpmnElement="Received_Prepare">
+                <di:waypoint x="150.0" y="131.0"/>
+                <di:waypoint x="290.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Prepare_Review_gui" bpmnElement="Prepare_Review">
+                <di:waypoint x="410.0" y="131.0"/>
+                <di:waypoint x="531.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Review_Closed_gui" bpmnElement="Review_Closed">
+                <di:waypoint x="651.0" y="131.0"/>
+                <di:waypoint x="721.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Prepare_Request_file_gui" bpmnElement="Prepare_Request_file">
+                <di:waypoint x="384.0" y="171.0"/>
+                <di:waypoint x="384.0" y="198.0"/>
+                <di:waypoint x="429.0" y="198.0"/>
+                <di:waypoint x="429.0" y="205.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="386.5" y="188.0" width="40" height="20"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Request_file_Review_gui" bpmnElement="Request_file_Review">
+                <di:waypoint x="429.0" y="205.0"/>
+                <di:waypoint x="429.0" y="197.0"/>
+                <di:waypoint x="519.0" y="197.0"/>
+                <di:waypoint x="519.0" y="178.0"/>
+                <di:waypoint x="539.0" y="178.0"/>
+                <di:waypoint x="539.0" y="171.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Guide_Prepare_gui" bpmnElement="Guide_Prepare">
+                <di:waypoint x="280.0" y="77.0"/>
+                <di:waypoint x="280.0" y="84.0"/>
+                <di:waypoint x="304.0" y="84.0"/>
+                <di:waypoint x="304.0" y="91.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="272.0" y="74.0" width="40" height="20"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Guide_Review_gui" bpmnElement="Guide_Review">
+                <di:waypoint x="280.0" y="77.0"/>
+                <di:waypoint x="280.0" y="83.0"/>
+                <di:waypoint x="519.0" y="83.0"/>
+                <di:waypoint x="519.0" y="84.0"/>
+                <di:waypoint x="545.0" y="84.0"/>
+                <di:waypoint x="545.0" y="91.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

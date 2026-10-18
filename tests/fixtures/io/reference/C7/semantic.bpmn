@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:sem="https://sentropic.com/schema/bpmn/semantics/1" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-builder">
+  <bpmn:collaboration id="Ordering_collab">
+    <bpmn:participant id="Ordering_pool" name="Ordering" processRef="Ordering" />
+  </bpmn:collaboration>
+  <bpmn:process id="Ordering" name="Ordering" isExecutable="false">
+    <bpmn:laneSet id="Ordering_lanes">
+      <bpmn:lane id="Unit" name="Unit">
+        <bpmn:flowNodeRef>Go</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Assemble</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Stop</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Go" name="Go">
+      <bpmn:extensionElements>
+        <sem:info order="0" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Go_Assemble</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Assemble" name="Assemble">
+      <bpmn:extensionElements>
+        <sem:info order="1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Go_Assemble</bpmn:incoming>
+      <bpmn:outgoing>Flow_Assemble_Stop</bpmn:outgoing>
+      <bpmn:property id="In_In_one_Assemble_target" />
+      <bpmn:property id="In_In_two_Assemble_target" />
+      <bpmn:dataInputAssociation id="In_In_one_Assemble">
+        <bpmn:extensionElements>
+          <sem:info order="1005" />
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>In_one</bpmn:sourceRef>
+        <bpmn:targetRef>In_In_one_Assemble_target</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="In_In_two_Assemble">
+        <bpmn:extensionElements>
+          <sem:info order="1006" />
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>In_two</bpmn:sourceRef>
+        <bpmn:targetRef>In_In_two_Assemble_target</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Out_Assemble_Out_one">
+        <bpmn:extensionElements>
+          <sem:info order="1007" />
+        </bpmn:extensionElements>
+        <bpmn:targetRef>Out_one</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="Out_Assemble_Out_two">
+        <bpmn:extensionElements>
+          <sem:info order="1008" />
+        </bpmn:extensionElements>
+        <bpmn:targetRef>Out_two</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:dataObject id="In_one_obj" />
+    <bpmn:dataObjectReference id="In_one" name="In one" dataObjectRef="In_one_obj">
+      <bpmn:extensionElements>
+        <sem:info order="5" laneRef="Unit" direction="in" primaryAssociationRef="In_In_one_Assemble" />
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:dataObject id="In_two_obj" />
+    <bpmn:dataObjectReference id="In_two" name="In two" dataObjectRef="In_two_obj">
+      <bpmn:extensionElements>
+        <sem:info order="6" laneRef="Unit" direction="in" primaryAssociationRef="In_In_two_Assemble" />
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:dataObject id="Out_one_obj" />
+    <bpmn:dataObjectReference id="Out_one" name="Out one" dataObjectRef="Out_one_obj">
+      <bpmn:extensionElements>
+        <sem:info order="7" laneRef="Unit" direction="out" primaryAssociationRef="Out_Assemble_Out_one" />
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:dataObject id="Out_two_obj" />
+    <bpmn:dataObjectReference id="Out_two" name="Out two" dataObjectRef="Out_two_obj">
+      <bpmn:extensionElements>
+        <sem:info order="8" laneRef="Unit" direction="out" primaryAssociationRef="Out_Assemble_Out_two" />
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:endEvent id="Stop" name="Stop">
+      <bpmn:extensionElements>
+        <sem:info order="9" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Assemble_Stop</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Go_Assemble" sourceRef="Go" targetRef="Assemble">
+      <bpmn:extensionElements>
+        <sem:info order="1000" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Assemble_Stop" sourceRef="Assemble" targetRef="Stop">
+      <bpmn:extensionElements>
+        <sem:info order="1001" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="Doc_Doc_one">
+      <bpmn:extensionElements>
+        <sem:info order="2" laneRef="Unit" primaryAssociationRef="DocLink_Doc_one_Assemble" />
+      </bpmn:extensionElements>
+      <bpmn:text>[Doc] Doc one</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="Doc_Doc_two">
+      <bpmn:extensionElements>
+        <sem:info order="3" laneRef="Unit" primaryAssociationRef="DocLink_Doc_two_Assemble" />
+      </bpmn:extensionElements>
+      <bpmn:text>[Doc] Doc two</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="Doc_Doc_three">
+      <bpmn:extensionElements>
+        <sem:info order="4" laneRef="Unit" primaryAssociationRef="DocLink_Doc_three_Assemble" />
+      </bpmn:extensionElements>
+      <bpmn:text>[Doc] Doc three</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="DocLink_Doc_one_Assemble" associationDirection="One" sourceRef="Doc_Doc_one" targetRef="Assemble">
+      <bpmn:extensionElements>
+        <sem:info order="1002" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+    <bpmn:association id="DocLink_Doc_two_Assemble" associationDirection="One" sourceRef="Doc_Doc_two" targetRef="Assemble">
+      <bpmn:extensionElements>
+        <sem:info order="1003" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+    <bpmn:association id="DocLink_Doc_three_Assemble" associationDirection="One" sourceRef="Doc_Doc_three" targetRef="Assemble">
+      <bpmn:extensionElements>
+        <sem:info order="1004" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Ordering_diagram" name="Ordering">
+    <bpmndi:BPMNPlane id="Ordering_plane" bpmnElement="Ordering_collab">
+      <bpmndi:BPMNShape id="Ordering_pool_di" bpmnElement="Ordering_pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="800" height="279" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Unit_di" bpmnElement="Unit" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="770" height="279" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Go_di" bpmnElement="Go">
+        <dc:Bounds x="100" y="106" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="116" y="160" width="19" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Assemble_di" bpmnElement="Assemble">
+        <dc:Bounds x="420" y="91" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Out_two_di" bpmnElement="Out_two">
+        <dc:Bounds x="553" y="185" width="40" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="552" y="239" width="42" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Doc_Doc_three_di" bpmnElement="Doc_Doc_three">
+        <dc:Bounds x="490" y="26" width="120" height="51" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="In_two_di" bpmnElement="In_two">
+        <dc:Bounds x="422" y="185" width="40" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="425" y="239" width="34" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Doc_Doc_one_di" bpmnElement="Doc_Doc_one">
+        <dc:Bounds x="220" y="26" width="120" height="51" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Out_one_di" bpmnElement="Out_one">
+        <dc:Bounds x="500" y="185" width="40" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="498" y="239" width="44" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="In_one_di" bpmnElement="In_one">
+        <dc:Bounds x="372" y="185" width="40" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="375" y="239" width="35" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Doc_Doc_two_di" bpmnElement="Doc_Doc_two">
+        <dc:Bounds x="350" y="26" width="120" height="51" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Stop_di" bpmnElement="Stop">
+        <dc:Bounds x="680" y="106" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="692" y="160" width="27" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Go_Assemble_di" bpmnElement="Flow_Go_Assemble">
+        <di:waypoint x="150" y="131" />
+        <di:waypoint x="420" y="131" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Assemble_Stop_di" bpmnElement="Flow_Assemble_Stop">
+        <di:waypoint x="540" y="131" />
+        <di:waypoint x="680" y="131" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DocLink_Doc_one_Assemble_di" bpmnElement="DocLink_Doc_one_Assemble">
+        <di:waypoint x="280" y="77" />
+        <di:waypoint x="280" y="84" />
+        <di:waypoint x="434" y="84" />
+        <di:waypoint x="434" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DocLink_Doc_two_Assemble_di" bpmnElement="DocLink_Doc_two_Assemble">
+        <di:waypoint x="410" y="77" />
+        <di:waypoint x="410" y="84" />
+        <di:waypoint x="434" y="84" />
+        <di:waypoint x="434" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DocLink_Doc_three_Assemble_di" bpmnElement="DocLink_Doc_three_Assemble">
+        <di:waypoint x="550" y="77" />
+        <di:waypoint x="550" y="84" />
+        <di:waypoint x="526" y="84" />
+        <di:waypoint x="526" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="In_In_one_Assemble_di" bpmnElement="In_In_one_Assemble">
+        <di:waypoint x="392" y="185" />
+        <di:waypoint x="392" y="178" />
+        <di:waypoint x="428" y="178" />
+        <di:waypoint x="428" y="171" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="In_In_two_Assemble_di" bpmnElement="In_In_two_Assemble">
+        <di:waypoint x="442" y="185" />
+        <di:waypoint x="442" y="171" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Out_Assemble_Out_one_di" bpmnElement="Out_Assemble_Out_one">
+        <di:waypoint x="520" y="171" />
+        <di:waypoint x="520" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Out_Assemble_Out_two_di" bpmnElement="Out_Assemble_Out_two">
+        <di:waypoint x="532" y="171" />
+        <di:waypoint x="532" y="178" />
+        <di:waypoint x="573" y="178" />
+        <di:waypoint x="573" y="185" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

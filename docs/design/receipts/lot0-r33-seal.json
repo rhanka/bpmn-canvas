@@ -1,0 +1,1447 @@
+{
+  "format": "profile-r33-seal-receipt/1",
+  "status": "sealed-and-verified-with-runtime-disagreements",
+  "author": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "role": "independent expectation author"
+  },
+  "branch": "workbench/functions-20261004-profile-lot0-r33seal",
+  "initialHead": "40714d3",
+  "authority": {
+    "revision": "R3.3",
+    "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+    "manifestSha256": "dbdbdbb8a61e87e76ea8e198561b86ffa1bbe86ea71a09261ab70ca31ef43dd3",
+    "verifiedCompanionEntries": 46,
+    "matrixInventorySha256": "79c25e5370bc2976b19728468d3614bb43713e1464bce808a4ee5c8ac3890a3e"
+  },
+  "attestation": "All 45 compatibility inputs and the additional sealed matrix citation were independently reviewed against hash-verified DESIGN R3.3. The new decisions are literal hand derivations. Inventory outcomes were used only to cross-check coverage and the already authored decisions. No src/profile file was read and no library code was executed before sealing; no runtime result formed or revised an expectation.",
+  "independence": {
+    "authoringTool": "tests/fixtures/profile-lot0/author-r33.mjs",
+    "imports": [
+      "node:assert/strict",
+      "node:fs",
+      "node:crypto"
+    ],
+    "preSealExecution": "Data assembly, hashing, authority verification and data-only red checks; no library execution.",
+    "priorReceiptsPreserved": [
+      "docs/design/receipts/lot0-s2b.json",
+      "docs/design/receipts/lot0-s4-expect.json",
+      "docs/design/receipts/lot0-s123-seal.json"
+    ],
+    "productionCodeEdited": false,
+    "step4FixReceiptTouched": false,
+    "postSealMetadataCompletion": "Updated remaining current-authority wording in the baseline, fixture README and lexical-dependency metadata to R3.3, then refreshed their freeze and receipt pins. No vector input, verdict, output, derivation or provenance changed after library execution began."
+  },
+  "coverage": {
+    "totalSealedVectors": 486,
+    "matrixVectorsReviewed": 45,
+    "additionalMatrixCitationsReviewed": 1,
+    "disputedVectorsReviewed": 9,
+    "changedVerdicts": 7,
+    "disputedUnchangedVerdicts": 2,
+    "otherExpectedOutputsPreserved": 479,
+    "inventory": {
+      "sha256": "79c25e5370bc2976b19728468d3614bb43713e1464bce808a4ee5c8ac3890a3e",
+      "total": 66,
+      "sealed": 45,
+      "unsealed": 21,
+      "changedFromR32": [
+        "s123-s1-minor-up-unknown",
+        "s123-s1-minor-up-unavailable",
+        "s123-s1-minor-down-unknown",
+        "s123-s1-minor-down-unavailable",
+        "s123-s2-document-schema-unsupported-unknown",
+        "s123-s2-document-schema-unsupported-unavailable",
+        "s123-s2-document-schema-supported-available",
+        "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+        "s123-regression: should check source availability for 1.1.9 with unknown [call 1]",
+        "s123-regression: should check source availability for 1.1.9 with unavailable [call 1]",
+        "s123-regression: should check source availability for 1.3.0 with unknown [call 1]",
+        "s123-regression: should check source availability for 1.3.0 with unavailable [call 1]",
+        "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+        "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]"
+      ],
+      "recordedExpectationChangesBeyondDisputes": [
+        "compatibility-test: should require validated migration results before accepting a different identity [call 2]",
+        "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+        "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+        "s123-regression: should refuse schema identity disagreement before unavailable source and migration [call 1]",
+        "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]"
+      ],
+      "disposition": "All 45 sealed inputs independently reviewed. The other 21 entries are historical/unsealed code assertions, not sealed vectors; runtime disagreement is measured only after sealing."
+    }
+  },
+  "changedVectors": [
+    {
+      "caseId": "s123-s1-minor-up-unknown",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused:profile-minor-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-up-unavailable",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused:profile-minor-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-down-unknown",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused:profile-minor-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-down-unavailable",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused:profile-minor-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-unsupported-unknown",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-schema-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P2 adds the ordered unsupported document-schema row. Unsupported D schema refuses document-schema-unsupported before source availability; unsupported P schema is a separate diagnostic.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:308",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-unsupported-unavailable",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-schema-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P2 adds the ordered unsupported document-schema row. Unsupported D schema refuses document-schema-unsupported before source availability; unsupported P schema is a separate diagnostic.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:308",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-available",
+      "supersedes": "R3.2 sealed verdict",
+      "old": {
+        "expectedStatus": "refused",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-schema-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P2 separates supported unequal schema identities from unsupported schemas. Both schemas and the exact source are available, so explicit schema migration is required; the former bare refusal is superseded.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    }
+  ],
+  "disputedUnchangedVectors": [
+    {
+      "caseId": "s123-s2-document-schema-supported-unknown",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P1 applies at the supported unequal-schema row: without an available exact source the refusal remains profile-source-unavailable. P2 changes its defining row, not its verdict.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-unavailable",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "reason": "P1 applies at the supported unequal-schema row: without an available exact source the refusal remains profile-source-unavailable. P2 changes its defining row, not its verdict.",
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    }
+  ],
+  "additionalMatrixCitations": [
+    {
+      "caseId": "s2b-envelope-profile-change",
+      "old": {
+        "expectedStatus": "ok",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "ok"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "tree": {
+                "$type": "bpmn:Definitions",
+                "id": "Definitions_A",
+                "targetNamespace": "urn:neutral:1",
+                "exporterVersion": "fixture-2",
+                "rootElements": [
+                  {
+                    "$type": "bpmn:Process",
+                    "id": "Process_A",
+                    "name": "Source",
+                    "isExecutable": false,
+                    "flowElements": [
+                      {
+                        "$type": "bpmn:Task",
+                        "id": "Task_A",
+                        "name": "Task",
+                        "documentation": [
+                          {
+                            "$type": "bpmn:Documentation",
+                            "text": "Source\nbytes",
+                            "textFormat": "text/plain"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral/1",
+                "version": "1.1.1",
+                "sha256": "558742fcd32a2fc3c6d3f7290d3236c8486112655c3831ffff7fa552b873f8d1",
+                "base": {
+                  "id": "neutral-base/1",
+                  "version": "fixture-2",
+                  "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-descriptors/1",
+                    "version": "fixture-2",
+                    "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                  }
+                ]
+              },
+              "baseRevision": "851037164c3008d87d820ba45c9ee7ef81e234ae756faebaa20c2a6c74063c05",
+              "revision": "0e4424fd88cd70380d9c3ea0b45f0d2d72ed3646049002d49f1a041daba7803e",
+              "newHistoryEpoch": true
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "ok",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "ok"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "tree": {
+                "$type": "bpmn:Definitions",
+                "id": "Definitions_A",
+                "targetNamespace": "urn:neutral:1",
+                "exporterVersion": "fixture-2",
+                "rootElements": [
+                  {
+                    "$type": "bpmn:Process",
+                    "id": "Process_A",
+                    "name": "Source",
+                    "isExecutable": false,
+                    "flowElements": [
+                      {
+                        "$type": "bpmn:Task",
+                        "id": "Task_A",
+                        "name": "Task",
+                        "documentation": [
+                          {
+                            "$type": "bpmn:Documentation",
+                            "text": "Source\nbytes",
+                            "textFormat": "text/plain"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral/1",
+                "version": "1.1.1",
+                "sha256": "558742fcd32a2fc3c6d3f7290d3236c8486112655c3831ffff7fa552b873f8d1",
+                "base": {
+                  "id": "neutral-base/1",
+                  "version": "fixture-2",
+                  "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-descriptors/1",
+                    "version": "fixture-2",
+                    "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                  }
+                ]
+              },
+              "baseRevision": "851037164c3008d87d820ba45c9ee7ef81e234ae756faebaa20c2a6c74063c05",
+              "revision": "0e4424fd88cd70380d9c3ea0b45f0d2d72ed3646049002d49f1a041daba7803e",
+              "newHistoryEpoch": true
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:258",
+        "DESIGN.md:260",
+        "DESIGN.md:262",
+        "DESIGN.md:266",
+        "DESIGN.md:315",
+        "DESIGN.md:421",
+        "DESIGN.md:603",
+        "DESIGN.md:685"
+      ],
+      "provenance": [
+        "DESIGN.md:260",
+        "DESIGN.md:262",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:322",
+        "DESIGN.md:430",
+        "DESIGN.md:612",
+        "DESIGN.md:694"
+      ],
+      "reason": "The semantic revision includes the exact profile identity. R3.3 retains this identity/revision requirement; no compatibility operation or verdict is asserted by this envelope witness."
+    }
+  ],
+  "preservation": {
+    "inputs": "38901f5edde4775bf644c85b3589e76ae9b1b2fd24d9bf341612eb6b74e8805c",
+    "unaffectedOutputs": "d2b533ba389aae57e6d8b9b1cf58cc16d7435ade9d72ae19b72f12e098f6b008"
+  },
+  "verification": {
+    "red": {
+      "command": "rtk node --test tests/profile-r33-seal.test.mjs",
+      "exitCode": 1,
+      "tests": 11,
+      "passed": 0,
+      "failed": 11,
+      "failureClasses": [
+        "R3.2 design pin",
+        "seven superseded verdicts",
+        "missing all-vector audit and preservation ledger",
+        "missing P1/schema provenance enforcement"
+      ]
+    },
+    "postSeal": {
+      "coverageSealProvenanceBrand": {
+        "command": "rtk node --test tests/profile-r33-seal.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-corpus.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-brand-guard.test.mjs",
+        "tests": 174,
+        "passed": 174,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "receiptChain": {
+        "command": "rtk node --test --test-name-pattern \"should supersede historical\" tests/profile-s123-receipt.test.mjs",
+        "passed": 1,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "fullAuthorityProvenance": {
+        "passed": true,
+        "method": "verifyDesignProvenance with complete SHA-256-verified DESIGN.md bytes"
+      },
+      "finalRegistrySealBrand": {
+        "command": "rtk node --test tests/profile-r33-seal.test.mjs tests/profile-brand-guard.test.mjs",
+        "tests": 12,
+        "passed": 12,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "exhaustiveGolden": {
+        "standaloneCommand": "rtk node --test tests/profile-golden-independence.test.mjs",
+        "standaloneExitCode": 130,
+        "disposition": "Supplementary standalone run interrupted because npm test executes the identical exhaustive byte-mutation test on the same unchanged expectation payload; final coverage is measured by the full suite.",
+        "fullSuiteResults": [
+          {
+            "assertion": "should seal hand-derived verdicts with per-vector normative provenance",
+            "passed": true,
+            "durationMs": 99.504267
+          },
+          {
+            "assertion": "should detect every changed expectation byte including IDs, pointers and reports",
+            "passed": true,
+            "durationMs": 940175.742035
+          },
+          {
+            "assertion": "should freeze all fourteen static rules and precedence without executing them",
+            "passed": true,
+            "durationMs": 1.031681
+          }
+        ]
+      },
+      "npmTest": {
+        "command": "rtk npm test",
+        "exitCode": 1,
+        "buildPassed": true,
+        "tests": 1919,
+        "pass": 1888,
+        "fail": 31,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 1240708.186363,
+        "rawLogSha256": "a144aaccd633cf576d9bbe8cb9c5a4606c8a26ac8c4320e1b766bbf2be725534",
+        "compatibilityFailures": [
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-supported-unknown",
+            "caseId": "s123-s2-document-schema-supported-unknown",
+            "expected": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-supported-unavailable",
+            "caseId": "s123-s2-document-schema-supported-unavailable",
+            "expected": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-unsupported-unknown",
+            "caseId": "s123-s2-document-schema-unsupported-unknown",
+            "expected": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-unsupported-unavailable",
+            "caseId": "s123-s2-document-schema-unsupported-unavailable",
+            "expected": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-supported-available",
+            "caseId": "s123-s2-document-schema-supported-available",
+            "expected": {
+              "status": "refused",
+              "code": "profile-schema-migration-required"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          }
+        ],
+        "browserEnvironmentFailures": {
+          "count": 26,
+          "cases": [
+            {
+              "file": "tests/aui.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/browser-dist.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/colored.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/core.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/demo.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/history.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/io-review-2.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/io-review-3.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/io-review-4.browser.test.mjs",
+              "dbusError": "InvalidArgs"
+            },
+            {
+              "file": "tests/io.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/layout-boundary.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/layout-corpus.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/layout-on-load.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/legend.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/legend2.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/legend3.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/palette.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/react.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/render-looks.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/ui.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/v02.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/watermark.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/workshop-export.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/workshop-served.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/workshop-structure.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            },
+            {
+              "file": "tests/workshop.browser.test.mjs",
+              "dbusError": "UnixProcessIdUnknown"
+            }
+          ],
+          "failureSignature": "cannot create transient scope: DBus error; 25 UnixProcessIdUnknown failures and one InvalidArgs failure referring to a kernel thread",
+          "scope": "Browser launch in the sandbox process namespace; no product assertion was reached in these cases.",
+          "runnerCleanup": {
+            "signal": "SIGTERM",
+            "children": [
+              "tests/browser-dist.browser.test.mjs",
+              "tests/demo.browser.test.mjs"
+            ],
+            "reason": "After recording browser-launch failures these two children retained live handles beyond their test time limits. Their working directory, commands and parent were verified before stopping them so the runner could emit its final summary."
+          }
+        },
+        "otherFailures": 0,
+        "sealedExpectationPayloadUnchanged": true
+      },
+      "authoringReplay": {
+        "passed": true,
+        "comparedFiles": 10,
+        "method": "Run the data-only authoring script on original R3.2 files from HEAD in an isolated temporary directory inside this worktree; compare every output byte; remove the scratch directory."
+      },
+      "targetedCompatibility": {
+        "command": "rtk node --test tests/profile-compatibility.test.mjs",
+        "exitCode": 1,
+        "tests": 47,
+        "passed": 42,
+        "failed": 5,
+        "failures": [
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-supported-unknown",
+            "caseId": "s123-s2-document-schema-supported-unknown",
+            "expected": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-supported-unavailable",
+            "caseId": "s123-s2-document-schema-supported-unavailable",
+            "expected": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-unsupported-unknown",
+            "caseId": "s123-s2-document-schema-unsupported-unknown",
+            "expected": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-unsupported-unavailable",
+            "caseId": "s123-s2-document-schema-unsupported-unavailable",
+            "expected": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          },
+          {
+            "file": "tests/profile-compatibility.test.mjs",
+            "assertion": "should match ordered compatibility s123-s2-document-schema-supported-available",
+            "caseId": "s123-s2-document-schema-supported-available",
+            "expected": {
+              "status": "refused",
+              "code": "profile-schema-migration-required"
+            },
+            "actual": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            },
+            "outputFlagsAgree": true
+          }
+        ]
+      },
+      "refreshedGates": {
+        "command": "rtk node --test tests/profile-r33-seal.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-corpus.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-brand-guard.test.mjs tests/profile-s123-receipt.test.mjs",
+        "tests": 176,
+        "passed": 176,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "finalMetadataGates": {
+        "command": "rtk node --test tests/profile-r33-seal.test.mjs tests/profile-brand-guard.test.mjs tests/profile-s123-receipt.test.mjs",
+        "tests": 14,
+        "passed": 14,
+        "failed": 0,
+        "exitCode": 0
+      }
+    }
+  },
+  "seals": {
+    "expectations.json": {
+      "old": {
+        "bytes": 1800789,
+        "sha256": "0e81cfb02f5bbca32f5f76c6fd6c0f2be641e5cbb81521d0763908aa0179a3bd"
+      },
+      "new": {
+        "bytes": 1802403,
+        "sha256": "b6ee671974e399fefeb1ff105978969ef95db9dc75ca5f6c8f361dcb1f278d2d"
+      }
+    },
+    "expectations.seal.json": {
+      "old": {
+        "bytes": 458,
+        "sha256": "c3fe881aab3f55781d3657d8b8829bff8e2e34dbc9a3cd46c4863203c5ce7948"
+      },
+      "new": {
+        "bytes": 465,
+        "sha256": "0fdb6c8524ae9b93e3fe30fe9532f80b3a0117b2db91c9389fe7885c4e3762c9"
+      }
+    },
+    "freeze.seal.json": {
+      "old": {
+        "bytes": 3241,
+        "sha256": "b6c668742db8949068f7582e6d86b30b3283015c466f799b45e052a877dde886"
+      },
+      "new": {
+        "bytes": 4030,
+        "sha256": "13b58125faa7dd8dfb3b9f84e17c030c12123a4195adc1d59b68bd99840406ea"
+      }
+    }
+  },
+  "supersedesFiles": [
+    {
+      "path": "docs/design/profile-compiler-rules.json",
+      "old": {
+        "bytes": 9898,
+        "sha256": "b17bf0a94819638d31275db15fd0c3efd366c714bb0d2fd4729544e0aa2c1ef6"
+      },
+      "new": {
+        "bytes": 9898,
+        "sha256": "a684ac82bbf6a94dedd53e97c72055b4fb2110b27fd75774bbe2fd1944ffd1e1"
+      }
+    },
+    {
+      "path": "docs/design/profile-externalization-scope.json",
+      "old": {
+        "bytes": 1220,
+        "sha256": "1f2d3bf091e01f0f2620fe322d872f9016bbf3bbc0ed0b8f715a2a95f7ff1d60"
+      },
+      "new": {
+        "bytes": 1391,
+        "sha256": "3661e64c4d9b65894ce9376b816d49112859b55b8f2cefd28828c30ed126eef3"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/README.md",
+      "old": {
+        "bytes": 9270,
+        "sha256": "8998827c58455867a7b3f77acd6e7f42c97c5ee48aa295b5029003914222145d"
+      },
+      "new": {
+        "bytes": 9844,
+        "sha256": "150f1bd7b5a335de7fd99deef31ce48cc055f2e57855d7f62b1b7c3651df81d3"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/design-provenance.json",
+      "old": {
+        "bytes": 106534,
+        "sha256": "e071e74815c1c25ecba160263b7cee84d04c3df9010c3198932089a6480fb652"
+      },
+      "new": {
+        "bytes": 109282,
+        "sha256": "d14862e485d7c03a8dffce1d0aa95e0a3bd3f4843803e0c165f9b59f3f411f63"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/expectations.json",
+      "old": {
+        "bytes": 1800789,
+        "sha256": "0e81cfb02f5bbca32f5f76c6fd6c0f2be641e5cbb81521d0763908aa0179a3bd"
+      },
+      "new": {
+        "bytes": 1802403,
+        "sha256": "b6ee671974e399fefeb1ff105978969ef95db9dc75ca5f6c8f361dcb1f278d2d"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+      "old": {
+        "bytes": 458,
+        "sha256": "c3fe881aab3f55781d3657d8b8829bff8e2e34dbc9a3cd46c4863203c5ce7948"
+      },
+      "new": {
+        "bytes": 465,
+        "sha256": "0fdb6c8524ae9b93e3fe30fe9532f80b3a0117b2db91c9389fe7885c4e3762c9"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "old": {
+        "bytes": 3241,
+        "sha256": "b6c668742db8949068f7582e6d86b30b3283015c466f799b45e052a877dde886"
+      },
+      "new": {
+        "bytes": 4030,
+        "sha256": "13b58125faa7dd8dfb3b9f84e17c030c12123a4195adc1d59b68bd99840406ea"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/inputs.json",
+      "old": {
+        "bytes": 8134,
+        "sha256": "c0a33f8450a468dd53da850d7e15952430bd63a178b6635058d6f22222950f7f"
+      },
+      "new": {
+        "bytes": 9710,
+        "sha256": "b21c2b18f884b1e2af3d49a0c0c698f9bb0457284aca294bfa69c1b696791088"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/s123-provenance-policy.json",
+      "old": {
+        "bytes": 23203,
+        "sha256": "7232987453cc606b193d72c2f6c75d5433ad01c4df4f215f5a5fbbb5762c3ff9"
+      },
+      "new": {
+        "bytes": 23978,
+        "sha256": "9d5428dab62152175123427544b4c29b1fdc27812cae372263aee0d7215d9490"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/step2b-provenance-policy.json",
+      "old": {
+        "bytes": 28026,
+        "sha256": "d2514a8162d60c277fc7e6ff105228e71d33b66a59567944b05a40e52f1c5821"
+      },
+      "new": {
+        "bytes": 29326,
+        "sha256": "9b1070565776bc141ab25e8695a7403de84dd66d53ed3d1e6507bd562143338d"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/step4-inputs.json",
+      "old": {
+        "bytes": 86123,
+        "sha256": "4cddf24f9c93b1a5f7df18e8006dde30bdb5b5980ba7c4512c933873de6c44d1"
+      },
+      "new": {
+        "bytes": 86123,
+        "sha256": "b4aa6e45541d8585eb331bc77289c418d84da5484ad15f7875ea6ca9234f5ad5"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/step4-provenance-policy.json",
+      "old": {
+        "bytes": 45926,
+        "sha256": "d56396fbbb5fb3c9e189347aed111a84d812edbfc8ea310066969d53c7693511"
+      },
+      "new": {
+        "bytes": 45926,
+        "sha256": "a43630abbc33330ab346906d0bf32ca808dea60316323d50b08e33dab7c4fe22"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 12783,
+        "sha256": "3534683d9e11079ada9df1c94bd1e55d1a2dabc20e42671b2beef33b46e08a81"
+      },
+      "new": {
+        "bytes": 13019,
+        "sha256": "35c06755c85eeb07175a6a6f57e8b3a22403b9be5c1a115600848a4607662967"
+      }
+    },
+    {
+      "path": "tests/profile-corpus-s123.test.mjs",
+      "old": {
+        "bytes": 3699,
+        "sha256": "5af61a7e6fbe3c5c805b44fd076f39e32ac37abf200fe89a4dba165b7210dc3b"
+      },
+      "new": {
+        "bytes": 3710,
+        "sha256": "f981a3e673e17ce762a639ab28ffdd51d195d28fecde24c2ed37856bf7b833c7"
+      }
+    },
+    {
+      "path": "tests/profile-corpus-step2b.test.mjs",
+      "old": {
+        "bytes": 6063,
+        "sha256": "67ffb96274ed9a82c6173defe695d411a116e0e34037f9c7a54c8d790b0a284b"
+      },
+      "new": {
+        "bytes": 6148,
+        "sha256": "0e584eeca0c3f4f2a16d28889c3c18d1ba53a8ad49446dcaf95c549aa69005e2"
+      }
+    },
+    {
+      "path": "tests/profile-corpus-step4.test.mjs",
+      "old": {
+        "bytes": 6284,
+        "sha256": "c91d25ce9ccda23f31d626aa4aebc58aa01320cb30de0545b656d141d435c2ef"
+      },
+      "new": {
+        "bytes": 6270,
+        "sha256": "07f1c2fc328d98682c871f3b7143b354b9ff11d5bfb8f98dc66e879a537c10d3"
+      }
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "old": {
+        "bytes": 6257,
+        "sha256": "919dac034d862265155134c688308bb9d273b671288ee081151f203518aa90fe"
+      },
+      "new": {
+        "bytes": 6257,
+        "sha256": "227a4b4b9976091d9d1140b170302dba291198ea2805174555de8521459221f1"
+      }
+    },
+    {
+      "path": "tests/profile-r32-expectations.test.mjs",
+      "old": {
+        "bytes": 14489,
+        "sha256": "34d8f3b0b900a5227c22a58fd1334464f87670a260203108999d426c6801a451"
+      },
+      "new": {
+        "bytes": 14489,
+        "sha256": "11ba9b9f151a3bc8de737140a3d1a5e2c434e9869192069e3bea756d6bcbb866"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 4335,
+        "sha256": "f91fbc74c5a620573def81a21f63faf4eca3fa70684956cc4999893dc7727a94"
+      },
+      "new": {
+        "bytes": 5145,
+        "sha256": "3458f0c4e98c7618ce06c332c05a3563ba1a50b20efb6bb0cd8f0620f79fa2ca"
+      }
+    },
+    {
+      "path": "docs/design/profile-lot0-baseline.md",
+      "old": {
+        "bytes": 6318,
+        "sha256": "199dabd6fab18bde3b749a84190c4c3d213e1c540ff58a3b4aee9d8a99287c00"
+      },
+      "new": {
+        "bytes": 6567,
+        "sha256": "eb49ec64954615bfb13416aada4d0626dcce990be82a0a7e4c95a9b2a8847bb5"
+      }
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "tests/fixtures/profile-lot0/MANIFEST-R33.sha256",
+      "bytes": 4109,
+      "sha256": "dbdbdbb8a61e87e76ea8e198561b86ffa1bbe86ea71a09261ab70ca31ef43dd3"
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/author-r33.mjs",
+      "bytes": 15204,
+      "sha256": "399e794867576bc61738da406cb732bd655cb9e1f5d360767842166a60902a9e"
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/r33-matrix-review.json",
+      "bytes": 84088,
+      "sha256": "e7d17bf9fbf5f65dc840d743302a650ff8fe74f5ccadf812c84752717a1caa1e"
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/compatibility-codes.json",
+      "bytes": 2721,
+      "sha256": "601b91d9c401d4a3aff1f05f26632d370226bf98e8366fca506b79f4a8a853b8"
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/compatibility-verdict.schema.json",
+      "bytes": 1603,
+      "sha256": "cf127eb6c2bd40155af2ba4cc8feed0dfa9aa2d1bf7e4c6dfec9e02bf4471c30"
+    },
+    {
+      "path": "tests/profile-r33-seal.test.mjs",
+      "bytes": 5268,
+      "sha256": "b3dc76665a112514ac8a1563caebc0b2b340cd00d787e46ccdb07f14c9123ab4"
+    }
+  ],
+  "limits": [
+    "Expectation reseal only; no compatibility implementation change or runtime acceptance claim.",
+    "Historical R3.2 authoring scripts, receipts and manifest retained; active pins and citations use R3.3.",
+    "No push; stash and excluded worktree paths untouched.",
+    "The full suite is not green: five compatibility assertions disagree with R3.3 and 26 browser cases could not launch in the test environment. Two stalled browser children required cleanup after their failure diagnostics; no implementation or browser test was changed."
+  ],
+  "sealedBeforeLibraryExecution": true,
+  "sealCheckpointUtc": "2026-10-16 00:43:02 UTC",
+  "unsealedInventoryDispositions": [
+    {
+      "file": "tests/profile-compatibility.test.mjs",
+      "assertion": "should require validated migration results before accepting a different identity [call 2]",
+      "disposition": "Historical assertion changed; the current assertion already expects profile-source-unavailable and agrees with R3.3.",
+      "expectedR33": "profile-source-unavailable",
+      "provenance": [
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:319"
+      ]
+    },
+    {
+      "file": "tests/profile-compatibility.test.mjs",
+      "assertion": "should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+      "disposition": "Current assertion checks refused status only; it remains true but does not enforce the newly assigned code.",
+      "expectedR33": "profile-schema-migration-required",
+      "provenance": [
+        "DESIGN.md:310",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "file": "tests/profile-s123-regressions.test.mjs",
+      "assertion": "should keep earlier identity conflicts ahead of unavailable source [call 2]",
+      "disposition": "Current unsealed diagnostic assertion is superseded by P1; left unchanged for the implementation follow-up.",
+      "assertedCode": "profile-major-mismatch",
+      "expectedR33": "profile-source-unavailable",
+      "provenance": [
+        "DESIGN.md:298",
+        "DESIGN.md:313",
+        "DESIGN.md:319"
+      ]
+    },
+    {
+      "file": "tests/profile-s123-regressions.test.mjs",
+      "assertion": "should refuse schema identity disagreement before unavailable source and migration [call 1]",
+      "disposition": "Current unsealed diagnostic assertion conflates unequal supported schemas with unsupported P schema; P1 applies at the supported-schema migration row.",
+      "assertedCode": "profile-schema-version",
+      "expectedR33": "profile-source-unavailable",
+      "provenance": [
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:310",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "file": "tests/profile-s123-regressions.test.mjs",
+      "assertion": "should refuse schema identity disagreement before known-and-available source and migration [call 1]",
+      "disposition": "Current unsealed diagnostic assertion conflates unequal supported schemas with unsupported P schema; selecting migration alone does not establish successful migration.",
+      "assertedCode": "profile-schema-version",
+      "expectedR33": "profile-schema-migration-required",
+      "provenance": [
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:310",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    }
+  ],
+  "implementationHandoff": {
+    "owner": "compatibility implementation author",
+    "scope": "Apply R3.3 P1 source-dependent precedence and P2 document-schema support/migration rows; update the three superseded unsealed code assertions and strengthen the status-only schema assertion.",
+    "acceptance": "All 45 independently sealed compatibility decisions agree without changing their expectations; current regression assertions agree with R3.3.",
+    "verification": [
+      "tests/profile-compatibility.test.mjs",
+      "tests/profile-s123-regressions.test.mjs",
+      "npm test"
+    ],
+    "implementationChangedByThisTask": false
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "format": "profile-expectation-seal/1",
+  "path": "expectations.json",
+  "bytes": 1802403,
+  "sha256": "b6ee671974e399fefeb1ff105978969ef95db9dc75ca5f6c8f361dcb1f278d2d",
+  "authoringMethod": "hand-derived literal rule outcomes and transitions; standalone JCS/SHA-256 of explicitly authored values",
+  "interpreterExecutedBeforeSeal": false,
+  "reviewStatus": "pending-independent-review",
+  "independentExtension": "R3.3 matrix reseal / gpt-6-astra / xhigh"
+}

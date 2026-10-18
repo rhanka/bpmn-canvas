@@ -1,0 +1,458 @@
+{
+ "base-order": {
+  "name": "Order handling",
+  "lanes": [
+   {
+    "name": "Sales",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "Order received"
+     },
+     {
+      "type": "TASK_INPUT",
+      "label": "Order form"
+     },
+     {
+      "type": "TASK",
+      "label": "Check order",
+      "app_label": "Order desk"
+     },
+     {
+      "type": "GATEWAY",
+      "label": "Order complete?",
+      "subtype": "OR"
+     },
+     {
+      "type": "TASK",
+      "label": "Ship order"
+     },
+     {
+      "type": "TASK_OUTPUT",
+      "label": "Shipping note"
+     },
+     {
+      "type": "DOCUMENT",
+      "label": "Shipping policy"
+     },
+     {
+      "type": "END",
+      "label": "Order shipped"
+     }
+    ]
+   },
+   {
+    "name": "Support",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "Request details"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "Order received",
+    "target": "Check order"
+   },
+   {
+    "source": "Check order",
+    "target": "Order complete?"
+   },
+   {
+    "source": "Order complete?",
+    "target": "Ship order",
+    "label": "yes"
+   },
+   {
+    "source": "Order complete?",
+    "target": "Request details",
+    "label": "no"
+   },
+   {
+    "source": "Request details",
+    "target": "Check order"
+   },
+   {
+    "source": "Ship order",
+    "target": "Order shipped"
+   },
+   {
+    "source": "Order form",
+    "target": "Check order",
+    "kind": "DATA"
+   },
+   {
+    "source": "Ship order",
+    "target": "Shipping note",
+    "kind": "DATA"
+   },
+   {
+    "source": "Shipping policy",
+    "target": "Ship order",
+    "kind": "DOC"
+   }
+  ]
+ },
+ "base-review": {
+  "name": "Request review",
+  "lanes": [
+   {
+    "name": "Office",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "Received"
+     },
+     {
+      "type": "TASK",
+      "label": "Prepare",
+      "app_label": "File tool"
+     },
+     {
+      "type": "TASK_OUTPUT",
+      "label": "Request file"
+     },
+     {
+      "type": "DOCUMENT",
+      "label": "Guide"
+     },
+     {
+      "type": "TASK",
+      "label": "Review"
+     },
+     {
+      "type": "END",
+      "label": "Closed"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "Received",
+    "target": "Prepare"
+   },
+   {
+    "source": "Prepare",
+    "target": "Review"
+   },
+   {
+    "source": "Review",
+    "target": "Closed"
+   },
+   {
+    "source": "Prepare",
+    "target": "Request file",
+    "kind": "DATA",
+    "label": "draft"
+   },
+   {
+    "source": "Request file",
+    "target": "Review",
+    "kind": "DATA"
+   },
+   {
+    "source": "Guide",
+    "target": "Prepare",
+    "kind": "DOC",
+    "label": "see part 4"
+   },
+   {
+    "source": "Guide",
+    "target": "Review",
+    "kind": "DOC"
+   }
+  ]
+ },
+ "homonymous-lanes": {
+  "name": "Homonymous lanes",
+  "lanes": [
+   {
+    "name": "Team",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "Begin"
+     },
+     {
+      "type": "TASK",
+      "label": "First step"
+     }
+    ]
+   },
+   {
+    "name": "Partner",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "Partner step"
+     }
+    ]
+   },
+   {
+    "name": "Team",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "Last step"
+     },
+     {
+      "type": "END",
+      "label": "Finish"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "Begin",
+    "target": "First step"
+   },
+   {
+    "source": "First step",
+    "target": "Partner step"
+   },
+   {
+    "source": "Partner step",
+    "target": "Last step"
+   },
+   {
+    "source": "Last step",
+    "target": "Finish"
+   }
+  ]
+ },
+ "lane-block-boundary": {
+  "name": "Team work",
+  "lanes": [
+   {
+    "name": "Team",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "Kick-off"
+     },
+     {
+      "type": "TASK",
+      "label": "Plan work"
+     }
+    ]
+   },
+   {
+    "name": "",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "Draft"
+     },
+     {
+      "type": "TASK_INPUT",
+      "label": "Checklist"
+     }
+    ]
+   },
+   {
+    "name": "Team",
+    "nodes": [
+     {
+      "type": "TASK_INPUT",
+      "label": "Spec"
+     },
+     {
+      "type": "TASK",
+      "label": "Build"
+     },
+     {
+      "type": "END",
+      "label": "Delivered"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "Kick-off",
+    "target": "Plan work"
+   },
+   {
+    "source": "Plan work",
+    "target": "Draft"
+   },
+   {
+    "source": "Draft",
+    "target": "Build"
+   },
+   {
+    "source": "Build",
+    "target": "Delivered"
+   },
+   {
+    "source": "Spec",
+    "target": "Build",
+    "kind": "DATA"
+   },
+   {
+    "source": "Checklist",
+    "target": "Build",
+    "kind": "DATA"
+   }
+  ]
+ },
+ "unnamed-lane": {
+  "name": "Unnamed lane",
+  "lanes": [
+   {
+    "name": "",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "Open"
+     },
+     {
+      "type": "TASK",
+      "label": "Sort mail"
+     }
+    ]
+   },
+   {
+    "name": "Mailroom",
+    "nodes": [
+     {
+      "type": "TASK",
+      "label": "Send mail"
+     },
+     {
+      "type": "END",
+      "label": "Closed"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "Open",
+    "target": "Sort mail"
+   },
+   {
+    "source": "Sort mail",
+    "target": "Send mail"
+   },
+   {
+    "source": "Send mail",
+    "target": "Closed"
+   }
+  ]
+ },
+ "shared-item": {
+  "name": "Shared item",
+  "lanes": [
+   {
+    "name": "Desk",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "In"
+     },
+     {
+      "type": "TASK",
+      "label": "Write"
+     },
+     {
+      "type": "TASK_OUTPUT",
+      "label": "Draft"
+     },
+     {
+      "type": "TASK",
+      "label": "Read"
+     },
+     {
+      "type": "DOCUMENT",
+      "label": "Style guide"
+     },
+     {
+      "type": "END",
+      "label": "Out"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "In",
+    "target": "Write"
+   },
+   {
+    "source": "Write",
+    "target": "Read"
+   },
+   {
+    "source": "Read",
+    "target": "Out"
+   },
+   {
+    "source": "Write",
+    "target": "Draft",
+    "kind": "DATA"
+   },
+   {
+    "source": "Draft",
+    "target": "Read",
+    "kind": "DATA"
+   },
+   {
+    "source": "Style guide",
+    "target": "Write",
+    "kind": "DOC"
+   },
+   {
+    "source": "Style guide",
+    "target": "Read",
+    "kind": "DOC"
+   }
+  ]
+ },
+ "duplicate-names": {
+  "name": "Duplicate names",
+  "lanes": [
+   {
+    "name": "Unit",
+    "nodes": [
+     {
+      "type": "START",
+      "label": "s"
+     },
+     {
+      "type": "TASK",
+      "label": "t1",
+      "text": "Check"
+     },
+     {
+      "type": "TASK",
+      "label": "t2",
+      "text": "Check"
+     },
+     {
+      "type": "END",
+      "label": "e"
+     }
+    ]
+   }
+  ],
+  "connections": [
+   {
+    "source": "s",
+    "target": "t1"
+   },
+   {
+    "source": "t1",
+    "target": "t2"
+   },
+   {
+    "source": "t2",
+    "target": "e"
+   }
+  ]
+ }
+}

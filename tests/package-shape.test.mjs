@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { brandTokens, hashOf } from "./helpers/brand.mjs";
+import { baselineHashAllowlist, outsideBaselineHashes, scanCommitMessages } from "./helpers/brand-baseline.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (p) => readFileSync(root + p);
@@ -18,7 +19,7 @@ test("package identity and license", () => {
 });
 
 test("exports name only implemented entries", () => {
-  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./react", "./styles.css"]);
+  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./react", "./semantics.json", "./styles.css"]);
   assert.equal(pkg.unpkg, "./dist/browser/bpmn-canvas.iife.min.js");
   assert.equal(pkg.jsdelivr, "./dist/browser/bpmn-canvas.iife.min.js");
   for (const [key, target] of Object.entries(pkg.exports)) {
@@ -52,12 +53,13 @@ test("shipped BPMN font bytes equal bpmn-font 0.13.0 (unmodified)", () => {
 });
 
 test("dist carries no brand, no storage, no global render hook, no watermark suppression", () => {
+  const allowed = baselineHashAllowlist();
   const files = execFileSync("find", ["dist", "-type", "f", "(", "-name", "*.js", "-o", "-name", "*.css", "-o", "-name", "*.d.ts", ")"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean);
   assert.ok(files.length > 10);
   for (const f of files) {
     const text = read(f).toString("utf8");
     assert.ok(!/localStorage|sessionStorage/i.test(text), `${f} uses browser storage`);
-    assert.deepEqual(brandTokens(text), [], `${f} has a banned identifier`);
+    assert.deepEqual(outsideBaselineHashes(f, text, allowed), [], `${f} has a banned identifier`);
     // The one allowed rule is gated by the host's explicit request (options.watermark with a license).
     const ungated = text.replace(/\[data-bpmn-canvas-watermark=\\?"hidden\\?"\]\s*\.bjs-powered-by\s*\{[^}]*\}/g, "");
     const hides = /bjs-powered-by[^}]*display\s*:\s*none/.test(ungated) || /bjs-powered-by[^;]*\.remove\(/.test(ungated);
@@ -105,6 +107,24 @@ test("npm pack contents stay inside the positive allowlist", () => {
   assert.ok(!info.files.some((f) => /\.xsd$/i.test(f.path)), "no XSD in the tarball (test-only)");
 });
 
+test("every packed file carries no banned identifier; the layout corpus is packed", () => {
+  const allowed = baselineHashAllowlist();
+  const [info] = JSON.parse(execFileSync("npm", ["pack", "--dry-run", "--json", "--ignore-scripts"], { cwd: root, encoding: "utf8" }));
+  const hits = info.files.filter((f) => !/\.(png|woff2?|ttf|eot)$/.test(f.path)).flatMap((f) => {
+    let text = readFileSync(root + f.path, "utf8");
+    if (f.path.endsWith(".map")) {
+      const map = JSON.parse(text);
+      // Base64 VLQ mappings encode numbers, not identifiers. Scan every textual field,
+      // including source paths, symbol names and any embedded source, without random encoding hits.
+      assert.match(map.mappings, /^[A-Za-z0-9+/,;]*$/);
+      text = JSON.stringify({ ...map, mappings: "" });
+    }
+    return outsideBaselineHashes(f.path, text, allowed);
+  });
+  assert.deepEqual(hits, []);
+  assert.ok(info.files.some((f) => f.path === "dist/layout-corpus.json"), "dist/layout-corpus.json must be packed");
+});
+
 test("no Python, no AI trailer files, no private markers in tree", () => {
   const tracked = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard"], {
     cwd: root,
@@ -147,6 +167,7 @@ test("every deep import of bpmn-js, diagram-js and tiny-svg in dist has an expli
 });
 
 test("no banned identifier anywhere: tracked files (tests and docs included) and every commit message", () => {
+  const allowed = baselineHashAllowlist();
   // Positive control with a neutral probe word, so the guard is known to fire.
   assert.deepEqual(brandTokens("const probeWordX = 1; probe_word_x.y", [hashOf("probewordx")]), ["probeWordX"]);
   const git = (...a) => execFileSync("git", a, { cwd: root, encoding: "utf8", maxBuffer: 1 << 28 });
@@ -154,9 +175,24 @@ test("no banned identifier anywhere: tracked files (tests and docs included) and
   const hits = [];
   for (const f of files) {
     if (!existsSync(root + f)) continue;
-    if (brandTokens(readFileSync(root + f, "utf8")).length) hits.push(f);
+    hits.push(...outsideBaselineHashes(f, readFileSync(root + f, "utf8"), allowed));
   }
   assert.deepEqual(hits, [], "tracked files with a banned identifier");
-  const messages = git("log", "--all", "--format=%H %B%x00").split("\0").filter((m) => brandTokens(m).length).map((m) => m.slice(0, 8));
+  const messages = scanCommitMessages(root, allowed);
   assert.deepEqual(messages, [], "commit messages with a banned identifier");
 });
+
+ test("semantic descriptor/checksum is packed; dependency and versions are exact", async () => {
+ const io = await import(root + "dist/io/index.js");
+ assert.equal(pkg.dependencies["bpmn-moddle"], "10.3.1");
+ const lock = JSON.parse(read("package-lock.json"));
+ assert.equal(lock.version, pkg.version); assert.equal(lock.packages[""].version, pkg.version);
+ assert.match(pkg.version, /^\d+\.\d+\.\d+$/);
+ assert.equal(pkg.exports["./semantics.json"], "./dist/io/semantics.json");
+ assert.equal(io.semanticsChecksum, sha("dist/io/semantics.json"));
+ });
+ test("release requires OIDC and provenance without token fallback", () => {
+ const workflow = read(".github/workflows/release.yml").toString("utf8");
+ assert.match(workflow, /id-token: write/); assert.match(workflow, /npm publish --access public --provenance/);
+ assert.doesNotMatch(workflow, /NPM_TOKEN|_authToken/);
+ });

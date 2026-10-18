@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-exporter" exporterVersion="9.9">
+    <bpmn:process id="Order_handling" name="Order handling" isExecutable="false">
+        <bpmn:laneSet id="LaneSet_Order_handling">
+            <bpmn:lane id="Sales" name="Sales">
+                <bpmn:flowNodeRef>Order_received</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Check_order</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Order_complete</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Ship_order</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Order_shipped</bpmn:flowNodeRef>
+            </bpmn:lane>
+            <bpmn:lane id="Support" name="Support">
+                <bpmn:flowNodeRef>Request_details</bpmn:flowNodeRef>
+            </bpmn:lane>
+        </bpmn:laneSet>
+        <bpmn:startEvent id="Order_received" name="Order received"/>
+        <bpmn:task id="Check_order" name="Check order"/>
+        <bpmn:dataObjectReference id="Order_form" name="Order form"/>
+        <bpmn:exclusiveGateway id="Order_complete" name="Order complete?"/>
+        <bpmn:task id="Ship_order" name="Ship order"/>
+        <bpmn:textAnnotation id="Shipping_policy">
+            <bpmn:text>Shipping policy</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:dataObjectReference id="Shipping_note" name="Shipping note"/>
+        <bpmn:endEvent id="Order_shipped" name="Order shipped"/>
+        <bpmn:task id="Request_details" name="Request details"/>
+        <bpmn:textAnnotation id="App_Check_order">
+            <bpmn:text>[App] Order desk</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:sequenceFlow id="Order_received_Check_order" name="" sourceRef="Order_received" targetRef="Check_order"/>
+        <bpmn:sequenceFlow id="Check_order_Order_complete" name="" sourceRef="Check_order" targetRef="Order_complete"/>
+        <bpmn:sequenceFlow id="Order_complete_Ship_order" name="yes" sourceRef="Order_complete" targetRef="Ship_order"/>
+        <bpmn:sequenceFlow id="Order_complete_Request_details" name="no" sourceRef="Order_complete" targetRef="Request_details"/>
+        <bpmn:sequenceFlow id="Request_details_Check_order" name="" sourceRef="Request_details" targetRef="Check_order"/>
+        <bpmn:sequenceFlow id="Ship_order_Order_shipped" name="" sourceRef="Ship_order" targetRef="Order_shipped"/>
+        <bpmn:association id="Order_form_Check_order" sourceRef="Order_form" targetRef="Check_order"/>
+        <bpmn:association id="Ship_order_Shipping_note" sourceRef="Ship_order" targetRef="Shipping_note"/>
+        <bpmn:association id="Shipping_policy_Ship_order" sourceRef="Shipping_policy" targetRef="Ship_order"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_Order_handling" name="Order handling - Diagram">
+        <bpmndi:BPMNPlane id="BPMNPlane_Order_handling" bpmnElement="Order_handling">
+            <bpmndi:BPMNShape id="Sales_gui" bpmnElement="Sales" isHorizontal="true">
+                <dc:Bounds x="30" y="0" width="1050" height="299"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Support_gui" bpmnElement="Support" isHorizontal="true">
+                <dc:Bounds x="30" y="299" width="1050" height="200"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Order_received_gui" bpmnElement="Order_received">
+                <dc:Bounds x="113" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Check_order_gui" bpmnElement="Check_order">
+                <dc:Bounds x="300" y="91" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Order_form_gui" bpmnElement="Order_form">
+                <dc:Bounds x="256" y="205" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Order_complete_gui" bpmnElement="Order_complete">
+                <dc:Bounds x="508" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Ship_order_gui" bpmnElement="Ship_order">
+                <dc:Bounds x="716" y="91" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Shipping_policy_gui" bpmnElement="Shipping_policy">
+                <dc:Bounds x="646" y="26" width="120" height="51"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Shipping_note_gui" bpmnElement="Shipping_note">
+                <dc:Bounds x="810" y="185" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Order_shipped_gui" bpmnElement="Order_shipped">
+                <dc:Bounds x="948" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Request_details_gui" bpmnElement="Request_details">
+                <dc:Bounds x="716" y="325" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="App_Check_order_gui" bpmnElement="App_Check_order">
+                <dc:Bounds x="313" y="161" width="95" height="30"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="Order_received_Check_order_gui" bpmnElement="Order_received_Check_order">
+                <di:waypoint x="163.0" y="131.0"/>
+                <di:waypoint x="300.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Check_order_Order_complete_gui" bpmnElement="Check_order_Order_complete">
+                <di:waypoint x="420.0" y="131.0"/>
+                <di:waypoint x="508.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Order_complete_Ship_order_gui" bpmnElement="Order_complete_Ship_order">
+                <di:waypoint x="558.0" y="131.0"/>
+                <di:waypoint x="716.0" y="131.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="617.0" y="121.0" width="40" height="20"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Order_complete_Request_details_gui" bpmnElement="Order_complete_Request_details">
+                <di:waypoint x="558.0" y="131.0"/>
+                <di:waypoint x="611.0" y="131.0"/>
+                <di:waypoint x="611.0" y="365.0"/>
+                <di:waypoint x="716.0" y="365.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="591.0" y="238.0" width="40" height="20"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Request_details_Check_order_gui" bpmnElement="Request_details_Check_order">
+                <di:waypoint x="776.0" y="325.0"/>
+                <di:waypoint x="776.0" y="8.0"/>
+                <di:waypoint x="360.0" y="8.0"/>
+                <di:waypoint x="360.0" y="91.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Ship_order_Order_shipped_gui" bpmnElement="Ship_order_Order_shipped">
+                <di:waypoint x="836.0" y="131.0"/>
+                <di:waypoint x="948.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Order_form_Check_order_gui" bpmnElement="Order_form_Check_order">
+                <di:waypoint x="276.0" y="205.0"/>
+                <di:waypoint x="276.0" y="198.0"/>
+                <di:waypoint x="319.0" y="198.0"/>
+                <di:waypoint x="319.0" y="171.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Ship_order_Shipping_note_gui" bpmnElement="Ship_order_Shipping_note">
+                <di:waypoint x="828.0" y="171.0"/>
+                <di:waypoint x="828.0" y="178.0"/>
+                <di:waypoint x="830.0" y="178.0"/>
+                <di:waypoint x="830.0" y="185.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Shipping_policy_Ship_order_gui" bpmnElement="Shipping_policy_Ship_order">
+                <di:waypoint x="706.0" y="77.0"/>
+                <di:waypoint x="706.0" y="84.0"/>
+                <di:waypoint x="730.0" y="84.0"/>
+                <di:waypoint x="730.0" y="91.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

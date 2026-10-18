@@ -1,0 +1,1043 @@
+{
+  "format": "profile-design-provenance/1",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "lineDomain": "UTF-8 line text without LF; one-based DESIGN.md lines",
+  "lines": [
+    {
+      "ref": "DESIGN.md:48",
+      "text": "The companion schema is normative for syntax; the compiler tables and §§2–11 are normative for typing and execution. Every object has `additionalProperties: false`, including operator branches and recipe steps. Maps with arbitrary business keys are arrays of closed named records. Duplicate names/IDs are a compile error. Empty arrays mean no entries. Required sections cannot be omitted. Optional properties are explicitly listed in the schema; absence means “not supplied”, never a guessed default. `null` is rejected everywhere in profile data. Numeric literals must be finite binary64 values; integers must be safe integers. Invalid Unicode and duplicate JSON object keys are rejected before schema validation. Required generic capability IDs for a profile exercising all consumers are `predicates/1`, `selectors/1`, `recipes/1`, `profile-lint/1`, `render-data/1`, `export-ir/1`; registry signatures additionally pin each native/format/glyph/metric implementation and its argument-schema digest. JSON Schema checks structural syntax; descriptor/ownership/cross-reference invariants are compile checks, not claims about schema-only validation.",
+      "sha256": "3180e8b9b23ca6908bbd07818691d484722c7c95bd819d8adcfeec56ee445f48"
+    },
+    {
+      "ref": "DESIGN.md:50",
+      "text": "Strict lexical parsing precedes JSON.parse/json.loads: reject duplicate decoded keys, lone surrogates, nonfinite numeric tokens (including 1e400) and mathematically integral tokens outside ±9007199254740991 (including 9007199254740993 before JS rounding). Fractional binary64 values must be finite; negative zero is accepted and canonicalizes to zero. The schema repeats finite number bounds and safe-integer bounds, including numeric scalar unions, glyph coordinates, order and counter fields. Checked arithmetic repeats these checks after evaluation. A syntax parser cannot rely on a runtime accepting Infinity or silently rounding an unsafe integer.",
+      "sha256": "e7403c5425e4cd3f5450d8ee9a5ff67c15ff024ce87c528bd8fcee116a0742b7"
+    },
+    {
+      "ref": "DESIGN.md:52",
+      "text": "**Python 2020-12 validation strategy (R3.1, py M1).** bpmn_io.profile ships a dedicated standard-library validator for the closed profile-mechanism/1 schema subset, with no runtime dependency. Supported schema keywords are exactly $schema, $id, $comment, title, $defs, $ref, type, properties, required, additionalProperties (Boolean closure), items, minItems, maxItems, uniqueItems, minLength, pattern, enum, const, minimum, maximum, exclusiveMinimum, exclusiveMaximum, allOf, anyOf, oneOf, not, if, then and else; Boolean schemas are admitted. Unknown keywords or regexes refuse schema loading (profile-schema-keyword/profile-schema-pattern); no format, patternProperties or unevaluated* keyword is supported. Visit schema positions only: a data property named format is not a keyword. References resolve only within the current schema or an explicitly supplied, digest-pinned schema registry; no filesystem/network resolution. The profile schema is self-contained; the compiled-lint schema's pinned profile URN is supplied explicitly. An external $ref to compiled-lint-options.schema.json without a registered pin refuses profile-schema-ref. Python pattern validation MUST use re.fullmatch on the expression with its outer ^/$ anchors removed: Python $ accepts a trailing \"\\n\", so re.match/re.search would accept an identifier that Ajv rejects. The distinct regex inventory is the following eight expressions (displayed with their schema anchors):",
+      "sha256": "bf6ae6bd7bcb830d5261494a6358e3e59dcd7e8a807e8a92fbf439290efb469f"
+    },
+    {
+      "ref": "DESIGN.md:65",
+      "text": "Python scalar types follow JSON Schema, not Python subclass accidents: bool is not number/integer; a finite safe mathematical integer written 1.0 is accepted as integer, while 1.5 in an integer field refuses. This corrects the consensus corpus label \"negative 1.0\" without changing §2.1 numeric policy; Ajv is the differential reference. String length counts Unicode code points; enum/const/uniqueItems compare JSON values structurally and distinguish true from 1. The lexical duplicate-key/Unicode/numeric checks still precede validation. jsonschema is a test-only dependency used only for differential tests against Ajv (with the same fullmatch pattern policy); it is never the runtime validator. The shared corpus includes rejected \"id\\n\", accepted 1.0, rejected fractional 1.5 and rejected unregistered external $ref. VALIDATION-R31.json records the executed Node/Ajv witnesses; actual stdlib/jsonschema/Ajv differential execution remains a lot-0 Python gate and was not run in this no-Python revision.",
+      "sha256": "ff7bef45097183363317ba4fb22af93e7a1a5ef670136e0fb542cd0f42abf392"
+    },
+    {
+      "ref": "DESIGN.md:69",
+      "text": "| Identity, `base`, `descriptors`, `capabilities`, `policies` | Exact base/descriptor digests; versioned primitive capabilities; canonical/allocator/text policy IDs. No ambient descriptor, import or network lookup. |",
+      "sha256": "9b93a21983be5f6c28cea6788604197f8bd8753f0ae959ad2daf3869f49e136e"
+    },
+    {
+      "ref": "DESIGN.md:81",
+      "text": "The compiler validates field paths against pinned descriptor containment/reference/scalar roles and effective producers; cardinalities, required fields and allowed target types come from that composed model. It checks every referenced notion/recipe/theme/resource/message ID, alias uniqueness, rule repair target, parameter type, bound variable and capability. Unknown or ill-typed content yields `profile-schema`, `profile-symbol`, `profile-type`, `profile-cycle`, `profile-write-set` or `profile-capability`; no partial compiled result.",
+      "sha256": "52dd270004abc1cd14040381e6128609424a0084f509d2ce733e4367ed6a2f22"
+    },
+    {
+      "ref": "DESIGN.md:85",
+      "text": "The profile-text loader MUST complete strict lexical parsing before schema validation or compilation. It MUST report exactly one of the four codes below on lexical failure, without substituting `profile-schema` or continuing to schema/compiler diagnostics. These conditions and their order are derived from `parseStrict` in [r3-contract-checks.mjs](r3-contract-checks.mjs). They apply at every nesting depth, including otherwise unknown fields. A schema-loading failure such as `profile-schema-keyword` concerns the schema artifact itself, not a competing diagnostic for profile text. Schema-only checks on already materialized values remain separate from this text-loader contract.",
+      "sha256": "58005f651b26cececd47320a290f6d4b35ff503fed7f636f73acc08cb43b0085"
+    },
+    {
+      "ref": "DESIGN.md:89",
+      "text": "| `profile-json` | A grammar check reached by the traversal below fails: empty/incomplete input, an invalid string escape or unescaped control character, a non-string object key, a missing colon/comma/closing delimiter, an invalid value token, or trailing data after the first value. If traversal succeeds, failure of the final whole-text JSON parse also uses this code, including whitespace outside JSON's space, tab, LF and CR. `NaN`, `Infinity`, `-Infinity`, comments, `+1`, leading-zero numbers and incomplete fractions/exponents are invalid JSON grammar, not finite-number exceptions. | `{\"x\":1} true` |",
+      "sha256": "eb7943446cc01448c2469f842c8e6f690d5d3d36a9f1fbc3e0a912ab2fc3ce10"
+    },
+    {
+      "ref": "DESIGN.md:90",
+      "text": "| `profile-json-duplicate-key` | A decoded, Unicode-valid object key equals a previously decoded key in the same object. Compare decoded strings exactly, without normalization; escape spelling does not distinguish keys. A fresh key set is used for each object, including nested objects and objects inside arrays. This check precedes the repeated key's colon and value. | `{\"outer\":{\"x\":1,\"\\u0078\":2}}` |",
+      "sha256": "9ec62c389911d8bbe7056095c31d2e673a95422453b772d61e93bcd39ef2aef2"
+    },
+    {
+      "ref": "DESIGN.md:91",
+      "text": "| `profile-unicode` | After successfully decoding a JSON string token used as either an object key or a value, its Unicode iteration encounters a surrogate code point U+D800–U+DFFF: an unpaired high or low UTF-16 surrogate, whether literal or escaped. Such a code point is not a Unicode scalar value. A correctly paired high/low surrogate represents a scalar and is accepted; Unicode noncharacters such as U+FFFF are scalars and are not rejected by this check. Invalid escape syntax is `profile-json`. | `{\"x\":\"\\ud800\"}` |",
+      "sha256": "780640eb4bf9347773a86a4649d4b7410d139611015c82b1091b3f91d804bdd5"
+    },
+    {
+      "ref": "DESIGN.md:92",
+      "text": "| `profile-number` | A JSON number token in value position, converted to binary64 as by ECMAScript `Number`, is non-finite, or its converted value is integral and outside the inclusive safe range −9007199254740991 through 9007199254740991. This rejects overflow such as `1e400`, unsafe integer spellings such as `9007199254740993`, and decimal/exponent spellings whose converted value is an unsafe integer, including `9.007199254740992e15` and `9007199254740991.5`. Finite fractional binary64 values, safe integral values spelled with a fraction/exponent, negative zero, and underflow to zero pass this check. | `{\"x\":1e400}` |",
+      "sha256": "13b28a855c298d16dc1db0d5c191726ad724dada73c7b81b8dfd243b471608d0"
+    },
+    {
+      "ref": "DESIGN.md:96",
+      "text": "1. Form the source-order token stream used by `parseStrict`: recognize JSON string tokens, JSON number tokens, `true`/`false`/`null` and structural punctuation; retain any other non-whitespace character as an invalid token. This pre-scan skips ECMAScript whitespace. That does not make all such whitespace valid JSON: the final whole-text grammar check below rejects any non-JSON whitespace if no earlier check has failed.",
+      "sha256": "3dff7052dc85850e14ac0b133123c86693114b2fc44a1cbb6a6ade5f50252a99"
+    },
+    {
+      "ref": "DESIGN.md:97",
+      "text": "2. Traverse one root value recursively in source order. For each object member, first decode its key as a JSON string (`profile-json` on failure or non-string), then check its Unicode scalars (`profile-unicode`), then check for a duplicate decoded key (`profile-json-duplicate-key`), then require the colon (`profile-json`), then traverse its value. Nested objects and array elements finish their checks before traversal continues to the next sibling. Decode and Unicode-check string values in the same order; check number values for `profile-number` before their following delimiter is examined. Any structural/value-token failure reached during this traversal yields `profile-json` immediately.",
+      "sha256": "6085c3acef24a29ebc8fe33d3389494e31ce72c4733965d0fbb9259ba407b1c6"
+    },
+    {
+      "ref": "DESIGN.md:98",
+      "text": "3. After the root value completes, reject remaining tokens as trailing data with `profile-json`. Only after that check succeeds, perform the whole-text JSON parse; any remaining grammar failure is `profile-json`. For example, a leading U+00A0 skipped by the pre-scan is rejected here, whereas an overflowing number in that same input has already produced `profile-number` in step 2.",
+      "sha256": "0812a0eda419c82547b644ea5af96b593ea22bfe59b14e29a2c8151246836643"
+    },
+    {
+      "ref": "DESIGN.md:99",
+      "text": "4. Only successful lexical parsing permits schema validation, followed by the existing compiler checks. Thus every lexical code takes precedence over `profile-schema` and any compiler code for the same profile text; a lexically valid value such as `null` is still subject to the schema's prohibition.",
+      "sha256": "178694f60a77386be219fe225c6e5a82aa3ff3c0356773a449d6826c6ee03801"
+    },
+    {
+      "ref": "DESIGN.md:112",
+      "text": "| `ids` | native selector → ordered unique ID array. Allowed only as an assignRef value operand; never coerced to text or assigned to a scalar field. This permits exact derived incoming/outgoing sets without a first-element shortcut. |",
+      "sha256": "d6d097df824f162254ef32c2c911c7b37c9227da2821e63f6bf96d6359b77178"
+    },
+    {
+      "ref": "DESIGN.md:114",
+      "text": "| `concat` | nonempty `values` → concatenated strings; all operands must be strings, no coercion. |",
+      "sha256": "4046c95da02df4a5ed4fe3053e5bdaae3a7b085cd423c5ebaf12a5b348022f40"
+    },
+    {
+      "ref": "DESIGN.md:117",
+      "text": "| `outputId` | binding and domain page\\|node\\|edge\\|label → call-local export ID. Allowed only in emit.fields values or emit.parent, never a predicate/select/when/capability expression; allocation planning must not depend on the IDs it is planning. Accepts typed page/occurrence handles; native handles need one exact current-page occurrence or refuse export-occurrence-ambiguous. |",
+      "sha256": "700a7646f2b39aca152170328f443254708de32b147625036a17fe413ae19d22"
+    },
+    {
+      "ref": "DESIGN.md:119",
+      "text": "A selector is `{from, via, property?, where, order}`. `from` names an immutable typed binding. `via` is exactly `self`, `root`, `owner`, `children`, `descendants`, `reference`, `inverseReference`, `all`, `pages`, `occurrences` or `semantic`. `root` returns Definitions; `owner` returns the immediate containment owner; `children` optionally restricts a containment property; `descendants` walks containment only; `all` is the finite root containment index. `reference` and `inverseReference` require a descriptor reference property, or a base-declared ID-valued scalar reference such as `calledElement`; other native traversals forbid `property` except `children`. No remote QName resolution is implied.",
+      "sha256": "44c9db761c262c0632ace8666fe63064df1a5dbe4abae720a8310897e54a4e03"
+    },
+    {
+      "ref": "DESIGN.md:123",
+      "text": "| Native handles: self, root, owner, children, descendants, reference, inverseReference, all | `id` | ID-bearing before ID-less; UTF-16 ID, then immutable source pointer for ID-less children. Deduplicate by native handle, not optional ID. |",
+      "sha256": "2ee44e58abf39b866537a9e2b108c1971bec358939c3a70c3b32c6419ffa153b"
+    },
+    {
+      "ref": "DESIGN.md:124",
+      "text": "| Occurrence-to-native: semantic (export/render only, source must be an occurrence) | `id` | Zero or one native handle, in native order; forbidden in validation rules. |",
+      "sha256": "82150f19fb5b73c724b057bc2fbff3cd20957aafb075284ba13694fc6435003c"
+    },
+    {
+      "ref": "DESIGN.md:125",
+      "text": "| Render: pages, or self resolving a page | `page-occurrence` | Ascending unique page `order`; pageId only a deterministic tie-breaker for diagnostics, duplicate page order is invalid layout. |",
+      "sha256": "fac33bc7b5b6731f645a70be617ea3b59945d7f83fc3dc1001bc7d24614a3dfa"
+    },
+    {
+      "ref": "DESIGN.md:126",
+      "text": "| Render: occurrences, or self/reference resolving an occurrence | `page-occurrence` | Page order, then UTF-16 occurrenceKey. Never semantic ID order. |",
+      "sha256": "eb4f46971b9c27e58ec4f5ec06bf3f462b32e43cbfa1555ce0ab8482d7227000"
+    },
+    {
+      "ref": "DESIGN.md:128",
+      "text": "Schema closes the explicit traversal cases; the compiler resolves typed self/reference cases and rejects a mismatched order with `profile-selector-order`. Native `semantic` from an occurrence returns zero or one native handle and uses `id`. Reversed-ID fixtures use page `z` at order 0 before page `a` at order 1, and occurrence keys whose semantic IDs sort oppositely; expected emission and counter-ID order follow page/occurrence order.",
+      "sha256": "6ead1a71c412a3c8258c0fa5ddd20869e4071d4b7f96e1f0c9f119c53e012331"
+    },
+    {
+      "ref": "DESIGN.md:130",
+      "text": "Export recipes additionally bind `render` to immutable R. `pages` from render returns PageHandles `{pageId,name,order,semanticRootId,bounds}` in layout page order; `occurrences` from render or a PageHandle returns R occurrence handles, ordered by page order then occurrenceKey; `semantic` from an occurrence returns its zero-or-one indexed native element. `self` and `read` work on these typed records. `reference` from an occurrence supports only `sourceOccurrence`/`targetOccurrence`, resolving the exact page/key pair; inverseReference is native-only. These three export traversals and occurrence references are forbidden outside export/render contexts. Unknown typed-record fields refuse compilation. Native type/ID predicates require native bindings, so a synthetic legend cannot masquerade as an element. An export recipe can emit once per repeated view, read its own geometry and wire edges to precise view endpoints. Output-ID keys are `(pageId, occurrenceKey, domain)`, not semantic ID alone. A PageHandle permits only domain `page` and uses the reserved empty occurrence key; ordinary occurrence keys must be nonempty and cannot use domain page. Native ID policy uses pageId for a page and semanticId for a semantic occurrence, only when unique in the artifact; synthetic occurrences or duplicates yield `export-id-ambiguous` and require an explicit digest/counter policy. Native candidate ID ordering never overrides export page/occurrence order.",
+      "sha256": "12e866614c18aae6c8287b5aa4bed95327a45845eb038c5e2200269cbc516728"
+    },
+    {
+      "ref": "DESIGN.md:132",
+      "text": "Candidates bind local `self` for `where`; outer named bindings are unchanged. A selector returns unique handles in its declared domain order from the preceding table. Stored reference-array order is preserved in the document even when selected results use ID order. Missing optional references select nothing; dangling or wrong-type references produce integrity diagnostics before evaluation and cannot silently count as absent. `where` errors are errors, not false. Selector nesting is finite; recognition dependencies must form a DAG. A rule may declare ordered `bindings: bindAction[]`, evaluated after its selected self is bound and before its assertion. This permits Start → outgoing SequenceFlow → target gateway → outgoing named flows using ordinary descriptor-reference selectors, without an ambient business traversal or executable rule.",
+      "sha256": "97ac3b796abc6a4d6d08b44cfab23a59cadc3cad70deffd88be4637be714f3c9"
+    },
+    {
+      "ref": "DESIGN.md:147",
+      "text": "| `count` | selector, inclusive nonnegative `min`, optional `max`; true when cardinality is inside bounds. Omitted max means the finite selected set has no upper bound; min > max is invalid profile data. |",
+      "sha256": "643e08e883ef1d68e8d1fa774ec32a632d242b4d2874b88c334582d45c811089"
+    },
+    {
+      "ref": "DESIGN.md:149",
+      "text": "| `recognizes` | `binding`, notion ID; evaluates that notion on the same snapshot. Cycles fail compilation; no invocation of N. |",
+      "sha256": "088abc6da850d3747cbe26c38e0ef2c5f2b4f1e058341400cbc100f67100617d"
+    },
+    {
+      "ref": "DESIGN.md:150",
+      "text": "| `reachable` | nonempty source and target selectors, explicit native `edgeTypes`, `minHops`, optional `maxHops`; true if any permitted directed path exists. Traverse only resolved sourceRef→targetRef edges; no containment/Association implied execution. Use BFS with a visited set; omitted max is at most the finite vertex count. |",
+      "sha256": "7a02dd5f30102e8e26747f02cab92e24c1f1cdbddcca57e928905e023491a879"
+    },
+    {
+      "ref": "DESIGN.md:154",
+      "text": "Recognition returns all explicit facets and zero or one notion per declared exclusive group. A notion has either `facet:true` or a nonempty `exclusiveGroup`, never both or neither (`profile-notion-kind`). Two matches in a group yield `profile-ambiguous-notion`; array order never chooses a winner. Zero matches may mean an admitted generic element or a readiness diagnostic according to validation data. Invalid graph structure is diagnosed independently, before any “not recognized” fallback. The MISSING-false boundRole rule is a deliberate exception to required-binding refusal; ambiguity in verified support ownership still refuses before recognition.",
+      "sha256": "9c492c136941c776e2d3b2ddf4088546843b3357c90d80dc6295293232815948"
+    },
+    {
+      "ref": "DESIGN.md:162",
+      "text": "| `bind` | selector, `as`, cardinality `one\\|zeroOrOne\\|first`, optional ordered `fallbacks` selectors. one/zeroOrOne require uniqueness; first chooses the first handle of the first nonempty selector result, then fallbacks in declaration order. Empty first/zeroOrOne binds MISSING; empty one refuses. Fallbacks are allowed only with first; the presence of fallbacks, including [], otherwise refuses profile-bind-fallbacks in recipes and rule bindings (CR-13). More than one under the unique modes gives `profile-ambiguous-binding`. |",
+      "sha256": "73f6f9338801c72ddec8572a2b151070bb1b80294d18b3e7b2d5b23289b6d277"
+    },
+    {
+      "ref": "DESIGN.md:163",
+      "text": "| `create` | `as,type,parent,property,identity,fields[]`; `identity:allocated` additionally requires explicit scalar-value `ownerId`, `slot`, `key`, and allocates via stable-id/1. `identity:containment` forbids allocator fields and writes no id; the compiler must prove that the effective base excludes id for this type. Both forms create a typed local handle. |",
+      "sha256": "20f6bdfb2182c3a417ba004ba0b2f02cd101dca52416e33f47a7dcc5bb4cd800"
+    },
+    {
+      "ref": "DESIGN.md:164",
+      "text": "| `ensure` | Allocated structural support creation plus `owner,role,ownerId`; reuse a validated support binding, otherwise create and bind the declared structural object (§7). owner names the semantic support owner; ownerId explicitly supplies the allocation domain. Never find a support by its name. |",
+      "sha256": "c89df44c6defd0c8ad59bf2400fe6caf229c12c2eecd249e97413fab42771ebc"
+    },
+    {
+      "ref": "DESIGN.md:166",
+      "text": "| `assignRef` | target, path, value array, mode `replace\\|appendUnique\\|remove`; flatten `ids` operands exactly one level, then validate cardinality, uniqueness, existence, ownership and target type before assignment. Scalar refs require exactly one ID except explicit optional removal. Stable append preserves prior order. Reference writes never create an endpoint. |",
+      "sha256": "4c2a5e4255e6cd2895358ec8f4b23a03467ad81d2abc06be7b245285b9f42811"
+    },
+    {
+      "ref": "DESIGN.md:168",
+      "text": "| `place` | target, owner, region, optional anchor binding and related selector; the sole source of derived placement constraints. No semantic containment or DI write. Top-level `placements` is fixed to `[]` in R3; competing automatic placement evaluation is removed. Region parameters come from typed theme tokens (§9.4). |",
+      "sha256": "06bca7122606714aee973813209c008d8cba67c8f39626eec8f1d4d064338e80"
+    },
+    {
+      "ref": "DESIGN.md:169",
+      "text": "| `emit` | `as`, kind `page\\|node\\|edge\\|label\\|metadata`, optional artifact parent, named value fields; emit only into the typed target-format IR, with field names/types validated against its pinned adapter signature. Never write the source tree or raw executable markup. |",
+      "sha256": "738034311fe0b9b6a3d464f176fab10543480d38191990d55e90bebcf6bed5cd"
+    },
+    {
+      "ref": "DESIGN.md:171",
+      "text": "| `remove` | target, explicit dependents selector, policy `refuseIfReferenced\\|includeDeclared`; delete only in edit/convert/migrate. Compute the full inbound/dependency closure first; refuse if it exceeds the declared deletion set, includes protected content or violates retained references. C/N cannot delete business elements. |",
+      "sha256": "d2cc6aadb436cc7e57c94777e4c90cc91260f92515b18971787f8245d3fdd39b"
+    },
+    {
+      "ref": "DESIGN.md:172",
+      "text": "| `refuse` | code and target; abort the complete operation atomically. No candidate tree/artifact is committed. |",
+      "sha256": "283b8765a21a326b0b900c1d896c45f4f7d00bde244a2a803cd9dd3ef57d1be9"
+    },
+    {
+      "ref": "DESIGN.md:174",
+      "text": "`create` fields cannot contain references or nested objects; use further create and assignRef actions. Native fragments for a user insert are validated separately, then compiled into these actions. `ensure` is restricted to declared structural support roles and native Collaboration/Participant/LaneSet/Lane; it is not a general “repair business model” instruction. Complete recipes may create the precisely authorized backing objects, ports and sets. The remove action expresses the generic dependency-checked host command as data; actor authorization and explicit deletion intent are required. It has no unchecked cascading-delete mode.",
+      "sha256": "d4919b37ff7893c21b7c4895a007ef10e0e68dea982c6b5bae46c7d8d9adc62d"
+    },
+    {
+      "ref": "DESIGN.md:176",
+      "text": "Every write must match a declared `{binding,path,mode}` and the actor matrix. Identical writes coalesce. Identical ensure plans for the same owner/role/type/parent/fields coalesce into one planned support and alias their local handles; conflicting ensure definitions or an unrelated existing occupant still refuse. `appendUnique` and `remove` deltas on the same reference array coalesce by ID: retain existing relative order, apply removals, append new IDs in canonical order. Appending and removing the same ID, mixing replace with a nonidentical delta, two different scalar values, conflicting reparentings or two placements for one target/region yield `profile-write-conflict`. This permits several calls to join one external lane without last-writer behavior. Recipes are checked before application. A second C/N run must return the identical tree, support bindings and placements, with no changes. A bounded second evaluation verifies the fixed point; failure is `normalization-not-fixed`, not an unbounded retry loop.",
+      "sha256": "a249fd0d73ad8cfa06bff1746cfbfb8fe3a5946e3e02ab490e19b4edcf474a25"
+    },
+    {
+      "ref": "DESIGN.md:182",
+      "text": "The JSON Schema is the sole authority for record keys, unions, requiredness, literal enumerations and numeric bounds. The following tables are the sole authority for static semantics not expressible in standard JSON Schema. The operator descriptions specify execution. Prose examples are derived illustrations and cannot add a field, implicit action, override or default. Each release pins schema plus compiler-rule-table version; a mismatch refuses before evaluation. The Node fixture compiler checks the supplied subset and negatives; neither it nor schema validity claims a production descriptor interpreter.",
+      "sha256": "ce8158a2b556acafd68caf44ea1d5c80e443c915c6da76ad14af645601a765f5"
+    },
+    {
+      "ref": "DESIGN.md:186",
+      "text": "| CR-01 capabilities | Unique known IDs; each used operator/consumer requires its declared capability and exact registry signature. No unknown foo/1 or duplicate. | `profile-capability` |",
+      "sha256": "9fc2607976ec0f68e802477d5225f1b5ce8bd32a3192c90acae752864ef1dc4d"
+    },
+    {
+      "ref": "DESIGN.md:187",
+      "text": "| CR-02 values | ids only inside assignRef.values; outputId only within export emit.fields/parent (no allocation-dependent selection); create.fields scalar-only; concat/case/stripPrefix only strings. | `profile-value-context`, `profile-type` |",
+      "sha256": "1c283b727e68eb380c52f3c15381b19e7c9f4f1fe8cc51672852adb749adbf59"
+    },
+    {
+      "ref": "DESIGN.md:188",
+      "text": "| CR-03 selectors | Table §2.2 order; property required only for reference/inverseReference, optional for children, forbidden otherwise. Binding domain must support traversal. | `profile-selector-order`, `profile-selector-property`, `profile-type` |",
+      "sha256": "34f5eb0418ab0a0e090bbc9d62ed0d3afd1e01551703e0060349d5b991ab7553"
+    },
+    {
+      "ref": "DESIGN.md:189",
+      "text": "| CR-04 bounds | count min <= max, reachable minHops <= maxHops; all computed numbers finite, integer outputs safe. | `profile-bounds` |",
+      "sha256": "3d0bf8d922e574e79715fccd1b2f41469d92830b59fe0fccf973691e0b20eb07"
+    },
+    {
+      "ref": "DESIGN.md:190",
+      "text": "| CR-05 symbols | Unique IDs/names in each namespace, all referenced notions/recipes/messages/resources/themes/glyphs and bindings exist; recognition/theme/extends dependencies acyclic. | `profile-symbol`, `profile-cycle`, `lint-config-cycle` |",
+      "sha256": "61187a78cb5774dcdaa8e18e454d8f5c81a0fb3fb74f4ae5475713df7120d28f"
+    },
+    {
+      "ref": "DESIGN.md:191",
+      "text": "| CR-06 authority | Every action maps to declared writes below and ratified effective producer rights; known containment/reference/scalar paths and target types. The checker receives the pinned base, applies explicit producerDelta and descriptor extension-field authority, and rejects a phase actor absent from the resulting field producer set. | `profile-write-set`, `profile-producer`, `profile-type` |",
+      "sha256": "bb642f287f5a60433ffffa0c92a6a04839b19d05210b8f1150fb3b39434a0cf1"
+    },
+    {
+      "ref": "DESIGN.md:192",
+      "text": "| CR-07 identity | allocated/containment agree with effective id admission; ownerId resolves to string; no guessed immediate-parent owner. | `profile-create-identity` |",
+      "sha256": "ba10edf4c42540c19ddf870e6b2d6fa00a82a7e6d86a536297e6bc08cc7fdeae"
+    },
+    {
+      "ref": "DESIGN.md:193",
+      "text": "| CR-08 lint | Exactly one validation record per stage/policy, all standard settings and applicable profile subrules present; resolver allowlist and options schema exact. | `lint-config-incomplete`, `lint-config-unknown`, `profile-schema` |",
+      "sha256": "a55e479491c5da9e1c0a97e0b52215eecc47d199aacbba8d559f18089a5b537c"
+    },
+    {
+      "ref": "DESIGN.md:194",
+      "text": "| CR-09 presentation | Explicit group/facet, glyph shape and token types, parameter signatures, theme binding uniqueness; no conflicting notion token assignment. | `profile-notion-kind`, `profile-glyph-shape`, `profile-type` |",
+      "sha256": "9d13b7c63a96cbabd76b95e0987866edea0385aa3b8c2aff38b6b0a49eb191eb"
+    },
+    {
+      "ref": "DESIGN.md:195",
+      "text": "| CR-10 UI | Every required recipe parameter supplied exactly once by typed gesture/field bindings; enums have nonempty choices with unique JSON values (even when choice names differ), references have target types, readonly has no command. | `profile-ui-parameters`, `profile-type` |",
+      "sha256": "7ae59c668cef9385eca31167be41ee907be1577b1fb251d5df6e50b4a49d9ae3"
+    },
+    {
+      "ref": "DESIGN.md:196",
+      "text": "| CR-11 export | emit kind has only its required/optional IR fields with correct types; artifact key/domain/parent valid; loss mapping §10.2. | `profile-export-field`, `profile-type` |",
+      "sha256": "e6609573315e2e96a87a0a57437bba00b34942783225d5bddd777e12d8717051"
+    },
+    {
+      "ref": "DESIGN.md:197",
+      "text": "| CR-12 migration | Target is literal self, source is an external pin; reject self source, own digest pin or unsupported recipe phase. | `profile-migration-endpoint` |",
+      "sha256": "14a1ba82bae9c6a09b84556f0ad380d92e17fdaa8fc57bd54b5be50a666970cb"
+    },
+    {
+      "ref": "DESIGN.md:198",
+      "text": "| CR-13 bind fallbacks | In recipe steps and rule bindings, presence of fallbacks requires cardinality first; [] is still a supplied fallback field. Schema conditional plus compiler preflight. | `profile-bind-fallbacks` |",
+      "sha256": "c8d6053634805cf52ae83bf9983d842224ecbd3b4ac753aa447abd6f66ca0ce1"
+    },
+    {
+      "ref": "DESIGN.md:199",
+      "text": "| CR-14 action phases | Each action must belong to the phase set in the authority table; schema recipe conditionals and compiler preflight agree. Export cannot mutate semantics. | `profile-action-phase` |",
+      "sha256": "c33992b4468b1b06ce8e27ee6f3a63dff22ce2bea27a72d694de01ec8d8c6cc4"
+    },
+    {
+      "ref": "DESIGN.md:203",
+      "text": "| bind, refuse | None; empty writes allowed only if all steps are read-only/refusal. | Any recipe phase; no mutation. |",
+      "sha256": "a60b956a21efec600469d1ff125088c5b7ac5c9f575de5603581a3a5dacb0514"
+    },
+    {
+      "ref": "DESIGN.md:204",
+      "text": "| create | parent, containment property pointer, create | create/edit/reference/complete/convert/migrate; only fields/types admitted to the invoking actor. |",
+      "sha256": "73a59e9a8785d90d888455414ec8426781431cc5d245e9a64e91c4099fb10722"
+    },
+    {
+      "ref": "DESIGN.md:205",
+      "text": "| ensure | parent/property create and envelope /bindings binding | normalize only, declared structural type/role and ratified support authority. |",
+      "sha256": "65a281807f112244f2214a772b5eabee2243aea599bd67432a30f8249af38c04"
+    },
+    {
+      "ref": "DESIGN.md:206",
+      "text": "| set / unset | target, exact scalar path, set / unset | create/edit/reference/complete/normalize/convert/migrate only; complete may write generated defaults only; normalize only declared correction fields; protected evidence and existing id never writable. |",
+      "sha256": "ef6794a6e46a4c18ea936211c0dfa1651a340deb1b5bec246c3d41c9bcc49d22"
+    },
+    {
+      "ref": "DESIGN.md:207",
+      "text": "| assignRef | target, exact reference path, reference | create/edit/reference/complete/normalize/convert/migrate only; C topology/ports/sets; N lane membership and approved relation-direction refs; explicit commands for other actor-authorized changes. |",
+      "sha256": "801558f0475e74272ef9f6a1a725ecceece111ec39dc471e5351620d0bd846c4"
+    },
+    {
+      "ref": "DESIGN.md:208",
+      "text": "| reparent | target, empty pointer, reparent AND destination parent, /property, reparent | Explicit edit/convert/migrate; N only a specifically approved structural support move, never business reassignment by containment. |",
+      "sha256": "b456dd4f9f43af2161a064fe7137dcfc90a86d609b5734e2e7530f36a4a696d9"
+    },
+    {
+      "ref": "DESIGN.md:209",
+      "text": "| place | target, empty pointer, placement | normalize only; derived constraint, no tree/DI deletion. |",
+      "sha256": "55e810afc22e5511a1d067d4711d8e9acfc00d43b018771840acce8401dbd864"
+    },
+    {
+      "ref": "DESIGN.md:210",
+      "text": "| emit | self, empty pointer, artifact | export only; output for current selected page/occurrence. |",
+      "sha256": "8e2fe7197b26472579f6a3de07eef36ebe21a272c59d7b421186bdb33fd823ba"
+    },
+    {
+      "ref": "DESIGN.md:211",
+      "text": "| loss | target, empty pointer, report | export only; per-call report, no semantic mutation. |",
+      "sha256": "187c6300c7c40ceaac9c48e4875336d7c97617efa6d9cc9c576144272b8e4e61"
+    },
+    {
+      "ref": "DESIGN.md:212",
+      "text": "| remove | target, empty pointer, remove | edit/convert/migrate only with explicit intent and dependency closure. Never C or N. |",
+      "sha256": "bf4aa46c583ea99ba828c18c5e203d8ee8eaf9ec3fece52ed8e09cd65ede25e6"
+    },
+    {
+      "ref": "DESIGN.md:214",
+      "text": "`envelope` and `artifact` are typed write targets, not native read bindings. Native property names are encoded as RFC 6901 pointers in writes. No action may omit a write because its output is not in the tree. Allocation identity is an effect of create/ensure, not a separate user-editable id field. The compiled actor matrix is generated from the effective base plus explicit producerDelta: AI may author only AI fields in extraction or authorized iteration; editor may author editor fields; import may retain admitted native fields; complete may write code-generated fields; normalize may write only the declared structural-support/role/direction set; render/export are read-only on semantics. Changing a frozen producer or requiredness rule is OPEN-BASE/OPEN-IO, not a compiler inference.",
+      "sha256": "5a54b6cdbc1db63fbb2607ba1e8a402e5c2a9920fe999261064cf6e1e52e9b9c"
+    },
+    {
+      "ref": "DESIGN.md:216",
+      "text": "R3.1 bounded authority witness: explicit create/edit/reference/convert/migrate commands use the editor actor, complete/normalize use code, and export has no native write authority. Base field producers and explicitly admitted descriptor extension-field producers are combined, then each producerDelta replaces its named from actor with to (an absent from actor refuses profile-producer). Native scalar/reference/containment writes, creation fields and generated IDs are checked against that effective set. Generic native bindings conservatively check every admitted target type supporting the field. A completion write to an editor-only Process.isExecutable without a delta refuses profile-producer; its explicit fixture delta authorizes code. This fixture check does not grant the broader structural-support or correction rights still required by the production contract.",
+      "sha256": "f433d6351cf3c02f6494e217b9ad6d0c39af2f436e029dc92d6d78030926b2f0"
+    },
+    {
+      "ref": "DESIGN.md:245",
+      "text": "| Predicate | `(operator, capabilityVersion, argumentSchemaDigest) -> pure evaluator` | Read-only finite native index and support bindings. |",
+      "sha256": "a54df4b4984d7781611b99a58cfd1e58d14455feddcc85b6532d5d41d27bdb9b"
+    },
+    {
+      "ref": "DESIGN.md:260",
+      "text": "R1 scalar ordering for JSON keys is withdrawn. `profile-c14n/2` uses RFC 8785 JCS: UTF-16 code-unit key ordering, no insignificant whitespace, UTF-8 without BOM, ECMAScript shortest binary64 number rendering, -0 as 0, JSON escaping, no Unicode normalization, no trailing newline in hashed bytes. Reject NaN/infinities, duplicate keys and lone surrogates. Arrays preserve order. The LF in a human-readable JSON file is not included in its canonical hash. Unicode scalar text-fit policy remains separate and unchanged in meaning.",
+      "sha256": "607a9ac01280f61beff1b6034430f585fa8eb63991f551bf469b127a3aa90668"
+    },
+    {
+      "ref": "DESIGN.md:262",
+      "text": "This explicitly versions the R1 comparator change and retains the existing workbench UTF-16 ordering. U+10000 sorts before U+E000 as a key; neither language may use its default scalar-key sort instead. Profile digest is lowercase SHA-256 of canonical complete profile JSON, including schema identity and every injected-data digest. It excludes only the external release manifest/signatures; there is no self-digest property to remove. Resource bytes use raw SHA-256 and must match before compile. Base/descriptors use their separately pinned canonical or raw digest domain recorded in their manifests, never an assumed interchangeable hash.",
+      "sha256": "78460a7cddc13c8bbca4b04c36b7696461fd468aae56c676e014c14da2352585"
+    },
+    {
+      "ref": "DESIGN.md:264",
+      "text": "Define `H(x) = lowercase_hex(SHA256(UTF8(JCS(x))))` and `B(bytes) = lowercase_hex(SHA256(bytes))`. `semanticRevision = H({tree:semanticTree, profileIdentity, bindings})`. This is an **acceptance-context revision**: it binds the semantic content and the exact profile package under which that content is accepted. Editing theme data in a profile creates a different profile identity and requires explicit migration/new history epoch even if tree bytes are equal. Selecting an already injected theme or changing view overrides does not change profileIdentity or semanticRevision, so ordinary theme switching preserves semantic history. No partial-profile semantic hash is introduced.",
+      "sha256": "d207712f7cb13dae0f9bf2eb4f2d660e1faeb8c7ded9de8e9a1da8c1b12c74c4"
+    },
+    {
+      "ref": "DESIGN.md:266",
+      "text": "The semantic projection is descriptor-driven and closed: remove Definitions.diagrams and every property whose descriptor role is presentation or whose value type is BPMNDI, DI, DC, native color-DI or bioc; recurse through remaining admitted semantic containment; remove no scalar semantic property merely because its name resembles a geometry field. Preserve all admitted semantic extension values, IDs, names, source Documentation and reference arrays. The compiled descriptor index must enumerate the exact excluded descriptor-qualified property IDs, including inherited extension properties, in its receipt; an unclassified foreign property refuses `descriptor-role-unknown`. Absent, empty and partial DI all produce the same semantic projection when their semantic fields match; extracted DI is separately preserved as snapshot presentation, never silently lost. Committed envelope.tree is this DI-free projection. XML/native import projection vectors include partial diagrams, nested color properties and a semantic extension named x that must survive.",
+      "sha256": "667bfd2ed5b22d665bea05074627de1d74701e045b95a55062bb2025a65c0b72"
+    },
+    {
+      "ref": "DESIGN.md:268",
+      "text": "For ordinary document operations, `baseRevision = inputEnvelope.semanticRevision`, and success revision is the committed output envelope revision. Initial import has no envelope revision: `baseRevision = H({domain:\"profile-import/1\",format,sourceDigest})`, where format is `native-json` or `bpmn-xml`; sourceDigest is `H(parsedSourceTree)` for strict native JSON, or `B(original UTF-8 XML bytes)` for XML, before projection or normalization. JSON spacing does not change its baseRevision; XML spacing does. Parse failures omit baseRevision because no valid native JSON value exists. `viewRevision` is exactly the digest tuple in §9.2. Undo may restore a prior revision. A DI-only drag changes only viewRevision. Host counters are excluded from parity.",
+      "sha256": "76475f4238e4c2b59609c88092b3e47f96c1188268fb75494d563ee6d4d690a3"
+    },
+    {
+      "ref": "DESIGN.md:276",
+      "text": "One allocator, **`stable-id/1`**, is used by C, N and explicit recipe creation:",
+      "sha256": "c9ffe320865cdb382360ad1ee7a91794dc38ab6b5cd80b0d21237b5e72823c01"
+    },
+    {
+      "ref": "DESIGN.md:280",
+      "text": "  UTF8(JCS([\"profile-mechanism/1\", ownerId, slot, stableKey]))",
+      "sha256": "1c453536577ab7beadcb6ae1d68190bdfe88f03ef2d9bf688c84dca132fed078"
+    },
+    {
+      "ref": "DESIGN.md:284",
+      "text": "The digest is full-length. Recipe-owned allocated IDs and surviving IDs never depend on theme, mutable labels, geometry or package patch/minor version. The explicit initial missing-source-ID exception below uses source content once at birth; later label edits never reallocate it. For an allocated create, ownerId is the explicitly evaluated argument, including when parent is an ID-less ioSpecification; it is never inferred from the nearest containing node. The virtual root allocation owner is the literal `document-root/1`. C assigns a missing Definitions ID first with that owner and slot `definitions`, key `root`; then fills semantic child IDs; N subsequently creates Collaboration under Definitions using Definitions.id as ownerId and the represented Process.id as stableKey, followed by main Participant, LaneSet, reserved lane and reference-band Participant. Participant/lane support ownerId is Process.id. Supplied recipe arguments must express this ordering and domain.",
+      "sha256": "a631075bb30a81eb030d0ba0248d89a7faa128f9b85f0edd7dbc5009558f9f65"
+    },
+    {
+      "ref": "DESIGN.md:286",
+      "text": "**Multi-Process support domain witness (R3.1).** For Definitions_support containing Process_A and Process_B, each Process has its own bound Collaboration; they are not shared. Collaboration allocation uses ownerId=Definitions_support, slot=collaboration, stableKey=Process_A or Process_B, while its envelope binding is {ownerId:Process_A,role:collaboration,targetId:<allocated Collaboration ID>} (and likewise for B). The ensure.owner binding is the Process; ensure.ownerId supplies the separate allocation domain. Each Process owns distinct main-participant, lane-set, external-lane and reference-band roles; their allocation domain is that Process ID and their stable keys are the respective role names. The main Participant references that Process; the band has no processRef. This makes §3.2 root allocation and §5 owner+role uniqueness concrete without a shared-root ownership exception.",
+      "sha256": "c42e9c1aeb0edeb4f5db074d6fa11089b873601a4d23479152044856b42f0c54"
+    },
+    {
+      "ref": "DESIGN.md:288",
+      "text": "Identity mode containment is required for effective-base ID-less Documentation/FormalExpression: no id, slot, key or ownerId is written. A typed creation handle identifies the new child within the plan; later coordinates use its nearest ID-bearing ancestor plus revision-bound containment pointer. It cannot become a native reference endpoint unless the effective base admits that reference form. Every allocated object is identified before postcheck; N needs no second C pass. Existing valid imported IDs always survive. A computed collision with a different object is `id-collision`; never suffix, overwrite or reidentify it.",
+      "sha256": "b52b0023704418c1029e5c45f281bc883037ca589d62504ce75175f0016d24a6"
+    },
+    {
+      "ref": "DESIGN.md:292",
+      "text": "For initially missing admitted IDs only, C defines contentSignature as H of the node's raw admitted semantic subtree with every id field removed, presentation projection applied, raw reference strings and source text retained, and no generated defaults added. Within the same ownerId/containment property and equal contentSignature, duplicateOrdinal is the zero-based original containment-array order; singleton fields use zero. stableKey is JCS([contentSignature,duplicateOrdinal]); slot is the descriptor-qualified containment property. First allocation may therefore distinguish identical ID-less siblings by their original order; later reorders never reallocate IDs. Later iteration schemas echo C-owned IDs as immutable handles. Ambiguous matching refuses. Two identical children produce different deterministic IDs for ordinals 0 and 1; retaining/reordering them preserves both. outputId remains a separate call-local map.",
+      "sha256": "1bfbf44b9b5e12f15ed395ec10c04724db2ea08bb36ee6cf76720e7b518790c7"
+    },
+    {
+      "ref": "DESIGN.md:296",
+      "text": "Let R be the runtime supported mechanisms/capabilities; P the injected exact profile identity; D the document envelope identity. Apply the following rows in order, before C/N/theme/export or edit. Errors preserve all source bytes and metadata. A read-only forensic viewer may show the unmodified source with diagnostics; that is not acceptance under P.",
+      "sha256": "40dd9617c76073dccddf3433bdc0b803ca98f9d9de5a13824aa880a3d7e66f96"
+    },
+    {
+      "ref": "DESIGN.md:298",
+      "text": "**Source-dependent remedies (P1).** At the first applicable row, if its only remedies require the exact source package or a migration validated with the source profile, an unknown D profile version/digest or unavailable source package yields `profile-source-unavailable` instead of that row's migration/mismatch code. This applies to the mechanism-differ, schema-differ, base/descriptor-mismatch, business-ID/major-mismatch and patch/minor rows. Unsupported envelope/schema/mechanism, missing/conflicting metadata, missing capability/asset and known same-version unequal-digest refusals retain their ordered diagnostics; source availability does not override them. A digest conflict requires two known unequal digests. Selecting a migration alone establishes neither source availability nor successful migration.",
+      "sha256": "7c14c15e9ca3e805bad9741839246facb0494ff0e15666d3cac044313b16ddea"
+    },
+    {
+      "ref": "DESIGN.md:302",
+      "text": "| Unknown envelope `documentVersion` (older or newer) | Refuse profile operation; require an explicit envelope migration. | `document-version-unsupported` |",
+      "sha256": "7e78bda1e1b49d5a51a69a68d7e4fde1c1988f0a188577f0b42b65f8920f12ee"
+    },
+    {
+      "ref": "DESIGN.md:303",
+      "text": "| Missing envelope/profile metadata, including standalone XML | Generic read-only import preview allowed; target profile and explicit classification/binding plan required before activation. | `profile-metadata-missing` |",
+      "sha256": "bfdfbacef1bb35d847cd7ee8488674894c6f24ac5aaccd592f902b6a5dcb7f29"
+    },
+    {
+      "ref": "DESIGN.md:304",
+      "text": "| Conflicting host, snapshot and document identities | Refuse; no source wins by recency. | `profile-metadata-conflict` |",
+      "sha256": "aa35ef4a091b2a3ee03cc88691354f8928a869e8995399508ad58118743e918b"
+    },
+    {
+      "ref": "DESIGN.md:305",
+      "text": "| P schema unsupported by R (older/newer) | Refuse even if business version is known. | `profile-schema-version` |",
+      "sha256": "a3677901d448778bea65dffa4469de457d082cf1fe6404e3fbc19fcb2bc4e3b0"
+    },
+    {
+      "ref": "DESIGN.md:306",
+      "text": "| P mechanism unsupported by R (older/newer) | Refuse even if business version is known. | `mechanism-version-unsupported` |",
+      "sha256": "6aa69b0c009d34d7c7ddfd2be774f5d040267468224baf72621934b6465562ab"
+    },
+    {
+      "ref": "DESIGN.md:307",
+      "text": "| D mechanism unsupported by R | Refuse; explicit mechanism migration required. | `document-mechanism-unsupported` |",
+      "sha256": "30138bea1514d781528f435a01de3b4c4d6892134d144f4584da63795f964624"
+    },
+    {
+      "ref": "DESIGN.md:308",
+      "text": "| D schema unsupported by R | Refuse; applying a supported P cannot reinterpret an unsupported D schema. | `document-schema-unsupported` |",
+      "sha256": "c4df30a5f8e411bba2c946b33dea4b7d8e2a4662a1822c9be7e1a54e62f533b9"
+    },
+    {
+      "ref": "DESIGN.md:309",
+      "text": "| P and D mechanisms differ, both supported | Source may reopen only with its exact source profile/runtime path; applying P requires explicit migration. | `mechanism-migration-required` |",
+      "sha256": "fece2342b5b34bfa56194b5c73939a789a65fcafde242e8f5d4d1a2e0050707c"
+    },
+    {
+      "ref": "DESIGN.md:310",
+      "text": "| P and D schema versions differ, both supported | Source may reopen only with its exact source profile/runtime path; applying P requires explicit migration. P1 applies. | `profile-schema-migration-required` |",
+      "sha256": "509923477c56d52aad3899b305462234c621aae1cab7798f273e59a04fe4d4b0"
+    },
+    {
+      "ref": "DESIGN.md:311",
+      "text": "| Required capability/operator/asset absent | Refuse before evaluation. | `profile-capability` / `profile-resource-missing` |",
+      "sha256": "527190ac7cabec750f7ad64c14d2ad11a32eed66eb5d09552d9b2a04eeaf2ed2"
+    },
+    {
+      "ref": "DESIGN.md:312",
+      "text": "| Base revision/digest or descriptor pins differ | Refuse unless a source→target migration is explicitly selected. | `base-mismatch` / `descriptor-mismatch` |",
+      "sha256": "283fbed3a99e57d29dde6e106be88c4be80569e0c1578bd7ae31581574e972a5"
+    },
+    {
+      "ref": "DESIGN.md:313",
+      "text": "| P and D business IDs/majors differ | Require explicit business migration; never reinterpret by native type alone. | `profile-major-mismatch` |",
+      "sha256": "d8cc011f81f8819df8551c239a4b84c7f215a2e463466053d0e78415ff368e79"
+    },
+    {
+      "ref": "DESIGN.md:314",
+      "text": "| Same profile ID and package version, known unequal digests | Refuse as identity conflict, including token-only differences. Cannot be waived by migration using the same identity. Publish a new version first. | `profile-digest-mismatch` |",
+      "sha256": "57f65e863aae39e12cc5f19968fa65843036c9d47da2bb989b0e5c36af2dfb98"
+    },
+    {
+      "ref": "DESIGN.md:315",
+      "text": "| D older patch, P newer patch, same major/minor, both versions/digests known and source package available | Load D with exact source package, or explicit migration to P. No automatic theme-only update. | `profile-patch-migration-required` |",
+      "sha256": "e09ddb74f9d631a63a1f19bc41dd46142d54222a07a113ee85edb4e3a2aa75e0"
+    },
+    {
+      "ref": "DESIGN.md:316",
+      "text": "| D newer patch, P older patch, same major/minor, both versions/digests known and source package available | Exact source package or explicit downgrade migration. | `profile-patch-downgrade-required` |",
+      "sha256": "13543e350db5457ce4f7bdbdfb7931c3b155f137a23724218d710ca8b9c77e91"
+    },
+    {
+      "ref": "DESIGN.md:317",
+      "text": "| D older minor, P newer minor, same major, both versions/digests known and source package available | Exact source package or explicit migration, even if all notions appear supported. | `profile-minor-migration-required` |",
+      "sha256": "65241f08fc936dd886c1a3c3d110f5d7393a8487ae850e95c3e65529c2ed7073"
+    },
+    {
+      "ref": "DESIGN.md:318",
+      "text": "| D newer minor, P older minor, same major, both versions/digests known and source package available | Exact source package or explicit downgrade; never ignore new notions. | `profile-minor-downgrade-required` |",
+      "sha256": "3f5c827e55fab2e6d4ac645f214423d64e8524103d28efa8f5dab74640f2e35f"
+    },
+    {
+      "ref": "DESIGN.md:319",
+      "text": "| D version/digest unknown or source package unavailable | Preserve source; no latest fallback. | `profile-source-unavailable` |",
+      "sha256": "7786ba42fd49a58fa43470bb780e59d00a7b148e0e57624a8f616fbc1daab7cc"
+    },
+    {
+      "ref": "DESIGN.md:320",
+      "text": "| R supports both, P = D in all identity/digest dimensions, envelope valid | Accept, subject to normal structural/readiness checks. | `ok` |",
+      "sha256": "b5a087416d0b4bf9e7d6f0e2cc0a140943ba6fb01f31dc83e5773c13d5188790"
+    },
+    {
+      "ref": "DESIGN.md:322",
+      "text": "`mechanismVersion × schemaVersion × profile version × document version` is therefore exact-match-or-explicit-migration, not a SemVer permissiveness rule. Different runtime library patch versions are allowed only when they advertise the same mechanism capabilities and pass the pinned corpus. Reports record actual runtime artifacts. Explicit migration validates source with its source profile, transforms a copy using approved recipes, validates target, emits complete losses/ID map, and commits target identity once. It never normalizes the source under target rules before consent.",
+      "sha256": "6238632e8a409bf3998cb668a9111e722a7ee97aad0b760145a0a531cc4dd526"
+    },
+    {
+      "ref": "DESIGN.md:324",
+      "text": "The §3.3 diagnostic registry is [compatibility-codes.json](compatibility-codes.json); [compatibility-verdict.schema.json](compatibility-verdict.schema.json) enumerates the same refusal codes, including `document-schema-unsupported` and `profile-schema-migration-required`. `profile-schema-version` denotes only unsupported P schema. An otherwise exact but invalid envelope remains a bare refusal; this erratum assigns it no new code. The profile syntax schema's loss-class enum is a separate domain (§10) and is unchanged.",
+      "sha256": "df2efe244b929dd2b8eea706ac2fd5467c1688b8796df916684e9fda80185144"
+    },
+    {
+      "ref": "DESIGN.md:330",
+      "text": "An embedded migration has a complete external `from` pin and **`to:\"self\"`**. Hash the unchanged profile JSON including the literal self, then resolve self to the computed enclosing profile identity in the immutable compiled result. Never substitute the digest into the hashed JSON. The source pin must not denote the containing profile; source profiles are independently digest-verified. Target-explicit pins and self sources refuse `profile-migration-endpoint`. This chooses one mechanism rather than adding a second external-manifest authority: it keeps migration recipes and their approval class in the same profile authoring source and removes the impossible SHA-256 fixed point. Both neutral profiles contain a real migration with expected resolution; rejection cases cover an explicit self digest and the wrong target form. Execution still requires per-migration approval where §13 requires it.",
+      "sha256": "8d73a8322ec299fabae6333e239e38e675bd597a92a54cea415a32e3ec7d6054"
+    },
+    {
+      "ref": "DESIGN.md:430",
+      "text": "`DocumentEnvelope/1` has exactly `{documentVersion:\"1\", profileIdentity, tree, bindings, semanticRevision}`. `profileIdentity` has exactly `{mechanismVersion, schemaVersion, profile, version, sha256, base, descriptors}`; base/descriptors use the closed pin record of the meta-schema. `tree` is the native Definitions JSON validated by the separately generated storage schema; no flattened copy of the semantic graph. `bindings` is an array of exactly `{ownerId, role, targetId}` records. Sort by ownerId/role/targetId under profile-c14n/2; owner+role is unique, target ownership/cardinality is validated. Roles are opaque profile data keys. `semanticRevision` must equal §3.1, excluding its own field. Unknown fields, null and duplicate bindings refuse.",
+      "sha256": "63ad442c7581b8031901eed13b41d303203cd3606f5f1dda1b4658a3506f4977"
+    },
+    {
+      "ref": "DESIGN.md:432",
+      "text": "The envelope is host/document-storage control metadata, not a semantic extension and not an AI-produced model. It records only profile identity and structural-support ownership. No business roles, reference classifications, layout or render state are secretly stored there. Native source evidence remains in tree. Snapshots additionally bind viewRevision and presentation state through a separate closed snapshot format; provider requests receive the permitted native projection and read-only revision/ID context.",
+      "sha256": "eba54c95cd433dceeaac2a7e5dbe10d3291d12f9236d7078eda9454e7a995d75"
+    },
+    {
+      "ref": "DESIGN.md:438",
+      "text": "A main participant has processRef to its Process. A reference band is a black-box Participant (no processRef) with an exact support binding `(processId, referenceBandRole, participantId)`. A reserved external lane similarly binds `(processId, externalLaneRole, laneId)`. The corresponding native type, parent Collaboration/LaneSet and no-processRef/owner relationship must agree with the binding. One bound band per Process, possibly displayed on several pages; repeated views do not create more semantic participants.",
+      "sha256": "9e4bd4e942a443d3a23db6822455aa8e62a0d2d4588c2846de860f71542c1615"
+    },
+    {
+      "ref": "DESIGN.md:440",
+      "text": "N reuses any correctly bound existing support, including an imported ID unrelated to stable-id/1. For a trusted generated document whose binding is missing, recovery may propose a binding only if the exact allocator ID, expected type/parent/owner and creation provenance all match; activation still requires an explicit recovery transaction. A hash-shaped ID alone does not authorize reuse. Conflicting/multiple candidates yield `support-binding-conflict`. An ordinary imported black-box pool with the same label remains an ordinary pool; N never takes it over.",
+      "sha256": "132b474f4f8955fab03daf291ac6c8bd3bc415e77ebbd7f9d5a3c5a583264cb5"
+    },
+    {
+      "ref": "DESIGN.md:444",
+      "text": "ID remapping is a separate approved import migration. Build a total map before application, then update descriptor references, declared ID-valued scalars including internal calledElement, DI bpmnElement references, support ownerId/targetId, navigation and provenance atomically. Resolve QNames using captured namespace bindings; rewrite only resolved in-document targets while preserving namespace identity. External or dangling references remain unchanged and yield reference-dangling/unsupported-namespace as appropriate; never fetch a target. DI objects' own IDs belong to the separate presentation namespace and are preserved unless that namespace has a collision requiring a separately reported DI map. Semantic remapping changes their bpmnElement references, not their own IDs. An unknown extension reference property, or opaque extension without an explicit pinned reference-free attestation, refuses migration-reference-opaque. This replaces the subjective 'might contain references' test. Surviving supports keep their actual IDs even after owner remap; recompute revisions and invalidate layout/R. Preserve the complete original→result map.",
+      "sha256": "f6ec6d30856ed34de07c5151ac722744db41b5261110b0fe7e2a148cf8a84402"
+    },
+    {
+      "ref": "DESIGN.md:460",
+      "text": "The generic resolver contract returns a RuleFactory/Config or undefined in JS, None in Python. Upstream NodeResolver may instead throw for unknown names: the profile adapter catches those specific lookup exceptions and turns them into lint-rule-unknown/lint-config-unknown. It handles undefined/None identically, never invoking a missing factory. Python MUST use StaticResolver over an explicit pinned allowlist (or an equivalently filtering wrapper); unrestricted importlib fallback from NodeResolver is prohibited in the profile path. Plugin discovery may use `entry_points(group=\"bpmnlint.plugins\")`, exact entry name `bpmnlint-plugin-profile-mechanism`, but only after matching the pinned whitelist. Profiles cannot cause module loading. The browser uses a prebuilt registry; there is no runtime require or network fetch.",
+      "sha256": "cb45b4afd2d2100165959752a6493046f942612a5d19332962e568de1fb2ccf7"
+    },
+    {
+      "ref": "DESIGN.md:464",
+      "text": "Extends syntax is `bpmnlint:recommended` or `plugin:<registered-package>/<config>`; filesystem paths, URLs and arbitrary scheme strings refuse. Normalize package names with upstream bpmnlint-plugin semantics. Resolve depth-first left-to-right, later whole settings overriding earlier ones, then local whole-setting overrides; options are never deep-merged. In mechanism 1, profile validation.settings author only rule/severity/classification; standard rule options may occur only in pinned host resolver manifests, whose per-rule schemas are verified. A profile severity record replaces that entire inherited setting and resets its options to empty. The sole generated profile-rule options use the separate closed compiled schema. There is no undeclared options key in profile data. The adapter detects cycles with an active recursion stack before calling upstream (lint-config-cycle), and resolves/validates all factories/options before evaluation. Missing whitelisted entries refuse. A fresh Linter and fresh rule instances are required per stage/evaluation; only immutable factories can survive A→B→A.",
+      "sha256": "8be1c9e8c273fd65f2c2d20fffa092daa019ec5569fbb5e04fdf399bbdf7129e"
+    },
+    {
+      "ref": "DESIGN.md:468",
+      "text": "Rule.phase, validation.id, compiledOptions.phase, diagnostic.stage and the merge key all use the SAME five execution-stage values: `import`, `pre-normalize`, `post-normalize`, `post-layout`, `release`. Draft/accept are independent readiness policies, never stages. Each profile contains exactly ten `validation` records: one for every (id, policy) pair, where policy is draft/accept. Each record contains its extends, every standard override (including unchanged explicit outcomes in these fixtures), applicable profile:<id> settings, and the sole transport rule ID. All standard overrides, disabled checks, draft downgrades and advisory exceptions are authored here. Generic wiring has no list of business-specific weakenings.",
+      "sha256": "d5ba613e206b3d0cdbbebe47c53808801966efa80d0ad981ce5e2bbeba8a84e9"
+    },
+    {
+      "ref": "DESIGN.md:476",
+      "text": "| standalone pre-normalize or post-normalize | exactly the named stage | explicitly supplied caller policy; missing policy refuses |",
+      "sha256": "907eb3f4977c0cde53fe69bf22975ee37b45d6014dc095bd640d258991ea2517"
+    },
+    {
+      "ref": "DESIGN.md:478",
+      "text": "| prepareExport | C → pre-normalize → N → post-normalize → layout → post-layout → release → R → map | accept; each lint stage once |",
+      "sha256": "cf2bfa5c7df1c195527af9fc5a80be0f60d5037c8b51a1f641c760d0a6c522fb"
+    },
+    {
+      "ref": "DESIGN.md:481",
+      "text": "C/N are pipeline steps, not lint stage aliases. A rule executes only when its rule.phase equals the current stage; rule bindings are evaluated on that stage snapshot. Its profile:<id> setting must exist in that exact stage/policy table (lint-config-incomplete otherwise). Off-stage profile settings are rejected rather than left as misleading dead configuration. Off removes the subrule before evaluation. A repairable pre-N error may continue only with its declared bounded repair recipe; post-N unresolved errors block. A draft policy does not downgrade integrity, permissions, evaluator errors or stale identity.",
+      "sha256": "a0a0ee3200887c1206509681383ce4622f70b641efaaf940a564a4aeb8e85937"
+    },
+    {
+      "ref": "DESIGN.md:485",
+      "text": "For (stage,policy), first flatten the allowlisted extends and explicit profile validation.settings by whole-setting replacement. Resolve numeric severities `0=off, 1=warn, 2=error, 3=info`. Validate complete standard-rule coverage against the pinned upstream recommended manifest. Partition settings by namespace:",
+      "sha256": "3158be9313a3011fbcea9729e0b3508698c056bf49f968bfb581668fa6e4197c"
+    },
+    {
+      "ref": "DESIGN.md:487",
+      "text": "1. Standard upstream names become the upstream rules object with their resolved options. bpmnlint 11.15.0 and its Python port both support numeric 3 → info. This mechanism deliberately chooses a common adapter transport: effective info is sent as warn and restored to info by the adapter in both languages. This is an adapter policy, not an engine limitation; the Node transport/effective-severity witness exercises it and actual upstream execution remains a lot-1 gate.",
+      "sha256": "98ceaa77bfb5d93566aec65fdd2c51444e1a09c8fa541e49d26d8bad3c2deb58"
+    },
+    {
+      "ref": "DESIGN.md:488",
+      "text": "2. `profile:<ruleId>` settings are removed from the upstream config entirely. Select enabled, current-stage declarative rules in profile declaration order, retaining their effective classification/severity in the compiler policy table.",
+      "sha256": "6a7983d2cceb4548905f8c0687b9295c17264703ab369f5623aed223ea72a307"
+    },
+    {
+      "ref": "DESIGN.md:489",
+      "text": "3. Register exactly `\"profile-mechanism/profile\": [\"error\", compiledOptions]`. This transport category prevents upstream from suppressing a subfinding. The adapter replaces it with the exact per-subrule severity. No executable rule is registered under a business ID.",
+      "sha256": "910a609ae6ead245e54d777f7005b773d5d973a8984be0e90c46e594e132f25a"
+    },
+    {
+      "ref": "DESIGN.md:491",
+      "text": "The closed [compiled-lint-options.schema.json](compiled-lint-options.schema.json) supplies the sole syntax for the seven keys `mechanismVersion, profileDigest, phase, readinessPolicy, compiledRules, bindings, severityPolicyDigest`: phase uses the five stages; readinessPolicy uses draft/accept; digests are lowercase SHA-256; bindings are closed ownerId/role/targetId records; compiledRules are closed profile rule records. Unknown fields refuse. Validate compiler output and compare it with the selected compiled profile; a caller cannot inject an alternative rule AST. `severityPolicyDigest = H({phase,readinessPolicy,settings})`, where settings is the fully flattened effective setting array sorted by UTF-16 rule name, including subrules but excluding the generated transport rule. The profile digest pins rule/options content separately.",
+      "sha256": "d6e0059b8624b5fe6cee886fa9e1ddf9cae715dc578ff1a32fb17412d170512f"
+    },
+    {
+      "ref": "DESIGN.md:508",
+      "text": "The profile plugin evaluates once at Definitions with a per-call guard; it never mutates moddle. Every emitted subfinding MUST provide profileRuleId, code, messageKey and sourcePointer, plus an ID when available; the adapter validates these fields against the compiled rule and original index. Missing required metadata is lint-rule-error, never a successful assertion. Raw upstream report shape remains unchanged and is accepted only through the standard adapter.",
+      "sha256": "6f031f2c3abe96ae9e0e0a51c119dab8317fc20e3e778393c3af17bfe4bfffd4"
+    },
+    {
+      "ref": "DESIGN.md:510",
+      "text": "Upstream path is a string/property or nonnegative integer/index segment array. Resolve the reported ID in the immutable input index and append escaped path segments to its absolute source pointer: replace ~ with ~0, then / with ~1; integer segments use decimal without locale. [] points to the node itself. Unresolvable ID or unsupported path form yields pointer=null/provenance=unavailable; it never fabricates the root pointer. Generic rules supply an already validated absolute RFC 6901 pointer, including ID-less children.",
+      "sha256": "8359c26fa3aa3b380da7c1116bac3c83a0ae12d5bb42b0d13b1cc1962b222e6f"
+    },
+    {
+      "ref": "DESIGN.md:514",
+      "text": "| Standard rule r | r / bpmnlint/r / bpmnlint.r | Exact effective profile policy row |",
+      "sha256": "502d4731eca0192aa39e2bfc4175b4c298b85a72de98630982375effb0c88c31"
+    },
+    {
+      "ref": "DESIGN.md:515",
+      "text": "| Profile subrule r | r / rule.code / rule.message | Exact effective profile:<r> policy row |",
+      "sha256": "70df3f74996290683f8480ec4c2288edc554baa2436d8b1eb49324cd3de2e4f2"
+    },
+    {
+      "ref": "DESIGN.md:516",
+      "text": "| Unknown rule/config | adapter / lint-rule-unknown or lint-config-unknown / same stable code | integrity / error |",
+      "sha256": "2577d9a5502dd30246017dbee07407157c80d5c3538dc4006cd86514761135f2"
+    },
+    {
+      "ref": "DESIGN.md:517",
+      "text": "| Extends cycle | adapter / lint-config-cycle / lint-config-cycle | integrity / error |",
+      "sha256": "210b4424d1979f8b23628eddab3814430195ac2e9adffeaeab2eda31c0af1258"
+    },
+    {
+      "ref": "DESIGN.md:518",
+      "text": "| Rule exception, malformed custom report or unavailable evaluator | adapter / lint-rule-error / lint-rule-error | integrity / error |",
+      "sha256": "0a8b958414e37973785c7bee7646c582cbe4efdb52174deb7271fa0158b3ce42"
+    },
+    {
+      "ref": "DESIGN.md:520",
+      "text": "Merge by (source,ruleId,code,targetId,sourcePointer,stage); do not merge findings from different stages or translated message strings. Preserve rawStandardFindings order/category separately. Corrected pre-N findings remain history with disposition corrected, while final blocking status uses unresolved postconditions/release findings.",
+      "sha256": "d6482aee7b09ad8a5a8aa45210dba7e5de2da04bce7b06bb0c7aa2ed6535620e"
+    },
+    {
+      "ref": "DESIGN.md:522",
+      "text": "Python exposes `bpmn_io.profile.lint(envelope, compiled, *, phase, readiness_policy)` and `bpmn-io profile lint --json`, returning the unified Result/1. This is a new profile entry point; the standard `bpmn-io lint --json` remains the literal upstream interface. Profile ok is true iff the operation succeeded and no unresolved unified error entry remains. Counts are over unresolved unified info/warn/error entries, not the raw error category used to transport warnings. CLI exit 0 means ok, exit 1 means refused/remaining error, exit 2 means invalid invocation. Tests include profile-warning-through-error-transport, standard info-through-warn, None and thrown unknown lookup, whitelist escape, extends cycle, escaped pointers and A→B→A.",
+      "sha256": "2667e3ce8cca11a28e632da88c2189bdfe49a0c46cd9d299842fef6f884baac9"
+    },
+    {
+      "ref": "DESIGN.md:536",
+      "text": "C runs on extraction or admitted retained native content with distinct actor schemas. Preserve every valid existing ID, editor subtype, port, set membership, condition and source-evidence byte. No “first port” or “first IO set” shortcut.",
+      "sha256": "048da6df4c00e482b46fa430f71389c5a652499035d8b0f98bf46637fcd07870"
+    },
+    {
+      "ref": "DESIGN.md:542",
+      "text": "| Identity/defaults | Allocate missing authorized IDs with stable-id/1, stamp known required generated base defaults; reject source version mismatch first. |",
+      "sha256": "a46c0a2bde2ce2a75771e8cfc9fd67d6f4c58283b4e9583721dff74f9e27001a"
+    },
+    {
+      "ref": "DESIGN.md:552",
+      "text": "**R3.1 owner default ratified on 2026-10-14; technical activation proof still required:** N may create/reuse only profile-declared structural Collaboration, main Participant, reference-band Participant, LaneSet and reserved external Lane. It cannot invent business-role lanes, activities, paths, suppliers, consumers or reference classifications. F3 creates no semantic Lane. The Python workbench refusal-only placement routine is re-specified as this separate N stage, not copied or relabeled as equivalent.",
+      "sha256": "ba7fc76392718248ecac4ff782dd44f03a0b8e5f5dc332202390d11d13f26b61"
+    },
+    {
+      "ref": "DESIGN.md:558",
+      "text": "| Structure | Ensure/reuse bound Collaboration/main Participant for each represented root Process; bound external lane when recognized calls or IO need it; bound reference band when reference occurrences need it. Allocate IDs immediately through stable-id/1. |",
+      "sha256": "91dde180d4a8169839c6032bca06d6101e7ca0810c0fa405f68e8bb9ee5a5080"
+    },
+    {
+      "ref": "DESIGN.md:565",
+      "text": "Derived output `placements` is exactly `{elementId, ownerProcessId, regionKey, anchorAssociationId?, relatedAssociationIds}[]`, distinct from the empty profile input placements field. Sort by UTF-16 tuple (ownerProcessId, regionKey, elementId, anchorAssociationId absent-before-present, relatedAssociationIds lexicographic). relatedAssociationIds is unique and ID-sorted. No theme-specific field occurs in these derived constraints; F3 resolves region geometry. Empty existing supports survive until explicit dependency-checked deletion. A deleted empty support stays absent while no element/placement needs the role. A later need triggers ensure with the current ownerId. Surviving support IDs remain unchanged through owner remaps; deletion ends that identity, so new creation after remap may produce a new ID and reports it. Undo restores the actual deleted object/ID. Live references to a removed support refuse.",
+      "sha256": "9e219d36efd21d2ba519797ff2a2a3f9ad4f8593da6630951b50c3f366899c72"
+    },
+    {
+      "ref": "DESIGN.md:569",
+      "text": "For every accepted x: C(C(x)) = C(x); N(N(x)) = N(x) in canonical tree, bindings and placement bytes; second-run change entries are empty. Also require JS(N_Python(x)) = N_Python(x) and Python(N_JS(x)) = N_JS(x), first-run equality and exact refusals. This proves more than separate idempotence. Rule conflicts, unresolved bindings, hash collisions and unexpected non-fixed points roll back the entire staged operation.",
+      "sha256": "9c7e000093cba6faecd8743fdf4645dc026a15eb7b7441765f86ced9f18c3dca"
+    },
+    {
+      "ref": "DESIGN.md:573",
+      "text": "The executed neutral-support-fixture.R31.json supplies independently pre-authored native trees, support bindings, created IDs and change counts for five ensure actions (Collaboration, main Participant, LaneSet, reserved Lane, reference-band Participant), plus the main processRef assignment. It covers one Process, two separate Process domains and valid imported non-generated IDs, and checks a no-change second pass. A late band ID collision, duplicate role binding, wrong-parent imported support, band carrying processRef and explicit refusal after five ensures preserve the entire caller tree/bindings. The evaluator stages every mutation on a detached copy; only a successful return exposes a candidate. This is bounded artifact evidence for atomicity/identity, not the browser history or twin-runtime ABI-freeze receipt required by OPEN-RESERVED-N.",
+      "sha256": "1a677a4cabd7e7d5830e1d153fa329e9767f7630ffc2ebb6ad6913dcd396cc2a"
+    },
+    {
+      "ref": "DESIGN.md:583",
+      "text": "createBpmnCanvas(host, options) -> Promise<PureResult<CanvasHandle>>",
+      "sha256": "bcab1910cd1fa85c9c6c8574d4ec2e061abc9f66a336f6d28337ef9a5fe95e2c"
+    },
+    {
+      "ref": "DESIGN.md:584",
+      "text": "canvas.setDefinitions(envelope, {expectedRevision?, expectedViewRevision?, signal?, mode})",
+      "sha256": "991c1642c35bc1abd53cfac633f07df13b6c78d6271589c1e4f35c80841521c6"
+    },
+    {
+      "ref": "DESIGN.md:585",
+      "text": "  -> Promise<Result<{envelope,semanticRevision,viewRevision}>>",
+      "sha256": "3135349dc340df5ba292f5b1c4f57f90c9939388c161325ecd9a4c9705d59ece"
+    },
+    {
+      "ref": "DESIGN.md:586",
+      "text": "canvas.getDefinitions() -> Result<DocumentEnvelope>",
+      "sha256": "2213a88fdb8d123e4b85977b132ebfbc8ca8cb4f9f1bf404607cc28d1210caf5"
+    },
+    {
+      "ref": "DESIGN.md:587",
+      "text": "canvas.applyCommands({baseRevision,expectedViewRevision,commands,transactionId,signal?})",
+      "sha256": "bc5f7dbfb7ae87bad184e08038d7fed86c5690e718afb6cc602254e4da931986"
+    },
+    {
+      "ref": "DESIGN.md:588",
+      "text": "  -> Promise<Result<{envelope,semanticRevision,viewRevision,transactionId,changed}>>",
+      "sha256": "ba5d20926535f00f5349f668f4986b9894bcd65a5b21509c8adb06d26726a70e"
+    },
+    {
+      "ref": "DESIGN.md:589",
+      "text": "canvas.activateBusinessProfile(compiled, explicitMigrationPlan?)",
+      "sha256": "ea1684455c83d26117aed3e101d9522bdc434e5961633fdbcd6e4f224757b393"
+    },
+    {
+      "ref": "DESIGN.md:590",
+      "text": "  -> Promise<Result<{envelope,semanticRevision,viewRevision,historyEpoch}>>",
+      "sha256": "fb7d0f08e529cffb857755543c08a51e26b5873d2e6de8dc89b9a9675c1fb143"
+    },
+    {
+      "ref": "DESIGN.md:591",
+      "text": "canvas.setTheme(themeId, overrides?) -> Promise<Result<{viewRevision}>>",
+      "sha256": "c318377c9f30d7b1f5cffa56f6f28c9fe7ebd75474f478feebf9a5bf2d6160f8"
+    },
+    {
+      "ref": "DESIGN.md:592",
+      "text": "canvas.getSnapshot() -> Result<Snapshot>",
+      "sha256": "fb9a878f938b45b58cc9ea895bf7840e9c4394874c6f76340e4ac24f556fd520"
+    },
+    {
+      "ref": "DESIGN.md:593",
+      "text": "canvas.restoreSnapshot(snapshot, {expectedRevision?,signal?})",
+      "sha256": "dc77cc47d2c549c7a318c06a78e463a34ae6ec51f5b4fc57755782d1ebe1418f"
+    },
+    {
+      "ref": "DESIGN.md:594",
+      "text": "  -> Promise<Result<{envelope,semanticRevision,viewRevision,historyEpoch}>>",
+      "sha256": "fb7d0f08e529cffb857755543c08a51e26b5873d2e6de8dc89b9a9675c1fb143"
+    },
+    {
+      "ref": "DESIGN.md:595",
+      "text": "canvas.undo({expectedRevision,expectedViewRevision}) -> Promise<Result<Snapshot>>",
+      "sha256": "8ea8eab50eae59cf73367b537ae8dc24a34f48ae397adb305457b5bfe9d4a05c"
+    },
+    {
+      "ref": "DESIGN.md:596",
+      "text": "canvas.redo({expectedRevision,expectedViewRevision}) -> Promise<Result<Snapshot>>",
+      "sha256": "8e899e0ae693a0db98e9554a0466a20b77f6d6763f3b7f033b2fe49bebe98049"
+    },
+    {
+      "ref": "DESIGN.md:597",
+      "text": "canvas.onChange(listener) -> PureResult<{subscriptionId}>",
+      "sha256": "4ac2662fbf1febc71cb874b23e5860cf8651284aaaec0c22608c279d95ec517f"
+    },
+    {
+      "ref": "DESIGN.md:598",
+      "text": "canvas.unsubscribe(subscriptionId) -> PureResult<{unsubscribed:true}>",
+      "sha256": "981a10cf3062b590854e9a221335a3a83e8fbedc4f70348ca74b5fafb41cbf78"
+    },
+    {
+      "ref": "DESIGN.md:599",
+      "text": "canvas.dispose() -> Promise<PureResult<{disposed:true}>>",
+      "sha256": "e33b166cdba751d2b1a90b877c7e627dd41676e5830216c53f89327640d845cb"
+    },
+    {
+      "ref": "DESIGN.md:600",
+      "text": "prepareExport(compiled,envelope,{format,themeId,overrides,diStyles,signal?})",
+      "sha256": "7ffdeed9fedcd25f0603065f28a7fa4641ce64f66cb721c6a617b786b946fced"
+    },
+    {
+      "ref": "DESIGN.md:601",
+      "text": "  -> Promise<Result<PreparedArtifact>>",
+      "sha256": "f892a4a7f8b0927f49df7740646d240906228d946235bb7ce3173179dbc1343d"
+    },
+    {
+      "ref": "DESIGN.md:602",
+      "text": "canvas.exportPrepared(prepared) -> Promise<Result<{format,bytes,digest,idMap,capability}>>",
+      "sha256": "fef69e76acae89ad6a9670a7c7b0fb96a79e2feca5290b112fd96f3731eb3e33"
+    },
+    {
+      "ref": "DESIGN.md:604",
+      "text": "Every signature names exactly one closed union from §10.1; there is no independent TransactionResult or bare-success editor return. Getters are synchronous immutable reads, all queued loading, editor, layout, activation, snapshot restoration and byte-producing preparation operations are asynchronous. All expected refusals, cancellation and disposed-state calls return the same union (operation-cancelled/canvas-disposed), not a rejected Promise. Unexpected internal exceptions become operation-error after stage rollback. CanvasHandle/DescriptorContext are opaque in-process handles with no serialized functions; their versioned factories own immutable descriptor pins and enforce single-context use.",
+      "sha256": "b4edaeb2fdbc296d7bc87cc7fec509c5b2ddbe669e21fc265e179c25f7c05a2e"
+    },
+    {
+      "ref": "DESIGN.md:606",
+      "text": "A descriptor package input is exactly {id,version,sha256,descriptorBytes}; descriptorBytes is immutable UTF-8 JSON and its raw SHA-256 must match. IDs are unique and all required BPMN/DI/DC/extension pins are provided explicitly. Duplicate package/type definitions, unknown pins or a second singleton context with different bytes refuse descriptor-mismatch. No sem/extension package is forced. The closed change event is {envelope,semanticRevision,viewRevision,transactionId,origin,report}; origin is load|command|undo|redo|migration|theme|snapshot, emitted once only after commit. Subscription IDs are session-local, excluded from parity and invalid after disposal.",
+      "sha256": "e140e286d5977b50388d54c23ca455fe6a53279c401d5b48717477ab95fc0e51",
+      "authoritySha256": "47efe86ff95fdaed0796081df4a5d04ea000bfba781cb9012a628ebe798e9b69"
+    },
+    {
+      "ref": "DESIGN.md:610",
+      "text": "A snapshot is exactly {snapshotVersion:\"1\",envelope,presentation,viewRevision}. There is no duplicate top-level profileIdentity that can override envelope.profileIdentity. Presentation is exactly {layout,themeId,overrides,diStyles,importedDi,selection,activePageId}. layout is Layout/1 (§9); overrides/diStyles are the closed §9.2 records; importedDi is {descriptorDigest,diagrams,sha256}, with diagrams the native BPMNDiagram containment array validated by those exact pinned DI/DC descriptors and sha256=H({descriptorDigest,diagrams}). This archived imported DI preserves admitted source presentation; the current displayed geometry is layout, not two competing geometry authorities. selection is an ordered unique array of {pageId,occurrenceKey}; activePageId is a present page ID when layout.pages is nonempty, and is the empty string only when layout.pages is empty. No selection uses semantic ID alone across repeated views. Empty documents have empty pages/selection and activePageId:\"\". All optional content is explicitly empty, never null; unknown fields refuse snapshot-schema.",
+      "sha256": "85f2d60f43e202860cb4cff810e692fcb3200f4da85b737b97eae7de92198250"
+    },
+    {
+      "ref": "DESIGN.md:612",
+      "text": "Restore validates snapshotVersion, envelope integrity and exact profile/base/descriptor identities first, then archived DI digest, layout/override/style shape, selection references and computed viewRevision from §9.2. Host target profile conflicts refuse profile-metadata-conflict; no newer field wins. Missing/stale layout or digest refuses snapshot-stale; recomputation is a separate explicit prepare/load operation, not silent restore behavior. A snapshot from another profile needs a selected migration plan on a copy; a successful migration begins a new history epoch. Snapshot bytes contain no live modeler, editor history, subscription or export-preparation handles. Selection/view navigation do not affect semanticRevision or the render digest. Import/export of Snapshot/1 never persists UI layout in the semantic tree.",
+      "sha256": "0b4a0b962ca822085101b10c132f0efd45c8bf6fb691ce974e14b38a2d98c6c8"
+    },
+    {
+      "ref": "DESIGN.md:619",
+      "text": "No-business-profile calls keep the existing XML API on its documented legacy release: setXml/getXml, exact unedited input XML, revision echoes, cancellation and no implicit normalization. New generic APIs are opt-in. Supplying both XML and native input for one load is `input-conflict`. Abort/dispose before commit exposes no success event or partial model. Serialized operations use expectedRevision and an operation token; a late canceled load cannot replace a newer document. Read-only mode rejects mutations and does not normalize source state. No edit callback automatically saves to the backend; host persistence remains explicit.",
+      "sha256": "2974837e23969c4af1a5f9a9c193db41636ec3ba6893f73e19d8cdb709935409"
+    },
+    {
+      "ref": "DESIGN.md:667",
+      "text": "`Layout/1` is exactly {layoutVersion:\"1\",pages,geometry}. Each page is {pageId,name,order,semanticRootId,bounds}; order is a unique nonnegative safe integer, name is the exact display name captured from the diagram record at layout time, never guessed from pageId. geometry is an ordered array of {pageId,occurrenceKey,semanticId?,role,bounds,label?,sourceOccurrence?,targetOccurrence?,waypoints?}. The page and geometry arrays use §2.2 page/occurrence order. These fields come from the pinned generic layout adapter and injected metrics/region data. Name changes invalidate layoutDigest even when pageId is unchanged.",
+      "sha256": "2a0a5d4d291d4a42e4e6c1f93c0939e5a38c5d9a02f594b715b83f21adee91f1"
+    },
+    {
+      "ref": "DESIGN.md:669",
+      "text": "`RenderData/1` is exactly {renderVersion:\"1\",binding,pages,occurrences,coverage,diagnostics}. pages is the exact Layout.pages array. binding is exactly {semanticRevision,profileDigest,descriptorDigest,layoutDigest,themeId,themeDigest,overridesDigest,diStylesDigest,metricsDigest,payloadDigest}; all digests are computed below. A PageHandle is {pageId,name,order,semanticRootId,bounds}. Export recipes can read /name without host state.",
+      "sha256": "8823fc09a427df34bc6a03160b5070ebf5c8fd78d54bc69e3e8defb48f52107d"
+    },
+    {
+      "ref": "DESIGN.md:671",
+      "text": "Each occurrence is exactly {pageId,occurrenceKey,semanticId?,role,emittedType,bounds,label?,style,glyphId,sourceOccurrence?,targetOccurrence?,waypoints?}. Bounds are {x,y,width,height} safe integer ticks (1 tick=0.001 pt); width/height nonnegative. Label is {text,bounds,lines}, lines an ordered string array. Edges require both endpoints and at least two ordered {x,y} waypoints; nonedges omit all three. Each endpoint is {pageId,occurrenceKey}, resolving exactly in the same R. Cross-page edges need explicit format support. Occurrence keys are nonempty and unique per page. No optional field uses null.",
+      "sha256": "0bd4b8bc7acf0cd7c008030d82c3d2fc150f92ad165e155f0b48d014c3877153"
+    },
+    {
+      "ref": "DESIGN.md:673",
+      "text": "Coverage is {semanticId,occurrences,disposition}[], with occurrences the ordered page/key pairs and disposition rendered|nonvisual|unsupported. Every admitted ID-bearing element is covered; ID-less children are accounted through their containing element and precise diagnostics. Repeated semantic IDs across pages retain every occurrence. Synthetic stripes/legends have no semanticId and use a key derived from declaration ID, owner ID and page ID. diagnostics uses the Report/2 entry shape. Style is a sorted unique array of typed {name,value} tokens; unknown tokens refuse.",
+      "sha256": "df7a787ca0e50a1b092276c1bbc18f6e01b0f05b4fe572276745d819a9912e6d"
+    },
+    {
+      "ref": "DESIGN.md:677",
+      "text": "All expressions use H from §3.1, with no newline and UTF-16 key order. Sort records before hashing only as explicitly stated; never sort a meaningful source array. Empty data hashes its specified empty record/array, not an omitted field.",
+      "sha256": "984e58677596e4438038cf82eadbbba287b5e22ed426c295ebfebfa904b5f202"
+    },
+    {
+      "ref": "DESIGN.md:681",
+      "text": "| profileDigest | Complete profile JSON, including symbolic migration self, H(profile) |",
+      "sha256": "09190353742c77d062796d63aa288aeac24b8ece46298a3293a57878a7209c2c"
+    },
+    {
+      "ref": "DESIGN.md:682",
+      "text": "| descriptorDigest | H(descriptorPins sorted by unique id), each pin exactly {id,version,sha256} |",
+      "sha256": "7a891e602f945ead2d2cc0db59c864869cd2bf6a5822a959298c5c0d6dc6f9df"
+    },
+    {
+      "ref": "DESIGN.md:683",
+      "text": "| layoutDigest | H(entire Layout/1 record) |",
+      "sha256": "d55c0b933b2a04822546ee1565b05716fe2b350543ff3c4af4a0b203428f5702"
+    },
+    {
+      "ref": "DESIGN.md:684",
+      "text": "| themeDigest | H({themeId,themes}), themes the complete resolved fallback-chain theme records from fallback root to selected theme |",
+      "sha256": "29a859bb66801b6112b423a1a26bc32b66831d508ac1b2e88af2f8cb5f27664d"
+    },
+    {
+      "ref": "DESIGN.md:685",
+      "text": "| overridesDigest | H(Overrides/1 normalized as below) |",
+      "sha256": "df698203e0f862d1d7d20b96fa580a9dec936b3698a47a151ca25853b710cab0"
+    },
+    {
+      "ref": "DESIGN.md:686",
+      "text": "| diStylesDigest | H(DiStyles/1 normalized as below) |",
+      "sha256": "4991d2dac8436924f5d964584a2f5830515d088522fa32ad22544214639279bb"
+    },
+    {
+      "ref": "DESIGN.md:687",
+      "text": "| metricsDigest | H([{id,sha256}] sorted by unique resource id), sha256=B(raw injected metric bytes) |",
+      "sha256": "e809e86de53537b7042b39087b619e13aade10890dbd96ea4c79704e82770d0c"
+    },
+    {
+      "ref": "DESIGN.md:688",
+      "text": "| payloadDigest | H({pages,occurrences,coverage,diagnostics}), excluding binding itself |",
+      "sha256": "0660af150337dfc1e82d1f2d3a3a56f112eaac21068303b03c5bc57a5ebc4280"
+    },
+    {
+      "ref": "DESIGN.md:690",
+      "text": "`viewRevision = H({semanticRevision,layoutDigest,themeId,themeDigest,overridesDigest,diStylesDigest,metricsDigest})`. The same inputs feed snapshot validation and export freshness. Layout algorithm/metrics versions and profile policy changes are already bound through profileIdentity and the metric resource pins; the layout receipt additionally pins the executable adapter artifact. A stale field, mismatching payload hash or unresolved input returns render-stale. Terminal serialization never repairs R. prepareExport may explicitly create a new R and receipt.",
+      "sha256": "1ed205638fedd2257d04a14dde4cfa14d9730b4a668187f513ae277e9cd7ed33"
+    },
+    {
+      "ref": "DESIGN.md:692",
+      "text": "Overrides/1 is exactly {semantic:[{semanticId,tokens}],occurrence:[{pageId,occurrenceKey,tokens}]}; targets unique, tokens unique by name. Normalize semantic records by semanticId and occurrence records by pageId then occurrenceKey, all UTF-16, and tokens by name. DiStyles/1 is exactly {native:[{pageId,occurrenceKey,tokens}],bioc:[{pageId,occurrenceKey,tokens}]}, normalized by the same occurrence/name order. Imported native color-DI and bioc are decoded into separate arrays; they never overwrite one another during import. Overrides may be empty {semantic:[],occurrence:[]}; styles may be {native:[],bioc:[]}. Reject unknown targets/tokens, duplicate targets, nulls and nonfinite/unsafe numeric values. Raw archived imported DI is separately digest-checked in Snapshot/1.",
+      "sha256": "25fbf3193a734adfe155238b6bd98f91727465a7a7d164b11ed66e58190ead07"
+    },
+    {
+      "ref": "DESIGN.md:694",
+      "text": "Required fixed vectors independently pin every digest, distinct page IDs/names, empty override/style bags, reordered input records normalizing identically, a changed metric byte, one changed page name and one changed occurrence payload. A theme selection/override changes viewRevision only; a new profile package changes its acceptance-context semanticRevision through explicit migration. The fixture validator reports exactly which vectors it executes.",
+      "sha256": "fc0807f41099bdacdd8fcc0227c7a8c0ce7e40585f8978fd88ae066272b6961e"
+    },
+    {
+      "ref": "DESIGN.md:700",
+      "text": "Resolve each token independently: occurrence override > semantic-ID override > native color-DI > bioc-DI > notion renderBinding tokens > selected theme tokens > declared theme fallback chain. Sparse overrides stay sparse. Unrecognized token types refuse render-token-invalid. Generic render-token/1 signatures admit fill/stroke/textColor as #RRGGBB or #RRGGBBAA, fontFamily as an injected resource family, nonnegative finite strokeWidth/fontSize, fontWeight from normal|bold, dash as a registered symbolic style, arrow from none|open|filled|hollow-triangle, and versioned case/region/template fields described here. Any additional token requires an explicit pinned signature. No CSS execution or arbitrary attributes.",
+      "sha256": "7f0f5358577161813ee49d5a390889cca6b1e78682534c95c4869c7133699237"
+    },
+    {
+      "ref": "DESIGN.md:704",
+      "text": "Glyph shape conditionals follow the schema: every native, path and template glyph requires viewBox with positive width and height; native requires nativeType and empty commands; path requires a positive-size viewBox and nonempty M/L(two values), C(six), Q(four), Z(zero) commands; template requires a closed generic template ID and exact typed parameters, empty commands and no nativeType. No HTML, arbitrary SVG, network resource or callback. Unknown glyph capability returns render-unsupported. This is an explicit R3 divergence from the earlier request for automatic standard-notation fallback: a profile must select a supported native glyph deliberately, including its export-loss policy.",
+      "sha256": "1ef35e33e47d086e3b64c45961b70ddb71c115f025b476044d8e317e338a0828"
+    },
+    {
+      "ref": "DESIGN.md:715",
+      "text": "Template parameter duplicates, wrong types, missing fields or extras refuse profile-glyph-shape. Distances are integer ticks at output; rational computations round once using §3. theme.syntheticOccurrences declares {id,select,role,label,region,glyph,tokens}, where role is band-stripe|attached-badge. Evaluate its native selector once on the immutable normalized tree; for every selected owner on each represented page emit a synthetic occurrence key JCS([id,owner.id,pageId]). Resolve region through the owner's placement/layout region; no matching region refuses render-region-missing. A stripe can use any declared compatible glyph; role determines its placement, glyph its paint. Source association hiding requires the unique approved placement anchor; no nearest-activity repair is implicit. The second neutral profile includes a header-band glyph and synthetic side stripe. Full browser/export template rendering remains a lot-4 proof, not a schema-validation claim.",
+      "sha256": "05e21ce3801c4a6c303c25bd1048a02466a9748ebfd38c73d210d0b58b0dbbec"
+    },
+    {
+      "ref": "DESIGN.md:735",
+      "text": "For document operations, `Result/1` is a discriminated closed union. Success has exactly `{status:\"ok\", operation, profileIdentity, baseRevision, revision, report, payload}`; payload schema depends on operation (envelope, placements, R, prepared artifact or bytes). Refusal has exactly `{status:\"refused\", operation, profileIdentity?, baseRevision?, code, diagnostics, report}` and no committed candidate tree/artifact. Missing pre-load identity is omitted, not fabricated. `report` records attempted candidate diagnostics without presenting its revision as committed.",
+      "sha256": "70d5061a79d79fb7a3567d6792d3f80f5b7b3fbb9cb8cdbd7809b1773b576b3c"
+    },
+    {
+      "ref": "DESIGN.md:737",
+      "text": "Every operation has the union named at its defining signature (§2.5 and §8.1); PureResult and Result always wrap output in payload. PureResult success is exactly {status:\"ok\",payload,diagnostics}, refusal {status:\"refused\",code,diagnostics}. It is used for profile load/compile/evaluation/selection/planning/staged apply, descriptor/canvas-handle creation, subscription management, read-only reference query/copy and disposal. Result/1 is used for complete/normalize/validate/resolveTheme/mapExport/serializePrepared/prepareExport and every document editor method including getters, theme, snapshots, undo/redo and exportPrepared. Editor operation payloads are closed by §8.1, not an undefined TransactionResult. Before an envelope exists, getters return a Result refusal with document-not-loaded and omitted identity/revisions. Read-only Result operations have baseRevision=revision. Initial import baseRevision uses the exact §3.1 formula. PreparedArtifact is exactly {format,profileIdentity,semanticRevision,viewRevision,ir,renderBinding,report,capability,idMap}; no live modeler or mutable handle escapes. serializePrepared reports the immutable preparation identity and revision and verifies renderBinding freshness. Binary bytes use Uint8Array in JS/bytes in Python; JSON reports contain their digest/artifact reference, never a new untyped payload.",
+      "sha256": "2438e1a73e33089283bc2f5cab388150bfdf4b07f76c001744da2ef71a440fdc"
+    },
+    {
+      "ref": "DESIGN.md:739",
+      "text": "`Report/2` is exactly `{reportVersion:\"2\", operation, sourceIdentity?, targetIdentity?, inputRevision?, outputRevision?, entries, rawStandardFindings, idMap, artifacts}`. Each entry is exactly:",
+      "sha256": "722403f2a616bae7c8d708e145c97219c987793081c54558ed841a0c2f0edcc6"
+    },
+    {
+      "ref": "DESIGN.md:742",
+      "text": "code, severity, classification, stage, ruleId, messageKey, disposition,",
+      "sha256": "2d3e7881880a6ecd76f180bd445a452d656a76ee702d23e3a36c6fd63d9e4df1"
+    },
+    {
+      "ref": "DESIGN.md:743",
+      "text": "source: {domain:tree|profile|artifact|none, pointer:string|null,",
+      "sha256": "f6217c32792dd1ce5dcb4baa90345be32ea2ddceb8e4fc4e98f695d28a3853f3"
+    },
+    {
+      "ref": "DESIGN.md:744",
+      "text": "         targetId:string|null, provenance:exact|unavailable|generated},",
+      "sha256": "d41c796f32f5d567888e49e40f5b93b323842c2d855d1cffd1caf16f21456fb1"
+    },
+    {
+      "ref": "DESIGN.md:745",
+      "text": "result: {domain:tree|profile|artifact|none, pointer:string|null,",
+      "sha256": "2446cd843cffce58774ee0bbb49bfb75f7c874a2886823f4790ec7b8208cbce8"
+    },
+    {
+      "ref": "DESIGN.md:746",
+      "text": "         targetId:string|null, provenance:exact|unavailable|generated},",
+      "sha256": "d41c796f32f5d567888e49e40f5b93b323842c2d855d1cffd1caf16f21456fb1"
+    },
+    {
+      "ref": "DESIGN.md:747",
+      "text": "originalType?, property?, beforePresent, before?, afterPresent, after?,",
+      "sha256": "2ec025a3cba19771b80c11b75514d5750481d30f62d5162950aa72357fa423ff"
+    },
+    {
+      "ref": "DESIGN.md:748",
+      "text": "causedBy?, pageId?, occurrenceKey?, emittedType?, legacyCode?, lossClass?",
+      "sha256": "25c278e52454927d5e66b84eb50edfb9302b781cac0308e94ccead88b47fa53d"
+    },
+    {
+      "ref": "DESIGN.md:751",
+      "text": "Null is allowed only in coordinate pointer/targetId and as an actual before/after source JSON value; presence flags distinguish missing from genuine null in dropped out-of-profile data. before/after are native JSON values read from the immutable source/final result, not profile programs. `severity = info|warn|error`; `classification = integrity|readiness|repairable|advisory|loss`; `disposition = observed|corrected|dropped|mapped|refused`. A loss entry requires lossClass from §10.2 independently of its specific code; other entries omit it. Stage order is load, import, complete, pre-normalize, normalize, post-normalize, layout, post-layout, release, render, export. Within a stage sort ruleId, source domain/pointer, targetId, code, pageId, occurrenceKey, canonical before/after using UTF-16 string ordering, absent before present. Exact duplicate tuples coalesce. This is `profile-report/2`, not the raw bpmnlint comparator. stage is the sole stage field; no second phase field appears in a report entry.",
+      "sha256": "741c34bf928a103b31e1322651e5ba58942eb234f887f846a0ee0887fbd2457d"
+    },
+    {
+      "ref": "DESIGN.md:753",
+      "text": "`idMap` is exactly {sourceId,resultId,domain,pageId?,occurrenceKey?}[], domain migration|export. Sort by (domain,pageId absent-before-present,occurrenceKey absent-before-present,sourceId,resultId), UTF-16 throughout; preserve repeated-view records. Artifact records are {format,pageId?,capability,digest?,entryIndexes}; refused artifacts omit digest. Every loss is reachable through entryIndexes. Capability is the worst occurrence/page/format outcome: engine-byte-compatible < structural < unsupported. Byte compatibility needs every feature and exact serializer/reference-input policy qualified. An unsupported necessary occurrence refuses the entire artifact; no partially valid download.",
+      "sha256": "9a169d40e91449549875aaac7fc30b3f20b0043da1ac29ae88902d577c11c11a"
+    },
+    {
+      "ref": "DESIGN.md:755",
+      "text": "Source pointers are immutable RFC 6901 pointers captured before projection; result pointers address final output, never intermediate arrays. No 256-character cap or truncation. ID-less content uses nearest original ID-bearing ancestor. Long identifiers and dropped unknown properties remain exact. Coordinate domain prevents a profile config error from pretending to be a model pointer. Whole-input resource bounds are explicit and return resource-limit.",
+      "sha256": "c6489532b165bf543c65812ff9df8d3274070ea7844bd84b97207a20d4f7ad62"
+    },
+    {
+      "ref": "DESIGN.md:760",
+      "text": "| JS `IoError(code, ids)` | Integrity/refusal entry per ID; pointer is unavailable unless indexed from the original model. Keep legacy code; no guessed path. |",
+      "sha256": "68371c7f13c120f31e57df8cc278b29d48f06ee12cd4d0c2eea708ce50a15709"
+    },
+    {
+      "ref": "DESIGN.md:761",
+      "text": "| Import `FidelityNotice` | Preserve reported information and loss class; unavailable provenance stays explicit. Enrich the producer for future exact pointers. |",
+      "sha256": "1beb69133d7679155e23f23b9ea7ac781b82d9abc307bb626c154253935c450b"
+    },
+    {
+      "ref": "DESIGN.md:762",
+      "text": "| Python export common report | Preserve pageId, occurrenceKey, emittedType and complete idMap without flattening repeated views. |",
+      "sha256": "5e524f174b92a0809acf3923521b6b3dd7b06b388f6b739a8a1f3d9e661235ee"
+    },
+    {
+      "ref": "DESIGN.md:763",
+      "text": "| Raw bpmnlint | Preserve raw findings, derive unified code/rule/severity through §6, resolve paths against the indexed native input. |",
+      "sha256": "d4d0b6d32551e724dcc4b4133b0f8dba43b70017963fbdc76e620cc44c05cee8"
+    },
+    {
+      "ref": "DESIGN.md:764",
+      "text": "| New C/N | Exact before/after, source/result coordinates, generated support entries and correction disposition. |",
+      "sha256": "75af140411dffa53fabfb997eba9e6f7c71d5dbaa14ef924bdf8a6a06a2b0c61"
+    },
+    {
+      "ref": "DESIGN.md:766",
+      "text": "Canonical coordinate cases remain mandatory: removal at flowElements index 0 must not shift the source pointer for the old index 2; ID-less Documentation; escaped `~`/`/`; ≥16 nested SubProcesses and >256-character pointer; cascading data-edge removal; generated port; N direction reversal; coarse legacy notice; two page occurrences for the same semantic ID.",
+      "sha256": "f1aa44423e2dd159188ae8959ed390efc61aef5cac9187eb80e80d936b57b3de"
+    },
+    {
+      "ref": "DESIGN.md:772",
+      "text": "`export-ir/1` defines a closed common IR field vocabulary. Page requires string id,name; node requires string id and optionally name,shape,fill,stroke,textColor,fontFamily plus numeric fontSize,strokeWidth; edge requires string id,source,target and optionally name,stroke,dash,arrow plus numeric strokeWidth; label requires string id,text; metadata requires string name,value. Duplicate/missing/unknown fields or wrong types refuse profile-export-field. Compile both against this common signature and the selected pinned target adapter: page.shape cannot pass, and a claimed export-ir/1 adapter cannot arbitrarily omit a common supported field without advertising a capability loss. Geometry, label lines and default style copy from current immutable R; recipes read occurrence /label/text and page /name rather than inventing host labels.",
+      "sha256": "25e4076f6dc0881b366fbade9c78d99d94270d915c5bce6c942e395d823f306b"
+    },
+    {
+      "ref": "DESIGN.md:774",
+      "text": "An artifact symbol table lasts for exactly one prepareExport call, across all ordered export recipes and selector iterations. emit.as is a local binding; the emitted id is the globally unique artifact key in this call. emit.parent is a Value expression yielding an earlier emitted page/node id, typically outputId for its deterministic page/occurrence/domain. Pages must be emitted before containers, containers before children, nodes before edges. A parent not yet emitted refuses export-parent-order; cross-call handles, duplicate keys, parent cycles or a parent of incompatible kind refuse export-parent-invalid. Page emits at the artifact root and must omit parent. For node/edge/label, omitted parent means the current page's previously emitted ID; metadata omits parent for artifact-global metadata or explicitly supplies an earlier page/node ID. The table is discarded on refusal/cancellation and never survives A→B→A. No recipe-local alias is assumed to survive into another recipe. Capability predicates evaluate once per occurrence with root, self=occurrence, render, page and an optional semantic binding; native predicates must use semantic and guard its absence for synthetic occurrences. A format-level constraint is checked over render; applicable capability classes aggregate by worst outcome.",
+      "sha256": "7bfe868d8a1045715280339df34f13d7891b8a8c8dcbc82282b53e7036ce875d"
+    },
+    {
+      "ref": "DESIGN.md:776",
+      "text": "Generic capability classes are closed: engine-byte-compatible, structural, unsupported. Closed loss classes are semantic-type, relation-kind, navigation, appearance, layout, metadata, unsupported-feature, provenance-unavailable. An unknown class refuses compilation. For the existing loss action, its field code is a **loss-class enum**, not a diagnostic code: map it to entry.lossClass=action.code, classification=loss, code=\"export-loss/\"+action.code, messageKey=\"export.loss.\"+action.code, severity=warn, stage=export and disposition=mapped. Resolve action.target in the current occurrence/native context, retain exact source coordinates, and use the current emitted artifact pointer as result coordinates (or explicit unavailable provenance). Add pageId/occurrenceKey/emittedType and artifact entryIndexes. Unsupported necessary content uses a typed refusal rather than a misleading mapped loss. Native interpretation is never declared preserved when only a visual substitute exists.",
+      "sha256": "a616b3eca371565ab341d2fad7acee2c4bae6e371e3a7a6b7601e43fe386871f"
+    },
+    {
+      "ref": "DESIGN.md:780",
+      "text": "| IoError unknown-format, unsupported-format | export-format-unsupported / export.format-unsupported / integrity / error |",
+      "sha256": "97a8f9c3f4b17fb868ff2e2b29a9232b4287e5ffd177541043f3dca532ed8002"
+    },
+    {
+      "ref": "DESIGN.md:781",
+      "text": "| IoError invalid-reference, missing-endpoint, duplicate-id | reference-dangling or id-collision / identical stable code / integrity / error |",
+      "sha256": "e18cebd677debfec43103deaefa272b2dcb59b4b2412edefa55a4dfba34d255c"
+    },
+    {
+      "ref": "DESIGN.md:782",
+      "text": "| Known FidelityNotice carrying a declared lossClass | export-loss/<class> / export.loss.<class> / loss / warn, retain legacyCode |",
+      "sha256": "5c1534f22eee49c069e2511e6bcfafddd76bfded92bc2a7826238bf26531b4e5"
+    },
+    {
+      "ref": "DESIGN.md:783",
+      "text": "| Any other legacy exception/code not in the pinned adapter manifest | legacy-unmapped / legacy.unmapped / integrity / error; preserve exact legacyCode and unavailable coordinates |",
+      "sha256": "3c10e7c81eac9e0c619b35238ec18a64082d6546eaa4f581a3ef221d88231ce5"
+    },
+    {
+      "ref": "DESIGN.md:785",
+      "text": "Each adapter publishes its finite per-code manifest before lot 4; no unlisted code is guessed from message text. The closed fallback makes current behavior deterministic while new mappings require a reviewed manifest revision. The same rules apply to workshop and assistant-UI export paths.",
+      "sha256": "14a3065a07df0c9009ac97e2607ed8c11dcc6ab7d9c98332a429bc52012f69f7"
+    },
+    {
+      "ref": "DESIGN.md:969",
+      "text": "Concrete ordinary-path negatives include a disconnected Task beside a valid external call, a gateway without incoming flow, and an ordinary component unreachable from Start/unable to reach End. External-call exemptions may not suppress them. Numeric canonicalizer vectors include 1e21→1e+21, 1e-7→1e-7, -0→0 and 5e-324→5e-324, plus U+10000 before U+E000 keys. These test the JCS codec independently: 1e21 is not an admitted safe profile integer. The Python workbench formatter without exponents is not JCS and cannot be reused unchanged; lot 0 pins an executable JCS implementation/hash per runtime. R3's Node codec/vector checks do not assert a Python implementation was written or run.",
+      "sha256": "d85f744eb366520c6de1a905456ea75b2ca7daa6583b4f738af570b00f6066c7"
+    }
+  ]
+}

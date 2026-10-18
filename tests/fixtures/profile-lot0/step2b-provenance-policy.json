@@ -1,0 +1,1347 @@
+{
+  "format": "profile-step2b-provenance/1",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "vectors": [
+    {
+      "caseId": "s2b-cr01-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:48",
+        "DESIGN.md:182",
+        "DESIGN.md:186",
+        "DESIGN.md:245"
+      ]
+    },
+    {
+      "caseId": "s2b-cr01-unknown",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:48",
+        "DESIGN.md:182",
+        "DESIGN.md:186"
+      ]
+    },
+    {
+      "caseId": "s2b-cr01-duplicate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:48",
+        "DESIGN.md:182",
+        "DESIGN.md:186"
+      ]
+    },
+    {
+      "caseId": "s2b-cr01-missing",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:48",
+        "DESIGN.md:182",
+        "DESIGN.md:186"
+      ]
+    },
+    {
+      "caseId": "s2b-cr01-signature",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:186",
+        "DESIGN.md:245"
+      ]
+    },
+    {
+      "caseId": "s2b-cr02-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:112",
+        "DESIGN.md:166",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s2b-cr02-ids-scalar",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:112",
+        "DESIGN.md:166",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s2b-cr02-output-selection",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:117",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s2b-cr02-concat-number",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s2b-cr02-create-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:174",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s2b-cr03-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:119",
+        "DESIGN.md:123",
+        "DESIGN.md:128",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s2b-cr03-order",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:119",
+        "DESIGN.md:123",
+        "DESIGN.md:128",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s2b-cr03-property",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:119",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s2b-cr03-missing-property",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:119",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s2b-cr03-domain",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s2b-cr04-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:147",
+        "DESIGN.md:182",
+        "DESIGN.md:189"
+      ]
+    },
+    {
+      "caseId": "s2b-cr04-count-reversed",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:147",
+        "DESIGN.md:182",
+        "DESIGN.md:189"
+      ]
+    },
+    {
+      "caseId": "s2b-cr04-hops-reversed",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:150",
+        "DESIGN.md:182",
+        "DESIGN.md:189"
+      ]
+    },
+    {
+      "caseId": "s2b-cr05-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:132",
+        "DESIGN.md:149",
+        "DESIGN.md:182",
+        "DESIGN.md:190"
+      ]
+    },
+    {
+      "caseId": "s2b-cr05-missing",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:182",
+        "DESIGN.md:190"
+      ]
+    },
+    {
+      "caseId": "s2b-cr05-duplicate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:48",
+        "DESIGN.md:81",
+        "DESIGN.md:182",
+        "DESIGN.md:190"
+      ]
+    },
+    {
+      "caseId": "s2b-cr05-cycle",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:132",
+        "DESIGN.md:149",
+        "DESIGN.md:182",
+        "DESIGN.md:190"
+      ]
+    },
+    {
+      "caseId": "s2b-cr05-lint-cycle",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:190",
+        "DESIGN.md:464"
+      ]
+    },
+    {
+      "caseId": "s2b-cr06-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:176",
+        "DESIGN.md:182",
+        "DESIGN.md:191",
+        "DESIGN.md:206",
+        "DESIGN.md:214",
+        "DESIGN.md:216"
+      ]
+    },
+    {
+      "caseId": "s2b-cr06-write",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:176",
+        "DESIGN.md:182",
+        "DESIGN.md:191",
+        "DESIGN.md:206"
+      ]
+    },
+    {
+      "caseId": "s2b-cr06-producer",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:191",
+        "DESIGN.md:206",
+        "DESIGN.md:214",
+        "DESIGN.md:216"
+      ]
+    },
+    {
+      "caseId": "s2b-cr06-absent-delta-source",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:191",
+        "DESIGN.md:216"
+      ]
+    },
+    {
+      "caseId": "s2b-cr06-path-kind",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:182",
+        "DESIGN.md:191",
+        "DESIGN.md:207"
+      ]
+    },
+    {
+      "caseId": "s2b-cr07-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:182",
+        "DESIGN.md:192",
+        "DESIGN.md:284",
+        "DESIGN.md:288"
+      ]
+    },
+    {
+      "caseId": "s2b-cr07-containment-on-id-type",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:182",
+        "DESIGN.md:192",
+        "DESIGN.md:288"
+      ]
+    },
+    {
+      "caseId": "s2b-cr07-allocated-idless",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:182",
+        "DESIGN.md:192",
+        "DESIGN.md:288"
+      ]
+    },
+    {
+      "caseId": "s2b-cr07-owner-number",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:182",
+        "DESIGN.md:192",
+        "DESIGN.md:284"
+      ]
+    },
+    {
+      "caseId": "s2b-cr08-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:193",
+        "DESIGN.md:464",
+        "DESIGN.md:468"
+      ]
+    },
+    {
+      "caseId": "s2b-cr08-missing-stage",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:193",
+        "DESIGN.md:468"
+      ]
+    },
+    {
+      "caseId": "s2b-cr08-unknown-config",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:193",
+        "DESIGN.md:460",
+        "DESIGN.md:464"
+      ]
+    },
+    {
+      "caseId": "s2b-cr08-options-schema",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:193",
+        "DESIGN.md:464"
+      ]
+    },
+    {
+      "caseId": "s2b-cr09-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:154",
+        "DESIGN.md:182",
+        "DESIGN.md:194",
+        "DESIGN.md:700",
+        "DESIGN.md:704"
+      ]
+    },
+    {
+      "caseId": "s2b-cr09-notion-kind",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:154",
+        "DESIGN.md:182",
+        "DESIGN.md:194"
+      ]
+    },
+    {
+      "caseId": "s2b-cr09-glyph",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:194",
+        "DESIGN.md:704"
+      ]
+    },
+    {
+      "caseId": "s2b-cr09-token-type",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:194",
+        "DESIGN.md:700"
+      ]
+    },
+    {
+      "caseId": "s2b-cr10-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:195"
+      ]
+    },
+    {
+      "caseId": "s2b-cr10-missing-parameter",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:195"
+      ]
+    },
+    {
+      "caseId": "s2b-cr10-enum-values",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:65",
+        "DESIGN.md:182",
+        "DESIGN.md:195"
+      ]
+    },
+    {
+      "caseId": "s2b-cr10-readonly-command",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:195"
+      ]
+    },
+    {
+      "caseId": "s2b-cr11-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:169",
+        "DESIGN.md:182",
+        "DESIGN.md:196",
+        "DESIGN.md:210",
+        "DESIGN.md:772",
+        "DESIGN.md:774"
+      ]
+    },
+    {
+      "caseId": "s2b-cr11-extra-field",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:196",
+        "DESIGN.md:772"
+      ]
+    },
+    {
+      "caseId": "s2b-cr11-missing-field",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:196",
+        "DESIGN.md:772"
+      ]
+    },
+    {
+      "caseId": "s2b-cr11-wrong-field-type",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:196",
+        "DESIGN.md:772"
+      ]
+    },
+    {
+      "caseId": "s2b-cr11-output-domain",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:117",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:196"
+      ]
+    },
+    {
+      "caseId": "s2b-cr12-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:197",
+        "DESIGN.md:330"
+      ]
+    },
+    {
+      "caseId": "s2b-cr12-target-pin",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:197",
+        "DESIGN.md:330"
+      ]
+    },
+    {
+      "caseId": "s2b-cr12-self-source",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:197",
+        "DESIGN.md:330"
+      ]
+    },
+    {
+      "caseId": "s2b-cr12-own-pin",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:197",
+        "DESIGN.md:330"
+      ]
+    },
+    {
+      "caseId": "s2b-cr12-recipe-phase",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:197",
+        "DESIGN.md:330"
+      ]
+    },
+    {
+      "caseId": "s2b-cr13-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:162",
+        "DESIGN.md:182",
+        "DESIGN.md:198"
+      ]
+    },
+    {
+      "caseId": "s2b-cr13-recipe-steps-one",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:162",
+        "DESIGN.md:182",
+        "DESIGN.md:198"
+      ]
+    },
+    {
+      "caseId": "s2b-cr13-recipe-steps-zeroOrOne",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:162",
+        "DESIGN.md:182",
+        "DESIGN.md:198"
+      ]
+    },
+    {
+      "caseId": "s2b-cr13-rule-bindings-one",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:162",
+        "DESIGN.md:182",
+        "DESIGN.md:198"
+      ]
+    },
+    {
+      "caseId": "s2b-cr13-rule-bindings-zeroOrOne",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:162",
+        "DESIGN.md:182",
+        "DESIGN.md:198"
+      ]
+    },
+    {
+      "caseId": "s2b-cr14-valid",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:199",
+        "DESIGN.md:210"
+      ]
+    },
+    {
+      "caseId": "s2b-cr14-export-set",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:182",
+        "DESIGN.md:199",
+        "DESIGN.md:206",
+        "DESIGN.md:214"
+      ]
+    },
+    {
+      "caseId": "s2b-cr14-complete-remove",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:171",
+        "DESIGN.md:182",
+        "DESIGN.md:199",
+        "DESIGN.md:212"
+      ]
+    },
+    {
+      "caseId": "s2b-cr14-edit-place",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:168",
+        "DESIGN.md:182",
+        "DESIGN.md:199",
+        "DESIGN.md:209"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-exact",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:320",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-document-0",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:302",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-document-2",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:302",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-missing",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:303",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-xml-alone",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:303",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-conflict",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:304",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-schema",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-mechanism",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:306",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-document-mechanism",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:307",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-mechanism-migration",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:309",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-capability",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:311",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-asset",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:311",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-base",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:312",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-descriptor",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:312",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-business-id",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-business-major",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-digest",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-digest-migration-no-waiver",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-patch-up",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-patch-down",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:316",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-minor-up",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-minor-down",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-source-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-precedence-version",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:302",
+        "DESIGN.md:303",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-precedence-capability",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:311",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-compat-precedence-base",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-valid",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-unknown-field",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430",
+        "DESIGN.md:432"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-null",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-duplicate-binding",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430",
+        "DESIGN.md:440",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-binding-order",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430",
+        "DESIGN.md:677"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-revision-mismatch",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-semantic-change",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-profile-change",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:262",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:322",
+        "DESIGN.md:430",
+        "DESIGN.md:612",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-theme-switch",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:430",
+        "DESIGN.md:684",
+        "DESIGN.md:690",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-di-only",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:266",
+        "DESIGN.md:268",
+        "DESIGN.md:430",
+        "DESIGN.md:683",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-semantic-extension",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:266",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-projection-unknown-role",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:266",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-import-json-spacing",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-import-xml-spacing",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-parse-failure",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:430",
+        "DESIGN.md:735"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-undo-revision",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-envelope-binding-change",
+      "family": "envelope-revisions",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-root-first",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:292",
+        "DESIGN.md:542"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-idless-parent",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-containment",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:163",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-five-supports",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:164",
+        "DESIGN.md:205",
+        "DESIGN.md:207",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:286",
+        "DESIGN.md:288",
+        "DESIGN.md:430",
+        "DESIGN.md:438",
+        "DESIGN.md:552",
+        "DESIGN.md:558",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-fixed-point",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:164",
+        "DESIGN.md:176",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:440",
+        "DESIGN.md:569",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-imported-id",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:438",
+        "DESIGN.md:440",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-collision",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:172",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:569",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-missing-siblings",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:292"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-reorder",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:292",
+        "DESIGN.md:536"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-rename",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:292",
+        "DESIGN.md:536"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-owner-remap",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:444",
+        "DESIGN.md:565",
+        "DESIGN.md:753"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-delete-no-need",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:171",
+        "DESIGN.md:212",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:565"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-recreate",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:164",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:444",
+        "DESIGN.md:565"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-undo",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:268",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:565"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-live-reference",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:171",
+        "DESIGN.md:212",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:565"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-binding-recovery",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:440"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-multi-process",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:164",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:286",
+        "DESIGN.md:288",
+        "DESIGN.md:430",
+        "DESIGN.md:438",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-rollback",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:172",
+        "DESIGN.md:203",
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:569",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-duplicate-role",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:430",
+        "DESIGN.md:440",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-band-process-ref",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:286",
+        "DESIGN.md:288",
+        "DESIGN.md:438",
+        "DESIGN.md:440",
+        "DESIGN.md:573"
+      ]
+    },
+    {
+      "caseId": "s2b-identity-wrong-parent",
+      "family": "identity-lifecycle",
+      "required": [
+        "DESIGN.md:276",
+        "DESIGN.md:280",
+        "DESIGN.md:284",
+        "DESIGN.md:288",
+        "DESIGN.md:438",
+        "DESIGN.md:440",
+        "DESIGN.md:573"
+      ]
+    }
+  ]
+}

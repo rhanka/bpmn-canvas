@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-exporter" exporterVersion="9.9">
+    <bpmn:process id="Team_work" name="Team work" isExecutable="false">
+        <bpmn:laneSet id="LaneSet_Team_work">
+            <bpmn:lane id="Team" name="Team"/>
+            <bpmn:lane id="Lane" name="">
+                <bpmn:flowNodeRef>Draft</bpmn:flowNodeRef>
+            </bpmn:lane>
+            <bpmn:lane id="Team_2" name="Team">
+                <bpmn:flowNodeRef>Kick_off</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Plan_work</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Build</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Delivered</bpmn:flowNodeRef>
+            </bpmn:lane>
+        </bpmn:laneSet>
+        <bpmn:startEvent id="Kick_off" name="Kick-off"/>
+        <bpmn:task id="Plan_work" name="Plan work"/>
+        <bpmn:task id="Draft" name="Draft"/>
+        <bpmn:task id="Build" name="Build"/>
+        <bpmn:dataObjectReference id="Spec" name="Spec"/>
+        <bpmn:dataObjectReference id="Checklist" name="Checklist"/>
+        <bpmn:endEvent id="Delivered" name="Delivered"/>
+        <bpmn:sequenceFlow id="Kick_off_Plan_work" name="" sourceRef="Kick_off" targetRef="Plan_work"/>
+        <bpmn:sequenceFlow id="Plan_work_Draft" name="" sourceRef="Plan_work" targetRef="Draft"/>
+        <bpmn:sequenceFlow id="Draft_Build" name="" sourceRef="Draft" targetRef="Build"/>
+        <bpmn:sequenceFlow id="Build_Delivered" name="" sourceRef="Build" targetRef="Delivered"/>
+        <bpmn:association id="Spec_Build" sourceRef="Spec" targetRef="Build"/>
+        <bpmn:association id="Checklist_Build" sourceRef="Checklist" targetRef="Build"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_Team_work" name="Team work - Diagram">
+        <bpmndi:BPMNPlane id="BPMNPlane_Team_work" bpmnElement="Team_work">
+            <bpmndi:BPMNShape id="Team_gui" bpmnElement="Team" isHorizontal="true">
+                <dc:Bounds x="30" y="0" width="938" height="200"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Lane_gui" bpmnElement="Lane" isHorizontal="true">
+                <dc:Bounds x="30" y="200" width="938" height="200"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Team_2_gui" bpmnElement="Team_2" isHorizontal="true">
+                <dc:Bounds x="30" y="400" width="938" height="214"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Kick_off_gui" bpmnElement="Kick_off">
+                <dc:Bounds x="100" y="41" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Plan_work_gui" bpmnElement="Plan_work">
+                <dc:Bounds x="220" y="26" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Draft_gui" bpmnElement="Draft">
+                <dc:Bounds x="410" y="226" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Build_gui" bpmnElement="Build">
+                <dc:Bounds x="657" y="426" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Spec_gui" bpmnElement="Spec">
+                <dc:Bounds x="659" y="520" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Checklist_gui" bpmnElement="Checklist">
+                <dc:Bounds x="604" y="520" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Delivered_gui" bpmnElement="Delivered">
+                <dc:Bounds x="847" y="441" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="Kick_off_Plan_work_gui" bpmnElement="Kick_off_Plan_work">
+                <di:waypoint x="150.0" y="66.0"/>
+                <di:waypoint x="220.0" y="66.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Plan_work_Draft_gui" bpmnElement="Plan_work_Draft">
+                <di:waypoint x="340.0" y="66.0"/>
+                <di:waypoint x="375.0" y="66.0"/>
+                <di:waypoint x="375.0" y="266.0"/>
+                <di:waypoint x="410.0" y="266.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Draft_Build_gui" bpmnElement="Draft_Build">
+                <di:waypoint x="530.0" y="266.0"/>
+                <di:waypoint x="565.0" y="266.0"/>
+                <di:waypoint x="565.0" y="466.0"/>
+                <di:waypoint x="657.0" y="466.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Build_Delivered_gui" bpmnElement="Build_Delivered">
+                <di:waypoint x="777.0" y="466.0"/>
+                <di:waypoint x="847.0" y="466.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Spec_Build_gui" bpmnElement="Spec_Build">
+                <di:waypoint x="679.0" y="520.0"/>
+                <di:waypoint x="679.0" y="506.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Checklist_Build_gui" bpmnElement="Checklist_Build">
+                <di:waypoint x="624.0" y="520.0"/>
+                <di:waypoint x="624.0" y="513.0"/>
+                <di:waypoint x="665.0" y="513.0"/>
+                <di:waypoint x="665.0" y="506.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

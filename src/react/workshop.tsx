@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useId, useImperativeHandle, useRef, useState } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
 import { createBpmnCanvas } from "../internal/canvas.js";
-import { exportDiagram, importDiagram, IoError } from "../io/index.js";
+import { export as exportModel, initializeCodecs, parseDefinitions, importDiagram, IoError } from "../io/index.js";
 import type { DiagramFile, ExportFormat, ImportResult, IoOptions } from "../io/index.js";
 import type {
   BpmnCanvasHandle,
@@ -17,6 +17,7 @@ import type {
   LegendTokens,
   PaletteColumns,
   ProfileId,
+  ProfileOptions,
   WatermarkOptions,
   WheelMode,
 } from "../types.js";
@@ -34,7 +35,23 @@ export interface FormatOption {
   readonly profile: ProfileId;
   /** Tokens of the `legend` or `colored` profile. */
   readonly tokens?: Partial<LegendTokens>;
+  /** `legend`: the legend palette in this look too. */
+  readonly palette?: ProfileOptions["palette"];
+  /** `colored` only: `classic` flat shapes. */
+  readonly drawing?: ProfileOptions["drawing"];
 }
+
+/** What one export captured, with the file: the document, its revision, the diagram and profile shown, and whether it was edited. */
+export interface DownloadContext {
+  readonly xml: string;
+  readonly revision: string | undefined;
+  readonly diagramId: string | undefined;
+  readonly profile: string;
+  readonly touched: boolean;
+}
+
+/** Rules a sub-process marker uses to find the diagram it opens, tried on each diagram in order. */
+export type NavigationRule = "calledElement" | "exactName" | "sectionNumber" | "substring";
 
 export interface WorkshopHandle {
   /** The complete current document, after any pending edit and save. */
@@ -78,8 +95,18 @@ export interface BpmnWorkshopProps {
   readonly onDiagnostic?: (diagnostic: Diagnostic) => void;
   readonly onSaveError?: (error: unknown) => void;
   readonly onAutoLayoutError?: (error: unknown) => void;
-  /** Receives a file to download. Default: a Blob link click. */
-  readonly onDownload?: (file: DiagramFile) => void;
+  /** Receives a file to download and what its export captured. Default: a Blob link click. */
+  readonly onDownload?: (file: DiagramFile, context: DownloadContext) => void;
+  /** Lay each document the host passes out as part of its load (see `SetXmlOptions.layoutOnLoad`). */
+  readonly layoutOnLoad?: boolean;
+  /** Toolbar contents: zoom ± buttons (default true), auto-layout as an icon (default) or text, import button (default true). */
+  readonly toolbar?: { readonly zoomButtons?: boolean; readonly autoLayout?: "icon" | "text"; readonly importButton?: boolean };
+  /** Menu triggers: chevron drawn (`svg`, default), as text (" ▾") or none; icons before the labels (default true). */
+  readonly menus?: { readonly chevron?: "svg" | "text" | "none"; readonly icons?: boolean };
+  /** Host icons for undo and redo. */
+  readonly icons?: { readonly undo?: ReactNode; readonly redo?: ReactNode };
+  /** Marker navigation by rules (see `navigationResolver`); `resolveTarget` gives a resolver of your own instead. */
+  readonly navigation?: { readonly rules: readonly NavigationRule[] };
   /**
    * Receives a validated import. When provided the workshop applies nothing itself: store the xml and pass it back
    * as `xml`. When omitted the workshop applies it to its own canvas.
@@ -114,6 +141,48 @@ export function defaultResolveTarget(click: ElementClick, diagrams: readonly Dia
   if (!name) return null;
   return others.find((d) => norm(d.name) === name)?.id ?? null;
 }
+
+const SECTION_NUMBER = /\b\d+(?:\.\d+)+\b/;
+
+/**
+ * A marker resolver from rules: diagrams are walked in order, the shown one skipped, and the first diagram that
+ * matches any rule wins. `calledElement`: the called element is the diagram's id or name. `exactName`: same name.
+ * `sectionNumber`: both names carry the same dotted number (`2.1`). `substring`: one name contains the other.
+ */
+export function navigationResolver(rules: readonly NavigationRule[]): (click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined) => string | null {
+  const on = new Set(rules);
+  return (click, diagrams, activeId) => {
+    const name = norm(click.name);
+    const called = norm(click.calledElement);
+    const isSub = click.type === "bpmn:SubProcess" || click.type === "bpmn:CallActivity" || !!called;
+    if (!isSub && !name) return null;
+    for (const d of diagrams) {
+      if (d.id === activeId) continue;
+      const dn = norm(d.name);
+      if (on.has("calledElement") && called && (norm(d.id) === called || dn === called)) return d.id;
+      if (!name) continue;
+      if (on.has("exactName") && dn === name) return d.id;
+      if (on.has("sectionNumber")) {
+        const a = SECTION_NUMBER.exec(name)?.[0];
+        const b = SECTION_NUMBER.exec(dn)?.[0];
+        if (a && b && a === b) return d.id;
+      }
+      if (on.has("substring") && dn && (dn.includes(name) || name.includes(dn))) return d.id;
+    }
+    return null;
+  };
+}
+
+const abortError = (): Error => {
+  const e = new Error("The document changed during the export");
+  e.name = "AbortError";
+  return e;
+};
+
+const profileOptionsOf = (f: FormatOption | undefined): ProfileOptions => ({
+  ...(f?.palette ? { palette: f.palette } : {}),
+  ...(f?.drawing ? { drawing: f.drawing } : {}),
+});
 
 function defaultDownload(file: DiagramFile): void {
   const blob = new Blob([file.xml], { type: file.mimeType });
@@ -150,7 +219,9 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
   const formatRef = useRef(format);
   formatRef.current = format;
   const currentProfile = useRef<string>("");
-
+  /** Increases with every new document the canvas shows (host update or local import): an export spanning one is dropped. */
+  const docSeq = useRef(0);
+  const lastEmitted = useRef<string | undefined>(undefined);
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
   const [diagrams, setDiagrams] = useState<readonly DiagramInfo[]>([]);
@@ -182,6 +253,7 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       if (!h) return;
       try {
         const xml = await h.getXml();
+        lastEmitted.current = change.revision;
         latest.current.onXmlChange?.(xml, change);
       } catch (error) {
         // Superseded by a newer document from the host, or the canvas is gone: nothing to save.
@@ -204,6 +276,8 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       xml: p.xml,
       ...(p.revision !== undefined ? { revision: p.revision } : {}),
       profile: fmt?.profile ?? "standard",
+      profileOptions: profileOptionsOf(fmt),
+      ...(p.layoutOnLoad ? { layoutOnLoad: true } : {}),
       ...(tokens && fmt?.profile === "legend" ? { legendTokens: tokens } : {}),
       ...(tokens && fmt?.profile === "colored" ? { coloredTokens: tokens } : {}),
       ...(paletteColumns !== undefined ? { paletteColumns } : {}),
@@ -225,6 +299,10 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       onDiagnostic: (d) => {
         latest.current.onDiagnostic?.(d);
         if (d.code === "read-only-lossy") addNotice("warning", latest.current.labels?.readOnlyLossy ?? DEFAULT_LABELS.readOnlyLossy);
+        if (d.code === "load-layout-failed") {
+          latest.current.onAutoLayoutError?.(new Error(d.message));
+          addNotice("error", latest.current.labels?.autoLayoutFailed ?? DEFAULT_LABELS.autoLayoutFailed);
+        }
       },
       onStateChange: (s) => {
         setState(s);
@@ -238,7 +316,8 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
         if (!click.marker) return;
         const h = handleRef.current;
         if (!h) return;
-        const resolve = latest.current.resolveTarget ?? defaultResolveTarget;
+        const nav = latest.current.navigation;
+        const resolve = nav ? navigationResolver(nav.rules) : (latest.current.resolveTarget ?? defaultResolveTarget);
         const target = resolve(click, diagramsRef.current, activeRef.current);
         if (target && target !== activeRef.current) void h.selectDiagram(target).catch(() => undefined);
       },
@@ -260,7 +339,12 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
     if (!h || !last) return;
     if (last.xml === props.xml && last.revision === props.revision) return;
     applied.current = { xml: props.xml, revision: props.revision };
-    void h.setXml(props.xml, props.revision !== undefined ? { revision: props.revision } : {}).then(refreshView, () => undefined);
+    // The workshop's own change coming back (same revision) is an echo, not a new document.
+    if (props.revision === undefined || props.revision !== lastEmitted.current) {
+      docSeq.current++;
+    }
+    const options = { ...(props.revision !== undefined ? { revision: props.revision } : {}), ...(latest.current.layoutOnLoad ? { layoutOnLoad: true } : {}) };
+    void h.setXml(props.xml, options).then(refreshView, () => undefined);
   }, [props.xml, props.revision, refreshView]);
 
   useEffect(() => {
@@ -276,7 +360,7 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
     const fmt = format;
     if (!h || !fmt || currentProfile.current === fmt.id) return;
     currentProfile.current = fmt.id;
-    void h.setProfile(fmt.profile, fmt.tokens).then(refreshView, () => undefined);
+    void h.setProfile(fmt.profile, fmt.tokens, profileOptionsOf(fmt)).then(refreshView, () => undefined);
   }, [format, refreshView]);
 
   useImperativeHandle(
@@ -316,10 +400,19 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
   const doExport = async (fmt: ExportFormat): Promise<void> => {
     const h = handleRef.current;
     if (!h) return;
+    const seq = docSeq.current;
     try {
       await saveTail.current;
-      const file = exportDiagram(await h.getXml(), fmt, props.ioOptions);
-      (props.onDownload ?? defaultDownload)(file);
+      // One capture: the document, its revision, the diagram and profile shown, and whether it was edited.
+      const snap = await h.snapshot();
+      if (docSeq.current !== seq) throw abortError();
+      const p = latest.current;
+      initializeCodecs(p.ioOptions);
+      const definitions = (await parseDefinitions(snap.xml)).rootElement;
+      const bytes = await exportModel(definitions, fmt);
+      if (docSeq.current !== seq) throw abortError();
+      const file: DiagramFile = { xml: new TextDecoder().decode(bytes), filename: fmt === "drawio" ? "diagram.drawio" : fmt === "sparx" ? "diagram.sparx.xml" : "diagram.bpmn", mimeType: fmt === "drawio" ? "application/vnd.jgraph.mxfile" : fmt === "sparx" ? "application/xml" : "application/bpmn+xml", fidelity: [] };
+      (p.onDownload ?? defaultDownload)(file, { xml: snap.xml, revision: snap.revision, diagramId: snap.diagramId, profile: snap.profile, touched: snap.touched });
       for (const f of file.fidelity) addNotice("info", f.message);
     } catch (error) {
       addNotice("error", `${labels.exportFailed}: ${error instanceof IoError || error instanceof Error ? error.message : String(error)}`);
@@ -331,7 +424,10 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       const result = await importDiagram(await readText, props.ioOptions);
       for (const f of result.fidelity) addNotice("info", f.message);
       if (props.onImport) props.onImport(result);
-      else await run((h) => h.setXml(result.xml).then(refreshView));
+      else {
+        docSeq.current++;
+        await run((h) => h.setXml(result.xml).then(refreshView));
+      }
     } catch (error) {
       addNotice("error", `${labels.importFailed}: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -339,6 +435,7 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
 
   const fitItems: MenuItem[] = [
     { id: "fit-auto", label: labels.fitAuto, onSelect: () => void run((h) => h.fit({ mode: "whole" })) },
+    { id: "fit-separator", kind: "separator", label: "", onSelect: () => undefined },
     { id: "zoom-50", label: labels.zoom50, onSelect: () => void run((h) => h.zoomTo(0.5)) },
     { id: "zoom-100", label: labels.zoom100, onSelect: () => void run((h) => h.zoomTo(1)) },
   ];
@@ -347,15 +444,25 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
     { id: "drawio", label: labels.exportDrawio, onSelect: () => void doExport("drawio") },
     { id: "sparx", label: labels.exportSparx, onSelect: () => void doExport("sparx") },
   ];
-  const formatItems: MenuItem[] = formats.map((f) => ({
-    id: f.id,
-    label: f.label,
-    checked: f.id === format?.id,
-    onSelect: () => {
-      if (props.format === undefined) setOwnFormat(f.id);
-      props.onFormatChange?.(f.id);
-    },
-  }));
+  const formatItems: MenuItem[] = [
+    { id: "format-header", kind: "header", label: labels.format, onSelect: () => undefined },
+    { id: "format-separator", kind: "separator", label: "", onSelect: () => undefined },
+    ...formats.map((f): MenuItem => ({
+      id: f.id,
+      label: f.label,
+      pressed: f.id === format?.id,
+      onSelect: () => {
+        if (props.format === undefined) setOwnFormat(f.id);
+        props.onFormatChange?.(f.id);
+      },
+    })),
+  ];
+  const zoomButtons = props.toolbar?.zoomButtons ?? true;
+  const textLayout = props.toolbar?.autoLayout === "text";
+  const importButton = (props.toolbar?.importButton ?? true) && !props.hideImport;
+  const chevron = props.menus?.chevron ?? "svg";
+  const menuIcons = props.menus?.icons ?? true;
+  const hasDocument = diagrams.length > 0;
 
   const inert = (props.inertLinks ?? true)
     ? (e: React.MouseEvent): void => {
@@ -383,15 +490,29 @@ export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
       onClickCapture={inert}
     >
       <div className="bpmn-workshop__toolbar" role="toolbar" aria-label={labels.toolbar}>
-        {btn("undo", labels.undo, () => void run((h) => h.undo()), <IconUndo />, busy || !canUndo)}
-        {btn("redo", labels.redo, () => void run((h) => h.redo()), <IconRedo />, busy || !canRedo)}
-        {btn("zoom-out", labels.zoomOut, () => void run((h) => h.zoomBy(0.8)), <IconZoomOut />, busy)}
-        {btn("zoom-in", labels.zoomIn, () => void run((h) => h.zoomBy(1.25)), <IconZoomIn />, busy)}
-        <Menu label={<><IconFit /> {labels.fit}</>} ariaLabel={labels.fit} items={fitItems} disabled={busy} testId="bpmn-workshop-fit" title={labels.fitAuto} />
-        {btn("auto-layout", labels.autoLayout, () => void doLayout(), <IconLayout />, busy, labels.autoLayoutHint)}
-        {formats.length > 1 && <Menu label={<><IconFormat /> {format?.label}</>} ariaLabel={labels.format} items={formatItems} disabled={busy} testId="bpmn-workshop-format" title={labels.formatHint} />}
-        {!props.hideExport && <Menu label={<><IconDownload /> {labels.export}</>} ariaLabel={labels.export} items={exportItems} testId="bpmn-workshop-export" />}
-        {!props.hideImport && btn("import", labels.import, () => fileRef.current?.click(), <IconUpload />, busy)}
+        {btn("undo", labels.undo, () => void run((h) => h.undo()), <>{props.icons?.undo ?? <IconUndo />}</>, busy || !canUndo)}
+        {btn("redo", labels.redo, () => void run((h) => h.redo()), <>{props.icons?.redo ?? <IconRedo />}</>, busy || !canRedo)}
+        {zoomButtons && btn("zoom-out", labels.zoomOut, () => void run((h) => h.zoomBy(0.8)), <IconZoomOut />, busy)}
+        {zoomButtons && btn("zoom-in", labels.zoomIn, () => void run((h) => h.zoomBy(1.25)), <IconZoomIn />, busy)}
+        <Menu label={menuIcons ? <><IconFit /> {labels.fit}</> : labels.fit} ariaLabel={labels.fit} chevron={chevron} items={fitItems} disabled={busy} testId="bpmn-workshop-fit" title={labels.fitAuto} />
+        {btn("auto-layout", labels.autoLayout, () => void doLayout(), textLayout ? <>{labels.autoLayout}</> : <IconLayout />, busy, labels.autoLayoutHint)}
+        {formats.length > 1 && (
+          <div role="group" aria-label={labels.format} title={labels.formatHint} className="bpmn-workshop__group">
+            <Menu label={menuIcons ? <><IconFormat /> {format?.label}</> : format?.label} ariaLabel={labels.format} chevron={chevron} items={formatItems} disabled={busy} testId="bpmn-workshop-format" title={labels.formatHint} />
+          </div>
+        )}
+        {!props.hideExport && (
+          <Menu
+            label={menuIcons ? <><IconDownload /> {labels.export}</> : labels.export}
+            // With a text chevron the trigger is named by its text, like the menus that carry their label in their text.
+            {...(chevron === "text" ? {} : { ariaLabel: labels.export })}
+            chevron={chevron}
+            items={exportItems}
+            disabled={busy || !hasDocument}
+            testId="bpmn-workshop-export"
+          />
+        )}
+        {importButton && btn("import", labels.import, () => fileRef.current?.click(), <IconUpload />, busy)}
         <input
           ref={fileRef}
           type="file"

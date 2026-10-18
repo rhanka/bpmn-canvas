@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:profile-mechanism:1:document-envelope",
+  "$comment": "Native tree storage and descriptor invariants are checked separately; no external schema resolution.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "documentVersion": {
+      "const": "1"
+    },
+    "profileIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mechanismVersion": {
+          "const": "1"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "profile": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.:/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "base": {
+          "$ref": "#/$defs/pin"
+        },
+        "descriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pin"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "mechanismVersion",
+        "schemaVersion",
+        "profile",
+        "version",
+        "sha256",
+        "base",
+        "descriptors"
+      ]
+    },
+    "tree": {
+      "type": "object"
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ownerId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "targetId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "ownerId",
+          "role",
+          "targetId"
+        ]
+      }
+    },
+    "semanticRevision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "documentVersion",
+    "profileIdentity",
+    "tree",
+    "bindings",
+    "semanticRevision"
+  ],
+  "$defs": {
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.:/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ]
+    }
+  }
+}

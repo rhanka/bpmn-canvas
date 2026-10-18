@@ -1,0 +1,672 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:profile-mechanism:1:render-data-1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "renderVersion": {
+      "const": "1"
+    },
+    "binding": {
+      "$ref": "#/$defs/binding"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/page"
+      }
+    },
+    "occurrences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/occurrence"
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "semanticId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "occurrences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/pair"
+            }
+          },
+          "disposition": {
+            "enum": [
+              "rendered",
+              "nonvisual",
+              "unsupported"
+            ]
+          }
+        },
+        "required": [
+          "semanticId",
+          "occurrences",
+          "disposition"
+        ]
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "required": [
+    "renderVersion",
+    "binding",
+    "pages",
+    "occurrences",
+    "coverage",
+    "diagnostics"
+  ],
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "semanticRevision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "profileDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "descriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "layoutDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "themeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "themeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "overridesDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "diStylesDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "metricsDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "payloadDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "semanticRevision",
+        "profileDigest",
+        "descriptorDigest",
+        "layoutDigest",
+        "themeId",
+        "themeDigest",
+        "overridesDigest",
+        "diStylesDigest",
+        "metricsDigest",
+        "payloadDigest"
+      ]
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "semanticRootId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bounds": {
+          "$ref": "#/$defs/bounds"
+        }
+      },
+      "required": [
+        "pageId",
+        "name",
+        "order",
+        "semanticRootId",
+        "bounds"
+      ]
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "y": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ]
+    },
+    "occurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semanticId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bounds": {
+          "$ref": "#/$defs/bounds"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "sourceOccurrence": {
+          "$ref": "#/$defs/pair"
+        },
+        "targetOccurrence": {
+          "$ref": "#/$defs/pair"
+        },
+        "waypoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ]
+          },
+          "minItems": 2
+        },
+        "emittedType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "style": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/token"
+          }
+        },
+        "glyphId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "pageId",
+        "occurrenceKey",
+        "role",
+        "bounds",
+        "emittedType",
+        "style",
+        "glyphId"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "emittedType": {
+                "const": "edge"
+              }
+            },
+            "required": [
+              "emittedType"
+            ]
+          },
+          "then": {
+            "required": [
+              "sourceOccurrence",
+              "targetOccurrence",
+              "waypoints"
+            ]
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "sourceOccurrence"
+                  ]
+                },
+                {
+                  "required": [
+                    "targetOccurrence"
+                  ]
+                },
+                {
+                  "required": [
+                    "waypoints"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "bounds": {
+          "$ref": "#/$defs/bounds"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "bounds",
+        "lines"
+      ]
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "pageId",
+        "occurrenceKey"
+      ]
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warn",
+            "error"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "integrity",
+            "readiness",
+            "repairable",
+            "advisory",
+            "loss"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "load",
+            "import",
+            "complete",
+            "pre-normalize",
+            "normalize",
+            "post-normalize",
+            "layout",
+            "post-layout",
+            "release",
+            "render",
+            "export"
+          ]
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "messageKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disposition": {
+          "enum": [
+            "observed",
+            "corrected",
+            "dropped",
+            "mapped",
+            "refused"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/coordinate"
+        },
+        "result": {
+          "$ref": "#/$defs/coordinate"
+        },
+        "beforePresent": {
+          "type": "boolean"
+        },
+        "afterPresent": {
+          "type": "boolean"
+        },
+        "originalType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property": {
+          "type": "string",
+          "minLength": 1
+        },
+        "causedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "emittedType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legacyCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "before": true,
+        "after": true,
+        "lossClass": {
+          "enum": [
+            "semantic-type",
+            "relation-kind",
+            "navigation",
+            "appearance",
+            "layout",
+            "metadata",
+            "unsupported-feature",
+            "provenance-unavailable"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "classification",
+        "stage",
+        "ruleId",
+        "messageKey",
+        "disposition",
+        "source",
+        "result",
+        "beforePresent",
+        "afterPresent"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "beforePresent": {
+                "const": true
+              }
+            },
+            "required": [
+              "beforePresent"
+            ]
+          },
+          "then": {
+            "required": [
+              "before"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "before"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "afterPresent": {
+                "const": true
+              }
+            },
+            "required": [
+              "afterPresent"
+            ]
+          },
+          "then": {
+            "required": [
+              "after"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "after"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "classification": {
+                "const": "loss"
+              }
+            },
+            "required": [
+              "classification"
+            ]
+          },
+          "then": {
+            "required": [
+              "lossClass"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "lossClass"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "coordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "enum": [
+            "tree",
+            "profile",
+            "artifact",
+            "none"
+          ]
+        },
+        "pointer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(?:/(?:[^~/]|~[01])*)*$"
+        },
+        "targetId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "provenance": {
+          "enum": [
+            "exact",
+            "unavailable",
+            "generated"
+          ]
+        }
+      },
+      "required": [
+        "domain",
+        "pointer",
+        "targetId",
+        "provenance"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "unavailable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "pointer": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "pointer": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "domain": {
+                "const": "none"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "pointer": {
+                "type": "null"
+              },
+              "targetId": {
+                "type": "null"
+              },
+              "provenance": {
+                "const": "unavailable"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

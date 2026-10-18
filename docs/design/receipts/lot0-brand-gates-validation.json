@@ -1,0 +1,574 @@
+{
+  "format": "lot0-brand-gates-validation/1",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "conductorDecision": "Legacy source/build/package gates accept only hashes derived from the pinned committed baseline, which may only shrink and must be empty in lot 2. Main history remains strict.",
+  "red": {
+    "label": "red-final",
+    "exitCode": 1,
+    "seconds": 15.402,
+    "counts": [
+      "# tests 14",
+      "# pass 4",
+      "# fail 10",
+      "# cancelled 0",
+      "# skipped 0",
+      "# duration_ms 15319.861602"
+    ],
+    "failures": [
+      "not ok 1 - should derive legacy hash allowances from the committed shrinking baseline",
+      "  location: '<repo>/tests/brand-legacy-gates.test.mjs:34:1'",
+      "  error: 'baselineHashAllowlist is not a function or its return value is not iterable'",
+      "not ok 2 - should reject non-baseline hashes with path and line diagnostics in legacy gates",
+      "  location: '<repo>/tests/brand-legacy-gates.test.mjs:55:1'",
+      "  error: 'outsideBaselineHashes is not a function'",
+      "not ok 3 - should exempt only baseline hashes in unpushed lot 0 commit messages",
+      "  location: '<repo>/tests/brand-legacy-gates.test.mjs:64:1'",
+      "  error: 'scanCommitMessages is not a function'",
+      "not ok 4 - should reject baseline hashes in main history even when inherited by lot 0",
+      "  location: '<repo>/tests/brand-legacy-gates.test.mjs:75:1'",
+      "  error: 'scanCommitMessages is not a function'",
+      "not ok 5 - should reject baseline hashes after the local commit becomes reachable from main",
+      "  location: '<repo>/tests/brand-legacy-gates.test.mjs:81:1'",
+      "  error: 'scanCommitMessages is not a function'",
+      "not ok 6 - should reject baseline hashes on other branches and remote reachable commits",
+      "  location: '<repo>/tests/brand-legacy-gates.test.mjs:89:1'",
+      "  error: 'scanCommitMessages is not a function'",
+      "not ok 8 - should wire the publication lifecycle to the brand release gate",
+      "  location: '<repo>/tests/brand-release-gate.test.mjs:43:1'",
+      "  error: |-",
+      "not ok 9 - should refuse publication with a nonempty baseline and no override",
+      "  location: '<repo>/tests/brand-release-gate.test.mjs:47:1'",
+      "  error: |-",
+      "not ok 10 - should allow publication with a committed nominative override for this version and date",
+      "  location: '<repo>/tests/brand-release-gate.test.mjs:53:1'",
+      "  error: |-",
+      "not ok 11 - should allow publication when the baseline is empty",
+      "  location: '<repo>/tests/brand-release-gate.test.mjs:59:1'",
+      "  error: |-"
+    ],
+    "log": "/tmp/lot0-gate-red-final.log"
+  },
+  "regression": {
+    "label": "regression",
+    "command": "node --test tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs",
+    "startedAt": "2026-10-16T03:25:06.943Z",
+    "completedAt": "2026-10-16T03:25:10.301Z",
+    "exitCode": 0,
+    "signal": null,
+    "seconds": 3.35715171,
+    "counts": [
+      "# tests 14",
+      "# suites 0",
+      "# pass 14",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0",
+      "# duration_ms 3277.676904"
+    ],
+    "failures": [],
+    "log": "/tmp/lot0-resume-regression.log",
+    "redactedLines": 0,
+    "logSha256": "b04aef0658c180b8e5535c57ba337e4b7eb6a87fde3d9aff17790eaf7ab56d00"
+  },
+  "typecheck": {
+    "label": "typecheck",
+    "command": "npm run typecheck",
+    "startedAt": "2026-10-16T03:24:54.856Z",
+    "completedAt": "2026-10-16T03:24:57.068Z",
+    "exitCode": 0,
+    "signal": null,
+    "seconds": 2.2112261839999996,
+    "counts": [],
+    "failures": [],
+    "log": "/tmp/lot0-resume-typecheck.log",
+    "redactedLines": 0,
+    "logSha256": "75b00b0358d963d3426e2fd6affbf3e17c73e9ef8689826d4c051e18c05e604d"
+  },
+  "brand": {
+    "label": "brand",
+    "command": "node --test tests/brand-baseline.test.mjs tests/brand-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/colored-style.test.mjs tests/legend-style.test.mjs tests/package-shape.test.mjs tests/profile-brand-guard.test.mjs",
+    "startedAt": "2026-10-16T03:25:17.012Z",
+    "completedAt": "2026-10-16T03:25:21.213Z",
+    "exitCode": 1,
+    "signal": null,
+    "seconds": 4.199877041,
+    "counts": [
+      "# tests 64",
+      "# suites 0",
+      "# pass 63",
+      "# fail 1",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0",
+      "# duration_ms 4102.702368"
+    ],
+    "failures": [
+      "not ok 61 - no banned identifier anywhere: tracked files (tests and docs included) and every commit message",
+      "  location: '<repo>/tests/package-shape.test.mjs:169:1'",
+      "  error: |-"
+    ],
+    "log": "/tmp/lot0-resume-brand.log",
+    "redactedLines": 2,
+    "logSha256": "bfbf745b496764a7c213a668e47614dc9c51a378bc48ffbce27953d63328d75e"
+  },
+  "profiles": {
+    "label": "profiles",
+    "command": "node --test tests/profile-boundary-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-identity.test.mjs tests/profile-lint-contract.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s4-fix.test.mjs tests/profile-s4-scope.test.mjs tests/profile-schema.test.mjs tests/profile-snapshot.test.mjs tests/profile-static.test.mjs",
+    "startedAt": "2026-10-16T03:25:17.009Z",
+    "completedAt": "2026-10-16T03:25:18.447Z",
+    "exitCode": 0,
+    "signal": null,
+    "seconds": 1.437544224,
+    "counts": [
+      "# tests 1018",
+      "# suites 0",
+      "# pass 1018",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0",
+      "# duration_ms 1313.324644"
+    ],
+    "failures": [],
+    "log": "/tmp/lot0-resume-profiles.log",
+    "redactedLines": 0,
+    "logSha256": "ad8a28af92eeb1fe44b59b45040b06cb28c0e2c28cf9ab3cd8607cf7884c1072",
+    "coverage": "All profile test files except profile-golden-independence.test.mjs; that file runs without exclusions in full npm test.",
+    "fullSuiteSupplement": {
+      "path": "tests/profile-golden-independence.test.mjs",
+      "tests": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "totalProfileTestsPassed": 1021
+  },
+  "releaseRefusal": {
+    "label": "release-refusal",
+    "command": "npm run prepublishOnly --silent",
+    "startedAt": "2026-10-16T03:25:45.904Z",
+    "completedAt": "2026-10-16T03:25:46.144Z",
+    "exitCode": 1,
+    "signal": null,
+    "seconds": 0.239290649,
+    "counts": [],
+    "failures": [],
+    "log": "/tmp/lot0-resume-release-refusal.log",
+    "redactedLines": 0,
+    "logSha256": "18553e201ad84d5c1ba48c6dd08aa99996a1202ef14c8e747a1aaf33265b47ee",
+    "expectedExitCode": 1,
+    "interpretation": "The actual npm prepublishOnly hook refused the current nonempty baseline without an override. No npm publish command was run."
+  },
+  "mainHistoryFailures": [
+    {
+      "ref": "git/07be09e21d852beb592314d50e0370e883c9b842:1",
+      "sha256": "583423608eda0cb63146a67a6ad655858bc511ba6f0d4fd742c0d898b684295a",
+      "reachableFrom": [
+        "main",
+        "origin/main",
+        "HEAD"
+      ]
+    },
+    {
+      "ref": "git/45aa6903174462e8dd95137971510f28ba5b4a19:7",
+      "sha256": "32ed8e0a3026bc02976abc70f27ddfe1f149b8f4dc5dad00a1451dd7e86e42e9",
+      "reachableFrom": [
+        "main",
+        "origin/main",
+        "HEAD"
+      ]
+    }
+  ],
+  "review": {
+    "status": "selection-failed",
+    "record": "docs/design/receipts/lot0-brand-gates-review.md",
+    "consensusClaimed": false
+  },
+  "full": {
+    "label": "full",
+    "command": "npm test -- --test-force-exit",
+    "startedAt": "2026-10-16T03:38:09.577Z",
+    "completedAt": "2026-10-16T03:56:03.245Z",
+    "exitCode": 1,
+    "signal": null,
+    "seconds": 1073.668411484,
+    "counts": [
+      "# tests 2003",
+      "# suites 0",
+      "# pass 1976",
+      "# fail 27",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0",
+      "# duration_ms 1066850.896703"
+    ],
+    "failures": [
+      "not ok 4 - adapter inside a real assistant-ui 0.15.22 runtime",
+      "  location: '<repo>/tests/aui.browser.test.mjs:10:1'",
+      "  error: |-",
+      "not ok 30 - browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+      "  location: '<repo>/tests/browser-dist.browser.test.mjs:22:1'",
+      "  error: |-",
+      "not ok 39 - colored profile in a real browser",
+      "  location: '<repo>/tests/colored.browser.test.mjs:36:1'",
+      "  error: |-",
+      "not ok 40 - core in a real browser",
+      "  location: '<repo>/tests/core.browser.test.mjs:24:1'",
+      "  error: |-",
+      "not ok 42 - the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+      "  location: '<repo>/tests/demo.browser.test.mjs:24:1'",
+      "  error: |-",
+      "not ok 58 - active diagram across a new document version; undo and redo across a profile switch",
+      "  location: '<repo>/tests/history.browser.test.mjs:9:1'",
+      "  error: |-",
+      "not ok 678 - shipped browser IIFE: C1–C7 parity and second-review refusals",
+      "  location: '<repo>/tests/io-review-2.browser.test.mjs:7:1'",
+      "  error: |-",
+      "not ok 718 - shipped browser IIFE: third-review refusals and resolved namespaces",
+      "  location: '<repo>/tests/io-review-3.browser.test.mjs:8:1'",
+      "  error: |-",
+      "not ok 750 - shipped browser IIFE: fourth-review supported placements and endpoint identity",
+      "  location: '<repo>/tests/io-review-4.browser.test.mjs:8:1'",
+      "  error: |-",
+      "not ok 787 - io codecs in a real browser",
+      "  location: '<repo>/tests/io.browser.test.mjs:28:1'",
+      "  error: |-",
+      "not ok 788 - boundary events follow their host in autoLayout, in one command",
+      "  location: '<repo>/tests/layout-boundary.browser.test.mjs:10:1'",
+      "  error: |-",
+      "not ok 791 - (kept) the canvas applies the corpus geometry to the DI",
+      "  location: '<repo>/tests/layout-corpus.browser.test.mjs:11:1'",
+      "  error: |-",
+      "not ok 802 - layoutOnLoad: a server document is laid out as part of its load",
+      "  location: '<repo>/tests/layout-on-load.browser.test.mjs:9:1'",
+      "  error: |-",
+      "not ok 843 - legend profile in a real browser",
+      "  location: '<repo>/tests/legend.browser.test.mjs:11:1'",
+      "  error: |-",
+      "not ok 844 - legend profile parity in a real browser",
+      "  location: '<repo>/tests/legend2.browser.test.mjs:14:1'",
+      "  error: |-",
+      "not ok 845 - legend tokens, data IO lifecycle and hit outlines in a real browser",
+      "  location: '<repo>/tests/legend3.browser.test.mjs:8:1'",
+      "  error: |-",
+      "not ok 864 - no banned identifier anywhere: tracked files (tests and docs included) and every commit message",
+      "  location: '<repo>/tests/package-shape.test.mjs:169:1'",
+      "  error: |-",
+      "not ok 867 - palette layout and token-driven icons in a real browser",
+      "  location: '<repo>/tests/palette.browser.test.mjs:16:1'",
+      "  error: |-",
+      "not ok 1889 - react and assistant-ui adapters in a real browser",
+      "  location: '<repo>/tests/react.browser.test.mjs:15:1'",
+      "  error: |-",
+      "not ok 1892 - rendering in both looks",
+      "  location: '<repo>/tests/render-looks.browser.test.mjs:29:1'",
+      "  error: |-",
+      "not ok 1893 - workshop primitives (menu, tabs) in a real browser",
+      "  location: '<repo>/tests/ui.browser.test.mjs:11:1'",
+      "  error: |-",
+      "not ok 1894 - 0.2 canvas API in a real browser",
+      "  location: '<repo>/tests/v02.browser.test.mjs:17:1'",
+      "  error: |-",
+      "not ok 1895 - bpmn.io logo: visible by default, hidden only with a named license",
+      "  location: '<repo>/tests/watermark.browser.test.mjs:8:1'",
+      "  error: |-",
+      "not ok 1987 - workshop: atomic exports",
+      "  location: '<repo>/tests/workshop-export.browser.test.mjs:9:1'",
+      "  error: |-",
+      "not ok 1988 - workshop: current model local exports",
+      "  location: '<repo>/tests/workshop-served.browser.test.mjs:7:1'",
+      "  error: |-",
+      "not ok 1989 - workshop structure with the step-0 contract options",
+      "  location: '<repo>/tests/workshop-structure.browser.test.mjs:12:1'",
+      "  error: |-",
+      "not ok 1990 - workshop in a real browser",
+      "  location: '<repo>/tests/workshop.browser.test.mjs:20:1'",
+      "  error: |-"
+    ],
+    "log": "/tmp/lot0-resume-full.log",
+    "redactedLines": 2,
+    "logSha256": "d007cc87d83b41f4a01910e63fa219643cc9ededc9a70ea677b535b576bf1976",
+    "status": "completed",
+    "runnerAdjustment": "The first npm test attempt stopped emitting results and was interrupted without final counts; its verified remaining process tree was then stopped. The complete suite was rerun through npm test -- --test-force-exit. A neutral handle probe confirmed that the trailing option is passed as a script argument and does not enable the runner flag. Two browser workers that had already failed Chromium launch retained server handles; only those verified workers were stopped with SIGTERM so their recorded failures could be reported and the remaining tests could finish. No test files were excluded, browser assertions retried, or repository test configuration changed.",
+    "workerCleanup": [
+      {
+        "path": "tests/browser-dist.browser.test.mjs",
+        "pid": 4034595,
+        "signal": "SIGTERM",
+        "reason": "Chromium launch failed; worker retained server handles."
+      },
+      {
+        "path": "tests/demo.browser.test.mjs",
+        "pid": 4034614,
+        "signal": "SIGTERM",
+        "reason": "Chromium launch failed; worker retained server handles."
+      }
+    ],
+    "initialAttempt": {
+      "command": "npm test",
+      "outcome": "interrupted-after-stalled-output",
+      "finalCountsAvailable": false,
+      "log": "/tmp/lot0-resume-full-initial.log",
+      "logSha256": "a42e77e1dca132b5488673463f005ee8eee2d3d611958e2b82b874c89f7711bb"
+    },
+    "failureDetails": [
+      {
+        "number": 4,
+        "test": "adapter inside a real assistant-ui 0.15.22 runtime",
+        "location": "<repo>/tests/aui.browser.test.mjs:10:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 30,
+        "test": "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+        "location": "<repo>/tests/browser-dist.browser.test.mjs:22:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 39,
+        "test": "colored profile in a real browser",
+        "location": "<repo>/tests/colored.browser.test.mjs:36:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 40,
+        "test": "core in a real browser",
+        "location": "<repo>/tests/core.browser.test.mjs:24:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 42,
+        "test": "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+        "location": "<repo>/tests/demo.browser.test.mjs:24:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 58,
+        "test": "active diagram across a new document version; undo and redo across a profile switch",
+        "location": "<repo>/tests/history.browser.test.mjs:9:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 678,
+        "test": "shipped browser IIFE: C1–C7 parity and second-review refusals",
+        "location": "<repo>/tests/io-review-2.browser.test.mjs:7:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 718,
+        "test": "shipped browser IIFE: third-review refusals and resolved namespaces",
+        "location": "<repo>/tests/io-review-3.browser.test.mjs:8:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 750,
+        "test": "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+        "location": "<repo>/tests/io-review-4.browser.test.mjs:8:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 787,
+        "test": "io codecs in a real browser",
+        "location": "<repo>/tests/io.browser.test.mjs:28:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 788,
+        "test": "boundary events follow their host in autoLayout, in one command",
+        "location": "<repo>/tests/layout-boundary.browser.test.mjs:10:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 791,
+        "test": "(kept) the canvas applies the corpus geometry to the DI",
+        "location": "<repo>/tests/layout-corpus.browser.test.mjs:11:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 802,
+        "test": "layoutOnLoad: a server document is laid out as part of its load",
+        "location": "<repo>/tests/layout-on-load.browser.test.mjs:9:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 843,
+        "test": "legend profile in a real browser",
+        "location": "<repo>/tests/legend.browser.test.mjs:11:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 844,
+        "test": "legend profile parity in a real browser",
+        "location": "<repo>/tests/legend2.browser.test.mjs:14:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 845,
+        "test": "legend tokens, data IO lifecycle and hit outlines in a real browser",
+        "location": "<repo>/tests/legend3.browser.test.mjs:8:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 864,
+        "test": "no banned identifier anywhere: tracked files (tests and docs included) and every commit message",
+        "location": "<repo>/tests/package-shape.test.mjs:169:1",
+        "category": "strict-main-history"
+      },
+      {
+        "number": 867,
+        "test": "palette layout and token-driven icons in a real browser",
+        "location": "<repo>/tests/palette.browser.test.mjs:16:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1889,
+        "test": "react and assistant-ui adapters in a real browser",
+        "location": "<repo>/tests/react.browser.test.mjs:15:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1892,
+        "test": "rendering in both looks",
+        "location": "<repo>/tests/render-looks.browser.test.mjs:29:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1893,
+        "test": "workshop primitives (menu, tabs) in a real browser",
+        "location": "<repo>/tests/ui.browser.test.mjs:11:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1894,
+        "test": "0.2 canvas API in a real browser",
+        "location": "<repo>/tests/v02.browser.test.mjs:17:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1895,
+        "test": "bpmn.io logo: visible by default, hidden only with a named license",
+        "location": "<repo>/tests/watermark.browser.test.mjs:8:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1987,
+        "test": "workshop: atomic exports",
+        "location": "<repo>/tests/workshop-export.browser.test.mjs:9:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1988,
+        "test": "workshop: current model local exports",
+        "location": "<repo>/tests/workshop-served.browser.test.mjs:7:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1989,
+        "test": "workshop structure with the step-0 contract options",
+        "location": "<repo>/tests/workshop-structure.browser.test.mjs:12:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      },
+      {
+        "number": 1990,
+        "test": "workshop in a real browser",
+        "location": "<repo>/tests/workshop.browser.test.mjs:20:1",
+        "category": "sandbox-chromium-launch",
+        "evidence": "Chromium launch failed in the sandbox before browser assertions; not retried or investigated."
+      }
+    ],
+    "failureSummary": {
+      "sandbox-chromium-launch": 26,
+      "strict-main-history": 1,
+      "other": 0
+    },
+    "interpretation": "The main-history gate remains strict as required. Sandbox Chromium launch failures are listed without changing browser setup or tests."
+  },
+  "priorFullCounts": [
+    "# tests 1987",
+    "# pass 1956",
+    "# fail 31",
+    "# cancelled 0",
+    "# skipped 0",
+    "# duration_ms 1086386.013628"
+  ],
+  "preservation": {
+    "pushed": false,
+    "published": false,
+    "historyRewritten": false,
+    "tmpTouchedByAgent": false,
+    "excludedLayoutDocumentTouchedByAgent": false,
+    "baselineChanged": false,
+    "pinChanged": false
+  },
+  "commits": [
+    "c1002e88cdeb3d6fafe466b7926a8b498ba5f25c",
+    "2b19109c9518c1f7b4c03bf2cf495c79c13735a2"
+  ],
+  "briefVerification": [
+    {
+      "item": 1,
+      "status": "complete",
+      "implementation": [
+        "tests/helpers/brand-baseline.mjs:51",
+        "tests/colored-style.test.mjs:65",
+        "tests/legend-style.test.mjs:155",
+        "tests/package-shape.test.mjs:55",
+        "tests/package-shape.test.mjs:110"
+      ],
+      "evidence": "Allowances are derived from the committed baseline and pin. Expansion, substitutions, working pin edits and reintroductions after a committed shrink are rejected. Non-baseline hashes fail with path:line and SHA-256 diagnostics. Existing storage, prototype, watermark and global-hook checks retain their logic. Lot 2 must empty the baseline.",
+      "tests": "tests/brand-legacy-gates.test.mjs:34"
+    },
+    {
+      "item": 2,
+      "status": "complete",
+      "implementation": [
+        "package.json:76",
+        "scripts/check-brand-release.mjs:7"
+      ],
+      "evidence": "prepublishOnly refuses a nonempty baseline unless an unchanged committed override names an owner and GO decision and matches version, current UTC date and baseline digest. Refusal, override acceptance, empty-baseline acceptance and invalid overrides pass regression tests. The real hook refuses the current baseline.",
+      "tests": "tests/brand-release-gate.test.mjs:43"
+    },
+    {
+      "item": 3,
+      "status": "complete",
+      "implementation": [
+        "tests/helpers/brand-baseline.mjs:66",
+        "tests/package-shape.test.mjs:181"
+      ],
+      "evidence": "Only baseline hashes on the named lot 0 branch, within main..HEAD and unreachable from remote refs, receive a local history exception. Main, other branches, remote-reachable commits and non-baseline hashes remain strict. Missing main fails closed. Two pre-existing main-history occurrences still fail as required.",
+      "tests": "tests/brand-legacy-gates.test.mjs:64"
+    }
+  ],
+  "resumedValidation": {
+    "completedAt": "2026-10-16T03:56:08.622Z",
+    "testedCommit": "2b19109c9518c1f7b4c03bf2cf495c79c13735a2",
+    "scope": "Verify the three brief items, rerun requested checks, and complete the receipt only.",
+    "allRequestedChecksCompleted": true,
+    "allTestsPassed": false
+  }
+}

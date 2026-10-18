@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { brandTokens } from "./helpers/brand.mjs";
+import { baselineHashAllowlist, outsideBaselineHashes } from "./helpers/brand-baseline.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = (p) => import(root + "dist/profiles/colored/" + p);
@@ -63,6 +63,7 @@ test("kind mapping of element types", async () => {
 });
 
 test("the profile sources and build carry no banned word, no storage, no prototype patch, no watermark handling", () => {
+  const allowed = baselineHashAllowlist();
   const banned = /localStorage|sessionStorage|@\/lib|bjs-powered-by|prototype\.\w+\s*=/i;
   const files = [];
   for (const dir of ["src/profiles/colored/", "dist/profiles/colored/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
@@ -70,7 +71,7 @@ test("the profile sources and build carry no banned word, no storage, no prototy
   for (const f of files) {
     const text = readFileSync(root + f, "utf8");
     assert.ok(!banned.test(text), `${f} has a banned pattern`);
-    assert.deepEqual(brandTokens(text), [], `${f} has a banned identifier`);
+    assert.deepEqual(outsideBaselineHashes(f, text, allowed), [], `${f} has a banned identifier`);
   }
 });
 

@@ -1,0 +1,199 @@
+{
+  "format": "profile-brand-remediation-receipt/1",
+  "initialHead": "f3a54c5",
+  "reason": "Conductor arbitration: remove confirmed leaks and explicitly reseal their active successors.",
+  "supersedesFiles": [
+    {
+      "path": "docs/design/receipts/lot0-s12.json",
+      "old": {
+        "bytes": 15334,
+        "sha256": "9f9ef0c21cba7c14b84d3ff46ec6964b22b5e65b3d4e557c83efc6db0dd0d94f"
+      },
+      "new": {
+        "bytes": 15338,
+        "sha256": "146dee545dd7b9a9db72f014566220cbba39b01794e2af4cd84c60ea66faeb5b"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/design-provenance.json",
+      "old": {
+        "bytes": 109282,
+        "sha256": "d14862e485d7c03a8dffce1d0aa95e0a3bd3f4843803e0c165f9b59f3f411f63"
+      },
+      "new": {
+        "bytes": 109379,
+        "sha256": "12f2f86ffba797450f872625b1beab86dbe33409c63a72473a2935880d6d6381"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 13019,
+        "sha256": "35c06755c85eeb07175a6a6f57e8b3a22403b9be5c1a115600848a4607662967"
+      },
+      "new": {
+        "bytes": 13651,
+        "sha256": "cd5ba13b799427746fb30b033411cd29c9b52ccf7959d078dbe5f74be2dc5d94"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "old": {
+        "bytes": 4030,
+        "sha256": "13b58125faa7dd8dfb3b9f84e17c030c12123a4195adc1d59b68bd99840406ea"
+      },
+      "new": {
+        "bytes": 4030,
+        "sha256": "1cbfc721fef1255c7ad932aa5e21839e8177fd8c0db08a24a5eaa8c7aad7c4de"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 5935,
+        "sha256": "05cda6146d91398eaea3bcdd33ff6a04f988a42c047f930af6ca13d2368415ec"
+      },
+      "new": {
+        "bytes": 6472,
+        "sha256": "ac891754666557a42ff8fed5d8e3888d638657303339a3fafd99cb7be27a78f3"
+      }
+    },
+    {
+      "path": "tests/helpers/brand.mjs",
+      "predecessorCommit": "f3a54c5^",
+      "old": {
+        "bytes": 1555,
+        "sha256": "9c774bc6e380ee9efcc00fb6376e5aaf7bb61dabdb0d4cf4af2fd896b8802ac5"
+      },
+      "new": {
+        "bytes": 2131,
+        "sha256": "5469c034bbc39bf89c7758e0974a29c96205d149da06b816485f468be7bb9c87"
+      }
+    },
+    {
+      "path": "docs/design/profile-externalization-scope.json",
+      "old": {
+        "bytes": 1391,
+        "sha256": "3661e64c4d9b65894ce9376b816d49112859b55b8f2cefd28828c30ed126eef3"
+      },
+      "new": {
+        "bytes": 1391,
+        "sha256": "ac38283d0850e3a2b911aaabdb65b44a153ace1e8b2615e24146eb74aff4ca93"
+      }
+    }
+  ],
+  "reseals": [
+    {
+      "item": 2,
+      "reason": "Local review folder renamed; all tracked references updated.",
+      "files": [
+        {
+          "path": "docs/design/receipts/lot0-s12.json",
+          "old": {
+            "bytes": 15334,
+            "sha256": "9f9ef0c21cba7c14b84d3ff46ec6964b22b5e65b3d4e557c83efc6db0dd0d94f"
+          },
+          "new": {
+            "bytes": 15338,
+            "sha256": "146dee545dd7b9a9db72f014566220cbba39b01794e2af4cd84c60ea66faeb5b"
+          }
+        }
+      ]
+    },
+    {
+      "item": 3,
+      "reason": "Neutralize DESIGN.md:606 quotation; retain its original line digest, seal the neutral excerpt, and extend the verified receipt successor chain.",
+      "files": [
+        {
+          "path": "tests/fixtures/profile-lot0/design-provenance.json",
+          "old": {
+            "bytes": 109282,
+            "sha256": "d14862e485d7c03a8dffce1d0aa95e0a3bd3f4843803e0c165f9b59f3f411f63"
+          },
+          "new": {
+            "bytes": 109379,
+            "sha256": "12f2f86ffba797450f872625b1beab86dbe33409c63a72473a2935880d6d6381"
+          }
+        },
+        {
+          "path": "tests/helpers/profile-seal.mjs",
+          "old": {
+            "bytes": 13019,
+            "sha256": "35c06755c85eeb07175a6a6f57e8b3a22403b9be5c1a115600848a4607662967"
+          },
+          "new": {
+            "bytes": 13651,
+            "sha256": "cd5ba13b799427746fb30b033411cd29c9b52ccf7959d078dbe5f74be2dc5d94"
+          }
+        },
+        {
+          "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+          "old": {
+            "bytes": 4030,
+            "sha256": "13b58125faa7dd8dfb3b9f84e17c030c12123a4195adc1d59b68bd99840406ea"
+          },
+          "new": {
+            "bytes": 4030,
+            "sha256": "f7f94b83c6c372f1d8d93ab1b2c44ba18897479e8b4ac453453c859d016641e0"
+          }
+        },
+        {
+          "path": "tests/profile-s123-receipt.test.mjs",
+          "old": {
+            "bytes": 5935,
+            "sha256": "05cda6146d91398eaea3bcdd33ff6a04f988a42c047f930af6ca13d2368415ec"
+          },
+          "new": {
+            "bytes": 6472,
+            "sha256": "ac891754666557a42ff8fed5d8e3888d638657303339a3fafd99cb7be27a78f3"
+          }
+        }
+      ]
+    },
+    {
+      "item": 4,
+      "reason": "Explicitly accept the shared scanner hash expansion already committed at f3a54c5; scanner bytes unchanged.",
+      "files": [
+        {
+          "path": "tests/helpers/brand.mjs",
+          "old": {
+            "bytes": 1555,
+            "sha256": "9c774bc6e380ee9efcc00fb6376e5aaf7bb61dabdb0d4cf4af2fd896b8802ac5"
+          },
+          "new": {
+            "bytes": 2131,
+            "sha256": "5469c034bbc39bf89c7758e0974a29c96205d149da06b816485f468be7bb9c87"
+          }
+        }
+      ]
+    },
+    {
+      "item": 4,
+      "reason": "Refresh the active historical scanner pin for f3a54c5 and reseal the frozen scope document.",
+      "files": [
+        {
+          "path": "docs/design/profile-externalization-scope.json",
+          "old": {
+            "bytes": 1391,
+            "sha256": "3661e64c4d9b65894ce9376b816d49112859b55b8f2cefd28828c30ed126eef3"
+          },
+          "new": {
+            "bytes": 1391,
+            "sha256": "ac38283d0850e3a2b911aaabdb65b44a153ace1e8b2615e24146eb74aff4ca93"
+          }
+        },
+        {
+          "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+          "old": {
+            "bytes": 4030,
+            "sha256": "f7f94b83c6c372f1d8d93ab1b2c44ba18897479e8b4ac453453c859d016641e0"
+          },
+          "new": {
+            "bytes": 4030,
+            "sha256": "1cbfc721fef1255c7ad932aa5e21839e8177fd8c0db08a24a5eaa8c7aad7c4de"
+          }
+        }
+      ]
+    }
+  ]
+}

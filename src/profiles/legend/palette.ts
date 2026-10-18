@@ -99,6 +99,7 @@ export class LegendPaletteProvider {
         group: entry.group,
         className: PALETTE_ICONS[entry.id] ?? "bpmn-icon-task",
         title: `Create ${entry.title}`,
+        html: `<div class="entry" draggable="true" title="Create ${entry.title}"></div>`,
         action: {
           dragstart: (event: Event) => this.startCreate(event, entry),
           click: (event: Event) => this.startCreate(event, entry),
@@ -195,7 +196,15 @@ function resolveProcess(bo: Any): Any | null {
  * process). They live in the owning process' ioSpecification, created on demand
  * WITH its required inputSet and outputSet. Every other type is upstream's.
  */
-export class LegendBpmnUpdater extends BpmnUpdater {
+// bpmn-js's CommonJS declaration resolves its default as a module under NodeNext.
+// Publish the structural base contract while using the same runtime constructor.
+const UpdaterBase = BpmnUpdater as unknown as {
+  new(eventBus: Any, bpmnFactory: Any, connectionDocking: Any): {
+    updateSemanticParent(businessObject: Any, newParent: Any, visualParent: Any): void;
+  };
+  $inject: string[];
+};
+export class LegendBpmnUpdater extends UpdaterBase {
   static override $inject: string[] = (BpmnUpdater as Any).$inject;
 
   private readonly bpmnFactory: Any;

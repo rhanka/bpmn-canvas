@@ -1,0 +1,469 @@
+{
+  "format": "profile-review-correction-receipt/1",
+  "status": "js-corrections-verified-independent-expectation-additions-pending",
+  "source": {
+    "branch": "workbench/functions-20261004-profile-lot0",
+    "initialHead": "19ef11a",
+    "redCommit": "6afe21129523e97ef9e37853b3729293ad729046",
+    "greenCommit": "9ca3331",
+    "contextRedCommit": "deeea0b",
+    "contextGreenCommit": "c28cd4e",
+    "exportContextRedCommit": "bffe7b1",
+    "exportContextGreenCommit": "a5b9d37c1f8f8acdcd20f9e21c25808755689242",
+    "finalImplementationCommit": "a5b9d37c1f8f8acdcd20f9e21c25808755689242",
+    "receiptCommit": "Resolve with git log -1 --format=%H -- docs/design/receipts/lot0-s123-fix.json."
+  },
+  "authority": {
+    "artifact": "DESIGN.md",
+    "revision": "R3.2",
+    "sha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497",
+    "completeExternalAuthorityVerified": true
+  },
+  "supersedes": [
+    {
+      "path": "docs/design/receipts/lot0-s2b.json",
+      "bytes": 11843,
+      "sha256": "c31736ca89d96437ad359270fa277f2195c14754d2404cb8868d23b33f9cb03a",
+      "scope": "Current test/source verification inventory only; original historical attestations and seal-chain bytes remain intact."
+    },
+    {
+      "path": "docs/design/receipts/lot0-s3.json",
+      "bytes": 26842,
+      "sha256": "b356aa39c504e12719ddd982ac4a299259d7f7590e88f3704cea0351ee6dfcd5",
+      "scope": "Current test/source verification inventory only; original historical attestations and seal-chain bytes remain intact."
+    }
+  ],
+  "historicalHashSupersession": [
+    "tests/helpers/profile-seal.mjs",
+    "tests/profile-r32-expectations.test.mjs",
+    "tests/profile-corpus-step2b.test.mjs"
+  ],
+  "sealedRecordsEdited": false,
+  "testFiles": [
+    {
+      "path": "tests/profile-brand-guard.test.mjs",
+      "bytes": 1230,
+      "sha256": "1b1676858eb596fe36400d599c5f466324d418d04231bed6ea08c9a2588bc3a7"
+    },
+    {
+      "path": "tests/profile-canonical.test.mjs",
+      "bytes": 2911,
+      "sha256": "30e24423708c5a696bf8ff260d850d3ec73a25c10e93551b6fbd8e2993309f58"
+    },
+    {
+      "path": "tests/profile-compatibility.test.mjs",
+      "bytes": 1660,
+      "sha256": "52dc8ef6c58645eca82258065897dcbafb6f9e8bad8747ce8ac3bf83a13dea29"
+    },
+    {
+      "path": "tests/profile-corpus-step2b.test.mjs",
+      "bytes": 6063,
+      "sha256": "67ffb96274ed9a82c6173defe695d411a116e0e34037f9c7a54c8d790b0a284b"
+    },
+    {
+      "path": "tests/profile-corpus-step4.test.mjs",
+      "bytes": 6279,
+      "sha256": "6470d0d812f077d0aed643a807af086cb134f6b8212d974bab573305f293a0df"
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "bytes": 6257,
+      "sha256": "919dac034d862265155134c688308bb9d273b671288ee081151f203518aa90fe"
+    },
+    {
+      "path": "tests/profile-envelope.test.mjs",
+      "bytes": 7063,
+      "sha256": "cb7477aa6bbec740bb65e8d73a9850e7acf4bb39210bae0e3ed8e8c11bca86ea"
+    },
+    {
+      "path": "tests/profile-golden-independence.test.mjs",
+      "bytes": 2011,
+      "sha256": "b7790b859671fcc7524528b75a11fe3208579e9fc1ba15125e24358a076ecef1"
+    },
+    {
+      "path": "tests/profile-identity.test.mjs",
+      "bytes": 10239,
+      "sha256": "757e3d8f7b15257cb44d09c309cedca2168b253f9cdff185ab8cbb433ce3e4dc"
+    },
+    {
+      "path": "tests/profile-r32-expectations.test.mjs",
+      "bytes": 14489,
+      "sha256": "34d8f3b0b900a5227c22a58fd1334464f87670a260203108999d426c6801a451"
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "bytes": 3718,
+      "sha256": "12448e4914d323ca8594afd6bbbc89f323e947ff117f6c003e39d9cb5cb429d8"
+    },
+    {
+      "path": "tests/profile-s123-regressions.test.mjs",
+      "bytes": 10585,
+      "sha256": "67bc368040e22873f19e0f3573b9eb5cdd7326b4f66adf43098d0235f7847461"
+    },
+    {
+      "path": "tests/profile-schema.test.mjs",
+      "bytes": 6117,
+      "sha256": "5fe44d08e42ec61899a286d36cba98c8486206455e358511554925ad77b4b60c"
+    },
+    {
+      "path": "tests/profile-static.test.mjs",
+      "bytes": 4888,
+      "sha256": "bb17a04babbb6ec0ad2784e6990d0808eab03f6f6e0a753674e390e8f1955d7a"
+    },
+    {
+      "path": "tests/helpers/profile-native.mjs",
+      "bytes": 809,
+      "sha256": "9fd260ad59b0e5f9babd4fbdfeb02d34e613ce72fe952eaf812703eaaf00319d"
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "bytes": 12555,
+      "sha256": "690416bda67fc84ab016cb7a18a54a77b97b2010357ac6e84ebddb2a45d59a4e"
+    },
+    {
+      "path": "tests/helpers/profile-step3.mjs",
+      "bytes": 668,
+      "sha256": "9535452b0da578c196f56d15bfea1068a6604513a695d9bfd068254e09e9017c"
+    },
+    {
+      "path": "tests/helpers/brand.mjs",
+      "bytes": 1555,
+      "sha256": "9c774bc6e380ee9efcc00fb6376e5aaf7bb61dabdb0d4cf4af2fd896b8802ac5"
+    }
+  ],
+  "implementationFiles": [
+    {
+      "path": "src/profile/canonical.ts",
+      "bytes": 3643,
+      "sha256": "cecd5fdbe32e6805119f76467265cfc817566d95bd7f8ee157db6872c41b0e55"
+    },
+    {
+      "path": "src/profile/compatibility.ts",
+      "bytes": 4456,
+      "sha256": "364cfca6568bf529340f3ffc5228d0dfd47af175029fa3369eeafa86b4717027"
+    },
+    {
+      "path": "src/profile/contracts.ts",
+      "bytes": 14669,
+      "sha256": "dca016f6725c781f8fcd2e7abea3c1c0c69c47101bdc75a873a665ddf22a82d2"
+    },
+    {
+      "path": "src/profile/envelope.ts",
+      "bytes": 8236,
+      "sha256": "f4f923c0e6e59defe8c1cd171a574120e5ed21e3a01f2c5a58177842b5884994"
+    },
+    {
+      "path": "src/profile/native-contracts.ts",
+      "bytes": 18464,
+      "sha256": "1d5cd26d883920b34fae331f3a2da2b723d7b50521ba5dd6ab479a4bd5a885df"
+    },
+    {
+      "path": "src/profile/static-contracts.ts",
+      "bytes": 19937,
+      "sha256": "c991d61cbb08c20d513cff27a60b76ad5a5ffb68e4536209a6892265e05e68a5"
+    }
+  ],
+  "expectationAndFreezePins": [
+    {
+      "path": "tests/fixtures/profile-lot0/expectations.json",
+      "bytes": 1599886,
+      "sha256": "c78217a66e5bfc485eb0511591cda923ed7361ef5507358b6fb76d7822f4672e"
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+      "bytes": 453,
+      "sha256": "81d3718119791dee3d61a803b1a25f92939f5276cc496748f66f8c105ea29eb7"
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "bytes": 2927,
+      "sha256": "3e8d9b06dbbe515ac9578063b995b2f47e6f5959f1e65f2e1546ace347d23ad3"
+    }
+  ],
+  "findings": [
+    {
+      "id": "S1",
+      "status": "fixed",
+      "evidence": [
+        "DESIGN.md:294",
+        "DESIGN.md:307",
+        "DESIGN.md:308",
+        "DESIGN.md:309",
+        "DESIGN.md:310",
+        "DESIGN.md:311",
+        "DESIGN.md:312"
+      ]
+    },
+    {
+      "id": "S2",
+      "status": "fixed",
+      "evidence": [
+        "DESIGN.md:301",
+        "DESIGN.md:313",
+        "DESIGN.md:421"
+      ],
+      "additionalIndependentSealedCoverage": "pending-expectation-author"
+    },
+    {
+      "id": "S3",
+      "status": "fixed",
+      "evidence": [
+        "DESIGN.md:124",
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:186"
+      ],
+      "additionalIndependentSealedCoverage": "pending-expectation-author"
+    },
+    {
+      "id": "S4",
+      "status": "fixed",
+      "choice": "bare-refusal-without-parity-code",
+      "evidence": [
+        "DESIGN.md:260",
+        "DESIGN.md:421",
+        "DESIGN.md:425"
+      ]
+    },
+    {
+      "id": "S5",
+      "status": "fixed",
+      "evidence": [
+        "DESIGN.md:79",
+        "DESIGN.md:185"
+      ],
+      "additionalIndependentSealedCoverage": "pending-expectation-author"
+    },
+    {
+      "id": "S6",
+      "status": "fixed",
+      "evidence": [
+        "DESIGN.md:46",
+        "DESIGN.md:65",
+        "DESIGN.md:260"
+      ]
+    },
+    {
+      "id": "S7",
+      "status": "fixed",
+      "evidence": [
+        "DESIGN.md:32"
+      ],
+      "scope": "All receipt files scanned by supplemental guard; frozen scope unchanged."
+    },
+    {
+      "id": "S8",
+      "status": "fixed",
+      "scope": "Both omitted suites and current seal helper inventoried here; both historical receipts preserved."
+    }
+  ],
+  "verification": {
+    "baseline": {
+      "command": "node --test tests/profile-compatibility.test.mjs tests/profile-envelope.test.mjs tests/profile-static.test.mjs tests/profile-schema.test.mjs tests/profile-brand-guard.test.mjs",
+      "passed": 286,
+      "failed": 0
+    },
+    "red": {
+      "command": "node --test tests/profile-compatibility.test.mjs tests/profile-static.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s123-receipt.test.mjs",
+      "passed": 197,
+      "failed": 50
+    },
+    "green": "passed-for-final-implementation-a5b9d37",
+    "contextRed": {
+      "command": "node --test tests/profile-s123-regressions.test.mjs",
+      "tests": 64,
+      "passed": 58,
+      "failed": 6
+    },
+    "focusedGreen": {
+      "command": "node --test tests/profile-s123-regressions.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-compatibility.test.mjs tests/profile-static.test.mjs tests/profile-schema.test.mjs tests/profile-envelope.test.mjs tests/profile-brand-guard.test.mjs",
+      "passed": 342,
+      "failed": 0,
+      "target": "9ca3331"
+    },
+    "initialFullAttempt": {
+      "command": "npm test",
+      "status": "interrupted-after-two-browser-sandbox-launch-failures",
+      "exitCode": 130,
+      "signature": "Chromium snap cannot create transient scope; DBus UnixProcessIdUnknown",
+      "files": [
+        "tests/aui.browser.test.mjs",
+        "tests/browser-dist.browser.test.mjs"
+      ],
+      "completeCampaign": false,
+      "reason": "Sandbox browser launch failed and stalled the campaign; final source changed during review, so final verification will be restarted."
+    },
+    "bareRefusalStrengtheningRed": {
+      "command": "node --test tests/profile-s123-regressions.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-compatibility.test.mjs tests/profile-static.test.mjs tests/profile-schema.test.mjs tests/profile-envelope.test.mjs tests/profile-brand-guard.test.mjs",
+      "tests": 352,
+      "passed": 344,
+      "failed": 8,
+      "reason": "Requiring a ProfileContractError with absent code revealed that a TypeScript field declaration emitted an own undefined property; changed to a declare-only field."
+    },
+    "contextGreen": {
+      "command": "node --test tests/profile-s123-regressions.test.mjs",
+      "passed": 64,
+      "failed": 0
+    },
+    "exportContextRed": {
+      "command": "node --test tests/profile-s123-regressions.test.mjs",
+      "tests": 79,
+      "passed": 71,
+      "failed": 8
+    },
+    "browserAlone": {
+      "command": "node --test --test-concurrency=1 tests/*.browser.test.mjs",
+      "passed": 483,
+      "failed": 0,
+      "durationMs": 115615.258235,
+      "execution": "outside-filesystem-sandbox",
+      "target": "c28cd4e source; typed-traversal changes are private profile preflight only"
+    },
+    "profileFullAttempt": {
+      "command": "node --test tests/profile-*.test.mjs",
+      "status": "interrupted",
+      "exitCode": 130,
+      "reason": "Avoid running the exhaustive expectation-byte mutation proof twice; final npm test includes it.",
+      "orphanedDuplicateWorkerStopped": true
+    },
+    "exportContextGreen": {
+      "command": "node --test tests/profile-s123-regressions.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-compatibility.test.mjs tests/profile-static.test.mjs tests/profile-schema.test.mjs tests/profile-envelope.test.mjs tests/profile-brand-guard.test.mjs",
+      "passed": 367,
+      "failed": 0
+    },
+    "profileSubset": {
+      "command": "node --test tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-identity.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-schema.test.mjs tests/profile-static.test.mjs",
+      "passed": 560,
+      "failed": 0,
+      "excludedSuite": "tests/profile-golden-independence.test.mjs",
+      "excludedReason": "The exhaustive data-only seal proof runs in full npm test, avoiding duplicate execution."
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "target": "a5b9d37c1f8f8acdcd20f9e21c25808755689242"
+    },
+    "brandGuard": {
+      "command": "node --test tests/profile-brand-guard.test.mjs",
+      "passed": 1,
+      "failed": 0,
+      "supplementalReceiptGuard": "Passed in focused/profile/full campaigns and final four-check receipt/guard verification."
+    },
+    "authorityProvenance": {
+      "status": "passed",
+      "method": "verifyDesignProvenance(verifyExpectations(), undefined, complete external DESIGN bytes)",
+      "designSha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497"
+    },
+    "fullNpmTest": {
+      "command": "npm test",
+      "target": "a5b9d37c1f8f8acdcd20f9e21c25808755689242",
+      "execution": "outside-filesystem-sandbox-after-browser-only-rerun",
+      "exitCode": 0,
+      "tests": 1974,
+      "passed": 1974,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "durationMs": 745536.224818,
+      "sourceAndTestBytesUnchangedDuringFullRun": true
+    },
+    "profileComplete": {
+      "tests": 563,
+      "passed": 563,
+      "failed": 0,
+      "evidence": "560 profile subset checks plus all three profile-golden-independence tests passed in full npm test; the exhaustive byte mutation proof was not bypassed."
+    },
+    "finalReceiptAndGuard": {
+      "command": "node --test --test-name-pattern \"should scan every|should supersede|should reject a forbidden\" tests/profile-brand-guard.test.mjs tests/profile-schema.test.mjs tests/profile-s123-receipt.test.mjs",
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "expectationDisputes": [],
+  "independentExpectationAdditions": {
+    "owner": "expectation author",
+    "status": "pending",
+    "scope": [
+      "S2 competing schema/source and invalid-envelope refusals",
+      "S3 RenderData/PageHandle occurrence positive/order-negative pairs and export/render context restriction across pages, occurrences, semantic and occurrence references",
+      "S5 inherited typed-field inference"
+    ],
+    "acceptance": "Hand derive from cited DESIGN lines, independently review and seal; implementation author must not edit oracle or seals."
+  },
+  "review": {
+    "status": "completed-built-in-model-re-review",
+    "author": {
+      "host": "codex",
+      "model": "gpt-6.1-sol",
+      "effort": "high"
+    },
+    "externalH2a": {
+      "status": "incomplete",
+      "reason": "Automatic approval review rejected external Claude-hosted repository/design transfer; no external session launched and no bypass attempted.",
+      "skill": "harness-review",
+      "differentHostConsensus": false
+    },
+    "target": "19ef11a..a5b9d37",
+    "builtIn": [
+      {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "host": "codex",
+        "verdict": "APPROVE",
+        "artifact": {
+          "path": "docs/design/receipts/lot0-s123-fix-review-contracts.md",
+          "bytes": 7451,
+          "sha256": "0456f2a7e8b5c6f016fcd811098fb594b3d51203aab7684afeafa949e9d08220"
+        }
+      },
+      {
+        "model": "gpt-6-sol",
+        "effort": "high",
+        "host": "codex",
+        "verdict": "APPROVE",
+        "artifact": {
+          "path": "docs/design/receipts/lot0-s123-fix-review-evidence.md",
+          "bytes": 4468,
+          "sha256": "f5101dc4d0199899d4af5fc561f03e9003722daffae3c8cc6ebff631fa47b3ae"
+        }
+      }
+    ],
+    "summary": {
+      "path": "docs/design/receipts/lot0-s123-fix-review.md",
+      "bytes": 2355,
+      "sha256": "16b61f8c168b577384272183bc145808c5be687189d826e06c00e0831d105b16"
+    }
+  },
+  "limits": {
+    "fullReleaseAccepted": false,
+    "stashGate": "closed",
+    "stashTouched": false,
+    "excludedPathsTouched": false,
+    "step4Implementation": false,
+    "step4OracleInspected": false,
+    "pushed": false,
+    "twinProof": "deferred",
+    "finalCanonicalCorpus": "deferred",
+    "step4OracleReadBoundary": "Provenance/seal verification and byte-inventory hashing only; no step-4 vector contents inspected for implementation."
+  },
+  "outOfScopeReviewObservations": [
+    {
+      "id": "occurrence-reference-property-allowlist",
+      "status": "pre-existing-observed-outside-supplied-S3-gate",
+      "evidence": [
+        "DESIGN.md:128",
+        "src/profile/static-contracts.ts:103"
+      ],
+      "counterexample": "CR-03 accepts OccurrenceHandle reference property bogus in export context with page-occurrence order. Only sourceOccurrence/targetOccurrence are specified.",
+      "boundedScope": "A separate correction can constrain endpoint property names and add independent expectations; this change does not claim whole-selector/compiler conformance."
+    }
+  ],
+  "acceptance": "S1-S8 implementation corrections and bounded re-review context closure pass JS verification. The reconciliation gate is closed by the dated successor receipt. Independent S2/S3/S5 expectation additions, twin-proof and final-corpus gates retain their separate disposition. No whole-selector/compiler, step-4 implementation or full release acceptance is claimed.",
+  "reconciliationClosure": {
+    "date": "2026-10-15",
+    "gateState": "closed",
+    "receipt": "docs/design/receipts/lot0-reconciliation-closed.json",
+    "evidence": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session.",
+    "supersedes": "Earlier retained-stash dispositions and open-gate statements only; other historical evidence remains unchanged."
+  }
+}

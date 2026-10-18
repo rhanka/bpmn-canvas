@@ -1,0 +1,1466 @@
+{
+ "base-order": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 1080,
+   "h": 499
+  },
+  "lanes": [
+   [
+    "Sales",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 1050,
+     "h": 299
+    }
+   ],
+   [
+    "Support",
+    {
+     "x": 30,
+     "y": 299,
+     "w": 1050,
+     "h": 200
+    }
+   ]
+  ],
+  "nodes": {
+   "Order received": {
+    "x": 113,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   },
+   "Check order": {
+    "x": 300,
+    "y": 91,
+    "w": 120,
+    "h": 80
+   },
+   "Order form": {
+    "x": 256,
+    "y": 205,
+    "w": 40,
+    "h": 50
+   },
+   "Order complete?": {
+    "x": 508,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   },
+   "Ship order": {
+    "x": 716,
+    "y": 91,
+    "w": 120,
+    "h": 80
+   },
+   "Shipping policy": {
+    "x": 646,
+    "y": 26,
+    "w": 120,
+    "h": 51
+   },
+   "Shipping note": {
+    "x": 810,
+    "y": 185,
+    "w": 40,
+    "h": 50
+   },
+   "Order shipped": {
+    "x": 948,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   },
+   "Request details": {
+    "x": 716,
+    "y": 325,
+    "w": 120,
+    "h": 80
+   }
+  },
+  "edges": [
+   [
+    [
+     163,
+     131
+    ],
+    [
+     300,
+     131
+    ]
+   ],
+   [
+    [
+     420,
+     131
+    ],
+    [
+     508,
+     131
+    ]
+   ],
+   [
+    [
+     558,
+     131
+    ],
+    [
+     716,
+     131
+    ]
+   ],
+   [
+    [
+     558,
+     131
+    ],
+    [
+     611,
+     131
+    ],
+    [
+     611,
+     365
+    ],
+    [
+     716,
+     365
+    ]
+   ],
+   [
+    [
+     776,
+     325
+    ],
+    [
+     776,
+     8
+    ],
+    [
+     360,
+     8
+    ],
+    [
+     360,
+     91
+    ]
+   ],
+   [
+    [
+     836,
+     131
+    ],
+    [
+     948,
+     131
+    ]
+   ],
+   [
+    [
+     276,
+     205
+    ],
+    [
+     276,
+     198
+    ],
+    [
+     319,
+     198
+    ],
+    [
+     319,
+     191
+    ]
+   ],
+   [
+    [
+     828,
+     171
+    ],
+    [
+     828,
+     178
+    ],
+    [
+     830,
+     178
+    ],
+    [
+     830,
+     185
+    ]
+   ],
+   [
+    [
+     706,
+     77
+    ],
+    [
+     706,
+     84
+    ],
+    [
+     730,
+     84
+    ],
+    [
+     730,
+     91
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   {
+    "x": 626,
+    "y": 113,
+    "w": 22,
+    "h": 16
+   },
+   {
+    "x": 695,
+    "y": 347,
+    "w": 17,
+    "h": 16
+   },
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "Order received",
+    "target": "Check order",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Check order",
+    "target": "Order complete?",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Order complete?",
+    "target": "Ship order",
+    "label": "yes",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Order complete?",
+    "target": "Request details",
+    "label": "no",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Request details",
+    "target": "Check order",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Ship order",
+    "target": "Order shipped",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Order form",
+    "target": "Check order",
+    "kind": "DATA"
+   },
+   {
+    "source": "Ship order",
+    "target": "Shipping note",
+    "kind": "DATA"
+   },
+   {
+    "source": "Shipping policy",
+    "target": "Ship order",
+    "kind": "DOC"
+   }
+  ],
+  "apps": {
+   "Check order": {
+    "x": 313,
+    "y": 161,
+    "w": 95,
+    "h": 30
+   }
+  },
+  "labels": {
+   "Order received": {
+    "x": 100,
+    "y": 160,
+    "w": 77,
+    "h": 16
+   },
+   "Order form": {
+    "x": 247,
+    "y": 259,
+    "w": 58,
+    "h": 16
+   },
+   "Order complete?": {
+    "x": 490,
+    "y": 160,
+    "w": 86,
+    "h": 16
+   },
+   "Shipping note": {
+    "x": 794,
+    "y": 239,
+    "w": 72,
+    "h": 16
+   },
+   "Order shipped": {
+    "x": 936,
+    "y": 160,
+    "w": 74,
+    "h": 16
+   }
+  }
+ },
+ "base-review": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 841,
+   "h": 299
+  },
+  "lanes": [
+   [
+    "Office",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 811,
+     "h": 299
+    }
+   ]
+  ],
+  "nodes": {
+   "Received": {
+    "x": 100,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   },
+   "Prepare": {
+    "x": 290,
+    "y": 91,
+    "w": 120,
+    "h": 80
+   },
+   "Guide": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 51
+   },
+   "Request file": {
+    "x": 409,
+    "y": 205,
+    "w": 40,
+    "h": 50
+   },
+   "Review": {
+    "x": 531,
+    "y": 91,
+    "w": 120,
+    "h": 80
+   },
+   "Closed": {
+    "x": 721,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     131
+    ],
+    [
+     290,
+     131
+    ]
+   ],
+   [
+    [
+     410,
+     131
+    ],
+    [
+     531,
+     131
+    ]
+   ],
+   [
+    [
+     651,
+     131
+    ],
+    [
+     721,
+     131
+    ]
+   ],
+   [
+    [
+     384,
+     191
+    ],
+    [
+     384,
+     198
+    ],
+    [
+     429,
+     198
+    ],
+    [
+     429,
+     205
+    ]
+   ],
+   [
+    [
+     429,
+     205
+    ],
+    [
+     429,
+     197
+    ],
+    [
+     519,
+     197
+    ],
+    [
+     519,
+     178
+    ],
+    [
+     539,
+     178
+    ],
+    [
+     539,
+     171
+    ]
+   ],
+   [
+    [
+     280,
+     77
+    ],
+    [
+     280,
+     84
+    ],
+    [
+     304,
+     84
+    ],
+    [
+     304,
+     91
+    ]
+   ],
+   [
+    [
+     280,
+     77
+    ],
+    [
+     280,
+     83
+    ],
+    [
+     519,
+     83
+    ],
+    [
+     519,
+     84
+    ],
+    [
+     545,
+     84
+    ],
+    [
+     545,
+     91
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "Received",
+    "target": "Prepare",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Prepare",
+    "target": "Review",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Review",
+    "target": "Closed",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Prepare",
+    "target": "Request file",
+    "kind": "DATA",
+    "label": "draft"
+   },
+   {
+    "source": "Request file",
+    "target": "Review",
+    "kind": "DATA"
+   },
+   {
+    "source": "Guide",
+    "target": "Prepare",
+    "kind": "DOC",
+    "label": "see part 4"
+   },
+   {
+    "source": "Guide",
+    "target": "Review",
+    "kind": "DOC"
+   }
+  ],
+  "apps": {
+   "Prepare": {
+    "x": 310,
+    "y": 161,
+    "w": 80,
+    "h": 30
+   }
+  },
+  "labels": {
+   "Received": {
+    "x": 100,
+    "y": 160,
+    "w": 50,
+    "h": 16
+   },
+   "Request file": {
+    "x": 398,
+    "y": 259,
+    "w": 63,
+    "h": 16
+   },
+   "Closed": {
+    "x": 727,
+    "y": 160,
+    "w": 39,
+    "h": 16
+   }
+  }
+ },
+ "homonymous-lanes": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 910,
+   "h": 600
+  },
+  "lanes": [
+   [
+    "Team",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 880,
+     "h": 200
+    }
+   ],
+   [
+    "Partner",
+    {
+     "x": 30,
+     "y": 200,
+     "w": 880,
+     "h": 200
+    }
+   ],
+   [
+    "Team",
+    {
+     "x": 30,
+     "y": 400,
+     "w": 880,
+     "h": 200
+    }
+   ]
+  ],
+  "nodes": {
+   "Begin": {
+    "x": 100,
+    "y": 41,
+    "w": 50,
+    "h": 50
+   },
+   "First step": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "Partner step": {
+    "x": 410,
+    "y": 226,
+    "w": 120,
+    "h": 80
+   },
+   "Last step": {
+    "x": 600,
+    "y": 426,
+    "w": 120,
+    "h": 80
+   },
+   "Finish": {
+    "x": 790,
+    "y": 441,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     66
+    ],
+    [
+     220,
+     66
+    ]
+   ],
+   [
+    [
+     340,
+     66
+    ],
+    [
+     375,
+     66
+    ],
+    [
+     375,
+     266
+    ],
+    [
+     410,
+     266
+    ]
+   ],
+   [
+    [
+     530,
+     266
+    ],
+    [
+     565,
+     266
+    ],
+    [
+     565,
+     466
+    ],
+    [
+     600,
+     466
+    ]
+   ],
+   [
+    [
+     720,
+     466
+    ],
+    [
+     790,
+     466
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "Begin",
+    "target": "First step",
+    "kind": "FLOW"
+   },
+   {
+    "source": "First step",
+    "target": "Partner step",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Partner step",
+    "target": "Last step",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Last step",
+    "target": "Finish",
+    "kind": "FLOW"
+   }
+  ],
+  "apps": {},
+  "labels": {
+   "Begin": {
+    "x": 109,
+    "y": 95,
+    "w": 33,
+    "h": 16
+   },
+   "Finish": {
+    "x": 798,
+    "y": 495,
+    "w": 34,
+    "h": 16
+   }
+  }
+ },
+ "lane-block-boundary": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 968,
+   "h": 614
+  },
+  "lanes": [
+   [
+    "Team",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 938,
+     "h": 200
+    }
+   ],
+   [
+    "",
+    {
+     "x": 30,
+     "y": 200,
+     "w": 938,
+     "h": 200
+    }
+   ],
+   [
+    "Team",
+    {
+     "x": 30,
+     "y": 400,
+     "w": 938,
+     "h": 214
+    }
+   ]
+  ],
+  "nodes": {
+   "Kick-off": {
+    "x": 100,
+    "y": 41,
+    "w": 50,
+    "h": 50
+   },
+   "Plan work": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "Draft": {
+    "x": 410,
+    "y": 226,
+    "w": 120,
+    "h": 80
+   },
+   "Build": {
+    "x": 657,
+    "y": 426,
+    "w": 120,
+    "h": 80
+   },
+   "Spec": {
+    "x": 659,
+    "y": 520,
+    "w": 40,
+    "h": 50
+   },
+   "Checklist": {
+    "x": 604,
+    "y": 520,
+    "w": 40,
+    "h": 50
+   },
+   "Delivered": {
+    "x": 847,
+    "y": 441,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     66
+    ],
+    [
+     220,
+     66
+    ]
+   ],
+   [
+    [
+     340,
+     66
+    ],
+    [
+     375,
+     66
+    ],
+    [
+     375,
+     266
+    ],
+    [
+     410,
+     266
+    ]
+   ],
+   [
+    [
+     530,
+     266
+    ],
+    [
+     565,
+     266
+    ],
+    [
+     565,
+     466
+    ],
+    [
+     657,
+     466
+    ]
+   ],
+   [
+    [
+     777,
+     466
+    ],
+    [
+     847,
+     466
+    ]
+   ],
+   [
+    [
+     679,
+     520
+    ],
+    [
+     679,
+     506
+    ]
+   ],
+   [
+    [
+     624,
+     520
+    ],
+    [
+     624,
+     513
+    ],
+    [
+     665,
+     513
+    ],
+    [
+     665,
+     506
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "Kick-off",
+    "target": "Plan work",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Plan work",
+    "target": "Draft",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Draft",
+    "target": "Build",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Build",
+    "target": "Delivered",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Spec",
+    "target": "Build",
+    "kind": "DATA"
+   },
+   {
+    "source": "Checklist",
+    "target": "Build",
+    "kind": "DATA"
+   }
+  ],
+  "apps": {},
+  "labels": {
+   "Kick-off": {
+    "x": 105,
+    "y": 95,
+    "w": 41,
+    "h": 16
+   },
+   "Spec": {
+    "x": 664,
+    "y": 574,
+    "w": 30,
+    "h": 16
+   },
+   "Checklist": {
+    "x": 600,
+    "y": 574,
+    "w": 49,
+    "h": 16
+   },
+   "Delivered": {
+    "x": 847,
+    "y": 495,
+    "w": 51,
+    "h": 16
+   }
+  }
+ },
+ "unnamed-lane": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 720,
+   "h": 400
+  },
+  "lanes": [
+   [
+    "",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 690,
+     "h": 200
+    }
+   ],
+   [
+    "Mailroom",
+    {
+     "x": 30,
+     "y": 200,
+     "w": 690,
+     "h": 200
+    }
+   ]
+  ],
+  "nodes": {
+   "Open": {
+    "x": 100,
+    "y": 41,
+    "w": 50,
+    "h": 50
+   },
+   "Sort mail": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "Send mail": {
+    "x": 410,
+    "y": 226,
+    "w": 120,
+    "h": 80
+   },
+   "Closed": {
+    "x": 600,
+    "y": 241,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     66
+    ],
+    [
+     220,
+     66
+    ]
+   ],
+   [
+    [
+     340,
+     66
+    ],
+    [
+     375,
+     66
+    ],
+    [
+     375,
+     266
+    ],
+    [
+     410,
+     266
+    ]
+   ],
+   [
+    [
+     530,
+     266
+    ],
+    [
+     600,
+     266
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "Open",
+    "target": "Sort mail",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Sort mail",
+    "target": "Send mail",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Send mail",
+    "target": "Closed",
+    "kind": "FLOW"
+   }
+  ],
+  "apps": {},
+  "labels": {
+   "Open": {
+    "x": 110,
+    "y": 95,
+    "w": 31,
+    "h": 16
+   },
+   "Closed": {
+    "x": 606,
+    "y": 295,
+    "w": 39,
+    "h": 16
+   }
+  }
+ },
+ "shared-item": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 790,
+   "h": 279
+  },
+  "lanes": [
+   [
+    "Desk",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 760,
+     "h": 279
+    }
+   ]
+  ],
+  "nodes": {
+   "In": {
+    "x": 100,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   },
+   "Write": {
+    "x": 290,
+    "y": 91,
+    "w": 120,
+    "h": 80
+   },
+   "Style guide": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 51
+   },
+   "Draft": {
+    "x": 368,
+    "y": 185,
+    "w": 40,
+    "h": 50
+   },
+   "Read": {
+    "x": 480,
+    "y": 91,
+    "w": 120,
+    "h": 80
+   },
+   "Out": {
+    "x": 670,
+    "y": 106,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     131
+    ],
+    [
+     290,
+     131
+    ]
+   ],
+   [
+    [
+     410,
+     131
+    ],
+    [
+     480,
+     131
+    ]
+   ],
+   [
+    [
+     600,
+     131
+    ],
+    [
+     670,
+     131
+    ]
+   ],
+   [
+    [
+     388,
+     171
+    ],
+    [
+     388,
+     185
+    ]
+   ],
+   [
+    [
+     388,
+     185
+    ],
+    [
+     388,
+     177
+    ],
+    [
+     468,
+     177
+    ],
+    [
+     468,
+     178
+    ],
+    [
+     488,
+     178
+    ],
+    [
+     488,
+     171
+    ]
+   ],
+   [
+    [
+     280,
+     77
+    ],
+    [
+     280,
+     84
+    ],
+    [
+     304,
+     84
+    ],
+    [
+     304,
+     91
+    ]
+   ],
+   [
+    [
+     280,
+     77
+    ],
+    [
+     280,
+     83
+    ],
+    [
+     468,
+     83
+    ],
+    [
+     468,
+     84
+    ],
+    [
+     494,
+     84
+    ],
+    [
+     494,
+     91
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "In",
+    "target": "Write",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Write",
+    "target": "Read",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Read",
+    "target": "Out",
+    "kind": "FLOW"
+   },
+   {
+    "source": "Write",
+    "target": "Draft",
+    "kind": "DATA"
+   },
+   {
+    "source": "Draft",
+    "target": "Read",
+    "kind": "DATA"
+   },
+   {
+    "source": "Style guide",
+    "target": "Write",
+    "kind": "DOC"
+   },
+   {
+    "source": "Style guide",
+    "target": "Read",
+    "kind": "DOC"
+   }
+  ],
+  "apps": {},
+  "labels": {
+   "In": {
+    "x": 118,
+    "y": 160,
+    "w": 14,
+    "h": 16
+   },
+   "Draft": {
+    "x": 374,
+    "y": 239,
+    "w": 28,
+    "h": 16
+   },
+   "Out": {
+    "x": 684,
+    "y": 160,
+    "w": 22,
+    "h": 16
+   }
+  }
+ },
+ "duplicate-names": {
+  "pool": {
+   "x": 0,
+   "y": 0,
+   "w": 720,
+   "h": 200
+  },
+  "lanes": [
+   [
+    "Unit",
+    {
+     "x": 30,
+     "y": 0,
+     "w": 690,
+     "h": 200
+    }
+   ]
+  ],
+  "nodes": {
+   "s": {
+    "x": 100,
+    "y": 41,
+    "w": 50,
+    "h": 50
+   },
+   "t1": {
+    "x": 220,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "t2": {
+    "x": 410,
+    "y": 26,
+    "w": 120,
+    "h": 80
+   },
+   "e": {
+    "x": 600,
+    "y": 41,
+    "w": 50,
+    "h": 50
+   }
+  },
+  "edges": [
+   [
+    [
+     150,
+     66
+    ],
+    [
+     220,
+     66
+    ]
+   ],
+   [
+    [
+     340,
+     66
+    ],
+    [
+     410,
+     66
+    ]
+   ],
+   [
+    [
+     530,
+     66
+    ],
+    [
+     600,
+     66
+    ]
+   ]
+  ],
+  "edgeLabels": [
+   null,
+   null,
+   null
+  ],
+  "connections": [
+   {
+    "source": "s",
+    "target": "t1",
+    "kind": "FLOW"
+   },
+   {
+    "source": "t1",
+    "target": "t2",
+    "kind": "FLOW"
+   },
+   {
+    "source": "t2",
+    "target": "e",
+    "kind": "FLOW"
+   }
+  ],
+  "apps": {},
+  "labels": {
+   "s": {
+    "x": 120,
+    "y": 95,
+    "w": 10,
+    "h": 16
+   },
+   "e": {
+    "x": 620,
+    "y": 95,
+    "w": 11,
+    "h": 16
+   }
+  }
+ }
+}

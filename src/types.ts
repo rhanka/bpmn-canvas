@@ -23,6 +23,7 @@ export type DiagnosticCode =
   | "render-failed"
   | "layout-unsupported"
   | "layout-failed"
+  | "load-layout-failed"
   | "read-only-lossy"
   | "save-failed"
   | "watermark-refused"
@@ -96,6 +97,31 @@ export interface HistoryState {
 export interface SetXmlOptions {
   /** Host revision of this document. Re-sending a revision already applied or emitted is an echo and is ignored. */
   readonly revision?: string;
+  /**
+   * Lay the document out as part of its load, with the auto-layout: no undo step, no `onChange`, `getXml()` keeps
+   * returning the input bytes until the first edit. Other diagrams are laid out the first time they are shown. A
+   * failure keeps the document as given and emits `load-layout-failed`. Default false.
+   */
+  readonly layoutOnLoad?: boolean;
+}
+
+/** Look options of a profile. */
+export interface ProfileOptions {
+  /** `legend`: the legend palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
+  readonly palette?: "legend" | "upstream";
+  /** `colored` only. `classic`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes recoloured. */
+  readonly drawing?: "upstream" | "classic";
+}
+
+/** One consistent capture of the canvas for an export (see `BpmnCanvasHandle.snapshot`). */
+export interface CanvasSnapshot {
+  /** The complete document, as `getXml()` returns it. */
+  readonly xml: string;
+  readonly revision: string | undefined;
+  readonly diagramId: string | undefined;
+  readonly profile: ProfileId;
+  /** Edited since the document was loaded (any command, undo and redo included); a new document resets it. */
+  readonly touched: boolean;
 }
 
 export type SetXmlResult =
@@ -123,6 +149,10 @@ export interface BpmnCanvasOptions {
   readonly xml?: string;
   readonly revision?: string;
   readonly profile?: ProfileId;
+  /** Look options of `profile` (palette, drawing). */
+  readonly profileOptions?: ProfileOptions;
+  /** `layoutOnLoad` for the first document (see `SetXmlOptions`). */
+  readonly layoutOnLoad?: boolean;
   /** Look inputs for the `legend` profile. Missing keys fall back to its defaults, the reference Custom look. */
   readonly legendTokens?: Partial<LegendTokens>;
   /** Colours of the `colored` profile, same fields as the legend tokens. Only the keys given recolour; see the README. */
@@ -201,7 +231,9 @@ export interface BpmnCanvasHandle {
    * `destroy()`). Emits `onChange` with cause `profile-switch`
    * and no new content revision.
    */
-  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>): Promise<void>;
+  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>, options?: ProfileOptions): Promise<void>;
+  /** One consistent capture for an export: document, revision, diagram, profile and `touched`. Refused during a drag. */
+  snapshot(): Promise<CanvasSnapshot>;
   canUndo(): boolean;
   canRedo(): boolean;
   undo(): void;
@@ -231,4 +263,16 @@ export interface RenderResult {
   readonly diagrams: readonly RenderedDiagram[];
   /** Every diagram that was not rendered is explained here, with its `diagramId`. */
   readonly diagnostics: readonly Diagnostic[];
+}
+
+/** A moddle element, including descriptor-defined extension values and object references. */
+export interface ModdleElement {
+  readonly $type: string;
+  // The upstream moddle package has no TypeScript declarations; property types come from its descriptor.
+  [property: string]: any;
+}
+export interface BpmnDefinitions extends ModdleElement {
+  readonly $type: "bpmn:Definitions";
+  readonly rootElements: ModdleElement[];
+  readonly diagrams?: ModdleElement[];
 }

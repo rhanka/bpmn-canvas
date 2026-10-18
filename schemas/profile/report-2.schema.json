@@ -1,0 +1,506 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:profile-mechanism:1:report-2",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "reportVersion": {
+      "const": "2"
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceIdentity": {
+      "$ref": "#/$defs/identity"
+    },
+    "targetIdentity": {
+      "$ref": "#/$defs/identity"
+    },
+    "inputRevision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "outputRevision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "rawStandardFindings": {
+      "type": "array",
+      "items": true
+    },
+    "idMap": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idmap"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    }
+  },
+  "required": [
+    "reportVersion",
+    "operation",
+    "entries",
+    "rawStandardFindings",
+    "idMap",
+    "artifacts"
+  ],
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mechanismVersion": {
+          "const": "1"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "profile": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.:/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "base": {
+          "$ref": "#/$defs/pin"
+        },
+        "descriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pin"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "mechanismVersion",
+        "schemaVersion",
+        "profile",
+        "version",
+        "sha256",
+        "base",
+        "descriptors"
+      ]
+    },
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.:/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ]
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warn",
+            "error"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "integrity",
+            "readiness",
+            "repairable",
+            "advisory",
+            "loss"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "load",
+            "import",
+            "complete",
+            "pre-normalize",
+            "normalize",
+            "post-normalize",
+            "layout",
+            "post-layout",
+            "release",
+            "render",
+            "export"
+          ]
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "messageKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disposition": {
+          "enum": [
+            "observed",
+            "corrected",
+            "dropped",
+            "mapped",
+            "refused"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/coordinate"
+        },
+        "result": {
+          "$ref": "#/$defs/coordinate"
+        },
+        "beforePresent": {
+          "type": "boolean"
+        },
+        "afterPresent": {
+          "type": "boolean"
+        },
+        "originalType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property": {
+          "type": "string",
+          "minLength": 1
+        },
+        "causedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "emittedType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legacyCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "before": true,
+        "after": true,
+        "lossClass": {
+          "enum": [
+            "semantic-type",
+            "relation-kind",
+            "navigation",
+            "appearance",
+            "layout",
+            "metadata",
+            "unsupported-feature",
+            "provenance-unavailable"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "classification",
+        "stage",
+        "ruleId",
+        "messageKey",
+        "disposition",
+        "source",
+        "result",
+        "beforePresent",
+        "afterPresent"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "beforePresent": {
+                "const": true
+              }
+            },
+            "required": [
+              "beforePresent"
+            ]
+          },
+          "then": {
+            "required": [
+              "before"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "before"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "afterPresent": {
+                "const": true
+              }
+            },
+            "required": [
+              "afterPresent"
+            ]
+          },
+          "then": {
+            "required": [
+              "after"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "after"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "classification": {
+                "const": "loss"
+              }
+            },
+            "required": [
+              "classification"
+            ]
+          },
+          "then": {
+            "required": [
+              "lossClass"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "lossClass"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "coordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "enum": [
+            "tree",
+            "profile",
+            "artifact",
+            "none"
+          ]
+        },
+        "pointer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(?:/(?:[^~/]|~[01])*)*$"
+        },
+        "targetId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "provenance": {
+          "enum": [
+            "exact",
+            "unavailable",
+            "generated"
+          ]
+        }
+      },
+      "required": [
+        "domain",
+        "pointer",
+        "targetId",
+        "provenance"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provenance": {
+                "const": "unavailable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "pointer": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "pointer": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "domain": {
+                "const": "none"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "pointer": {
+                "type": "null"
+              },
+              "targetId": {
+                "type": "null"
+              },
+              "provenance": {
+                "const": "unavailable"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "idmap": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "enum": [
+            "migration",
+            "export"
+          ]
+        },
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "sourceId",
+        "resultId",
+        "domain"
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capability": {
+          "enum": [
+            "engine-byte-compatible",
+            "structural",
+            "unsupported"
+          ]
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "entryIndexes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        }
+      },
+      "required": [
+        "format",
+        "capability",
+        "entryIndexes"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "capability": {
+                "const": "unsupported"
+              }
+            },
+            "required": [
+              "capability"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "digest"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

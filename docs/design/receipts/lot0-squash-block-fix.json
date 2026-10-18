@@ -1,0 +1,476 @@
+{
+  "format": "lot0-squash-block-fix/1",
+  "completedAt": "2026-10-16T07:51:41.509Z",
+  "status": "completed-with-sandbox-browser-failures",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "initialHead": "3d79308",
+  "implementationHead": "7151323",
+  "changes": {
+    "paths": {
+      "filesNeutralized": 3,
+      "linesNeutralized": 68,
+      "trackedFilesScanned": 532,
+      "helper": "tests/helpers/path-guard.mjs",
+      "tests": "tests/path-guard.test.mjs",
+      "coverage": "All tracked bytes and added lines of git diff main...HEAD, including binary diffs; no exceptions. Synthetic fixture paths are assembled at runtime."
+    },
+    "reseal": {
+      "path": "docs/design/receipts/lot0-squash-paths-reseal.json",
+      "sha256": "758a10870789384f0cebf0fec43b03f060d86c45a75c78a39c80f888d6b4a24c",
+      "chain": "Existing predecessor pins remain intact; successor resolution validates the explicit path reseal and current bytes."
+    },
+    "release": {
+      "script": "scripts/check-brand-release.mjs",
+      "tests": "tests/brand-release-gate.test.mjs",
+      "binding": [
+        "exact package version",
+        "npm pack tarball SHA-256",
+        "owner decision reference",
+        "owner",
+        "GO",
+        "current UTC date",
+        "baseline SHA-256"
+      ],
+      "consumption": "Atomic exclusive creation in the common Git directory; one successful gate invocation consumes the version even if subsequent publication fails. Shared across linked worktrees. A fresh clone has no local consumption history.",
+      "realHook": "Refused the current nonempty baseline without an override; no publication attempted."
+    },
+    "squashMessage": {
+      "path": ".h2a/squash-prep/MESSAGE.txt",
+      "ignored": true,
+      "sha256": "01e713df071efc6ff46b5105d2ebba98ea98a34058e8ab563b02c8c8cf493d74",
+      "validation": "Mentions the path guard and hardened release gate; no protected tokens, home paths or attribution trailers."
+    }
+  },
+  "red": [
+    {
+      "tests": 15,
+      "pass": 10,
+      "fail": 5,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 10297.70075,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-red.log",
+        "sha256": "a62bd2508d687068a66ddeb6b364391fa15cd36628a4c3f8c260e7ce07e432b6",
+        "originalLogSha256": "fba0b97ef1a2dff68bf69bb9a182dcf661d82e6a4b14102d2dafab6e720f28a2"
+      }
+    },
+    {
+      "tests": 4,
+      "pass": 1,
+      "fail": 3,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 1410.936716,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-path-red.log",
+        "sha256": "7a30ef23bc94a2bb2df6641bb6ee82ae5864a5b47d6d8b80af15e2dd8853f4e5",
+        "originalLogSha256": "c264708eb24ea8e41150913227e389b69d31e3cc86334505b66ab3df19fd7819"
+      }
+    },
+    {
+      "tests": 2,
+      "pass": 1,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 447.350933,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-seal-red.log",
+        "sha256": "9dd499bc4144701eb1bebfd6132733ee265cd4570558b09d382fa52d664cc7bb",
+        "originalLogSha256": "52fcb5cabc1b1e31f4972fd9b636e8ca4f675e6577341a754fdb8d7a5aac35de"
+      }
+    },
+    {
+      "tests": 5,
+      "pass": 3,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 381.959221,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-reseal-red.log",
+        "sha256": "c449256f4d7282eb5461e21d0e889df042a7c19956a018cdd387e7e1e29029bc",
+        "originalLogSha256": "b2030493fe7126d14bc47d87906290d0b1c25f146b5e8aa992f989f34d551557"
+      }
+    }
+  ],
+  "redInterpretation": "The old gate accepted wrong tarball hashes, changed packed payloads, missing decision references and reuse. The path helper was initially absent; after adding it, both repository scans rejected the 68 leaked lines. The initial added-line fixture also reused an unchanged base line; its removed baseline was corrected before green. Existing seal verification rejected the changed receipt before explicit successor resolution was added.",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "status": "passed",
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-typecheck.log",
+        "sha256": "75b00b0358d963d3426e2fd6affbf3e17c73e9ef8689826d4c051e18c05e604d",
+        "originalLogSha256": "75b00b0358d963d3426e2fd6affbf3e17c73e9ef8689826d4c051e18c05e604d"
+      }
+    },
+    {
+      "command": "node --test tests/brand-release-gate.test.mjs",
+      "status": "passed",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 13796.0719,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-release-green.log",
+        "sha256": "5af6b5ca0ed7c237daed2cae0bb07aeadfaa85c60a8ee1ee1f32de189c32fb9d",
+        "originalLogSha256": "5af6b5ca0ed7c237daed2cae0bb07aeadfaa85c60a8ee1ee1f32de189c32fb9d"
+      }
+    },
+    {
+      "command": "node --test tests/path-guard.test.mjs",
+      "status": "passed",
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 2102.750491,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-path-green.log",
+        "sha256": "415846127169c3a6bff5bf61f5272bdcfda4de056a143462d6e9cc3de1825fb5",
+        "originalLogSha256": "415846127169c3a6bff5bf61f5272bdcfda4de056a143462d6e9cc3de1825fb5"
+      }
+    },
+    {
+      "command": "node --test tests/lot0-squash-readiness.test.mjs tests/profile-s123-receipt.test.mjs",
+      "status": "passed",
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 406.847743,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-reseal-green.log",
+        "sha256": "7e02f4bdd562b9fa4f9e5a33d320ec1ba4cae880e0772bba2469b93276a4de12",
+        "originalLogSha256": "7e02f4bdd562b9fa4f9e5a33d320ec1ba4cae880e0772bba2469b93276a4de12"
+      }
+    },
+    {
+      "command": "node --test tests/brand-*.test.mjs tests/path-guard.test.mjs tests/lot0-squash-readiness.test.mjs tests/profile-*.test.mjs",
+      "status": "passed",
+      "tests": 1062,
+      "pass": 1062,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 1051104.398477,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-focused-green.log",
+        "sha256": "57f9440dc962f5d7e2c5c35a68829a0a6018a1f04b731a1665c2a1ba2b9c76f1",
+        "originalLogSha256": "57f9440dc962f5d7e2c5c35a68829a0a6018a1f04b731a1665c2a1ba2b9c76f1"
+      }
+    },
+    {
+      "command": "npm test",
+      "status": "failed",
+      "tests": 2019,
+      "pass": 1993,
+      "fail": 26,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 1104424.4194,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-squash-full.log",
+        "sha256": "fc0fa00b203ff19860fb8d0d9b85556de08765ecc3338c243b265900e95b1ddf",
+        "originalLogSha256": "4d876cc1b1acfb0d10a1070d60af899eb3169e5087cf02d3c680dba03167d93c"
+      }
+    }
+  ],
+  "failures": [
+    {
+      "number": 4,
+      "path": "tests/aui.browser.test.mjs:10:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 37,
+      "path": "tests/browser-dist.browser.test.mjs:22:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 46,
+      "path": "tests/colored.browser.test.mjs:36:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 47,
+      "path": "tests/core.browser.test.mjs:24:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 49,
+      "path": "tests/demo.browser.test.mjs:24:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 65,
+      "path": "tests/history.browser.test.mjs:9:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 685,
+      "path": "tests/io-review-2.browser.test.mjs:7:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 725,
+      "path": "tests/io-review-3.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 757,
+      "path": "tests/io-review-4.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 794,
+      "path": "tests/io.browser.test.mjs:28:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 795,
+      "path": "tests/layout-boundary.browser.test.mjs:10:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 798,
+      "path": "tests/layout-corpus.browser.test.mjs:11:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 809,
+      "path": "tests/layout-on-load.browser.test.mjs:9:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 850,
+      "path": "tests/legend.browser.test.mjs:11:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 851,
+      "path": "tests/legend2.browser.test.mjs:14:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 852,
+      "path": "tests/legend3.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 879,
+      "path": "tests/palette.browser.test.mjs:16:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 1905,
+      "path": "tests/react.browser.test.mjs:15:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 1908,
+      "path": "tests/render-looks.browser.test.mjs:29:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 1909,
+      "path": "tests/ui.browser.test.mjs:11:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 1910,
+      "path": "tests/v02.browser.test.mjs:17:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 1911,
+      "path": "tests/watermark.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 2003,
+      "path": "tests/workshop-export.browser.test.mjs:9:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 2004,
+      "path": "tests/workshop-served.browser.test.mjs:7:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 2005,
+      "path": "tests/workshop-structure.browser.test.mjs:12:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "number": 2006,
+      "path": "tests/workshop.browser.test.mjs:20:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    }
+  ],
+  "failureSummary": {
+    "sandboxChromiumLaunch": 26,
+    "other": 0
+  },
+  "processCleanup": {
+    "command": "npm test",
+    "returnCode": 1,
+    "timedOut": false,
+    "elapsedSeconds": 1110.18,
+    "workerCleanup": [],
+    "remainingProcesses": 0,
+    "manualWorkerCleanup": [
+      {
+        "path": "tests/browser-dist.browser.test.mjs",
+        "pid": 2822415,
+        "signal": "SIGTERM",
+        "reason": "Browser worker retained server handles after the launch attempt; no child browser process remained."
+      },
+      {
+        "path": "tests/demo.browser.test.mjs",
+        "pid": 2822419,
+        "signal": "SIGTERM",
+        "reason": "Browser worker retained server handles after the launch attempt; no child browser process remained."
+      }
+    ],
+    "deadlineExtension": {
+      "reason": "The exhaustive sealed-byte mutation test is CPU-active and historically exceeds the initial supervision deadline. Test commands and assertions were unchanged.",
+      "extendedWaitSeconds": 660.2,
+      "timedOut": false,
+      "supervisorResumed": true
+    },
+    "scope": "All test processes started by this task completed or were terminated. Browser configuration and assertions were unchanged.",
+    "finalKnownProcessCheck": {
+      "knownTestPidsChecked": [
+        2816055,
+        2816152,
+        2822121,
+        2822363,
+        2822415,
+        2822419,
+        2823919
+      ],
+      "remaining": []
+    }
+  },
+  "review": {
+    "status": "selection-failed",
+    "dossier": ".h2a/reviews/lot0-squash-block-fix.md",
+    "reason": "Live peer discovery returned no sessions and no live model catalog endpoint was configured to resolve two complementary review legs. No consensus review claimed."
+  },
+  "artifacts": [
+    {
+      "path": "docs/design/receipts/lot0-brand-gates-validation.json",
+      "bytes": 26549,
+      "sha256": "2b17e81acc1daff32776f9d8ed397f860c4790637cbe2cd06c8442b8fd32e66c"
+    },
+    {
+      "path": "docs/design/receipts/lot0-s3.json",
+      "bytes": 27585,
+      "sha256": "4e87e6044776b32216bdf3f30f896b3216c388cddae9b02ab6dcf57da66add73"
+    },
+    {
+      "path": "docs/design/receipts/lot0-squash-paths-reseal.json",
+      "bytes": 1268,
+      "sha256": "758a10870789384f0cebf0fec43b03f060d86c45a75c78a39c80f888d6b4a24c"
+    },
+    {
+      "path": "docs/design/receipts/workbench-review.md",
+      "bytes": 726,
+      "sha256": "2cbee78c6f52df06675cd4e8b4444c5a897aa46a371a17e3dbe57900a7c51a88"
+    },
+    {
+      "path": "docs/release.md",
+      "bytes": 2533,
+      "sha256": "d068c5ff453526612cdd85fc42dbbbf50a1b9627955ca41830b1deb0ad058dd6"
+    },
+    {
+      "path": "scripts/check-brand-release.mjs",
+      "bytes": 3423,
+      "sha256": "cc46cf40838cf0a70b65c9116d41961937c98f00834d274a473c365b6159cd18"
+    },
+    {
+      "path": "tests/brand-release-gate.test.mjs",
+      "bytes": 6353,
+      "sha256": "e831357f800b738af89e7449228659da8dc040b4c120690eafc20c3bfa7a1b57"
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "bytes": 1605,
+      "sha256": "c83953fe0d168857f1066e378cbe7187c0f0c9419548b0d8d69f9c4b0972bb75"
+    },
+    {
+      "path": "tests/helpers/path-guard.mjs",
+      "bytes": 2091,
+      "sha256": "422ae41cdb187fba59c6f46f6f161340a7d9b3ccc1cf25304f425e32386e843a"
+    },
+    {
+      "path": "tests/lot0-squash-readiness.test.mjs",
+      "bytes": 6176,
+      "sha256": "7eef0c9b1ec0fa6f95fe54f81b0cb14573f41e3a54a7d38c5552f644c38e5628"
+    },
+    {
+      "path": "tests/path-guard.test.mjs",
+      "bytes": 2702,
+      "sha256": "9a37ed9765e97509b57a79c43face022363c6bc7e92c89f81e4c9548984e2b0e"
+    }
+  ],
+  "preservation": {
+    "published": false,
+    "pushed": false,
+    "historyRewritten": false,
+    "attributionTrailersAdded": false,
+    "excludedPathsTouched": false,
+    "excludedPaths": [
+      "tmp/",
+      "docs/design/0.3.1-layout-on-load.md"
+    ]
+  },
+  "postReceiptVerification": {
+    "command": "node --test tests/path-guard.test.mjs tests/brand-baseline.test.mjs tests/lot0-squash-readiness.test.mjs tests/profile-s123-receipt.test.mjs",
+    "status": "passed",
+    "tests": 18,
+    "pass": 18,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 1894.435412,
+    "trackedFiles": 533,
+    "log": {
+      "path": ".h2a/squash-prep/validation/lot0-squash-post-receipt.log",
+      "sha256": "715ba7e9e0ff1609715b41467ef4b12a9b7735ca46c6e03f0d43d5d95c723286"
+    }
+  }
+}

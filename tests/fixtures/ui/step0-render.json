@@ -1,0 +1,1326 @@
+{
+ "source": "SVG primitives of the step-0 canvas for each element of R1.bpmn (invented), both looks, recorded once (limited extraction; texts by content, size, weight and colour).",
+ "looks": {
+  "custom": {
+   "Service_desk_pool": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "1304",
+      "height": "499",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "30",
+      "height": "499",
+      "fill": "#eee7df",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Servicedesk",
+      "fontSize": "14",
+      "fontWeight": "700",
+      "fill": "#595959"
+     }
+    ]
+   },
+   "Back_office": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "1274",
+      "height": "200",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "40",
+      "height": "200",
+      "fill": "#ffffff",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Backoffice",
+      "fontSize": "14",
+      "fontWeight": "700",
+      "fill": "#595959"
+     }
+    ]
+   },
+   "Front_desk": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "1274",
+      "height": "299",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "40",
+      "height": "299",
+      "fill": "#ffffff",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Frontdesk",
+      "fontSize": "14",
+      "fontWeight": "700",
+      "fill": "#595959"
+     }
+    ]
+   },
+   "Request_in": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "circle",
+      "cx": "25",
+      "cy": "25",
+      "r": "25",
+      "fill": "#e27676",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     }
+    ]
+   },
+   "Request_in_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Requestin",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Request_form": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M0 0h32l8 8v42h-40Z",
+      "fill": "#f6f1ea",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M32 0v8h8",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     }
+    ]
+   },
+   "Request_form_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Requestform",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "120",
+      "height": "80",
+      "rx": "10",
+      "fill": "url()",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Logrequest",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#000000"
+     },
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "92",
+      "height": "30",
+      "fill": "#99ffff",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M78 5h9v12h-9ZM75 7.5h6v2.5h-6ZM75 12h6v2.5h-6Z",
+      "fill": "#99ffff",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Tickettool",
+      "fontSize": "12",
+      "fontWeight": "700",
+      "fill": "#000000"
+     }
+    ]
+   },
+   "Ticket": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M0 0h32l8 8v42h-40Z",
+      "fill": "#f6f1ea",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M32 0v8h8",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     }
+    ]
+   },
+   "Ticket_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Ticket",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "200",
+      "height": "80",
+      "rx": "10",
+      "fill": "url()",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Checktheincomingrequestagainstalltheapplicablerulesandrecordtheoutcome",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#000000"
+     }
+    ]
+   },
+   "Valid": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M25 0L50 25L25 50L0 25Z",
+      "fill": "#60be89",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M17 17l16 16M33 17l-16 16",
+      "stroke": "#000000",
+      "stroke-width": "5",
+      "stroke-linecap": "butt"
+     }
+    ]
+   },
+   "Valid_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Valid?",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Request_done": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "circle",
+      "cx": "25",
+      "cy": "25",
+      "r": "23.5",
+      "fill": "#e27676",
+      "stroke": "#000000",
+      "stroke-width": "3"
+     }
+    ]
+   },
+   "Request_done_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Requestdone",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Resolve_issue": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "120",
+      "height": "80",
+      "rx": "10",
+      "fill": "url()",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "rect",
+      "x": "53",
+      "y": "62",
+      "width": "14",
+      "height": "14",
+      "fill": "transparent",
+      "stroke": "#000000",
+      "stroke-width": "1.2"
+     },
+     {
+      "tag": "path",
+      "d": "M56 69h8M60 65v8",
+      "stroke": "#000000",
+      "stroke-width": "1.2"
+     },
+     {
+      "tag": "text",
+      "text": "Resolveissue",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#000000"
+     }
+    ]
+   },
+   "Escalate": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "108",
+      "height": "62",
+      "rx": "10",
+      "fill": "#ffff99",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M84 9h9v-3l6 5l-6 5v-3h-9Z",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Escalate",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#000000"
+     }
+    ]
+   },
+   "Doc_Desk_manual": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M0 0H120V43.35Q90 32.13 60 43.35Q30 54.57 0 43.35Z",
+      "fill": "#ffe599",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "line",
+      "x1": "0",
+      "y1": "15",
+      "x2": "120",
+      "y2": "15",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Deskmanual",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "#000000"
+     }
+    ]
+   },
+   "App_Log_request": {
+    "hidden": true,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "92",
+      "height": "30",
+      "fill": "#99ffff",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M78 5h9v12h-9ZM75 7.5h6v2.5h-6ZM75 12h6v2.5h-6Z",
+      "fill": "#99ffff",
+      "stroke": "#000000",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Tickettool",
+      "fontSize": "12",
+      "fontWeight": "700",
+      "fill": "#000000"
+     }
+    ]
+   },
+   "Flow_Request_in_Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M153 131L292 131",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Log_request_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M412 131L546 131",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome_Valid": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M746 131L816 131",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Valid__Request_done": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M866 131L971 131",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Valid__Request_done_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "yes",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Flow_Valid__Resolve_issue": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M866 131L901 131L901 365L936 365",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Valid__Resolve_issue_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "no",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Flow_Resolve_issue_Escalate": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M1056 365L1126 365",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Escalate_Request_done": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M1180 334L1180 8L996 8L996 106",
+      "fill": "none",
+      "stroke": "#000000",
+      "stroke-width": "1",
+      "stroke-linejoin": "round",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "DocLink_Desk_manual_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M576 91L576 77",
+      "fill": "none",
+      "stroke": "#b85450",
+      "stroke-width": "1",
+      "stroke-dasharray": "5 5"
+     }
+    ]
+   },
+   "AppLink_Log_request": {
+    "hidden": true,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M352 161L352 151",
+      "fill": "none",
+      "stroke": "#b85450",
+      "stroke-width": "1",
+      "stroke-dasharray": "5 5"
+     }
+    ]
+   },
+   "In_Request_form_Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M262 205L262 198L312 198L312 191",
+      "fill": "none",
+      "stroke": "#b85450",
+      "stroke-width": "1",
+      "stroke-dasharray": "5 5"
+     }
+    ]
+   },
+   "Out_Log_request_Ticket": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M392 191L392 198L426 198L426 205",
+      "fill": "none",
+      "stroke": "#b85450",
+      "stroke-width": "1",
+      "stroke-dasharray": "5 5"
+     }
+    ]
+   }
+  },
+  "bpmn": {
+   "Service_desk_pool": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "1304",
+      "height": "499",
+      "fill": "#eee7df",
+      "stroke": "#0f3180",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "line",
+      "x1": "30",
+      "y1": "0",
+      "x2": "30",
+      "y2": "499",
+      "stroke": "#0f3180",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "Servicedesk",
+      "fontSize": "14",
+      "fontWeight": "700",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Back_office": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "1274",
+      "height": "200",
+      "fill": "#fbf9f6",
+      "stroke": "#b9b2a8",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "line",
+      "x1": "30",
+      "y1": "0",
+      "x2": "30",
+      "y2": "200",
+      "stroke": "#b9b2a8",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "Backoffice",
+      "fontSize": "12.5",
+      "fontWeight": "700",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Front_desk": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "1274",
+      "height": "299",
+      "fill": "#fbf9f6",
+      "stroke": "#b9b2a8",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "line",
+      "x1": "30",
+      "y1": "0",
+      "x2": "30",
+      "y2": "299",
+      "stroke": "#b9b2a8",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "Frontdesk",
+      "fontSize": "12.5",
+      "fontWeight": "700",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Request_in": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "circle",
+      "cx": "25",
+      "cy": "25",
+      "r": "25",
+      "fill": "#e27676",
+      "stroke": "#8a2d2d",
+      "stroke-width": "1.5"
+     }
+    ]
+   },
+   "Request_in_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Requestin",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Request_form": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M0 0h32l8 8v42h-40Z",
+      "fill": "#efe9e1",
+      "stroke": "#8a7f72",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M32 0v8h8",
+      "fill": "none",
+      "stroke": "#8a7f72",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Requestform",
+      "fontSize": "10.5",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Request_form_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Requestform",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "120",
+      "height": "80",
+      "rx": "9",
+      "fill": "#f6f1ea",
+      "stroke": "#8a7f72",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "Logrequest",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Ticket": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M0 0h32l8 8v42h-40Z",
+      "fill": "#efe9e1",
+      "stroke": "#8a7f72",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "path",
+      "d": "M32 0v8h8",
+      "fill": "none",
+      "stroke": "#8a7f72",
+      "stroke-width": "1"
+     },
+     {
+      "tag": "text",
+      "text": "Ticket",
+      "fontSize": "10.5",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Ticket_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Ticket",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "200",
+      "height": "80",
+      "rx": "9",
+      "fill": "#f6f1ea",
+      "stroke": "#8a7f72",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "Checktheincomingrequestagainstalltheapplicablerulesandrecordtheoutcome",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Valid": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M25 0L50 25L25 50L0 25Z",
+      "fill": "#60be89",
+      "stroke": "#2f7a4f",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "path",
+      "d": "M17 17l16 16M33 17l-16 16",
+      "stroke": "#3a3a3a",
+      "stroke-width": "4",
+      "stroke-linecap": "round"
+     }
+    ]
+   },
+   "Valid_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Valid?",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Request_done": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "circle",
+      "cx": "25",
+      "cy": "25",
+      "r": "25",
+      "fill": "#e27676",
+      "stroke": "#8a2d2d",
+      "stroke-width": "4"
+     },
+     {
+      "tag": "circle",
+      "cx": "25",
+      "cy": "25",
+      "r": "18",
+      "fill": "#8a2d2d"
+     }
+    ]
+   },
+   "Request_done_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "Requestdone",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Resolve_issue": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "120",
+      "height": "80",
+      "rx": "9",
+      "fill": "#f6f1ea",
+      "stroke": "#8a7f72",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "rect",
+      "x": "53",
+      "y": "62",
+      "width": "14",
+      "height": "14",
+      "fill": "transparent",
+      "stroke": "#8a7f72",
+      "stroke-width": "1.2"
+     },
+     {
+      "tag": "path",
+      "d": "M56 69h8M60 65v8",
+      "stroke": "#8a7f72",
+      "stroke-width": "1.2"
+     },
+     {
+      "tag": "text",
+      "text": "Resolveissue",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Escalate": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "rect",
+      "x": "0",
+      "y": "0",
+      "width": "108",
+      "height": "62",
+      "rx": "9",
+      "fill": "#fff59d",
+      "stroke": "#b59b00",
+      "stroke-width": "3.5"
+     },
+     {
+      "tag": "rect",
+      "x": "47",
+      "y": "44",
+      "width": "14",
+      "height": "14",
+      "fill": "transparent",
+      "stroke": "#b59b00",
+      "stroke-width": "1.2"
+     },
+     {
+      "tag": "path",
+      "d": "M50 51h8M54 47v8",
+      "stroke": "#b59b00",
+      "stroke-width": "1.2"
+     },
+     {
+      "tag": "text",
+      "text": "Escalate",
+      "fontSize": "12",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Doc_Desk_manual": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M20 0 L0 0 L0 51 L20 51",
+      "fill": "none",
+      "stroke": "#b8860b",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "[Doc]Deskmanual",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "App_Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M20 0 L0 0 L0 30 L20 30",
+      "fill": "none",
+      "stroke": "#3a8a8a",
+      "stroke-width": "1.4"
+     },
+     {
+      "tag": "text",
+      "text": "[App]Tickettool",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "#3a3a3a"
+     }
+    ]
+   },
+   "Flow_Request_in_Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M153 131L292 131",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Log_request_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M412 131L546 131",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome_Valid": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M746 131L816 131",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Valid__Request_done": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M866 131L971 131",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Valid__Request_done_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "yes",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Flow_Valid__Resolve_issue": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M866 131L896 131C898.5 131 901 133.5 901 136L901 360C901 362.5 903.5 365 906 365L936 365",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Valid__Resolve_issue_label": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "text",
+      "text": "no",
+      "fontSize": "11",
+      "fontWeight": "normal",
+      "fill": "hsl(225, 10%, 15%)"
+     }
+    ]
+   },
+   "Flow_Resolve_issue_Escalate": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M1056 365L1126 365",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Flow_Escalate_Request_done": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15 Z",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1",
+      "fill": "hsl(225, 10%, 15%)"
+     },
+     {
+      "tag": "path",
+      "d": "M1180 334L1180 13C1180 10.5 1177.5 8 1175 8L1001 8C998.5 8 996 10.5 996 13L996 106",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "DocLink_Desk_manual_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1.5",
+      "stroke-dasharray": "10000,1"
+     },
+     {
+      "tag": "path",
+      "d": "M576 91L576 77",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "stroke-dasharray": "0, 5",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "AppLink_Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M352 161L352 151",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "stroke-dasharray": "0, 5"
+     }
+    ]
+   },
+   "In_Request_form_Log_request": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1.5",
+      "stroke-dasharray": "10000,1"
+     },
+     {
+      "tag": "path",
+      "d": "M262 205L262 203C262 200.5 264.5 198 267 198L307 198C309.5 198 312 195.5 312 193L312 191",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "stroke-dasharray": "0, 5",
+      "marker-end": "yes"
+     }
+    ]
+   },
+   "Out_Log_request_Ticket": {
+    "hidden": false,
+    "primitives": [
+     {
+      "tag": "path",
+      "d": "M 1 5 L 11 10 L 1 15",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "1.5",
+      "stroke-dasharray": "10000,1"
+     },
+     {
+      "tag": "path",
+      "d": "M392 191L392 193C392 195.5 394.5 198 397 198L421 198C423.5 198 426 200.5 426 203L426 205",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke": "hsl(225, 10%, 15%)",
+      "stroke-width": "2",
+      "stroke-dasharray": "0, 5",
+      "marker-end": "yes"
+     }
+    ]
+   }
+  }
+ }
+}

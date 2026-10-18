@@ -1,0 +1,4823 @@
+{
+  "format": "lot0-corpus-v1-revendor/1",
+  "status": "final",
+  "initialHead": "4b4ea9a",
+  "date": "2026-10-16",
+  "source": {
+    "repository": "bpmn-moddle-py",
+    "sourceCommit": "cb46b3b8f893996a83c056f31f8aa92aa2364bd3",
+    "sourceTreeId": "0c6bf891f147079e175a46d0d34f42ff308d235c",
+    "tagName": "profile-corpus-v1.0.0",
+    "tagObject": "dfb8a986933dd86ad176022df13efecb6c73b325",
+    "sourceRootTree": "f33aa0c7aba96effb7c7e46783dfcdde1c507497",
+    "sourceTree": "contracts/",
+    "readMethod": "git ls-tree inventory and git show raw blobs; source checkout and index never changed",
+    "tagAccepted": true
+  },
+  "vendoring": {
+    "rule": "Copy every regular file under contracts/ byte for byte, preserving relative paths. No files outside contracts/ are imported.",
+    "evidence": "The previous pin contained all 42 contracts/ files. The final tree has 21 mechanism artifacts plus 176 manifest-listed cases and the manifest. The manifest lists cases only, so copying only its files would omit profile and verdict dependencies. Comparator executables are outside contracts/ and remain metadata only.",
+    "files": 198,
+    "mechanismFiles": 21,
+    "cases": 176,
+    "manifest": {
+      "path": "profile-parity-corpus/1/manifest.json",
+      "bytes": 30434,
+      "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf"
+    },
+    "unchangedPreviousPayloadFiles": 41,
+    "changedExistingFiles": [
+      {
+        "path": "profile-parity-corpus/1/manifest.json",
+        "old": {
+          "bytes": 5292,
+          "sha256": "d2745fb31655cfb0b61992989c8eb52b4c782cecf0e9ef28307f5be4f4befb5e"
+        },
+        "new": {
+          "bytes": 30434,
+          "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf"
+        }
+      }
+    ],
+    "addedFiles": 156,
+    "removedFiles": 0,
+    "manifestChanges": {
+      "addedCaseEntries": 153,
+      "addedComparatorIds": [
+        "compatibility-verdict-ref"
+      ],
+      "addedExecutablePins": [
+        "tests/oracle/profile_references.mjs",
+        "tests/oracle/profile_c14n.mjs"
+      ],
+      "executableFilesVendored": false
+    }
+  },
+  "vectorConsistency": {
+    "total": 486,
+    "expectationFile": {
+      "path": "tests/fixtures/profile-lot0/expectations.json",
+      "bytes": 1802403,
+      "sha256": "b6ee671974e399fefeb1ff105978969ef95db9dc75ca5f6c8f361dcb1f278d2d"
+    },
+    "expectationSeal": {
+      "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+      "bytes": 465,
+      "sha256": "0fdb6c8524ae9b93e3fe30fe9532f80b3a0117b2db91c9389fe7885c4e3762c9"
+    },
+    "expectationBytesChanged": false,
+    "expectationSealChanged": false,
+    "originalCanonicalCases": 23,
+    "newPublicMatrixMatches": 45,
+    "otherLocalVectors": 418,
+    "changedInputOrOutcomeDependencies": [],
+    "expectedOutcomeChanges": 0,
+    "disputes": [],
+    "method": "Compared all previous pin paths and raw digests to the final git blobs. Only the manifest changes; no vector uses manifest bytes as an operation input or expected output. All 486 vectors transitively verify its provenance. The expectation file and seal are unchanged. Original canonical cases retain identical full bytes. For 45 matching public case IDs, compare input JSON, expected status and output JSON with explicit role mapping input -> matrixInput, output -> outcome. Other vectors use literal or unchanged fixture artifacts; no new cases are silently adopted into the sealed set.",
+    "reasons": {
+      "original-canonical-bytes-unchanged": "Original canonical case and every referenced artifact retain identical bytes, so the input and verdict do not change.",
+      "new-public-matrix-agrees": "New case publication adds authority but changes no input or expected value; only artifact role labels differ.",
+      "literal-or-unchanged-artifact": "Literal/local frozen inputs and every previously available corpus artifact are unchanged; added files do not replace dependencies."
+    },
+    "vectors": [
+      {
+        "caseId": "jcs-escapes",
+        "canonicalPath": "profile-parity-corpus/1/cases/jcs-escapes.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "jcs-key-order",
+        "canonicalPath": "profile-parity-corpus/1/cases/jcs-key-order.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "jcs-numbers",
+        "canonicalPath": "profile-parity-corpus/1/cases/jcs-numbers.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "identity-stable-id",
+        "canonicalPath": "profile-parity-corpus/1/cases/identity-stable-id.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lexical-duplicate-keys",
+        "canonicalPath": "profile-parity-corpus/1/cases/lexical-duplicate-keys.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lexical-lone-surrogate",
+        "canonicalPath": "profile-parity-corpus/1/cases/lexical-lone-surrogate.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lexical-negative-zero",
+        "canonicalPath": "profile-parity-corpus/1/cases/lexical-negative-zero.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lexical-nonfinite",
+        "canonicalPath": "profile-parity-corpus/1/cases/lexical-nonfinite.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lexical-unsafe-integer",
+        "canonicalPath": "profile-parity-corpus/1/cases/lexical-unsafe-integer.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "schema-integer-one-zero",
+        "canonicalPath": "profile-parity-corpus/1/cases/schema-integer-one-zero.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "schema-integer-fraction",
+        "canonicalPath": "profile-parity-corpus/1/cases/schema-integer-fraction.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "schema-id-newline",
+        "canonicalPath": "profile-parity-corpus/1/cases/schema-id-newline.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "schema-keyword-subset",
+        "canonicalPath": "profile-parity-corpus/1/cases/schema-keyword-subset.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "schema-external-ref-pinned",
+        "canonicalPath": "profile-parity-corpus/1/cases/schema-external-ref-pinned.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "schema-external-ref-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/schema-external-ref-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-info-through-warn",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-info-through-warn.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-warning-through-error",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-warning-through-error.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-unknown-lookup-none",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-unknown-lookup-none.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-unknown-lookup-thrown",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-unknown-lookup-thrown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-extends-cycle",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-extends-cycle.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-whitelist-escape",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-whitelist-escape.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-pointer-escaping",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-pointer-escaping.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "lint-alternating-profiles",
+        "canonicalPath": "profile-parity-corpus/1/cases/lint-alternating-profiles.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "original-canonical-bytes-unchanged"
+      },
+      {
+        "caseId": "r32-empty",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-incomplete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-invalid-escape",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-control-character",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-nonstring-key",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-missing-colon",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-missing-comma",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-missing-close",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-nan",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-infinity",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-negative-infinity",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-comment",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-plus",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-leading-zero",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-fraction-incomplete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-exponent-incomplete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-duplicate-nested",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-key",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-high-value",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-low-value",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-literal",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-overflow",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-negative-overflow",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unsafe-integer",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unsafe-negative",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unsafe-exponent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-rounded-fraction",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-key-decode-before-unicode",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-key-decode-before-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-key-unicode-before-colon",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-duplicate-before-colon",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-duplicate-before-unicode-value",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-before-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-number-before-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-duplicate-before-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-number-before-unicode",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-before-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-json-before-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-number-before-json",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-json-before-unicode",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-before-json",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-json-before-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-duplicate-before-json",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-trailing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-number-before-trailing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-unicode-before-trailing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-duplicate-before-trailing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-trailing-not-walked",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-non-json-whitespace",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-number-before-final-grammar",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-schema-json",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-schema-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-schema-unicode",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-schema-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-schema-null-control",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-paired-surrogates",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-noncharacter",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-fresh-key-sets",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-no-key-normalization",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-numeric-boundaries",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "r32-json-whitespace",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr01-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr01-unknown",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr01-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr01-missing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr01-signature",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr02-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr02-ids-scalar",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr02-output-selection",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr02-concat-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr02-create-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr03-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr03-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr03-property",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr03-missing-property",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr03-domain",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr04-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr04-count-reversed",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr04-hops-reversed",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr05-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr05-missing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr05-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr05-cycle",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr05-lint-cycle",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr06-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr06-write",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr06-producer",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr06-absent-delta-source",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr06-path-kind",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr07-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr07-containment-on-id-type",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr07-allocated-idless",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr07-owner-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr08-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr08-missing-stage",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr08-unknown-config",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr08-options-schema",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr09-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr09-notion-kind",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr09-glyph",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr09-token-type",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr10-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr10-missing-parameter",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr10-enum-values",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr10-readonly-command",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr11-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr11-extra-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr11-missing-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr11-wrong-field-type",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr11-output-domain",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr12-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr12-target-pin",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr12-self-source",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr12-own-pin",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr12-recipe-phase",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr13-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr13-recipe-steps-one",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr13-recipe-steps-zeroOrOne",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr13-rule-bindings-one",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr13-rule-bindings-zeroOrOne",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr14-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr14-export-set",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr14-complete-remove",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-cr14-edit-place",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-compat-exact",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-001-s2b-compat-exact.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-document-0",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-002-s2b-compat-document-0.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-document-2",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-003-s2b-compat-document-2.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-missing",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-004-s2b-compat-missing.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-xml-alone",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-005-s2b-compat-xml-alone.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-conflict",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-006-s2b-compat-conflict.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-schema",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-007-s2b-compat-schema.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-mechanism",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-008-s2b-compat-mechanism.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-document-mechanism",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-009-s2b-compat-document-mechanism.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-mechanism-migration",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-010-s2b-compat-mechanism-migration.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-capability",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-011-s2b-compat-capability.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-asset",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-012-s2b-compat-asset.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-base",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-013-s2b-compat-base.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-descriptor",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-014-s2b-compat-descriptor.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-business-id",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-015-s2b-compat-business-id.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-business-major",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-016-s2b-compat-business-major.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-digest",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-017-s2b-compat-digest.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-digest-migration-no-waiver",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-018-s2b-compat-digest-migration-no-waiver.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-patch-up",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-019-s2b-compat-patch-up.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-patch-down",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-020-s2b-compat-patch-down.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-minor-up",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-021-s2b-compat-minor-up.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-minor-down",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-022-s2b-compat-minor-down.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-source-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-023-s2b-compat-source-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-precedence-version",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-024-s2b-compat-precedence-version.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-precedence-capability",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-025-s2b-compat-precedence-capability.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-compat-precedence-base",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-026-s2b-compat-precedence-base.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s2b-envelope-valid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-unknown-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-null",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-duplicate-binding",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-binding-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-revision-mismatch",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-semantic-change",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-profile-change",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-theme-switch",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-di-only",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-semantic-extension",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-projection-unknown-role",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-import-json-spacing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-import-xml-spacing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-parse-failure",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-undo-revision",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-envelope-binding-change",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-root-first",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-idless-parent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-containment",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-five-supports",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-fixed-point",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-imported-id",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-collision",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-missing-siblings",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-reorder",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-rename",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-owner-remap",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-delete-no-need",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-recreate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-undo",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-live-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-binding-recovery",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-multi-process",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-rollback",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-duplicate-role",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-band-process-ref",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s2b-identity-wrong-parent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-empty",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-repeated-selection",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-duplicate-identity",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-unknown-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-null",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-profile-conflict",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-base-conflict",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-descriptor-conflict",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-archived-di-damage",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-stale-layout",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-stale-view",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-invalid-selection",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-duplicate-selection",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-active-page",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-semantic-selection",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-version",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-missing-layout",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-navigation-only",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-snapshot-archive-preservation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-complete-binding",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-page-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-occurrence-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-repeated-semantic",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-synthetic",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-edge",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-endpoint-missing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-waypoints-short",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-nonedge-endpoint",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-coverage-missing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-fractional-geometry",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-negative-size",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-unsafe-geometry",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-duplicate-key",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-empty-key",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-null",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-unknown-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-duplicate-page-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-negative-page-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-cross-page-unsupported",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-layout-unknown-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-semanticRevision",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-profileDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-descriptorDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-layoutDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-themeId",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-themeDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-overridesDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-diStylesDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-metricsDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-stale-payloadDigest",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-empty-bags",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-normalized-bags",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-metric-byte",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-page-name",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-payload-change",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-theme-switch",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-override-change",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-profile-package",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-token-invalid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-duplicate-target",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-duplicate-token",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-unknown-target",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-null-bag",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-pure-ok",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-pure-refused",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-get-definitions",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-get-snapshot",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-not-loaded",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-cancelled",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-disposed",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-operation-error",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-failure-candidate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-unknown-key",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-bare-success",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-getter-revision-mismatch",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-null-identity",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-extra",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-signature-contract",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-prepared-artifact",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-all-stages",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-total-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-exact-duplicate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-presence-null",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-escaped-pointer",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-long-deep-pointer",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-idless-child",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-deletion-source-stable",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-generated-port",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-direction-reversal",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-coarse-legacy",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-unknown-legacy",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-repeated-idmap",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-artifact-indexes",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-raw-preserved",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-unknown-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-phase-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-loss-class-required",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-nonloss-class",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-null-message",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-false-presence-with-value",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-true-presence-without-value",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-unknown-stage",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-coordinate-domain",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-profile-coordinate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-pointer-string",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-pointer-self",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-pointer-invalid",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-import-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-import-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-pre-normalize-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-pre-normalize-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-post-normalize-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-post-normalize-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-post-layout-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-post-layout-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-release-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-1-release-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-import-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-import-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-pre-normalize-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-pre-normalize-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-post-normalize-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-post-normalize-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-post-layout-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-post-layout-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-release-draft",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-table-neutral-grid-1-release-accept",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-numeric-0",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-numeric-1",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-numeric-2",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-numeric-3",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-info-restoration",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-profile-warning",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-rule-missing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-rule-thrown",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-config-missing",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-config-thrown",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-allowlist",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-cycle",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-options-replacement",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-off-stage",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-compiled-tampering",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-draft-integrity",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-release-barrier",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-off-subrule",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-malformed-custom",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-unresolved-id",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-missing-policy",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-missing-setting",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-compiled-unknown-field",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-lint-contract-corrected-history",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-semantic-type",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-relation-kind",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-navigation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-appearance",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-layout",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-metadata",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-unsupported-feature",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-provenance-unavailable",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-worst-capability",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-unsupported-necessary",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-legacy-format",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-legacy-format-alias",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-legacy-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-legacy-endpoint",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-legacy-id",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-export-losses-unknown-class",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-setDefinitions",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-applyCommands",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-activateBusinessProfile",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-setTheme",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-restoreSnapshot",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-undo",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-payload-redo",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-result-unions-dispose-ok",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-cascading-removal",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-reports-resource-limit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-descriptor-pin-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-digests-metric-pin-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s4-render-contract-signed-position",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s1-patch-up-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-027-s123-s1-patch-up-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-patch-up-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-028-s123-s1-patch-up-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-patch-down-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-029-s123-s1-patch-down-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-patch-down-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-030-s123-s1-patch-down-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-minor-up-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-031-s123-s1-minor-up-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-minor-up-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-032-s123-s1-minor-up-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-minor-down-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-033-s123-s1-minor-down-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-minor-down-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-034-s123-s1-minor-down-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-digest-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-035-s123-s1-digest-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s1-digest-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-036-s123-s1-digest-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-injected-schema-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-037-s123-s2-injected-schema-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-injected-schema-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-038-s123-s2-injected-schema-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-document-schema-supported-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-039-s123-s2-document-schema-supported-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-document-schema-supported-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-040-s123-s2-document-schema-supported-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-document-schema-unsupported-unknown",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-041-s123-s2-document-schema-unsupported-unknown.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-document-schema-unsupported-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-042-s123-s2-document-schema-unsupported-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-document-schema-supported-available",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-043-s123-s2-document-schema-supported-available.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-envelope-invalid-available",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-044-s123-s2-envelope-invalid-available.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s2-envelope-invalid-unavailable",
+        "canonicalPath": "profile-parity-corpus/1/cases/compat-045-s123-s2-envelope-invalid-unavailable.json",
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "new-public-matrix-agrees"
+      },
+      {
+        "caseId": "s123-s3-pages-export",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-render",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-validation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-absent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-create",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-edit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-complete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-normalize",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-convert",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-pages-migrate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-export",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-render",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-validation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-absent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-create",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-edit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-complete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-normalize",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-convert",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-migrate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-export",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-render",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-validation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-absent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-create",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-edit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-complete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-normalize",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-convert",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-migrate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-export",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-render",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-validation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-absent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-create",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-edit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-complete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-normalize",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-convert",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-semantic-migrate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-export",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-render",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-validation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-absent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-create",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-edit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-complete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-normalize",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-convert",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-source-reference-migrate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-export",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-render",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-validation",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-absent",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-create",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-edit",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-complete",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-normalize",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-reference",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-convert",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-target-reference-migrate",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-export-wrong-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-render-render-wrong-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-export-wrong-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s3-occurrences-page-render-wrong-order",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s5-parent-string",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s5-parent-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s5-parent-boolean",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s5-grandparent-string",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s5-grandparent-number",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      },
+      {
+        "caseId": "s123-s5-grandparent-boolean",
+        "canonicalPath": null,
+        "changedInputOrOutcomeDependencies": [],
+        "expectedOutcomeChanged": false,
+        "reason": "literal-or-unchanged-artifact"
+      }
+    ]
+  },
+  "resealPolicy": "Only corpus metadata, pin references, freeze hashes, verification code and receipt provenance are resealed. No expectation or expectation seal is rewritten. Existing campaign results in refreshed historical receipts are historical, not newly claimed runtime proof.",
+  "supersedesFiles": [
+    {
+      "path": "docs/design/profile-lot0-baseline.md",
+      "old": {
+        "bytes": 6687,
+        "sha256": "08262089802b5e949fdb7839d1f80ca8ed9c47bb414809ab8746dccff30cd8c1"
+      },
+      "new": {
+        "bytes": 7703,
+        "sha256": "2304e40a79c7af2387f9c0edc6d2fab699ed5f704560e364ad0f40c461be9d9c"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s12.json",
+      "old": {
+        "bytes": 15338,
+        "sha256": "146dee545dd7b9a9db72f014566220cbba39b01794e2af4cd84c60ea66faeb5b"
+      },
+      "new": {
+        "bytes": 15341,
+        "sha256": "ccebe73408a618e63bc90501431f7e5cf35a10f0c5ff494fdd65a5dbec696fb9"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s2-r32.json",
+      "old": {
+        "bytes": 61534,
+        "sha256": "3a4293000f31b1a373171a917ff7fa65d07f28faca376673d4a9e5cc06bdc64d"
+      },
+      "new": {
+        "bytes": 61534,
+        "sha256": "5a28195a81e55d543b9e53f19c6919fbace0c7bdee021be7e30a18119d3c6d95"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s2b.json",
+      "old": {
+        "bytes": 11843,
+        "sha256": "c31736ca89d96437ad359270fa277f2195c14754d2404cb8868d23b33f9cb03a"
+      },
+      "new": {
+        "bytes": 11844,
+        "sha256": "51de059dc014cf8734551c876e4f1d80968353d0e9410e25fc2a68244c8ad64c"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s3.json",
+      "old": {
+        "bytes": 27585,
+        "sha256": "4e87e6044776b32216bdf3f30f896b3216c388cddae9b02ab6dcf57da66add73"
+      },
+      "new": {
+        "bytes": 27588,
+        "sha256": "7e1483f8d79605e39288c1e14866bfc767bc03db6f4ba338fdef268a18a1d789"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s4-expect.json",
+      "old": {
+        "bytes": 18835,
+        "sha256": "999e0d7ac654f3fe6967b5211bdf1806f4064a126d1684acfcb003d93f4d94e3"
+      },
+      "new": {
+        "bytes": 18836,
+        "sha256": "272a455acda7a12b08c4df5b4832455f755e66e756f2e812f8c7bbcc54f849e9"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "old": {
+        "bytes": 4031,
+        "sha256": "d0761fc7f38fd308b638b7fa4a60cf19f7187bab90bac4c644d6a450b027f203"
+      },
+      "new": {
+        "bytes": 4031,
+        "sha256": "f7be856c20174397ae804ebe8ec8ccdc757124a8ad4cd240a8d435d2ea8f9628"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/inputs.json",
+      "old": {
+        "bytes": 10460,
+        "sha256": "505d000e3ab0cb797f452941d7499ad956e9971541e7cd57a136d8efd5c6011e"
+      },
+      "new": {
+        "bytes": 10460,
+        "sha256": "db44d0391472fe9f69fc668d99f2b691cf54e80021f06a7198a052cb0c5c1796"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus.pin.json",
+      "old": {
+        "bytes": 8202,
+        "sha256": "cba427469011d9484aaae7adb6464d6963be33eeb7808be86b63831079bbda3a"
+      },
+      "new": {
+        "bytes": 42306,
+        "sha256": "da7f6a1062a691d5b3602d35913de7bec22266a401c920ee3900b8e0dc412bca"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/manifest.json",
+      "old": {
+        "bytes": 5292,
+        "sha256": "d2745fb31655cfb0b61992989c8eb52b4c782cecf0e9ef28307f5be4f4befb5e"
+      },
+      "new": {
+        "bytes": 30434,
+        "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf"
+      }
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "old": {
+        "bytes": 1605,
+        "sha256": "c83953fe0d168857f1066e378cbe7187c0f0c9419548b0d8d69f9c4b0972bb75"
+      },
+      "new": {
+        "bytes": 2062,
+        "sha256": "163bfd775f97554df7265886c766a300df415e9a5ad5442ebc74261827205e06"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 13622,
+        "sha256": "9dd6c2e0cd3c3caf7594daa6eff716f6fdb6815b56587f4f0522af930600ce55"
+      },
+      "new": {
+        "bytes": 13804,
+        "sha256": "e86bdaa428842fbd853009300290a14ef4a57740d1352d22d598bd8772dceb3a"
+      }
+    },
+    {
+      "path": "tests/lot0-squash-readiness.test.mjs",
+      "old": {
+        "bytes": 6176,
+        "sha256": "7eef0c9b1ec0fa6f95fe54f81b0cb14573f41e3a54a7d38c5552f644c38e5628"
+      },
+      "new": {
+        "bytes": 6308,
+        "sha256": "ed71e6fa2632d81a6258e7108f640d35fea9c6eb1099d072fb1fde77ba04f20d"
+      }
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "old": {
+        "bytes": 8220,
+        "sha256": "b29a1291b4beb295c3aa70810899de9e306150574b85f3033fc2c34b6d98ae62"
+      },
+      "new": {
+        "bytes": 8781,
+        "sha256": "54d4a7cd14d1f58533db846778230db9f1f4c1da3e71b70c95c55c6a08f2fbf0"
+      }
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "tests/profile-corpus-revendor.test.mjs",
+      "bytes": 3708,
+      "sha256": "efb3990b3f4c4e087ed542d84d20e9b2c8f4b81153d945f9b4ae93ee1960d25d"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/compatibility-codes.json",
+      "bytes": 2721,
+      "sha256": "601b91d9c401d4a3aff1f05f26632d370226bf98e8366fca506b79f4a8a853b8"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/compatibility-verdict.schema.json",
+      "bytes": 1603,
+      "sha256": "cf127eb6c2bd40155af2ba4cc8feed0dfa9aa2d1bf7e4c6dfec9e02bf4471c30"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/r33-matrix-vectors.public.json",
+      "bytes": 472365,
+      "sha256": "4c0d7f85c3c51b2213160022668996dbf975ff1b6100a80009fb9137488821c3"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-001-s2b-compat-exact.json",
+      "bytes": 1767,
+      "sha256": "6b46826a33fabdeac6d9138f53db24f474ba7be42a65faa07076996130889133"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-002-s2b-compat-document-0.json",
+      "bytes": 1850,
+      "sha256": "fc2def3ff9c13b5e1cd834c4ff2ba67f163fc26022bda7f6463d76c53a163cc4"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-003-s2b-compat-document-2.json",
+      "bytes": 1850,
+      "sha256": "e29af558c23769185f792cfc7fed43ebfb9bb0f3163321c8d5784202ce517756"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-004-s2b-compat-missing.json",
+      "bytes": 1419,
+      "sha256": "f6e22d1a69915d42c2a4641314be315f29df4926d9f4c86dacb3f8393d995ec5"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-005-s2b-compat-xml-alone.json",
+      "bytes": 1412,
+      "sha256": "63ef12592f78693654b86244ad36e08939d4b425f462181763b50192ad814c6f"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-006-s2b-compat-conflict.json",
+      "bytes": 2754,
+      "sha256": "78195a0982ac8d3f9993dab494d3d6a4153ffd2e389b2befb4fa8858592f758f"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-007-s2b-compat-schema.json",
+      "bytes": 1834,
+      "sha256": "c031070b82a066e85ca9f496316ef273f031fc5c681862b6cb1831e95986c307"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-008-s2b-compat-mechanism.json",
+      "bytes": 1851,
+      "sha256": "493b0a3a60b6f8ddb03d67de9c4744d7f28dba09e71af5b175880e73ac68b36c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-009-s2b-compat-document-mechanism.json",
+      "bytes": 1862,
+      "sha256": "8d64aebff4cc35d3148745082b260a74e5757874cee68907ad92aac7f89cc8d8"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-010-s2b-compat-mechanism-migration.json",
+      "bytes": 1863,
+      "sha256": "1891863f7599495e8c539e76023bf567bfd6fa2eed7925217a899de3f432e79c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-011-s2b-compat-capability.json",
+      "bytes": 1818,
+      "sha256": "76f61a963c502583ccb1c9a84cca3411eaa93cc203bed0a8b7b532aced16e01c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-012-s2b-compat-asset.json",
+      "bytes": 1815,
+      "sha256": "400e706c7598095e702c2277e05b5349019e30c987c830fe547cd999a641617b"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-013-s2b-compat-base.json",
+      "bytes": 1814,
+      "sha256": "86daa1fe6955abe7d815812b40452cd0eee2d70ff3d731ea64c4406c8a3a07c7"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-014-s2b-compat-descriptor.json",
+      "bytes": 1832,
+      "sha256": "0a781e7b4403e5ae3c0090ea48d669b0d502389041a2021e95afde7ce444f159"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-015-s2b-compat-business-id.json",
+      "bytes": 1837,
+      "sha256": "cbd020422f694d8722e3e578f309daf9ea232a98b6285b812b0e91182fc5dde9"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-016-s2b-compat-business-major.json",
+      "bytes": 1842,
+      "sha256": "dd36a81a156537789757105878c9ca9e124a56c6f972aaf67171171102f55a57"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-017-s2b-compat-digest.json",
+      "bytes": 1836,
+      "sha256": "eaf88899cdea491b981b8882ffa2aea7be59e85476dedb4e51498848d6f5e4af"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-018-s2b-compat-digest-migration-no-waiver.json",
+      "bytes": 1855,
+      "sha256": "ac41ef4600d5b5ff713e74c11b6cac283893484832843a550c11c1eadc777fbe"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-019-s2b-compat-patch-up.json",
+      "bytes": 1856,
+      "sha256": "56b94c2199e96c833edca91337dd459f235b86906a751ec8e5bb27f4836f04bb"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-020-s2b-compat-patch-down.json",
+      "bytes": 1858,
+      "sha256": "ad16c638755ace4aefdbdc9615d66d9d63684fc20efad79172314e703dc17f66"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-021-s2b-compat-minor-up.json",
+      "bytes": 1856,
+      "sha256": "eff8844fff117fad0b6d5ae404a947f76dced03920cad2ebcec754952c19c7b1"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-022-s2b-compat-minor-down.json",
+      "bytes": 1858,
+      "sha256": "2ce82a451482c52718231fe3ab04b49d993e14fdb91b903e47c2b09bbeefbab6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-023-s2b-compat-source-unavailable.json",
+      "bytes": 1846,
+      "sha256": "2f12ca43069696c30cbebbbb3590c499dc642b340af220cb682b7e6e376981a4"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-024-s2b-compat-precedence-version.json",
+      "bytes": 1401,
+      "sha256": "6d587649ee9555e1938c3f1be7050e1ab52784ac19e69e896ef5d815f940b252"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-025-s2b-compat-precedence-capability.json",
+      "bytes": 1754,
+      "sha256": "0a73612bffd27a7938b775ec1dcd6d3c0291d7db03f50b518ade36a8dda1efda"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-026-s2b-compat-precedence-base.json",
+      "bytes": 1825,
+      "sha256": "7c03397345487295e21981d9643b5b2aaceb4f1f70b2dcff0882e634cbd4643e"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-027-s123-s1-patch-up-unknown.json",
+      "bytes": 1619,
+      "sha256": "71f17e22f3f8750e9c01ac097cc7aa1b5f407865bf2a312d299f4a0b721c5dc5"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-028-s123-s1-patch-up-unavailable.json",
+      "bytes": 1627,
+      "sha256": "a3c91ee71636484a50ea88976f694f99b41243bb456ad218bc9b659334287766"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-029-s123-s1-patch-down-unknown.json",
+      "bytes": 1621,
+      "sha256": "ccc26b9e31f2aeb6cf2a589aabf450d7630aaf98fd0a7a9bdf23dd16f3d3e583"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-030-s123-s1-patch-down-unavailable.json",
+      "bytes": 1629,
+      "sha256": "aea8a116e4d4f534ae39a3ed5f390006ec09d7bc095b4df0badab1b0b59b282a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-031-s123-s1-minor-up-unknown.json",
+      "bytes": 1619,
+      "sha256": "32cbcf6461ea8bb3d40ec4621d7580ddc3febc5ef8220c7d5f4da5f78c1143ff"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-032-s123-s1-minor-up-unavailable.json",
+      "bytes": 1627,
+      "sha256": "7fe2bc1d04d882079aa0453073bb7333e16da40ea1e11a0b4c2bd4cbe36c2dac"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-033-s123-s1-minor-down-unknown.json",
+      "bytes": 1621,
+      "sha256": "5734dce23084b1bc5473a1641ff3de6f3318d02446fe821c8ebc923e6292d102"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-034-s123-s1-minor-down-unavailable.json",
+      "bytes": 1629,
+      "sha256": "a347b8569cb5a94e3014b278c2c71c1ef2e4ef35984c81a16bce50fd3471784f"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-035-s123-s1-digest-unknown.json",
+      "bytes": 1611,
+      "sha256": "34f0a54fb477c9de4ccc2602edf80b434a24087708306ebbe2e15e378bc5e770"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-036-s123-s1-digest-unavailable.json",
+      "bytes": 1619,
+      "sha256": "437818c0ecd2088e93e644d08032ebad5d9f362d3a65577a3ada04b0eae25381"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-037-s123-s2-injected-schema-unknown.json",
+      "bytes": 1618,
+      "sha256": "079a5faf7f17a348838498006b625492baaa6ce37d4c289e1fd5308db558a3f6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-038-s123-s2-injected-schema-unavailable.json",
+      "bytes": 1626,
+      "sha256": "fec6aec76996996e03975d461a05b2457c39e2d6f0d21a4ef946d1219cf0cd3d"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-039-s123-s2-document-schema-supported-unknown.json",
+      "bytes": 1644,
+      "sha256": "4257ff9189e4d8e0bfa03aab9496be996bbf62f46ce0574eb0de8fba11ef43e6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-040-s123-s2-document-schema-supported-unavailable.json",
+      "bytes": 1652,
+      "sha256": "08a91df175600ec43870b9421b05568d2803fbe218e48377514143bd9723641b"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-041-s123-s2-document-schema-unsupported-unknown.json",
+      "bytes": 1640,
+      "sha256": "c504962a2ed2051b7b3d1620a3a549a1fb6f981ab00fbd2717744440eb386171"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-042-s123-s2-document-schema-unsupported-unavailable.json",
+      "bytes": 1648,
+      "sha256": "f23f934405bfc08dbba3e413c564e46c0fe80968ef011674aeadee89aab157f3"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-043-s123-s2-document-schema-supported-available.json",
+      "bytes": 1672,
+      "sha256": "b48f2cc9cb756eaf420e722b5e9721652bf7577e22b3ac9498cc12acca55fc31"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-044-s123-s2-envelope-invalid-available.json",
+      "bytes": 1579,
+      "sha256": "d4b475370c1f0532fe18c09deb921baffe95f53515f4fe20c06d9ad0a299dffd"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-045-s123-s2-envelope-invalid-unavailable.json",
+      "bytes": 1636,
+      "sha256": "7ef551292b79857f3714645573f25ebd23dfae1c1a5197787ddee8993ca71f3d"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-046-compatibility-test-should-require-validated-migration-results-before-accepting-a-different-identity-call-1.json",
+      "bytes": 1945,
+      "sha256": "532d57270e808081c3165a7fb63f954b16fed28d68e1d681de17a3674fc99db5"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-047-compatibility-test-should-require-validated-migration-results-before-accepting-a-different-identity-call-2.json",
+      "bytes": 1925,
+      "sha256": "6edc6cfa619e0294bab8141eacabe59f8ce5baa2f58ea3e41ed7b57c7c4a2872"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-048-compatibility-test-should-refuse-invalid-exact-envelopes-and-schema-identity-disagreement-call-1.json",
+      "bytes": 1862,
+      "sha256": "3e48886d27439fbe35d10c8c2bd70d7ac6ec814de982c6f7ae73c8dcfafa4759"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-049-compatibility-test-should-refuse-invalid-exact-envelopes-and-schema-identity-disagreement-call-2.json",
+      "bytes": 1946,
+      "sha256": "4e0b8772b6fd5b134403269c1279c5421bdc8cee9c9aa71145abf35fe40cdc33"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-050-s123-regression-should-check-source-availability-for-1-2-2-with-known-and-available-call-1.json",
+      "bytes": 1661,
+      "sha256": "da9e9966d9de8ea35e59b691ff239ccbc821029329ac68656f6a0c4c7df2f2fd"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-051-s123-regression-should-check-source-availability-for-1-2-2-with-unknown-call-1.json",
+      "bytes": 1625,
+      "sha256": "17454ae235cbd3f05fdc87cea9f3a78df9453ae367dfdbf9741b998b9dcc99a7"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-052-s123-regression-should-check-source-availability-for-1-2-2-with-unavailable-call-1.json",
+      "bytes": 1633,
+      "sha256": "9cb8bc6f61d9798793f3d58ba0562f04a950f18033bb8f6b19c1334209bbb1d4"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-053-s123-regression-should-check-source-availability-for-1-2-4-with-known-and-available-call-1.json",
+      "bytes": 1661,
+      "sha256": "120f83b1e68fd13392d5c72f5f1b2a777a08e333b6b48513d9f0185f94ef11e8"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-054-s123-regression-should-check-source-availability-for-1-2-4-with-unknown-call-1.json",
+      "bytes": 1625,
+      "sha256": "bc8dbfdc6e5c9a339640847c24c9736fe3e72f2ea7563f4857d199c14e9616da"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-055-s123-regression-should-check-source-availability-for-1-2-4-with-unavailable-call-1.json",
+      "bytes": 1633,
+      "sha256": "71ceb31e13bf5d637753eb8611d2b00889e46466a71ef969658a86b6b97aa5b2"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-056-s123-regression-should-check-source-availability-for-1-1-9-with-known-and-available-call-1.json",
+      "bytes": 1661,
+      "sha256": "eadb4ab2138409f65b7ff0d37edf9ed36feaeb319fca7b48e190ddf46af6c697"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-057-s123-regression-should-check-source-availability-for-1-1-9-with-unknown-call-1.json",
+      "bytes": 1625,
+      "sha256": "9809d44c9d2afb8b7c1560702bcce77fb20e26262c5aac5c790583148afb59c7"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-058-s123-regression-should-check-source-availability-for-1-1-9-with-unavailable-call-1.json",
+      "bytes": 1633,
+      "sha256": "228fdca425c0b9f36f48586265bb38e24539f2ff6046a3511cdfaad799cb2579"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-059-s123-regression-should-check-source-availability-for-1-3-0-with-known-and-available-call-1.json",
+      "bytes": 1661,
+      "sha256": "7af230502c9afe39970c298fbbbe2f01d57ae305b90c7110c773c0a3cf5f7b7c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-060-s123-regression-should-check-source-availability-for-1-3-0-with-unknown-call-1.json",
+      "bytes": 1625,
+      "sha256": "ef7913782482a268789da96e9fc68a55d8c09ff1e489313ca2989463274ffcda"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-061-s123-regression-should-check-source-availability-for-1-3-0-with-unavailable-call-1.json",
+      "bytes": 1633,
+      "sha256": "17015fef509d9ee6924b2db53ee95d1504141931864a1fcb55e6c565b31badfc"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-062-s123-regression-should-keep-earlier-identity-conflicts-ahead-of-unavailable-source-call-1.json",
+      "bytes": 1634,
+      "sha256": "fd865e9f216c742600dd76134897b091309b9badb6ecf341c5512b0a42d4f23e"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-063-s123-regression-should-keep-earlier-identity-conflicts-ahead-of-unavailable-source-call-2.json",
+      "bytes": 1646,
+      "sha256": "5fc853d651745d1f0cf22e8c564ffb5c64de1ecaf67051e10d779aee38710666"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-064-s123-regression-should-refuse-schema-identity-disagreement-before-unavailable-source-and-migration-call-1.json",
+      "bytes": 1656,
+      "sha256": "4357806a5dfa9119b0d7114b42cd0e241f3bacab31402c9b123d016ed8c5f27a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-065-s123-regression-should-refuse-schema-identity-disagreement-before-known-and-available-source-and-migration-call-1.json",
+      "bytes": 1686,
+      "sha256": "2fb5e1c15abf8dc944ae7a87b282118db83c433c73fb02c811a118d811e61c44"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-066-s123-regression-should-refuse-invalid-exact-envelopes-without-an-invented-parity-code-call-1.json",
+      "bytes": 1589,
+      "sha256": "05c7372755956b74bfbd7edc41e584eebd96ece5bc33d9fe868287fb2c4e92d2"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-067-r33-mechanism-known-and-available.json",
+      "bytes": 1866,
+      "sha256": "556f4d84e2fa42792913d5d9bbf5c0bcb1a1ab58d81493f5681629e2687ad37a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-068-r33-mechanism-unknown.json",
+      "bytes": 1838,
+      "sha256": "0426e48b5e37dd8d94c29b687fb0bab687088b61887969ebabc9fa4c20213d36"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-069-r33-mechanism-unavailable.json",
+      "bytes": 1846,
+      "sha256": "ffe1241847aaaa2f61007d5b82ce9d57a27317ea2a9ab7883ea9a6218571ab3b"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-070-r33-mechanism-unknown-source-version.json",
+      "bytes": 1847,
+      "sha256": "47e609b1e734893579399b66e0107b7894a44d5b6e226c30c5d7a635ebc18a5c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-071-r33-mechanism-unknown-source-sha256.json",
+      "bytes": 1788,
+      "sha256": "8df2e9515749cd933e6e95a6425ffc43bbd1157fd759048cfb2b069e2cbce6a6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-072-r33-mechanism-selected-migration-unavailable.json",
+      "bytes": 1864,
+      "sha256": "d17dc871e317c7db986e21d8062f4f7dcb129f68f63c2aaa70a275783b4b1d4a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-073-r33-schema-known-and-available.json",
+      "bytes": 1877,
+      "sha256": "e30f8dd7c2173186b3ca9fa52f26ef905a7883a3b5617e1633f0786109c38545"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-074-r33-schema-unknown.json",
+      "bytes": 1839,
+      "sha256": "66289e7a101e9562dcfee751ce447bce620900ae3715d0f8640bf291d39bd52b"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-075-r33-schema-unavailable.json",
+      "bytes": 1847,
+      "sha256": "f8b822a6881d7eb78fd85e4eecbde1d1fba60908528aa5fb76aebfb7eef1edd7"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-076-r33-schema-unknown-source-version.json",
+      "bytes": 1848,
+      "sha256": "79df31b7dcbbf71c2ae73c278bf337b199de314bf75bdce1f9f89fac20acfe67"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-077-r33-schema-unknown-source-sha256.json",
+      "bytes": 1789,
+      "sha256": "f310b878e3e8843bb5e6ccdfeca5b7de0ce9eff17495599d68269ee04fe704f1"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-078-r33-schema-selected-migration-unavailable.json",
+      "bytes": 1865,
+      "sha256": "1c0adf54e7ff2ec73dd1f7c228900253f49cd93963898db978fdd36a6869ff31"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-079-r33-base-known-and-available.json",
+      "bytes": 1827,
+      "sha256": "a37d3bbd02b281af5d4212e77ec11faf77281ed5e811e9d5a805024bbb7204fc"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-080-r33-base-unknown.json",
+      "bytes": 1829,
+      "sha256": "9b170e54c26aecedd30399bf9bd128e1b62156b0ac389702ec1c7d4a020fbb4c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-081-r33-base-unavailable.json",
+      "bytes": 1837,
+      "sha256": "dbe1311c219a4feaf7a2f5fcccaa26cbfb72adf850bab7261a482ef03fa80508"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-082-r33-base-unknown-source-version.json",
+      "bytes": 1838,
+      "sha256": "0d7651b10eb70d4984ae88cca5228a916a6eb64050e191dc2c3f16eb83f1797a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-083-r33-base-unknown-source-sha256.json",
+      "bytes": 1779,
+      "sha256": "b4a6118a5102dac6c4646cac13a36298de3c63b92b5b64bed88706c034aec564"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-084-r33-base-selected-migration-unavailable.json",
+      "bytes": 1855,
+      "sha256": "2e6887fa7b6dc2c1e46ed0726009549beb85a94aa8a3cac1809f840a3d1013e4"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-085-r33-descriptor-known-and-available.json",
+      "bytes": 1845,
+      "sha256": "d942bac8933de34bef67f41009637f7caf84e667f72f8cc5625da5fdbb517aa1"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-086-r33-descriptor-unknown.json",
+      "bytes": 1835,
+      "sha256": "459c173f6c07057dc6d48e685222ccfde8eef2c7cd4401ab38562d7c956f25c9"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-087-r33-descriptor-unavailable.json",
+      "bytes": 1843,
+      "sha256": "7db4821d90abe6dad673a556b28201d91c80898b3aeeb1848ff9e1d3ad480833"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-088-r33-descriptor-unknown-source-version.json",
+      "bytes": 1844,
+      "sha256": "a96530e420b606365fa868bf3ea5d3698f9c5b3fd830f3b5486e230a3c217035"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-089-r33-descriptor-unknown-source-sha256.json",
+      "bytes": 1785,
+      "sha256": "13dab21ba8a4f21713a8d69278b478f1e7d3ec211b306bb7aa760914c9c8bb62"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-090-r33-descriptor-selected-migration-unavailable.json",
+      "bytes": 1861,
+      "sha256": "5d0183140d4c16dd898e6674fda6689f5af18d868ac5a619677cb8e10b8286be"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-091-r33-business-id-known-and-available.json",
+      "bytes": 1860,
+      "sha256": "c236ee27907a7ffcb9820ba5e22440681d8a533001415d64a22a08faf0c7b44c"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-092-r33-business-id-unknown.json",
+      "bytes": 1844,
+      "sha256": "2a9b7d47987b128329314a43bba5ac97cf39bb47205b54541f9aaafc941816dd"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-093-r33-business-id-unavailable.json",
+      "bytes": 1852,
+      "sha256": "6483e257518989a143ec2313be9dadc990a277801a43f3c231715221836a2a22"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-094-r33-business-id-unknown-source-version.json",
+      "bytes": 1853,
+      "sha256": "f568db15ea3c170bd625afc613a6c5ef936902a33002df15ef8a540b8d8237ef"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-095-r33-business-id-unknown-source-sha256.json",
+      "bytes": 1794,
+      "sha256": "d0175bdfc11ea13ffd7e2a1743eab0063c8d582c885336512caff8f783712ddd"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-096-r33-business-id-selected-migration-unavailable.json",
+      "bytes": 1870,
+      "sha256": "b3fde56ea31f3c465c60dee5c96c12b2679e5494696062ffb9d94c7ff30889c5"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-097-r33-major-known-and-available.json",
+      "bytes": 1846,
+      "sha256": "137b0d573100e361a517f3a2b60b4d572980279b70407edfbec44899702bc6af"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-098-r33-major-unknown.json",
+      "bytes": 1830,
+      "sha256": "cc9e4c3f745a9e081a6473000c778844fc4faeebf1723ffc77c554a750eca521"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-099-r33-major-unavailable.json",
+      "bytes": 1838,
+      "sha256": "e57b41c3cb4603622ce0282a0a0325af1c3ef33aa1776b1bae04c5374025128a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-100-r33-major-unknown-source-version.json",
+      "bytes": 1839,
+      "sha256": "9fecff0e7af37ac4a048fe33812154635e3413c5c45b9ee892db2b58abd08231"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-101-r33-major-unknown-source-sha256.json",
+      "bytes": 1780,
+      "sha256": "0e54322db9770cfdac9a1e9fd867253722a42a1321101848f24a7479f422cb48"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-102-r33-major-selected-migration-unavailable.json",
+      "bytes": 1856,
+      "sha256": "02f7dfbda518090f81e4f30a004d150e0b388863b0c9d1ef7ae251a47ce26128"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-103-r33-patch-up-known-and-available.json",
+      "bytes": 1869,
+      "sha256": "bb4858ef14389e2c5b1b8bec958d7e809885b790c6c213b1face95d79cf56aaa"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-104-r33-patch-up-unknown.json",
+      "bytes": 1833,
+      "sha256": "4b1d1eafa1bd40e76ced031b74f393f1632eb9251352b58c1bdd05a12c9e083e"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-105-r33-patch-up-unavailable.json",
+      "bytes": 1841,
+      "sha256": "a35cf292f589cfa84ad6b02d52e58be874671b10b5b10c61fe7fd7409292f1e7"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-106-r33-patch-up-unknown-source-version.json",
+      "bytes": 1842,
+      "sha256": "ba1a0e479230df472166d70e8ed7ab842b1999ca584df05f26d0c2a442a894f6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-107-r33-patch-up-unknown-source-sha256.json",
+      "bytes": 1783,
+      "sha256": "87f9ec53eeb2f1d44ec27a674a4b9e4ef526a36b35657d84411d78347288bc61"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-108-r33-patch-up-selected-migration-unavailable.json",
+      "bytes": 1859,
+      "sha256": "4fcd2f2b5a83b42264a98a7aad6599cffb73dee3b463595dec5d8d9e9a6cd2fc"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-109-r33-patch-down-known-and-available.json",
+      "bytes": 1871,
+      "sha256": "fcb16af2fdbcdd3422aa07e566fcde803e9da8519a2d961b6ad5557f42221915"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-110-r33-patch-down-unknown.json",
+      "bytes": 1835,
+      "sha256": "504c5846566d155c7e27f0803ce9b79a714a23c2d6719c9d565bc6877a3e6f78"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-111-r33-patch-down-unavailable.json",
+      "bytes": 1843,
+      "sha256": "914302297e5a85fe38d5227bc2d34197dbc0e3281769a0248e996802eecbddec"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-112-r33-patch-down-unknown-source-version.json",
+      "bytes": 1844,
+      "sha256": "d902b4d5ad2a8685f443eb35d20859c12d91dbd85e103cfd5f76c5ee17d3e8b0"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-113-r33-patch-down-unknown-source-sha256.json",
+      "bytes": 1785,
+      "sha256": "aa9b4b306106db80236ae2111b804ab9402e714834b4fe1ea863afb3c3a7ff08"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-114-r33-patch-down-selected-migration-unavailable.json",
+      "bytes": 1861,
+      "sha256": "07f17671b7b72c748838ead3d60c7777b232df1ea4230e00725892a922e3afae"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-115-r33-minor-up-known-and-available.json",
+      "bytes": 1869,
+      "sha256": "64f99e95c7e37c45225e87386bae4000a53757e22ad6b64532bb0754c35861c6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-116-r33-minor-up-unknown.json",
+      "bytes": 1833,
+      "sha256": "3b0548c644fac06231232d159f9be8214f76a873746593ce334c8c0ff3771860"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-117-r33-minor-up-unavailable.json",
+      "bytes": 1841,
+      "sha256": "a824e04b82e46931b19b299da88d394cdeb5e6938d2c43425e76198c3d7f16d5"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-118-r33-minor-up-unknown-source-version.json",
+      "bytes": 1842,
+      "sha256": "b2d5561a46a7b6a08771196748f1cf41817a7c9fe53b605607eada163e517e47"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-119-r33-minor-up-unknown-source-sha256.json",
+      "bytes": 1783,
+      "sha256": "243d55edace3e834bfe53deeb6d85545fac88d9de6bb550e1097cc27382853e6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-120-r33-minor-up-selected-migration-unavailable.json",
+      "bytes": 1859,
+      "sha256": "2825a61112ecb94b0f752d7817389f3ce2d80cd1d0f2c292f598967a70a9eebc"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-121-r33-minor-down-known-and-available.json",
+      "bytes": 1871,
+      "sha256": "070bb36327365d46bee8b3e0394c81a194d864076fb5c1c6e16707a5a4f3e4d9"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-122-r33-minor-down-unknown.json",
+      "bytes": 1835,
+      "sha256": "31541c1f0d30cf2c241a02b80d897b6c30b27831dc3c678a4ce0bc9898546862"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-123-r33-minor-down-unavailable.json",
+      "bytes": 1843,
+      "sha256": "0190fcce986137a85f533c80e5f2fea540413cfe1054496b41a6b71d9d694098"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-124-r33-minor-down-unknown-source-version.json",
+      "bytes": 1844,
+      "sha256": "825f2a743f68d87a2675e8195089e88420ce325346efc3c226d060243ef4544a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-125-r33-minor-down-unknown-source-sha256.json",
+      "bytes": 1785,
+      "sha256": "d117ab8925c006afe1e6fa6d9e9cc0c604a19638f0830ba29642065f34d9906d"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-126-r33-minor-down-selected-migration-unavailable.json",
+      "bytes": 1861,
+      "sha256": "35444c9e2ce9276fbe1bdf4b33e1a7188ea7ea98280c51bf46d1af3a96f9cf3a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-127-r33-unsupported-d-schema-known-and-available.json",
+      "bytes": 1871,
+      "sha256": "e70fa00ebf2b07ade0265eb55df4914bdfb33da161e83194588c9ae090e03994"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-128-r33-unsupported-p-schema-known-and-available.json",
+      "bytes": 1861,
+      "sha256": "3f4eab0c84401f558c5e45b9e370882d34e98abac3e7cf9d3524e532d91bf2a1"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-129-r33-known-digest-conflict-known-and-available.json",
+      "bytes": 1864,
+      "sha256": "1667904ff834e24d8f4196171d2aa3cdf2050b9ec9b86b333034bc447ab5b6d7"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-130-r33-equal-supported-schemas-known-and-available.json",
+      "bytes": 1798,
+      "sha256": "c523eefd026801c6997c3e8c5a236d08fa6a220eb578230095fa7155f04dad2f"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-131-r33-unsupported-d-schema-unknown.json",
+      "bytes": 1847,
+      "sha256": "f4b2414995f72e6eb211bc4cacbbc778aec290a224ed3cf444573f7ba82a6575"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-132-r33-unsupported-p-schema-unknown.json",
+      "bytes": 1837,
+      "sha256": "13ad726bd09c4522224e0d9e57f8791f01b251795581c880245fcd17bc90d6ee"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-133-r33-known-digest-conflict-unknown.json",
+      "bytes": 1840,
+      "sha256": "4233c9680b87b165046d87ee8bb6f96474f80f3ce803ba68d42594dab79b16e0"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-134-r33-equal-supported-schemas-unknown.json",
+      "bytes": 1848,
+      "sha256": "3b2a36208ef3cc176f810039f1478b0df8cf9a99f156e21ecc62d501a77a9d88"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-135-r33-unsupported-d-schema-unavailable.json",
+      "bytes": 1855,
+      "sha256": "3d358ddd122ec8d696934c10de72f10e0db2d170c11b7cc699ffb4c65e0db4bc"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-136-r33-unsupported-p-schema-unavailable.json",
+      "bytes": 1845,
+      "sha256": "8c206df4ef47f22808c940f3c21327f7f44e72d5fa6f809ff8679c7e3a90a842"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-137-r33-known-digest-conflict-unavailable.json",
+      "bytes": 1848,
+      "sha256": "9855af36a3ce624cbbaf7fa8973df4f9d4eebe3c29f89751ddcb178c5b121adb"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-138-r33-equal-supported-schemas-unavailable.json",
+      "bytes": 1856,
+      "sha256": "3988bbacafc8f683cbddfc94f252ca561343d81a4eb91bc8468ebc6460fe0caa"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-139-r33-schema-up.json",
+      "bytes": 1860,
+      "sha256": "e60161403ce2d432d0f2d0ec284ce21607401017da232c2d84db5393a7743325"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-140-r33-schema-before-capability.json",
+      "bytes": 1788,
+      "sha256": "798ce70cad5128cc5aa37147bfbfa6bbaf9a720821d09fd45c53e497fb585327"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-141-r33-mechanism-before-schema.json",
+      "bytes": 1868,
+      "sha256": "e3c28f3434c7655037f65165e57e3c0ecf3a223ab3940abe507b2e089988db52"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-142-r33-unsupported-d-schema-before-mechanism-difference.json",
+      "bytes": 1883,
+      "sha256": "7dcd9d1d602f61cf9a1c4de2c8ce6df3ced880055bd138ff33d76c64325ce7b6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-143-r33-unsupported-p-schema-before-d-schema.json",
+      "bytes": 1857,
+      "sha256": "cd8d657cee166a1eebafe6c3bfa5154d6749a160e0eb70d9768d8c87c113b528"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-144-r33-document-version-before-schema.json",
+      "bytes": 1863,
+      "sha256": "96b403c91429e87d3604b470d74d122174ada26664d2fb428f8998a2c524f7cb"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-145-r33-metadata-conflict-before-schema.json",
+      "bytes": 2312,
+      "sha256": "b66c9b833a4321cdd9bbd44b059281293fe16c9d04812c0325b6d1603e362236"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-146-r33-unsupported-d-mechanism-before-d-schema.json",
+      "bytes": 1876,
+      "sha256": "5669e986d69decf219644281dcaeeb80d6bafcd794db39dfbb60b71558d2f15a"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-147-r33-capability-before-source.json",
+      "bytes": 1742,
+      "sha256": "18c9ceedd5c35748ccb33e5f785ad556db6fa21a4f8daffd6dd990905e453fa2"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-148-r33-asset-before-source.json",
+      "bytes": 1814,
+      "sha256": "38cab82fde0cd796afe4876ba107774481d9f8ec4a9c7df1b717a2de7e3effd6"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-149-r33-invalid-exact-envelope.json",
+      "bytes": 1789,
+      "sha256": "c097fbc5923983eb345be676d22624ed4032cc455569e4a411b81c5cd79d8251"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-150-r33-exact-unknown-digest.json",
+      "bytes": 1773,
+      "sha256": "a9b183a1b81c5b56288fd21eba8134740c4a2cf78b9b11f110478c207c02578b"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/compat-151-r33-exact-unknown-version.json",
+      "bytes": 1832,
+      "sha256": "76ffa6f755008512d810e29825d0d4f8535e517d94aa39dddaef65b6d6547533"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/lexical-leading-nbsp.json",
+      "bytes": 323,
+      "sha256": "a2e2be1f86424af0620567f26eeb7ad95c2301d4a06a2bbd967142ce860dd2f2"
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/cases/lexical-unsafe-fraction.json",
+      "bytes": 358,
+      "sha256": "9817d7099d11a36727205209c3d52d3f64ad6013e241baf3132670c060bd697d"
+    }
+  ],
+  "validation": {
+    "red": {
+      "command": "rtk node --test tests/profile-corpus.test.mjs",
+      "exitCode": 1,
+      "pass": 18,
+      "fail": 3,
+      "expectedFailures": [
+        "old inventory 23 versus 176",
+        "old source commit",
+        "stale historical test-file seal"
+      ]
+    },
+    "auditRed": {
+      "command": "rtk node --test tests/profile-corpus-revendor.test.mjs",
+      "exitCode": 1,
+      "pass": 0,
+      "fail": 2,
+      "expectedFailures": [
+        "old inventory",
+        "receipt absent"
+      ]
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.67,
+      "processGroupTerminated": true,
+      "failedTests": []
+    },
+    "guards": {
+      "command": "rtk node --test tests/brand-guard.test.mjs tests/brand-baseline.test.mjs tests/profile-brand-guard.test.mjs tests/path-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 20.4,
+      "processGroupTerminated": true,
+      "tests": 41,
+      "suites": 0,
+      "pass": 41,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "corpus-green": {
+      "command": "rtk proxy node --test --test-skip-pattern ^should detect every changed expectation byte tests/profile-corpus.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-golden-independence.test.mjs tests/profile-s123-receipt.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.17,
+      "processGroupTerminated": true,
+      "tests": 182,
+      "suites": 0,
+      "pass": 182,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "profiles": {
+      "command": "rtk proxy node --test tests/profile-boundary-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-identity.test.mjs tests/profile-lint-contract.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s4-fix.test.mjs tests/profile-s4-scope.test.mjs tests/profile-schema.test.mjs tests/profile-snapshot.test.mjs tests/profile-static.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.37,
+      "processGroupTerminated": true,
+      "tests": 1021,
+      "suites": 0,
+      "pass": 1021,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "readiness-red": {
+      "command": "rtk proxy node --test tests/lot0-squash-readiness.test.mjs",
+      "exitCode": 1,
+      "timedOut": false,
+      "seconds": 0.57,
+      "processGroupTerminated": true,
+      "tests": 5,
+      "suites": 0,
+      "pass": 3,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": [
+        "3 - should seal every predecessor pin and reject unapproved history substitutions",
+        "5 - should verify the explicit path reseal and every predecessor and successor digest"
+      ]
+    },
+    "readiness-green": {
+      "command": "rtk proxy node --test tests/lot0-squash-readiness.test.mjs tests/profile-corpus-revendor.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.52,
+      "processGroupTerminated": true,
+      "tests": 7,
+      "suites": 0,
+      "pass": 7,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "corpus": {
+      "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-golden-independence.test.mjs tests/profile-s123-receipt.test.mjs",
+      "exitCode": -15,
+      "timedOut": true,
+      "seconds": 180,
+      "processGroupTerminated": true,
+      "failedTests": [],
+      "disposition": "Superseded by corpus-green focused checks; exhaustive mutation test runs without exclusions in full npm test."
+    },
+    "fullInitialAttempt": {
+      "command": "rtk npm test",
+      "completed": false,
+      "interrupted": true,
+      "processGroupTerminated": true,
+      "reason": "Restarted after adapting the two directly affected historical seal-chain assertions. No complete result claimed."
+    },
+    "guardInventory": {
+      "newBrandHits": 0,
+      "newAbsolutePathHits": 0,
+      "brandBaselineRows": 131,
+      "brandBaselineChanged": false,
+      "expectationBytesChanged": false,
+      "expectationSealChanged": false
+    },
+    "verdictContractByteEquality": [
+      "profile-mechanism/1/compatibility-codes.json",
+      "profile-mechanism/1/compatibility-verdict.schema.json"
+    ],
+    "canonicalSnapshotCheck": {
+      "comparedUsing": "git show raw blobs at the pinned commit",
+      "byteMatches": 198,
+      "regularFiles": 198,
+      "fileMode": "100644",
+      "previousPinExactlyCoveredCanonicalTreeFiles": 42,
+      "previousPayloadBytesUnchanged": 41
+    },
+    "full": {
+      "command": "rtk proxy npm test",
+      "exitCode": 1,
+      "timedOut": false,
+      "seconds": 1081.32,
+      "processGroupTerminated": true,
+      "tests": 2026,
+      "suites": 0,
+      "pass": 2000,
+      "fail": 26,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": [
+        "4 - adapter inside a real assistant-ui 0.15.22 runtime",
+        "41 - browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+        "50 - colored profile in a real browser",
+        "51 - core in a real browser",
+        "53 - the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+        "69 - active diagram across a new document version; undo and redo across a profile switch",
+        "689 - shipped browser IIFE: C1–C7 parity and second-review refusals",
+        "729 - shipped browser IIFE: third-review refusals and resolved namespaces",
+        "761 - shipped browser IIFE: fourth-review supported placements and endpoint identity",
+        "798 - io codecs in a real browser",
+        "799 - boundary events follow their host in autoLayout, in one command",
+        "802 - (kept) the canvas applies the corpus geometry to the DI",
+        "813 - layoutOnLoad: a server document is laid out as part of its load",
+        "854 - legend profile in a real browser",
+        "855 - legend profile parity in a real browser",
+        "856 - legend tokens, data IO lifecycle and hit outlines in a real browser",
+        "883 - palette layout and token-driven icons in a real browser",
+        "1912 - react and assistant-ui adapters in a real browser",
+        "1915 - rendering in both looks",
+        "1916 - workshop primitives (menu, tabs) in a real browser",
+        "1917 - 0.2 canvas API in a real browser",
+        "1918 - bpmn.io logo: visible by default, hidden only with a named license",
+        "2010 - workshop: atomic exports",
+        "2011 - workshop: current model local exports",
+        "2012 - workshop structure with the step-0 contract options",
+        "2013 - workshop in a real browser"
+      ],
+      "failureDetails": [
+        {
+          "path": "tests/aui.browser.test.mjs",
+          "test": "adapter inside a real assistant-ui 0.15.22 runtime",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/browser-dist.browser.test.mjs",
+          "test": "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/colored.browser.test.mjs",
+          "test": "colored profile in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/core.browser.test.mjs",
+          "test": "core in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/demo.browser.test.mjs",
+          "test": "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/history.browser.test.mjs",
+          "test": "active diagram across a new document version; undo and redo across a profile switch",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/io-review-2.browser.test.mjs",
+          "test": "shipped browser IIFE: C1–C7 parity and second-review refusals",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/io-review-3.browser.test.mjs",
+          "test": "shipped browser IIFE: third-review refusals and resolved namespaces",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: browser closed before launch completed"
+        },
+        {
+          "path": "tests/io-review-4.browser.test.mjs",
+          "test": "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/io.browser.test.mjs",
+          "test": "io codecs in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/layout-boundary.browser.test.mjs",
+          "test": "boundary events follow their host in autoLayout, in one command",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/layout-corpus.browser.test.mjs",
+          "test": "(kept) the canvas applies the corpus geometry to the DI",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/layout-on-load.browser.test.mjs",
+          "test": "layoutOnLoad: a server document is laid out as part of its load",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/legend.browser.test.mjs",
+          "test": "legend profile in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/legend2.browser.test.mjs",
+          "test": "legend profile parity in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/legend3.browser.test.mjs",
+          "test": "legend tokens, data IO lifecycle and hit outlines in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/palette.browser.test.mjs",
+          "test": "palette layout and token-driven icons in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/react.browser.test.mjs",
+          "test": "react and assistant-ui adapters in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/render-looks.browser.test.mjs",
+          "test": "rendering in both looks",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/ui.browser.test.mjs",
+          "test": "workshop primitives (menu, tabs) in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/v02.browser.test.mjs",
+          "test": "0.2 canvas API in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/watermark.browser.test.mjs",
+          "test": "bpmn.io logo: visible by default, hidden only with a named license",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/workshop-export.browser.test.mjs",
+          "test": "workshop: atomic exports",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/workshop-served.browser.test.mjs",
+          "test": "workshop: current model local exports",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/workshop-structure.browser.test.mjs",
+          "test": "workshop structure with the step-0 contract options",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        },
+        {
+          "path": "tests/workshop.browser.test.mjs",
+          "test": "workshop in a real browser",
+          "sandboxChromiumFailure": true,
+          "signature": "Chromium launch failed: snap/DBus cannot create transient scope (UnixProcessIdUnknown)"
+        }
+      ],
+      "nonBrowserFailures": [],
+      "exhaustiveSealMutationIncluded": true,
+      "sanitizedOutputSha256": "0c97cf544abcf0f257adaf568715837562c6b27746cfff532bb991d2d7e17b6f",
+      "interpretation": "Full npm test completed with the recorded exit code. Chromium launch failures remain failures; no browser configuration or expectation was changed.",
+      "exhaustiveSealMutationPassed": true,
+      "singleByteMutationChecks": 934149
+    },
+    "browserWorkerCleanup": {
+      "stopped": [
+        {
+          "pid": 1585463,
+          "path": "tests/browser-dist.browser.test.mjs",
+          "elapsedSeconds": 324.3,
+          "cpuSeconds": 0.9
+        },
+        {
+          "pid": 1585497,
+          "path": "tests/demo.browser.test.mjs",
+          "elapsedSeconds": 324.3,
+          "cpuSeconds": 0.9
+        }
+      ],
+      "reason": "Failed Chromium launch left HTTP server handles open beyond the declared 240/300-second test limits. No child browser processes remained; stopped only these task-owned idle workers to let the complete suite report."
+    },
+    "finalChecks": {
+      "command": "rtk proxy node --test tests/profile-corpus-revendor.test.mjs tests/profile-corpus.test.mjs tests/lot0-squash-readiness.test.mjs tests/profile-s123-receipt.test.mjs tests/brand-baseline.test.mjs tests/path-guard.test.mjs tests/profile-brand-guard.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.07,
+      "processGroupTerminated": true,
+      "tests": 42,
+      "suites": 0,
+      "pass": 42,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "processCleanup": {
+      "remainingTaskOwnedTestProcesses": 0,
+      "allStartedTestProcessGroupsTerminated": true
+    }
+  },
+  "limits": [
+    "The final release is accepted by lot0-corpus-pin-final.json. Only the resolved commit and contracts tree select corpus bytes; tag name and object are metadata.",
+    "No source comparator is executed and no new canonical case is promoted into the 486-vector seal.",
+    "Byte provenance and matching sealed expectations do not claim complete runtime parity."
+  ]
+}

@@ -1,0 +1,279 @@
+{
+  "format": "profile-reconciliation-closure-receipt/1",
+  "date": "2026-10-15",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "initialHead": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+  "gate": "DESIGN §14.1",
+  "gateState": "closed",
+  "blocksIndependentSteps": false,
+  "execution": {
+    "authority": "Owner-delegated conductor git execution, DESIGN §14.1, 2026-10-15",
+    "state": "stash@{0} dropped; verified duplicate of e9f5f89",
+    "action": "conductor executed the owner-delegated drop after verifying diff identity",
+    "ownerCommand": "git stash drop 'stash@{0}'",
+    "gateState": "closed",
+    "blocksIndependentSteps": false,
+    "closure": "docs/design/receipts/lot0-reconciliation-closed.json",
+    "agentTouchedStash": false,
+    "date": "2026-10-15",
+    "droppedBy": "conductor, git execution delegated by the owner",
+    "stashObject": "2116408888bcbb1105560f1af6e088bdef2dd2af",
+    "duplicateDiffSha256": "94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12",
+    "duplicateDiffBytes": 2049,
+    "stashListEmpty": true,
+    "stashObjectDangling": true,
+    "verification": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session."
+  },
+  "verification": {
+    "evidence": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session.",
+    "dropReportSource": "Owner task statement; conductor executed the delegated git operation before this session.",
+    "independentChecks": [
+      "git stash list: exit 0, empty output",
+      "git cat-file -t 2116408888bcbb1105560f1af6e088bdef2dd2af: commit",
+      "git fsck --no-reflogs: dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af",
+      "Both reference-model git diffs: 2049 bytes, SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12"
+    ],
+    "finalStashRecheck": {
+      "stashListEmpty": true,
+      "objectType": "commit",
+      "danglingCommitVerified": true
+    }
+  },
+  "commits": {
+    "red": "e00a6b45b17839fa6656f7f211b585de01821a03",
+    "green": "33c83529236b7d3e6f66c68aff763da07dce5757",
+    "receipt": "Resolve with git log -1 --format=%H -- docs/design/receipts/lot0-reconciliation-closed.json; a commit cannot embed its own hash."
+  },
+  "red": {
+    "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-s123-receipt.test.mjs tests/brand-baseline.test.mjs",
+    "tests": 29,
+    "passed": 22,
+    "failed": 7,
+    "reason": "Old retained-stash gate/disposition, reopened gate accepted, and absent closure receipt."
+  },
+  "reseal": {
+    "reason": "Owner-requested explicit closure reseal; original conductor receipt prefix preserved. Historical byte pins remain as predecessors and are superseded only by the entries below.",
+    "oldFreezeSeal": {
+      "bytes": 4030,
+      "sha256": "1cbfc721fef1255c7ad932aa5e21839e8177fd8c0db08a24a5eaa8c7aad7c4de"
+    },
+    "newFreezeSeal": {
+      "bytes": 4031,
+      "sha256": "d0761fc7f38fd308b638b7fa4a60cf19f7187bab90bac4c644d6a450b027f203"
+    },
+    "expectationSealUnchanged": {
+      "bytes": 465,
+      "sha256": "0fdb6c8524ae9b93e3fe30fe9532f80b3a0117b2db91c9389fe7885c4e3762c9"
+    },
+    "chain": "S123 fix → S123 seal → R3.3 seal → R3.3 implementation → brand remediation → this closure receipt. Each predecessor pin is retained and checked before applying the successor."
+  },
+  "supersedesFiles": [
+    {
+      "path": "docs/design/profile-lot0-baseline.md",
+      "old": {
+        "bytes": 6567,
+        "sha256": "eb49ec64954615bfb13416aada4d0626dcce990be82a0a7e4c95a9b2a8847bb5"
+      },
+      "new": {
+        "bytes": 6687,
+        "sha256": "08262089802b5e949fdb7839d1f80ca8ed9c47bb414809ab8746dccff30cd8c1"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/reconciliation.md",
+      "old": {
+        "bytes": 2124,
+        "sha256": "81d16f3a9f4671f29dea5b38b62490f07eb2a2f1ca94e6e794fbcd4e54829639"
+      },
+      "new": {
+        "bytes": 2672,
+        "sha256": "3e4b21a044667efc3b3b015f9b0f7fbfc2694390530aa0a4e516423ab558c4fb"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/inputs.json",
+      "old": {
+        "bytes": 9710,
+        "sha256": "b21c2b18f884b1e2af3d49a0c0c698f9bb0457284aca294bfa69c1b696791088"
+      },
+      "new": {
+        "bytes": 10460,
+        "sha256": "505d000e3ab0cb797f452941d7499ad956e9971541e7cd57a136d8efd5c6011e"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 13651,
+        "sha256": "cd5ba13b799427746fb30b033411cd29c9b52ccf7959d078dbe5f74be2dc5d94"
+      },
+      "new": {
+        "bytes": 13622,
+        "sha256": "9dd6c2e0cd3c3caf7594daa6eff716f6fdb6815b56587f4f0522af930600ce55"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "old": {
+        "bytes": 4030,
+        "sha256": "1cbfc721fef1255c7ad932aa5e21839e8177fd8c0db08a24a5eaa8c7aad7c4de"
+      },
+      "new": {
+        "bytes": 4031,
+        "sha256": "d0761fc7f38fd308b638b7fa4a60cf19f7187bab90bac4c644d6a450b027f203"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s2-r32.json",
+      "old": {
+        "bytes": 60163,
+        "sha256": "fe3273ea42a8162334fc7adb6dea441cd562db6a7948e6d915655e6e851aa348"
+      },
+      "new": {
+        "bytes": 61534,
+        "sha256": "3a4293000f31b1a373171a917ff7fa65d07f28faca376673d4a9e5cc06bdc64d"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s3.json",
+      "old": {
+        "bytes": 26842,
+        "sha256": "b356aa39c504e12719ddd982ac4a299259d7f7590e88f3704cea0351ee6dfcd5"
+      },
+      "new": {
+        "bytes": 27615,
+        "sha256": "e73c38a78952dcd2eaf308232b7f64c150c84ac59713948d07da3390a5cd0b82"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s123-fix.json",
+      "old": {
+        "bytes": 17313,
+        "sha256": "9149394b9c0f61b0b0cfea37c6e8c8eb55cae5dd7a9d8f3d4af964e46eed6751"
+      },
+      "new": {
+        "bytes": 18158,
+        "sha256": "2e02e1a64c1369680e5dc0bea7361b9ebd232d35c3a2d24b9bd72eb517d02124"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s123-seal.json",
+      "old": {
+        "bytes": 25817,
+        "sha256": "ede834ef89219ef2a1176cdf6258a769128c57abbad40efce4628ad1acc3db7f"
+      },
+      "new": {
+        "bytes": 26590,
+        "sha256": "da461de6a860111fec1e3abd60946abb0e13ecdb6d4e2da32f18b9833544c96d"
+      }
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "old": {
+        "bytes": 6257,
+        "sha256": "227a4b4b9976091d9d1140b170302dba291198ea2805174555de8521459221f1"
+      },
+      "new": {
+        "bytes": 8156,
+        "sha256": "83efb43364cd02728e19817361509b06cff68227b70a02cacf124329e39b775d"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 6472,
+        "sha256": "ac891754666557a42ff8fed5d8e3888d638657303339a3fafd99cb7be27a78f3"
+      },
+      "new": {
+        "bytes": 6839,
+        "sha256": "ed0802b1b9d18248ffc4027b932827b50bd79036a52f934f382c6960f87d0dff"
+      }
+    },
+    {
+      "path": "tests/brand-baseline.test.mjs",
+      "old": {
+        "bytes": 5504,
+        "sha256": "cd5885c3684b99dbc7cf9a1bc4a1fdcbbe7601bf36bfe509cb164a3ac9e347ec"
+      },
+      "new": {
+        "bytes": 5815,
+        "sha256": "7d11748b03735d7012eb0a811ab4f9baeee999a23aea345b45ed59d09e7876ce"
+      }
+    }
+  ],
+  "historicalReviewDisposition": "Earlier independent reviews remain historical; their retained-stash limitations are superseded only for DESIGN §14.1 by this closure. No new independent review endorsement is claimed.",
+  "preservation": {
+    "stashMutatedByClosureSession": false,
+    "excludedPathsTouched": false,
+    "pushed": false
+  },
+  "green": {
+    "focused": {
+      "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-s123-receipt.test.mjs tests/brand-baseline.test.mjs tests/profile-brand-guard.test.mjs",
+      "tests": 30,
+      "passed": 30,
+      "failed": 0
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0
+    },
+    "profiles": {
+      "command": "node --test tests/profile-boundary-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-golden-independence.test.mjs tests/profile-identity.test.mjs tests/profile-lint-contract.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s4-fix.test.mjs tests/profile-s4-scope.test.mjs tests/profile-schema.test.mjs tests/profile-snapshot.test.mjs tests/profile-static.test.mjs tests/brand-baseline.test.mjs",
+      "files": 26,
+      "exitCode": 0,
+      "seconds": 1026.19,
+      "summary": [
+        "# tests 1028",
+        "# suites 0",
+        "# pass 1028",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 1025964.842719"
+      ],
+      "failures": [],
+      "log": "/tmp/bpmn-lot0-close-profile-tests.log",
+      "runner": "rtk python3 using subprocess.run; no browser tests or retries",
+      "counts": {
+        "tests": 1028,
+        "pass": 1028,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "profileFiles": 25,
+      "profileTests": 1021,
+      "trackedBaselineTests": 7,
+      "testedGateAndSealCommit": "33c83529236b7d3e6f66c68aff763da07dce5757",
+      "testedGateAndSealBytesMatchGreenCommit": true
+    },
+    "brandGuards": {
+      "commands": [
+        "rtk node --test tests/brand-baseline.test.mjs tests/profile-brand-guard.test.mjs"
+      ],
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "checkpoint": "Separate 8-test run after the green commit and receipt metadata update."
+    },
+    "exhaustiveMutationScope": {
+      "file": "tests/profile-golden-independence.test.mjs",
+      "fixtureBytes": 1802403,
+      "nonWhitespaceMutationProbes": 934149,
+      "status": "passed in the complete profile run"
+    },
+    "browserScope": "The requested profile tests do not launch Chromium. Standalone browser suites were not run.",
+    "sandboxChromiumLaunchFailures": [],
+    "profileRunDurationSeconds": 1026.19
+  },
+  "finalValidation": {
+    "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-s123-receipt.test.mjs tests/brand-baseline.test.mjs tests/profile-brand-guard.test.mjs",
+    "tests": 30,
+    "passed": 30,
+    "failed": 0,
+    "scope": "Final profile results, successor chain, frozen gate records and receipt contents before appending this validation result. Brand guards rerun after this final append."
+  }
+}

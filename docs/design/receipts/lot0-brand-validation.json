@@ -1,0 +1,396 @@
+{
+  "testedHead": "2e99d8ff6054ab76d521195c68f2c6da11d1f5d5",
+  "baseline": {
+    "rowCount": 131,
+    "sha256": "659fac0c91de9b7e4010c6732cddaa55849fad131fe22a50e73dc684c06e5ece"
+  },
+  "seals": [
+    {
+      "path": "docs/design/receipts/lot0-s12.json",
+      "old": {
+        "bytes": 15334,
+        "sha256": "9f9ef0c21cba7c14b84d3ff46ec6964b22b5e65b3d4e557c83efc6db0dd0d94f"
+      },
+      "new": {
+        "bytes": 15338,
+        "sha256": "146dee545dd7b9a9db72f014566220cbba39b01794e2af4cd84c60ea66faeb5b"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/design-provenance.json",
+      "old": {
+        "bytes": 109282,
+        "sha256": "d14862e485d7c03a8dffce1d0aa95e0a3bd3f4843803e0c165f9b59f3f411f63"
+      },
+      "new": {
+        "bytes": 109379,
+        "sha256": "12f2f86ffba797450f872625b1beab86dbe33409c63a72473a2935880d6d6381"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 13019,
+        "sha256": "35c06755c85eeb07175a6a6f57e8b3a22403b9be5c1a115600848a4607662967"
+      },
+      "new": {
+        "bytes": 13651,
+        "sha256": "cd5ba13b799427746fb30b033411cd29c9b52ccf7959d078dbe5f74be2dc5d94"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "old": {
+        "bytes": 4030,
+        "sha256": "13b58125faa7dd8dfb3b9f84e17c030c12123a4195adc1d59b68bd99840406ea"
+      },
+      "new": {
+        "bytes": 4030,
+        "sha256": "1cbfc721fef1255c7ad932aa5e21839e8177fd8c0db08a24a5eaa8c7aad7c4de"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 5935,
+        "sha256": "05cda6146d91398eaea3bcdd33ff6a04f988a42c047f930af6ca13d2368415ec"
+      },
+      "new": {
+        "bytes": 6472,
+        "sha256": "ac891754666557a42ff8fed5d8e3888d638657303339a3fafd99cb7be27a78f3"
+      }
+    },
+    {
+      "path": "tests/helpers/brand.mjs",
+      "predecessorCommit": "f3a54c5^",
+      "old": {
+        "bytes": 1555,
+        "sha256": "9c774bc6e380ee9efcc00fb6376e5aaf7bb61dabdb0d4cf4af2fd896b8802ac5"
+      },
+      "new": {
+        "bytes": 2131,
+        "sha256": "5469c034bbc39bf89c7758e0974a29c96205d149da06b816485f468be7bb9c87"
+      }
+    },
+    {
+      "path": "docs/design/profile-externalization-scope.json",
+      "old": {
+        "bytes": 1391,
+        "sha256": "3661e64c4d9b65894ce9376b816d49112859b55b8f2cefd28828c30ed126eef3"
+      },
+      "new": {
+        "bytes": 1391,
+        "sha256": "ac38283d0850e3a2b911aaabdb65b44a153ace1e8b2615e24146eb74aff4ca93"
+      }
+    }
+  ],
+  "provenanceExcerptPin": {
+    "domain": "SHA-256 of JSON.stringify(parsed evidence), UTF-8",
+    "old": "99cab78f8792d98da09b44283c4dac06ea67864bd523e357f539d6336b82ef28",
+    "new": "92f68b02143087a65c45ac2f2e8fef5640611e47f76b8108e28185446085e148"
+  },
+  "quotation": {
+    "ref": "DESIGN.md:606",
+    "authoritySha256": "47efe86ff95fdaed0796081df4a5d04ea000bfba781cb9012a628ebe798e9b69",
+    "neutralSha256": "e140e286d5977b50388d54c23ca455fe6a53279c401d5b48717477ab95fc0e51"
+  },
+  "red": {
+    "command": "node --test tests/brand-baseline.test.mjs tests/profile-brand-guard.test.mjs",
+    "tests": 7,
+    "passed": 0,
+    "failed": 7
+  },
+  "focused": {
+    "tests": 25,
+    "passed": 25,
+    "failed": 0
+  },
+  "typecheck": {
+    "label": "typecheck",
+    "exitCode": 0,
+    "seconds": 2.14,
+    "counts": [],
+    "failures": []
+  },
+  "profiles": {
+    "label": "profiles",
+    "exitCode": 0,
+    "seconds": 1.23,
+    "counts": [
+      "# tests 1016",
+      "# pass 1016",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# duration_ms 1110.164631"
+    ],
+    "failures": []
+  },
+  "profilesExhaustiveSuite": "tests/profile-golden-independence.test.mjs is included in the full npm test run.",
+  "trackedGuard": {
+    "trackedRows": 131,
+    "baselineRows": 131,
+    "outsideBaseline": 0,
+    "confirmedLeakRows": 0
+  },
+  "fullStatus": "completed-with-failures",
+  "format": "profile-brand-validation/1",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "full": {
+    "label": "full",
+    "exitCode": 1,
+    "seconds": 1091.32,
+    "counts": [
+      "# tests 1987",
+      "# pass 1956",
+      "# fail 31",
+      "# cancelled 0",
+      "# skipped 0",
+      "# duration_ms 1086386.013628"
+    ],
+    "reportedTests": 1987,
+    "passed": 1956,
+    "failed": 31,
+    "browserLaunchFailures": 26,
+    "strictLegacyBrandGateFailures": 5,
+    "logSha256": "b2cdd79b0aa0af417a03c4f4d888085a5dcc383d7b12007526754b5a694352b6",
+    "sourceAndTestBytesUnchangedDuringFullRun": true,
+    "interpretation": "Full npm test exited 1. The tracked-file baseline guard is green; the five older zero-exception source/package gates remain strict and red. Browser assertions beyond failed launch were not executed. Browser suite will be rerun serially outside the sandbox.",
+    "failures": [
+      {
+        "location": "tests/aui.browser.test.mjs:10:1",
+        "test": "adapter inside a real assistant-ui 0.15.22 runtime",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/browser-dist.browser.test.mjs:22:1",
+        "test": "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/colored-style.test.mjs:65:1",
+        "test": "the profile sources and build carry no banned word, no storage, no prototype patch, no watermark handling",
+        "category": "strict-legacy-brand-gate",
+        "reason": "This zero-exception legacy gate rejects conductor-approved business content retained in the tracked baseline or its generated artifacts. No temporary waiver was added to this gate."
+      },
+      {
+        "location": "tests/colored.browser.test.mjs:36:1",
+        "test": "colored profile in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/core.browser.test.mjs:24:1",
+        "test": "core in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/demo.browser.test.mjs:24:1",
+        "test": "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/history.browser.test.mjs:9:1",
+        "test": "active diagram across a new document version; undo and redo across a profile switch",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/io-review-2.browser.test.mjs:7:1",
+        "test": "shipped browser IIFE: C1\u2013C7 parity and second-review refusals",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/io-review-3.browser.test.mjs:8:1",
+        "test": "shipped browser IIFE: third-review refusals and resolved namespaces",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/io-review-4.browser.test.mjs:8:1",
+        "test": "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/io.browser.test.mjs:28:1",
+        "test": "io codecs in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/layout-boundary.browser.test.mjs:10:1",
+        "test": "boundary events follow their host in autoLayout, in one command",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/layout-corpus.browser.test.mjs:11:1",
+        "test": "(kept) the canvas applies the corpus geometry to the DI",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/layout-on-load.browser.test.mjs:9:1",
+        "test": "layoutOnLoad: a server document is laid out as part of its load",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/legend-style.test.mjs:155:1",
+        "test": "legend sources contain no banned symbol",
+        "category": "strict-legacy-brand-gate",
+        "reason": "This zero-exception legacy gate rejects conductor-approved business content retained in the tracked baseline or its generated artifacts. No temporary waiver was added to this gate."
+      },
+      {
+        "location": "tests/legend.browser.test.mjs:11:1",
+        "test": "legend profile in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/legend2.browser.test.mjs:14:1",
+        "test": "legend profile parity in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/legend3.browser.test.mjs:8:1",
+        "test": "legend tokens, data IO lifecycle and hit outlines in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/package-shape.test.mjs:54:1",
+        "test": "dist carries no brand, no storage, no global render hook, no watermark suppression",
+        "category": "strict-legacy-brand-gate",
+        "reason": "This zero-exception legacy gate rejects conductor-approved business content retained in the tracked baseline or its generated artifacts. No temporary waiver was added to this gate."
+      },
+      {
+        "location": "tests/package-shape.test.mjs:108:1",
+        "test": "every packed file carries no banned identifier; the layout corpus is packed",
+        "category": "strict-legacy-brand-gate",
+        "reason": "This zero-exception legacy gate rejects conductor-approved business content retained in the tracked baseline or its generated artifacts. No temporary waiver was added to this gate."
+      },
+      {
+        "location": "tests/package-shape.test.mjs:166:1",
+        "test": "no banned identifier anywhere: tracked files (tests and docs included) and every commit message",
+        "category": "strict-legacy-brand-gate",
+        "reason": "This zero-exception legacy gate rejects conductor-approved business content retained in the tracked baseline or its generated artifacts. No temporary waiver was added to this gate."
+      },
+      {
+        "location": "tests/palette.browser.test.mjs:16:1",
+        "test": "palette layout and token-driven icons in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/react.browser.test.mjs:15:1",
+        "test": "react and assistant-ui adapters in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/render-looks.browser.test.mjs:29:1",
+        "test": "rendering in both looks",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/ui.browser.test.mjs:11:1",
+        "test": "workshop primitives (menu, tabs) in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/v02.browser.test.mjs:17:1",
+        "test": "0.2 canvas API in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/watermark.browser.test.mjs:8:1",
+        "test": "bpmn.io logo: visible by default, hidden only with a named license",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/workshop-export.browser.test.mjs:9:1",
+        "test": "workshop: atomic exports",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/workshop-served.browser.test.mjs:7:1",
+        "test": "workshop: current model local exports",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/workshop-structure.browser.test.mjs:12:1",
+        "test": "workshop structure with the step-0 contract options",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      },
+      {
+        "location": "tests/workshop.browser.test.mjs:20:1",
+        "test": "workshop in a real browser",
+        "category": "sandbox-chromium-launch",
+        "signature": "Chromium launchPersistentContext closed; DBus UnixProcessIdUnknown / failed to set unit properties."
+      }
+    ]
+  },
+  "browserWorkerCleanup": [
+    {
+      "pid": 2563120,
+      "file": "tests/browser-dist.browser.test.mjs",
+      "signal": "SIGTERM",
+      "reason": "Worker remained alive more than five minutes after a sandbox Chromium DBus launch failure; stopped only this worker so the exhaustive non-browser test could finish. No browser test or implementation changed."
+    },
+    {
+      "pid": 2563124,
+      "file": "tests/demo.browser.test.mjs",
+      "signal": "SIGTERM",
+      "reason": "Worker remained alive more than five minutes after a sandbox Chromium DBus launch failure; stopped only this worker so the exhaustive non-browser test could finish. No browser test or implementation changed."
+    }
+  ],
+  "preservation": {
+    "stashTouched": false,
+    "tmpTouched": false,
+    "excludedLayoutDocumentTouched": false,
+    "pushed": false,
+    "historyRewritten": false
+  },
+  "commits": [
+    "93c570e test: reproduce tracked brand baseline and provenance leaks",
+    "0c47936 test: pin temporary business baseline and reject unlisted tracked occurrences",
+    "191d365 docs: replace local review folder reference and record receipt reseal",
+    "7a3832f test: neutralize DESIGN quotation and reseal provenance successors",
+    "2e99d8f test: update historical scanner pin for f3a54c5 and reseal scope"
+  ],
+  "exhaustiveSealMutation": {
+    "passed": true,
+    "suite": "tests/profile-golden-independence.test.mjs",
+    "fixtureBytes": 1802403,
+    "mutations": 934149
+  },
+  "finalReceiptChecks": {
+    "label": "final",
+    "exitCode": 0,
+    "seconds": 2.33,
+    "counts": [
+      "# tests 95",
+      "# pass 95",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# duration_ms 2240.159063"
+    ],
+    "failures": []
+  }
+}

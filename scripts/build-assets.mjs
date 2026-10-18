@@ -20,3 +20,16 @@ cpSync(root + ".gen/inline/", root + "dist/assets/inline/", { recursive: true })
 const css = grab("FONT_FACE_CSS").replaceAll(placeholder, "./assets/bpmn-font/font/") + "\n" + grab("BASE_CSS").replaceAll(grab("ASSET_PLACEHOLDER"), "./assets/inline/");
 writeFileSync(root + "dist/styles.css", css);
 console.log(`dist/styles.css ${css.length} bytes; font assets copied unmodified`);
+
+// The canonical layout corpus (tests/fixtures/layout-corpus), shipped so a host can mirror it and compare layouts.
+const corpus = root + "tests/fixtures/layout-corpus/";
+const shipped = {
+  version: JSON.parse(readFileSync(corpus + "VERSION", "utf8")),
+  cases: JSON.parse(readFileSync(corpus + "cases.json", "utf8")),
+  expected: JSON.parse(readFileSync(corpus + "expected.json", "utf8")),
+};
+writeFileSync(root + "dist/layout-corpus.json", JSON.stringify(shipped) + "\n");
+console.log(`dist/layout-corpus.json: ${Object.keys(shipped.cases).length} cases, VERSION ${shipped.version.expectedSha256.slice(0, 12)}`);
+
+// The shared descriptor is shipped verbatim; its file hash is the public fingerprint.
+copyFileSync(root + "src/io/semantics.json", root + "dist/io/semantics.json");

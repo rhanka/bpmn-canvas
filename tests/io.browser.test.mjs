@@ -12,6 +12,7 @@ const two = r("tests/fixtures/io/two-processes.bpmn");
 const ce4 = r("experiments/e3/corpus/ce4-two-pools-message.bpmn");
 const ce5 = r("experiments/e3/corpus/ce5-two-diagrams-shared-root.bpmn");
 const MAX = 8 * 1024 * 1024;
+const GENERIC = { drawio: { codec: "generic" } };
 
 const nodesOf = (p) => p.nodes.map((n) => [n.kind, n.label, n.bounds]);
 const edgesOf = (p) => p.edges.map((e) => [e.kind, e.label, e.points]);
@@ -30,10 +31,10 @@ test("io codecs in a real browser", { timeout: 300000 }, async (t) => {
     const out = { hasDecompression: await pg.evaluate(() => window.io.hasDecompression) };
 
     // exact bytes and fidelity notices
-    const edited = pool.replaceAll("Fill form", "Current edit");
-    out.bpmn = await call("exportDiagram", edited, "bpmn");
-    out.sparx = await call("exportDiagram", edited, "sparx");
-    out.drawioExport = await call("exportDiagram", pool, "drawio");
+    const edited = r("tests/fixtures/io/reference/C1/semantic.bpmn").replaceAll("Check order", "Current edit");
+    out.bpmn = await call("modelFile", edited, "bpmn");
+    out.sparx = await call("modelFile", edited, "sparx");
+    out.drawioExport = await call("projectFile", pool, "drawio", GENERIC);
 
     // round trip, uncompressed and compressed, single pool and two processes
     out.round = {};
@@ -55,13 +56,13 @@ test("io codecs in a real browser", { timeout: 300000 }, async (t) => {
 
     // options
     const drawio = out.round.pool.drawio;
-    out.optKind = (await call("exportDiagram", pool, "drawio", { kindAttribute: "kindX", host: "my-host" })).ok.xml;
+    out.optKind = (await call("projectFile", pool, "drawio", { ...GENERIC, kindAttribute: "kindX", host: "my-host" })).ok.xml;
     out.optDefault = out.drawioExport.ok.xml;
-    const legacy = (await call("exportDiagram", pool, "drawio", { kindAttribute: "oldKind" })).ok.xml;
+    const legacy = (await call("projectFile", pool, "drawio", { ...GENERIC, kindAttribute: "oldKind" })).ok.xml;
     out.legacyWithout = (await call("decodeDrawio", legacy)).ok[0].nodes.find((n) => n.label === "Notify")?.kind;
     out.legacyWith = (await call("decodeDrawio", legacy, { legacyKindAttributes: ["oldKind"] })).ok[0].nodes.find((n) => n.label === "Notify")?.kind;
     out.nsCustom = (await call("importDiagram", drawio, { targetNamespace: "urn:test:x" })).ok.xml;
-    out.maxBytes = await call("exportDiagram", pool, "bpmn", { maxBytes: 100 });
+    out.maxBytes = await call("bpmnGraph", pool, { maxBytes: 100 });
     const stripped = drawio.replace(/ bpmnKind="[^"]*"/g, "");
     out.styleOnly = (await call("decodeDrawio", stripped)).ok[0];
     out.unknownShape = await call("importDiagram", stripped.replace("shape=mxgraph.bpmn.task", "shape=rectangle"));
@@ -76,7 +77,7 @@ test("io codecs in a real browser", { timeout: 300000 }, async (t) => {
     refuse.unresolvedShape = ["unresolved-shape", pool.replace('id="dFill" bpmnElement="Fill"', 'id="dFill" bpmnElement="missing"')];
     refuse.twoParticipants = ["multiple-participants", `<?xml version="1.0"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="D" targetNamespace="x"><bpmn:collaboration id="C"><bpmn:participant id="P1" processRef="A"/><bpmn:participant id="P2" processRef="B"/></bpmn:collaboration><bpmn:process id="A"><bpmn:task id="TA"/></bpmn:process><bpmn:process id="B"><bpmn:task id="TB"/></bpmn:process><bpmndi:BPMNDiagram id="BD"><bpmndi:BPMNPlane id="PL" bpmnElement="C"><bpmndi:BPMNShape id="s1" bpmnElement="P1"><dc:Bounds x="0" y="0" width="300" height="100"/></bpmndi:BPMNShape><bpmndi:BPMNShape id="s2" bpmnElement="P2"><dc:Bounds x="0" y="150" width="300" height="100"/></bpmndi:BPMNShape><bpmndi:BPMNShape id="s3" bpmnElement="TA"><dc:Bounds x="50" y="20" width="100" height="60"/></bpmndi:BPMNShape><bpmndi:BPMNShape id="s4" bpmnElement="TB"><dc:Bounds x="50" y="170" width="100" height="60"/></bpmndi:BPMNShape></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>`];
     out.exportRefusals = {};
-    for (const [k, [code, xml]] of Object.entries(refuse)) out.exportRefusals[k] = { code, res: await call("exportDiagram", xml, "drawio") };
+    for (const [k, [code, xml]] of Object.entries(refuse)) out.exportRefusals[k] = { code, res: await call("projectFile", xml, "drawio", GENERIC) };
 
     // native refusals
     const nat = {
@@ -121,12 +122,16 @@ test("io codecs in a real browser", { timeout: 300000 }, async (t) => {
     return out;
   });
 
-  await t.test("export bpmn and sparx return the exact input bytes, with their notices", () => {
-    assert.equal(o.bpmn.ok.xml, pool.replaceAll("Fill form", "Current edit"));
+  await t.test("BPMN returns input bytes, Sparx writes the reference interchange, generic Draw.io declares projection", () => {
+    assert.match(o.bpmn.ok.xml, /name="Current edit"/); assert.match(o.bpmn.ok.xml, /sem:info/);
     assert.deepEqual({ ...o.bpmn.ok, xml: undefined }, { xml: undefined, filename: "diagram.bpmn", mimeType: "application/bpmn+xml", fidelity: [] });
-    assert.equal(o.sparx.ok.xml, o.bpmn.ok.xml);
+    assert.notEqual(o.sparx.ok.xml, o.bpmn.ok.xml);
+    assert.match(o.sparx.ok.xml, /^<\?xml version="1.0" \?>/);
+    assert.match(o.sparx.ok.xml, /<bpmn:task id="Current_edit" name="Current edit"\/>/);
+    assert.match(o.sparx.ok.xml, /exporter="bpmn-canvas" exporterVersion="0.4.0"/);
     assert.equal(o.sparx.ok.filename, "diagram.sparx.xml");
-    assert.deepEqual(o.sparx.ok.fidelity.map((f) => f.code), ["interchange-only"]);
+    assert.equal(o.sparx.ok.mimeType, "application/xml");
+    assert.deepEqual(o.sparx.ok.fidelity, []);
     assert.deepEqual(o.drawioExport.ok.fidelity.map((f) => f.code), ["projection"]);
     assert.equal(o.drawioExport.ok.mimeType, "application/vnd.jgraph.mxfile");
   });

@@ -3,20 +3,26 @@ import type { ReactNode } from "react";
 
 export interface MenuItem {
   readonly id: string;
+  /** `item` (default) is selectable; `separator` is a rule; `header` is a non-selectable title (its `label`). */
+  readonly kind?: "item" | "separator" | "header";
   readonly label: string;
   /** Second, smaller line (for instance a fidelity note). */
   readonly description?: string;
   readonly disabled?: boolean;
   /** Radio-style item that is currently selected. Renders role `menuitemradio` with aria-checked. */
   readonly checked?: boolean;
+  /** Toggle-style item: role `menuitem` with `aria-pressed`, no check mark. */
+  readonly pressed?: boolean;
   readonly onSelect: () => void;
 }
 
 export interface MenuProps {
   /** Visible label of the trigger button. */
   readonly label: ReactNode;
-  /** Accessible name of the trigger and of the menu. */
-  readonly ariaLabel: string;
+  /** Accessible name of the trigger and of the menu. Without it the trigger is named by its text. */
+  readonly ariaLabel?: string;
+  /** `svg` (default): a drawn chevron; `text`: " ▾" after the label; `none`: no chevron. */
+  readonly chevron?: "svg" | "text" | "none";
   readonly items: readonly MenuItem[];
   readonly disabled?: boolean;
   readonly testId?: string;

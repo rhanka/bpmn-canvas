@@ -1,0 +1,3367 @@
+{
+  "format": "profile-step4-inputs/1",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "boundary": "Supplied, immutable Layout/R and admitted native records; no production layout, compiler, lint or serialization execution is claimed.",
+  "profile": {
+    "$schema": "urn:profile-mechanism:1:profile",
+    "schemaVersion": "1.0.0",
+    "mechanismVersion": "1",
+    "profile": "neutral/1",
+    "version": "1.1.0",
+    "base": {
+      "id": "neutral-base/1",
+      "version": "fixture-2",
+      "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+    },
+    "descriptors": [
+      {
+        "id": "neutral-descriptors/1",
+        "version": "fixture-2",
+        "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+      }
+    ],
+    "capabilities": [
+      "predicates/1",
+      "selectors/1",
+      "recipes/1",
+      "profile-lint/1",
+      "render-data/1",
+      "export-ir/1"
+    ],
+    "policies": {
+      "canonical": "profile-c14n/2",
+      "allocator": "stable-id/1",
+      "whitespace": "ecma262-2024",
+      "textFit": "engine-scalar-A/1",
+      "unknownFields": "reject",
+      "compatibility": "exact-or-explicit-migration/1",
+      "localeFallback": "en"
+    },
+    "producerDelta": [],
+    "notions": [
+      {
+        "id": "task",
+        "labels": [
+          {
+            "name": "en",
+            "value": "task"
+          }
+        ],
+        "citations": [],
+        "nativeTypes": [
+          "bpmn:Task"
+        ],
+        "recognition": {
+          "op": "typeIs",
+          "binding": "self",
+          "type": "bpmn:Task",
+          "mode": "exact"
+        },
+        "exclusiveGroup": "primary",
+        "ai": {
+          "description": "Synthetic profile example for schema review; no customer vocabulary.",
+          "examples": [],
+          "counterexamples": [],
+          "producers": [
+            "editor",
+            "import"
+          ],
+          "evidenceRequired": false
+        },
+        "createRecipe": "create-task",
+        "referenceRecipes": [
+          "link"
+        ],
+        "renderBindings": [
+          {
+            "theme": "plain",
+            "glyph": "task",
+            "tokens": [
+              {
+                "name": "fill",
+                "value": "#ffffff"
+              }
+            ],
+            "label": {
+              "op": "read",
+              "binding": "self",
+              "path": "/name"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "id": "name",
+            "path": "/name",
+            "widget": "text",
+            "label": "label",
+            "visible": {
+              "op": "true"
+            },
+            "mutable": {
+              "op": "true"
+            },
+            "command": "rename",
+            "choices": [],
+            "targetTypes": [],
+            "message": "invalid",
+            "parameters": [
+              {
+                "name": "target",
+                "source": "target"
+              },
+              {
+                "name": "name",
+                "source": "value"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aid",
+        "labels": [
+          {
+            "name": "en",
+            "value": "aid"
+          }
+        ],
+        "citations": [],
+        "nativeTypes": [
+          "bpmn:TextAnnotation"
+        ],
+        "recognition": {
+          "op": "all",
+          "args": [
+            {
+              "op": "typeIs",
+              "binding": "self",
+              "type": "bpmn:TextAnnotation",
+              "mode": "exact"
+            },
+            {
+              "op": "textPrefix",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/text"
+              },
+              "prefix": "[Aid]",
+              "trim": "none"
+            }
+          ]
+        },
+        "exclusiveGroup": "primary",
+        "ai": {
+          "description": "Synthetic profile example for schema review; no customer vocabulary.",
+          "examples": [],
+          "counterexamples": [],
+          "producers": [
+            "editor",
+            "import"
+          ],
+          "evidenceRequired": false
+        },
+        "createRecipe": "create-aid",
+        "referenceRecipes": [
+          "link"
+        ],
+        "renderBindings": [
+          {
+            "theme": "plain",
+            "glyph": "aid",
+            "tokens": [
+              {
+                "name": "fill",
+                "value": "#eeeeff"
+              }
+            ],
+            "label": {
+              "op": "stripPrefix",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/text"
+              },
+              "prefix": "[Aid] ",
+              "trim": "none"
+            }
+          }
+        ],
+        "fields": []
+      }
+    ],
+    "rules": [
+      {
+        "id": "task-named",
+        "phase": "post-normalize",
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Task",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "assert": {
+          "op": "all",
+          "args": [
+            {
+              "op": "present",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/name"
+              }
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "equal",
+                "left": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/name"
+                },
+                "right": {
+                  "op": "literal",
+                  "value": ""
+                }
+              }
+            }
+          ]
+        },
+        "code": "task-name-missing",
+        "message": "invalid",
+        "classification": "readiness"
+      },
+      {
+        "id": "task-named-import",
+        "phase": "import",
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Task",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "assert": {
+          "op": "all",
+          "args": [
+            {
+              "op": "present",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/name"
+              }
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "equal",
+                "left": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/name"
+                },
+                "right": {
+                  "op": "literal",
+                  "value": ""
+                }
+              }
+            }
+          ]
+        },
+        "code": "task-name-missing-import",
+        "message": "invalid",
+        "classification": "readiness"
+      },
+      {
+        "id": "task-named-pre-normalize",
+        "phase": "pre-normalize",
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Task",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "assert": {
+          "op": "all",
+          "args": [
+            {
+              "op": "present",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/name"
+              }
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "equal",
+                "left": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/name"
+                },
+                "right": {
+                  "op": "literal",
+                  "value": ""
+                }
+              }
+            }
+          ]
+        },
+        "code": "task-name-missing-pre-normalize",
+        "message": "invalid",
+        "classification": "readiness"
+      },
+      {
+        "id": "task-named-post-layout",
+        "phase": "post-layout",
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Task",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "assert": {
+          "op": "all",
+          "args": [
+            {
+              "op": "present",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/name"
+              }
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "equal",
+                "left": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/name"
+                },
+                "right": {
+                  "op": "literal",
+                  "value": ""
+                }
+              }
+            }
+          ]
+        },
+        "code": "task-name-missing-post-layout",
+        "message": "invalid",
+        "classification": "readiness"
+      },
+      {
+        "id": "task-named-release",
+        "phase": "release",
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Task",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "assert": {
+          "op": "all",
+          "args": [
+            {
+              "op": "present",
+              "value": {
+                "op": "read",
+                "binding": "self",
+                "path": "/name"
+              }
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "equal",
+                "left": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/name"
+                },
+                "right": {
+                  "op": "literal",
+                  "value": ""
+                }
+              }
+            }
+          ]
+        },
+        "code": "task-name-missing-release",
+        "message": "invalid",
+        "classification": "readiness"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "create-task",
+        "phase": "create",
+        "parameters": [
+          {
+            "name": "owner",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "select": {
+          "from": "owner",
+          "via": "self",
+          "where": {
+            "op": "true"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "owner",
+            "path": "/flowElements",
+            "mode": "create"
+          }
+        ],
+        "steps": [
+          {
+            "op": "create",
+            "as": "created",
+            "type": "bpmn:Task",
+            "parent": "owner",
+            "property": "flowElements",
+            "slot": "task",
+            "key": {
+              "op": "param",
+              "name": "key"
+            },
+            "fields": [
+              {
+                "name": "name",
+                "value": {
+                  "op": "param",
+                  "name": "name"
+                }
+              }
+            ],
+            "identity": "allocated",
+            "ownerId": {
+              "op": "id",
+              "binding": "owner"
+            }
+          }
+        ]
+      },
+      {
+        "id": "create-aid",
+        "phase": "create",
+        "parameters": [
+          {
+            "name": "owner",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "body",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "select": {
+          "from": "owner",
+          "via": "self",
+          "where": {
+            "op": "true"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "owner",
+            "path": "/artifacts",
+            "mode": "create"
+          }
+        ],
+        "steps": [
+          {
+            "op": "create",
+            "as": "created",
+            "type": "bpmn:TextAnnotation",
+            "parent": "owner",
+            "property": "artifacts",
+            "slot": "aid",
+            "key": {
+              "op": "param",
+              "name": "key"
+            },
+            "fields": [
+              {
+                "name": "text",
+                "value": {
+                  "op": "concat",
+                  "values": [
+                    {
+                      "op": "literal",
+                      "value": "[Aid] "
+                    },
+                    {
+                      "op": "param",
+                      "name": "body"
+                    }
+                  ]
+                }
+              }
+            ],
+            "identity": "allocated",
+            "ownerId": {
+              "op": "id",
+              "binding": "owner"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rename",
+        "phase": "edit",
+        "parameters": [
+          {
+            "name": "target",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "select": {
+          "from": "target",
+          "via": "self",
+          "where": {
+            "op": "true"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "/name",
+            "mode": "set"
+          }
+        ],
+        "steps": [
+          {
+            "op": "set",
+            "target": "self",
+            "path": "/name",
+            "value": {
+              "op": "param",
+              "name": "name"
+            }
+          }
+        ]
+      },
+      {
+        "id": "complete-process",
+        "phase": "complete",
+        "parameters": [],
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Process",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "/isExecutable",
+            "mode": "set"
+          }
+        ],
+        "steps": [
+          {
+            "op": "set",
+            "target": "self",
+            "path": "/isExecutable",
+            "value": {
+              "op": "literal",
+              "value": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "place-task",
+        "phase": "normalize",
+        "parameters": [],
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Task",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "",
+            "mode": "placement"
+          }
+        ],
+        "steps": [
+          {
+            "op": "bind",
+            "as": "owner",
+            "select": {
+              "from": "self",
+              "via": "owner",
+              "where": {
+                "op": "true"
+              },
+              "order": "id"
+            },
+            "cardinality": "one"
+          },
+          {
+            "op": "place",
+            "target": "self",
+            "owner": "owner",
+            "region": "content",
+            "related": {
+              "from": "root",
+              "via": "all",
+              "where": {
+                "op": "false"
+              },
+              "order": "id"
+            }
+          }
+        ]
+      },
+      {
+        "id": "link",
+        "phase": "reference",
+        "parameters": [
+          {
+            "name": "owner",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "source",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "target",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "key",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "select": {
+          "from": "owner",
+          "via": "self",
+          "where": {
+            "op": "true"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "owner",
+            "path": "/artifacts",
+            "mode": "create"
+          },
+          {
+            "binding": "edge",
+            "path": "/sourceRef",
+            "mode": "reference"
+          },
+          {
+            "binding": "edge",
+            "path": "/targetRef",
+            "mode": "reference"
+          }
+        ],
+        "steps": [
+          {
+            "op": "create",
+            "as": "edge",
+            "type": "bpmn:Association",
+            "parent": "owner",
+            "property": "artifacts",
+            "slot": "link",
+            "key": {
+              "op": "param",
+              "name": "key"
+            },
+            "fields": [
+              {
+                "name": "associationDirection",
+                "value": {
+                  "op": "literal",
+                  "value": "None"
+                }
+              }
+            ],
+            "identity": "allocated",
+            "ownerId": {
+              "op": "id",
+              "binding": "owner"
+            }
+          },
+          {
+            "op": "assignRef",
+            "target": "edge",
+            "path": "/sourceRef",
+            "values": [
+              {
+                "op": "id",
+                "binding": "source"
+              }
+            ],
+            "mode": "replace"
+          },
+          {
+            "op": "assignRef",
+            "target": "edge",
+            "path": "/targetRef",
+            "values": [
+              {
+                "op": "id",
+                "binding": "target"
+              }
+            ],
+            "mode": "replace"
+          }
+        ]
+      },
+      {
+        "id": "export-pages",
+        "phase": "export",
+        "parameters": [],
+        "select": {
+          "from": "render",
+          "via": "pages",
+          "where": {
+            "op": "true"
+          },
+          "order": "page-occurrence"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "",
+            "mode": "artifact"
+          }
+        ],
+        "steps": [
+          {
+            "op": "emit",
+            "as": "page",
+            "kind": "page",
+            "fields": [
+              {
+                "name": "id",
+                "value": {
+                  "op": "outputId",
+                  "binding": "self",
+                  "domain": "page"
+                }
+              },
+              {
+                "name": "name",
+                "value": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/name"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "export-nodes",
+        "phase": "export",
+        "parameters": [],
+        "select": {
+          "from": "render",
+          "via": "occurrences",
+          "where": {
+            "op": "equal",
+            "left": {
+              "op": "read",
+              "binding": "self",
+              "path": "/emittedType"
+            },
+            "right": {
+              "op": "literal",
+              "value": "node"
+            }
+          },
+          "order": "page-occurrence"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "",
+            "mode": "artifact"
+          }
+        ],
+        "steps": [
+          {
+            "op": "emit",
+            "as": "node",
+            "kind": "node",
+            "fields": [
+              {
+                "name": "id",
+                "value": {
+                  "op": "outputId",
+                  "binding": "self",
+                  "domain": "node"
+                }
+              },
+              {
+                "name": "name",
+                "value": {
+                  "op": "read",
+                  "binding": "self",
+                  "path": "/label/text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "add-note",
+        "phase": "edit",
+        "parameters": [
+          {
+            "name": "target",
+            "type": "element",
+            "required": true
+          },
+          {
+            "name": "body",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "select": {
+          "from": "target",
+          "via": "self",
+          "where": {
+            "op": "true"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "/documentation",
+            "mode": "create"
+          }
+        ],
+        "steps": [
+          {
+            "op": "create",
+            "as": "note",
+            "type": "bpmn:Documentation",
+            "identity": "containment",
+            "parent": "self",
+            "property": "documentation",
+            "fields": [
+              {
+                "name": "text",
+                "value": {
+                  "op": "param",
+                  "name": "body"
+                }
+              },
+              {
+                "name": "textFormat",
+                "value": {
+                  "op": "literal",
+                  "value": "text/plain"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "migrate-process",
+        "phase": "migrate",
+        "parameters": [],
+        "select": {
+          "from": "root",
+          "via": "all",
+          "where": {
+            "op": "typeIs",
+            "binding": "self",
+            "type": "bpmn:Process",
+            "mode": "exact"
+          },
+          "order": "id"
+        },
+        "when": {
+          "op": "true"
+        },
+        "writes": [
+          {
+            "binding": "self",
+            "path": "/isExecutable",
+            "mode": "set"
+          }
+        ],
+        "steps": [
+          {
+            "op": "set",
+            "target": "self",
+            "path": "/isExecutable",
+            "value": {
+              "op": "literal",
+              "value": false
+            }
+          }
+        ]
+      }
+    ],
+    "placements": [],
+    "themes": [
+      {
+        "id": "plain",
+        "aliases": [],
+        "tokens": [
+          {
+            "name": "fill",
+            "value": "#ffffff"
+          },
+          {
+            "name": "stroke",
+            "value": "#000000"
+          },
+          {
+            "name": "region.content.headerWidth",
+            "value": 0
+          },
+          {
+            "name": "region.content.padding",
+            "value": 8
+          },
+          {
+            "name": "region.content.gap",
+            "value": 8
+          },
+          {
+            "name": "region.content.minHeight",
+            "value": 40
+          }
+        ],
+        "glyphs": [
+          {
+            "id": "task",
+            "kind": "native",
+            "nativeType": "bpmn:Task",
+            "viewBox": [
+              0,
+              0,
+              100,
+              80
+            ],
+            "commands": []
+          },
+          {
+            "id": "aid",
+            "kind": "native",
+            "nativeType": "bpmn:TextAnnotation",
+            "viewBox": [
+              0,
+              0,
+              100,
+              80
+            ],
+            "commands": []
+          }
+        ],
+        "metricsResource": "neutral-metrics",
+        "geometry": "shared",
+        "syntheticOccurrences": []
+      },
+      {
+        "id": "dim",
+        "aliases": [],
+        "tokens": [
+          {
+            "name": "fill",
+            "value": "#eeeeee"
+          },
+          {
+            "name": "stroke",
+            "value": "#000000"
+          },
+          {
+            "name": "region.content.headerWidth",
+            "value": 0
+          },
+          {
+            "name": "region.content.padding",
+            "value": 8
+          },
+          {
+            "name": "region.content.gap",
+            "value": 8
+          },
+          {
+            "name": "region.content.minHeight",
+            "value": 40
+          }
+        ],
+        "glyphs": [
+          {
+            "id": "task",
+            "kind": "native",
+            "nativeType": "bpmn:Task",
+            "viewBox": [
+              0,
+              0,
+              100,
+              80
+            ],
+            "commands": []
+          },
+          {
+            "id": "aid",
+            "kind": "native",
+            "nativeType": "bpmn:TextAnnotation",
+            "viewBox": [
+              0,
+              0,
+              100,
+              80
+            ],
+            "commands": []
+          }
+        ],
+        "metricsResource": "neutral-metrics",
+        "geometry": "shared",
+        "syntheticOccurrences": [],
+        "fallback": "plain"
+      }
+    ],
+    "ui": [
+      {
+        "id": "task-create",
+        "surface": "palette",
+        "group": "basic",
+        "order": 0,
+        "upstreamEntries": [
+          "create.task"
+        ],
+        "label": "label",
+        "when": {
+          "op": "true"
+        },
+        "recipe": "create-task",
+        "parameters": [
+          {
+            "name": "owner",
+            "source": "owner"
+          },
+          {
+            "name": "key",
+            "source": "key"
+          },
+          {
+            "name": "name",
+            "source": "value"
+          }
+        ],
+        "icon": {
+          "theme": "plain",
+          "glyph": "task"
+        }
+      }
+    ],
+    "validation": [
+      {
+        "id": "import",
+        "policy": "draft",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-import",
+            "severity": "warn",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "import",
+        "policy": "accept",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-import",
+            "severity": "error",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "pre-normalize",
+        "policy": "draft",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-pre-normalize",
+            "severity": "warn",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "pre-normalize",
+        "policy": "accept",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-pre-normalize",
+            "severity": "error",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "post-normalize",
+        "policy": "draft",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named",
+            "severity": "warn",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "post-normalize",
+        "policy": "accept",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named",
+            "severity": "error",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "post-layout",
+        "policy": "draft",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-post-layout",
+            "severity": "warn",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "post-layout",
+        "policy": "accept",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-post-layout",
+            "severity": "error",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "release",
+        "policy": "draft",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "warn",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-release",
+            "severity": "warn",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      },
+      {
+        "id": "release",
+        "policy": "accept",
+        "extends": [
+          "bpmnlint:recommended"
+        ],
+        "settings": [
+          {
+            "rule": "ad-hoc-sub-process",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "conditional-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "end-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "event-based-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "event-sub-process-typed-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "fake-join",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "global",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "label-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "link-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-bpmndi",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-complex-gateway",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-disconnected",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-duplicate-sequence-flows",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-gateway-join-fork",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-split",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-end",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-implicit-start",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-inclusive-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "no-overlapping-elements",
+            "severity": "off",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "single-event-definition",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "start-event-required",
+            "severity": "error",
+            "classification": "readiness"
+          },
+          {
+            "rule": "sub-process-blank-start-event",
+            "severity": "error",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-gateway",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-label",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "superfluous-termination",
+            "severity": "warn",
+            "classification": "integrity"
+          },
+          {
+            "rule": "profile:task-named-release",
+            "severity": "error",
+            "classification": "readiness"
+          }
+        ],
+        "profileRule": "profile-mechanism/profile"
+      }
+    ],
+    "providerDialects": [
+      {
+        "id": "schema-example",
+        "adapter": "vertex-gemini-json-schema/1",
+        "apiVersion": "fixture-only",
+        "allowedKeywords": [
+          "type",
+          "properties",
+          "required",
+          "items"
+        ],
+        "optionalTransport": "omit",
+        "maxOutputTokens": 64,
+        "models": [
+          "fixture-only"
+        ],
+        "qualification": "unverified",
+        "argumentSchemaDigest": "1e42b387e05b9802efcf2ded2d9cdcf705f3dc4ac51b9610ea4290eafd928f08"
+      }
+    ],
+    "exports": [
+      {
+        "id": "drawing",
+        "format": "drawio",
+        "recipes": [
+          "export-pages",
+          "export-nodes"
+        ],
+        "capabilities": [
+          {
+            "when": {
+              "op": "true"
+            },
+            "class": "structural",
+            "losses": [
+              "semantic-type"
+            ]
+          }
+        ],
+        "idPolicy": "counter",
+        "counterOrigin": 0,
+        "metadata": [],
+        "serializer": {
+          "version": "fixture-1",
+          "encoding": "UTF-8",
+          "newline": "LF",
+          "indent": 0,
+          "compression": "none",
+          "attributeOrder": [],
+          "emptyElement": "short"
+        }
+      }
+    ],
+    "migrations": [
+      {
+        "id": "from-neutral-1",
+        "from": {
+          "id": "neutral/1",
+          "version": "1.0.0",
+          "sha256": "1d7931bde1bf7a9c0899c99f92c85aaf145931e80252dbd6b2dc43dd5043a85a"
+        },
+        "to": "self",
+        "recipes": [
+          "migrate-process"
+        ],
+        "approval": "technical",
+        "lossPolicy": "refuse"
+      }
+    ],
+    "resources": [
+      {
+        "id": "neutral-metrics",
+        "kind": "metrics",
+        "mediaType": "application/json",
+        "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0",
+        "assetKey": "neutral-metrics.json",
+        "license": "CC0-1.0",
+        "attribution": "Synthetic CC0 metric fixture supplied with R3."
+      }
+    ],
+    "messages": [
+      {
+        "id": "label",
+        "texts": [
+          {
+            "name": "en",
+            "value": "Task"
+          }
+        ]
+      },
+      {
+        "id": "invalid",
+        "texts": [
+          {
+            "name": "en",
+            "value": "Name is required."
+          }
+        ]
+      }
+    ],
+    "compatibilityAliases": []
+  },
+  "envelope": {
+    "documentVersion": "1",
+    "profileIdentity": {
+      "mechanismVersion": "1",
+      "schemaVersion": "1.0.0",
+      "profile": "neutral/1",
+      "version": "1.1.0",
+      "sha256": "c23cef7dc737217ed3cc2e125f46733812b2b4495f3b9164a17f96be92a466c0",
+      "base": {
+        "id": "neutral-base/1",
+        "version": "fixture-2",
+        "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+      },
+      "descriptors": [
+        {
+          "id": "neutral-descriptors/1",
+          "version": "fixture-2",
+          "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+        }
+      ]
+    },
+    "tree": {
+      "$type": "bpmn:Definitions",
+      "id": "D",
+      "targetNamespace": "urn:neutral",
+      "rootElements": [
+        {
+          "$type": "bpmn:Process",
+          "id": "P",
+          "isExecutable": false,
+          "flowElements": [
+            {
+              "$type": "bpmn:Task",
+              "id": "Z",
+              "name": "First"
+            },
+            {
+              "$type": "bpmn:Task",
+              "id": "A",
+              "name": "Second"
+            }
+          ],
+          "artifacts": []
+        }
+      ]
+    },
+    "bindings": [],
+    "semanticRevision": "4491d44aa66a67177ca8fd102419f926a83ca91368ad39276a6689c5fd597c04"
+  },
+  "preconditions": {
+    "nativeStorageAndIdentityVerifiedAtBoundary": true,
+    "syntheticPackageNotPublished": true,
+    "descriptorSlice": "neutral fixture scope; full native DI descriptor validation is deferred"
+  },
+  "layout": {
+    "layoutVersion": "1",
+    "pages": [
+      {
+        "pageId": "Z-page",
+        "name": "First sheet",
+        "order": 2,
+        "semanticRootId": "P",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 800
+        }
+      },
+      {
+        "pageId": "A-page",
+        "name": "Second sheet",
+        "order": 10,
+        "semanticRootId": "P",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 800
+        }
+      }
+    ],
+    "geometry": [
+      {
+        "pageId": "Z-page",
+        "occurrenceKey": "a",
+        "semanticId": "Z",
+        "role": "content",
+        "bounds": {
+          "x": 0,
+          "y": 20,
+          "width": 100,
+          "height": 80
+        },
+        "label": {
+          "text": "First",
+          "bounds": {
+            "x": 0,
+            "y": 100,
+            "width": 100,
+            "height": 20
+          },
+          "lines": [
+            "First"
+          ]
+        }
+      },
+      {
+        "pageId": "Z-page",
+        "occurrenceKey": "z",
+        "semanticId": "A",
+        "role": "content",
+        "bounds": {
+          "x": 200,
+          "y": 20,
+          "width": 100,
+          "height": 80
+        },
+        "label": {
+          "text": "Second",
+          "bounds": {
+            "x": 200,
+            "y": 100,
+            "width": 100,
+            "height": 20
+          },
+          "lines": [
+            "Second"
+          ]
+        }
+      },
+      {
+        "pageId": "A-page",
+        "occurrenceKey": "a",
+        "semanticId": "Z",
+        "role": "content",
+        "bounds": {
+          "x": 0,
+          "y": 20,
+          "width": 100,
+          "height": 80
+        },
+        "label": {
+          "text": "First",
+          "bounds": {
+            "x": 0,
+            "y": 100,
+            "width": 100,
+            "height": 20
+          },
+          "lines": [
+            "First"
+          ]
+        }
+      }
+    ]
+  },
+  "render": {
+    "renderVersion": "1",
+    "binding": {
+      "semanticRevision": "4491d44aa66a67177ca8fd102419f926a83ca91368ad39276a6689c5fd597c04",
+      "profileDigest": "c23cef7dc737217ed3cc2e125f46733812b2b4495f3b9164a17f96be92a466c0",
+      "descriptorDigest": "f66cec713b5cf4361896f3183372486d6e29314299858d8098d4a5024f0a8f90",
+      "layoutDigest": "5e60cfc6fbb3d3c64c4625c7b14cceb513a5ccc411f7521c623abde639a35652",
+      "themeId": "plain",
+      "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+      "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+      "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+      "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051",
+      "payloadDigest": "3cc9b09f1a91de971bff4f4590ae6026fc94fa81657679b98f3e96756cef3e30"
+    },
+    "pages": [
+      {
+        "pageId": "Z-page",
+        "name": "First sheet",
+        "order": 2,
+        "semanticRootId": "P",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 800
+        }
+      },
+      {
+        "pageId": "A-page",
+        "name": "Second sheet",
+        "order": 10,
+        "semanticRootId": "P",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 800
+        }
+      }
+    ],
+    "occurrences": [
+      {
+        "pageId": "Z-page",
+        "occurrenceKey": "a",
+        "semanticId": "Z",
+        "role": "content",
+        "emittedType": "node",
+        "bounds": {
+          "x": 0,
+          "y": 20,
+          "width": 100,
+          "height": 80
+        },
+        "label": {
+          "text": "First",
+          "bounds": {
+            "x": 0,
+            "y": 100,
+            "width": 100,
+            "height": 20
+          },
+          "lines": [
+            "First"
+          ]
+        },
+        "style": [
+          {
+            "name": "fill",
+            "value": "#ffffff"
+          },
+          {
+            "name": "stroke",
+            "value": "#000000"
+          }
+        ],
+        "glyphId": "task"
+      },
+      {
+        "pageId": "Z-page",
+        "occurrenceKey": "z",
+        "semanticId": "A",
+        "role": "content",
+        "emittedType": "node",
+        "bounds": {
+          "x": 200,
+          "y": 20,
+          "width": 100,
+          "height": 80
+        },
+        "label": {
+          "text": "Second",
+          "bounds": {
+            "x": 200,
+            "y": 100,
+            "width": 100,
+            "height": 20
+          },
+          "lines": [
+            "Second"
+          ]
+        },
+        "style": [
+          {
+            "name": "fill",
+            "value": "#ffffff"
+          },
+          {
+            "name": "stroke",
+            "value": "#000000"
+          }
+        ],
+        "glyphId": "task"
+      },
+      {
+        "pageId": "A-page",
+        "occurrenceKey": "a",
+        "semanticId": "Z",
+        "role": "content",
+        "emittedType": "node",
+        "bounds": {
+          "x": 0,
+          "y": 20,
+          "width": 100,
+          "height": 80
+        },
+        "label": {
+          "text": "First",
+          "bounds": {
+            "x": 0,
+            "y": 100,
+            "width": 100,
+            "height": 20
+          },
+          "lines": [
+            "First"
+          ]
+        },
+        "style": [
+          {
+            "name": "fill",
+            "value": "#ffffff"
+          },
+          {
+            "name": "stroke",
+            "value": "#000000"
+          }
+        ],
+        "glyphId": "task"
+      }
+    ],
+    "coverage": [
+      {
+        "semanticId": "D",
+        "occurrences": [],
+        "disposition": "nonvisual"
+      },
+      {
+        "semanticId": "P",
+        "occurrences": [],
+        "disposition": "nonvisual"
+      },
+      {
+        "semanticId": "Z",
+        "occurrences": [
+          {
+            "pageId": "Z-page",
+            "occurrenceKey": "a"
+          },
+          {
+            "pageId": "A-page",
+            "occurrenceKey": "a"
+          }
+        ],
+        "disposition": "rendered"
+      },
+      {
+        "semanticId": "A",
+        "occurrences": [
+          {
+            "pageId": "Z-page",
+            "occurrenceKey": "z"
+          }
+        ],
+        "disposition": "rendered"
+      }
+    ],
+    "diagnostics": []
+  },
+  "snapshot": {
+    "snapshotVersion": "1",
+    "envelope": {
+      "documentVersion": "1",
+      "profileIdentity": {
+        "mechanismVersion": "1",
+        "schemaVersion": "1.0.0",
+        "profile": "neutral/1",
+        "version": "1.1.0",
+        "sha256": "c23cef7dc737217ed3cc2e125f46733812b2b4495f3b9164a17f96be92a466c0",
+        "base": {
+          "id": "neutral-base/1",
+          "version": "fixture-2",
+          "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+        },
+        "descriptors": [
+          {
+            "id": "neutral-descriptors/1",
+            "version": "fixture-2",
+            "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+          }
+        ]
+      },
+      "tree": {
+        "$type": "bpmn:Definitions",
+        "id": "D",
+        "targetNamespace": "urn:neutral",
+        "rootElements": [
+          {
+            "$type": "bpmn:Process",
+            "id": "P",
+            "isExecutable": false,
+            "flowElements": [
+              {
+                "$type": "bpmn:Task",
+                "id": "Z",
+                "name": "First"
+              },
+              {
+                "$type": "bpmn:Task",
+                "id": "A",
+                "name": "Second"
+              }
+            ],
+            "artifacts": []
+          }
+        ]
+      },
+      "bindings": [],
+      "semanticRevision": "4491d44aa66a67177ca8fd102419f926a83ca91368ad39276a6689c5fd597c04"
+    },
+    "presentation": {
+      "layout": {
+        "layoutVersion": "1",
+        "pages": [
+          {
+            "pageId": "Z-page",
+            "name": "First sheet",
+            "order": 2,
+            "semanticRootId": "P",
+            "bounds": {
+              "x": 0,
+              "y": 0,
+              "width": 1000,
+              "height": 800
+            }
+          },
+          {
+            "pageId": "A-page",
+            "name": "Second sheet",
+            "order": 10,
+            "semanticRootId": "P",
+            "bounds": {
+              "x": 0,
+              "y": 0,
+              "width": 1000,
+              "height": 800
+            }
+          }
+        ],
+        "geometry": [
+          {
+            "pageId": "Z-page",
+            "occurrenceKey": "a",
+            "semanticId": "Z",
+            "role": "content",
+            "bounds": {
+              "x": 0,
+              "y": 20,
+              "width": 100,
+              "height": 80
+            },
+            "label": {
+              "text": "First",
+              "bounds": {
+                "x": 0,
+                "y": 100,
+                "width": 100,
+                "height": 20
+              },
+              "lines": [
+                "First"
+              ]
+            }
+          },
+          {
+            "pageId": "Z-page",
+            "occurrenceKey": "z",
+            "semanticId": "A",
+            "role": "content",
+            "bounds": {
+              "x": 200,
+              "y": 20,
+              "width": 100,
+              "height": 80
+            },
+            "label": {
+              "text": "Second",
+              "bounds": {
+                "x": 200,
+                "y": 100,
+                "width": 100,
+                "height": 20
+              },
+              "lines": [
+                "Second"
+              ]
+            }
+          },
+          {
+            "pageId": "A-page",
+            "occurrenceKey": "a",
+            "semanticId": "Z",
+            "role": "content",
+            "bounds": {
+              "x": 0,
+              "y": 20,
+              "width": 100,
+              "height": 80
+            },
+            "label": {
+              "text": "First",
+              "bounds": {
+                "x": 0,
+                "y": 100,
+                "width": 100,
+                "height": 20
+              },
+              "lines": [
+                "First"
+              ]
+            }
+          }
+        ]
+      },
+      "themeId": "plain",
+      "overrides": {
+        "semantic": [],
+        "occurrence": []
+      },
+      "diStyles": {
+        "native": [],
+        "bioc": []
+      },
+      "importedDi": {
+        "descriptorDigest": "f66cec713b5cf4361896f3183372486d6e29314299858d8098d4a5024f0a8f90",
+        "diagrams": [],
+        "sha256": "4e24b55b396a01ddfe08af1fb1787166c578b855cf4f927e39707bb92a74f2b9"
+      },
+      "selection": [
+        {
+          "pageId": "Z-page",
+          "occurrenceKey": "a"
+        },
+        {
+          "pageId": "A-page",
+          "occurrenceKey": "a"
+        }
+      ],
+      "activePageId": "Z-page"
+    },
+    "viewRevision": "b6ff3764a644e1c6a50aaccb3b53f785439640a3c1d4d3432f996945e1cbc5b4"
+  },
+  "viewTuple": {
+    "semanticRevision": "4491d44aa66a67177ca8fd102419f926a83ca91368ad39276a6689c5fd597c04",
+    "layoutDigest": "5e60cfc6fbb3d3c64c4625c7b14cceb513a5ccc411f7521c623abde639a35652",
+    "themeId": "plain",
+    "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+    "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+    "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+    "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+  },
+  "metricPins": [
+    {
+      "id": "neutral-metrics",
+      "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+    }
+  ],
+  "overrides": {
+    "semantic": [],
+    "occurrence": []
+  },
+  "diStyles": {
+    "native": [],
+    "bioc": []
+  },
+  "emptySnapshot": {
+    "snapshotVersion": "1",
+    "envelope": {
+      "documentVersion": "1",
+      "profileIdentity": {
+        "mechanismVersion": "1",
+        "schemaVersion": "1.0.0",
+        "profile": "neutral/1",
+        "version": "1.1.0",
+        "sha256": "c23cef7dc737217ed3cc2e125f46733812b2b4495f3b9164a17f96be92a466c0",
+        "base": {
+          "id": "neutral-base/1",
+          "version": "fixture-2",
+          "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+        },
+        "descriptors": [
+          {
+            "id": "neutral-descriptors/1",
+            "version": "fixture-2",
+            "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+          }
+        ]
+      },
+      "tree": {
+        "$type": "bpmn:Definitions",
+        "id": "D",
+        "targetNamespace": "urn:neutral",
+        "rootElements": []
+      },
+      "bindings": [],
+      "semanticRevision": "f4e2579b466066cd2f1fd755dfebcbb1617bca984b6840814896974c0866fcf3"
+    },
+    "presentation": {
+      "layout": {
+        "layoutVersion": "1",
+        "pages": [],
+        "geometry": []
+      },
+      "themeId": "plain",
+      "overrides": {
+        "semantic": [],
+        "occurrence": []
+      },
+      "diStyles": {
+        "native": [],
+        "bioc": []
+      },
+      "importedDi": {
+        "descriptorDigest": "f66cec713b5cf4361896f3183372486d6e29314299858d8098d4a5024f0a8f90",
+        "diagrams": [],
+        "sha256": "4e24b55b396a01ddfe08af1fb1787166c578b855cf4f927e39707bb92a74f2b9"
+      },
+      "selection": [],
+      "activePageId": ""
+    },
+    "viewRevision": "9b6cc0ff60baafc4ba173323c2af02ce2c2b881303b5932e1fc676ee8b7345d4"
+  },
+  "edge": {
+    "pageId": "Z-page",
+    "occurrenceKey": "edge",
+    "semanticId": "E",
+    "role": "content",
+    "emittedType": "edge",
+    "bounds": {
+      "x": 100,
+      "y": 60,
+      "width": 100,
+      "height": 0
+    },
+    "style": [],
+    "glyphId": "connector",
+    "sourceOccurrence": {
+      "pageId": "Z-page",
+      "occurrenceKey": "a"
+    },
+    "targetOccurrence": {
+      "pageId": "Z-page",
+      "occurrenceKey": "z"
+    },
+    "waypoints": [
+      {
+        "x": 100,
+        "y": 60
+      },
+      {
+        "x": 200,
+        "y": 60
+      }
+    ]
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "format": "lot0-corpus-pin-final/1",
+  "status": "final",
+  "date": "2026-10-17",
+  "initialHead": "b671050b5f1c32e0f58687dcb9ee90da70e01822",
+  "source": {
+    "repository": "bpmn-moddle-py",
+    "sourceCommit": "cb46b3b8f893996a83c056f31f8aa92aa2364bd3",
+    "sourceTree": "contracts/",
+    "sourceTreeId": "0c6bf891f147079e175a46d0d34f42ff308d235c",
+    "resolutionKeys": [
+      "sourceCommit",
+      "sourceTreeId"
+    ],
+    "tagName": "profile-corpus-v1.0.0",
+    "tagObject": "dfb8a986933dd86ad176022df13efecb6c73b325",
+    "tagAccepted": true,
+    "tagMetadataOnly": true,
+    "commitOnOriginMain": true,
+    "sourceReadOnly": true,
+    "annotatedTagVerified": true,
+    "contractsTreeMatchesPreviousPin": true
+  },
+  "previousSource": {
+    "sourceCommit": "e8da4c3c0aaf8a07f6dcf9aec3124be4f6fbd470",
+    "sourceTreeId": "0c6bf891f147079e175a46d0d34f42ff308d235c",
+    "status": "provisional",
+    "tagAccepted": false
+  },
+  "manifest": {
+    "path": "profile-parity-corpus/1/manifest.json",
+    "bytes": 30434,
+    "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf"
+  },
+  "integrity": {
+    "vendoredFiles": 198,
+    "allVendoredBlobsEqualPinnedTree": true,
+    "vendoredBytesChanged": false,
+    "expectationBytesChanged": false,
+    "expectationSealChanged": false,
+    "productionBytesChanged": false,
+    "outsideProvenanceMetadataAndSealsChanged": true,
+    "outsideProvenanceScopeChanged": false,
+    "additionalChanges": "Provenance verification test and helper code only; required offline tree proof, acceptance and seal-chain checks, and foreign-SHA guard regression.",
+    "scope": "Provenance metadata, its offline verification and guard regressions, documentation and explicit seals only. No operation inputs, outputs, runtime code or vendored payload bytes changed.",
+    "localHistoryAllowanceExtended": false,
+    "foreignObjectLookupsInLocalTests": false,
+    "excludedPathsTouched": false
+  },
+  "predecessorInventorySha256": "2173460c46cd8e2d577c63b2e872e489fad8109b0d06d52a5b17ebf1186a33ac",
+  "supersedesFiles": [
+    {
+      "path": "docs/design/profile-lot0-baseline.md",
+      "old": {
+        "bytes": 7703,
+        "sha256": "2304e40a79c7af2387f9c0edc6d2fab699ed5f704560e364ad0f40c461be9d9c"
+      },
+      "new": {
+        "bytes": 7936,
+        "sha256": "5612817fa23701961d4444022e86b48c10999babd927f8bc75cbdb5e7777d371"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-corpus-v1-revendor.json",
+      "old": {
+        "bytes": 186416,
+        "sha256": "2c76ab386ad787cabc1b25aefde75835d28cefb4adb1aad8290dd9f4c4e50066"
+      },
+      "new": {
+        "bytes": 186604,
+        "sha256": "45d05c4b6ccefd6b521341b20048aaf1fa7cb2f579afbcefd097a1be5e4b9fef"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s12.json",
+      "old": {
+        "bytes": 15341,
+        "sha256": "ccebe73408a618e63bc90501431f7e5cf35a10f0c5ff494fdd65a5dbec696fb9"
+      },
+      "new": {
+        "bytes": 15533,
+        "sha256": "bb31c4e8121e9d6586a673221f275a397ff0f17511233e7c82b3d1d89a2327f1"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s2-r32.json",
+      "old": {
+        "bytes": 61534,
+        "sha256": "5a28195a81e55d543b9e53f19c6919fbace0c7bdee021be7e30a18119d3c6d95"
+      },
+      "new": {
+        "bytes": 61692,
+        "sha256": "596a353aaf1b2f211027c0f90f7f8ad2788b247a3fff6151fc6accb9249a21d9"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s2b.json",
+      "old": {
+        "bytes": 11844,
+        "sha256": "51de059dc014cf8734551c876e4f1d80968353d0e9410e25fc2a68244c8ad64c"
+      },
+      "new": {
+        "bytes": 12009,
+        "sha256": "6447cad5beb3d40ec50a1d84843df5934c416122bb125961c563fede4a2b2f5f"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s3.json",
+      "old": {
+        "bytes": 27588,
+        "sha256": "7e1483f8d79605e39288c1e14866bfc767bc03db6f4ba338fdef268a18a1d789"
+      },
+      "new": {
+        "bytes": 27799,
+        "sha256": "359e120c6ca9642c759e32f82d25db0abbe6b721b2ee7131a9dd1add1cd0fb9c"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s4-expect.json",
+      "old": {
+        "bytes": 18836,
+        "sha256": "272a455acda7a12b08c4df5b4832455f755e66e756f2e812f8c7bbcc54f849e9"
+      },
+      "new": {
+        "bytes": 19001,
+        "sha256": "19d53939f7ece2ff9af5e5cd7d82d7c0eee3746e8ca74f0025623c2cf3330782"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-twin-proof.json",
+      "old": {
+        "bytes": 61672,
+        "sha256": "7fc0989892f9bde0a177ff2016dcb38c42634f44ecd5148800db956f6be8bc8c"
+      },
+      "new": {
+        "bytes": 61754,
+        "sha256": "c1235973cb91739c8685748d05dd6f3dc87a12c33cb61e2b195f17ca81239d29"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/README.md",
+      "old": {
+        "bytes": 9844,
+        "sha256": "150f1bd7b5a335de7fd99deef31ce48cc055f2e57855d7f62b1b7c3651df81d3"
+      },
+      "new": {
+        "bytes": 9856,
+        "sha256": "c97cae6a20871edfd515e55eaddfff378efbd875c8a4f5ec3cef25a944b4c30b"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "old": {
+        "bytes": 4031,
+        "sha256": "f7be856c20174397ae804ebe8ec8ccdc757124a8ad4cd240a8d435d2ea8f9628"
+      },
+      "new": {
+        "bytes": 4031,
+        "sha256": "df9003ce079e8ee93aa8ae73a658b3b87de8455b90b7eb6a8818c1c2e310f3e0"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-lot0/inputs.json",
+      "old": {
+        "bytes": 10460,
+        "sha256": "db44d0391472fe9f69fc668d99f2b691cf54e80021f06a7198a052cb0c5c1796"
+      },
+      "new": {
+        "bytes": 10636,
+        "sha256": "66ebab3840f5e023c38325a9b37e71de0dab7546f13e00bd1b4614786bbdcba9"
+      }
+    },
+    {
+      "path": "tests/fixtures/profile-parity-corpus.pin.json",
+      "old": {
+        "bytes": 42306,
+        "sha256": "da7f6a1062a691d5b3602d35913de7bec22266a401c920ee3900b8e0dc412bca"
+      },
+      "new": {
+        "bytes": 42418,
+        "sha256": "d34ee889917b8c5ef14c8d7bbd3fa2b222d93f4ac61de4bd0b41deb5767378a2"
+      }
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "old": {
+        "bytes": 2062,
+        "sha256": "163bfd775f97554df7265886c766a300df415e9a5ad5442ebc74261827205e06"
+      },
+      "new": {
+        "bytes": 2488,
+        "sha256": "c4542a465bceaa66cfd0983e77f75d256df74ce8acc51d915565c98f35739aeb"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 13804,
+        "sha256": "e86bdaa428842fbd853009300290a14ef4a57740d1352d22d598bd8772dceb3a"
+      },
+      "new": {
+        "bytes": 13819,
+        "sha256": "1e8dd90470b200e104043694e35c2e6a35d2393377ad52996409c9b1ce13e9b4"
+      }
+    },
+    {
+      "path": "tests/profile-corpus-revendor.test.mjs",
+      "old": {
+        "bytes": 4692,
+        "sha256": "c3e462c2e319bc6d27160f16fe3a4285ba940910c6535fc944f456346f04f0ec"
+      },
+      "new": {
+        "bytes": 4786,
+        "sha256": "e72f86badaff8d32ed3f8bedea7ce24dba3fb08d294ea5955105ba2c80d7c175"
+      }
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "old": {
+        "bytes": 8781,
+        "sha256": "54d4a7cd14d1f58533db846778230db9f1f4c1da3e71b70c95c55c6a08f2fbf0"
+      },
+      "new": {
+        "bytes": 10935,
+        "sha256": "5bffe2f52b858d5d7bca2e0ea4b056dad558ab2f270f5f57f404af094e43463a"
+      }
+    },
+    {
+      "path": "tests/profile-r32-expectations.test.mjs",
+      "old": {
+        "bytes": 14489,
+        "sha256": "11ba9b9f151a3bc8de737140a3d1a5e2c434e9869192069e3bea756d6bcbb866"
+      },
+      "new": {
+        "bytes": 14483,
+        "sha256": "41ada4bc4d937e1656d59d5c8446fa9a9852a477cfe9fd207603e46c5f9c5934"
+      }
+    },
+    {
+      "path": "tests/profile-twin-proof.test.mjs",
+      "old": {
+        "bytes": 5670,
+        "sha256": "bd14e07c9db09b4110fcff2c344383c03bb9f695633ded42c99ec27bfde831d9"
+      },
+      "new": {
+        "bytes": 5717,
+        "sha256": "58b7d2532736cdf16df122968eb87fd1be3091d32fe8a1e15d46b93d77b605b0"
+      }
+    },
+    {
+      "path": "tests/test-history-guard.test.mjs",
+      "old": {
+        "bytes": 20218,
+        "sha256": "b93c6734894423f6e22f1f0996a9c55a04f0613c8f135b3caca3031b8b087ed0"
+      },
+      "new": {
+        "bytes": 20810,
+        "sha256": "eecefa280d88c98ed86be3adbdff2939cbde5645626366b74e0df4fd90ba070c"
+      }
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "tests/profile-corpus-pin-final.test.mjs",
+      "bytes": 3651,
+      "sha256": "a8a77aad2ff58dd83deb6ec9e7c74669b10856952ed5f30d0d88fcb3cff7cfba"
+    }
+  ],
+  "validation": {
+    "testsFirst": {
+      "command": "rtk node --test --test-name-pattern='should pin the final|should reproduce the pinned|should treat sibling' tests/profile-corpus.test.mjs tests/test-history-guard.test.mjs",
+      "tests": 3,
+      "pass": 1,
+      "fail": 2,
+      "reason": "Expected failures: old commit and missing tree pin; sibling-data guard regression passed."
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.7,
+      "processGroupTerminated": true,
+      "outputSha256": "74a2b3cd458ece7636b8b86345f855f51c0c4ba4a7cdecd39ef7d6ea03aafd99"
+    },
+    "profiles-scoped": {
+      "command": "rtk node --test --test-skip-pattern=^should detect every changed expectation byte tests/profile-boundary-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-pin-final.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-golden-independence.test.mjs tests/profile-identity.test.mjs tests/profile-lint-contract.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s4-fix.test.mjs tests/profile-s4-scope.test.mjs tests/profile-schema.test.mjs tests/profile-snapshot.test.mjs tests/profile-static.test.mjs tests/profile-twin-proof.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.28,
+      "processGroupTerminated": true,
+      "outputSha256": "7e542dfb76a1bb8b9a1c55eb164106b680c238795390279d892ad30f3df31c0f",
+      "tests": 1184,
+      "suites": 0,
+      "pass": 1184,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "guards": {
+      "command": "rtk node --test tests/brand-baseline.test.mjs tests/brand-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/lot0-squash-readiness.test.mjs tests/path-guard.test.mjs tests/profile-brand-guard.test.mjs tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 19.73,
+      "processGroupTerminated": true,
+      "outputSha256": "832a240dcdf82cb92cb89cca93244a6893ddabe69c4b76b87bbd263b25a0a9a6",
+      "tests": 55,
+      "suites": 0,
+      "pass": 55,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "excludedStressTest": {
+      "name": "should detect every changed expectation byte including IDs, pointers and reports",
+      "reason": "Exhaustively hashes the unchanged 1,802,403-byte expectation file after each non-whitespace byte mutation. Expectation bytes, seal and verifyExpectedBytes are unchanged; direct seal and provenance checks passed. This one stress test is outside the scoped profile gate.",
+      "excludedFromScopedRun": true
+    },
+    "boundedBroadProfileAttempt": {
+      "command": "rtk node --test tests/profile-boundary-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-pin-final.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-golden-independence.test.mjs tests/profile-identity.test.mjs tests/profile-lint-contract.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s4-fix.test.mjs tests/profile-s4-scope.test.mjs tests/profile-schema.test.mjs tests/profile-snapshot.test.mjs tests/profile-static.test.mjs tests/profile-twin-proof.test.mjs",
+      "exitCode": -15,
+      "timedOut": true,
+      "seconds": 240.11,
+      "processGroupTerminated": true,
+      "outputSha256": "d2d157eeb13ed80bfb42c035acd08292888c38eeafa1b3b30ff6c084a858018e",
+      "interpretation": "The runner stopped the broad attempt at 240 seconds during the unchanged exhaustive expectation-byte stress test. It is not a passing full-suite result. The scoped run passed all 1184 remaining profile/corpus tests."
+    },
+    "guardsAfterStaging": {
+      "command": "rtk node --test tests/brand-baseline.test.mjs tests/brand-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/lot0-squash-readiness.test.mjs tests/path-guard.test.mjs tests/profile-brand-guard.test.mjs tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 20.08,
+      "processGroupTerminated": true,
+      "outputSha256": "07aea398aa9047c4539c0f82c1b80dbb1dd145b3181a754385daae17301e0402",
+      "tests": 55,
+      "suites": 0,
+      "pass": 55,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "processCleanup": {
+      "allStartedTestProcessesExited": true,
+      "allManagedTestProcessGroupsTerminated": true,
+      "remainingTaskOwnedTestProcesses": 0
+    }
+  },
+  "limits": [
+    "Final release acceptance changes provenance only; no additional runtime parity or joint qualification is claimed.",
+    "Tag name and annotated tag object are metadata. Offline verification reads local files and does not resolve foreign identifiers in this repository."
+  ]
+}

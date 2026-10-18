@@ -1,0 +1,2019 @@
+{
+  "format": "profile-step4-provenance-policy/1",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "vectors": [
+    {
+      "caseId": "s4-snapshot-empty",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-repeated-selection",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-duplicate-identity",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-unknown-field",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-null",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-profile-conflict",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-base-conflict",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-descriptor-conflict",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-archived-di-damage",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-stale-layout",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-stale-view",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-invalid-selection",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-duplicate-selection",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-active-page",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-semantic-selection",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-version",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-missing-layout",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:667",
+        "DESIGN.md:690",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-navigation-only",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:610",
+        "DESIGN.md:612",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-snapshot-archive-preservation",
+      "family": "snapshot",
+      "required": [
+        "DESIGN.md:266",
+        "DESIGN.md:610",
+        "DESIGN.md:612"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-complete-binding",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:264",
+        "DESIGN.md:667",
+        "DESIGN.md:669",
+        "DESIGN.md:671",
+        "DESIGN.md:673",
+        "DESIGN.md:677",
+        "DESIGN.md:681",
+        "DESIGN.md:682",
+        "DESIGN.md:683",
+        "DESIGN.md:684",
+        "DESIGN.md:685",
+        "DESIGN.md:686",
+        "DESIGN.md:687",
+        "DESIGN.md:688",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-page-order",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:667"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-occurrence-order",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:260",
+        "DESIGN.md:262",
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-repeated-semantic",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:126",
+        "DESIGN.md:671",
+        "DESIGN.md:673"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-synthetic",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:673",
+        "DESIGN.md:715"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-edge",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-endpoint-missing",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-waypoints-short",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-nonedge-endpoint",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-coverage-missing",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:673"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-fractional-geometry",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-negative-size",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-unsafe-geometry",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-duplicate-key",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-empty-key",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-null",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-unknown-field",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-duplicate-page-order",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:667"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-negative-page-order",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:667"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-cross-page-unsupported",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671",
+        "DESIGN.md:753"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-layout-unknown-field",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:667"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-semanticRevision",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-profileDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-descriptorDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-layoutDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-themeId",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-themeDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-overridesDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-diStylesDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-metricsDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-stale-payloadDigest",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:669",
+        "DESIGN.md:690"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-empty-bags",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:677",
+        "DESIGN.md:685",
+        "DESIGN.md:686",
+        "DESIGN.md:692"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-normalized-bags",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:260",
+        "DESIGN.md:685",
+        "DESIGN.md:686",
+        "DESIGN.md:692",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-metric-byte",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:687",
+        "DESIGN.md:690",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-page-name",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:667",
+        "DESIGN.md:683",
+        "DESIGN.md:690",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-payload-change",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:688",
+        "DESIGN.md:690",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-theme-switch",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:264",
+        "DESIGN.md:684",
+        "DESIGN.md:690",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-override-change",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:264",
+        "DESIGN.md:685",
+        "DESIGN.md:690",
+        "DESIGN.md:692",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-profile-package",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:264",
+        "DESIGN.md:612",
+        "DESIGN.md:681",
+        "DESIGN.md:694"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-token-invalid",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:692",
+        "DESIGN.md:700"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-duplicate-target",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:692",
+        "DESIGN.md:700"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-duplicate-token",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:692",
+        "DESIGN.md:700"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-unknown-target",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:692",
+        "DESIGN.md:700"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-null-bag",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:692",
+        "DESIGN.md:700"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-pure-ok",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:598",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-pure-refused",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:604",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-get-definitions",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-get-snapshot",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-not-loaded",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-cancelled",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:604",
+        "DESIGN.md:606",
+        "DESIGN.md:619",
+        "DESIGN.md:735"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-disposed",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:604",
+        "DESIGN.md:606",
+        "DESIGN.md:619",
+        "DESIGN.md:735"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-operation-error",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:604",
+        "DESIGN.md:606",
+        "DESIGN.md:619",
+        "DESIGN.md:735"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-failure-candidate",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-unknown-key",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-bare-success",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-getter-revision-mismatch",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-null-identity",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-extra",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-signature-contract",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:583",
+        "DESIGN.md:584",
+        "DESIGN.md:585",
+        "DESIGN.md:586",
+        "DESIGN.md:587",
+        "DESIGN.md:588",
+        "DESIGN.md:589",
+        "DESIGN.md:590",
+        "DESIGN.md:591",
+        "DESIGN.md:592",
+        "DESIGN.md:593",
+        "DESIGN.md:594",
+        "DESIGN.md:595",
+        "DESIGN.md:596",
+        "DESIGN.md:597",
+        "DESIGN.md:598",
+        "DESIGN.md:599",
+        "DESIGN.md:600",
+        "DESIGN.md:601",
+        "DESIGN.md:602",
+        "DESIGN.md:604",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-prepared-artifact",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:737",
+        "DESIGN.md:753"
+      ]
+    },
+    {
+      "caseId": "s4-reports-all-stages",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-total-order",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-exact-duplicate",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:520",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-presence-null",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-escaped-pointer",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:510",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-long-deep-pointer",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:766"
+      ]
+    },
+    {
+      "caseId": "s4-reports-idless-child",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:510",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:766"
+      ]
+    },
+    {
+      "caseId": "s4-reports-deletion-source-stable",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:766"
+      ]
+    },
+    {
+      "caseId": "s4-reports-generated-port",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:764",
+        "DESIGN.md:766"
+      ]
+    },
+    {
+      "caseId": "s4-reports-direction-reversal",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:764",
+        "DESIGN.md:766"
+      ]
+    },
+    {
+      "caseId": "s4-reports-coarse-legacy",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:755",
+        "DESIGN.md:761",
+        "DESIGN.md:782"
+      ]
+    },
+    {
+      "caseId": "s4-reports-unknown-legacy",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:755",
+        "DESIGN.md:783",
+        "DESIGN.md:785"
+      ]
+    },
+    {
+      "caseId": "s4-reports-repeated-idmap",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:755",
+        "DESIGN.md:762"
+      ]
+    },
+    {
+      "caseId": "s4-reports-artifact-indexes",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:755",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-reports-raw-preserved",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:508",
+        "DESIGN.md:520",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:763"
+      ]
+    },
+    {
+      "caseId": "s4-reports-unknown-field",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-phase-field",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-loss-class-required",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-nonloss-class",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-null-message",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-false-presence-with-value",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-true-presence-without-value",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-unknown-stage",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-coordinate-domain",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-profile-coordinate",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-pointer-string",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:510",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-pointer-self",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:510",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-reports-pointer-invalid",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:510",
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-import-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-import-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-pre-normalize-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-pre-normalize-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-post-normalize-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-post-normalize-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-post-layout-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-post-layout-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-release-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-1-release-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-import-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-import-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-pre-normalize-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-pre-normalize-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-post-normalize-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-post-normalize-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-post-layout-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-post-layout-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-release-draft",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-table-neutral-grid-1-release-accept",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487",
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-numeric-0",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-numeric-1",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-numeric-2",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-numeric-3",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:487"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-info-restoration",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:487",
+        "DESIGN.md:510",
+        "DESIGN.md:514",
+        "DESIGN.md:520",
+        "DESIGN.md:522",
+        "DESIGN.md:751"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-profile-warning",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:488",
+        "DESIGN.md:489",
+        "DESIGN.md:508",
+        "DESIGN.md:515",
+        "DESIGN.md:522"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-rule-missing",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:460",
+        "DESIGN.md:516",
+        "DESIGN.md:751"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-rule-thrown",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:460",
+        "DESIGN.md:516",
+        "DESIGN.md:751"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-config-missing",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:460",
+        "DESIGN.md:516",
+        "DESIGN.md:751"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-config-thrown",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:460",
+        "DESIGN.md:516",
+        "DESIGN.md:751"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-allowlist",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:460",
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-cycle",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:517"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-options-replacement",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:464",
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-off-stage",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-compiled-tampering",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-draft-integrity",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:522"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-release-barrier",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:478",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:522"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-off-subrule",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:488",
+        "DESIGN.md:489"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-malformed-custom",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:508",
+        "DESIGN.md:518"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-unresolved-id",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:510"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-missing-policy",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:476",
+        "DESIGN.md:481",
+        "DESIGN.md:485"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-missing-setting",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-compiled-unknown-field",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:491"
+      ]
+    },
+    {
+      "caseId": "s4-lint-contract-corrected-history",
+      "family": "lint-contract",
+      "required": [
+        "DESIGN.md:468",
+        "DESIGN.md:481",
+        "DESIGN.md:485",
+        "DESIGN.md:520",
+        "DESIGN.md:522"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-semantic-type",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-relation-kind",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-navigation",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-appearance",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-layout",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-metadata",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-unsupported-feature",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-provenance-unavailable",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-worst-capability",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:753",
+        "DESIGN.md:774",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-unsupported-necessary",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:753",
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-legacy-format",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:760",
+        "DESIGN.md:780"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-legacy-format-alias",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:760",
+        "DESIGN.md:780"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-legacy-reference",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:760",
+        "DESIGN.md:781"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-legacy-endpoint",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:760",
+        "DESIGN.md:781"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-legacy-id",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:751",
+        "DESIGN.md:753",
+        "DESIGN.md:760",
+        "DESIGN.md:781"
+      ]
+    },
+    {
+      "caseId": "s4-export-losses-unknown-class",
+      "family": "export-losses",
+      "required": [
+        "DESIGN.md:776"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-setDefinitions",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:585",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-applyCommands",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:588",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-activateBusinessProfile",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:590",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-setTheme",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:591",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-restoreSnapshot",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:594",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-undo",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:595",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-payload-redo",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:596",
+        "DESIGN.md:604",
+        "DESIGN.md:735",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-result-unions-dispose-ok",
+      "family": "result-unions",
+      "required": [
+        "DESIGN.md:599",
+        "DESIGN.md:604",
+        "DESIGN.md:737"
+      ]
+    },
+    {
+      "caseId": "s4-reports-cascading-removal",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:739",
+        "DESIGN.md:742",
+        "DESIGN.md:743",
+        "DESIGN.md:744",
+        "DESIGN.md:745",
+        "DESIGN.md:746",
+        "DESIGN.md:747",
+        "DESIGN.md:748",
+        "DESIGN.md:751",
+        "DESIGN.md:755",
+        "DESIGN.md:766"
+      ]
+    },
+    {
+      "caseId": "s4-reports-resource-limit",
+      "family": "reports",
+      "required": [
+        "DESIGN.md:755"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-descriptor-pin-order",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:682"
+      ]
+    },
+    {
+      "caseId": "s4-render-digests-metric-pin-order",
+      "family": "render-digests",
+      "required": [
+        "DESIGN.md:687"
+      ]
+    },
+    {
+      "caseId": "s4-render-contract-signed-position",
+      "family": "render-contract",
+      "required": [
+        "DESIGN.md:671"
+      ]
+    }
+  ]
+}

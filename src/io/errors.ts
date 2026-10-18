@@ -3,6 +3,7 @@ export type IoErrorCode =
   | "dtd"
   | "invalid-xml"
   | "duplicate-id"
+  | "duplicate-extension"
   | "not-bpmn"
   | "missing-di"
   | "import-warning"
@@ -34,7 +35,21 @@ export type IoErrorCode =
   | "unsupported-edge"
   | "unsupported-decoration"
   | "multiple-pools"
-  | "no-bpmn-nodes";
+  | "no-bpmn-nodes"
+  | "free-annotation"
+  | "orphan-application"
+  | "invalid-semantics"
+  | "missing-semantics"
+  | "unknown-semantics-version"
+  | "unknown-type"
+  | "unknown-property"
+  | "dangling-reference"
+  | "invalid-reference"
+  | "invalid-containment"
+  | "invalid-value"
+  | "invalid-model"
+  | "unsupported-extension"
+  | "invalid-configuration";
 
 /** A refusal. Nothing is returned partially: the input is either converted faithfully or refused. */
 export class IoError extends Error {
@@ -66,6 +81,10 @@ export interface IoOptions {
   readonly host?: string;
   /** `targetNamespace` of BPMN regenerated from Draw.io. Default `urn:bpmn-canvas:import`. */
   readonly targetNamespace?: string;
+  /** Draw.io envelope: `agent` written on the mxfile when given. */
+  readonly drawio?: { readonly agent?: string };
+  /** Sparx export envelope. Defaults `bpmn-canvas` / `0.4.0`. */
+  readonly sparx?: { readonly exporter?: string; readonly exporterVersion?: string };
 }
 
 export interface ResolvedIoOptions {

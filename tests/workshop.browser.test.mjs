@@ -12,6 +12,7 @@ const ce3 = r("experiments/e3/corpus/ce3-collapsed-subprocess.bpmn");
 const ce4 = r("experiments/e3/corpus/ce4-two-pools-message.bpmn");
 const ce5 = r("experiments/e3/corpus/ce5-two-diagrams-shared-root.bpmn");
 const pool = r("tests/fixtures/io/pool-lanes.bpmn");
+const semantic = r("tests/fixtures/io/reference/C1/semantic.bpmn");
 // In-memory files: a snap Chromium cannot read the host /tmp, and a remote Chrome cannot read local paths.
 const file = (name, text) => ({ name, mimeType: "application/xml", buffer: Buffer.from(text, "utf8") });
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -135,11 +136,11 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     await ev(([i]) => window.ws.canvasHandle(i), [f.id]);
     await ev(([i]) => { const m = window.ws.canvasHandle(i).modeler; m.get("modeling").updateProperties(m.get("elementRegistry").get("T1"), { name: "EDIT" }); }, [f.id]);
     await page.locator(`${tb(f.id)} [data-testid="bpmn-workshop-format"] button`).first().click();
-    await page.getByRole("menuitemradio", { name: "Legend", exact: true }).click();
+    await page.getByRole("menuitem", { name: "Legend", exact: true }).click();
     await sleep(700);
-    o.format = await ev(async ([i]) => ({ legend: window.ws.qa(i, ".legend-shape") > 0, xml: (await window.ws.getXml(i)).includes('name="EDIT"'), canUndo: window.ws.canvasHandle(i).canUndo(), containers: window.ws.qa(i, ".djs-container"), onFormatChange: window.ws.log(i).formats, triggerText: window.ws.text(i, '[data-testid="bpmn-workshop-format"] .bpmn-workshop-menu__label'), checked: window.ws.attr(i, '[role="menuitemradio"][aria-checked="true"]', "aria-checked") }), [f.id]);
+    o.format = await ev(async ([i]) => ({ legend: window.ws.qa(i, ".legend-shape") > 0, xml: (await window.ws.getXml(i)).includes('name="EDIT"'), canUndo: window.ws.canvasHandle(i).canUndo(), containers: window.ws.qa(i, ".djs-container"), onFormatChange: window.ws.log(i).formats, triggerText: window.ws.text(i, '[data-testid="bpmn-workshop-format"] .bpmn-workshop-menu__label'), checked: window.ws.attr(i, '[role="menuitem"][aria-pressed="true"]', "aria-pressed") }), [f.id]);
     await page.locator(`${tb(f.id)} [data-testid="bpmn-workshop-format"] button`).first().click();
-    await page.getByRole("menuitemradio", { name: "Colored", exact: true }).click();
+    await page.getByRole("menuitem", { name: "Colored", exact: true }).click();
     await sleep(700);
     o.formatColored = await ev(([i]) => ({ legend: window.ws.qa(i, ".legend-shape"), fill: [...window.ws.it(i).mountEl.querySelectorAll('.djs-element[data-element-id="T1"] rect')].map((x) => x.style.fill || x.getAttribute("fill")).filter(Boolean).slice(0, 2) }), [f.id]);
     await ev(([i]) => window.ws.unmount(i), [f.id]);
@@ -151,14 +152,14 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     await ev(([i]) => window.ws.unmount(i), [fc.id]);
 
     // ---- 8 export ---------------------------------------------------------------------------------------------
-    const x = await mount(pool);
-    for (const [label, key] of [["BPMN", "bpmn"], ["Draw.io", "drawio"], ["Sparx (BPMN 2.0)", "sparx"]]) {
+    const x = await mount(semantic);
+    for (const [label, key] of [["BPMN", "bpmn"], ["Draw.io", "drawio"], ["Sparx", "sparx"]]) {
       await page.locator(`${tb(x.id)} [data-testid="bpmn-workshop-export"] button`).first().click();
       await page.getByRole("menuitem", { name: label, exact: true }).click();
       await sleep(300);
     }
     o.exports = await ev(([i]) => window.ws.log(i).downloads.map((d) => ({ filename: d.filename, mimeType: d.mimeType, fidelity: d.fidelity.map((f) => f.code), same: d.xml.length })), [x.id]);
-    o.exportBpmnSame = await ev(([i, p]) => window.ws.log(i).downloads[0]?.xml === p, [x.id, pool]);
+    o.exportBpmnSame = await ev(([i, p]) => window.ws.log(i).downloads[0]?.xml.includes('id="Order_form"') && window.ws.log(i).downloads[0]?.xml.includes("sem:info"), [x.id, semantic]);
     o.exportNotices = await ev(([i]) => [...window.ws.it(i).mountEl.querySelectorAll(".bpmn-workshop__notice")].map((n) => [n.getAttribute("role"), n.textContent]), [x.id]);
     await ev(([i]) => window.ws.unmount(i), [x.id]);
     const xr = await mount(ce4);
@@ -178,12 +179,7 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     o.importNative = await ev(([i]) => window.ws.log(i).imports.map((r) => ({ projected: r.projected, fidelity: r.fidelity, same: r.xml.length })), [im.id]);
     o.importNativeSame = await ev(([i, p]) => window.ws.log(i).imports[0]?.xml === p, [im.id, pool]);
     await ev(([i]) => window.ws.unmount(i), [im.id]);
-    const ex = await mount(pool);
-    await page.locator(`${tb(ex.id)} [data-testid="bpmn-workshop-export"] button`).first().click();
-    await page.getByRole("menuitem", { name: "Draw.io", exact: true }).click();
-    await sleep(300);
-    const dioText = await ev(([i]) => window.ws.log(i).downloads[0]?.xml, [ex.id]);
-    await ev(([i]) => window.ws.unmount(i), [ex.id]);
+    const dioText = await ev((xml) => window.ws.projectDrawio(xml), pool);
     const im2 = await mount(ce1, { importHandler: true });
     await page.locator(`${tb(im2.id)} [data-testid="bpmn-workshop-file"]`).setInputFiles(file("round.drawio", dioText));
     await sleep(900);
@@ -335,27 +331,29 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     assert.equal(o.busyBytes, true);
     assert.deepEqual(o.busyOff, { veil: false, readOnly: false });
   });
-  await t.test("format switch: menu radio, look changes live, document, tab and undo kept, host notified; controlled mode follows the prop", () => {
+  await t.test("format switch: pressed menu items, look changes live, document, tab and undo kept, host notified; controlled mode follows the prop", () => {
     assert.equal(o.format.legend, true);
     assert.equal(o.format.xml, true);
     assert.equal(o.format.canUndo, true, "undo survives the switch");
     assert.equal(o.format.containers, 1);
     assert.deepEqual(o.format.onFormatChange, ["leg"]);
     assert.equal(o.format.triggerText.trim(), "Legend");
+    assert.equal(o.format.checked, "true");
     assert.equal(o.formatColored.legend, 0, "the colored look is not the legend look");
     assert.equal(o.formatControlled, true);
     assert.equal(o.formatControlledBack, 0);
   });
-  await t.test("export: BPMN returns the exact bytes; Draw.io and Sparx carry their fidelity notices, shown to the user", () => {
+  await t.test("export: semantic BPMN and local reference Draw.io/Sparx without notices", () => {
     assert.deepEqual(o.exports.map((d) => d.filename), ["diagram.bpmn", "diagram.drawio", "diagram.sparx.xml"]);
     assert.equal(o.exportBpmnSame, true);
-    assert.deepEqual(o.exports.map((d) => d.fidelity), [[], ["projection"], ["interchange-only"]]);
-    assert.ok(o.exportNotices.length >= 2 && o.exportNotices.every((n) => n[0] === "status"));
-    assert.match(o.exportNotices[0][1], /projection/i);
+    assert.deepEqual(o.exports.map((d) => d.fidelity), [[], [], []]);
+    assert.deepEqual(o.exports.map((d) => d.mimeType), ["application/bpmn+xml", "application/vnd.jgraph.mxfile", "application/xml"]);
+    assert.equal(o.exportNotices.length, 0);
+    assert.ok(o.exportNotices.every((n) => n[0] === "status"));
   });
   await t.test("export that must be refused downloads nothing and shows an alert with the reason", () => {
     assert.equal(o.exportRefused.downloads, 0);
-    assert.match(o.exportRefused.alert, /Export failed: .*does not support/);
+    assert.match(o.exportRefused.alert, /Export failed: .*Message flows/);
   });
   await t.test("import: native BPMN unchanged to onImport; Draw.io projected with notices; invalid file is an alert; without onImport it is applied", () => {
     assert.deepEqual(o.importNative.map((x) => [x.projected, x.fidelity]), [[false, []]]);

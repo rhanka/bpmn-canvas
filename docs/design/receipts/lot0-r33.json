@@ -1,0 +1,290 @@
+{
+  "format": "profile-r33-implementation-receipt/1",
+  "status": "implemented-and-verified-with-browser-rerun",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "initialHead": "ef0b129",
+  "authority": {
+    "revision": "R3.3",
+    "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+    "matrixInventorySha256": "79c25e5370bc2976b19728468d3614bb43713e1464bce808a4ee5c8ac3890a3e",
+    "sealReceipt": "docs/design/receipts/lot0-r33-seal.json",
+    "registrySha256": "601b91d9c401d4a3aff1f05f26632d370226bf98e8366fca506b79f4a8a853b8",
+    "verdictSchemaSha256": "cf127eb6c2bd40155af2ba4cc8feed0dfa9aa2d1bf7e4c6dfec9e02bf4471c30",
+    "externalCompanionsMatchLocalBytes": true
+  },
+  "changes": [
+    "Separate unsupported injected/document schemas and supported schema migration in matrix order.",
+    "Apply P1 at the first source-dependent row; require known versions and digests, with two known unequal digests for digest conflict.",
+    "Validate runtime verdicts with the byte-identical R3.3 verdict schema and sealed registry.",
+    "Strengthen current assertions that already matched R3.3 and update the remaining historical code assertions.",
+    "Expose identity-change activation requirements; migration intent alone cannot activate a changed package or waive a same-version digest conflict."
+  ],
+  "assertionAccounting": {
+    "alreadyCorrectAndStrengthened": [
+      "compatibility migration intent call 2",
+      "minor versions 1.1.9 and 1.3.0 with unknown/unavailable source"
+    ],
+    "updated": [
+      "compatibility invalid envelope/schema call 2",
+      "earlier identity conflict call 2",
+      "schema disagreement with unavailable source call 1",
+      "schema disagreement with available source call 1"
+    ]
+  },
+  "step4": {
+    "caseId": "s4-render-digests-profile-package",
+    "status": "activation-requirements-closed-at-contract-boundary",
+    "artifactsChecked": [
+      "identity",
+      "semanticRevision",
+      "activation"
+    ],
+    "result": {
+      "explicitMigrationRequired": true,
+      "newHistoryEpoch": true
+    },
+    "preflight": "profile-digest-mismatch: this same-version package edit requires publishing a new version before migration.",
+    "remaining": "Live migration execution, committed history epoch changes, history invalidation and editor integration remain step 6; requirement flags are not execution evidence."
+  },
+  "verification": {
+    "red": {
+      "command": "rtk proxy node --test tests/profile-compatibility.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs",
+      "tests": 231,
+      "passed": 187,
+      "failed": 44,
+      "commit": "29ad2a5"
+    },
+    "focused": {
+      "tests": 231,
+      "passed": 231,
+      "failed": 0
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0
+    },
+    "typeContracts": {
+      "command": "rtk npm run typecheck:compat",
+      "exitCode": 0
+    },
+    "brand": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    "profileInventoryFollowup": {
+      "tests": 1016,
+      "passed": 1015,
+      "failed": 1,
+      "cause": "Historical byte inventory required a successor chain for changed implementation/test files. Earlier receipts remain unchanged."
+    },
+    "profiles": {
+      "command": "rtk proxy node --input-type=module; spawn node --test over sorted tests/profile-*.test.mjs except profile-golden-independence.test.mjs",
+      "tests": 1016,
+      "passed": 1016,
+      "failed": 0,
+      "excludedSuiteIncludedInFullRun": true,
+      "exitCode": 0
+    },
+    "full": {
+      "command": "rtk npm test",
+      "execution": "outside filesystem and PID sandbox",
+      "exitCode": 1,
+      "tests": 2402,
+      "pass": 2399,
+      "fail": 3,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 1101885.048343,
+      "status": "completed-with-three-browser-launch-failures",
+      "sourceAndTestBytesUnchanged": true,
+      "failures": [
+        {
+          "file": "tests/io-review-2.browser.test.mjs",
+          "signature": "page.goto: Target page, context or browser has been closed"
+        },
+        {
+          "file": "tests/io-review-4.browser.test.mjs",
+          "signature": "Chromium launch timeout; zygote/GPU process launch failure, SIGABRT"
+        },
+        {
+          "file": "tests/layout-boundary.browser.test.mjs",
+          "signature": "Chromium launch timeout and SIGSEGV"
+        }
+      ],
+      "nonBrowserFailures": 0,
+      "logSha256": "d6453e9cdda140ff327ad59b584e403bde64aea17d3953d5e70a8074297f4ae4",
+      "browserLaunchFailuresResolvedBySerialRerun": true,
+      "interpretation": "The original npm test invocation exited 1 solely on three Chromium launch/closed-browser errors under concurrent launch. All non-browser checks passed, including exhaustive seal mutation. All 483 browser checks then passed alone and serially on identical source/test bytes. The original full invocation is not reported as exit 0."
+    },
+    "goldenIndependence": {
+      "includedInFullRun": true,
+      "everyNonWhitespaceExpectationByteMutated": true,
+      "passed": true,
+      "durationMs": 1099815.533513
+    },
+    "browserRerun": {
+      "command": "rtk proxy node --test --test-concurrency=1 tests/*.browser.test.mjs",
+      "execution": "browser files alone and serially, outside filesystem and PID sandbox",
+      "exitCode": 0,
+      "tests": 483,
+      "pass": 483,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 201470.428427,
+      "sourceAndTestBytesUnchanged": true,
+      "logSha256": "49cd2b7f63089258966cf08c9838aa1081c63d065e25b319ca3a8c6f3c2d6546"
+    },
+    "finalReceiptChecks": {
+      "command": "rtk proxy node --test tests/profile-s123-receipt.test.mjs tests/profile-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-s4-scope.test.mjs",
+      "exitCode": 0,
+      "tests": 84,
+      "pass": 84,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "duration_ms": 456.908708
+    }
+  },
+  "supersedesFiles": [
+    {
+      "path": "src/profile/compatibility.ts",
+      "old": {
+        "bytes": 4456,
+        "sha256": "364cfca6568bf529340f3ffc5228d0dfd47af175029fa3369eeafa86b4717027"
+      },
+      "new": {
+        "bytes": 5762,
+        "sha256": "421c54f05e2e46d2caf36a66fa5e78f27447ca441d831ccaed28ee2e2401ed18"
+      }
+    },
+    {
+      "path": "tests/profile-compatibility.test.mjs",
+      "old": {
+        "bytes": 1660,
+        "sha256": "52dc8ef6c58645eca82258065897dcbafb6f9e8bad8747ce8ac3bf83a13dea29"
+      },
+      "new": {
+        "bytes": 1856,
+        "sha256": "439a8743bf69a45a179fa230be92536f0f4fccf93898e84671a8c7449731bd43"
+      }
+    },
+    {
+      "path": "tests/profile-s123-regressions.test.mjs",
+      "old": {
+        "bytes": 10585,
+        "sha256": "67bc368040e22873f19e0f3573b9eb5cdd7326b4f66adf43098d0235f7847461"
+      },
+      "new": {
+        "bytes": 10832,
+        "sha256": "707bd38f3424b5a7bc20123db417f07e3cdee03e042604c54251f78a3450ddf8"
+      }
+    },
+    {
+      "path": "tests/profile-render-contract.test.mjs",
+      "old": {
+        "bytes": 6398,
+        "sha256": "f065f38624e28c8f0b56381bfae6a56c879902ee9c976296e84efdcbae4cd503"
+      },
+      "new": {
+        "bytes": 7438,
+        "sha256": "2e6384ea7d403c0d3de3478055a857c7d5f4946ed2f21f454a541152fd5c44cf"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 5145,
+        "sha256": "3458f0c4e98c7618ce06c332c05a3563ba1a50b20efb6bb0cd8f0620f79fa2ca"
+      },
+      "new": {
+        "bytes": 5935,
+        "sha256": "05cda6146d91398eaea3bcdd33ff6a04f988a42c047f930af6ca13d2368415ec"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "src/profile/compatibility.ts",
+      "bytes": 5762,
+      "sha256": "421c54f05e2e46d2caf36a66fa5e78f27447ca441d831ccaed28ee2e2401ed18"
+    },
+    {
+      "path": "tests/profile-compatibility.test.mjs",
+      "bytes": 1856,
+      "sha256": "439a8743bf69a45a179fa230be92536f0f4fccf93898e84671a8c7449731bd43"
+    },
+    {
+      "path": "tests/profile-s123-regressions.test.mjs",
+      "bytes": 10832,
+      "sha256": "707bd38f3424b5a7bc20123db417f07e3cdee03e042604c54251f78a3450ddf8"
+    },
+    {
+      "path": "tests/profile-render-contract.test.mjs",
+      "bytes": 7438,
+      "sha256": "2e6384ea7d403c0d3de3478055a857c7d5f4946ed2f21f454a541152fd5c44cf"
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "bytes": 5935,
+      "sha256": "05cda6146d91398eaea3bcdd33ff6a04f988a42c047f930af6ca13d2368415ec"
+    },
+    {
+      "path": "schemas/profile/compatibility-verdict.schema.json",
+      "bytes": 1603,
+      "sha256": "cf127eb6c2bd40155af2ba4cc8feed0dfa9aa2d1bf7e4c6dfec9e02bf4471c30"
+    },
+    {
+      "path": "tests/profile-r33.test.mjs",
+      "bytes": 7024,
+      "sha256": "45997acd7eedeaf8692eb218936a3aedc9a60c2acb99992f18284ff6f2ad3ba1"
+    }
+  ],
+  "expectationDisputes": [],
+  "preservation": {
+    "sealedFixturesEdited": false,
+    "sealsEdited": false,
+    "priorReceiptsEdited": false,
+    "stashTouched": false,
+    "tmpTouched": false,
+    "layoutDocumentTouched": false,
+    "pushed": false,
+    "protectedDiffEmpty": true,
+    "sourceAndTestsMatchedImplementationCommitDuringFullRun": true
+  },
+  "review": {
+    "status": "reserved-for-later-independent-model-review"
+  },
+  "implementationCommit": "c3ea3479fd5e1c808a38ef41e187d95556f9df5d",
+  "inventoryAccounting": {
+    "sealedMatrixVectors": 45,
+    "unsealedAssertions": 21,
+    "changedFromR32": [
+      "s123-s1-minor-up-unknown",
+      "s123-s1-minor-up-unavailable",
+      "s123-s1-minor-down-unknown",
+      "s123-s1-minor-down-unavailable",
+      "s123-s2-document-schema-unsupported-unknown",
+      "s123-s2-document-schema-unsupported-unavailable",
+      "s123-s2-document-schema-supported-available",
+      "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+      "s123-regression: should check source availability for 1.1.9 with unknown [call 1]",
+      "s123-regression: should check source availability for 1.1.9 with unavailable [call 1]",
+      "s123-regression: should check source availability for 1.3.0 with unknown [call 1]",
+      "s123-regression: should check source availability for 1.3.0 with unavailable [call 1]",
+      "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+      "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]"
+    ],
+    "recordedExpectationChangesBeyondDisputes": [
+      "compatibility-test: should require validated migration results before accepting a different identity [call 2]",
+      "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+      "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+      "s123-regression: should refuse schema identity disagreement before unavailable source and migration [call 1]",
+      "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]"
+    ],
+    "disposition": "All current assertions covered; existing correct source-unavailable checks retained and strengthened. No archived patch or historical receipt was rewritten."
+  },
+  "knownFailures": 0,
+  "requiredLocalChecksPassed": true
+}

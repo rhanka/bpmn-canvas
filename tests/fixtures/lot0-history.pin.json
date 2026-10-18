@@ -1,0 +1,154 @@
+{
+  "format": "lot0-history-pin/1",
+  "predecessors": [
+    {
+      "commit": "f3a54c5",
+      "path": "docs/design/receipts/lot0-s12.json",
+      "bytes": 15334,
+      "sha256": "9f9ef0c21cba7c14b84d3ff46ec6964b22b5e65b3d4e557c83efc6db0dd0d94f"
+    },
+    {
+      "commit": "f3a54c5",
+      "path": "tests/fixtures/profile-lot0/design-provenance.json",
+      "bytes": 109282,
+      "sha256": "d14862e485d7c03a8dffce1d0aa95e0a3bd3f4843803e0c165f9b59f3f411f63"
+    },
+    {
+      "commit": "f3a54c5",
+      "path": "tests/helpers/profile-seal.mjs",
+      "bytes": 13019,
+      "sha256": "35c06755c85eeb07175a6a6f57e8b3a22403b9be5c1a115600848a4607662967"
+    },
+    {
+      "commit": "f3a54c5",
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "bytes": 4030,
+      "sha256": "13b58125faa7dd8dfb3b9f84e17c030c12123a4195adc1d59b68bd99840406ea"
+    },
+    {
+      "commit": "f3a54c5",
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "bytes": 5935,
+      "sha256": "05cda6146d91398eaea3bcdd33ff6a04f988a42c047f930af6ca13d2368415ec"
+    },
+    {
+      "commit": "f3a54c5^",
+      "path": "tests/helpers/brand.mjs",
+      "bytes": 1555,
+      "sha256": "9c774bc6e380ee9efcc00fb6376e5aaf7bb61dabdb0d4cf4af2fd896b8802ac5"
+    },
+    {
+      "commit": "f3a54c5",
+      "path": "docs/design/profile-externalization-scope.json",
+      "bytes": 1391,
+      "sha256": "3661e64c4d9b65894ce9376b816d49112859b55b8f2cefd28828c30ed126eef3"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "docs/design/profile-lot0-baseline.md",
+      "bytes": 6567,
+      "sha256": "eb49ec64954615bfb13416aada4d0626dcce990be82a0a7e4c95a9b2a8847bb5"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/fixtures/profile-lot0/reconciliation.md",
+      "bytes": 2124,
+      "sha256": "81d16f3a9f4671f29dea5b38b62490f07eb2a2f1ca94e6e794fbcd4e54829639"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/fixtures/profile-lot0/inputs.json",
+      "bytes": 9710,
+      "sha256": "b21c2b18f884b1e2af3d49a0c0c698f9bb0457284aca294bfa69c1b696791088"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/helpers/profile-seal.mjs",
+      "bytes": 13651,
+      "sha256": "cd5ba13b799427746fb30b033411cd29c9b52ccf7959d078dbe5f74be2dc5d94"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "bytes": 4030,
+      "sha256": "1cbfc721fef1255c7ad932aa5e21839e8177fd8c0db08a24a5eaa8c7aad7c4de"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "docs/design/receipts/lot0-s2-r32.json",
+      "bytes": 60163,
+      "sha256": "fe3273ea42a8162334fc7adb6dea441cd562db6a7948e6d915655e6e851aa348"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "docs/design/receipts/lot0-s3.json",
+      "bytes": 26842,
+      "sha256": "b356aa39c504e12719ddd982ac4a299259d7f7590e88f3704cea0351ee6dfcd5"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "docs/design/receipts/lot0-s123-fix.json",
+      "bytes": 17313,
+      "sha256": "9149394b9c0f61b0b0cfea37c6e8c8eb55cae5dd7a9d8f3d4af964e46eed6751"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "docs/design/receipts/lot0-s123-seal.json",
+      "bytes": 25817,
+      "sha256": "ede834ef89219ef2a1176cdf6258a769128c57abbad40efce4628ad1acc3db7f"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/profile-corpus.test.mjs",
+      "bytes": 6257,
+      "sha256": "227a4b4b9976091d9d1140b170302dba291198ea2805174555de8521459221f1"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "bytes": 6472,
+      "sha256": "ac891754666557a42ff8fed5d8e3888d638657303339a3fafd99cb7be27a78f3"
+    },
+    {
+      "commit": "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "path": "tests/brand-baseline.test.mjs",
+      "bytes": 5504,
+      "sha256": "cd5885c3684b99dbc7cf9a1bc4a1fdcbbe7601bf36bfe509cb164a3ac9e347ec"
+    }
+  ],
+  "successors": [
+    {
+      "path": "tests/brand-baseline.test.mjs",
+      "previous": {
+        "bytes": 5815,
+        "sha256": "7d11748b03735d7012eb0a811ab4f9baeee999a23aea345b45ed59d09e7876ce"
+      },
+      "current": {
+        "bytes": 5848,
+        "sha256": "d4c5a3ea009fa507ce4f6796d7a5ba6a0826bfc999b979cfb1e3439c961ae42c"
+      }
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "previous": {
+        "bytes": 8156,
+        "sha256": "83efb43364cd02728e19817361509b06cff68227b70a02cacf124329e39b775d"
+      },
+      "current": {
+        "bytes": 8220,
+        "sha256": "b29a1291b4beb295c3aa70810899de9e306150574b85f3033fc2c34b6d98ae62"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "previous": {
+        "bytes": 6839,
+        "sha256": "ed0802b1b9d18248ffc4027b932827b50bd79036a52f934f382c6960f87d0dff"
+      },
+      "current": {
+        "bytes": 6923,
+        "sha256": "6fb61b8f7edcacaae0c51f6cdaeebce43b19a061b27e11f037dc7818966f76e9"
+      }
+    }
+  ]
+}

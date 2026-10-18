@@ -1,0 +1,33 @@
+{
+  "format": "profile-externalization-scope/1",
+  "scanner": {
+    "path": "tests/helpers/brand.mjs",
+    "sha256": "5469c034bbc39bf89c7758e0974a29c96205d149da06b816485f468be7bb9c87"
+  },
+  "lexiconSource": "existing scanner hashed lexicon; no additional external lexicon supplied",
+  "extraHashes": [],
+  "lexiconSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "noticeExceptions": [],
+  "paths": [
+    "tests/fixtures/profile-parity-corpus",
+    "tests/fixtures/profile-parity-corpus.pin.json",
+    "tests/fixtures/profile-lot0",
+    "tests/helpers/profile-seal.mjs",
+    "tests/profile-corpus.test.mjs",
+    "tests/profile-corpus-step2b.test.mjs",
+    "tests/profile-golden-independence.test.mjs",
+    "tests/profile-brand-guard.test.mjs",
+    "docs/design/profile-lot0-baseline.md",
+    "docs/design/profile-compiler-rules.json",
+    "docs/design/profile-externalization-scope.json",
+    "docs/design/receipts/lot0-s12.json",
+    "docs/design/receipts/lot0-s12-review.md",
+    "tests/profile-r32-expectations.test.mjs",
+    "docs/design/receipts/lot0-s2-r32.json",
+    "tests/profile-r33-seal.test.mjs",
+    "tests/profile-corpus-s123.test.mjs",
+    "tests/profile-s123-receipt.test.mjs",
+    "docs/design/receipts/lot0-r33-seal.json"
+  ],
+  "deferred": "Whole-repository occurrence classification and consumer release acceptance remain later-lot gates"
+}

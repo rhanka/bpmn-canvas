@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:sem="https://sentropic.com/schema/bpmn/semantics/1" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-builder">
+  <bpmn:collaboration id="Request_review_collab">
+    <bpmn:participant id="Request_review_pool" name="Request review" processRef="Request_review" />
+  </bpmn:collaboration>
+  <bpmn:process id="Request_review" name="Request review" isExecutable="false">
+    <bpmn:laneSet id="Request_review_lanes">
+      <bpmn:lane id="Office" name="Office">
+        <bpmn:flowNodeRef>Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Prepare</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Review</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Closed</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Received" name="Received">
+      <bpmn:extensionElements>
+        <sem:info order="0" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Received_Prepare</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Prepare" name="Prepare">
+      <bpmn:extensionElements>
+        <sem:info order="1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Received_Prepare</bpmn:incoming>
+      <bpmn:outgoing>Flow_Prepare_Review</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="Out_Prepare_Request_file">
+        <bpmn:extensionElements>
+          <sem:info order="1003" label="draft" />
+        </bpmn:extensionElements>
+        <bpmn:targetRef>Request_file</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:dataObject id="Request_file_obj" />
+    <bpmn:dataObjectReference id="Request_file" name="Request file" dataObjectRef="Request_file_obj">
+      <bpmn:extensionElements>
+        <sem:info order="2" laneRef="Office" direction="out" primaryAssociationRef="Out_Prepare_Request_file" />
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:task id="Review" name="Review">
+      <bpmn:extensionElements>
+        <sem:info order="4" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Prepare_Review</bpmn:incoming>
+      <bpmn:outgoing>Flow_Review_Closed</bpmn:outgoing>
+      <bpmn:property id="In_Request_file_Review_target" />
+      <bpmn:dataInputAssociation id="In_Request_file_Review">
+        <bpmn:extensionElements>
+          <sem:info order="1004" />
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>Request_file</bpmn:sourceRef>
+        <bpmn:targetRef>In_Request_file_Review_target</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
+    <bpmn:endEvent id="Closed" name="Closed">
+      <bpmn:extensionElements>
+        <sem:info order="5" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Review_Closed</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Received_Prepare" sourceRef="Received" targetRef="Prepare">
+      <bpmn:extensionElements>
+        <sem:info order="1000" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Prepare_Review" sourceRef="Prepare" targetRef="Review">
+      <bpmn:extensionElements>
+        <sem:info order="1001" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Review_Closed" sourceRef="Review" targetRef="Closed">
+      <bpmn:extensionElements>
+        <sem:info order="1002" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="Doc_Guide">
+      <bpmn:extensionElements>
+        <sem:info order="3" laneRef="Office" primaryAssociationRef="DocLink_Guide_Prepare" />
+      </bpmn:extensionElements>
+      <bpmn:text>[Doc] Guide</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="DocLink_Guide_Prepare" associationDirection="One" sourceRef="Doc_Guide" targetRef="Prepare">
+      <bpmn:extensionElements>
+        <sem:info order="1005" label="see part 4" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+    <bpmn:association id="DocLink_Guide_Review" associationDirection="One" sourceRef="Doc_Guide" targetRef="Review">
+      <bpmn:extensionElements>
+        <sem:info order="1006" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+    <bpmn:textAnnotation id="App_Prepare">
+      <bpmn:text>[App] File tool</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="AppLink_Prepare" sourceRef="App_Prepare" targetRef="Prepare">
+      <bpmn:extensionElements>
+        <sem:info order="1012" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Request_review_diagram" name="Request review">
+    <bpmndi:BPMNPlane id="Request_review_plane" bpmnElement="Request_review_collab">
+      <bpmndi:BPMNShape id="Request_review_pool_di" bpmnElement="Request_review_pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="841" height="299" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Office_di" bpmnElement="Office" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="811" height="299" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Received_di" bpmnElement="Received">
+        <dc:Bounds x="100" y="106" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="160" width="50" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Prepare_di" bpmnElement="Prepare">
+        <dc:Bounds x="290" y="91" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Request_file_di" bpmnElement="Request_file">
+        <dc:Bounds x="409" y="205" width="40" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="398" y="259" width="63" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Doc_Guide_di" bpmnElement="Doc_Guide">
+        <dc:Bounds x="220" y="26" width="120" height="51" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Review_di" bpmnElement="Review">
+        <dc:Bounds x="531" y="91" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Closed_di" bpmnElement="Closed">
+        <dc:Bounds x="721" y="106" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="727" y="160" width="39" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Received_Prepare_di" bpmnElement="Flow_Received_Prepare">
+        <di:waypoint x="150" y="131" />
+        <di:waypoint x="290" y="131" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Prepare_Review_di" bpmnElement="Flow_Prepare_Review">
+        <di:waypoint x="410" y="131" />
+        <di:waypoint x="531" y="131" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Review_Closed_di" bpmnElement="Flow_Review_Closed">
+        <di:waypoint x="651" y="131" />
+        <di:waypoint x="721" y="131" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Out_Prepare_Request_file_di" bpmnElement="Out_Prepare_Request_file">
+        <di:waypoint x="384" y="191" />
+        <di:waypoint x="384" y="198" />
+        <di:waypoint x="429" y="198" />
+        <di:waypoint x="429" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="In_Request_file_Review_di" bpmnElement="In_Request_file_Review">
+        <di:waypoint x="429" y="205" />
+        <di:waypoint x="429" y="197" />
+        <di:waypoint x="519" y="197" />
+        <di:waypoint x="519" y="178" />
+        <di:waypoint x="539" y="178" />
+        <di:waypoint x="539" y="171" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DocLink_Guide_Prepare_di" bpmnElement="DocLink_Guide_Prepare">
+        <di:waypoint x="280" y="77" />
+        <di:waypoint x="280" y="84" />
+        <di:waypoint x="304" y="84" />
+        <di:waypoint x="304" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DocLink_Guide_Review_di" bpmnElement="DocLink_Guide_Review">
+        <di:waypoint x="280" y="77" />
+        <di:waypoint x="280" y="83" />
+        <di:waypoint x="519" y="83" />
+        <di:waypoint x="519" y="84" />
+        <di:waypoint x="545" y="84" />
+        <di:waypoint x="545" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="App_Prepare_di" bpmnElement="App_Prepare">
+        <dc:Bounds x="310" y="161" width="80" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="AppLink_Prepare_di" bpmnElement="AppLink_Prepare">
+        <di:waypoint x="350" y="161" />
+        <di:waypoint x="350" y="165" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

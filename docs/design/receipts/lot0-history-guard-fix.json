@@ -1,0 +1,81 @@
+{
+  "format": "lot0-history-guard-fix/1",
+  "date": "2026-10-16",
+  "initialHead": "04af40e",
+  "review": "LOT0-SOL-REVIEW-4.md, MAJOR 1",
+  "artifact": {
+    "path": "tests/test-history-guard.test.mjs",
+    "bytes": 20218,
+    "sha256": "b93c6734894423f6e22f1f0996a9c55a04f0613c8f135b3caca3031b8b087ed0"
+  },
+  "changes": [
+    "Resolve const bindings by lexical identity, including immutable aliases and shadowing.",
+    "Reject mutated or escaped argument arrays, checking every binding in an alias chain.",
+    "Reject unresolved argument arrays, subcommands and revision arguments.",
+    "Forbid shell execution and shell-enabled process options; normalize supported direct Git global options and reject unknown ones.",
+    "Preserve the existing controlled wrappers and the closed published commit allowance.",
+    "Extend the runtime Git shim to catch SHA reads after global options while retaining HEAD and main controls."
+  ],
+  "closedAllowance": [
+    "07be09e",
+    "45aa690"
+  ],
+  "red": {
+    "command": "rtk node --test --test-name-pattern='should reject a Git argument array|should reject an off-main read|should reject shell Git' tests/test-history-guard.test.mjs",
+    "exitCode": 1,
+    "tests": 3,
+    "passed": 0,
+    "failed": 3,
+    "observed": "All three reproductions returned zero diagnostics instead of one before the scanner changed."
+  },
+  "verification": [
+    {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "rtk npm run typecheck:compat",
+      "exitCode": 0
+    },
+    {
+      "command": "rtk node --test tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "nestedHistoryFreeCorpusAndTwinTests": 157
+    },
+    {
+      "command": "rtk node --test tests/profile-*.test.mjs tests/lot0-squash-readiness.test.mjs",
+      "exitCode": 0,
+      "tests": 1184,
+      "passed": 1184,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    {
+      "command": "rtk node --test tests/test-history-guard.test.mjs tests/brand-*.test.mjs tests/path-guard.test.mjs tests/history-attribution.test.mjs tests/profile-brand-guard.test.mjs tests/profile-schema.test.mjs",
+      "exitCode": 0,
+      "tests": 132,
+      "passed": 132,
+      "failed": 0
+    },
+    {
+      "command": "rtk node --test --test-name-pattern='dist carries no brand|every packed file carries no banned|no banned identifier anywhere' tests/package-shape.test.mjs",
+      "exitCode": 0,
+      "tests": 3,
+      "passed": 3,
+      "failed": 0
+    }
+  ],
+  "additionalRed": {
+    "command": "rtk node --test --test-name-pattern='should fail closed' tests/test-history-guard.test.mjs",
+    "exitCode": 1,
+    "tests": 1,
+    "passed": 0,
+    "failed": 1,
+    "observed": "An unknown helper receiving git as its first argument was incorrectly treated as a safe array consumer."
+  },
+  "profileNote": "The complete profile campaign, including the exhaustive expectation byte-mutation test, finished successfully before the attempted interruption; no tests were excluded."
+}

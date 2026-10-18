@@ -1,0 +1,43 @@
+{
+  "$type": "bpmn:Definitions",
+  "id": "Defs_Paper",
+  "targetNamespace": "urn:example:workbench:local",
+  "expressionLanguage": "http://www.w3.org/1999/XPath",
+  "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+  "$attrs": { "xmlns:sem": "https://sentropic.com/schema/bpmn/semantics/1" },
+  "rootElements": [
+    {
+      "$type": "bpmn:Process", "id": "Process_Paper", "isExecutable": false,
+      "laneSets": [{ "$type": "bpmn:LaneSet", "id": "Lanes_Paper", "lanes": [
+        { "$type": "bpmn:Lane", "id": "Lane_Review", "name": "Review", "flowNodeRef": ["Task_Fold", "Start_Paper", "End_Paper"] }
+      ] }],
+      "flowElements": [
+        { "$type": "bpmn:SequenceFlow", "id": "Flow_First", "sourceRef": "Start_Paper", "targetRef": "Task_Fold" },
+        { "$type": "bpmn:Task", "id": "Task_Fold", "name": "Fold é 🪁\n1.0 01 ٢ & < > \"", "isForCompensation": false, "startQuantity": 1, "completionQuantity": 1,
+          "incoming": ["Flow_First"], "outgoing": ["Flow_Last"],
+          "extensionElements": { "$type": "bpmn:ExtensionElements", "values": [
+            { "$type": "sem:Info", "order": 2, "laneRef": "Lane_Review", "direction": "input", "label": "01", "primaryAssociationRef": "Flow_First", "processRef": "Process_Lantern" }
+          ] }
+        },
+        { "$type": "bpmn:StartEvent", "id": "Start_Paper", "parallelMultiple": false, "isInterrupting": true, "incoming": [], "outgoing": ["Flow_First"] },
+        { "$type": "bpmn:EndEvent", "id": "End_Paper", "incoming": ["Flow_Last"] },
+        { "$type": "bpmn:SequenceFlow", "id": "Flow_Last", "sourceRef": "Task_Fold", "targetRef": "End_Paper" }
+      ]
+    },
+    { "$type": "bpmn:Process", "id": "Process_Lantern", "name": "Lantern", "flowElements": [] }
+  ],
+  "diagrams": [
+    { "$type": "bpmndi:BPMNDiagram", "id": "Diagram_Paper", "plane": {
+      "$type": "bpmndi:BPMNPlane", "id": "Plane_Paper", "bpmnElement": "Process_Paper", "planeElement": [
+        { "$type": "bpmndi:BPMNShape", "id": "Shape_Fold", "bpmnElement": "Task_Fold", "fill": "#f0f8ff", "stroke": "#123456",
+          "bounds": { "$type": "dc:Bounds", "x": 12.5, "y": 20.25, "width": 100, "height": 80 },
+          "label": { "$type": "bpmndi:BPMNLabel", "bounds": { "$type": "dc:Bounds", "x": 0, "y": 0, "width": 120, "height": 30 } }
+        },
+        { "$type": "bpmndi:BPMNEdge", "id": "Edge_First", "bpmnElement": "Flow_First", "messageVisibleKind": "initiating", "waypoint": [
+          { "$type": "dc:Point", "x": 1.5, "y": 2.5 }, { "$type": "dc:Point", "x": 5, "y": 2.5 }, { "$type": "dc:Point", "x": 5, "y": 8 }
+        ] }
+      ]
+    } },
+    { "$type": "bpmndi:BPMNDiagram", "id": "Diagram_Lantern", "plane": { "$type": "bpmndi:BPMNPlane", "id": "Plane_Lantern", "bpmnElement": "Process_Lantern", "planeElement": [] } }
+  ]
+}

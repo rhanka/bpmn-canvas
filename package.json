@@ -1,6 +1,6 @@
 {
   "name": "@sentropic/bpmn-canvas",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Framework-independent BPMN 2.0 editing canvas built on bpmn-js, with React and assistant-ui adapters.",
   "license": "MIT",
   "author": "Fabien Antoine <fabien.antoine@m4x.org>",
@@ -50,6 +50,7 @@
       "types": "./dist/io/index.d.ts",
       "import": "./dist/io/index.js"
     },
+    "./semantics.json": "./dist/io/semantics.json",
     "./layout": {
       "types": "./dist/layout/index.d.ts",
       "import": "./dist/layout/index.js"
@@ -72,6 +73,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "prepublishOnly": "node scripts/check-brand-release.mjs",
     "clean": "node scripts/clean.mjs",
     "gen": "node scripts/gen-css.mjs",
     "build": "npm run clean && npm run gen && tsc -p tsconfig.build.json && node scripts/build-assets.mjs && node scripts/build-browser.mjs",
@@ -83,7 +85,7 @@
   "dependencies": {
     "bpmn-auto-layout": "1.3.0",
     "bpmn-js": "~18.30.1",
-    "bpmn-moddle": "~10.3.1",
+    "bpmn-moddle": "10.3.1",
     "diagram-js": "~15.27.1",
     "tiny-svg": "~4.1.4"
   },

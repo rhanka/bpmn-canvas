@@ -1,0 +1,584 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:profile-mechanism:1:snapshot-1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "snapshotVersion": {
+      "const": "1"
+    },
+    "envelope": {
+      "$ref": "#/$defs/envelope"
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "layout": {
+          "$ref": "#/$defs/layout"
+        },
+        "themeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "overrides": {
+          "$ref": "#/$defs/overrides"
+        },
+        "diStyles": {
+          "$ref": "#/$defs/styles"
+        },
+        "importedDi": {
+          "$ref": "#/$defs/archive"
+        },
+        "selection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pair"
+          }
+        },
+        "activePageId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "layout",
+        "themeId",
+        "overrides",
+        "diStyles",
+        "importedDi",
+        "selection",
+        "activePageId"
+      ]
+    },
+    "viewRevision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "snapshotVersion",
+    "envelope",
+    "presentation",
+    "viewRevision"
+  ],
+  "$defs": {
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "documentVersion": {
+          "const": "1"
+        },
+        "profileIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mechanismVersion": {
+              "const": "1"
+            },
+            "schemaVersion": {
+              "const": "1.0.0"
+            },
+            "profile": {
+              "type": "string",
+              "pattern": "^[A-Za-z_][A-Za-z0-9_.:/-]*$"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "base": {
+              "$ref": "#/$defs/pin"
+            },
+            "descriptors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/pin"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "mechanismVersion",
+            "schemaVersion",
+            "profile",
+            "version",
+            "sha256",
+            "base",
+            "descriptors"
+          ]
+        },
+        "tree": {
+          "type": "object"
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ownerId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "targetId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "ownerId",
+              "role",
+              "targetId"
+            ]
+          }
+        },
+        "semanticRevision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "documentVersion",
+        "profileIdentity",
+        "tree",
+        "bindings",
+        "semanticRevision"
+      ]
+    },
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.:/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ]
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "layoutVersion": {
+          "const": "1"
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/page"
+          }
+        },
+        "geometry": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/geometry"
+          }
+        }
+      },
+      "required": [
+        "layoutVersion",
+        "pages",
+        "geometry"
+      ]
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "semanticRootId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bounds": {
+          "$ref": "#/$defs/bounds"
+        }
+      },
+      "required": [
+        "pageId",
+        "name",
+        "order",
+        "semanticRootId",
+        "bounds"
+      ]
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "y": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ]
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semanticId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bounds": {
+          "$ref": "#/$defs/bounds"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "sourceOccurrence": {
+          "$ref": "#/$defs/pair"
+        },
+        "targetOccurrence": {
+          "$ref": "#/$defs/pair"
+        },
+        "waypoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ]
+          },
+          "minItems": 2
+        }
+      },
+      "required": [
+        "pageId",
+        "occurrenceKey",
+        "role",
+        "bounds"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "required": [
+                  "sourceOccurrence"
+                ]
+              },
+              {
+                "required": [
+                  "targetOccurrence"
+                ]
+              },
+              {
+                "required": [
+                  "waypoints"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "sourceOccurrence",
+              "targetOccurrence",
+              "waypoints"
+            ]
+          }
+        }
+      ]
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "bounds": {
+          "$ref": "#/$defs/bounds"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "bounds",
+        "lines"
+      ]
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrenceKey": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "pageId",
+        "occurrenceKey"
+      ]
+    },
+    "overrides": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "semantic": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "semanticId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/token"
+                }
+              }
+            },
+            "required": [
+              "semanticId",
+              "tokens"
+            ]
+          }
+        },
+        "occurrence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "pageId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "occurrenceKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/token"
+                }
+              }
+            },
+            "required": [
+              "pageId",
+              "occurrenceKey",
+              "tokens"
+            ]
+          }
+        }
+      },
+      "required": [
+        "semantic",
+        "occurrence"
+      ]
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "styles": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "native": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "pageId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "occurrenceKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/token"
+                }
+              }
+            },
+            "required": [
+              "pageId",
+              "occurrenceKey",
+              "tokens"
+            ]
+          }
+        },
+        "bioc": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "pageId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "occurrenceKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/token"
+                }
+              }
+            },
+            "required": [
+              "pageId",
+              "occurrenceKey",
+              "tokens"
+            ]
+          }
+        }
+      },
+      "required": [
+        "native",
+        "bioc"
+      ]
+    },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "descriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "diagrams": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "descriptorDigest",
+        "diagrams",
+        "sha256"
+      ]
+    }
+  }
+}

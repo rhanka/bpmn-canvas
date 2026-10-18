@@ -9,7 +9,13 @@ import { fileURLToPath } from "node:url";
 
 const repo = fileURLToPath(new URL("../../", import.meta.url));
 const sha = (buf) => createHash("sha256").update(buf).digest("hex");
-const run = (cmd, args, cwd) => execFileSync(cmd, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], maxBuffer: 64 * 1024 * 1024 });
+const git = (cwd, ...args) => execFileSync("git", args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], maxBuffer: 64 * 1024 * 1024 });
+const run = (cmd, args, cwd) => {
+  const options = { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], maxBuffer: 64 * 1024 * 1024 };
+  if (cmd === "npm") return execFileSync("npm", args, options);
+  if (cmd === "npx") return execFileSync("npx", args, options);
+  throw new Error("Unsupported preparation executable");
+};
 
 function listFiles(dir, base = dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? listFiles(join(dir, e.name), base) : [join(dir, e.name).slice(base.length + 1)])).sort();
@@ -32,8 +38,8 @@ export function prepare({ workdir = process.env.P3_WORKDIR ?? join(homedir(), ".
   mkdirSync(workdir, { recursive: true });
 
   sh("npm", ["run", "build"], repo);
-  const head = run("git", ["rev-parse", "HEAD"], repo).trim();
-  const dirty = run("git", ["status", "--porcelain", "--", ".", ":!proofs"], repo).trim() !== "";
+  const head = git(repo, "rev-parse", "HEAD").trim();
+  const dirty = git(repo, "status", "--porcelain", "--", ".", ":!proofs").trim() !== "";
   const packOut = JSON.parse(sh("npm", ["pack", "--json", "--pack-destination", workdir], repo));
   const tarball = join(workdir, packOut[0].filename);
   const tarSha = sha(readFileSync(tarball));

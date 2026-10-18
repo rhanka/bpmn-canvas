@@ -38,6 +38,23 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
   </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
 
+// Two collapsed sub-processes, one with an application band ([App] annotation), one without.
+const SP_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="DSP" targetNamespace="http://example.org/sp">
+  <bpmn:process id="PSP" isExecutable="false">
+    <bpmn:subProcess id="SPA" name="With application"/>
+    <bpmn:subProcess id="SPN" name="Without application"/>
+    <bpmn:textAnnotation id="SPAPP"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="SPAS" sourceRef="SPA" targetRef="SPAPP"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BDSP"><bpmndi:BPMNPlane id="PLSP" bpmnElement="PSP">
+    <bpmndi:BPMNShape id="dSPA" bpmnElement="SPA"><dc:Bounds x="100" y="100" width="140" height="90"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dSPN" bpmnElement="SPN"><dc:Bounds x="300" y="100" width="140" height="90"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="dSPAPP" bpmnElement="SPAPP"><dc:Bounds x="130" y="180" width="80" height="30"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="dSPAS" bpmnElement="SPAS"><di:waypoint x="170" y="190"/><di:waypoint x="170" y="180"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>`;
+
 const mount = (id) => {
   const c = document.createElement("div");
   c.id = `host-${id}`;
@@ -125,6 +142,19 @@ window.runSmoke = async () => {
   a.m.destroy(); a.host.remove();
   out.afterDestroyA = { bDefIds: defIds(b.host), bTaskStillLegend: info(b.host, "T1").legend };
 
+  // The [+] marker of a sub-process stays above its application band; without a band it is where it was.
+  {
+    const sp = await make("sp", true);
+    await sp.m.importXML(SP_XML);
+    const reg = sp.m.get("elementRegistry");
+    const marker = (id) => {
+      const r = reg.getGraphics(id).querySelector('[data-marker="sub-process"] rect');
+      return r ? { bottom: Number(r.getAttribute("y")) + Number(r.getAttribute("height")), height: reg.get(id).height, pointer: r.parentElement.getAttribute("pointer-events") } : null;
+    };
+    out.marker = { withApp: marker("SPA"), withoutApp: marker("SPN") };
+    sp.m.destroy();
+    sp.host.remove();
+  }
   window.__pic = true;
   b.m.destroy(); plain.m.destroy();
   return out;

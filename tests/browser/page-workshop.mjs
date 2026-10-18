@@ -1,3 +1,4 @@
+import { bpmnGraph, encodeDrawio } from "../../dist/io/index.js";
 import { StrictMode, createElement, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BpmnWorkshop } from "../../dist/react/index.js";
@@ -35,6 +36,7 @@ function Harness({ id, opts }) {
 }
 
 window.ws = {
+  projectDrawio: (xml) => encodeDrawio(bpmnGraph(xml)),
   mount(xml, opts = {}, size = { width: 900, height: 560 }, strict = false, shadow = false) {
     const id = ++seq;
     const host = document.createElement("div");

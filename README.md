@@ -3,8 +3,9 @@
 A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
 framework-independent core, optional React and assistant-ui adapters.
 
-Status: 0.3.0. The API below is implemented and tested but not frozen (0.x). Changes: see
-[Upgrading from 0.2](#upgrading-from-02) and [Upgrading from 0.1](#upgrading-from-01).
+Status: 0.4.0. The API below is implemented and tested but not frozen (0.x). Changes: see
+[Upgrading from 0.3](#upgrading-from-03), [Upgrading from 0.2](#upgrading-from-02) and
+[Upgrading from 0.1](#upgrading-from-01).
 
 ## Demo
 
@@ -127,8 +128,8 @@ import { BpmnWorkshop } from "@sentropic/bpmn-canvas/react";
   is disabled. Navigation by tabs is the host's choice, not the veil's.
 - **Format**: switching recreates the modeler with the same document, diagram and view; Undo and Redo keep working.
   `format` and `onFormatChange` make it controlled; the host persists the choice if it wants to.
-- **Export** gives the exact BPMN bytes (Sparx included) or a Draw.io projection, with the fidelity notice shown as a
-  message; a refusal is shown as an alert and nothing is downloaded. `onDownload(file)` replaces the default Blob link.
+- **Export** serializes the current model as BPMN, Draw.io or Sparx; a refusal is shown as an alert and nothing is
+  downloaded. `onDownload(file)` replaces the default Blob link.
 - **Import** (a file field): native BPMN or Draw.io. With `onImport(result)` the host receives the validated result and
   stores it; without it the workshop applies it to its own canvas. Fidelity notices and refusals are shown as messages.
 - **Documents**: `onXmlChange(xml, change)` is called after every edit with the complete document (pulled once per
@@ -142,26 +143,49 @@ import { BpmnWorkshop } from "@sentropic/bpmn-canvas/react";
 ## Draw.io and Sparx (`/io`)
 
 ```ts
-import { exportDiagram, importDiagram, IoError } from "@sentropic/bpmn-canvas/io";
+import * as io from "@sentropic/bpmn-canvas/io";
 
-const file = exportDiagram(await canvas.getXml(), "drawio"); // { xml, filename, mimeType, fidelity }
-const result = await importDiagram(text);                       // { xml, projected, fidelity }
+// Initialize once with the same envelope configuration in Node and the browser.
+io.initializeCodecs({ host: "my-editor", sparx: { exporter: "my-editor", exporterVersion: "1" } });
+
+const { rootElement: definitions } = await io.parseDefinitions(await canvas.getXml());
+// The caller supplies a complete, laid-out, immutable snapshot of every page.
+const bytes: Uint8Array = await io.export(definitions, "drawio");
+const xml = new TextDecoder().decode(bytes);
+const result = await io.importDiagram(text); // { xml, projected, fidelity }
+const titles = io.listDiagrams(xmlInput).map((d) => d.name); // diagram, else process, else "Diagram N"
 ```
 
-- `bpmn` and `sparx` return the exact input bytes (Sparx accepts BPMN 2.0 XML as an interchange format; no EA/XMI
-  conversion is performed). `drawio` is a **projection**: one participant per page, no nested sub-process content,
-  no conditional flows or boundary events, every element with its DI. Anything else is refused.
-- A conversion never returns a partial result. It returns the file and a `fidelity` list (what it kept or
-  regenerated), or throws an `IoError` with a stable `code` (`unsupported-element`, `nested-subprocess`,
-  `multiple-participants`, `element-without-di`, `missing-endpoint`, `too-large`, `dtd`, `duplicate-id`,
-  `not-bpmn`, `missing-di`, `import-warning`, `unsupported-shape`, `unsupported-structure`, and others) and the
-  `ids` involved.
+- `parseDefinitions(xml)` registers the shared semantic descriptor, returns `{ rootElement, elementsById, warnings }`,
+  and rejects invalid required semantics and unknown namespace versions. `createModdle()` exposes descriptor-aware
+  `create`, `fromXML` and `toXML` operations for model authoring; use `parseDefinitions` for validated wire input.
+  `semanticDescriptor` and `semanticsChecksum` are exported, and the verbatim descriptor is available at
+  `@sentropic/bpmn-canvas/semantics.json`. Register it under `sem` when using another moddle instance.
+- `export(definitions, format)` returns `Promise<Uint8Array>` containing UTF-8 bytes. The caller supplies the filename
+  and MIME type. `bpmn` serializes the current moddle graph, including extensions and DI; whitespace and namespace
+  spelling may change. `drawio` and `sparx` project semantic IDs, references, roles, lane membership and orders from
+  that graph and use its DI for geometry. The exporter never normalizes, lays out or repairs a model.
+- Formatted exports preserve the reference codecs' cell/element order, IDs, styles, geometry, anchors, page links,
+  rounding and escaping. They support one pool per page, tasks, collapsed sub-processes, call activities,
+  start/end/throw events, exclusive/parallel gateways, data objects/inputs/outputs, `[Doc]` and `[App]` annotations,
+  sequence flows and data/document links. All pages need complete valid DI. Unsupported content or missing required
+  facts refuses the whole conversion with an `IoError` carrying a stable `code` and offending `ids`.
+- Semantic metadata lives in `sem:Info` within `extensionElements`: `order`, `laneRef`, `direction`, `label`,
+  `primaryAssociationRef` and `processRef`. References identify elements by ID; DI positions and names do not supply
+  these facts. Keep this metadata consistent with edits before exporting.
+- Envelope configuration is fixed once with `initializeCodecs`: `host`, `drawio.agent` (omitted unless supplied),
+  `sparx.exporter` and `sparx.exporterVersion` (defaults `bpmn-canvas` / `0.4.0`). A later different initialization
+  throws `invalid-configuration`; caller mutation cannot change the fixed configuration.
+- **Migration from 0.3:** `exportDiagram`, `readFacts`, `ExportFacts` and `ServedFile` are removed. Export accepts a
+  moddle Definitions, with no `facts`, `processJson`, `served`, `touched`, `inputXml` or per-call envelope options.
+  The generic Draw.io export option (`drawio.codec`) and exact-input BPMN passthrough are removed. Parse with the
+  descriptor, prepare all pages and call `export(definitions, format)`; decode the returned bytes only if text is needed.
 - Importing Draw.io decodes pages (raw or compressed) and regenerates BPMN: ids and DI are regenerated, data links
   become associations, HTML labels become text. The regenerated BPMN is valid against the OMG schema (flow elements
   before artifacts, every root element before the diagrams). Native BPMN is validated by importing every diagram
   in an off-screen viewer and is returned unchanged.
 - Raw and decompressed input is bounded (8 MiB by default, `maxBytes`), and DTDs and entities are refused.
-- Options carry file-format names so a host can keep reading files written by earlier tools: `kindAttribute`
+- Import/projection options carry file-format names so a host can keep reading files written by earlier tools: `kindAttribute`
   (default `bpmnKind`), `legacyKindAttributes`, `host`, `targetNamespace`.
 
 ## View, zoom and navigation (0.2)
@@ -293,6 +317,37 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 | `getXml()` while nothing is displayed | Returns the last XML the host supplied. |
 | Styles not applied after the first import (`styles.css` not loaded, or blocked by a CSP) | `styles-missing` (error), reported once and written in the canvas itself. |
 | Icon font or images not loadable (wrong `assetBase`, inlined bundle without `assetBase`, `font-src`/`img-src`) | `asset-load-failed` (error) naming the URL, reported once and written in the canvas. The diagram stays editable. |
+
+## Upgrading from 0.3
+
+0.4 adds the reference exports and the options a host needs to show the canvas exactly as it shipped before. Every
+0.3 entry and call is kept; the changes below are visible.
+
+- **Exports.** `drawio` is now the reference codec (see [Draw.io and Sparx](#drawio-and-sparx-io)); the 0.3 encoder
+  is `drawio: { codec: "generic" }`. `sparx` no longer returns the input bytes: it writes the reference Sparx file
+  (`application/xml`). Both return an empty `fidelity` and refuse what is outside the legend vocabulary.
+- **New `IoOptions`:** `drawio`, `sparx`, `facts`, `served`, `touched`. New `IoErrorCode`s:
+  `free-annotation`, `orphan-application`, `invalid-facts`, `not-served`. New: `readFacts`, `listDiagrams`.
+- **Canvas.** `setXml(xml, { layoutOnLoad: true })` and `createBpmnCanvas(host, { layoutOnLoad: true })` lay the
+  document out as part of its load (no undo step, no `onChange`, `getXml()` keeps the input bytes until an edit;
+  other diagrams on their first display; a failure keeps the document as given and emits the new diagnostic
+  `load-layout-failed`). `setProfile(profile, tokens, options)` and `profileOptions` take
+  `{ palette: "legend", drawing: "classic" }`. The handle gains `snapshot()`: one capture of the document, revision,
+  diagram, profile and whether it was edited since it was loaded; host mocks implementing `BpmnCanvasHandle` need it.
+  Exhaustive `switch`es over `DiagnosticCode` need `load-layout-failed`.
+- **Looks.** `colored` with `drawing: "classic"` draws flat shapes in its colours (1.4 lines, end ring with an inner
+  dot, open-bracket annotations, header lines on pools and lanes, labels inside). The legend `[+]` marker of a
+  sub-process now sits above its application band.
+- **Workshop.** `onDownload(file, context)` receives the capture of the export (`xml`, `revision`, `diagramId`,
+  `profile`, `touched`); an export spanning a new document is dropped with a notice, and one is refused during a
+  drag. New props: `layoutOnLoad`, `served`, `facts`, `toolbar`, `menus`, `icons`, `navigation`; `FormatOption`
+  gains `palette` and `drawing`. Once a host passes `served`, an unedited document without the file for a format has
+  that export item disabled. The Export trigger is disabled while read-only. The Format menu starts with a header and a
+  separator and its items carry `aria-pressed` (they were `menuitemradio`); the Format trigger sits in a
+  `role="group"`; the Fit menu has a separator. The default label
+  `exportSparx` is `Sparx`. `navigationResolver(rules)` builds a marker resolver from rules.
+- **Layout corpus.** `dist/layout-corpus.json` ships the canonical layout cases, their expected layouts and a
+  `VERSION` (hashes of both, of the layout sources, and the layout dependencies), for a host to mirror.
 
 ## Upgrading from 0.2
 

@@ -70,23 +70,14 @@ jobs:
       - run: npm run typecheck
       - run: npm test
 
-      # Idempotent: a version already on the registry is not published twice.
-      # Steady state: npm trusted publishing (OIDC), no token. The very first publish of a new
-      # package needs a one-off automation token in the NPM_TOKEN secret, because the trusted
-      # publisher can only be attached on npmjs.com once the package exists. Delete the secret
-      # after attaching the trusted publisher (see docs/release.md).
+      # Idempotent npm trusted publishing (OIDC), with provenance.
       - name: Publish to npm
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -euo pipefail
           name="$(node -p "require('./package.json').name")"
           if npm view "${name}@${RELEASE_VERSION}" version >/dev/null 2>&1; then
             echo "${name}@${RELEASE_VERSION} is already on the registry; skipping."
             exit 0
-          fi
-          if [ -n "${NPM_TOKEN:-}" ]; then
-            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$HOME/.npmrc"
           fi
           npm run build
           npm publish --access public --provenance

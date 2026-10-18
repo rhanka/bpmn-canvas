@@ -17,7 +17,11 @@ async function deflateBase64(text) {
 }
 
 window.io = {
-  call: (name, ...args) => wrap(() => io[name](...args)),
+  call: (name, ...args) => wrap(async () => {
+    if (name === "projectFile") return { xml: io.encodeDrawio(io.bpmnGraph(args[0], args[2]), args[2]), filename: "diagram.drawio", mimeType: "application/vnd.jgraph.mxfile", fidelity: [{code: "projection"}] };
+    if (name === "modelFile") { const fmt = args[1]; const xml = new TextDecoder().decode(await io.export((await io.parseDefinitions(args[0])).rootElement, fmt)); return {xml, filename: fmt === "bpmn" ? "diagram.bpmn" : "diagram.sparx.xml", mimeType: fmt === "bpmn" ? "application/bpmn+xml" : "application/xml", fidelity: []}; }
+    return io[name](...args);
+  }),
   deflateBase64,
   async compressPages(mxfile) {
     const doc = new DOMParser().parseFromString(mxfile, "application/xml");

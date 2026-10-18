@@ -8,6 +8,7 @@ const TYPEAHEAD_MS = 500;
 /** Accessible dropdown menu: ARIA menu button pattern, written without a UI library. */
 export function Menu(props: MenuProps): ReactElement {
   const { label, ariaLabel, items, disabled, testId, title, className } = props;
+  const chevron = props.chevron ?? "svg";
   const id = useId();
   const popupId = `${id}-menu`;
   const triggerId = `${id}-trigger`;
@@ -20,7 +21,7 @@ export function Menu(props: MenuProps): ReactElement {
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const typeahead = useRef<{ text: string; at: number }>({ text: "", at: 0 });
 
-  const enabled = useCallback((): number[] => items.flatMap((it, i) => (it.disabled ? [] : [i])), [items]);
+  const enabled = useCallback((): number[] => items.flatMap((it, i) => (it.disabled || (it.kind !== undefined && it.kind !== "item") ? [] : [i])), [items]);
 
   const close = useCallback((refocus: boolean): void => {
     setOpen(false);
@@ -152,17 +153,19 @@ export function Menu(props: MenuProps): ReactElement {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={popupId}
-        aria-label={ariaLabel}
+        {...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {})}
         {...(title ? { title } : {})}
         disabled={disabled === true}
         onClick={() => (open ? close(false) : openAt("first"))}
       >
-        <span className="bpmn-workshop-menu__label">{label}</span>
-        <ChevronDownIcon className="bpmn-workshop-menu__chevron" />
+        <span className="bpmn-workshop-menu__label">{label}{chevron === "text" ? " ▾" : null}</span>
+        {chevron === "svg" ? <ChevronDownIcon className="bpmn-workshop-menu__chevron" /> : null}
       </button>
       <div id={popupId} ref={popupRef} role="menu" aria-label={ariaLabel} hidden={!open} className="bpmn-workshop-menu__popup" style={shift ? { transform: `translateX(${shift}px)` } : undefined}>
         {items.map((it, i) => {
-          const radio = it.checked !== undefined;
+          if (it.kind === "separator") return <div key={it.id} role="separator" className="bpmn-workshop-menu__separator" />;
+          if (it.kind === "header") return <div key={it.id} className="bpmn-workshop-menu__header">{it.label}</div>;
+          const radio = it.checked !== undefined && it.pressed === undefined;
           return (
             <button
               key={it.id}
@@ -172,6 +175,7 @@ export function Menu(props: MenuProps): ReactElement {
               type="button"
               role={radio ? "menuitemradio" : "menuitem"}
               {...(radio ? { "aria-checked": it.checked === true } : {})}
+              {...(it.pressed !== undefined ? { "aria-pressed": it.pressed } : {})}
               aria-disabled={it.disabled ? true : undefined}
               tabIndex={-1}
               className="bpmn-workshop-menu__item"

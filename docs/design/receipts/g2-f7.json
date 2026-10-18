@@ -1,0 +1,797 @@
+{
+  "gate": "G2",
+  "function": "F7",
+  "jsLocalResult": "passed",
+  "twinGateResult": "corpus comparisons passed; Python execution receipt audit pending",
+  "parityStatus": "passed against immutable Python-lane expected corpus; executed Python receipt hashes pending",
+  "sourceRevision": "8494f80edc6dcd61a6c9f1e11dd183a2f59da33e",
+  "sourceState": "implementation staged atop red checkpoint; receipt included in green commit",
+  "sourceDiffSha256": "cde373eeab7666f206b71e00ce36061964d7fd302f9dd8becc696b6eded3bdf8",
+  "sourceFilesSha256": {
+    "src/io/index.ts": "cc97e4f51101090057037d934bf63f60fb4f75b9ea820b72dfee82aa28ccf6f6",
+    "src/io/serialize-bpmn.ts": "d96f0520a9b3697b8b958bb0ac35f499dd8f99b20172257e188e244346e5af6e"
+  },
+  "versions": {
+    "package": "0.4.0",
+    "node": "v22.22.1",
+    "bpmn-moddle": "10.3.1",
+    "moddle": "8.2.1",
+    "moddle-xml": "12.3.1",
+    "typescript": "5.9.3"
+  },
+  "descriptorFilesSha256": {
+    "src/io/semantics.json": "c274f46f773b5f557f7995fa70aae9d8a50384aedfcc6c3a5d166563a17a7c97",
+    "node_modules/bpmn-moddle/resources/bpmn/json/bpmn.json": "ae16ae96f24115f461ac6f57133546b88306fb37542f2d70c49f67b14d9400e7",
+    "node_modules/bpmn-moddle/resources/bpmn/json/bpmndi.json": "047c57936c9c9cce6d5d9da7c07e80fbdcb8dfa00ac734f60e97b680f44d03aa",
+    "node_modules/bpmn-moddle/resources/bpmn/json/dc.json": "91e124b7af094303e60af5f493e56587705af34de926a43915f469bbbbce42e9",
+    "node_modules/bpmn-moddle/resources/bpmn/json/di.json": "dfe43b92531ea584c90a043c66c43ec2caeafc9473b11b00609cc679ddf74057",
+    "node_modules/bpmn-moddle/resources/bpmn-io/json/bioc.json": "e9ebd5b06269d863fb09d08ba8953a1b02d5f140eff465741375826612f2c358",
+    "node_modules/bpmn-moddle/dist/index.js": "ece57e2fae965e1372cfb21b983fba06818c318ad0d35b6b8b8b6da2e27a0c9b"
+  },
+  "descriptorSetSha256": "7f7e02d73412e78514f9744690cdaa71ddd6976b7972e2fe42bc717850df70a4",
+  "configuration": {
+    "xmlOptions": {
+      "format": true,
+      "preamble": true
+    },
+    "descriptors": "native input factory, built with the shipped descriptor set"
+  },
+  "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+  "localCorpusFilesSha256": {
+    "tests/helpers/workbench-native.mjs": "07d715ce2f73e3e24f7f41bca5c78f23a91827cf519e22c049c43c6ffa872afb"
+  },
+  "sharedCorpusManifestSha256": "61903a61e2a6f258b506b4cdcd310a57787eee30845d6deb996afbb54abf33a9",
+  "authoredAssertionSourceSha256": {
+    "tests/workbench-f7.test.mjs": "1523631aa9856f0aa2c7bb31a95340b62a8827161ce162df59562fb017ab6236"
+  },
+  "comparisonRule": "namespace-expanded XML structure, QName xsi:type expanded, exact text/CDATA content, ordered elements/refs/DI/colors; ignore declaration, prefix spelling, attribute order and nontext whitespace between elements only; repeated and parse-write fixed-point bytes exact within one configuration",
+  "repeatCount": 3,
+  "freshRuntimeCount": 3,
+  "caseOrder": "A B A then independent invalid cases in each fresh runtime",
+  "executions": [
+    [
+      {
+        "name": "local-A-formatted",
+        "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "parseWriteAgainOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-B-compact",
+        "configurationSha256": "d74c401908d01b0e2193f6b423142a7138e08a6063cdb22a39866da3e41e99e1",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "parseWriteAgainOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-A-formatted",
+        "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "parseWriteAgainOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "duplicate-id",
+        "inputSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "inputBeforeSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "inputAfterSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "jsOutputSha256": "df5376fe0f374590e592f316a2cad91b8f6879f4660e122811d8337b3af2154c",
+        "diagnostic": {
+          "code": "duplicate-id",
+          "ids": [
+            "Start_Booklet"
+          ],
+          "message": "Duplicate ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "dangling-reference",
+        "inputSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "inputBeforeSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "inputAfterSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "jsOutputSha256": "394b1b4b4352eaa095316b731d26c820f974f848922d1b00644373b97736c76a",
+        "diagnostic": {
+          "code": "dangling-reference",
+          "ids": [
+            "Flow_First"
+          ],
+          "message": "Dangling targetRef"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "wrong-type",
+        "inputSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "inputBeforeSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "inputAfterSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "jsOutputSha256": "220a653763ddafa871cc91f8f59ed3e26d67990f848c67f5238bef7e3e30042c",
+        "diagnostic": {
+          "code": "invalid-reference",
+          "ids": [],
+          "message": "Detached or wrongly typed laneRef"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      }
+    ],
+    [
+      {
+        "name": "local-A-formatted",
+        "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "parseWriteAgainOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-B-compact",
+        "configurationSha256": "d74c401908d01b0e2193f6b423142a7138e08a6063cdb22a39866da3e41e99e1",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "parseWriteAgainOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-A-formatted",
+        "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "parseWriteAgainOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "duplicate-id",
+        "inputSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "inputBeforeSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "inputAfterSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "jsOutputSha256": "df5376fe0f374590e592f316a2cad91b8f6879f4660e122811d8337b3af2154c",
+        "diagnostic": {
+          "code": "duplicate-id",
+          "ids": [
+            "Start_Booklet"
+          ],
+          "message": "Duplicate ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "dangling-reference",
+        "inputSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "inputBeforeSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "inputAfterSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "jsOutputSha256": "394b1b4b4352eaa095316b731d26c820f974f848922d1b00644373b97736c76a",
+        "diagnostic": {
+          "code": "dangling-reference",
+          "ids": [
+            "Flow_First"
+          ],
+          "message": "Dangling targetRef"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "wrong-type",
+        "inputSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "inputBeforeSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "inputAfterSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "jsOutputSha256": "220a653763ddafa871cc91f8f59ed3e26d67990f848c67f5238bef7e3e30042c",
+        "diagnostic": {
+          "code": "invalid-reference",
+          "ids": [],
+          "message": "Detached or wrongly typed laneRef"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      }
+    ],
+    [
+      {
+        "name": "local-A-formatted",
+        "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "parseWriteAgainOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-B-compact",
+        "configurationSha256": "d74c401908d01b0e2193f6b423142a7138e08a6063cdb22a39866da3e41e99e1",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "parseWriteAgainOutputSha256": "e11d35235a00000aef4d9d8c8f7dc68e37ce3d817b053eb743a493bb5c1eb828",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-A-formatted",
+        "configurationSha256": "b4c020366c593533b872586f444c43a524347f6d3d905fd08502614e9ec5dc55",
+        "inputSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputBeforeSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "inputAfterSha256": "9fe972c5a945b1401064c596e3a8660512353b38488f5c040f7f2fa73fc89b9e",
+        "jsOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "outputStructureSha256": "c12240a6f2b3d3a0f723d6a50db0629ebef35c6b16a18569b7dce930eddb9317",
+        "parseWriteOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "parseWriteAgainOutputSha256": "ae262b5eba42e5c934edc5914a7227ac2fc6a105eaee7ab08e9192b845fe2b06",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "duplicate-id",
+        "inputSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "inputBeforeSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "inputAfterSha256": "641e69faf8554f326100d1fbaccf36cb1b37cf0066042d5d2c42221aa3230ed3",
+        "jsOutputSha256": "df5376fe0f374590e592f316a2cad91b8f6879f4660e122811d8337b3af2154c",
+        "diagnostic": {
+          "code": "duplicate-id",
+          "ids": [
+            "Start_Booklet"
+          ],
+          "message": "Duplicate ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "dangling-reference",
+        "inputSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "inputBeforeSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "inputAfterSha256": "e8c74442fca1b303c6cdc340cde40e9b138482a27e284efb95be1a3c177799cd",
+        "jsOutputSha256": "394b1b4b4352eaa095316b731d26c820f974f848922d1b00644373b97736c76a",
+        "diagnostic": {
+          "code": "dangling-reference",
+          "ids": [
+            "Flow_First"
+          ],
+          "message": "Dangling targetRef"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "wrong-type",
+        "inputSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "inputBeforeSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "inputAfterSha256": "2894462fc3ad0193af7ee0116df10d86d2750955772382ad510ef63bfe09d7a6",
+        "jsOutputSha256": "220a653763ddafa871cc91f8f59ed3e26d67990f848c67f5238bef7e3e30042c",
+        "diagnostic": {
+          "code": "invalid-reference",
+          "ids": [],
+          "message": "Detached or wrongly typed laneRef"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      }
+    ]
+  ],
+  "red": {
+    "command": "node --test tests/workbench-f7.test.mjs",
+    "tests": 20,
+    "pass": 0,
+    "fail": 20,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "logSha256": "25ec7d0756cefe21c41f0ae29a071262262b95df5febffd91d6107d94bdc60f1",
+    "reason": "serializeBpmn not exported"
+  },
+  "green": {
+    "command": "node --test tests/workbench-f7.test.mjs",
+    "tests": 20,
+    "pass": 20,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "logSha256": "4926f1e61ba669b8f1bef98f2ceb3519813d03f3a8590bb8c691643ccd3062cd"
+  },
+  "fullSuite": {
+    "command": "node --test --test-concurrency=4 tests/*.test.mjs (after npm run build)",
+    "tests": 1366,
+    "pass": 1338,
+    "fail": 28,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "logSha256": "d0e1a18f7529197601898d7510ee90e95fa506d82fe2a93ab0d02bf953603e66",
+    "inheritedFailuresUnchanged": true,
+    "inheritedFailures": [
+      "Collaboration DocLink_Shipping_policy_Ship_order: process-wide duplicate order refuses on parse and export",
+      "Collaboration Doc_Shipping_policy: process-wide duplicate order refuses on parse and export",
+      "Collaboration artifact ownership: drawio refuses multiple participants with a typed code",
+      "Collaboration artifact ownership: parse refuses multiple participants with a typed code",
+      "Collaboration artifact ownership: sparx refuses multiple participants with a typed code",
+      "Collaboration document annotation and association: XSD-valid placement parses and retains both goldens",
+      "Collaboration document annotation and association: direct drawio equals unchanged golden",
+      "Collaboration document annotation and association: direct sparx equals unchanged golden",
+      "Collaboration document annotation and association: parse and repeated Node/browser bytes equal both goldens",
+      "Collaboration document annotation: XSD-valid placement parses and retains both goldens",
+      "Collaboration document annotation: direct drawio equals unchanged golden",
+      "Collaboration document annotation: direct sparx equals unchanged golden",
+      "Collaboration document annotation: parse and repeated Node/browser bytes equal both goldens",
+      "ambiguous Collaboration artifact ownership refuses on browser parse",
+      "descriptor containment: Collaboration.artifacts <- bpmn:TextAnnotation",
+      "detached same-ID application source: both browser exporters refuse",
+      "detached same-ID application source: drawio refuses before consuming the endpoint",
+      "detached same-ID application source: sparx refuses before consuming the endpoint",
+      "detached same-ID application target: both browser exporters refuse",
+      "detached same-ID application target: drawio refuses before consuming the endpoint",
+      "detached same-ID application target: sparx refuses before consuming the endpoint",
+      "detached same-ID document source: both browser exporters refuse",
+      "detached same-ID document source: drawio refuses before consuming the endpoint",
+      "detached same-ID document source: sparx refuses before consuming the endpoint",
+      "detached same-ID document target: both browser exporters refuse",
+      "detached same-ID document target: drawio refuses before consuming the endpoint",
+      "detached same-ID document target: sparx refuses before consuming the endpoint",
+      "shipped browser IIFE: fourth-review supported placements and endpoint identity"
+    ],
+    "baseCounts": {
+      "tests": 1320,
+      "pass": 1292,
+      "fail": 28,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0
+    },
+    "baseLogSha256": "ac1ef219188c385ed23d64d4332d6e4ececc09748f67cbb46f2802620a4c4c71"
+  },
+  "staticChecks": [
+    "npm run typecheck",
+    "npm run typecheck:compat",
+    "all six built strict consumers in npm test",
+    "brand and attribution guards in npm test"
+  ],
+  "limitations": [
+    "No Python executed or compared",
+    "Local invented corpus only; no shared-manifest claim",
+    "Shared descriptor/default/numeric policy awaits G0",
+    "Unknown optional attrs/extensions refused until supported",
+    "Inherited red retained for G7; suite is not wholly green",
+    "Default file-concurrency campaign had two additional browser viewport assertion failures; bounded campaign runs every same test. No non-AI flaky waiver is claimed.",
+    "Peer consensus review unavailable: exact author model/effort metadata not exposed; see workbench-review.md"
+  ],
+  "additionalCampaigns": [
+    {
+      "command": "npm test",
+      "tests": 1366,
+      "pass": 1334,
+      "fail": 32,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "logSha256": "fdd8811987d2e4041097815f2fff48a40d7c528cd5ccc4ae2082f5740fc73733",
+      "failures": [
+        "(kept) initial view identical in both looks, the whole diagram visible",
+        "0.2 canvas API in a real browser",
+        "Collaboration DocLink_Shipping_policy_Ship_order: process-wide duplicate order refuses on parse and export",
+        "Collaboration Doc_Shipping_policy: process-wide duplicate order refuses on parse and export",
+        "Collaboration artifact ownership: drawio refuses multiple participants with a typed code",
+        "Collaboration artifact ownership: parse refuses multiple participants with a typed code",
+        "Collaboration artifact ownership: sparx refuses multiple participants with a typed code",
+        "Collaboration document annotation and association: XSD-valid placement parses and retains both goldens",
+        "Collaboration document annotation and association: direct drawio equals unchanged golden",
+        "Collaboration document annotation and association: direct sparx equals unchanged golden",
+        "Collaboration document annotation and association: parse and repeated Node/browser bytes equal both goldens",
+        "Collaboration document annotation: XSD-valid placement parses and retains both goldens",
+        "Collaboration document annotation: direct drawio equals unchanged golden",
+        "Collaboration document annotation: direct sparx equals unchanged golden",
+        "Collaboration document annotation: parse and repeated Node/browser bytes equal both goldens",
+        "L2 readable keeps the user's zoom across a resize; whole re-fits on every resize",
+        "ambiguous Collaboration artifact ownership refuses on browser parse",
+        "descriptor containment: Collaboration.artifacts <- bpmn:TextAnnotation",
+        "detached same-ID application source: both browser exporters refuse",
+        "detached same-ID application source: drawio refuses before consuming the endpoint",
+        "detached same-ID application source: sparx refuses before consuming the endpoint",
+        "detached same-ID application target: both browser exporters refuse",
+        "detached same-ID application target: drawio refuses before consuming the endpoint",
+        "detached same-ID application target: sparx refuses before consuming the endpoint",
+        "detached same-ID document source: both browser exporters refuse",
+        "detached same-ID document source: drawio refuses before consuming the endpoint",
+        "detached same-ID document source: sparx refuses before consuming the endpoint",
+        "detached same-ID document target: both browser exporters refuse",
+        "detached same-ID document target: drawio refuses before consuming the endpoint",
+        "detached same-ID document target: sparx refuses before consuming the endpoint",
+        "rendering in both looks",
+        "shipped browser IIFE: fourth-review supported placements and endpoint identity"
+      ],
+      "result": "28 inherited failures plus two viewport assertion failures and their two parents; retained, not accepted as green"
+    },
+    {
+      "command": "node --test tests/render-looks.browser.test.mjs tests/v02.browser.test.mjs",
+      "tests": 33,
+      "pass": 33,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "logSha256": "4d80c9c12090b2067c9763ade60fbd8b16707c3aba5c6cfe6ccd59db4c7eefcf",
+      "result": "both viewport files pass in isolation; assertions and timeouts unchanged"
+    }
+  ],
+  "pythonTwinRevision": "d2e8a1de81147d0a1fdb5f819d78ec149817ec80",
+  "parity": {
+    "stage": "A",
+    "sourceRevision": "953d39f7c7ba9956d493891e832fd0cb847db6ef",
+    "sourceDiffSha256": "cd1dc952cae601eb1fbff3fe19eee5ac3759a870fd222178c41ce8e3a0fa62e6",
+    "sourceFilesSha256": {
+      "src/io/moddle-json.ts": "203ff34a7681d1a972db3efcd26b7b5aad7870b896258ff280759502393733c6",
+      "src/io/serialize-bpmn.ts": "8a8a5cc69c4778d4e934802b2ef459b902306555af6382c916a0ee86f11ad525",
+      "src/io/errors.ts": "4a3a5680a130007e129ae55303a1a2e9f68e0d5dcd5759a58b7ca16fc8c94372"
+    },
+    "configSha256": "a4b40655217ce33a6c7be02582decb1476c0311a83f70a94063c9ceac9b85b01",
+    "comparatorsSha256": "565172afd71a4b4338d0563748d8e59c84953621f2b5e3db070f28b91a6a8f5d",
+    "comparisonRule": "expanded namespace names; sorted expanded attribute names; ordered child elements; exact non-formatting text/tails; ignore declaration/prefix/attribute order/inter-element formatting only",
+    "diagnosticTuple": [
+      "code",
+      "path"
+    ],
+    "repeatCount": 3,
+    "freshRuntimeCount": 3,
+    "caseOrder": "index then W01 W07 W01; both writer options",
+    "freshRunOutputHashes": [
+      "39ffac0289932523773382ed10222d251a0f293b47815e07bbe82df946e243ee",
+      "39ffac0289932523773382ed10222d251a0f293b47815e07bbe82df946e243ee",
+      "39ffac0289932523773382ed10222d251a0f293b47815e07bbe82df946e243ee"
+    ],
+    "samples": {
+      "W01/0": {
+        "inputFileSha256": "e31094d7f6a9d3a90b8e73c919a9f16d3a532429ade358eef287a81657ba909d",
+        "inputBeforeSha256": "3ab9129e652de59009a1535994ce00476194d8e2d08f953944d9968e4ed4b25a",
+        "inputAfterSha256": "3ab9129e652de59009a1535994ce00476194d8e2d08f953944d9968e4ed4b25a",
+        "expectedFileSha256": "5dfb24bdf184c5f213d1d4e8d1956d2efb01507e3350021300b2fe6dfa5db282",
+        "expectedStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "jsOutputSha256": "eed7982199323aa0afa933a671b2dc7662ef670f45aa8c48cd9728b73722440d",
+        "jsStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "eed7982199323aa0afa933a671b2dc7662ef670f45aa8c48cd9728b73722440d",
+        "mixedFixedPointSha256": "961c67707ce233caeca536f3638814e12b718c5b7945eea7bae14e9f56013074",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W01/1": {
+        "inputFileSha256": "e31094d7f6a9d3a90b8e73c919a9f16d3a532429ade358eef287a81657ba909d",
+        "inputBeforeSha256": "3ab9129e652de59009a1535994ce00476194d8e2d08f953944d9968e4ed4b25a",
+        "inputAfterSha256": "3ab9129e652de59009a1535994ce00476194d8e2d08f953944d9968e4ed4b25a",
+        "expectedFileSha256": "5dfb24bdf184c5f213d1d4e8d1956d2efb01507e3350021300b2fe6dfa5db282",
+        "expectedStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "jsOutputSha256": "706c449ca2da0b4eb544fdce605fa6bc757c4020083d4d77c7f6b02039f4b37a",
+        "jsStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "706c449ca2da0b4eb544fdce605fa6bc757c4020083d4d77c7f6b02039f4b37a",
+        "mixedFixedPointSha256": "4d8770fb5454cb118a285a74a7b7e53023a257b7f4e35fb57b3bf19bc79af39a",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W02/0": {
+        "inputFileSha256": "7c478d205024f73f99f549e4e41a0bd5f78a90f43664e3e1f26aa646dbc01f85",
+        "inputBeforeSha256": "f418879a3acc08514a37eef9fe0d9030d36b413dc3d32e53f8ab0e4dabe4683e",
+        "inputAfterSha256": "f418879a3acc08514a37eef9fe0d9030d36b413dc3d32e53f8ab0e4dabe4683e",
+        "expectedFileSha256": "fc498784cc2a1793d82ad37e91b22dff1efa1ad073e36676716c83597d7ae434",
+        "expectedStructureSha256": "58806c21b32fb39c6c555d2f67cf514391881ca68185ebe741c74355dfb76cd3",
+        "jsOutputSha256": "aac6ec9b73b12820fbeeac5f2e2bcb3f4ecc31d0423e3807577ffc1c6ce453ee",
+        "jsStructureSha256": "58806c21b32fb39c6c555d2f67cf514391881ca68185ebe741c74355dfb76cd3",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "aac6ec9b73b12820fbeeac5f2e2bcb3f4ecc31d0423e3807577ffc1c6ce453ee",
+        "mixedFixedPointSha256": "270af1aaef5eb48d421816ce93494beba69064a027934993edbb2a2c8bd476f1",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W02/1": {
+        "inputFileSha256": "7c478d205024f73f99f549e4e41a0bd5f78a90f43664e3e1f26aa646dbc01f85",
+        "inputBeforeSha256": "f418879a3acc08514a37eef9fe0d9030d36b413dc3d32e53f8ab0e4dabe4683e",
+        "inputAfterSha256": "f418879a3acc08514a37eef9fe0d9030d36b413dc3d32e53f8ab0e4dabe4683e",
+        "expectedFileSha256": "fc498784cc2a1793d82ad37e91b22dff1efa1ad073e36676716c83597d7ae434",
+        "expectedStructureSha256": "58806c21b32fb39c6c555d2f67cf514391881ca68185ebe741c74355dfb76cd3",
+        "jsOutputSha256": "f2424105d3d75f1790a69f2750b4054383abf06a5b6a351312d876ce4700c541",
+        "jsStructureSha256": "58806c21b32fb39c6c555d2f67cf514391881ca68185ebe741c74355dfb76cd3",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "f2424105d3d75f1790a69f2750b4054383abf06a5b6a351312d876ce4700c541",
+        "mixedFixedPointSha256": "4c13df04c142f238583f22f6e82dbbb102e56f499cbbaaa7f6a378bafed6f15d",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W03/0": {
+        "inputFileSha256": "49bdfcc1ebcd578f5e7f0589ec023c265ad2030f1cb4b862c3ecfd53bc888864",
+        "inputBeforeSha256": "264cb9de46a96835c1a3f7c6c9504902564b4d7e6347715b97a1ba7d5393ab87",
+        "inputAfterSha256": "264cb9de46a96835c1a3f7c6c9504902564b4d7e6347715b97a1ba7d5393ab87",
+        "expectedFileSha256": "d3d0e206c7203354af1c809069679c898e924ee4bb87c658c60e739a492ce24e",
+        "expectedStructureSha256": "53ff71990fb05d7819d38d1200de4a01264be68c7a26b3de2e8e5f216af6dcbe",
+        "jsOutputSha256": "dd54ca627a1b404a5ad8f5b1c72bb74ffa4ecc4a1482ef79fef5a9fdf3b6402e",
+        "jsStructureSha256": "53ff71990fb05d7819d38d1200de4a01264be68c7a26b3de2e8e5f216af6dcbe",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "dd54ca627a1b404a5ad8f5b1c72bb74ffa4ecc4a1482ef79fef5a9fdf3b6402e",
+        "mixedFixedPointSha256": "dd54ca627a1b404a5ad8f5b1c72bb74ffa4ecc4a1482ef79fef5a9fdf3b6402e",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W03/1": {
+        "inputFileSha256": "49bdfcc1ebcd578f5e7f0589ec023c265ad2030f1cb4b862c3ecfd53bc888864",
+        "inputBeforeSha256": "264cb9de46a96835c1a3f7c6c9504902564b4d7e6347715b97a1ba7d5393ab87",
+        "inputAfterSha256": "264cb9de46a96835c1a3f7c6c9504902564b4d7e6347715b97a1ba7d5393ab87",
+        "expectedFileSha256": "d3d0e206c7203354af1c809069679c898e924ee4bb87c658c60e739a492ce24e",
+        "expectedStructureSha256": "53ff71990fb05d7819d38d1200de4a01264be68c7a26b3de2e8e5f216af6dcbe",
+        "jsOutputSha256": "dec8f14ba6edffc6c2848d7847a9fd038c508ee5ac392edba4fd2d0043296ab2",
+        "jsStructureSha256": "53ff71990fb05d7819d38d1200de4a01264be68c7a26b3de2e8e5f216af6dcbe",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "dec8f14ba6edffc6c2848d7847a9fd038c508ee5ac392edba4fd2d0043296ab2",
+        "mixedFixedPointSha256": "dec8f14ba6edffc6c2848d7847a9fd038c508ee5ac392edba4fd2d0043296ab2",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W04/0": {
+        "inputFileSha256": "1a4208c669a341cce6a6065f39df9fdbe7beddd66836334e1a14cfe9e67b50c4",
+        "inputBeforeSha256": "c68f6949317c0a6de73b5688948853ca9aa6220ea06787fc05fc1ba1c9793ed9",
+        "inputAfterSha256": "c68f6949317c0a6de73b5688948853ca9aa6220ea06787fc05fc1ba1c9793ed9",
+        "expectedFileSha256": "5d5f9475393696fa735859fb4288e080c9f9a69b473bc5d2b236d37705c79690",
+        "expectedStructureSha256": "857032f2ce8b46336f4e7d95635c0119879329c8522e7d6ee3c93b056fa841ff",
+        "jsOutputSha256": "b69ea7c26fa22ee65d2764064700da01cc56e772322131bda17625b181a2e716",
+        "jsStructureSha256": "857032f2ce8b46336f4e7d95635c0119879329c8522e7d6ee3c93b056fa841ff",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "b69ea7c26fa22ee65d2764064700da01cc56e772322131bda17625b181a2e716",
+        "mixedFixedPointSha256": "ea3d7395c6a70242f8c3a26479b7bb81603674ba2ee237e73c14af958c8f16d7",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W04/1": {
+        "inputFileSha256": "1a4208c669a341cce6a6065f39df9fdbe7beddd66836334e1a14cfe9e67b50c4",
+        "inputBeforeSha256": "c68f6949317c0a6de73b5688948853ca9aa6220ea06787fc05fc1ba1c9793ed9",
+        "inputAfterSha256": "c68f6949317c0a6de73b5688948853ca9aa6220ea06787fc05fc1ba1c9793ed9",
+        "expectedFileSha256": "5d5f9475393696fa735859fb4288e080c9f9a69b473bc5d2b236d37705c79690",
+        "expectedStructureSha256": "857032f2ce8b46336f4e7d95635c0119879329c8522e7d6ee3c93b056fa841ff",
+        "jsOutputSha256": "b2126d9023b3bd09856ef958cc5d5c7791f38c18140969abcb6c15cfba7f25dc",
+        "jsStructureSha256": "857032f2ce8b46336f4e7d95635c0119879329c8522e7d6ee3c93b056fa841ff",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "b2126d9023b3bd09856ef958cc5d5c7791f38c18140969abcb6c15cfba7f25dc",
+        "mixedFixedPointSha256": "e6a4a3f1bfab0e5711b92459e004f726b31ffeb265a747054ce4ffe1db887635",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W05/0": {
+        "inputFileSha256": "5900911656a69e48d4b4fb2a204dfa17aba33c1946a6e882fea7ce913b54544e",
+        "inputBeforeSha256": "92e668a08a247a4b4abf5b9c24638d6f2bd4efdd8dab733adb248b2de3db8d30",
+        "inputAfterSha256": "92e668a08a247a4b4abf5b9c24638d6f2bd4efdd8dab733adb248b2de3db8d30",
+        "expectedFileSha256": "aecbd1890ae90f2d4b92b6d63789d424ca0c9933ecc54c7d078469681a13b282",
+        "expectedStructureSha256": "f8070efcf8dad6dd4b52edb75136f6fdb087293d333d77f48cfcbd6ec325f2b1",
+        "jsOutputSha256": "63fe4d6517bbe495c26375e3ee92f52a4cfdbab431f5be682bcc41d90325bef8",
+        "jsStructureSha256": "f8070efcf8dad6dd4b52edb75136f6fdb087293d333d77f48cfcbd6ec325f2b1",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "63fe4d6517bbe495c26375e3ee92f52a4cfdbab431f5be682bcc41d90325bef8",
+        "mixedFixedPointSha256": "f05a693ae2167c445a7c373b4a234cefe22ae9b5c28975006630f5621f98caa7",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W05/1": {
+        "inputFileSha256": "5900911656a69e48d4b4fb2a204dfa17aba33c1946a6e882fea7ce913b54544e",
+        "inputBeforeSha256": "92e668a08a247a4b4abf5b9c24638d6f2bd4efdd8dab733adb248b2de3db8d30",
+        "inputAfterSha256": "92e668a08a247a4b4abf5b9c24638d6f2bd4efdd8dab733adb248b2de3db8d30",
+        "expectedFileSha256": "aecbd1890ae90f2d4b92b6d63789d424ca0c9933ecc54c7d078469681a13b282",
+        "expectedStructureSha256": "f8070efcf8dad6dd4b52edb75136f6fdb087293d333d77f48cfcbd6ec325f2b1",
+        "jsOutputSha256": "e598f7e1efa9dc973353a9925311d715dd3d7afea76de9a888e05e23dababd69",
+        "jsStructureSha256": "f8070efcf8dad6dd4b52edb75136f6fdb087293d333d77f48cfcbd6ec325f2b1",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "e598f7e1efa9dc973353a9925311d715dd3d7afea76de9a888e05e23dababd69",
+        "mixedFixedPointSha256": "c9b5a1331e9ebbaecf7dd4a2fae88a583569ddffeb4839b9256090aa13c93d77",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W06/0": {
+        "inputFileSha256": "582349f46726923a85f8024dc8bffd71efe399693ca3c6144cfc325e0e3294f6",
+        "inputBeforeSha256": "864d0dc01340a776099a23a2ae487da2cb30a99bf1e0911f599b0b836c17dbb4",
+        "inputAfterSha256": "864d0dc01340a776099a23a2ae487da2cb30a99bf1e0911f599b0b836c17dbb4",
+        "expectedFileSha256": "ced9d7ecd9b3ff4e749d68e88c63fbf2483376df96591864fb2d72fb305ab12f",
+        "expectedStructureSha256": "ea90c7181727801768d6748bb6df0442bb511f68d0d94816023411fe229cab00",
+        "jsOutputSha256": "4c698ac673d7bdc4862d76fca5a0ab67b5a0e4bf0bd75a4bab4508d3736345e6",
+        "jsStructureSha256": "ea90c7181727801768d6748bb6df0442bb511f68d0d94816023411fe229cab00",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "4c698ac673d7bdc4862d76fca5a0ab67b5a0e4bf0bd75a4bab4508d3736345e6",
+        "mixedFixedPointSha256": "27e5b2d37b3563f4a40d0386afa58e86bc9aec572ae176480ef23864961ecdbb",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W06/1": {
+        "inputFileSha256": "582349f46726923a85f8024dc8bffd71efe399693ca3c6144cfc325e0e3294f6",
+        "inputBeforeSha256": "864d0dc01340a776099a23a2ae487da2cb30a99bf1e0911f599b0b836c17dbb4",
+        "inputAfterSha256": "864d0dc01340a776099a23a2ae487da2cb30a99bf1e0911f599b0b836c17dbb4",
+        "expectedFileSha256": "ced9d7ecd9b3ff4e749d68e88c63fbf2483376df96591864fb2d72fb305ab12f",
+        "expectedStructureSha256": "ea90c7181727801768d6748bb6df0442bb511f68d0d94816023411fe229cab00",
+        "jsOutputSha256": "10091f5644bd71361e58218c16866a9faa4e16f19b97c406df62fd12ba6e48c7",
+        "jsStructureSha256": "ea90c7181727801768d6748bb6df0442bb511f68d0d94816023411fe229cab00",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "10091f5644bd71361e58218c16866a9faa4e16f19b97c406df62fd12ba6e48c7",
+        "mixedFixedPointSha256": "b704cee7ecfc78b042a920d7f6365d5cbfa51659a04fefc8908ee4223851c4f8",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W07/0": {
+        "inputFileSha256": "4b0203bca2842f8b67453b5aca5156fa6b3874ddb30ea2e3b7cbe72f629e1e19",
+        "inputBeforeSha256": "58f470835d665f896031fd6afdb74341727bb75ab846a4efe9f7b2fc8a042cdb",
+        "inputAfterSha256": "58f470835d665f896031fd6afdb74341727bb75ab846a4efe9f7b2fc8a042cdb",
+        "expectedFileSha256": "b0b3c4094791f6cd5b913c2d7d365fe7b8540fd95cb1d87ced3917c49965cc1f",
+        "expectedStructureSha256": "2bc66785af6bff6f04338a696ee54a3f3e5491faafd2f3c8381982288872dc96",
+        "jsOutputSha256": "0b9aee15d53b5e71034564a7a6b32a4c6a16041bb5fa3819af6f24823758ed68",
+        "jsStructureSha256": "2bc66785af6bff6f04338a696ee54a3f3e5491faafd2f3c8381982288872dc96",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "0b9aee15d53b5e71034564a7a6b32a4c6a16041bb5fa3819af6f24823758ed68",
+        "mixedFixedPointSha256": "2a438b6fe0ad0b398da4efe98630c6a99d3349a9f667f8f45e107aeb418bc4d6",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W07/1": {
+        "inputFileSha256": "4b0203bca2842f8b67453b5aca5156fa6b3874ddb30ea2e3b7cbe72f629e1e19",
+        "inputBeforeSha256": "58f470835d665f896031fd6afdb74341727bb75ab846a4efe9f7b2fc8a042cdb",
+        "inputAfterSha256": "58f470835d665f896031fd6afdb74341727bb75ab846a4efe9f7b2fc8a042cdb",
+        "expectedFileSha256": "b0b3c4094791f6cd5b913c2d7d365fe7b8540fd95cb1d87ced3917c49965cc1f",
+        "expectedStructureSha256": "2bc66785af6bff6f04338a696ee54a3f3e5491faafd2f3c8381982288872dc96",
+        "jsOutputSha256": "00dadc227a51ef79cbe8b04560aa1a0f82ffb1880576e6e6515464bd45759ba1",
+        "jsStructureSha256": "2bc66785af6bff6f04338a696ee54a3f3e5491faafd2f3c8381982288872dc96",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "00dadc227a51ef79cbe8b04560aa1a0f82ffb1880576e6e6515464bd45759ba1",
+        "mixedFixedPointSha256": "32d3aadee99e047918f3e2bd7061638de2ae7eaeb414a70b31ccc4fcb50a49cb",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08/0": {
+        "inputFileSha256": "625b45af3543b973de076ef3fa6e1c55851f8394ad2ba5aab97c6e5ef0a74b94",
+        "inputBeforeSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "inputAfterSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "expectedFileSha256": "5dfb24bdf184c5f213d1d4e8d1956d2efb01507e3350021300b2fe6dfa5db282",
+        "expectedStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "jsOutputSha256": "eed7982199323aa0afa933a671b2dc7662ef670f45aa8c48cd9728b73722440d",
+        "jsStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "eed7982199323aa0afa933a671b2dc7662ef670f45aa8c48cd9728b73722440d",
+        "mixedFixedPointSha256": "961c67707ce233caeca536f3638814e12b718c5b7945eea7bae14e9f56013074",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08/1": {
+        "inputFileSha256": "625b45af3543b973de076ef3fa6e1c55851f8394ad2ba5aab97c6e5ef0a74b94",
+        "inputBeforeSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "inputAfterSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "expectedFileSha256": "5dfb24bdf184c5f213d1d4e8d1956d2efb01507e3350021300b2fe6dfa5db282",
+        "expectedStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "jsOutputSha256": "706c449ca2da0b4eb544fdce605fa6bc757c4020083d4d77c7f6b02039f4b37a",
+        "jsStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "706c449ca2da0b4eb544fdce605fa6bc757c4020083d4d77c7f6b02039f4b37a",
+        "mixedFixedPointSha256": "4d8770fb5454cb118a285a74a7b7e53023a257b7f4e35fb57b3bf19bc79af39a",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-keys/0": {
+        "inputFileSha256": "f57a96fa850f8c8e6d6b5bd5b178626e59f62629deff0f8fad1a467cc4204d42",
+        "inputBeforeSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "inputAfterSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "expectedFileSha256": "f6b5619be8747dfe46cdb080d5c340a5b84d57c7cdd93a4d34a278e60acf77f9",
+        "expectedStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "jsOutputSha256": "eed7982199323aa0afa933a671b2dc7662ef670f45aa8c48cd9728b73722440d",
+        "jsStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "eed7982199323aa0afa933a671b2dc7662ef670f45aa8c48cd9728b73722440d",
+        "mixedFixedPointSha256": "961c67707ce233caeca536f3638814e12b718c5b7945eea7bae14e9f56013074",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-keys/1": {
+        "inputFileSha256": "f57a96fa850f8c8e6d6b5bd5b178626e59f62629deff0f8fad1a467cc4204d42",
+        "inputBeforeSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "inputAfterSha256": "633a6159ddb8f12f07a70121ba6f795115325dbd0a1591f218af9444f2a86f9f",
+        "expectedFileSha256": "f6b5619be8747dfe46cdb080d5c340a5b84d57c7cdd93a4d34a278e60acf77f9",
+        "expectedStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "jsOutputSha256": "706c449ca2da0b4eb544fdce605fa6bc757c4020083d4d77c7f6b02039f4b37a",
+        "jsStructureSha256": "c8b781503d37ea3cd700966d2046cdcc729583e394d5ff3456c2b4f07ba1ff16",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "706c449ca2da0b4eb544fdce605fa6bc757c4020083d4d77c7f6b02039f4b37a",
+        "mixedFixedPointSha256": "4d8770fb5454cb118a285a74a7b7e53023a257b7f4e35fb57b3bf19bc79af39a",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-arrays/0": {
+        "inputFileSha256": "b8cadbd7608d46a2b8524518e3da1adf70839c84675a1ad2bcdec5b9b4e345d6",
+        "inputBeforeSha256": "e57ca018a6fdd2f5fe7913e886552bb5fdd6e93244ee235b1da31956c12e3fc6",
+        "inputAfterSha256": "e57ca018a6fdd2f5fe7913e886552bb5fdd6e93244ee235b1da31956c12e3fc6",
+        "expectedFileSha256": "f0358015d5d555ee04a5844ac574779e74ff6de49beb4846d432452fb38a56d7",
+        "expectedStructureSha256": "eb68c21a0a01484b15f22afca14f75131c02001038990696a5113fd10115487b",
+        "jsOutputSha256": "b72ae24aff2f2dcdb447043295a35b21f46b7dec52c8eab5a4f3845bbb6f8493",
+        "jsStructureSha256": "eb68c21a0a01484b15f22afca14f75131c02001038990696a5113fd10115487b",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "b72ae24aff2f2dcdb447043295a35b21f46b7dec52c8eab5a4f3845bbb6f8493",
+        "mixedFixedPointSha256": "95cfd9c2f97640b313096e2fd4ff1a38af36edf557e0514103e0c6ee0c5243af",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-arrays/1": {
+        "inputFileSha256": "b8cadbd7608d46a2b8524518e3da1adf70839c84675a1ad2bcdec5b9b4e345d6",
+        "inputBeforeSha256": "e57ca018a6fdd2f5fe7913e886552bb5fdd6e93244ee235b1da31956c12e3fc6",
+        "inputAfterSha256": "e57ca018a6fdd2f5fe7913e886552bb5fdd6e93244ee235b1da31956c12e3fc6",
+        "expectedFileSha256": "f0358015d5d555ee04a5844ac574779e74ff6de49beb4846d432452fb38a56d7",
+        "expectedStructureSha256": "eb68c21a0a01484b15f22afca14f75131c02001038990696a5113fd10115487b",
+        "jsOutputSha256": "ce60e238757db86f54d6d3f4a20b55675919775ebc6217f2e7a4ea5d5d555923",
+        "jsStructureSha256": "eb68c21a0a01484b15f22afca14f75131c02001038990696a5113fd10115487b",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "ce60e238757db86f54d6d3f4a20b55675919775ebc6217f2e7a4ea5d5d555923",
+        "mixedFixedPointSha256": "bef126a565a3595919e5244ccfff07ab91ab1bca6373ee881f6f706b94189fc0",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-absent/0": {
+        "inputFileSha256": "6f092fdd4ee504ce137e5c7b9dcea5ac6414bbfa34fe89446889369eaceba77f",
+        "inputBeforeSha256": "0cd4bfebdab764145a240a7bb1cd67001f843b382e08f064857f5275b79f4d18",
+        "inputAfterSha256": "0cd4bfebdab764145a240a7bb1cd67001f843b382e08f064857f5275b79f4d18",
+        "expectedFileSha256": "3682408ebdc9df49e3a2c23f60a4f4f7fcffa9850f7c504e0d1eb0e16af7003a",
+        "expectedStructureSha256": "ebb770bcd3f64c528acaadfc9dcbc64eea9883ce3c307f822783cb2a197f16d1",
+        "jsOutputSha256": "937aa1ad1a3fc906f436ceb92d677328e9328a26adc728f45643cd03ce9d03f8",
+        "jsStructureSha256": "ebb770bcd3f64c528acaadfc9dcbc64eea9883ce3c307f822783cb2a197f16d1",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "937aa1ad1a3fc906f436ceb92d677328e9328a26adc728f45643cd03ce9d03f8",
+        "mixedFixedPointSha256": "c0d9ba153441307be328f64f2d2f71232db1b3448dc9af4a2d3ddcb09df75f3c",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-absent/1": {
+        "inputFileSha256": "6f092fdd4ee504ce137e5c7b9dcea5ac6414bbfa34fe89446889369eaceba77f",
+        "inputBeforeSha256": "0cd4bfebdab764145a240a7bb1cd67001f843b382e08f064857f5275b79f4d18",
+        "inputAfterSha256": "0cd4bfebdab764145a240a7bb1cd67001f843b382e08f064857f5275b79f4d18",
+        "expectedFileSha256": "3682408ebdc9df49e3a2c23f60a4f4f7fcffa9850f7c504e0d1eb0e16af7003a",
+        "expectedStructureSha256": "ebb770bcd3f64c528acaadfc9dcbc64eea9883ce3c307f822783cb2a197f16d1",
+        "jsOutputSha256": "bc87c24c4cfd94e318c1960323ac314cc45217736f6972de12170c02e493313f",
+        "jsStructureSha256": "ebb770bcd3f64c528acaadfc9dcbc64eea9883ce3c307f822783cb2a197f16d1",
+        "pythonOutputSha256": null,
+        "jsFixedPointSha256": "bc87c24c4cfd94e318c1960323ac314cc45217736f6972de12170c02e493313f",
+        "mixedFixedPointSha256": "282ec1c9ae9888e391ebca8feb88ace54d7bc41a97fed978e0ccce918617d86d",
+        "firstDifference": null,
+        "result": "passed"
+      }
+    },
+    "redLogSha256": "6a037692656aef9799c7a47218a70b569bd268c462394775d8eeb90457d12dca",
+    "greenLogSha256": "26b322eb22b26d20adc6c74ae43f522d1ac107f8d5f4849d3c15c3e7bb5e5df0",
+    "firstDifference": null
+  }
+}

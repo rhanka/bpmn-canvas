@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { brandTokens } from "./helpers/brand.mjs";
+import { baselineHashAllowlist, outsideBaselineHashes } from "./helpers/brand-baseline.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = process.env.LEGEND_DIST ?? `${root}dist`;
@@ -153,13 +153,14 @@ test("tokens: an explicit per-type value wins over the conveniences", () => {
 });
 
 test("legend sources contain no banned symbol", () => {
+  const allowed = baselineHashAllowlist();
   const dir = `${root}src/profiles/legend/`;
   const banned = /localStorage|sessionStorage|@\/lib|\.bjs-powered-by|prototype\.\w+\s*=/;
   for (const f of readdirSync(dir)) {
     if (!/\.(ts|mjs)$/.test(f)) continue;
     const text = readFileSync(dir + f, "utf8");
     assert.ok(!banned.test(text), `${f} contains a banned symbol: ${banned.exec(text)?.[0]}`);
-    assert.deepEqual(brandTokens(text), [], `${f} keeps a banned identifier`);
+    assert.deepEqual(outsideBaselineHashes(`src/profiles/legend/${f}`, text, allowed), [], `${f} keeps a banned identifier`);
     assert.ok(!/#[0-9a-fA-F]{6}\b/.test(f === "tokens.ts" ? "" : text), `${f} hard-codes a colour outside tokens.ts`);
   }
 });

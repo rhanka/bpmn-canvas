@@ -1,0 +1,690 @@
+{
+  "format": "profile-step-receipt/1",
+  "step": 3,
+  "status": "js-step3-contracts-complete-twin-and-final-corpus-deferred",
+  "fullStep3Accepted": false,
+  "scope": "Private JS syntax, isolated CR-01–CR-14 static preflight, ordered compatibility, canonical identities, descriptor-driven semantic projection, DocumentEnvelope/1 and supplied identity-transition contracts. No profile activation or recipe/C/N interpreter.",
+  "source": {
+    "branch": "workbench/functions-20261004-profile-lot0",
+    "baseCommit": "e9f5f8961ac63f7163003c0960cb20c4080147a3",
+    "initialCommit": "d51b55580e913a3fefb1c1fd10d9829501caec77",
+    "redCommit": "0596e678851b9fead6cb643b58fc21c72456e200",
+    "greenCommit": "284faedb4df08f5eaa737ae0e9e8e011e0b4d7cc",
+    "receiptCommit": "Resolve with git log -1 --format=%H -- docs/design/receipts/lot0-s3.json; it cannot be embedded in its own bytes.",
+    "previousSubset": {
+      "receiptCommit": "3a21aceb7b7a29e7de106ce473b820241e8d969d",
+      "redCommit": "ada213cb4ce16e422ff89745be73910d1888335c",
+      "greenCommit": "d8e339243cf092690dfacafeb65c9a3583236bfe"
+    },
+    "reconciliation": {
+      "gateState": "closed",
+      "independentWorkAuthorized": true,
+      "stashTouched": false
+    },
+    "unrelatedUntrackedPaths": [
+      "tmp/",
+      "docs/design/0.3.1-layout-on-load.md"
+    ],
+    "unrelatedPathsTouched": false,
+    "sourceAndTestTreeDirtyAtVerification": true,
+    "verificationTreeMatchesGreenCommit": true,
+    "verificationStartedBeforeGreenCommit": true,
+    "sourceAndTestBytesChangedDuringFullVerification": false,
+    "stashTouched": false,
+    "pushed": false
+  },
+  "inputs": {
+    "authority": {
+      "artifact": "DESIGN.md",
+      "revision": "R3.2",
+      "bytes": 216625,
+      "sha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497",
+      "completeExternalAuthorityVerified": true
+    },
+    "executionPlan": {
+      "artifact": "LOT0-CANVAS-PLAN.md",
+      "sha256": "140dd4b0c3e75ceacd44c2de3dfad2d30e2cbfc6e78a5d19482837906ce46def",
+      "authority": "R3.2 supersedes the historical R3.1 plan references"
+    },
+    "expectationSeal": {
+      "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+      "bytes": 453,
+      "sha256": "1bc9d17076c4143aacbf04cbc8ab92956076f87fbc85780615d379547c703a15"
+    },
+    "freezeSeal": {
+      "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+      "bytes": 2302,
+      "sha256": "eaffb753e4155293cf2f1ee673ba704cd2a7bb9989e38d7b58c391ac2abc9c70"
+    },
+    "artifacts": [
+      {
+        "path": "tests/fixtures/profile-lot0/expectations.json",
+        "bytes": 731417,
+        "sha256": "f19fadd62f465b0a869cb2aabb3966c89f299ea7661c72835706af20e6eb3ce8"
+      },
+      {
+        "path": "tests/fixtures/profile-lot0/inputs.json",
+        "bytes": 8134,
+        "sha256": "c0a33f8450a468dd53da850d7e15952430bd63a178b6635058d6f22222950f7f"
+      },
+      {
+        "path": "tests/fixtures/profile-lot0/design-provenance.json",
+        "bytes": 77715,
+        "sha256": "63f950ffdc435f62697cd44fd7cf4dfc637d3253c75ef294537532bf87543a93"
+      },
+      {
+        "path": "tests/fixtures/profile-lot0/reconciliation.md",
+        "bytes": 2124,
+        "sha256": "81d16f3a9f4671f29dea5b38b62490f07eb2a2f1ca94e6e794fbcd4e54829639"
+      },
+      {
+        "path": "docs/design/profile-compiler-rules.json",
+        "bytes": 9898,
+        "sha256": "b17bf0a94819638d31275db15fd0c3efd366c714bb0d2fd4729544e0aa2c1ef6"
+      },
+      {
+        "path": "docs/design/profile-externalization-scope.json",
+        "bytes": 1220,
+        "sha256": "1f2d3bf091e01f0f2620fe322d872f9016bbf3bbc0ed0b8f715a2a95f7ff1d60"
+      },
+      {
+        "path": "tests/fixtures/profile-parity-corpus.pin.json",
+        "bytes": 42306,
+        "sha256": "da7f6a1062a691d5b3602d35913de7bec22266a401c920ee3900b8e0dc412bca"
+      },
+      {
+        "path": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+        "bytes": 78825,
+        "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+      },
+      {
+        "path": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/compiled-lint-options.schema.json",
+        "bytes": 1567,
+        "sha256": "6a0b8a2a7f9d7721ffc9a7f652a87f807c3ae8db5e2a37b0a9bc81f2df932e90"
+      },
+      {
+        "path": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/manifest.json",
+        "bytes": 30434,
+        "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf"
+      },
+      {
+        "path": "tests/helpers/profile-seal.mjs",
+        "bytes": 12266,
+        "sha256": "fc96cdb4342f3ec1021246ac7d469b4856d86a53c547d7dbc31a295edb91a1ea"
+      },
+      {
+        "path": "tests/helpers/brand.mjs",
+        "bytes": 1555,
+        "sha256": "9c774bc6e380ee9efcc00fb6376e5aaf7bb61dabdb0d4cf4af2fd896b8802ac5"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 172832,
+        "sha256": "70d7989b115b219c836a54b6ad3eddad50b6d5d16f184113e04c1ef639b0ec5e"
+      },
+      {
+        "path": "tests/fixtures/profile-lot0/step2b-digests.json",
+        "bytes": 410389,
+        "sha256": "426ce118847d53048749aded6d1a1d2636f0e77462e41836dbce8c91a069d5cc"
+      },
+      {
+        "path": "tests/fixtures/profile-lot0/step2b-provenance-policy.json",
+        "bytes": 28026,
+        "sha256": "d2514a8162d60c277fc7e6ff105228e71d33b66a59567944b05a40e52f1c5821"
+      },
+      {
+        "path": "docs/design/receipts/lot0-s2b.json",
+        "bytes": 11843,
+        "sha256": "c31736ca89d96437ad359270fa277f2195c14754d2404cb8868d23b33f9cb03a"
+      }
+    ],
+    "corpus": {
+      "status": "final",
+      "sourceCommit": "cb46b3b8f893996a83c056f31f8aa92aa2364bd3",
+      "sourceTreeId": "0c6bf891f147079e175a46d0d34f42ff308d235c",
+      "tagName": "profile-corpus-v1.0.0",
+      "tagObject": "dfb8a986933dd86ad176022df13efecb6c73b325",
+      "tagAccepted": true,
+      "manifest": {
+        "path": "profile-parity-corpus/1/manifest.json",
+        "bytes": 30434,
+        "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf"
+      },
+      "bytesChanged": false
+    },
+    "staticTieBreak": "Multiple simultaneous static failures remain unqualified pending canonical precedence expectations; no new ranking is inferred from isolated-rule vectors.",
+    "sealsAndSealedFilesChanged": false,
+    "descriptorScope": {
+      "source": "profile-mechanism/1/neutral-support-fixture.R31.json",
+      "storageAddition": {
+        "property": "bpmn:Definitions.exporterVersion",
+        "role": "semantic",
+        "evidence": "DESIGN.md:425",
+        "location": "test adapter only; sealed descriptor bytes unchanged"
+      },
+      "testedExcludedQualifiedProperties": [
+        "bpmn:Definitions.diagrams",
+        "bpmn:Process.color:fill"
+      ],
+      "testedPreservedQualifiedProperty": "bpmn:Process.ext:x",
+      "inheritedProperties": "Caller supplies the compiled qualified role index; unknown foreign properties refuse."
+    }
+  },
+  "implementation": {
+    "sourceFiles": [
+      {
+        "path": "src/profile/canonical.ts",
+        "bytes": 3541,
+        "sha256": "45aeb4d66ab011b07c3c325a7ebd3ba155e7d8036dd1c4366ad8c8a813e599ac"
+      },
+      {
+        "path": "src/profile/compatibility.ts",
+        "bytes": 4506,
+        "sha256": "9dba7c936aaf0248f2bbf95f0af1e687a229d8659d2078bd283cf61216047525"
+      },
+      {
+        "path": "src/profile/contracts.ts",
+        "bytes": 14669,
+        "sha256": "dca016f6725c781f8fcd2e7abea3c1c0c69c47101bdc75a873a665ddf22a82d2"
+      },
+      {
+        "path": "src/profile/envelope.ts",
+        "bytes": 7042,
+        "sha256": "30da99bcb2329b90a167fa4638c2a1456d0151a0ce203162238eccba198205ae"
+      },
+      {
+        "path": "src/profile/native-contracts.ts",
+        "bytes": 18353,
+        "sha256": "ac2b27db6d297a6b76f762323a2d2b5c2ae21aa46fc73a855f066e12c9bbf2c2"
+      },
+      {
+        "path": "src/profile/static-contracts.ts",
+        "bytes": 19770,
+        "sha256": "e62703c12db6eda36731025e3e22da4b4e6ca2590e7041c8b936f4a7c0fab552"
+      },
+      {
+        "path": "schemas/profile/document-envelope-1.schema.json",
+        "bytes": 2640,
+        "sha256": "796305d930fa8665b7786d03f1016a1d7b790294737b2290c1ae1a12323b6bf0"
+      },
+      {
+        "path": "schemas/profile/profile-mechanism-1.schema.json",
+        "bytes": 78825,
+        "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+      }
+    ],
+    "testFiles": [
+      {
+        "path": "tests/profile-canonical.test.mjs",
+        "bytes": 2911,
+        "sha256": "30e24423708c5a696bf8ff260d850d3ec73a25c10e93551b6fbd8e2993309f58"
+      },
+      {
+        "path": "tests/profile-schema.test.mjs",
+        "bytes": 6093,
+        "sha256": "7c7a347cc9aff60c807c4b6df90f992af7467a7b107d593e96140d0405a9ed56"
+      },
+      {
+        "path": "tests/profile-static.test.mjs",
+        "bytes": 4890,
+        "sha256": "87ea94158b5726254a9e63e216cc4a58b8151ccbcd29dee55fd06ce34aef78a1"
+      },
+      {
+        "path": "tests/profile-compatibility.test.mjs",
+        "bytes": 1749,
+        "sha256": "8737e42ce27be61beb6ab18229e9383ee8d7a1ded651a5792245918a3792315c"
+      },
+      {
+        "path": "tests/profile-envelope.test.mjs",
+        "bytes": 7063,
+        "sha256": "cb7477aa6bbec740bb65e8d73a9850e7acf4bb39210bae0e3ed8e8c11bca86ea"
+      },
+      {
+        "path": "tests/profile-identity.test.mjs",
+        "bytes": 10239,
+        "sha256": "757e3d8f7b15257cb44d09c309cedca2168b253f9cdff185ab8cbb433ce3e4dc"
+      },
+      {
+        "path": "tests/helpers/profile-step3.mjs",
+        "bytes": 668,
+        "sha256": "9535452b0da578c196f56d15bfea1068a6604513a695d9bfd068254e09e9017c"
+      },
+      {
+        "path": "tests/helpers/profile-native.mjs",
+        "bytes": 809,
+        "sha256": "9fd260ad59b0e5f9babd4fbdfeb02d34e613ce72fe952eaf812703eaaf00319d"
+      }
+    ],
+    "executablePins": [
+      {
+        "path": "dist/profile/canonical.js",
+        "bytes": 3702,
+        "sha256": "3045f90f0eea7420d3298ff92790cf43af1d2a4ed86c2d428a5e461cfe776193"
+      },
+      {
+        "path": "dist/profile/compatibility.js",
+        "bytes": 3532,
+        "sha256": "c78a3c4d28f2d300a1b370f814194dcdb46365758dc0f14e410ba38fc545a832"
+      },
+      {
+        "path": "dist/profile/contracts.js",
+        "bytes": 16478,
+        "sha256": "5e5efc868a200e396b0d9314b548a46ef8fd96af77cac4fa2d1dee6ef272a629"
+      },
+      {
+        "path": "dist/profile/envelope.js",
+        "bytes": 5535,
+        "sha256": "2df7b2c822a91f625c42bc031bb75ebd9c36dc59cbc65e1cbaf4b82bde2f7f00"
+      },
+      {
+        "path": "dist/profile/native-contracts.js",
+        "bytes": 16271,
+        "sha256": "4859e535d02ae76b6d77b62388c07398c70b173dc7758765f10c4babde638706"
+      },
+      {
+        "path": "dist/profile/static-contracts.js",
+        "bytes": 21332,
+        "sha256": "8d017be3a3c1b736967892b6baa397b0d3b2e9e90a8d2976c26a93a9fbbfb79e"
+      }
+    ],
+    "comparator": "profile-c14n/2",
+    "allocator": "stable-id/1",
+    "hashDomains": [
+      "B(raw UTF-8 or Uint8Array bytes)",
+      "H(UTF-8 JCS value)"
+    ],
+    "runtime": {
+      "node": "v22.22.1",
+      "typescript": "5.9.3"
+    },
+    "parseLimits": {
+      "maxBytes": 1048576,
+      "maxDepth": 256,
+      "maxNodes": 100000
+    },
+    "syntaxBoundary": "Strict text loader and closed schema-subset validator remain separate from isolated static checks. No production whole-profile compiler or global simultaneous-static-error precedence is claimed.",
+    "nativeStorageBoundary": "Envelope validation requires an explicitly supplied native storage validator and descriptor/support-role facts. The synthetic storage descriptor addition is recorded above; no generated native storage schema or ambient moddle configuration is introduced.",
+    "identityBoundary": "Missing-ID allocation and local descriptor-reference remapping produce detached results. Structural-support, deletion/recreation and rollback goldens are supplied-transition boundary inputs; no ensure recipe, normalization, dependency-closure engine or browser undo is executed.",
+    "viewBoundary": "Theme-switch and DI-only expectations check canonical digest tuples and semantic invariance only; no Snapshot/1, Layout/1, R or Report/2 implementation is introduced.",
+    "private": true,
+    "packageExportsChanged": false,
+    "legacyComparatorChanged": false,
+    "descriptorConfigurationChanged": false,
+    "nativeJsonOnly": true,
+    "xmlApiChanged": false,
+    "xmlImportBytesOnlyHashed": true,
+    "newRecipePredicateCodecLayoutOrRenderInterpreterExecuted": false,
+    "pythonExecuted": false,
+    "steps4AndLaterStarted": false
+  },
+  "tests": {
+    "red": {
+      "command": "rtk proxy node --test tests/profile-static.test.mjs tests/profile-compatibility.test.mjs tests/profile-envelope.test.mjs tests/profile-identity.test.mjs",
+      "exitCode": 1,
+      "tests": 4,
+      "pass": 0,
+      "fail": 4,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": {
+        "path": "/tmp/lot0-s3-finish-red.tap",
+        "bytes": 5170,
+        "sha256": "94340a1e60fdd17ec5edc55cdc1e4d27beba2ac0ee6768511b20f72f9f373abc",
+        "retention": "local evidence outside the repository"
+      },
+      "cause": "Four test files fail to import absent private modules before individual cases execute; recorded before the implementation commit."
+    },
+    "resourcePinRed": {
+      "command": "rtk proxy node --test tests/profile-static.test.mjs",
+      "exitCode": 1,
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": {
+        "path": "/tmp/lot0-s3-resource-red.tap",
+        "bytes": 1198,
+        "sha256": "88a4f09abb377e72c69704f356001e78849f42e576e2e5e706a722ac4474554a",
+        "retention": "local evidence outside the repository"
+      },
+      "cause": "Missing verifyResourcePins export, observed before its implementation."
+    },
+    "scoped": {
+      "command": "rtk proxy node --test tests/profile-static.test.mjs tests/profile-compatibility.test.mjs tests/profile-envelope.test.mjs tests/profile-identity.test.mjs",
+      "exitCode": 0,
+      "tests": 229,
+      "pass": 229,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": {
+        "path": "/tmp/lot0-s3-finish-scoped.tap",
+        "bytes": 40688,
+        "sha256": "61d7e9bb36d22617725ac99be07c2144453bb66a10fab034aacc4febd3c8b869",
+        "retention": "local evidence outside the repository"
+      }
+    },
+    "profileSuite": {
+      "command": "rtk proxy node --test tests/profile-*.test.mjs",
+      "exitCode": 0,
+      "tests": 464,
+      "pass": 464,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": {
+        "path": "/tmp/lot0-s3-finish-profiles-final.tap",
+        "bytes": 89055,
+        "sha256": "c2d684535d482e893e7bca99923056d78499c6d6161824f2cb9c2839fb0e1884",
+        "retention": "local evidence outside the repository"
+      }
+    },
+    "brandGuard": {
+      "command": "rtk proxy node --test tests/profile-brand-guard.test.mjs tests/profile-schema.test.mjs",
+      "exitCode": 0,
+      "tests": 81,
+      "pass": 81,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": {
+        "path": "/tmp/lot0-s3-finish-brand.tap",
+        "bytes": 17504,
+        "sha256": "b0fa9ec0e19d4203bd94f9934fbdba350e62bdbaf65bca0321cb6911c199b461",
+        "retention": "local evidence outside the repository"
+      },
+      "frozenScopeChanged": false,
+      "newFilesTest": "should scan every new step-3 source, schema and test with the frozen brand guard",
+      "receiptBrandScan": "passed after authoring"
+    },
+    "typechecks": [
+      {
+        "command": "rtk npm run typecheck",
+        "exitCode": 0
+      },
+      {
+        "command": "rtk npm run typecheck:compat",
+        "exitCode": 0
+      }
+    ],
+    "fullSuite": {
+      "command": "rtk proxy env CHROMIUM=<cache>/ms-playwright/chromium-1243/chrome-linux64/chrome npm test",
+      "exitCode": 0,
+      "tests": 1875,
+      "pass": 1875,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0,
+      "log": {
+        "path": "/tmp/lot0-s3-finish-full.tap",
+        "bytes": 440670,
+        "sha256": "5c9cbd3b9f23c144fa8c25ffd919c561464d574aae396736a763c5eb990c2924",
+        "retention": "local evidence outside the repository"
+      }
+    },
+    "browser": {
+      "executable": "<cache>/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "version": "153.0.8010.12",
+      "sha256": "8c599d43aec53f2460a31ae2f4af6bd863f8258b34ff519564bc5d4726bfaa1e",
+      "selection": "Existing cached Chromium override, harness unchanged. Full suite passed without a contention/sandbox failure; no separate browser rerun needed."
+    },
+    "expectationCoverage": {
+      "previousLexicalAndCanonicalCases": 76,
+      "newSealedFamilies": [
+        {
+          "family": "static-rules",
+          "vectors": 63,
+          "ids": [
+            "s2b-cr01-valid",
+            "s2b-cr01-unknown",
+            "s2b-cr01-duplicate",
+            "s2b-cr01-missing",
+            "s2b-cr01-signature",
+            "s2b-cr02-valid",
+            "s2b-cr02-ids-scalar",
+            "s2b-cr02-output-selection",
+            "s2b-cr02-concat-number",
+            "s2b-cr02-create-reference",
+            "s2b-cr03-valid",
+            "s2b-cr03-order",
+            "s2b-cr03-property",
+            "s2b-cr03-missing-property",
+            "s2b-cr03-domain",
+            "s2b-cr04-valid",
+            "s2b-cr04-count-reversed",
+            "s2b-cr04-hops-reversed",
+            "s2b-cr05-valid",
+            "s2b-cr05-missing",
+            "s2b-cr05-duplicate",
+            "s2b-cr05-cycle",
+            "s2b-cr05-lint-cycle",
+            "s2b-cr06-valid",
+            "s2b-cr06-write",
+            "s2b-cr06-producer",
+            "s2b-cr06-absent-delta-source",
+            "s2b-cr06-path-kind",
+            "s2b-cr07-valid",
+            "s2b-cr07-containment-on-id-type",
+            "s2b-cr07-allocated-idless",
+            "s2b-cr07-owner-number",
+            "s2b-cr08-valid",
+            "s2b-cr08-missing-stage",
+            "s2b-cr08-unknown-config",
+            "s2b-cr08-options-schema",
+            "s2b-cr09-valid",
+            "s2b-cr09-notion-kind",
+            "s2b-cr09-glyph",
+            "s2b-cr09-token-type",
+            "s2b-cr10-valid",
+            "s2b-cr10-missing-parameter",
+            "s2b-cr10-enum-values",
+            "s2b-cr10-readonly-command",
+            "s2b-cr11-valid",
+            "s2b-cr11-extra-field",
+            "s2b-cr11-missing-field",
+            "s2b-cr11-wrong-field-type",
+            "s2b-cr11-output-domain",
+            "s2b-cr12-valid",
+            "s2b-cr12-target-pin",
+            "s2b-cr12-self-source",
+            "s2b-cr12-own-pin",
+            "s2b-cr12-recipe-phase",
+            "s2b-cr13-valid",
+            "s2b-cr13-recipe-steps-one",
+            "s2b-cr13-recipe-steps-zeroOrOne",
+            "s2b-cr13-rule-bindings-one",
+            "s2b-cr13-rule-bindings-zeroOrOne",
+            "s2b-cr14-valid",
+            "s2b-cr14-export-set",
+            "s2b-cr14-complete-remove",
+            "s2b-cr14-edit-place"
+          ]
+        },
+        {
+          "family": "compatibility",
+          "vectors": 26,
+          "ids": [
+            "s2b-compat-exact",
+            "s2b-compat-document-0",
+            "s2b-compat-document-2",
+            "s2b-compat-missing",
+            "s2b-compat-xml-alone",
+            "s2b-compat-conflict",
+            "s2b-compat-schema",
+            "s2b-compat-mechanism",
+            "s2b-compat-document-mechanism",
+            "s2b-compat-mechanism-migration",
+            "s2b-compat-capability",
+            "s2b-compat-asset",
+            "s2b-compat-base",
+            "s2b-compat-descriptor",
+            "s2b-compat-business-id",
+            "s2b-compat-business-major",
+            "s2b-compat-digest",
+            "s2b-compat-digest-migration-no-waiver",
+            "s2b-compat-patch-up",
+            "s2b-compat-patch-down",
+            "s2b-compat-minor-up",
+            "s2b-compat-minor-down",
+            "s2b-compat-source-unavailable",
+            "s2b-compat-precedence-version",
+            "s2b-compat-precedence-capability",
+            "s2b-compat-precedence-base"
+          ]
+        },
+        {
+          "family": "envelope-revisions",
+          "vectors": 17,
+          "ids": [
+            "s2b-envelope-valid",
+            "s2b-envelope-unknown-field",
+            "s2b-envelope-null",
+            "s2b-envelope-duplicate-binding",
+            "s2b-envelope-binding-order",
+            "s2b-envelope-revision-mismatch",
+            "s2b-envelope-semantic-change",
+            "s2b-envelope-profile-change",
+            "s2b-envelope-theme-switch",
+            "s2b-envelope-di-only",
+            "s2b-envelope-semantic-extension",
+            "s2b-envelope-projection-unknown-role",
+            "s2b-envelope-import-json-spacing",
+            "s2b-envelope-import-xml-spacing",
+            "s2b-envelope-parse-failure",
+            "s2b-envelope-undo-revision",
+            "s2b-envelope-binding-change"
+          ]
+        },
+        {
+          "family": "identity-lifecycle",
+          "vectors": 21,
+          "ids": [
+            "s2b-identity-root-first",
+            "s2b-identity-idless-parent",
+            "s2b-identity-containment",
+            "s2b-identity-five-supports",
+            "s2b-identity-fixed-point",
+            "s2b-identity-imported-id",
+            "s2b-identity-collision",
+            "s2b-identity-missing-siblings",
+            "s2b-identity-reorder",
+            "s2b-identity-rename",
+            "s2b-identity-owner-remap",
+            "s2b-identity-delete-no-need",
+            "s2b-identity-recreate",
+            "s2b-identity-undo",
+            "s2b-identity-live-reference",
+            "s2b-identity-binding-recovery",
+            "s2b-identity-multi-process",
+            "s2b-identity-rollback",
+            "s2b-identity-duplicate-role",
+            "s2b-identity-band-process-ref",
+            "s2b-identity-wrong-parent"
+          ]
+        }
+      ],
+      "newSealedVectors": 127,
+      "staticOutcomes": "All 63 exact accept/refuse codes are exercised through isolated rule preflight.",
+      "compatibilityOutcomes": "All 26 exact decisions and output records, including ordered competing-error witnesses.",
+      "envelopeOutcomes": "17 boundaries: acceptance/refusal, ordering, projection, strict/native versus raw/XML import revisions, semantic/package/undo/view hash tuples.",
+      "identityOutcomes": "21 cases consumed with their stated identity boundaries. Complete recipe-driven candidate generation is not claimed; supplied support states are validated and deliberately damaged targets/partial candidates are rejected.",
+      "supportRecipeExecutionProved": false,
+      "normalizationFixedPointProved": false,
+      "browserHistoryProved": false,
+      "crossRuntimeParityProved": false
+    }
+  },
+  "closed": [
+    {
+      "id": "syntax-and-canonical-js",
+      "items": [
+        "R3.2 lexical diagnostic precedence and closed schema subset",
+        "JCS UTF-16 ordering and finite binary64 formatting",
+        "raw and canonical SHA-256 domains and full-length stable-id/1"
+      ]
+    },
+    {
+      "id": "static-contract-preflight-js",
+      "items": [
+        "Exact sealed CR-01–CR-14 outcomes",
+        "capability/signature and raw resource pins",
+        "type/value/selector bounds and symbol/cycle checks",
+        "action/phase and declared write contracts, both reparent writes and envelope/artifact writes",
+        "effective producer delta, protected IDs, ID-less creation, scalar fields",
+        "UI parameters/choice uniqueness/readonly, export field signatures, symbolic migration self"
+      ]
+    },
+    {
+      "id": "compatibility-contract-js",
+      "items": [
+        "Sixteen ordered rows with both minor/patch directions",
+        "same-version digest conflict cannot be waived by selected migration",
+        "unavailable source, metadata conflicts, mechanism/base/descriptor/business barriers"
+      ]
+    },
+    {
+      "id": "envelope-and-revision-contract-js",
+      "items": [
+        "Closed envelope/profile/pin/binding keys with separate injected native storage validation",
+        "sorted owner/role uniqueness and supplied type/parent/owner support rules",
+        "descriptor-qualified presentation extraction and semantic extension preservation",
+        "strict native import versus raw XML revision domains",
+        "semantic/profile/binding and view-only tuple invariants"
+      ]
+    },
+    {
+      "id": "identity-contract-js",
+      "items": [
+        "root-first and child birth signatures/ordinals",
+        "explicit allocation owner under an ID-less parent and containment-only node creation",
+        "imported-ID preservation, collision refusal, local owner/reference remapping",
+        "raw MISSING without defaults, null/dangling refusal and explicit descriptor inheritance",
+        "supplied support/deletion/recreation/undo/rollback boundary validation; no recipe execution"
+      ]
+    }
+  ],
+  "deferred": [
+    {
+      "id": "twin-proof",
+      "owner": "Twin library lane and conductor",
+      "items": [
+        "Independently pinned twin JCS executable and number strings",
+        "closed-subset schema differential execution",
+        "both-lane equality, structural-support atomicity/fixed points and transport receipts"
+      ],
+      "reason": "No Python execution is authorized. JS-only evidence cannot establish twin proof or activate gated support mutation."
+    },
+    {
+      "id": "final-canonical-corpus-and-joint-qualification",
+      "owner": "Canonical corpus lane and conductor",
+      "items": [
+        "Final canonical release commit/tree accepted by lot0-corpus-pin-final.json; joint qualification remains pending",
+        "canonical competing-static-error precedence and complete final corpus qualification",
+        "final release acceptance and production parity"
+      ],
+      "reason": "The final canonical corpus commit and tree are accepted by lot0-corpus-pin-final.json. Local independently sealed vectors close JS boundaries only; complete joint qualification and production parity remain unclaimed."
+    }
+  ],
+  "laterStepsNotStarted": [
+    "Snapshot/1, Layout/1, R, result unions and Report/2",
+    "bounded recipe/ensure probe and production compiler/C/N",
+    "browser transaction/history proof and runtime activation"
+  ],
+  "expectationDefects": [],
+  "expectationDisputes": [],
+  "acceptance": "The authorized step-3 JS contract scope is green. Independent review is pending. Full step-3 release acceptance remains false until the separate twin proof and final canonical corpus gates close. This receipt makes no step-4+ or production interpreter claim.",
+  "reconciliationClosure": {
+    "date": "2026-10-15",
+    "gateState": "closed",
+    "receipt": "docs/design/receipts/lot0-reconciliation-closed.json",
+    "evidence": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session.",
+    "supersedes": "Earlier retained-stash dispositions and open-gate statements only; other historical evidence remains unchanged."
+  }
+}

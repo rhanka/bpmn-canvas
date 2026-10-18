@@ -1,0 +1,40 @@
+{
+  "format": "lot0-squash-paths-reseal/1",
+  "initialHead": "3d79308b06c95cc8fb401b17f3e5e65b374cebea",
+  "reason": "Neutralize local machine paths in historical receipts; preserve explicit predecessor and successor byte pins.",
+  "supersedesFiles": [
+    {
+      "path": "docs/design/receipts/lot0-brand-gates-validation.json",
+      "old": {
+        "bytes": 28174,
+        "sha256": "c51b18d15353f9c175c811829bc09881ed55be6eb8daf6b14bf79d690c88ece0"
+      },
+      "new": {
+        "bytes": 26549,
+        "sha256": "2b17e81acc1daff32776f9d8ed397f860c4790637cbe2cd06c8442b8fd32e66c"
+      }
+    },
+    {
+      "path": "docs/design/receipts/lot0-s3.json",
+      "old": {
+        "bytes": 27615,
+        "sha256": "e73c38a78952dcd2eaf308232b7f64c150c84ac59713948d07da3390a5cd0b82"
+      },
+      "new": {
+        "bytes": 27585,
+        "sha256": "4e87e6044776b32216bdf3f30f896b3216c388cddae9b02ab6dcf57da66add73"
+      }
+    },
+    {
+      "path": "docs/design/receipts/workbench-review.md",
+      "old": {
+        "bytes": 747,
+        "sha256": "3840711647e0efcff989956c3c4833980e11040e0e634fff75c8601275b5ab61"
+      },
+      "new": {
+        "bytes": 726,
+        "sha256": "2cbee78c6f52df06675cd4e8b4444c5a897aa46a371a17e3dbe57900a7c51a88"
+      }
+    }
+  ]
+}

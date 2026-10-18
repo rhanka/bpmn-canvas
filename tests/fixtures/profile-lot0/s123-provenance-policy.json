@@ -1,0 +1,1064 @@
+{
+  "format": "profile-s123-provenance-policy/1",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "vectors": [
+    {
+      "caseId": "s123-s1-patch-up-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-patch-up-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-patch-down-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:316",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-patch-down-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:316",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-up-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-up-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-down-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-minor-down-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-digest-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s1-digest-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-injected-schema-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-injected-schema-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-unsupported-unknown",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:308",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-unsupported-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:308",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-available",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ]
+    },
+    {
+      "caseId": "s123-s2-envelope-invalid-available",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:320",
+        "DESIGN.md:322",
+        "DESIGN.md:324",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s123-s2-envelope-invalid-unavailable",
+      "family": "compatibility",
+      "required": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:319",
+        "DESIGN.md:320",
+        "DESIGN.md:322",
+        "DESIGN.md:324",
+        "DESIGN.md:430"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-export",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-render",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-validation",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-absent",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-create",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-edit",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-complete",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-normalize",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-convert",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-pages-migrate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:125",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-export",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-render",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-validation",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-absent",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-create",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-edit",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-complete",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-normalize",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-convert",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-migrate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-export",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-render",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-validation",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-absent",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-create",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-edit",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-complete",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-normalize",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-convert",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-migrate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-export",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-render",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-validation",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-absent",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-create",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-edit",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-complete",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-normalize",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-convert",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-semantic-migrate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:124",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-export",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-render",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-validation",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-absent",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-create",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-edit",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-complete",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-normalize",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-convert",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-source-reference-migrate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-export",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-render",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-validation",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-absent",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-create",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-edit",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-complete",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-normalize",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-reference",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-convert",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-target-reference-migrate",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-export-wrong-order",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-render-render-wrong-order",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-export-wrong-order",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s3-occurrences-page-render-wrong-order",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:126",
+        "DESIGN.md:128",
+        "DESIGN.md:130",
+        "DESIGN.md:182",
+        "DESIGN.md:188"
+      ]
+    },
+    {
+      "caseId": "s123-s5-parent-string",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s123-s5-parent-number",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s123-s5-parent-boolean",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s123-s5-grandparent-string",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s123-s5-grandparent-number",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    },
+    {
+      "caseId": "s123-s5-grandparent-boolean",
+      "family": "static-rules",
+      "required": [
+        "DESIGN.md:81",
+        "DESIGN.md:114",
+        "DESIGN.md:182",
+        "DESIGN.md:187"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,562 @@
+{
+  "format": "profile-lot0-step4/1",
+  "authority": {
+    "revision": "R3.2",
+    "sha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497",
+    "reverificationSource": "DESIGN.R32.md",
+    "externalPathChangedDuringTask": {
+      "from": "DESIGN.md R3.2",
+      "to": "DESIGN.md R3.3",
+      "newSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+      "action": "Used hash-identical archived R3.2 bytes for final provenance validation; did not adopt R3.3 or change frozen compatibility."
+    }
+  },
+  "baseline": "d3e3203096976ddc860c51132c14e09b37770695",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "expectationCommits": [
+    "9b25df2",
+    "6d1ea6c",
+    "19ef11a"
+  ],
+  "commits": {
+    "red": "012224d2ee635c0a085ad309f8313cf835ddab0d",
+    "green": "c336429f60da88e1be809f39d734f9ee2c0c2054",
+    "receipt": "self; see git history",
+    "redClosure": "101829fea9d1a8d531b8e5080c43ddcf31cb0870",
+    "greenClosure": "29d24b135d5908712b72d1d93980b268c73438fc"
+  },
+  "expectationSeal": {
+    "path": "expectations.json",
+    "format": "profile-expectation-seal/1",
+    "bytes": 1800789,
+    "sha256": "0e81cfb02f5bbca32f5f76c6fd6c0f2be641e5cbb81521d0763908aa0179a3bd",
+    "authoringMethod": "hand-derived literal rule outcomes and transitions; standalone JCS/SHA-256 of explicitly authored values",
+    "interpreterExecutedBeforeSeal": false,
+    "reviewStatus": "pending-independent-review",
+    "independentExtension": "S1/S2/S3/S5 / gpt-6-astra / xhigh"
+  },
+  "verification": {
+    "red": {
+      "command": "rtk node --test tests/profile-snapshot.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-lint-contract.test.mjs tests/profile-boundary-schema.test.mjs",
+      "tests": 10,
+      "passed": 0,
+      "failed": 10,
+      "reason": "Five missing schemas and five suites missing the new boundary modules; syntax was checked before the red commit."
+    },
+    "hardeningRed": {
+      "tests": 96,
+      "passed": 92,
+      "failed": 4,
+      "reason": "Nested snapshot shape, copied identity digest, captured geometry consistency, and rollback exception containment."
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0
+    },
+    "typeContracts": {
+      "command": "rtk npx tsc -p tests/types/tsconfig.json --noEmit",
+      "exitCode": 0
+    },
+    "focused": {
+      "tests": 196,
+      "passed": 196,
+      "failed": 0,
+      "skipped": 0,
+      "includesBrandGuard": true
+    },
+    "profile": {
+      "files": 21,
+      "tests": 859,
+      "passed": 850,
+      "failed": 9,
+      "skipped": 0,
+      "excluded": [
+        "profile-golden-independence.test.mjs; included in full npm test"
+      ],
+      "failedVectors": [
+        "s123-s1-minor-up-unknown",
+        "s123-s1-minor-up-unavailable",
+        "s123-s1-minor-down-unknown",
+        "s123-s1-minor-down-unavailable",
+        "s123-s2-document-schema-supported-unknown",
+        "s123-s2-document-schema-supported-unavailable",
+        "s123-s2-document-schema-unsupported-unknown",
+        "s123-s2-document-schema-unsupported-unavailable",
+        "s123-s2-document-schema-supported-available"
+      ]
+    },
+    "fullNpmTest": {
+      "status": "completed-with-nine-frozen-disagreements",
+      "command": "rtk proxy npm test",
+      "execution": "outside-filesystem-sandbox",
+      "implementationHead": "29d24b135d5908712b72d1d93980b268c73438fc",
+      "supersededAttempt": {
+        "head": "c336429f60da88e1be809f39d734f9ee2c0c2054",
+        "status": "terminated-by-this-task-after-schema-regressions",
+        "countedAsVerification": false
+      },
+      "exitCode": 1,
+      "tests": 2273,
+      "passed": 2264,
+      "failed": 9,
+      "skipped": 0,
+      "cancelled": 0,
+      "durationMs": 1192008.128219,
+      "failedTests": [
+        "should match ordered compatibility s123-s1-minor-up-unknown",
+        "should match ordered compatibility s123-s1-minor-up-unavailable",
+        "should match ordered compatibility s123-s1-minor-down-unknown",
+        "should match ordered compatibility s123-s1-minor-down-unavailable",
+        "should match ordered compatibility s123-s2-document-schema-supported-unknown",
+        "should match ordered compatibility s123-s2-document-schema-supported-unavailable",
+        "should match ordered compatibility s123-s2-document-schema-unsupported-unknown",
+        "should match ordered compatibility s123-s2-document-schema-unsupported-unavailable",
+        "should match ordered compatibility s123-s2-document-schema-supported-available"
+      ],
+      "sourceAndTestBytesUnchangedDuringFinalRun": true,
+      "browserRerunNeeded": false
+    },
+    "brand": {
+      "frozenScope": "tests/profile-brand-guard.test.mjs",
+      "additionalScope": "tests/profile-s4-scope.test.mjs",
+      "passed": true
+    },
+    "scope": {
+      "compatibilityUnchanged": true,
+      "sealedFixturesUnchanged": true,
+      "sealReceiptsUnchanged": true,
+      "stashTouched": false,
+      "excludedPathsTouched": false,
+      "pushed": false
+    },
+    "provenance": {
+      "fullAuthorityBytes": true,
+      "expectationsSeal": true,
+      "freeze": true,
+      "sourceAndTestArtifactHashes": true,
+      "protectedPathDiffsEmpty": true
+    },
+    "shapeClosureRed": {
+      "tests": 2,
+      "passed": 0,
+      "failed": 2,
+      "scope": "Nested snapshot unknown-key diagnostic code and complete endpoint requirements in Layout syntax."
+    },
+    "goldenIndependence": {
+      "status": "passed",
+      "execution": "included in full npm test",
+      "everyNonWhitespaceExpectationByteMutated": true,
+      "durationMs": 1190302.313318
+    },
+    "finalIntegrity": {
+      "artifactsMatched": true,
+      "freezeMatched": true,
+      "provenanceMatchedArchivedR32": true,
+      "protectedPathsUnchanged": true
+    },
+    "receiptBrandScan": {
+      "passed": true,
+      "scanner": "tests/helpers/brand.mjs",
+      "exceptions": []
+    }
+  },
+  "closed": [
+    {
+      "id": "presentation",
+      "scope": "Closed Layout/1, Snapshot/1 and RenderData/1 shapes; supplied occurrence geometry, endpoint and coverage validation; exact digest formulas, archive preservation, target bags and token signatures."
+    },
+    {
+      "id": "results",
+      "scope": "Result/PureResult wrappers, signature payloads, immutable getter copies, synchronous getters and asynchronous stage/error seam. Failure unions omit candidates and unloaded identities."
+    },
+    {
+      "id": "reports",
+      "scope": "Closed Report/2 records, eleven-stage comparator, canonical UTF-8 bytes, exact duplicate coalescing, original source coordinates, idMap order and artifact entryIndexes after sorting/coalescing."
+    },
+    {
+      "id": "lint-policy-boundary",
+      "scope": "Twenty source-data policy tables; numeric severity and info transport; subrule filtering; whole-setting replacement; allowlist/cycle/lookup and tamper refusals. No literal upstream rule execution."
+    },
+    {
+      "id": "export-loss-boundary",
+      "scope": "Finite legacy mapping, typed loss class/code/message records, worst supplied capability and necessary unsupported refusal. No terminal serializer qualification."
+    }
+  ],
+  "vectors": {
+    "total": 180,
+    "boundaryChecks": 180,
+    "families": {
+      "snapshot": [
+        "s4-snapshot-empty",
+        "s4-snapshot-repeated-selection",
+        "s4-snapshot-duplicate-identity",
+        "s4-snapshot-unknown-field",
+        "s4-snapshot-null",
+        "s4-snapshot-profile-conflict",
+        "s4-snapshot-base-conflict",
+        "s4-snapshot-descriptor-conflict",
+        "s4-snapshot-archived-di-damage",
+        "s4-snapshot-stale-layout",
+        "s4-snapshot-stale-view",
+        "s4-snapshot-invalid-selection",
+        "s4-snapshot-duplicate-selection",
+        "s4-snapshot-active-page",
+        "s4-snapshot-semantic-selection",
+        "s4-snapshot-version",
+        "s4-snapshot-missing-layout",
+        "s4-snapshot-navigation-only",
+        "s4-snapshot-archive-preservation"
+      ],
+      "render-contract": [
+        "s4-render-contract-complete-binding",
+        "s4-render-contract-page-order",
+        "s4-render-contract-occurrence-order",
+        "s4-render-contract-repeated-semantic",
+        "s4-render-contract-synthetic",
+        "s4-render-contract-edge",
+        "s4-render-contract-endpoint-missing",
+        "s4-render-contract-waypoints-short",
+        "s4-render-contract-nonedge-endpoint",
+        "s4-render-contract-coverage-missing",
+        "s4-render-contract-fractional-geometry",
+        "s4-render-contract-negative-size",
+        "s4-render-contract-unsafe-geometry",
+        "s4-render-contract-duplicate-key",
+        "s4-render-contract-empty-key",
+        "s4-render-contract-null",
+        "s4-render-contract-unknown-field",
+        "s4-render-contract-duplicate-page-order",
+        "s4-render-contract-negative-page-order",
+        "s4-render-contract-cross-page-unsupported",
+        "s4-render-contract-layout-unknown-field",
+        "s4-render-contract-stale-semanticRevision",
+        "s4-render-contract-stale-profileDigest",
+        "s4-render-contract-stale-descriptorDigest",
+        "s4-render-contract-stale-layoutDigest",
+        "s4-render-contract-stale-themeId",
+        "s4-render-contract-stale-themeDigest",
+        "s4-render-contract-stale-overridesDigest",
+        "s4-render-contract-stale-diStylesDigest",
+        "s4-render-contract-stale-metricsDigest",
+        "s4-render-contract-stale-payloadDigest",
+        "s4-render-contract-signed-position"
+      ],
+      "render-digests": [
+        "s4-render-digests-empty-bags",
+        "s4-render-digests-normalized-bags",
+        "s4-render-digests-metric-byte",
+        "s4-render-digests-page-name",
+        "s4-render-digests-payload-change",
+        "s4-render-digests-theme-switch",
+        "s4-render-digests-override-change",
+        "s4-render-digests-profile-package",
+        "s4-render-digests-token-invalid",
+        "s4-render-digests-duplicate-target",
+        "s4-render-digests-duplicate-token",
+        "s4-render-digests-unknown-target",
+        "s4-render-digests-null-bag",
+        "s4-render-digests-descriptor-pin-order",
+        "s4-render-digests-metric-pin-order"
+      ],
+      "result-unions": [
+        "s4-result-unions-pure-ok",
+        "s4-result-unions-pure-refused",
+        "s4-result-unions-get-definitions",
+        "s4-result-unions-get-snapshot",
+        "s4-result-unions-not-loaded",
+        "s4-result-unions-cancelled",
+        "s4-result-unions-disposed",
+        "s4-result-unions-operation-error",
+        "s4-result-unions-failure-candidate",
+        "s4-result-unions-unknown-key",
+        "s4-result-unions-bare-success",
+        "s4-result-unions-getter-revision-mismatch",
+        "s4-result-unions-null-identity",
+        "s4-result-unions-payload-extra",
+        "s4-result-unions-signature-contract",
+        "s4-result-unions-prepared-artifact",
+        "s4-result-unions-payload-setDefinitions",
+        "s4-result-unions-payload-applyCommands",
+        "s4-result-unions-payload-activateBusinessProfile",
+        "s4-result-unions-payload-setTheme",
+        "s4-result-unions-payload-restoreSnapshot",
+        "s4-result-unions-payload-undo",
+        "s4-result-unions-payload-redo",
+        "s4-result-unions-dispose-ok"
+      ],
+      "reports": [
+        "s4-reports-all-stages",
+        "s4-reports-total-order",
+        "s4-reports-exact-duplicate",
+        "s4-reports-presence-null",
+        "s4-reports-escaped-pointer",
+        "s4-reports-long-deep-pointer",
+        "s4-reports-idless-child",
+        "s4-reports-deletion-source-stable",
+        "s4-reports-generated-port",
+        "s4-reports-direction-reversal",
+        "s4-reports-coarse-legacy",
+        "s4-reports-unknown-legacy",
+        "s4-reports-repeated-idmap",
+        "s4-reports-artifact-indexes",
+        "s4-reports-raw-preserved",
+        "s4-reports-unknown-field",
+        "s4-reports-phase-field",
+        "s4-reports-loss-class-required",
+        "s4-reports-nonloss-class",
+        "s4-reports-null-message",
+        "s4-reports-false-presence-with-value",
+        "s4-reports-true-presence-without-value",
+        "s4-reports-unknown-stage",
+        "s4-reports-coordinate-domain",
+        "s4-reports-profile-coordinate",
+        "s4-reports-pointer-string",
+        "s4-reports-pointer-self",
+        "s4-reports-pointer-invalid",
+        "s4-reports-cascading-removal",
+        "s4-reports-resource-limit"
+      ],
+      "lint-contract": [
+        "s4-lint-contract-table-neutral-1-import-draft",
+        "s4-lint-contract-table-neutral-1-import-accept",
+        "s4-lint-contract-table-neutral-1-pre-normalize-draft",
+        "s4-lint-contract-table-neutral-1-pre-normalize-accept",
+        "s4-lint-contract-table-neutral-1-post-normalize-draft",
+        "s4-lint-contract-table-neutral-1-post-normalize-accept",
+        "s4-lint-contract-table-neutral-1-post-layout-draft",
+        "s4-lint-contract-table-neutral-1-post-layout-accept",
+        "s4-lint-contract-table-neutral-1-release-draft",
+        "s4-lint-contract-table-neutral-1-release-accept",
+        "s4-lint-contract-table-neutral-grid-1-import-draft",
+        "s4-lint-contract-table-neutral-grid-1-import-accept",
+        "s4-lint-contract-table-neutral-grid-1-pre-normalize-draft",
+        "s4-lint-contract-table-neutral-grid-1-pre-normalize-accept",
+        "s4-lint-contract-table-neutral-grid-1-post-normalize-draft",
+        "s4-lint-contract-table-neutral-grid-1-post-normalize-accept",
+        "s4-lint-contract-table-neutral-grid-1-post-layout-draft",
+        "s4-lint-contract-table-neutral-grid-1-post-layout-accept",
+        "s4-lint-contract-table-neutral-grid-1-release-draft",
+        "s4-lint-contract-table-neutral-grid-1-release-accept",
+        "s4-lint-contract-numeric-0",
+        "s4-lint-contract-numeric-1",
+        "s4-lint-contract-numeric-2",
+        "s4-lint-contract-numeric-3",
+        "s4-lint-contract-info-restoration",
+        "s4-lint-contract-profile-warning",
+        "s4-lint-contract-rule-missing",
+        "s4-lint-contract-rule-thrown",
+        "s4-lint-contract-config-missing",
+        "s4-lint-contract-config-thrown",
+        "s4-lint-contract-allowlist",
+        "s4-lint-contract-cycle",
+        "s4-lint-contract-options-replacement",
+        "s4-lint-contract-off-stage",
+        "s4-lint-contract-compiled-tampering",
+        "s4-lint-contract-draft-integrity",
+        "s4-lint-contract-release-barrier",
+        "s4-lint-contract-off-subrule",
+        "s4-lint-contract-malformed-custom",
+        "s4-lint-contract-unresolved-id",
+        "s4-lint-contract-missing-policy",
+        "s4-lint-contract-missing-setting",
+        "s4-lint-contract-compiled-unknown-field",
+        "s4-lint-contract-corrected-history"
+      ],
+      "export-losses": [
+        "s4-export-losses-semantic-type",
+        "s4-export-losses-relation-kind",
+        "s4-export-losses-navigation",
+        "s4-export-losses-appearance",
+        "s4-export-losses-layout",
+        "s4-export-losses-metadata",
+        "s4-export-losses-unsupported-feature",
+        "s4-export-losses-provenance-unavailable",
+        "s4-export-losses-worst-capability",
+        "s4-export-losses-unsupported-necessary",
+        "s4-export-losses-legacy-format",
+        "s4-export-losses-legacy-format-alias",
+        "s4-export-losses-legacy-reference",
+        "s4-export-losses-legacy-endpoint",
+        "s4-export-losses-legacy-id",
+        "s4-export-losses-unknown-class"
+      ]
+    },
+    "partialArtifactClosure": [
+      {
+        "caseId": "s4-render-digests-profile-package",
+        "closed": [
+          "identity",
+          "semanticRevision"
+        ],
+        "deferred": [
+          "activation"
+        ]
+      }
+    ],
+    "coverageInterpretation": "One invoked check per sealed vector. Supplied-IR checks validate/serialize authored records; declarative transaction, renderer and allocator effects are not treated as measured production behavior.",
+    "closedAtBoundary": 179,
+    "partialAtBoundary": 1
+  },
+  "deferred": [
+    {
+      "id": "compatibility-activation",
+      "status": "deferred-to-R3.3",
+      "caseId": "s4-render-digests-profile-package",
+      "artifact": "activation",
+      "reason": "Package identity and semantic digest changes are tested. Activation and history-epoch effects require the frozen compatibility dispatcher and later editor integration; neither is changed."
+    },
+    {
+      "id": "compatibility-disagreements",
+      "status": "deferred-to-R3.3",
+      "caseIds": [
+        "s123-s1-minor-up-unknown",
+        "s123-s1-minor-up-unavailable",
+        "s123-s1-minor-down-unknown",
+        "s123-s1-minor-down-unavailable",
+        "s123-s2-document-schema-supported-unknown",
+        "s123-s2-document-schema-supported-unavailable",
+        "s123-s2-document-schema-unsupported-unknown",
+        "s123-s2-document-schema-unsupported-unavailable",
+        "s123-s2-document-schema-supported-available"
+      ],
+      "reason": "The conductor freezes compatibility behavior and the nine S1/S2 disagreements."
+    },
+    {
+      "id": "native-storage-and-DI",
+      "scope": "Storage/admission callbacks are mandatory. Sealed synthetic inputs assume prior storage and descriptor admission; the nonempty archive witness proves hashing/preservation, not complete native DI/DC validation."
+    },
+    {
+      "id": "upstream-lint",
+      "scope": "Pinned upstream execution, fresh Linter/rule instances, cache isolation and CLI behavior remain lot 1. Resolver manifests and inherited options supplied to this boundary must already be pinned/schema-validated."
+    },
+    {
+      "id": "render-and-export-production",
+      "scope": "Production layout, glyph resolution, target IR validation, writer bytes, real metric-byte admission and engine-byte qualification remain later lots. Capability outcomes and prepared IR are supplied facts."
+    },
+    {
+      "id": "transactions",
+      "scope": "queueBoundary measures scheduling/refusal delivery with injected stages, and public method signatures are type-checked. It is not a live canvas API, serialized editor queue, browser transaction, history or event proof; step 6 owns those."
+    },
+    {
+      "id": "report-null-ties",
+      "scope": "The expectation receipt leaves cross-runtime null/string coordinate order and ties outside the named tuple unresolved. Runtime uses null-before-string and stable input order on such ties, without claiming final cross-runtime comparator ratification."
+    },
+    {
+      "id": "twin-and-final-corpus",
+      "scope": "No Python execution, twin parity, final canonical corpus or production activation is claimed."
+    }
+  ],
+  "expectationDisputes": [],
+  "artifacts": [
+    {
+      "path": "schemas/profile/layout-1.schema.json",
+      "bytes": 4788,
+      "sha256": "a54146239efd408ee3f0a50672eaadb164a610d9f54de80cbcd17f3338b3e797"
+    },
+    {
+      "path": "schemas/profile/render-data-1.schema.json",
+      "bytes": 12957,
+      "sha256": "e277998e2865ac6f4454163a94dee85041e715d00ae7fd627f512205a8842a15"
+    },
+    {
+      "path": "schemas/profile/report-2.schema.json",
+      "bytes": 9168,
+      "sha256": "34eb286ff76ede5626283051bacd47f841d4c3be860905780a8e9efe33b90cc5"
+    },
+    {
+      "path": "schemas/profile/result-1.schema.json",
+      "bytes": 49920,
+      "sha256": "5599f90bc98cdaec1fe96dad698e8e1969c90e0531f7666192207bf02f3b4a83"
+    },
+    {
+      "path": "schemas/profile/snapshot-1.schema.json",
+      "bytes": 13021,
+      "sha256": "fc5019789ba322a28dc8b1b79649d0d8a059da63374d6d817f74338f3a6d483b"
+    },
+    {
+      "path": "src/profile/boundary.ts",
+      "bytes": 2401,
+      "sha256": "3e1e90864af40907422a3ae5e988d27471725a740f2aa7e15380c736bfb1728f"
+    },
+    {
+      "path": "src/profile/lint-contracts.ts",
+      "bytes": 10039,
+      "sha256": "028b45a28ae262291c49638c0f806aecd26ffdfd32a3c8d033aad132302901b0"
+    },
+    {
+      "path": "src/profile/presentation-contracts.ts",
+      "bytes": 20615,
+      "sha256": "b58293f8373846b44b517e8c6a2fe6d64f05c4ff914ecb4d8129602ce1b57778"
+    },
+    {
+      "path": "src/profile/report.ts",
+      "bytes": 12905,
+      "sha256": "af3e457a7e232dcf4bd813084a6b2cd7408d79425fb9df5e3e63d23d9383f7fe"
+    },
+    {
+      "path": "src/profile/results.ts",
+      "bytes": 15339,
+      "sha256": "a38cff0f7e54cfc7ec3f2ae8a298b22a5519995df15982ffa44ba95282cd47e9"
+    },
+    {
+      "path": "tests/helpers/profile-step4.mjs",
+      "bytes": 1444,
+      "sha256": "d152d6a0d711a96b3f41f9ea01def574370f4535b54ff1aca3cc20b26f4753a2"
+    },
+    {
+      "path": "tests/profile-boundary-schema.test.mjs",
+      "bytes": 1693,
+      "sha256": "f67979f54adc055e07293ce1f9ef386ecadb4859932af85021c9b7d2bf994941"
+    },
+    {
+      "path": "tests/profile-lint-contract.test.mjs",
+      "bytes": 4514,
+      "sha256": "bbbcb89a2827928f49fea54ac8f9aa1c03202684f4c8a421b71a3ec405d17a5b"
+    },
+    {
+      "path": "tests/profile-render-contract.test.mjs",
+      "bytes": 6398,
+      "sha256": "f065f38624e28c8f0b56381bfae6a56c879902ee9c976296e84efdcbae4cd503"
+    },
+    {
+      "path": "tests/profile-report.test.mjs",
+      "bytes": 4514,
+      "sha256": "ea347034f3143f628b769ce295b13f5ba1260da386b3046bcf0fe9cd3c44e191"
+    },
+    {
+      "path": "tests/profile-result.test.mjs",
+      "bytes": 3926,
+      "sha256": "3b8b2e11e27ff95f0efb87df220a8401ffd661d45c38150924404f835c079268"
+    },
+    {
+      "path": "tests/profile-s4-scope.test.mjs",
+      "bytes": 902,
+      "sha256": "32ed3d08f34fdf5c5c09e394531754bf43738ee57d538bf045de706eb3546b41"
+    },
+    {
+      "path": "tests/profile-snapshot.test.mjs",
+      "bytes": 3349,
+      "sha256": "019d224de2bc88f64eaa691946cd8f21a846697966c05e928103f919d8ce37a9"
+    },
+    {
+      "path": "tests/types/profile-contracts.ts",
+      "bytes": 987,
+      "sha256": "7e74b440599e8aebf2afd76ab83eb5ce62de02b87af884b7b42ff8025e3477af"
+    }
+  ],
+  "preservation": {
+    "excludedPaths": [
+      "tmp/",
+      "docs/design/0.3.1-layout-on-load.md"
+    ],
+    "protectedPaths": [
+      "src/profile/compatibility.ts",
+      "tests/fixtures/profile-lot0/",
+      "tests/fixtures/profile-parity-corpus/",
+      "docs/design/receipts/lot0-s123-seal.json",
+      "docs/design/receipts/lot0-s4-expect.json"
+    ],
+    "sourceAndTestBytesFrozenBeforeFullRun": true,
+    "independentReview": "later, by other models as requested"
+  }
+}

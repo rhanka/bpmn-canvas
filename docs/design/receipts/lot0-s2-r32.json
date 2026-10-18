@@ -1,0 +1,1483 @@
+{
+  "format": "profile-lot0-s2-r32-receipt/1",
+  "date": "2026-10-15",
+  "status": "revalidated-sealed-subset-acceptance-incomplete",
+  "supersedes": {
+    "path": "docs/design/receipts/lot0-s12.json",
+    "scope": "Current design/companion pins, step-2 expectation seal, revalidation results and baseline gate/stash disposition. The prior receipt preserves historical reconciliation and test/review evidence; current gate state is closed after the owner-delegated conductor drop."
+  },
+  "scope": {
+    "steps": [
+      1,
+      2
+    ],
+    "laterStepsStarted": false,
+    "profileTextLoaderWritten": false,
+    "profileTextLoaderExecuted": false,
+    "profileCompilerWritten": false,
+    "interpreterWritten": false,
+    "interpreterExecuted": false,
+    "referenceValidatorExecuted": false,
+    "canonicalRepositoryModified": false,
+    "pushed": false
+  },
+  "source": {
+    "branch": "workbench/functions-20261004-profile-lot0",
+    "startCommit": "163e334677e472c0ed259d56954d9349a775197d",
+    "redCommit": "433708968f3d0a6543268c5c8b6504d0ce22a054",
+    "greenCommit": "8b8efa0289cb4c64e1df96bc1266cc1f01e7c8ac"
+  },
+  "inputs": {
+    "design": {
+      "revision": "R3.2",
+      "sha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497"
+    },
+    "companionManifest": {
+      "sha256": "3a0989bae3479656bbb335dd8857474bc6219b6f4f5a35e0f8cefab5caeca131",
+      "entries": 36
+    },
+    "companions": [
+      {
+        "path": "DESIGN.R31.md",
+        "bytes": 210061,
+        "sha256": "020270f65e0be7b119365bb402ff062cf406fca92940709dd987d9dfdc8173f8"
+      },
+      {
+        "path": "DESIGN.md",
+        "bytes": 216625,
+        "sha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497"
+      },
+      {
+        "path": "R2-COMPANION-HASHES.json",
+        "bytes": 569,
+        "sha256": "c55cabd9fcd43275f4850e4faa0f2b40b0745f0c40b58c98e3c35ab23da5f651"
+      },
+      {
+        "path": "R3-FINDINGS.json",
+        "bytes": 27911,
+        "sha256": "569840cc673f265671c6e3eca31c952018a935ed99e5a4f0c604406955b95815"
+      },
+      {
+        "path": "R31-FINDINGS.json",
+        "bytes": 7470,
+        "sha256": "896a7934dc7d2806334b7638a98b7add4767d5fc7433455291aef7e244177152"
+      },
+      {
+        "path": "VALIDATION-R2.json",
+        "bytes": 44303,
+        "sha256": "64cd321f7930fcc415b999cb254037c3794e9380f728d5302e209664aad66acb"
+      },
+      {
+        "path": "VALIDATION-R3-COMPANIONS.json",
+        "bytes": 40481,
+        "sha256": "141dbf580d16252c48ab371fd1516c6da53ed787026f940e127a53714b9040f9"
+      },
+      {
+        "path": "VALIDATION-R3-cond.json",
+        "bytes": 95971,
+        "sha256": "b061ece762669863bb9422b849a27a77c403cdadcd6c189c4ed648910445964c"
+      },
+      {
+        "path": "VALIDATION-R3.json",
+        "bytes": 95971,
+        "sha256": "b061ece762669863bb9422b849a27a77c403cdadcd6c189c4ed648910445964c"
+      },
+      {
+        "path": "VALIDATION-R31-cond.json",
+        "bytes": 144128,
+        "sha256": "548fe0b876ae8f063f3f638183204ef671f174c2f54943e46770b2e37e37becb"
+      },
+      {
+        "path": "VALIDATION-R31.json",
+        "bytes": 144128,
+        "sha256": "548fe0b876ae8f063f3f638183204ef671f174c2f54943e46770b2e37e37becb"
+      },
+      {
+        "path": "VALIDATION-R32.json",
+        "bytes": 159613,
+        "sha256": "2cbde97e83cd5a5a352417ab9c92d8ca2e7ff83f20602be3086158a032105d72"
+      },
+      {
+        "path": "bpmnlint-11.15.0-recommended.json",
+        "bytes": 2149,
+        "sha256": "9f0c84f67ff37a6462e4070edfe0f84c2ce5c71344fc8cb695eee744a017d81b"
+      },
+      {
+        "path": "build-r3-companions.mjs",
+        "bytes": 20332,
+        "sha256": "45f9e46e653ebd57e517496cf53b0257a47decb5082f83963124f8a0b4235934"
+      },
+      {
+        "path": "build-r3-digest-vectors.mjs",
+        "bytes": 3147,
+        "sha256": "ec507abb67b5fa340e3c21153fb1b505480a6609d003e729452e8f78669b9aca"
+      },
+      {
+        "path": "build-r3-fixtures.mjs",
+        "bytes": 4573,
+        "sha256": "def5648ffcfc2ccc03054a9d63aaf35ddef2aae485fafb32b96f230b6f5ec5fb"
+      },
+      {
+        "path": "compiled-lint-options.schema.json",
+        "bytes": 1567,
+        "sha256": "6a0b8a2a7f9d7721ffc9a7f652a87f807c3ae8db5e2a37b0a9bc81f2df932e90"
+      },
+      {
+        "path": "lint-policy-r3.json",
+        "bytes": 52792,
+        "sha256": "09d1ea508a8d3e3cf7765e70f54f0553093773769ec24c7947732175c9d5a514"
+      },
+      {
+        "path": "neutral-base.json",
+        "bytes": 7031,
+        "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+      },
+      {
+        "path": "neutral-chain-rule.json",
+        "bytes": 2047,
+        "sha256": "fee2e569ef2268c8b961205545d574ce47906bfb25cc29c4800cbb2dc56959ac"
+      },
+      {
+        "path": "neutral-descriptors.json",
+        "bytes": 3171,
+        "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+      },
+      {
+        "path": "neutral-fixture.json",
+        "bytes": 10290,
+        "sha256": "86d9959eb0a21d986be9d616a5a727a54e06bc30b24641c6ee3022eed9b3974c"
+      },
+      {
+        "path": "neutral-grid-fixture.json",
+        "bytes": 11891,
+        "sha256": "396887368f366d06652a1417f3a690cbb35232cd817411aaab889eee19723502"
+      },
+      {
+        "path": "neutral-grid-profile.json",
+        "bytes": 71340,
+        "sha256": "7247b5cd90c13fea2d42048a8ea6a5f3a36f64db67a771533adf10968c92cccd"
+      },
+      {
+        "path": "neutral-grid-profile.v1.json",
+        "bytes": 70715,
+        "sha256": "ab6e7308d3ccf4f76743a3943b42283f4e175ba2bf356f153bbcbd50be4c466f"
+      },
+      {
+        "path": "neutral-metrics.json",
+        "bytes": 200,
+        "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+      },
+      {
+        "path": "neutral-profile.json",
+        "bytes": 63350,
+        "sha256": "c1319045f538a9f4ef1f3f7500af4a3e0df059e04c7c42dd7e992477c9199650"
+      },
+      {
+        "path": "neutral-provider-arguments.schema.json",
+        "bytes": 1685,
+        "sha256": "1e42b387e05b9802efcf2ded2d9cdcf705f3dc4ac51b9610ea4290eafd928f08"
+      },
+      {
+        "path": "neutral-registry.json",
+        "bytes": 1734,
+        "sha256": "ac4a09989f3fafd9e7695ba18901fac04d08ca4fa869600d5f715a34cf16039f"
+      },
+      {
+        "path": "neutral-support-fixture.R31.json",
+        "bytes": 41295,
+        "sha256": "0a0a280bbb517337e11695a1849ea29a457bfb9028f60a657d8cc16824c5af5c"
+      },
+      {
+        "path": "profile-mechanism-1.schema.json",
+        "bytes": 78825,
+        "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+      },
+      {
+        "path": "r3-contract-checks.mjs",
+        "bytes": 32829,
+        "sha256": "65cc71f52313c0bff7995a65b40c73ce7f0d4f3064410da105faf28a3dcc63ff"
+      },
+      {
+        "path": "r3-digest-vectors.json",
+        "bytes": 3782,
+        "sha256": "13a4a3ec13b1541b54972f7dc59e4a8c86d1c25e4d531cce3e1a7a13c58575a2"
+      },
+      {
+        "path": "r31-contract-checks.mjs",
+        "bytes": 11956,
+        "sha256": "4e00018abb50e11aa151598f4b10902620439bdd894cf69d156ee019dab4396a"
+      },
+      {
+        "path": "update-r3-ledger.mjs",
+        "bytes": 17238,
+        "sha256": "80a50168655bad41788ad47a93ec9269f9ce8d186246fccd0580c63c43d762ba"
+      },
+      {
+        "path": "validate-r2.mjs",
+        "bytes": 33918,
+        "sha256": "6650fd51b2aecfa0cd6804325f09c2bef1393f8a262e46062cb022e5a64c8a33"
+      }
+    ],
+    "verification": {
+      "designHashMatched": true,
+      "allCompanionHashesMatched": true,
+      "entries": 36,
+      "performedBeforeAuthoring": true
+    },
+    "baseline": {
+      "ref": "e9f5f8961ac63f7163003c0960cb20c4080147a3",
+      "workDisposition": "reference-model change committed once in base",
+      "stashDisposition": "dropped-verified-duplicate",
+      "excludedUntracked": [
+        "tmp/",
+        "docs/design/0.3.1-layout-on-load.md"
+      ],
+      "stashDecision": {
+        "authority": "Owner-delegated conductor git execution, DESIGN §14.1, 2026-10-15",
+        "state": "stash@{0} dropped; verified duplicate of e9f5f89",
+        "action": "conductor executed the owner-delegated drop after verifying diff identity",
+        "ownerCommand": "git stash drop 'stash@{0}'",
+        "gateState": "closed",
+        "blocksIndependentSteps": false,
+        "closure": "docs/design/receipts/lot0-reconciliation-closed.json",
+        "agentTouchedStash": false,
+        "date": "2026-10-15",
+        "droppedBy": "conductor, git execution delegated by the owner",
+        "stashObject": "2116408888bcbb1105560f1af6e088bdef2dd2af",
+        "duplicateDiffSha256": "94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12",
+        "duplicateDiffBytes": 2049,
+        "stashListEmpty": true,
+        "stashObjectDangling": true,
+        "verification": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session."
+      },
+      "gateState": "closed",
+      "blocksIndependentSteps": false,
+      "identityVerified": true,
+      "fix4Ref": "e9f5f89"
+    },
+    "parents": {
+      "canvas": "61903a61e2a6f258b506b4cdcd310a57787eee30845d6deb996afbb54abf33a9",
+      "headless": "def4ffb25b6c60f963226fb62d9b433e10a1420f340a1835b8ac273711e29b3d"
+    },
+    "reconciliation": {
+      "sha256": "3e4b21a044667efc3b3b015f9b0f7fbfc2694390530aa0a4e516423ab558c4fb",
+      "base": "e9f5f8961ac63f7163003c0960cb20c4080147a3"
+    }
+  },
+  "designDelta": {
+    "previousRevision": "R3.1",
+    "previousDesignSha256": "020270f65e0be7b119365bb402ff062cf406fca92940709dd987d9dfdc8173f8",
+    "addedNormativeContract": "Section 2.1.1 defines the four lexical codes and recursive source-order first failure before schema. Key decoding precedes Unicode, which precedes duplicate detection; then colon and value. Remaining tokens and whole-text grammar are checked after the root walk.",
+    "otherNormativeChangesFound": [],
+    "changedCompanionPaths": [
+      "DESIGN.md",
+      "R3-FINDINGS.json",
+      "R31-FINDINGS.json",
+      "validate-r2.mjs"
+    ],
+    "addedCompanionPaths": [
+      "DESIGN.R31.md",
+      "VALIDATION-R32.json"
+    ],
+    "removedCompanionPaths": [],
+    "companionPayloadChanges": "Profile/schema/base/registry/fixture/digest-vector payload hashes are unchanged. Finding ledgers refresh body lines; validator adds lexical negatives/precedence cases and checks preserved R3.1 provenance. External scripts were read, never executed.",
+    "previouslyCitedNormativeLinesChecked": 35,
+    "previouslyCitedNormativeTextUnchanged": true
+  },
+  "corpusPin": {
+    "sourceCommit": "cb46b3b8f893996a83c056f31f8aa92aa2364bd3",
+    "sourceTreeId": "0c6bf891f147079e175a46d0d34f42ff308d235c",
+    "tagName": "profile-corpus-v1.0.0",
+    "tagObject": "dfb8a986933dd86ad176022df13efecb6c73b325",
+    "manifestSha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf",
+    "pinSha256": "d34ee889917b8c5ef14c8d7bbd3fa2b222d93f4ac61de4bd0b41deb5767378a2",
+    "status": "final",
+    "tagAccepted": true,
+    "upstreamManifestCompared": true,
+    "upstreamManifestUnchanged": true,
+    "vendorChanged": false
+  },
+  "expectations": {
+    "format": "profile-expectation-seal/1",
+    "path": "expectations.json",
+    "bytes": 86216,
+    "sha256": "654f27fdf86020fe665adfd5004340adc2bb1e2a733bdacb3659799416c277f8",
+    "authoringMethod": "hand-derived literal artifacts plus SHA-256 of explicitly authored strings",
+    "interpreterExecutedBeforeSeal": false,
+    "reviewStatus": "pending-independent-review",
+    "canonicalVectors": 23,
+    "localVectors": 61,
+    "totalVectors": 84,
+    "verdictDeltas": [],
+    "artifactDeltas": [],
+    "derivationDeltas": [
+      {
+        "caseId": "lexical-unsafe-integer",
+        "change": "Replaced the pre-rounding mathematical-token explanation with the R3.2 converted-binary64 criterion. 9007199254740993 converts to integral 9007199254740992 and is still refused as profile-number."
+      },
+      {
+        "caseIds": [
+          "lexical-duplicate-keys",
+          "lexical-lone-surrogate",
+          "lexical-nonfinite"
+        ],
+        "change": "Replaced forthcoming/instructed code wording with normative R3.2 code and traversal provenance."
+      },
+      {
+        "caseId": "lexical-negative-zero",
+        "change": "Clarified converted-value acceptance and the lexical-only scope of the existing bounded verdict."
+      }
+    ],
+    "provenance": "All current DESIGN.md:line citations target the exact R3.2 design hash. Historical authoring citations explicitly use DESIGN.R31.md.",
+    "runtimeProof": false,
+    "updateFromActual": false
+  },
+  "canonicalAudit": [
+    {
+      "caseId": "jcs-escapes",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:236"
+      ],
+      "provenance": [
+        "DESIGN.md:258"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "31771b647a110215d5226b1e8ed1654f2f241020c97fd2c0f926cde5d16675c1",
+      "derivation": "JCS escapes LF and the control scalar, leaves the accented scalar in UTF-8 and emits the surrounding JSON string quotes."
+    },
+    {
+      "caseId": "jcs-key-order",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:236",
+        "DESIGN.R31.md:238"
+      ],
+      "provenance": [
+        "DESIGN.md:258",
+        "DESIGN.md:260"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "af518b5249ad6477d0da4dee5109d4e5e17df571511b9a9f3cbe0f4015be763c",
+      "derivation": "Compare UTF-16 code units: ASCII a precedes b, and the high surrogate D800 of U+10000 precedes E000."
+    },
+    {
+      "caseId": "jcs-numbers",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:236",
+        "DESIGN.R31.md:938"
+      ],
+      "provenance": [
+        "DESIGN.md:258",
+        "DESIGN.md:960"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "abd3fa0c037802ef275b0c82feb7ec0c0c62635ff01bc0a652c7cb2d475a5d57",
+      "derivation": "Generic JCS uses ECMAScript shortest binary64 strings, the positive exponent sign, and zero for negative zero. This vector does not admit unsafe integral tokens into a profile."
+    },
+    {
+      "caseId": "identity-stable-id",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:252",
+        "DESIGN.R31.md:260"
+      ],
+      "provenance": [
+        "DESIGN.md:274",
+        "DESIGN.md:282"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "409e9b76f082e8f5f1ac01789c3447e4ba78da8ffb5dd3233af1e74ce24eef49",
+      "derivation": "Hash each explicitly authored UTF-8 allocation tuple with SHA-256, use all 64 lowercase hexadecimal digits, and prefix g_. Definition ownership for Collaboration is explicit."
+    },
+    {
+      "caseId": "lexical-duplicate-keys",
+      "expectedStatus": "refused:profile-json-duplicate-key",
+      "previousProvenance": [
+        "DESIGN.R31.md:46"
+      ],
+      "provenance": [
+        "DESIGN.md:48",
+        "DESIGN.md:88",
+        "DESIGN.md:95",
+        "DESIGN.md:96"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "bc01edf42bd67a954f0899d9138df3b6aeeec133703085050fde4b87e4801200",
+      "derivation": "The raw key a and escaped key \\u0061 decode to the same Unicode-valid key. R3.2 requires profile-json-duplicate-key before its colon, value or schema checks."
+    },
+    {
+      "caseId": "lexical-lone-surrogate",
+      "expectedStatus": "refused:profile-unicode",
+      "previousProvenance": [
+        "DESIGN.R31.md:46"
+      ],
+      "provenance": [
+        "DESIGN.md:48",
+        "DESIGN.md:89",
+        "DESIGN.md:95",
+        "DESIGN.md:96"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "6976e62a8c70c90b48baf98a292bb778da9b90aa8a26f3a55e94a0fb3b9438e4",
+      "derivation": "The decoded D800 code unit has no following low surrogate. R3.2 requires profile-unicode after string decoding and before schema validation."
+    },
+    {
+      "caseId": "lexical-negative-zero",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:46",
+        "DESIGN.R31.md:236"
+      ],
+      "provenance": [
+        "DESIGN.md:48",
+        "DESIGN.md:90",
+        "DESIGN.md:258"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "5e06bb0afd460f4725fec2777cc76708c80bd59f369809ec88496191ce291da6",
+      "derivation": "The converted value of -0 is finite and safely integral. R3.2 admits it lexically; generic canonical identity renders it as 0. This bounded verdict does not claim full-profile schema acceptance."
+    },
+    {
+      "caseId": "lexical-nonfinite",
+      "expectedStatus": "refused:profile-number",
+      "previousProvenance": [
+        "DESIGN.R31.md:46"
+      ],
+      "provenance": [
+        "DESIGN.md:48",
+        "DESIGN.md:90",
+        "DESIGN.md:95",
+        "DESIGN.md:96"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "d7882f1bdf0f46205befe231c99a3cd3e65830430aa6cba7cb3a18c63cfbab27",
+      "derivation": "The number token 1e400 converts to non-finite binary64. R3.2 requires profile-number before a following delimiter or any schema validation."
+    },
+    {
+      "caseId": "lexical-unsafe-integer",
+      "expectedStatus": "refused:profile-number",
+      "previousProvenance": [
+        "DESIGN.R31.md:46"
+      ],
+      "provenance": [
+        "DESIGN.md:48",
+        "DESIGN.md:90",
+        "DESIGN.md:95",
+        "DESIGN.md:96"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "d7882f1bdf0f46205befe231c99a3cd3e65830430aa6cba7cb3a18c63cfbab27",
+      "derivation": "The token 9007199254740993 converts to binary64 9007199254740992, an integral value outside the inclusive safe range. R3.2 requires profile-number; the criterion is the converted value."
+    },
+    {
+      "caseId": "schema-integer-one-zero",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:61"
+      ],
+      "provenance": [
+        "DESIGN.md:63"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "47265ccd5cc0b02c23f53766bfb4d1a3bcc10be2bd20af9eebe8cda3abb63b72",
+      "derivation": "The schema integer domain is mathematical: 1.0 is finite, safe and integral. Both validators admit it and its canonical value is 1."
+    },
+    {
+      "caseId": "schema-integer-fraction",
+      "expectedStatus": "refused:profile-schema",
+      "previousProvenance": [
+        "DESIGN.R31.md:61"
+      ],
+      "provenance": [
+        "DESIGN.md:63"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "fc1013799c7171bc7a36a3ff3f6a1c819c989042fd8de83e7c01080d9602eb0b",
+      "derivation": "The value 1.5 is not mathematically integral. Both validators reject its integer type; the profile boundary uses profile-schema."
+    },
+    {
+      "caseId": "schema-id-newline",
+      "expectedStatus": "refused:profile-schema",
+      "previousProvenance": [
+        "DESIGN.R31.md:48",
+        "DESIGN.R31.md:61"
+      ],
+      "provenance": [
+        "DESIGN.md:50",
+        "DESIGN.md:63"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "855f14049aa8c3c906dddc2cab4f968f4ab8d473e983196b50541cc72dfa4921",
+      "derivation": "Full-string pattern matching rejects trailing LF in id. Stock search-based matching is retained only as the documented reference divergence, never as profile acceptance."
+    },
+    {
+      "caseId": "schema-keyword-subset",
+      "expectedStatus": "refused:profile-schema-keyword",
+      "previousProvenance": [
+        "DESIGN.R31.md:48"
+      ],
+      "provenance": [
+        "DESIGN.md:50"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "3a1280dd1ceb53cec3d8855ef279a00372305be44fb4d93f89b8cbe8a5d1900c",
+      "derivation": "The closed 29-keyword subset omits format. The profile rejection is profile-schema-keyword; reference-specific ignore/throw outcomes remain documented, not substituted for it."
+    },
+    {
+      "caseId": "schema-external-ref-pinned",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:48",
+        "DESIGN.R31.md:65"
+      ],
+      "provenance": [
+        "DESIGN.md:50",
+        "DESIGN.md:67"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "9e1339d91895b3ec341d7ae632f0cbc83c71a458895bc4525d53cfca0c6ee0fb",
+      "derivation": "The compiled-options schema and its profile registry target are explicitly pinned inputs. Resolve the known reference from those bytes only; this reference fragment is valid."
+    },
+    {
+      "caseId": "schema-external-ref-unknown",
+      "expectedStatus": "refused:profile-schema-ref",
+      "previousProvenance": [
+        "DESIGN.R31.md:48",
+        "DESIGN.R31.md:65"
+      ],
+      "provenance": [
+        "DESIGN.md:50",
+        "DESIGN.md:67"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "30e3748f9ca5e33c1ce35d4b801b2cf4d76b7cc103f6d1bad398e294c35c3a45",
+      "derivation": "The compiled-options reference has no supplied registry target in this case. Refuse profile-schema-ref; do not fetch it. The reference diagnostic is bounded comparator evidence."
+    },
+    {
+      "caseId": "lint-info-through-warn",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:454",
+        "DESIGN.R31.md:456"
+      ],
+      "provenance": [
+        "DESIGN.md:476",
+        "DESIGN.md:478"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "0863bcb871930440545dbc95b9efac79734ea1b4bb0bb7c75ddb7d9a53bdc1f3",
+      "derivation": "Numeric severity 3 means info. The common adapter deliberately transports info as warn and restores effective info for both accept and draft policies."
+    },
+    {
+      "caseId": "lint-warning-through-error",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:456",
+        "DESIGN.R31.md:458"
+      ],
+      "provenance": [
+        "DESIGN.md:478",
+        "DESIGN.md:480"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "fac8735314e065bc59deec6a5d52c4f727f893f46d10a334eb0bea769f666956",
+      "derivation": "The generic rule transports at error while each profile subrule keeps its effective severity. Draft readiness warning counts as warn and does not fail acceptance."
+    },
+    {
+      "caseId": "lint-unknown-lookup-none",
+      "expectedStatus": "refused:lint-config-unknown",
+      "previousProvenance": [
+        "DESIGN.R31.md:429"
+      ],
+      "provenance": [
+        "DESIGN.md:451"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "9298e34252ffd823795809835edeec880e1bf1d26da28a1f5dd9fca62c82c5bc",
+      "derivation": "Missing factories and the specific unknown-lookup exception both map to a typed lint-config-unknown integrity refusal. They never silently disable a rule."
+    },
+    {
+      "caseId": "lint-unknown-lookup-thrown",
+      "expectedStatus": "refused:lint-config-unknown",
+      "previousProvenance": [
+        "DESIGN.R31.md:429"
+      ],
+      "provenance": [
+        "DESIGN.md:451"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "9298e34252ffd823795809835edeec880e1bf1d26da28a1f5dd9fca62c82c5bc",
+      "derivation": "Missing factories and the specific unknown-lookup exception both map to a typed lint-config-unknown integrity refusal. They never silently disable a rule."
+    },
+    {
+      "caseId": "lint-extends-cycle",
+      "expectedStatus": "refused:lint-config-cycle",
+      "previousProvenance": [
+        "DESIGN.R31.md:433"
+      ],
+      "provenance": [
+        "DESIGN.md:455"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "66757f852dc85978b40f5e6f1cd28bd64f97b5a1fb0d973d665324a5a4a5382f",
+      "derivation": "Depth-first allowlisted resolution encounters cycle/a then cycle/b then cycle/a. Preserve the two cycle members and refuse lint-config-cycle."
+    },
+    {
+      "caseId": "lint-whitelist-escape",
+      "expectedStatus": "refused:profile-schema",
+      "previousProvenance": [
+        "DESIGN.R31.md:433"
+      ],
+      "provenance": [
+        "DESIGN.md:455"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "c3ba5654b5e2f26fd8f8ea8a7524c0983131a27c74d0fec9cb095051d3bdc93b",
+      "derivation": "A relative filesystem escape is not one of the allowed extends forms. Reject configuration syntax before resolver execution."
+    },
+    {
+      "caseId": "lint-pointer-escaping",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:479",
+        "DESIGN.R31.md:724"
+      ],
+      "provenance": [
+        "DESIGN.md:501",
+        "DESIGN.md:746"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "da1c969505ef65755b9548c23631256aab5ecfbe6752a72e6b5cb5e6582a0886",
+      "derivation": "Index Task_1 at its immutable native pointer, then escape tilde before slash for each supplied segment. The unresolved ghost retains unavailable provenance and null pointer."
+    },
+    {
+      "caseId": "lint-alternating-profiles",
+      "expectedStatus": "ok",
+      "previousProvenance": [
+        "DESIGN.R31.md:433",
+        "DESIGN.R31.md:460"
+      ],
+      "provenance": [
+        "DESIGN.md:455",
+        "DESIGN.md:482"
+      ],
+      "verdictChanged": false,
+      "artifactsChanged": false,
+      "expectedArtifactsSha256": "82ab84a2dfc5aa347b5f2d8971ed958a7d2efd49a9ecfff51f64212100180120",
+      "derivation": "Each evaluation uses its own compiled options and fresh linter state. The A to B to A sequence must restore the original A options without retaining B state."
+    }
+  ],
+  "staticRuleAudit": {
+    "rules": 14,
+    "actions": 12,
+    "checksCodesPhasesWritesChanged": false,
+    "provenanceRefreshed": true,
+    "lexicalCodesAreNotARanking": true,
+    "staticTieBreak": "Still unresolved; R3.2 lexical precedence does not define a total order between simultaneous static failures.",
+    "provenance": [
+      "DESIGN.md:184",
+      "DESIGN.md:197",
+      "DESIGN.md:199"
+    ]
+  },
+  "localCoverage": {
+    "codes": [
+      "profile-json",
+      "profile-json-duplicate-key",
+      "profile-unicode",
+      "profile-number"
+    ],
+    "allSixCodePairsInBothSourceOrders": true,
+    "keyOrder": [
+      "decode before Unicode",
+      "decode before duplicate comparison",
+      "Unicode before colon/value",
+      "duplicate before colon/value"
+    ],
+    "recursiveDepth": "Objects inside arrays, nested values and first sibling before next sibling.",
+    "postWalk": "Lexical failures in the root beat trailing tokens. Trailing tokens are rejected without walking a second root. Non-JSON whitespace fails the final parse unless the walk already failed.",
+    "schemaBoundary": "Each lexical code wins in otherwise schema-invalid input, including unknown nested fields. Lexically valid null reaches schema and is refused as profile-schema.",
+    "positiveLexicalControls": [
+      "valid surrogate pairs",
+      "Unicode noncharacters",
+      "fresh key sets",
+      "no key normalization",
+      "safe numeric endpoints and spellings",
+      "finite fractions",
+      "negative zero",
+      "underflow/subnormal",
+      "JSON whitespace"
+    ],
+    "positiveScope": "profile-lexical-parse only; no claim of full-profile schema acceptance.",
+    "sameKeyUnicodeDuplicate": "A duplicate comparison requires a successfully decoded, Unicode-valid key. An unpaired-surrogate key already fails on its first occurrence; there is no reachable same-key Unicode/duplicate tie.",
+    "authoredSource": "tests/fixtures/profile-lot0/author-r32-lexical.mjs.txt"
+  },
+  "commits": {
+    "red": "234753a8a7a272e74cd152e387c7f741ef949a1b",
+    "green": "16ad0ba4cba3c8677750e97a07d743e66a63c214",
+    "receiptCommitResolution": "git log -1 --format=%H -- docs/design/receipts/lot0-s2-r32.json"
+  },
+  "tests": {
+    "red": {
+      "command": "rtk node --test tests/profile-r32-expectations.test.mjs",
+      "exitCode": 1,
+      "tests": 69,
+      "pass": 58,
+      "fail": 11,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 170.159491,
+      "sha256": "3ed34c1b9fc0f74dfdf5e05a0214e561cd63b66611d7d56da190afc06f6d3d0c"
+    },
+    "scoped": {
+      "command": "rtk node --test tests/profile-r32-expectations.test.mjs tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-brand-guard.test.mjs",
+      "exitCode": 0,
+      "tests": 89,
+      "pass": 89,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 3097.772882,
+      "sha256": "6ceaeee775c4418fb7d7eec2631258bdb851d077d65630a5c6ce210883b2c136"
+    },
+    "fullSuite": {
+      "command": "npm test",
+      "exitCode": 0,
+      "tests": 1500,
+      "pass": 1500,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 152270.623295,
+      "sha256": "84146569727c09ce4e8d61606e4dea1a7ae060828274e5b00b97d47a026ac523",
+      "wrapper": "rtk proxy taskset -c 0,1 npm test",
+      "environment": "host browser access; two-CPU affinity limits test-file contention",
+      "sourceCommit": "8b8efa0289cb4c64e1df96bc1266cc1f01e7c8ac",
+      "buildPassed": true,
+      "browserRerunRequired": false,
+      "testAndTimeoutChanges": false
+    },
+    "receiptValidation": {
+      "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-brand-guard.test.mjs tests/profile-r32-expectations.test.mjs",
+      "tests": 89,
+      "pass": 89,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "sha256": "c6cd4b03c5bc1427ee447cee4ae92f3c44104e948abbf6a8a0304fe2244cc5bb",
+      "scope": "Final receipt content, seal chains, provenance and brand scan. Only this validation record was appended afterward; brand guard rerun for that final edit."
+    }
+  },
+  "review": {
+    "status": "pending-independent-review",
+    "delegatedByThisSession": false
+  },
+  "openItems": [
+    {
+      "owner": "canonical corpus lane and conductor",
+      "scope": "Full step-2 canonical expectation set",
+      "acceptance": "Publish reviewed compiler/authority, complete C/N/report, adversarial support/grid/sorting, envelope/snapshot/layout/render/idMap and final-byte expectations; explicitly adopt a new canonical pin. The 84-vector seal remains a bounded subset."
+    },
+    {
+      "owner": "both library lanes and conductor",
+      "scope": "Independent review and agreement",
+      "acceptance": "Review the new R3.2 seal and unchanged CR-01 through CR-14 mappings; provide canonical-number and cross-lane evidence. No runtime parity is claimed."
+    },
+    {
+      "owner": "conductor",
+      "scope": "Static failure tie-break",
+      "acceptance": "Define ordering for simultaneous static failures before executable cases need a single such code. Lexical ordering is resolved by R3.2."
+    },
+    {
+      "owner": "consumer and conductor",
+      "scope": "External scan inputs and accepted release identities",
+      "acceptance": "Supply any additional hashed lexicon and actually accepted release pins; original receipt remains the baseline inventory."
+    }
+  ],
+  "excludedPaths": [
+    "tmp/",
+    "docs/design/0.3.1-layout-on-load.md"
+  ],
+  "canonicalAuditHashDomain": "UTF-8 JSON.stringify(expectedArtifacts) in sealed property order; an audit hash, not profile JCS.",
+  "freezeSeal": {
+    "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+    "bytes": 1684,
+    "sha256": "4de8db00113ef688a67ab2934581f1e699360f73a243e71cf940af3beaaf7cc1"
+  },
+  "historicalR32Revalidation": {
+    "source": {
+      "branch": "workbench/functions-20261004-profile-lot0",
+      "startCommit": "814dec4",
+      "greenCommit": "16ad0ba4cba3c8677750e97a07d743e66a63c214"
+    },
+    "tests": {
+      "red": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-brand-guard.test.mjs tests/profile-r32-expectations.test.mjs",
+        "tests": 83,
+        "pass": 19,
+        "fail": 64,
+        "exitCode": 1,
+        "sha256": "879c595a6bada20f271155d940d5a55feab7e22ec403954369dae22017b63f34"
+      },
+      "scoped": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-brand-guard.test.mjs tests/profile-r32-expectations.test.mjs",
+        "tests": 83,
+        "pass": 83,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 3345.260023,
+        "exitCode": 0,
+        "sha256": "c383a131446bbb6861b93f33dc69eea821053681580cb58099942b2dc344495f",
+        "includesNewReceiptBrandScan": true
+      },
+      "sandboxFullSuite": {
+        "command": "rtk npm test",
+        "tests": 1040,
+        "pass": 1014,
+        "fail": 26,
+        "cancelled": 0,
+        "skipped": 0,
+        "exitCode": 1,
+        "buildPassed": true,
+        "reason": "All failures were browser launch failures inside the sandbox: UnixProcessIdUnknown. The exact browser-dist and demo test children were terminated after their launch failures left live processes. No timeout or test changes were made.",
+        "terminatedFiles": [
+          "tests/browser-dist.browser.test.mjs",
+          "tests/demo.browser.test.mjs"
+        ],
+        "sha256": "f2ed33c9a2c845a1d93b2437b4e7803b86c0d70280c3fa9e0a1d6d2c04bd9ef9"
+      },
+      "isolatedBrowserRerun": {
+        "command": "rtk proxy node --test tests/*.browser.test.mjs",
+        "tests": 464,
+        "pass": 463,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 181306.599123,
+        "exitCode": 1,
+        "sha256": "45cb0412b9ff54a0389f236699574ade0a10645cf099aa7db8edab1764d7a5a2",
+        "environment": "host browser access",
+        "reason": "One browser launch crashed with SIGSEGV and timed out after 180000 ms; all other files passed.",
+        "failedFile": "tests/react.browser.test.mjs",
+        "signature": "browserType.launchPersistentContext: Timeout 180000ms exceeded; browser process signal SIGSEGV",
+        "testProcessTermination": "Attempted to stop the stalled test after three minutes, but it had already exited on its existing launch timeout; no process was killed by that attempt."
+      },
+      "fullSuite": {
+        "command": "npm test",
+        "wrapper": "rtk proxy taskset -c 0,1 npm test",
+        "environment": "host browser access; CPU affinity 0,1 reduces default test-file concurrency",
+        "tests": 1494,
+        "pass": 1494,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 144408.224763,
+        "exitCode": 0,
+        "buildPassed": true,
+        "sourceCommit": "16ad0ba4cba3c8677750e97a07d743e66a63c214",
+        "worktree": "Green commit plus new receipt and its brand-scan scope/seal. Final receipt-only edits verified by the scoped suite.",
+        "testScriptChanges": false,
+        "testAndTimeoutChanges": false,
+        "sha256": "07183c0e86e10a0b12599eff626c4b1dcb6860920af26b6e10e0e51b12608239"
+      },
+      "testSpecificationCorrections": [
+        "Added the recursive-walk citation at line 95 alongside the post-walk citation at line 96; lexicalProvenance points to line 95.",
+        "Kept the existing receipt path in the data assertion so the green change precedes the new receipt; the new receipt is added to the brand-scan scope in its own commit."
+      ],
+      "singleFileBrowserRerun": {
+        "command": "rtk proxy node --test tests/react.browser.test.mjs",
+        "tests": 22,
+        "pass": 22,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 4646.457221,
+        "exitCode": 0,
+        "sha256": "a92dea7b7fd09c1066e370cd82e7fb50eec919cf100ea3e9e7d83ecf3124f9eb",
+        "environment": "host browser access; this test file alone",
+        "testAndTimeoutChanges": false
+      },
+      "hostFullSuiteAttempt": {
+        "command": "rtk proxy npm test",
+        "tests": 1482,
+        "pass": 1481,
+        "fail": 0,
+        "cancelled": 1,
+        "skipped": 0,
+        "durationMs": 181825.763863,
+        "exitCode": 1,
+        "sha256": "9c6f34d0b91c63e1499231f925aedb7741becd3da4ec213ee0590306f491437e",
+        "buildPassed": true,
+        "environment": "host browser access; default concurrency from 32 CPUs",
+        "cancelledFile": "tests/legend2.browser.test.mjs",
+        "signature": "testTimeoutFailure: test timed out after 180000ms",
+        "assertionFailures": 0
+      },
+      "secondSingleFileBrowserRerun": {
+        "command": "rtk proxy node --test tests/legend2.browser.test.mjs",
+        "tests": 13,
+        "pass": 13,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 992.725101,
+        "exitCode": 0,
+        "sha256": "3dcda2d174ab4a2867d08b377d510bd7675f4fa8c0b09db93e50e6bbdf8854bb",
+        "environment": "host browser access; this file alone",
+        "testAndTimeoutChanges": false
+      },
+      "recoveryConclusion": "The required npm test suite passed completely with reduced browser concurrency. Both single-file browser retries passed. All attempted runs and failures are retained above; no assertions or timeouts were changed."
+    }
+  },
+  "reviewCorrection": {
+    "date": "2026-10-15",
+    "source": {
+      "branch": "workbench/functions-20261004-profile-lot0",
+      "startCommit": "163e334677e472c0ed259d56954d9349a775197d",
+      "redCommit": "433708968f3d0a6543268c5c8b6504d0ce22a054",
+      "greenCommit": "8b8efa0289cb4c64e1df96bc1266cc1f01e7c8ac"
+    },
+    "reviewSources": [
+      "LOT0-S12-CONSENSUS-bpmn-canvas.md",
+      "LOT0-S12-REVIEW-MUSE-WONDER.md"
+    ],
+    "findings": [
+      {
+        "id": "C1",
+        "reviewerId": "B1",
+        "severity": "BLOCKER",
+        "status": "fixed",
+        "commit": "8b8efa0",
+        "evidence": "All five mis-citations exist at the starting HEAD. Unicode positive controls now cite line 89; duplicate-key positive controls line 88; JSON whitespace lines 87/94/96 (with shared 83/95/97). All 84 expected statuses and artifact bytes remain unchanged; no other vector field changed."
+      },
+      {
+        "id": "C2",
+        "reviewerId": "M1",
+        "severity": "MAJOR",
+        "status": "closed",
+        "evidence": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session.",
+        "duplicateDiffSha256": "94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12",
+        "priorCorrectionCommit": "8b8efa0",
+        "gateState": "closed",
+        "blocksIndependentSteps": false
+      },
+      {
+        "id": "C3",
+        "reviewerId": "M2",
+        "severity": "MAJOR",
+        "status": "fixed",
+        "commits": [
+          "4337089",
+          "8b8efa0"
+        ],
+        "evidence": "Exact per-canonical-case and per-local-outcome provenance sets, including explicit positive controls. All references resolve to pinned R3.2 excerpts. Four damaged-evidence probes and a consistently resealed C1 mutation are rejected. The excerpt ledger is pinned independently of the byte seal; no profile is evaluated."
+      },
+      {
+        "id": "C4",
+        "reviewerId": "N1",
+        "severity": "MINOR",
+        "status": "fixed",
+        "commits": [
+          "4337089",
+          "8b8efa0"
+        ],
+        "evidence": "lexicalProvenance now lists DESIGN.md:95, DESIGN.md:96 and DESIGN.md:97 and its assertion locks all three."
+      },
+      {
+        "id": "C5",
+        "reviewerId": "N2",
+        "severity": "MINOR",
+        "status": "fixed",
+        "commit": "8b8efa0",
+        "evidence": "Historical R3.1 receipt now opens with a supersededBy pointer identifying its seal figures as historical."
+      },
+      {
+        "id": "C6",
+        "reviewerId": "N3",
+        "severity": "MINOR",
+        "status": "fixed",
+        "commit": "8b8efa0",
+        "evidence": "Fixture README explicitly limits local envelopes to lot 0, lists missing canonical fields and gives the local-to-canonical verdict-shape mapping. No loader/adapter or step 3 implemented."
+      },
+      {
+        "id": "C7",
+        "reviewerId": "N4",
+        "severity": "MINOR",
+        "status": "fixed",
+        "evidence": "verificationCode below records raw byte lengths and SHA-256 for the verifier and all four profile test files at the green commit. These are receipt audit hashes; no self-seal or new seal format is claimed."
+      }
+    ],
+    "rejectedFindings": [],
+    "reseal": {
+      "reason": "Correct C1 provenance; freeze C2 owner-disposition record, C3 excerpt evidence and C4 complete lexical ordering provenance.",
+      "expectations": {
+        "oldArtifact": {
+          "path": "tests/fixtures/profile-lot0/expectations.json",
+          "bytes": 86192,
+          "sha256": "75ac473ec06b9cf5b4574585811ff3ab1104dbea2005837eb32577066d50de92"
+        },
+        "newArtifact": {
+          "path": "tests/fixtures/profile-lot0/expectations.json",
+          "bytes": 86216,
+          "sha256": "654f27fdf86020fe665adfd5004340adc2bb1e2a733bdacb3659799416c277f8"
+        },
+        "oldSeal": {
+          "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+          "bytes": 363,
+          "sha256": "5bcb785ccd1ca538ab969ae7cd0d6a007f80417e80947e5e235fb7a312ce0e8e"
+        },
+        "newSeal": {
+          "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+          "bytes": 363,
+          "sha256": "978638ae3469ec2630d8095852a405fb5cd909e6ff16df9f51c0a627289957aa"
+        }
+      },
+      "freeze": {
+        "oldSeal": {
+          "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+          "bytes": 1526,
+          "sha256": "2064f5b6f53ef7089f70682b84511c41e4a3fd66e42c37d4a40532c2da1efd17"
+        },
+        "newSeal": {
+          "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+          "bytes": 1684,
+          "sha256": "0128fcd8fe17f2de67d8a7ebfc870ae49e91b64dd50e879600e11f79689e38e2"
+        }
+      },
+      "verdictsChanged": 0,
+      "artifactsChanged": 0
+    },
+    "provenanceEvidence": {
+      "path": "tests/fixtures/profile-lot0/design-provenance.json",
+      "bytes": 19682,
+      "sha256": "27abb2914ad8f0cdb659f7f3da35b30bb5ee160e07d4dbb55aa339c856b70388",
+      "citedLines": 26,
+      "expectations": 84,
+      "designSha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497",
+      "fullAuthorityCompared": true,
+      "comparison": "verifyDesignProvenance(expectations, evidence, authorityBytes): full raw design SHA-256, exact one-based line text, per-line UTF-8 digest, complete citation inventory. Executed against the supplied R3.2 DESIGN. Offline suites pin the extracted text and exact per-case rule citations.",
+      "canonicalizedLedgerSha256": "dafb732053d0ae7b9f4ad1292ef68924d162e20ce855d0356c7c800f1c36493c"
+    },
+    "verificationCode": [
+      {
+        "path": "tests/helpers/profile-seal.mjs",
+        "bytes": 9358,
+        "sha256": "8e998c9efd9d85efbff742d749e0b5a49fe082cd7e433f4522751f1686434d1a"
+      },
+      {
+        "path": "tests/profile-corpus.test.mjs",
+        "bytes": 4177,
+        "sha256": "b572ac251d27f84372ccc7c86ef7d47340070c6d3506d5dcdc89ea7ecab9af36"
+      },
+      {
+        "path": "tests/profile-golden-independence.test.mjs",
+        "bytes": 2011,
+        "sha256": "b7790b859671fcc7524528b75a11fe3208579e9fc1ba15125e24358a076ecef1"
+      },
+      {
+        "path": "tests/profile-brand-guard.test.mjs",
+        "bytes": 1186,
+        "sha256": "d327816812eeaa8d791c4c8a145f2b7df4a1e29379b166fbd5de6732143a4259"
+      },
+      {
+        "path": "tests/profile-r32-expectations.test.mjs",
+        "bytes": 11552,
+        "sha256": "bdb100582d5db385ad406f6bfafe324f20a14e049b9f0251ac85ed724c6f5287"
+      }
+    ],
+    "localEnvelopeDocumentation": {
+      "path": "tests/fixtures/profile-lot0/README.md",
+      "bytes": 3475,
+      "sha256": "a2003e96311b2ce23982fadfa7fd21cef86ddd60dd3c5c12da5eb43bc0d2f85c"
+    },
+    "reviewStatus": "pending-independent-re-review; no acceptance, runtime parity or canonical publication claimed",
+    "verificationCodeStatus": "historical; superseded for current-tree verification",
+    "verificationCodeSupersededBy": "#/round2MinorCorrections/verificationCode"
+  },
+  "c2GateCorrection": {
+    "date": "2026-10-15",
+    "authority": "conductor ruling on C2, DESIGN R3.2 §14.1: no duplicated unresolved stash change",
+    "source": {
+      "startCommit": "8f59b8541d80100f45ab2fbc0c18f08cbf92cd11",
+      "redCommit": "72ed015"
+    },
+    "gateState": "closed",
+    "blocksIndependentSteps": false,
+    "closure": "docs/design/receipts/lot0-reconciliation-closed.json",
+    "reseal": {
+      "reason": "Explicitly reseal the corrected baseline, frozen gate/stash inputs and owner-disposition addendum; preserve the original conductor receipt bytes above the addendum.",
+      "oldSeal": {
+        "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+        "bytes": 1684,
+        "sha256": "0128fcd8fe17f2de67d8a7ebfc870ae49e91b64dd50e879600e11f79689e38e2"
+      },
+      "newSeal": {
+        "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+        "bytes": 1684,
+        "sha256": "4de8db00113ef688a67ab2934581f1e699360f73a243e71cf940af3beaaf7cc1"
+      },
+      "changedArtifacts": [
+        {
+          "oldArtifact": {
+            "path": "tests/fixtures/profile-lot0/inputs.json",
+            "bytes": 7737,
+            "sha256": "fd82067c9ea2783fdc103f0fecfe54afed4e01b11f354fead83c32f55f5253b3"
+          },
+          "newArtifact": {
+            "path": "tests/fixtures/profile-lot0/inputs.json",
+            "bytes": 8134,
+            "sha256": "c0a33f8450a468dd53da850d7e15952430bd63a178b6635058d6f22222950f7f"
+          }
+        },
+        {
+          "oldArtifact": {
+            "path": "tests/fixtures/profile-lot0/reconciliation.md",
+            "bytes": 1897,
+            "sha256": "031d57d52ac47d88669c0f44abed289ff15d3e638fc3a3d13356b7996556c882"
+          },
+          "newArtifact": {
+            "path": "tests/fixtures/profile-lot0/reconciliation.md",
+            "bytes": 2124,
+            "sha256": "81d16f3a9f4671f29dea5b38b62490f07eb2a2f1ca94e6e794fbcd4e54829639"
+          }
+        },
+        {
+          "oldArtifact": {
+            "path": "docs/design/profile-lot0-baseline.md",
+            "bytes": 6080,
+            "sha256": "96cdacb974681d7c9ce7befb2ed503510316dcf499c281386289c8c89b9d72f5"
+          },
+          "newArtifact": {
+            "path": "docs/design/profile-lot0-baseline.md",
+            "bytes": 6318,
+            "sha256": "199dabd6fab18bde3b749a84190c4c3d213e1c540ff58a3b4aee9d8a99287c00"
+          }
+        }
+      ]
+    },
+    "tests": {
+      "red": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs",
+        "tests": 18,
+        "pass": 16,
+        "fail": 2,
+        "exitCode": 1
+      },
+      "profileAndBrand": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-brand-guard.test.mjs",
+        "tests": 91,
+        "pass": 91,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "exitCode": 0
+      },
+      "sandboxFullSuiteAttempt": {
+        "command": "rtk proxy taskset -c 0,1 npm test",
+        "buildPassed": true,
+        "status": "stopped-after-browser-launch-failure",
+        "signature": "Snap Chromium cannot create transient scope: DBus org.freedesktop.DBus.Error.InvalidArgs; sandbox process namespace reports browser PID as a kernel thread",
+        "recovery": "Stopped only this attempt; reran the complete npm test suite with host browser access and the same two-CPU affinity."
+      },
+      "fullSuite": {
+        "command": "npm test",
+        "wrapper": "rtk proxy taskset -c 0,1 npm test",
+        "environment": "host browser access; two-CPU affinity limits test-file contention",
+        "tests": 1502,
+        "pass": 1502,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 159863.108684,
+        "exitCode": 0,
+        "buildPassed": true,
+        "sha256": "40cfdb5db7891c907e95d7ff21fb782e07ea0c89199b792680776d7e4a8bf02f",
+        "worktree": "Red commit 72ed015 plus the C2 gate correction and explicit reseal. Final receipt validation reruns the profile tests and brand guard after recording these results.",
+        "testScriptChanges": false,
+        "timeoutChanges": false
+      },
+      "receiptValidation": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-r32-expectations.test.mjs",
+        "tests": 90,
+        "pass": 90,
+        "fail": 0,
+        "exitCode": 0
+      },
+      "finalBrandGuard": {
+        "command": "rtk node --test tests/profile-brand-guard.test.mjs",
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "exitCode": 0
+      }
+    },
+    "verificationCode": [
+      {
+        "path": "tests/helpers/profile-seal.mjs",
+        "bytes": 9595,
+        "sha256": "c4104ad0b53c6c5e0d5375b3322c270bfbe9d5a1866ea01bc055741554ed6ff1"
+      },
+      {
+        "path": "tests/profile-corpus.test.mjs",
+        "bytes": 6257,
+        "sha256": "919dac034d862265155134c688308bb9d273b671288ee081151f203518aa90fe"
+      }
+    ],
+    "agentTouchedStash": false,
+    "pushed": false,
+    "verificationCodeStatus": "historical; superseded for current-tree verification",
+    "verificationCodeSupersededBy": "#/round2MinorCorrections/verificationCode"
+  },
+  "currentVerificationCode": "#/round2MinorCorrections/verificationCode",
+  "round2MinorCorrections": {
+    "date": "2026-10-15",
+    "status": "R2-R4-fixed; R1-open; acceptance-incomplete",
+    "authority": {
+      "review": "LOT0-S12-R2-CONSENSUS-bpmn-canvas.md",
+      "sha256": "0456b461ac48c361ef5280ef9e6bb21b3d18f8f5080c191f973739d1d90fd678",
+      "section": "5 Gate",
+      "designRevision": "R3.2",
+      "designSha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497",
+      "authorization": "Owner requests R2-R4 together in one explicit reseal, with R1 deferred to a separate post-drop receipt commit."
+    },
+    "source": {
+      "branch": "workbench/functions-20261004-profile-lot0",
+      "startCommit": "3bbb815b9e266f73ad86a8056a041cc5f8c566a3",
+      "redCommit": "d898d3f9ff5c198874e4034223cde23d1c0cc931",
+      "greenCommit": "89442731a5b23be15bb1cf217f6a57cd85b8e500"
+    },
+    "findings": {
+      "R2": {
+        "verifiedAtHead": true,
+        "evidence": "At startCommit all four canonical lexical refusals cite lines 48, code row and 95-96, omitting 83 and 97; negative zero cites only 48, 90 and 258. Exact-set assertions lock those omissions.",
+        "fix": "Add 83 and 97 to the four refusals; add 83 and 95-97 to negative zero. Update the locking sets and require 83 and 95-97 on each pinned canonical/local lexical vector, without parsing profile text or inferring rules from derivations.",
+        "canonicalVectorsChanged": 5,
+        "verdictsChanged": 0
+      },
+      "R3": {
+        "verifiedAtHead": true,
+        "evidence": "At startCommit all twelve actions and their locking assertion cite the authority-table header DESIGN.md:199; definitions occupy 201-210.",
+        "fix": "Cite each defining row, including grouped bind/refuse at 201 and set/unset at 204. Pin all ten defining-row excerpts against the full supplied design. The checker resolves action names from those rows and rejects header-only and wrong-action rows.",
+        "actionsChanged": 12,
+        "actionBodiesChanged": 0
+      },
+      "R4": {
+        "verifiedAtHead": true,
+        "evidence": "At startCommit reviewCorrection.verificationCode has stale helper and corpus-test hashes; c2GateCorrection.verificationCode updates only those two.",
+        "fix": "Republish one current list for the verifier and all four profile test files below; explicitly mark both earlier lists historical and superseded by it.",
+        "currentVerificationCode": "#/round2MinorCorrections/verificationCode"
+      },
+      "R1": {
+        "status": "closed",
+        "addressed": true,
+        "closure": "docs/design/receipts/lot0-reconciliation-closed.json"
+      }
+    },
+    "gateState": "closed",
+    "blocksIndependentSteps": false,
+    "stepsAccepted": false,
+    "laterStepsStarted": false,
+    "reseal": {
+      "reason": "R2 canonical lexical citation completeness and R3 defining action rows; one explicit reseal, R1 gate unchanged",
+      "seals": [
+        {
+          "oldSeal": {
+            "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+            "bytes": 363,
+            "sha256": "978638ae3469ec2630d8095852a405fb5cd909e6ff16df9f51c0a627289957aa"
+          },
+          "newSeal": {
+            "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+            "bytes": 363,
+            "sha256": "728473cc9e35c2f9028aacf7b80e481de072315e0627374255ffa3f622e37db1"
+          }
+        },
+        {
+          "oldSeal": {
+            "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+            "bytes": 1684,
+            "sha256": "4de8db00113ef688a67ab2934581f1e699360f73a243e71cf940af3beaaf7cc1"
+          },
+          "newSeal": {
+            "path": "tests/fixtures/profile-lot0/freeze.seal.json",
+            "bytes": 1684,
+            "sha256": "e63e264fdfc2db8be52cf99b25cfa40cc994e46e2ef1ab62c5a61f13538c88f4"
+          }
+        }
+      ],
+      "changedArtifacts": [
+        {
+          "oldArtifact": {
+            "path": "tests/fixtures/profile-lot0/expectations.json",
+            "bytes": 86216,
+            "sha256": "654f27fdf86020fe665adfd5004340adc2bb1e2a733bdacb3659799416c277f8"
+          },
+          "newArtifact": {
+            "path": "tests/fixtures/profile-lot0/expectations.json",
+            "bytes": 86504,
+            "sha256": "d2215d7ab30c22fb1d4323b80688720afa1f6bb2ded154fe02d36a050729241f"
+          }
+        },
+        {
+          "oldArtifact": {
+            "path": "tests/fixtures/profile-lot0/design-provenance.json",
+            "bytes": 19682,
+            "sha256": "27abb2914ad8f0cdb659f7f3da35b30bb5ee160e07d4dbb55aa339c856b70388"
+          },
+          "newArtifact": {
+            "path": "tests/fixtures/profile-lot0/design-provenance.json",
+            "bytes": 22705,
+            "sha256": "94f6bbcdf4cf2ede297602424bb5d4468e280f2bde06e9e67021589db7746118"
+          }
+        },
+        {
+          "oldArtifact": {
+            "path": "docs/design/profile-compiler-rules.json",
+            "bytes": 9898,
+            "sha256": "8bdbbf2da9e1c8caccb13faeb8ebe074bbbe5154f4a88066b818e2dffb651a66"
+          },
+          "newArtifact": {
+            "path": "docs/design/profile-compiler-rules.json",
+            "bytes": 9898,
+            "sha256": "b17bf0a94819638d31275db15fd0c3efd366c714bb0d2fd4729544e0aa2c1ef6"
+          }
+        }
+      ],
+      "operations": 1,
+      "verdictsChanged": 0,
+      "expectedArtifactsChanged": 0,
+      "actionBodiesChanged": 0
+    },
+    "provenanceEvidence": {
+      "path": "tests/fixtures/profile-lot0/design-provenance.json",
+      "bytes": 22705,
+      "sha256": "94f6bbcdf4cf2ede297602424bb5d4468e280f2bde06e9e67021589db7746118",
+      "citedLines": 36,
+      "expectationVectors": 84,
+      "canonicalVectors": 23,
+      "localVectors": 61,
+      "actionDefinitions": 10,
+      "fullAuthorityCompared": true,
+      "comparison": "verifyDesignProvenance(expectations, evidence, authorityBytes): full design digest, all 36 exact one-based lines, line digests, complete expectation/action citation inventory, lexical completeness and defining action rows.",
+      "canonicalizedLedgerSha256": "67e2e676580b2b6b29b25f2267dbb7f4fd169f0acf68c57a84d9f6ef5e7e0854"
+    },
+    "tests": {
+      "red": {
+        "command": "rtk node --test tests/profile-r32-expectations.test.mjs",
+        "tests": 107,
+        "pass": 68,
+        "fail": 39,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 194.327331,
+        "exitCode": 1,
+        "logSha256": "61c6e3fe99505eabe1773d1e6d30b02472dbe015ce97a6e350246c7ac39dba5a"
+      },
+      "profileAndBrand": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-brand-guard.test.mjs",
+        "tests": 129,
+        "pass": 129,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 3180.088623,
+        "exitCode": 0,
+        "logSha256": "86d85b7d046a9a3a38fe3033adbbf52b3274249f2bbee99ced1cd86e83a1e622"
+      },
+      "fullSuite": {
+        "command": "npm test",
+        "tests": 1540,
+        "pass": 1540,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "durationMs": 144252.695856,
+        "exitCode": 0,
+        "logSha256": "5da90b5c4cacc9c3234ee248b1c83149d674dacd2037304d24f8e27494d75736",
+        "wrapper": "rtk sh -c: taskset -c 0,1 npm test; output redirected to an external temporary log",
+        "environment": "Host Chromium access and two-CPU affinity, matching the previous receipt passing setup.",
+        "buildPassed": true,
+        "testScriptChanges": false,
+        "timeoutChanges": false
+      },
+      "regressions": {
+        "newTests": 38,
+        "coverage": "24 single-vector missing-citation mutations with consistent expectation byte reseals; twelve header-only action mutations; one wrong-action defining-row mutation; one exact action-row inventory assertion. Existing 84 vectors pass with their unchanged verdicts."
+      },
+      "receiptValidation": {
+        "command": "rtk node --test tests/profile-corpus.test.mjs tests/profile-golden-independence.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-brand-guard.test.mjs",
+        "tests": 129,
+        "pass": 129,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "exitCode": 0,
+        "logSha256": "c3f79bbcfb6947bbef59a7268b86227a27f9d49faf97c1bb5a0a63149f77138a"
+      }
+    },
+    "verificationCodeScope": "Authoritative current-tree inventory; supersedes both historical verificationCode lists above. Receipt hashes code; no verifier self-seal is claimed.",
+    "verificationCode": [
+      {
+        "path": "tests/helpers/profile-seal.mjs",
+        "bytes": 11031,
+        "sha256": "d9fa08a55fc7a4761d039255153054ac60d8bf53593d27914ee1ff0e0a278842"
+      },
+      {
+        "path": "tests/profile-corpus.test.mjs",
+        "bytes": 6257,
+        "sha256": "919dac034d862265155134c688308bb9d273b671288ee081151f203518aa90fe"
+      },
+      {
+        "path": "tests/profile-golden-independence.test.mjs",
+        "bytes": 2011,
+        "sha256": "b7790b859671fcc7524528b75a11fe3208579e9fc1ba15125e24358a076ecef1"
+      },
+      {
+        "path": "tests/profile-brand-guard.test.mjs",
+        "bytes": 1186,
+        "sha256": "d327816812eeaa8d791c4c8a145f2b7df4a1e29379b166fbd5de6732143a4259"
+      },
+      {
+        "path": "tests/profile-r32-expectations.test.mjs",
+        "bytes": 14471,
+        "sha256": "c8861da2202293362ad40e1cc3e36357acc4b147489ddf5197efe4a5d47d388f"
+      }
+    ],
+    "reviewStatus": "pending-independent-re-review; no acceptance, runtime parity or canonical publication claimed",
+    "agentTouchedStash": false,
+    "pushed": false
+  },
+  "reconciliationClosure": {
+    "date": "2026-10-15",
+    "gateState": "closed",
+    "receipt": "docs/design/receipts/lot0-reconciliation-closed.json",
+    "evidence": "2026-10-15: the conductor, with git execution delegated by the owner, dropped stash@{0} after re-verifying its reference-model diff against e9f5f89. Both diffs are 2049 bytes with SHA-256 94a746a6ca13c68882af01d22bcb3529a4e72ceea96bdcea24daa221d13f1a12. This closure session independently verified the same diff identity, an empty git stash list, and dangling commit 2116408888bcbb1105560f1af6e088bdef2dd2af. DESIGN §14.1 gate closed; no stash mutation by this closure session.",
+    "supersedes": "Earlier retained-stash dispositions and open-gate statements only; other historical evidence remains unchanged."
+  }
+}

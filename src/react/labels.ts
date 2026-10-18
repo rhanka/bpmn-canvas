@@ -50,7 +50,7 @@ export const DEFAULT_LABELS: WorkshopLabels = {
   export: "Export",
   exportBpmn: "BPMN",
   exportDrawio: "Draw.io",
-  exportSparx: "Sparx (BPMN 2.0)",
+  exportSparx: "Sparx",
   exportFailed: "Export failed",
   import: "Import",
   importFailed: "Import failed",

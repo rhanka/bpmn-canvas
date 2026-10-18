@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:sem="https://sentropic.com/schema/bpmn/semantics/1" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-builder">
+  <bpmn:collaboration id="Sales_overview_collab">
+    <bpmn:participant id="Sales_overview_pool" name="Sales overview" processRef="Sales_overview" />
+  </bpmn:collaboration>
+  <bpmn:process id="Sales_overview" name="Sales overview" isExecutable="false">
+    <bpmn:laneSet id="Sales_overview_lanes">
+      <bpmn:lane id="Desk" name="Desk">
+        <bpmn:flowNodeRef>Start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Quote_preparation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Run_2_1_checks</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Archive</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>tape2_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Done</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start" name="Start">
+      <bpmn:extensionElements>
+        <sem:info order="0" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Start_Quote_preparation</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="Quote_preparation" name="Quote preparation">
+      <bpmn:extensionElements>
+        <sem:info order="1" processRef="Quote_preparation_2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Start_Quote_preparation</bpmn:incoming>
+      <bpmn:outgoing>Flow_Quote_preparation_Run_2_1_checks</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:callActivity id="Run_2_1_checks" name="Run 2.1 checks" calledElement="Process_2_1_Credit_check">
+      <bpmn:extensionElements>
+        <sem:info order="2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Quote_preparation_Run_2_1_checks</bpmn:incoming>
+      <bpmn:outgoing>Flow_Run_2_1_checks_Archive</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:task id="Archive" name="Archive">
+      <bpmn:extensionElements>
+        <sem:info order="3" processRef="Archive_records" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Run_2_1_checks_Archive</bpmn:incoming>
+      <bpmn:outgoing>Flow_Archive__tape2_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:subProcess id="tape2_1" name="Étape2.1">
+      <bpmn:extensionElements>
+        <sem:info order="4" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Archive__tape2_1</bpmn:incoming>
+      <bpmn:outgoing>Flow__tape2_1_Done</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:endEvent id="Done" name="Done">
+      <bpmn:extensionElements>
+        <sem:info order="5" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow__tape2_1_Done</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Start_Quote_preparation" sourceRef="Start" targetRef="Quote_preparation">
+      <bpmn:extensionElements>
+        <sem:info order="1000" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Quote_preparation_Run_2_1_checks" sourceRef="Quote_preparation" targetRef="Run_2_1_checks">
+      <bpmn:extensionElements>
+        <sem:info order="1001" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Run_2_1_checks_Archive" sourceRef="Run_2_1_checks" targetRef="Archive">
+      <bpmn:extensionElements>
+        <sem:info order="1002" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Archive__tape2_1" sourceRef="Archive" targetRef="tape2_1">
+      <bpmn:extensionElements>
+        <sem:info order="1003" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow__tape2_1_Done" sourceRef="tape2_1" targetRef="Done">
+      <bpmn:extensionElements>
+        <sem:info order="1004" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:collaboration id="Quote_preparation_collab">
+    <bpmn:participant id="Quote_preparation_pool" name="Quote preparation" processRef="Quote_preparation_2" />
+  </bpmn:collaboration>
+  <bpmn:process id="Quote_preparation_2" name="Quote preparation" isExecutable="false">
+    <bpmn:laneSet id="Quote_preparation_lanes">
+      <bpmn:lane id="Desk_2" name="Desk">
+        <bpmn:flowNodeRef>Quote_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Price_items</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Quote_ready</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Quote_start" name="Quote start">
+      <bpmn:extensionElements>
+        <sem:info order="6" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Quote_start_Price_items</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Price_items" name="Price items">
+      <bpmn:extensionElements>
+        <sem:info order="7" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Quote_start_Price_items</bpmn:incoming>
+      <bpmn:outgoing>Flow_Price_items_Quote_ready</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Quote_ready" name="Quote ready">
+      <bpmn:extensionElements>
+        <sem:info order="8" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Price_items_Quote_ready</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Quote_start_Price_items" sourceRef="Quote_start" targetRef="Price_items">
+      <bpmn:extensionElements>
+        <sem:info order="1005" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Price_items_Quote_ready" sourceRef="Price_items" targetRef="Quote_ready">
+      <bpmn:extensionElements>
+        <sem:info order="1006" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:collaboration id="Collab_2_1_Credit_check_collab">
+    <bpmn:participant id="Pool_2_1_Credit_check_pool" name="2.1 Credit check" processRef="Process_2_1_Credit_check" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_2_1_Credit_check" name="2.1 Credit check" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_2_1_Credit_check_lanes">
+      <bpmn:lane id="Finance" name="Finance">
+        <bpmn:flowNodeRef>Check_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Score_customer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Check_done</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Check_start" name="Check start">
+      <bpmn:extensionElements>
+        <sem:info order="9" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Check_start_Score_customer</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Score_customer" name="Score customer">
+      <bpmn:extensionElements>
+        <sem:info order="10" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Check_start_Score_customer</bpmn:incoming>
+      <bpmn:outgoing>Flow_Score_customer_Check_done</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Check_done" name="Check done">
+      <bpmn:extensionElements>
+        <sem:info order="11" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Score_customer_Check_done</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Check_start_Score_customer" sourceRef="Check_start" targetRef="Score_customer">
+      <bpmn:extensionElements>
+        <sem:info order="1007" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Score_customer_Check_done" sourceRef="Score_customer" targetRef="Check_done">
+      <bpmn:extensionElements>
+        <sem:info order="1008" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:collaboration id="Archive_records_collab">
+    <bpmn:participant id="Archive_records_pool" name="Archive records" processRef="Archive_records" />
+  </bpmn:collaboration>
+  <bpmn:process id="Archive_records" name="Archive records" isExecutable="false">
+    <bpmn:laneSet id="Archive_records_lanes">
+      <bpmn:lane id="Records" name="Records">
+        <bpmn:flowNodeRef>Archive_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Store_file</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Archived</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Archive_start" name="Archive start">
+      <bpmn:extensionElements>
+        <sem:info order="12" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Archive_start_Store_file</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Store_file" name="Store file">
+      <bpmn:extensionElements>
+        <sem:info order="13" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Archive_start_Store_file</bpmn:incoming>
+      <bpmn:outgoing>Flow_Store_file_Archived</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Archived" name="Archived">
+      <bpmn:extensionElements>
+        <sem:info order="14" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Store_file_Archived</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Archive_start_Store_file" sourceRef="Archive_start" targetRef="Store_file">
+      <bpmn:extensionElements>
+        <sem:info order="1009" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Store_file_Archived" sourceRef="Store_file" targetRef="Archived">
+      <bpmn:extensionElements>
+        <sem:info order="1010" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Sales_overview_diagram" name="Sales overview">
+    <bpmndi:BPMNPlane id="Sales_overview_plane" bpmnElement="Sales_overview_collab">
+      <bpmndi:BPMNShape id="Sales_overview_pool_di" bpmnElement="Sales_overview_pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="1091" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Desk_di" bpmnElement="Desk" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="1061" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start">
+        <dc:Bounds x="100" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="111" y="95" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Quote_preparation_di" bpmnElement="Quote_preparation">
+        <dc:Bounds x="220" y="26" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Run_2_1_checks_di" bpmnElement="Run_2_1_checks">
+        <dc:Bounds x="410" y="35" width="111" height="62" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Archive_di" bpmnElement="Archive">
+        <dc:Bounds x="591" y="26" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="tape2_1_di" bpmnElement="tape2_1">
+        <dc:Bounds x="781" y="26" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Done_di" bpmnElement="Done">
+        <dc:Bounds x="971" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="981" y="95" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Start_Quote_preparation_di" bpmnElement="Flow_Start_Quote_preparation">
+        <di:waypoint x="150" y="66" />
+        <di:waypoint x="220" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Quote_preparation_Run_2_1_checks_di" bpmnElement="Flow_Quote_preparation_Run_2_1_checks">
+        <di:waypoint x="340" y="66" />
+        <di:waypoint x="410" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Run_2_1_checks_Archive_di" bpmnElement="Flow_Run_2_1_checks_Archive">
+        <di:waypoint x="521" y="66" />
+        <di:waypoint x="591" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Archive__tape2_1_di" bpmnElement="Flow_Archive__tape2_1">
+        <di:waypoint x="711" y="66" />
+        <di:waypoint x="781" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow__tape2_1_Done_di" bpmnElement="Flow__tape2_1_Done">
+        <di:waypoint x="901" y="66" />
+        <di:waypoint x="971" y="66" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Quote_preparation_diagram" name="Quote preparation">
+    <bpmndi:BPMNPlane id="Quote_preparation_plane" bpmnElement="Quote_preparation_collab">
+      <bpmndi:BPMNShape id="Quote_preparation_pool_di" bpmnElement="Quote_preparation_pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="554" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Desk_2_di" bpmnElement="Desk_2" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="524" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Quote_start_di" bpmnElement="Quote_start">
+        <dc:Bounds x="104" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="95" width="59" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Price_items_di" bpmnElement="Price_items">
+        <dc:Bounds x="229" y="26" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Quote_ready_di" bpmnElement="Quote_ready">
+        <dc:Bounds x="426" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="419" y="95" width="65" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Quote_start_Price_items_di" bpmnElement="Flow_Quote_start_Price_items">
+        <di:waypoint x="154" y="66" />
+        <di:waypoint x="229" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Price_items_Quote_ready_di" bpmnElement="Flow_Price_items_Quote_ready">
+        <di:waypoint x="349" y="66" />
+        <di:waypoint x="426" y="66" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram_2_1_Credit_check_diagram" name="2.1 Credit check">
+    <bpmndi:BPMNPlane id="Plane_2_1_Credit_check_plane" bpmnElement="Collab_2_1_Credit_check_collab">
+      <bpmndi:BPMNShape id="Pool_2_1_Credit_check_pool_di" bpmnElement="Pool_2_1_Credit_check_pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="553" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Finance_di" bpmnElement="Finance" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="523" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Check_start_di" bpmnElement="Check_start">
+        <dc:Bounds x="105" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="95" width="60" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Score_customer_di" bpmnElement="Score_customer">
+        <dc:Bounds x="230" y="26" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Check_done_di" bpmnElement="Check_done">
+        <dc:Bounds x="426" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="420" y="95" width="63" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Check_start_Score_customer_di" bpmnElement="Flow_Check_start_Score_customer">
+        <di:waypoint x="155" y="66" />
+        <di:waypoint x="230" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Score_customer_Check_done_di" bpmnElement="Flow_Score_customer_Check_done">
+        <di:waypoint x="350" y="66" />
+        <di:waypoint x="426" y="66" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Archive_records_diagram" name="Archive records">
+    <bpmndi:BPMNPlane id="Archive_records_plane" bpmnElement="Archive_records_collab">
+      <bpmndi:BPMNShape id="Archive_records_pool_di" bpmnElement="Archive_records_pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="546" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Records_di" bpmnElement="Records" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="516" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Archive_start_di" bpmnElement="Archive_start">
+        <dc:Bounds x="108" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="95" width="66" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Store_file_di" bpmnElement="Store_file">
+        <dc:Bounds x="236" y="26" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Archived_di" bpmnElement="Archived">
+        <dc:Bounds x="426" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="428" y="95" width="47" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Archive_start_Store_file_di" bpmnElement="Flow_Archive_start_Store_file">
+        <di:waypoint x="158" y="66" />
+        <di:waypoint x="236" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Store_file_Archived_di" bpmnElement="Flow_Store_file_Archived">
+        <di:waypoint x="356" y="66" />
+        <di:waypoint x="426" y="66" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

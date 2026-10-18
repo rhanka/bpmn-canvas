@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-exporter" exporterVersion="9.9">
+    <bpmn:process id="Ordering" name="Ordering" isExecutable="false">
+        <bpmn:laneSet id="LaneSet_Ordering">
+            <bpmn:lane id="Unit" name="Unit">
+                <bpmn:flowNodeRef>Go</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Assemble</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Stop</bpmn:flowNodeRef>
+            </bpmn:lane>
+        </bpmn:laneSet>
+        <bpmn:startEvent id="Go" name="Go"/>
+        <bpmn:task id="Assemble" name="Assemble"/>
+        <bpmn:textAnnotation id="Doc_one">
+            <bpmn:text>Doc one</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:textAnnotation id="Doc_three">
+            <bpmn:text>Doc three</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:textAnnotation id="Doc_two">
+            <bpmn:text>Doc two</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:dataObjectReference id="In_one" name="In one"/>
+        <bpmn:dataObjectReference id="In_two" name="In two"/>
+        <bpmn:dataObjectReference id="Out_two" name="Out two"/>
+        <bpmn:dataObjectReference id="Out_one" name="Out one"/>
+        <bpmn:endEvent id="Stop" name="Stop"/>
+        <bpmn:sequenceFlow id="Go_Assemble" name="" sourceRef="Go" targetRef="Assemble"/>
+        <bpmn:sequenceFlow id="Assemble_Stop" name="" sourceRef="Assemble" targetRef="Stop"/>
+        <bpmn:association id="Doc_one_Assemble" sourceRef="Doc_one" targetRef="Assemble"/>
+        <bpmn:association id="Doc_two_Assemble" sourceRef="Doc_two" targetRef="Assemble"/>
+        <bpmn:association id="Doc_three_Assemble" sourceRef="Doc_three" targetRef="Assemble"/>
+        <bpmn:association id="In_one_Assemble" sourceRef="In_one" targetRef="Assemble"/>
+        <bpmn:association id="In_two_Assemble" sourceRef="In_two" targetRef="Assemble"/>
+        <bpmn:association id="Assemble_Out_one" sourceRef="Assemble" targetRef="Out_one"/>
+        <bpmn:association id="Assemble_Out_two" sourceRef="Assemble" targetRef="Out_two"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_Ordering" name="Ordering - Diagram">
+        <bpmndi:BPMNPlane id="BPMNPlane_Ordering" bpmnElement="Ordering">
+            <bpmndi:BPMNShape id="Unit_gui" bpmnElement="Unit" isHorizontal="true">
+                <dc:Bounds x="30" y="0" width="770" height="279"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Go_gui" bpmnElement="Go">
+                <dc:Bounds x="100" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Assemble_gui" bpmnElement="Assemble">
+                <dc:Bounds x="420" y="91" width="120" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Doc_one_gui" bpmnElement="Doc_one">
+                <dc:Bounds x="220" y="26" width="120" height="51"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Doc_three_gui" bpmnElement="Doc_three">
+                <dc:Bounds x="490" y="26" width="120" height="51"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Doc_two_gui" bpmnElement="Doc_two">
+                <dc:Bounds x="350" y="26" width="120" height="51"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="In_one_gui" bpmnElement="In_one">
+                <dc:Bounds x="372" y="185" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="In_two_gui" bpmnElement="In_two">
+                <dc:Bounds x="422" y="185" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Out_two_gui" bpmnElement="Out_two">
+                <dc:Bounds x="553" y="185" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Out_one_gui" bpmnElement="Out_one">
+                <dc:Bounds x="500" y="185" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Stop_gui" bpmnElement="Stop">
+                <dc:Bounds x="680" y="106" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="Go_Assemble_gui" bpmnElement="Go_Assemble">
+                <di:waypoint x="150.0" y="131.0"/>
+                <di:waypoint x="420.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Assemble_Stop_gui" bpmnElement="Assemble_Stop">
+                <di:waypoint x="540.0" y="131.0"/>
+                <di:waypoint x="680.0" y="131.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Doc_one_Assemble_gui" bpmnElement="Doc_one_Assemble">
+                <di:waypoint x="280.0" y="77.0"/>
+                <di:waypoint x="280.0" y="84.0"/>
+                <di:waypoint x="434.0" y="84.0"/>
+                <di:waypoint x="434.0" y="91.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Doc_two_Assemble_gui" bpmnElement="Doc_two_Assemble">
+                <di:waypoint x="410.0" y="77.0"/>
+                <di:waypoint x="410.0" y="84.0"/>
+                <di:waypoint x="434.0" y="84.0"/>
+                <di:waypoint x="434.0" y="91.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Doc_three_Assemble_gui" bpmnElement="Doc_three_Assemble">
+                <di:waypoint x="550.0" y="77.0"/>
+                <di:waypoint x="550.0" y="84.0"/>
+                <di:waypoint x="526.0" y="84.0"/>
+                <di:waypoint x="526.0" y="91.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="In_one_Assemble_gui" bpmnElement="In_one_Assemble">
+                <di:waypoint x="392.0" y="185.0"/>
+                <di:waypoint x="392.0" y="178.0"/>
+                <di:waypoint x="428.0" y="178.0"/>
+                <di:waypoint x="428.0" y="171.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="In_two_Assemble_gui" bpmnElement="In_two_Assemble">
+                <di:waypoint x="442.0" y="185.0"/>
+                <di:waypoint x="442.0" y="171.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Assemble_Out_one_gui" bpmnElement="Assemble_Out_one">
+                <di:waypoint x="520.0" y="171.0"/>
+                <di:waypoint x="520.0" y="185.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Assemble_Out_two_gui" bpmnElement="Assemble_Out_two">
+                <di:waypoint x="532.0" y="171.0"/>
+                <di:waypoint x="532.0" y="178.0"/>
+                <di:waypoint x="573.0" y="178.0"/>
+                <di:waypoint x="573.0" y="185.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

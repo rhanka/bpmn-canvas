@@ -1,0 +1,730 @@
+{
+  "gate": "G1",
+  "function": "F1",
+  "jsLocalResult": "passed",
+  "twinGateResult": "corpus comparisons passed; Python execution receipt audit pending",
+  "parityStatus": "passed against immutable Python-lane expected corpus; executed Python receipt hashes pending",
+  "sourceRevision": "13631e37be1e46f00b9635fa10712eabac1046b3",
+  "sourceState": "implementation staged atop red checkpoint; receipt included in green commit",
+  "sourceDiffSha256": "032109321c13d85a08d7b2be1bd63ca3c1c900e40e1747be21933b24044b565d",
+  "sourceFilesSha256": {
+    "src/io/index.ts": "5afc9912897fd7fcbb5cd1235f973d3887e5e5a2e9637ef779bc083358a87938",
+    "src/io/errors.ts": "a604460fb856048126ad29463ba4c131a0b8b83c90e2629f5674ed0537231731",
+    "src/io/moddle-json.ts": "cdc7d07619c1fd45da3880f6aa029f1acfc09817a8ffa1f6a5b1d808bdd03aab"
+  },
+  "versions": {
+    "package": "0.4.0",
+    "node": "v22.22.1",
+    "bpmn-moddle": "10.3.1",
+    "moddle": "8.2.1",
+    "moddle-xml": "12.3.1",
+    "typescript": "5.9.3"
+  },
+  "descriptorFilesSha256": {
+    "src/io/semantics.json": "c274f46f773b5f557f7995fa70aae9d8a50384aedfcc6c3a5d166563a17a7c97",
+    "node_modules/bpmn-moddle/resources/bpmn/json/bpmn.json": "ae16ae96f24115f461ac6f57133546b88306fb37542f2d70c49f67b14d9400e7",
+    "node_modules/bpmn-moddle/resources/bpmn/json/bpmndi.json": "047c57936c9c9cce6d5d9da7c07e80fbdcb8dfa00ac734f60e97b680f44d03aa",
+    "node_modules/bpmn-moddle/resources/bpmn/json/dc.json": "91e124b7af094303e60af5f493e56587705af34de926a43915f469bbbbce42e9",
+    "node_modules/bpmn-moddle/resources/bpmn/json/di.json": "dfe43b92531ea584c90a043c66c43ec2caeafc9473b11b00609cc679ddf74057",
+    "node_modules/bpmn-moddle/resources/bpmn-io/json/bioc.json": "e9ebd5b06269d863fb09d08ba8953a1b02d5f140eff465741375826612f2c358",
+    "node_modules/bpmn-moddle/dist/index.js": "ece57e2fae965e1372cfb21b983fba06818c318ad0d35b6b8b8b6da2e27a0c9b"
+  },
+  "descriptorSetSha256": "7f7e02d73412e78514f9744690cdaa71ddd6976b7972e2fe42bc717850df70a4",
+  "configuration": {
+    "contractVersion": "1",
+    "defaults": "explicit",
+    "descriptors": {
+      "sem": {
+        "name": "BpmnSemantics",
+        "prefix": "sem",
+        "uri": "https://sentropic.com/schema/bpmn/semantics/1",
+        "xml": {
+          "tagAlias": "lowerCase"
+        },
+        "types": [
+          {
+            "name": "Info",
+            "superClass": [
+              "Element"
+            ],
+            "properties": [
+              {
+                "name": "order",
+                "type": "Integer",
+                "isAttr": true
+              },
+              {
+                "name": "laneRef",
+                "type": "bpmn:Lane",
+                "isAttr": true,
+                "isReference": true
+              },
+              {
+                "name": "direction",
+                "type": "String",
+                "isAttr": true
+              },
+              {
+                "name": "label",
+                "type": "String",
+                "isAttr": true
+              },
+              {
+                "name": "primaryAssociationRef",
+                "type": "bpmn:BaseElement",
+                "isAttr": true,
+                "isReference": true
+              },
+              {
+                "name": "processRef",
+                "type": "bpmn:Process",
+                "isAttr": true,
+                "isReference": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "configurationSha256": "6b634ddb41a61353d25a8f7682ee24831032559af44b692a5e747801b16700c5",
+  "localCorpusFilesSha256": {
+    "tests/fixtures/io/workbench/local-model.json": "ea6a64b90be3395aa81b28a928c2b6f4124c3d79554c6df4748eae6ea18b21df"
+  },
+  "sharedCorpusManifestSha256": "61903a61e2a6f258b506b4cdcd310a57787eee30845d6deb996afbb54abf33a9",
+  "comparisonRule": "canonical JSON: recursively sorted object keys; unchanged array/string contents; finite ECMAScript number representation; explicit descriptor defaults",
+  "repeatCount": 3,
+  "freshRuntimeCount": 3,
+  "caseOrder": "A B A then independent invalid cases in each fresh runtime",
+  "executions": [
+    [
+      {
+        "name": "local-A",
+        "inputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputBeforeSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputAfterSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "modelBeforeSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "modelAfterSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "jsOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "expectedOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-B",
+        "inputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "inputBeforeSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "inputAfterSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "modelBeforeSha256": "8ed75bbd78acfe83f44162183fc8100a2c73fc93d718d4ca5ac0a16dd89363a6",
+        "modelAfterSha256": "8ed75bbd78acfe83f44162183fc8100a2c73fc93d718d4ca5ac0a16dd89363a6",
+        "jsOutputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "expectedOutputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-A",
+        "inputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputBeforeSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputAfterSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "modelBeforeSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "modelAfterSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "jsOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "expectedOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "duplicate-id",
+        "inputSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "inputBeforeSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "inputAfterSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "jsOutputSha256": "9913dac94d662001616bc79a34329be5fbeddd089596bd2e9e975323312466cb",
+        "diagnostic": {
+          "code": "duplicate-id",
+          "ids": [
+            "Flow_First"
+          ],
+          "path": "$.rootElements[0].flowElements[1].id",
+          "message": "Duplicate ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "dangling-reference",
+        "inputSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "inputBeforeSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "inputAfterSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "jsOutputSha256": "4df95948c102ca32c9e841a1593a41af31f4cc2cdb9990ff3a92bc6d066c5ddf",
+        "diagnostic": {
+          "code": "dangling-reference",
+          "ids": [
+            "Flow_First"
+          ],
+          "path": "$.rootElements[0].flowElements[0].targetRef",
+          "message": "Unknown reference ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "wrong-type",
+        "inputSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "inputBeforeSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "inputAfterSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "jsOutputSha256": "5da18b8b69b3c7b15c91bb78e97f64bb0ba8a1e9c235ace9823c8b44b35f51b2",
+        "diagnostic": {
+          "code": "invalid-reference",
+          "ids": [],
+          "path": "$.rootElements[0].flowElements[1].extensionElements.values[0].laneRef",
+          "message": "Wrong reference type or detached object"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      }
+    ],
+    [
+      {
+        "name": "local-A",
+        "inputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputBeforeSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputAfterSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "modelBeforeSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "modelAfterSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "jsOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "expectedOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-B",
+        "inputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "inputBeforeSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "inputAfterSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "modelBeforeSha256": "8ed75bbd78acfe83f44162183fc8100a2c73fc93d718d4ca5ac0a16dd89363a6",
+        "modelAfterSha256": "8ed75bbd78acfe83f44162183fc8100a2c73fc93d718d4ca5ac0a16dd89363a6",
+        "jsOutputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "expectedOutputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-A",
+        "inputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputBeforeSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputAfterSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "modelBeforeSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "modelAfterSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "jsOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "expectedOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "duplicate-id",
+        "inputSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "inputBeforeSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "inputAfterSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "jsOutputSha256": "9913dac94d662001616bc79a34329be5fbeddd089596bd2e9e975323312466cb",
+        "diagnostic": {
+          "code": "duplicate-id",
+          "ids": [
+            "Flow_First"
+          ],
+          "path": "$.rootElements[0].flowElements[1].id",
+          "message": "Duplicate ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "dangling-reference",
+        "inputSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "inputBeforeSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "inputAfterSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "jsOutputSha256": "4df95948c102ca32c9e841a1593a41af31f4cc2cdb9990ff3a92bc6d066c5ddf",
+        "diagnostic": {
+          "code": "dangling-reference",
+          "ids": [
+            "Flow_First"
+          ],
+          "path": "$.rootElements[0].flowElements[0].targetRef",
+          "message": "Unknown reference ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "wrong-type",
+        "inputSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "inputBeforeSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "inputAfterSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "jsOutputSha256": "5da18b8b69b3c7b15c91bb78e97f64bb0ba8a1e9c235ace9823c8b44b35f51b2",
+        "diagnostic": {
+          "code": "invalid-reference",
+          "ids": [],
+          "path": "$.rootElements[0].flowElements[1].extensionElements.values[0].laneRef",
+          "message": "Wrong reference type or detached object"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      }
+    ],
+    [
+      {
+        "name": "local-A",
+        "inputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputBeforeSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputAfterSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "modelBeforeSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "modelAfterSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "jsOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "expectedOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-B",
+        "inputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "inputBeforeSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "inputAfterSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "modelBeforeSha256": "8ed75bbd78acfe83f44162183fc8100a2c73fc93d718d4ca5ac0a16dd89363a6",
+        "modelAfterSha256": "8ed75bbd78acfe83f44162183fc8100a2c73fc93d718d4ca5ac0a16dd89363a6",
+        "jsOutputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "expectedOutputSha256": "29598beb772624672f913dd5069cd2a230108d1353b45ae8bdec5a0de76f16ad",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "local-A",
+        "inputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputBeforeSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "inputAfterSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "modelBeforeSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "modelAfterSha256": "ba373bb6e0a3d68a7d3e38c0fe326d062c05d5cd27b9b72322f90d0cef32d3c2",
+        "jsOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "expectedOutputSha256": "32500faff0d2b82479cfdbcd04d917e34ff8ce0b9fb6c51631ac5288dde70bc5",
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "duplicate-id",
+        "inputSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "inputBeforeSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "inputAfterSha256": "e636558ef5b00033865d9056e7cfe13364379e33b806e8242ec19f6e3e1113b7",
+        "jsOutputSha256": "9913dac94d662001616bc79a34329be5fbeddd089596bd2e9e975323312466cb",
+        "diagnostic": {
+          "code": "duplicate-id",
+          "ids": [
+            "Flow_First"
+          ],
+          "path": "$.rootElements[0].flowElements[1].id",
+          "message": "Duplicate ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "dangling-reference",
+        "inputSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "inputBeforeSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "inputAfterSha256": "3f84d962e83b5f41f605d7da07deb0ad9c0e578d28752f224e55849470033491",
+        "jsOutputSha256": "4df95948c102ca32c9e841a1593a41af31f4cc2cdb9990ff3a92bc6d066c5ddf",
+        "diagnostic": {
+          "code": "dangling-reference",
+          "ids": [
+            "Flow_First"
+          ],
+          "path": "$.rootElements[0].flowElements[0].targetRef",
+          "message": "Unknown reference ID"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      },
+      {
+        "name": "wrong-type",
+        "inputSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "inputBeforeSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "inputAfterSha256": "ca46e236c2ce906f6a3f2519c2a97581b6b6ab5bf2eb014a09f8991511dfd726",
+        "jsOutputSha256": "5da18b8b69b3c7b15c91bb78e97f64bb0ba8a1e9c235ace9823c8b44b35f51b2",
+        "diagnostic": {
+          "code": "invalid-reference",
+          "ids": [],
+          "path": "$.rootElements[0].flowElements[1].extensionElements.values[0].laneRef",
+          "message": "Wrong reference type or detached object"
+        },
+        "pythonOutputSha256": null,
+        "firstDifference": null
+      }
+    ]
+  ],
+  "red": {
+    "command": "node --test tests/workbench-f1.test.mjs",
+    "tests": 26,
+    "pass": 0,
+    "fail": 26,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "logSha256": "c5b0ab3ca5f0317297cfd856b3cfbece1991a0ceb51dbe2a5ef4161942939d7f",
+    "reason": "hydrate/project not exported"
+  },
+  "green": {
+    "command": "node --test tests/workbench-f1.test.mjs",
+    "tests": 26,
+    "pass": 26,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "logSha256": "48905bfad75da1916b37cfa66bbbdabbd1b4f989251ee9b71ff3de1142396b9e"
+  },
+  "fullSuite": {
+    "command": "npm test",
+    "tests": 1346,
+    "pass": 1318,
+    "fail": 28,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "logSha256": "0a44107ec6a0e62cdab1a2c57ae7cca301d8e89efb8f98394bded334d910e69c",
+    "inheritedFailuresUnchanged": true
+  },
+  "staticChecks": [
+    "npm run typecheck",
+    "npm run typecheck:compat",
+    "all six built strict consumers in npm test",
+    "brand and attribution guards in npm test"
+  ],
+  "limitations": [
+    "No Python executed or compared",
+    "Local invented corpus only; no shared-manifest claim",
+    "Shared descriptor/default/numeric policy awaits G0",
+    "Unknown optional attrs/extensions refused until supported",
+    "Inherited red retained for G7; suite is not wholly green"
+  ],
+  "pythonTwinRevision": "d2e8a1de81147d0a1fdb5f819d78ec149817ec80",
+  "parity": {
+    "stage": "A",
+    "sourceRevision": "953d39f7c7ba9956d493891e832fd0cb847db6ef",
+    "sourceDiffSha256": "cd1dc952cae601eb1fbff3fe19eee5ac3759a870fd222178c41ce8e3a0fa62e6",
+    "sourceFilesSha256": {
+      "src/io/moddle-json.ts": "203ff34a7681d1a972db3efcd26b7b5aad7870b896258ff280759502393733c6",
+      "src/io/serialize-bpmn.ts": "8a8a5cc69c4778d4e934802b2ef459b902306555af6382c916a0ee86f11ad525",
+      "src/io/errors.ts": "4a3a5680a130007e129ae55303a1a2e9f68e0d5dcd5759a58b7ca16fc8c94372"
+    },
+    "configSha256": "a4b40655217ce33a6c7be02582decb1476c0311a83f70a94063c9ceac9b85b01",
+    "comparatorsSha256": "565172afd71a4b4338d0563748d8e59c84953621f2b5e3db070f28b91a6a8f5d",
+    "comparisonRule": "recursively sorted object keys; UTF-8; unescaped Unicode; no whitespace; arrays/strings unchanged; finite IEEE754 numbers written as shortest round-trip decimal without exponent; negative zero = 0; integers limited to +/-9007199254740991",
+    "diagnosticTuple": [
+      "code",
+      "path"
+    ],
+    "repeatCount": 3,
+    "freshRuntimeCount": 3,
+    "caseOrder": "index then W01 W07 W01; both writer options",
+    "freshRunOutputHashes": [
+      "632b8e24151a4a585c30c79ddea5d224350fc35341bad580a293867d780dfcd7",
+      "632b8e24151a4a585c30c79ddea5d224350fc35341bad580a293867d780dfcd7",
+      "632b8e24151a4a585c30c79ddea5d224350fc35341bad580a293867d780dfcd7"
+    ],
+    "samples": {
+      "W01": {
+        "inputFileSha256": "e31094d7f6a9d3a90b8e73c919a9f16d3a532429ade358eef287a81657ba909d",
+        "inputBeforeSha256": "c0cec206bc16382fffde5761cf5521e4259f1701916493c7e9a5f542237d40cf",
+        "inputAfterSha256": "c0cec206bc16382fffde5761cf5521e4259f1701916493c7e9a5f542237d40cf",
+        "expectedFileSha256": "f6be8ddae92c003a938bff57a850961dbf2d161b1833f47059c34f84b539829e",
+        "expectedCanonicalSha256": "e3a325fd6a84c88e65b224d4becc0780c620ec3b9231880d054f35a0f72e3dee",
+        "jsOutputSha256": "e3a325fd6a84c88e65b224d4becc0780c620ec3b9231880d054f35a0f72e3dee",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "5172c07ad18330e137d89d106d4bde021f652bec6253b55964e157c61e07a337",
+        "modelAfterSha256": "5172c07ad18330e137d89d106d4bde021f652bec6253b55964e157c61e07a337",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W02": {
+        "inputFileSha256": "7c478d205024f73f99f549e4e41a0bd5f78a90f43664e3e1f26aa646dbc01f85",
+        "inputBeforeSha256": "3693d8d13120747d2f576e4a2b6c9b21127861feefd19606029313e2b8cb613b",
+        "inputAfterSha256": "3693d8d13120747d2f576e4a2b6c9b21127861feefd19606029313e2b8cb613b",
+        "expectedFileSha256": "cedec41a3479b4f03f37d4ded4cc186ad865ef5475b31a4b3546b9981deb4c18",
+        "expectedCanonicalSha256": "1ee3eb58a1d53722c3ecf0de199f3b90f5726725c48087d6076bfcf8193a6f37",
+        "jsOutputSha256": "1ee3eb58a1d53722c3ecf0de199f3b90f5726725c48087d6076bfcf8193a6f37",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "40ad68a9cd74690726e4091eea0ba40a857c30c40138b9cee22cb66fbe91e698",
+        "modelAfterSha256": "40ad68a9cd74690726e4091eea0ba40a857c30c40138b9cee22cb66fbe91e698",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W03": {
+        "inputFileSha256": "49bdfcc1ebcd578f5e7f0589ec023c265ad2030f1cb4b862c3ecfd53bc888864",
+        "inputBeforeSha256": "378994d13ff995163cc4cb3eea980921c0407cd4819e5098b5a78ffb28968677",
+        "inputAfterSha256": "378994d13ff995163cc4cb3eea980921c0407cd4819e5098b5a78ffb28968677",
+        "expectedFileSha256": "b3643a4b2a1c94cf4aa967fcc7f7a12dbbc129bbbb9a75ee5cb6c84ed3efee0b",
+        "expectedCanonicalSha256": "93757eba623a9c82455c1e688d8eb411d399ae89f00309f138e7a234195f3081",
+        "jsOutputSha256": "93757eba623a9c82455c1e688d8eb411d399ae89f00309f138e7a234195f3081",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "6345c260b2d07d6e2ce4f5b62fbd39c3b5f141c1b2e94c8d6d068fc66eb7ba82",
+        "modelAfterSha256": "6345c260b2d07d6e2ce4f5b62fbd39c3b5f141c1b2e94c8d6d068fc66eb7ba82",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W04": {
+        "inputFileSha256": "1a4208c669a341cce6a6065f39df9fdbe7beddd66836334e1a14cfe9e67b50c4",
+        "inputBeforeSha256": "7e90a61295bb2fa1474b6fbc6be972b1446a6c5c42505442678c3bf943c7b964",
+        "inputAfterSha256": "7e90a61295bb2fa1474b6fbc6be972b1446a6c5c42505442678c3bf943c7b964",
+        "expectedFileSha256": "3af91972c2a948a1d2be03b4c02a9c6804b1d0c4ec97f0b4135cc9b8982504fd",
+        "expectedCanonicalSha256": "e2926742fdd664dd9b40fd4698ae15c751eae12293dbfadf8926216ddf366d33",
+        "jsOutputSha256": "e2926742fdd664dd9b40fd4698ae15c751eae12293dbfadf8926216ddf366d33",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "2a8cb78069fffd8c0ef40c5ac320d9166c0cadd2fb9adfd7c9db1817068dcdf1",
+        "modelAfterSha256": "2a8cb78069fffd8c0ef40c5ac320d9166c0cadd2fb9adfd7c9db1817068dcdf1",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W05": {
+        "inputFileSha256": "5900911656a69e48d4b4fb2a204dfa17aba33c1946a6e882fea7ce913b54544e",
+        "inputBeforeSha256": "b18975445c4b660b562f13baeeee9dfa6070b1be5323bb631be601632a401722",
+        "inputAfterSha256": "b18975445c4b660b562f13baeeee9dfa6070b1be5323bb631be601632a401722",
+        "expectedFileSha256": "f629fdf450382ccb7ff3eb3606573364e638ec976054ac4c98fafc3b8c37a65c",
+        "expectedCanonicalSha256": "77139657e0a43c2065202fbcf4c20b7bfc504a1e33b9968e221526385351fbd9",
+        "jsOutputSha256": "77139657e0a43c2065202fbcf4c20b7bfc504a1e33b9968e221526385351fbd9",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "e46eee919919a46cbf549bc35f56fb478c708f6ee2ebef1e1733e5bc12b0f9ff",
+        "modelAfterSha256": "e46eee919919a46cbf549bc35f56fb478c708f6ee2ebef1e1733e5bc12b0f9ff",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W06": {
+        "inputFileSha256": "582349f46726923a85f8024dc8bffd71efe399693ca3c6144cfc325e0e3294f6",
+        "inputBeforeSha256": "6703fe8bf59bcc0a864baf18db94a424830a649e71468253c1bf767fec650b11",
+        "inputAfterSha256": "6703fe8bf59bcc0a864baf18db94a424830a649e71468253c1bf767fec650b11",
+        "expectedFileSha256": "30d14bfba6d0e5e36f0325ae72e08e981b6f7943704543d3fa8d6f9f5e1334e5",
+        "expectedCanonicalSha256": "4f352dd01744853ca85c33a4df0df35aa81d20036fbb65891dbc15494281108b",
+        "jsOutputSha256": "4f352dd01744853ca85c33a4df0df35aa81d20036fbb65891dbc15494281108b",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "c54031f6e0af6c62a5ad55ee08dcb1482336d63c76ee5da7333ce3a03a37e0aa",
+        "modelAfterSha256": "c54031f6e0af6c62a5ad55ee08dcb1482336d63c76ee5da7333ce3a03a37e0aa",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W07": {
+        "inputFileSha256": "4b0203bca2842f8b67453b5aca5156fa6b3874ddb30ea2e3b7cbe72f629e1e19",
+        "inputBeforeSha256": "4bd3875404f8e02bcb460590b019ce198ba571e3a6c6b4f17ba033177425706d",
+        "inputAfterSha256": "4bd3875404f8e02bcb460590b019ce198ba571e3a6c6b4f17ba033177425706d",
+        "expectedFileSha256": "4cbbe697145852759a809fa5b9610d32790a265058f81425530d7782bc6e6ade",
+        "expectedCanonicalSha256": "8ef0c355bcc81870c72870bb31e0a1404d2e1bc0d12e27196f0a238341e6dff6",
+        "jsOutputSha256": "8ef0c355bcc81870c72870bb31e0a1404d2e1bc0d12e27196f0a238341e6dff6",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "0d36efdbb20fab4c2bebe39d0e59639d6775db327052ab08c8ee69b8ae25a0f3",
+        "modelAfterSha256": "0d36efdbb20fab4c2bebe39d0e59639d6775db327052ab08c8ee69b8ae25a0f3",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08": {
+        "inputFileSha256": "625b45af3543b973de076ef3fa6e1c55851f8394ad2ba5aab97c6e5ef0a74b94",
+        "inputBeforeSha256": "02f8dbbae6436a738d3d287e7577ad2d5d5f5eeed637180ba8623a612a564387",
+        "inputAfterSha256": "02f8dbbae6436a738d3d287e7577ad2d5d5f5eeed637180ba8623a612a564387",
+        "expectedFileSha256": "ef8782576a89e9cfea0bdab65ae52588d7fce54e5a6555124575cc204b98f557",
+        "expectedCanonicalSha256": "bffd52fbce63ec12565fc4fb62ac231a04a2cb9de109de8244ef0e896a48da4d",
+        "jsOutputSha256": "bffd52fbce63ec12565fc4fb62ac231a04a2cb9de109de8244ef0e896a48da4d",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "bd7a1387ba5409cbd8990fd37309d3a8e7ffe1965ded37073cd4c7ac516196a2",
+        "modelAfterSha256": "bd7a1387ba5409cbd8990fd37309d3a8e7ffe1965ded37073cd4c7ac516196a2",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-keys": {
+        "inputFileSha256": "f57a96fa850f8c8e6d6b5bd5b178626e59f62629deff0f8fad1a467cc4204d42",
+        "inputBeforeSha256": "02f8dbbae6436a738d3d287e7577ad2d5d5f5eeed637180ba8623a612a564387",
+        "inputAfterSha256": "02f8dbbae6436a738d3d287e7577ad2d5d5f5eeed637180ba8623a612a564387",
+        "expectedFileSha256": "5c2c5d4ce575231e05f70363aaf0d81f15db285b8c1fd1c73e02ed9c2f1b5cfd",
+        "expectedCanonicalSha256": "bffd52fbce63ec12565fc4fb62ac231a04a2cb9de109de8244ef0e896a48da4d",
+        "jsOutputSha256": "bffd52fbce63ec12565fc4fb62ac231a04a2cb9de109de8244ef0e896a48da4d",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "bd7a1387ba5409cbd8990fd37309d3a8e7ffe1965ded37073cd4c7ac516196a2",
+        "modelAfterSha256": "bd7a1387ba5409cbd8990fd37309d3a8e7ffe1965ded37073cd4c7ac516196a2",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-arrays": {
+        "inputFileSha256": "b8cadbd7608d46a2b8524518e3da1adf70839c84675a1ad2bcdec5b9b4e345d6",
+        "inputBeforeSha256": "b1be6a0b5b1a3076b9c7f9bf03c6043121593c1be9c6a50eb1afaa180f94326b",
+        "inputAfterSha256": "b1be6a0b5b1a3076b9c7f9bf03c6043121593c1be9c6a50eb1afaa180f94326b",
+        "expectedFileSha256": "6bb4e501c6277f7fdc65857d89b29dcb9e3649b1333865bef64508b882ea488c",
+        "expectedCanonicalSha256": "b905c5caf3144d674f5b3666f3e4c1b48ec0d69a9926bffbf074c069e8e21d44",
+        "jsOutputSha256": "b905c5caf3144d674f5b3666f3e4c1b48ec0d69a9926bffbf074c069e8e21d44",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "207480d486e864e2f025e4301fa2d3bad6ca27971032a58f84d1583f528f5253",
+        "modelAfterSha256": "207480d486e864e2f025e4301fa2d3bad6ca27971032a58f84d1583f528f5253",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W08-absent": {
+        "inputFileSha256": "6f092fdd4ee504ce137e5c7b9dcea5ac6414bbfa34fe89446889369eaceba77f",
+        "inputBeforeSha256": "712783cf3465937d07b9a8fb1e86d2ebc9267d3dd7988d36906e149c468187ab",
+        "inputAfterSha256": "712783cf3465937d07b9a8fb1e86d2ebc9267d3dd7988d36906e149c468187ab",
+        "expectedFileSha256": "15edd7978198f51ca028f7efe3d9b212457850db4e1333cbed306762142a2419",
+        "expectedCanonicalSha256": "ebc3e309cf8fea70f4809724bc8e064f8a467d3d6d209116ccc6137c6e910daa",
+        "jsOutputSha256": "ebc3e309cf8fea70f4809724bc8e064f8a467d3d6d209116ccc6137c6e910daa",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "940362748eea71dea4cc8cdf62ab9eb2a4965edcf222e651d3c3765d1c7eb7e2",
+        "modelAfterSha256": "940362748eea71dea4cc8cdf62ab9eb2a4965edcf222e651d3c3765d1c7eb7e2",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W10": {
+        "inputFileSha256": "7fd664b302337a997eea7ad21af9c525ade771941655ba3bf187281b38a0acd8",
+        "inputBeforeSha256": "aa4888bb40181cf185d06e21808afb0b5165b90e816787fdcb3e0aaace18e304",
+        "inputAfterSha256": "aa4888bb40181cf185d06e21808afb0b5165b90e816787fdcb3e0aaace18e304",
+        "expectedFileSha256": "4b563146206e15b330d786188699e49440c4a1efce90f8b2f4ed4e7dc8436bfb",
+        "expectedCanonicalSha256": "bd3cbd985ead7f8251561ce9e2c46b65202e2b0cd926b88e4ad4ab38b413487b",
+        "jsOutputSha256": "bd3cbd985ead7f8251561ce9e2c46b65202e2b0cd926b88e4ad4ab38b413487b",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "57db729604098ce12f225b234e271658cf945ff5e925c3fabf64a1d241296006",
+        "modelAfterSha256": "57db729604098ce12f225b234e271658cf945ff5e925c3fabf64a1d241296006",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W10-conflict": {
+        "inputFileSha256": "9194928d15c02e78b467b9e7bb66ae61820ef60cc869eec18186dc70ca61ef87",
+        "inputBeforeSha256": "24d9cd86f2165cd3938abc90065fde1d1bb77f16fb5567e1defdebde2c821052",
+        "inputAfterSha256": "24d9cd86f2165cd3938abc90065fde1d1bb77f16fb5567e1defdebde2c821052",
+        "expectedFileSha256": "b20614cd191c2da275fb1eb3df7194c77dd144c98390560124450d30e692c46a",
+        "expectedCanonicalSha256": "3d79288ecec9e3e75994789e811e619dcb9365c08c353f7a652225f738a26056",
+        "jsOutputSha256": "3d79288ecec9e3e75994789e811e619dcb9365c08c353f7a652225f738a26056",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "37fcc364d65f2a67e3cef4705042b8d6f58b5b32f39fe10ba9775e93ee6d8b59",
+        "modelAfterSha256": "37fcc364d65f2a67e3cef4705042b8d6f58b5b32f39fe10ba9775e93ee6d8b59",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W11": {
+        "inputFileSha256": "d843286a629ffb7f6ede819c957c4f776b32407b718271abef3f49b26fb0d326",
+        "inputBeforeSha256": "647069aaed98b0d5448f41430568f494c04c09699cc0b886cad9ff6dc9da370f",
+        "inputAfterSha256": "647069aaed98b0d5448f41430568f494c04c09699cc0b886cad9ff6dc9da370f",
+        "expectedFileSha256": "76d80290a950ea190472dd68be786d5a0aee342ee902072ebd040ba030ad7c6e",
+        "expectedCanonicalSha256": "f7d0a25398dbab78788f6021b6cfde79d8e3ee8a1f1765d86d6801a2f6b0463c",
+        "jsOutputSha256": "f7d0a25398dbab78788f6021b6cfde79d8e3ee8a1f1765d86d6801a2f6b0463c",
+        "pythonOutputSha256": null,
+        "modelBeforeSha256": "c7cea2af7ab01c77460f1a866ff54d3fe9d2e70c464a01e58782ee02eacd399f",
+        "modelAfterSha256": "c7cea2af7ab01c77460f1a866ff54d3fe9d2e70c464a01e58782ee02eacd399f",
+        "mixedFixedPoint": "passed against frozen Python-lane expected projection",
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W09-duplicate": {
+        "inputFileSha256": "c2bb8e402f03729fecf7991c43ebd516272e33f82e0793d9b0a906cc5c009706",
+        "inputBeforeSha256": "8c15d2f9a9348863f9eaf0f416d35c6e5e10ef8ba1f9bd27e6f0494fea63a59f",
+        "inputAfterSha256": "8c15d2f9a9348863f9eaf0f416d35c6e5e10ef8ba1f9bd27e6f0494fea63a59f",
+        "expectedCanonicalSha256": "9c6491b50e62fe8fc45bd066264120b7ce9fdbcea2b5c6e78adbe6bf1acc4528",
+        "jsOutputSha256": "9c6491b50e62fe8fc45bd066264120b7ce9fdbcea2b5c6e78adbe6bf1acc4528",
+        "pythonOutputSha256": null,
+        "diagnostic": {
+          "code": "duplicate-id",
+          "path": "/rootElements/0/flowElements/2/id"
+        },
+        "ids": [
+          "Task_Review"
+        ],
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W09-dangling": {
+        "inputFileSha256": "4fb6fa803776f99111e9c9f186ba84dcaf53c96122c28544053e3801b3c7b647",
+        "inputBeforeSha256": "2d7a10479efa687540c157560e1932f022cfb2595ea09bdde06b699b693ee64b",
+        "inputAfterSha256": "2d7a10479efa687540c157560e1932f022cfb2595ea09bdde06b699b693ee64b",
+        "expectedCanonicalSha256": "8c68cc03f12507c4f892d51313512af234cbccae39edc9428e224e7215ce5271",
+        "jsOutputSha256": "8c68cc03f12507c4f892d51313512af234cbccae39edc9428e224e7215ce5271",
+        "pythonOutputSha256": null,
+        "diagnostic": {
+          "code": "dangling-reference",
+          "path": "/rootElements/0/flowElements/3/targetRef"
+        },
+        "ids": [
+          "Flow_1"
+        ],
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W09-wrong-type": {
+        "inputFileSha256": "71b647c45e0a53423529215e539cbe6270e8aa332ccbf4a2f838b037f51dde41",
+        "inputBeforeSha256": "0620b959126627d6761820d03ad406bb59e5aff203ea0aad9f10dc83bd6f3d7d",
+        "inputAfterSha256": "0620b959126627d6761820d03ad406bb59e5aff203ea0aad9f10dc83bd6f3d7d",
+        "expectedCanonicalSha256": "3e5e21c5bda4cc8992be00ac1de8a6c83f854e3533bc06aaacdae1d2f4db344e",
+        "jsOutputSha256": "3e5e21c5bda4cc8992be00ac1de8a6c83f854e3533bc06aaacdae1d2f4db344e",
+        "pythonOutputSha256": null,
+        "diagnostic": {
+          "code": "reference-type",
+          "path": "/rootElements/0/flowElements/7/extensionElements/values/0/laneRef"
+        },
+        "ids": [],
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W09-extension": {
+        "inputFileSha256": "d174faa17b24ac091e20c30e7d48973ae43c6cb6b04d2868af04cfb4e01bd9bc",
+        "inputBeforeSha256": "8cffac75268a9bb51441becc85689bd6ee8b13302b361af8dd180e3809ebee28",
+        "inputAfterSha256": "8cffac75268a9bb51441becc85689bd6ee8b13302b361af8dd180e3809ebee28",
+        "expectedCanonicalSha256": "b51e2a0349d6fe02f86eb263a49579cbf4c855313a22b707b9203fcee661d926",
+        "jsOutputSha256": "b51e2a0349d6fe02f86eb263a49579cbf4c855313a22b707b9203fcee661d926",
+        "pythonOutputSha256": null,
+        "diagnostic": {
+          "code": "duplicate-extension",
+          "path": "/rootElements/0/flowElements/5/extensionElements/values/1"
+        },
+        "ids": [],
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W09-version": {
+        "inputFileSha256": "5a8e287d371a05e44fa2b2897d219dfcc147d97840f3f599784a3ab859337f9a",
+        "inputBeforeSha256": "d3cc2a6aed7fe8d3dfe8fa6dcf9f4ca4fa0f335a238754d34e32ec8b9bc22155",
+        "inputAfterSha256": "d3cc2a6aed7fe8d3dfe8fa6dcf9f4ca4fa0f335a238754d34e32ec8b9bc22155",
+        "expectedCanonicalSha256": "881657fd9c21bb07426fc74a36f1a25d2d6e64de1efd4747556b5831788b18a8",
+        "jsOutputSha256": "881657fd9c21bb07426fc74a36f1a25d2d6e64de1efd4747556b5831788b18a8",
+        "pythonOutputSha256": null,
+        "diagnostic": {
+          "code": "unsupported-type",
+          "path": "/rootElements/0/flowElements/5/extensionElements/values/0/$type"
+        },
+        "ids": [],
+        "firstDifference": null,
+        "result": "passed"
+      },
+      "W09-page": {
+        "inputFileSha256": "56b866a5557a6a4b5d9a9bbf430be025628f48a065015428dacafd87f8a862eb",
+        "inputBeforeSha256": "da577bb041e467cf3e8d74805f19068bf74f61e1eddb206210f9c83c53ee08f5",
+        "inputAfterSha256": "da577bb041e467cf3e8d74805f19068bf74f61e1eddb206210f9c83c53ee08f5",
+        "expectedCanonicalSha256": "e29a4c0cbfec59e942c37240c6e949dde4dcfdf382804c49a1b99f05579f372f",
+        "jsOutputSha256": "e29a4c0cbfec59e942c37240c6e949dde4dcfdf382804c49a1b99f05579f372f",
+        "pythonOutputSha256": null,
+        "diagnostic": {
+          "code": "dangling-reference",
+          "path": "/diagrams/1/plane/bpmnElement"
+        },
+        "ids": [
+          "Plane_Lantern"
+        ],
+        "firstDifference": null,
+        "result": "passed"
+      }
+    },
+    "redLogSha256": "6a037692656aef9799c7a47218a70b569bd268c462394775d8eeb90457d12dca",
+    "greenLogSha256": "26b322eb22b26d20adc6c74ae43f522d1ac107f8d5f4849d3c15c3e7bb5e5df0",
+    "firstDifference": null
+  }
+}

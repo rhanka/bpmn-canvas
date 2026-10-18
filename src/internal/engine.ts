@@ -3,7 +3,7 @@
  * the engine is loaded when a canvas or a render is actually created.
  */
 import type { BpmnCanvasConfig, ProfileDefinition } from "./contracts.js";
-import type { LegendTokens, ProfileId } from "../types.js";
+import type { LegendTokens, ProfileId, ProfileOptions } from "../types.js";
 
 export interface ModdleLike {
   fromXML(xml: string): Promise<{ rootElement: DefinitionsLike; warnings: Array<{ message: string; element?: { id?: string }; value?: string }> }>;
@@ -71,16 +71,31 @@ export function loadViewer(): Promise<ViewerCtor> {
   return viewerPromise;
 }
 
-export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>): Promise<ProfileDefinition> {
+export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>, options: ProfileOptions = {}): Promise<ProfileDefinition> {
+  let profile: ProfileDefinition;
   if (id === "legend") {
     const mod = (await import("../profiles/legend/index.js")) as unknown as { legendProfile(tokens?: Partial<LegendTokens>): ProfileDefinition };
-    return mod.legendProfile(tokens);
+    profile = mod.legendProfile(tokens);
+  } else if (id === "colored") {
+    const mod = await import("../profiles/colored/index.js");
+    profile = mod.coloredProfile(tokens);
+    if (options.drawing === "classic") {
+      const { ClassicRendererModule } = await import("../profiles/colored/classic.js");
+      profile = {
+        ...profile,
+        tokens: profile.tokens ?? mod.resolveColoredTokens(tokens),
+        modelerModules: [...profile.modelerModules, ClassicRendererModule],
+        viewerModules: [...profile.viewerModules, ClassicRendererModule],
+      };
+    }
+  } else {
+    profile = { id: "standard", modelerModules: [], viewerModules: [] };
   }
-  if (id === "colored") {
-    const mod = (await import("../profiles/colored/index.js")) as unknown as { coloredProfile(tokens?: Partial<LegendTokens>): ProfileDefinition };
-    return mod.coloredProfile(tokens);
+  if (options.palette === "legend" && id !== "legend") {
+    const palette = (await import("../profiles/legend/palette.js")) as unknown as { LegendPaletteModule: unknown };
+    profile = { ...profile, modelerModules: [...profile.modelerModules, palette.LegendPaletteModule] };
   }
-  return { id: "standard", modelerModules: [], viewerModules: [] };
+  return profile;
 }
 
 export function profileConfig(instanceId: string, profile: ProfileDefinition, paletteColumns?: "auto" | 1 | 2): BpmnCanvasConfig {

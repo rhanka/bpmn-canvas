@@ -260,7 +260,7 @@ export class LegendRenderer extends BaseRenderer {
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill: body, stroke, "stroke-width": sw });
         svgClasses(rect).add("legend-task");
         svgAppend(gfx, rect);
-        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke);
+        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, appsOf(element).length ? APP_BOX.overlap : 0);
         this.label(gfx, element, fill, stroke, w, h);
         this.drawApps(gfx, element);
         break;
@@ -555,11 +555,14 @@ export class LegendRenderer extends BaseRenderer {
     svgAppend(gfx, label);
   }
 
-  private subprocessMarker(gfx: Any, w: number, h: number, stroke: string): void {
+  /** The [+] marker, kept above the application band when the activity has one (`band`, its overlap). */
+  private subprocessMarker(gfx: Any, w: number, h: number, stroke: string, band = 0): void {
+    h -= band;
     const group = svgCreate("g");
     svgClasses(group).add("legend-subprocess-marker");
     svgClasses(group).add("legend-marker");
     svgAttr(group, { "data-marker": "sub-process", "pointer-events": "all" });
+    group.setAttribute("pointer-events", "all");
     const box = svgCreate("rect");
     svgAttr(box, { x: w / 2 - 7, y: h - 18, width: 14, height: 14, fill: "transparent", stroke, "stroke-width": 1.2, "pointer-events": "all" });
     svgClasses(box).add("legend-marker");

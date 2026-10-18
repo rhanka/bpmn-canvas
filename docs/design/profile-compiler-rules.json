@@ -1,0 +1,374 @@
+{
+  "format": "profile-compiler-rule-table/1",
+  "revision": "R3.3",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "rules": [
+    {
+      "id": "CR-01",
+      "name": "capabilities",
+      "check": "Unique known IDs; each used operator/consumer requires its declared capability and exact registry signature. No unknown foo/1 or duplicate.",
+      "codes": [
+        "profile-capability"
+      ],
+      "provenance": "DESIGN.md:186"
+    },
+    {
+      "id": "CR-02",
+      "name": "values",
+      "check": "ids only inside assignRef.values; outputId only within export emit.fields/parent (no allocation-dependent selection); create.fields scalar-only; concat/case/stripPrefix only strings.",
+      "codes": [
+        "profile-value-context",
+        "profile-type"
+      ],
+      "provenance": "DESIGN.md:187"
+    },
+    {
+      "id": "CR-03",
+      "name": "selectors",
+      "check": "Table §2.2 order; property required only for reference/inverseReference, optional for children, forbidden otherwise. Binding domain must support traversal.",
+      "codes": [
+        "profile-selector-order",
+        "profile-selector-property",
+        "profile-type"
+      ],
+      "provenance": "DESIGN.md:188"
+    },
+    {
+      "id": "CR-04",
+      "name": "bounds",
+      "check": "count min <= max, reachable minHops <= maxHops; all computed numbers finite, integer outputs safe.",
+      "codes": [
+        "profile-bounds"
+      ],
+      "provenance": "DESIGN.md:189"
+    },
+    {
+      "id": "CR-05",
+      "name": "symbols",
+      "check": "Unique IDs/names in each namespace, all referenced notions/recipes/messages/resources/themes/glyphs and bindings exist; recognition/theme/extends dependencies acyclic.",
+      "codes": [
+        "profile-symbol",
+        "profile-cycle",
+        "lint-config-cycle"
+      ],
+      "provenance": "DESIGN.md:190"
+    },
+    {
+      "id": "CR-06",
+      "name": "authority",
+      "check": "Every action maps to declared writes below and ratified effective producer rights; known containment/reference/scalar paths and target types. The checker receives the pinned base, applies explicit producerDelta and descriptor extension-field authority, and rejects a phase actor absent from the resulting field producer set.",
+      "codes": [
+        "profile-write-set",
+        "profile-producer",
+        "profile-type"
+      ],
+      "provenance": "DESIGN.md:191"
+    },
+    {
+      "id": "CR-07",
+      "name": "identity",
+      "check": "allocated/containment agree with effective id admission; ownerId resolves to string; no guessed immediate-parent owner.",
+      "codes": [
+        "profile-create-identity"
+      ],
+      "provenance": "DESIGN.md:192"
+    },
+    {
+      "id": "CR-08",
+      "name": "lint",
+      "check": "Exactly one validation record per stage/policy, all standard settings and applicable profile subrules present; resolver allowlist and options schema exact.",
+      "codes": [
+        "lint-config-incomplete",
+        "lint-config-unknown",
+        "profile-schema"
+      ],
+      "provenance": "DESIGN.md:193"
+    },
+    {
+      "id": "CR-09",
+      "name": "presentation",
+      "check": "Explicit group/facet, glyph shape and token types, parameter signatures, theme binding uniqueness; no conflicting notion token assignment.",
+      "codes": [
+        "profile-notion-kind",
+        "profile-glyph-shape",
+        "profile-type"
+      ],
+      "provenance": "DESIGN.md:194"
+    },
+    {
+      "id": "CR-10",
+      "name": "UI",
+      "check": "Every required recipe parameter supplied exactly once by typed gesture/field bindings; enums have nonempty choices with unique JSON values (even when choice names differ), references have target types, readonly has no command.",
+      "codes": [
+        "profile-ui-parameters",
+        "profile-type"
+      ],
+      "provenance": "DESIGN.md:195"
+    },
+    {
+      "id": "CR-11",
+      "name": "export",
+      "check": "emit kind has only its required/optional IR fields with correct types; artifact key/domain/parent valid; loss mapping §10.2.",
+      "codes": [
+        "profile-export-field",
+        "profile-type"
+      ],
+      "provenance": "DESIGN.md:196"
+    },
+    {
+      "id": "CR-12",
+      "name": "migration",
+      "check": "Target is literal self, source is an external pin; reject self source, own digest pin or unsupported recipe phase.",
+      "codes": [
+        "profile-migration-endpoint"
+      ],
+      "provenance": "DESIGN.md:197"
+    },
+    {
+      "id": "CR-13",
+      "name": "bind fallbacks",
+      "check": "In recipe steps and rule bindings, presence of fallbacks requires cardinality first; [] is still a supplied fallback field. Schema conditional plus compiler preflight.",
+      "codes": [
+        "profile-bind-fallbacks"
+      ],
+      "provenance": "DESIGN.md:198"
+    },
+    {
+      "id": "CR-14",
+      "name": "action phases",
+      "check": "Each action must belong to the phase set in the authority table; schema recipe conditionals and compiler preflight agree. Export cannot mutate semantics.",
+      "codes": [
+        "profile-action-phase"
+      ],
+      "provenance": "DESIGN.md:199"
+    }
+  ],
+  "actions": [
+    {
+      "action": "bind",
+      "phases": [
+        "create",
+        "edit",
+        "complete",
+        "normalize",
+        "reference",
+        "export",
+        "convert",
+        "migrate"
+      ],
+      "writes": [],
+      "provenance": "DESIGN.md:203"
+    },
+    {
+      "action": "refuse",
+      "phases": [
+        "create",
+        "edit",
+        "complete",
+        "normalize",
+        "reference",
+        "export",
+        "convert",
+        "migrate"
+      ],
+      "writes": [],
+      "provenance": "DESIGN.md:203"
+    },
+    {
+      "action": "create",
+      "phases": [
+        "create",
+        "edit",
+        "reference",
+        "complete",
+        "convert",
+        "migrate"
+      ],
+      "writes": [
+        "parent:/property:create"
+      ],
+      "provenance": "DESIGN.md:204"
+    },
+    {
+      "action": "ensure",
+      "phases": [
+        "normalize"
+      ],
+      "writes": [
+        "parent:/property:create",
+        "envelope:/bindings:binding"
+      ],
+      "provenance": "DESIGN.md:205"
+    },
+    {
+      "action": "set",
+      "phases": [
+        "create",
+        "edit",
+        "reference",
+        "complete",
+        "normalize",
+        "convert",
+        "migrate"
+      ],
+      "writes": [
+        "target:scalar:set"
+      ],
+      "provenance": "DESIGN.md:206"
+    },
+    {
+      "action": "unset",
+      "phases": [
+        "create",
+        "edit",
+        "reference",
+        "complete",
+        "normalize",
+        "convert",
+        "migrate"
+      ],
+      "writes": [
+        "target:scalar:unset"
+      ],
+      "provenance": "DESIGN.md:206"
+    },
+    {
+      "action": "assignRef",
+      "phases": [
+        "create",
+        "edit",
+        "reference",
+        "complete",
+        "normalize",
+        "convert",
+        "migrate"
+      ],
+      "writes": [
+        "target:reference:reference"
+      ],
+      "provenance": "DESIGN.md:207"
+    },
+    {
+      "action": "reparent",
+      "phases": [
+        "edit",
+        "convert",
+        "migrate",
+        "normalize"
+      ],
+      "writes": [
+        "target::reparent",
+        "parent:/property:reparent"
+      ],
+      "normalizeCondition": "specifically approved structural support move only",
+      "provenance": "DESIGN.md:208"
+    },
+    {
+      "action": "place",
+      "phases": [
+        "normalize"
+      ],
+      "writes": [
+        "target::placement"
+      ],
+      "provenance": "DESIGN.md:209"
+    },
+    {
+      "action": "emit",
+      "phases": [
+        "export"
+      ],
+      "writes": [
+        "self::artifact"
+      ],
+      "provenance": "DESIGN.md:210"
+    },
+    {
+      "action": "loss",
+      "phases": [
+        "export"
+      ],
+      "writes": [
+        "target::report"
+      ],
+      "provenance": "DESIGN.md:211"
+    },
+    {
+      "action": "remove",
+      "phases": [
+        "edit",
+        "convert",
+        "migrate"
+      ],
+      "writes": [
+        "target::remove"
+      ],
+      "provenance": "DESIGN.md:212"
+    }
+  ],
+  "actorMapping": {
+    "create": "editor",
+    "edit": "editor",
+    "reference": "editor",
+    "convert": "editor",
+    "migrate": "editor",
+    "complete": "code",
+    "normalize": "code",
+    "export": []
+  },
+  "authorityComposition": [
+    "pinned base field producers",
+    "explicitly admitted extension-field producers",
+    "producerDelta replaces named from actor with to; absent from refuses profile-producer"
+  ],
+  "precedence": [
+    "lexical",
+    "schema",
+    "static",
+    "compatibility",
+    "integrity",
+    "evaluation"
+  ],
+  "precedenceScope": "Phase dependency only. R3.3 does not define a total tie-break between simultaneous static failures; this table does not invent one. Specialized CR-13/14 codes remain the normative mappings even when schema conditionals detect them.",
+  "lexicalCodes": [
+    "profile-json",
+    "profile-json-duplicate-key",
+    "profile-unicode",
+    "profile-number"
+  ],
+  "lexicalDependency": "R3.3 section 2.1.1 normative codes and recursive first-failure order",
+  "approval": {
+    "defaults": "ratified",
+    "bothLaneExpectationAgreement": "pending",
+    "staticTieBreak": "unresolved"
+  },
+  "provenance": [
+    "DESIGN.md:48",
+    "DESIGN.md:50",
+    "DESIGN.md:182",
+    "DESIGN.md:186",
+    "DESIGN.md:198",
+    "DESIGN.md:199",
+    "DESIGN.md:216",
+    "DESIGN.md:85",
+    "DESIGN.md:97",
+    "DESIGN.md:98",
+    "DESIGN.md:99"
+  ],
+  "lexicalOrder": [
+    "recursive-source-order",
+    "key-decode",
+    "key-unicode",
+    "key-duplicate",
+    "colon",
+    "value",
+    "remaining-tokens",
+    "whole-text-json",
+    "schema"
+  ],
+  "lexicalProvenance": [
+    "DESIGN.md:97",
+    "DESIGN.md:98",
+    "DESIGN.md:99"
+  ]
+}

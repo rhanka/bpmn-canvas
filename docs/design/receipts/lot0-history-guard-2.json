@@ -1,0 +1,324 @@
+{
+  "format": "lot0-history-guard/2",
+  "date": "2026-10-17",
+  "initialHead": "9c7f2eac858f1b4b8c51449cc3214e3a571f2460",
+  "reviews": [
+    "LOT0-SOL-REVIEW-4.md",
+    "LOT0-SOL-REVIEW-5.md",
+    "LOT0-SOL-REVIEW-6.md"
+  ],
+  "closedAllowance": [
+    "07be09e",
+    "45aa690"
+  ],
+  "scope": "Best-effort accident lint over plain test git calls; the authoritative check is the fresh-squash full run without branch objects and, after merge, CI on main where branch objects never exist.",
+  "scopeDecision": "The history guard is an accident lint over plain git calls a test author would write by mistake, not an adversarial boundary. No new guard code is added for the bypass families; the scope note is aligned with the forms actually covered and the bypass families are listed as known limits.",
+  "review6Disposition": "The 3 MAJOR findings of LOT0-SOL-REVIEW-6 are deferred as out of scope by design; no guard code changes, docs-only alignment plus this authoritative check record.",
+  "supersedesFiles": [
+    {
+      "path": "tests/brand-release-gate.test.mjs",
+      "old": {
+        "bytes": 9021,
+        "sha256": "f4c75f798eda03ffe2d0218a2882a7d370009f9785369becf3afc750a1d31ea0"
+      },
+      "new": {
+        "bytes": 9029,
+        "sha256": "a0573282e909f22717b38c2473ae2b28bbcb3c0211380a6f81aa64919d83ab24"
+      }
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "old": {
+        "bytes": 2488,
+        "sha256": "c4542a465bceaa66cfd0983e77f75d256df74ce8acc51d915565c98f35739aeb"
+      },
+      "new": {
+        "bytes": 2915,
+        "sha256": "bb5e0e1f1f6e2e69e230d56bd9f855cd0e40b0ad1d272c327fe22d2e9e69bab4"
+      }
+    },
+    {
+      "path": "tests/helpers/workbench-parity-proof.mjs",
+      "old": {
+        "bytes": 6087,
+        "sha256": "b171d49776797b0276e1c557fb8860a7cca74b987114155bb6928bfa6d99b1dc"
+      },
+      "new": {
+        "bytes": 6077,
+        "sha256": "d59560bac046a4cbc2f4c01b2821923f3c064e783ca469eba773732813d6bf8e"
+      }
+    },
+    {
+      "path": "tests/helpers/workbench-proof.mjs",
+      "old": {
+        "bytes": 11382,
+        "sha256": "cee9a33179fd323b43e0a11ac3bd281ee87ef950ce2b2ed7205ecafb7b0d5d64"
+      },
+      "new": {
+        "bytes": 11372,
+        "sha256": "c7d585ddc4b70d0f854f85285e47fcb2bf657b9a8b894f20fd92006037a11a18"
+      }
+    },
+    {
+      "path": "tests/io-consumer-types.test.mjs",
+      "old": {
+        "bytes": 3331,
+        "sha256": "d7496e25c67ddc02dd0945f8500e4c466edf4d2f7abc96f132562593dab136d4"
+      },
+      "new": {
+        "bytes": 3321,
+        "sha256": "86268065ec2f5b5904b8390cf3718910325090cd86b4eef672884b122c1958b1"
+      }
+    },
+    {
+      "path": "tests/lot0-squash-readiness.test.mjs",
+      "old": {
+        "bytes": 6308,
+        "sha256": "ed71e6fa2632d81a6258e7108f640d35fea9c6eb1099d072fb1fde77ba04f20d"
+      },
+      "new": {
+        "bytes": 6351,
+        "sha256": "910dca0e1a8ba1e5df785d98b8788a0bd2c7239b6ff8560747d3944a23ad42af"
+      }
+    },
+    {
+      "path": "tests/p3/prepare.mjs",
+      "old": {
+        "bytes": 3246,
+        "sha256": "b2158c1c5e0389d09f609770f716a43b571f0e06d2b1b5d76da2162e3d9f4ff0"
+      },
+      "new": {
+        "bytes": 3559,
+        "sha256": "cbe1c393b4d721d1420ff56ec779806b9443dec4114c421da9b100e0fd73ee5f"
+      }
+    },
+    {
+      "path": "tests/profile-corpus-pin-final.test.mjs",
+      "old": {
+        "bytes": 3651,
+        "sha256": "a8a77aad2ff58dd83deb6ec9e7c74669b10856952ed5f30d0d88fcb3cff7cfba"
+      },
+      "new": {
+        "bytes": 5160,
+        "sha256": "b3a0a17d57d68ecf3a6b12899c39031fa0a243c09b31cb32d5192524d4a262e9"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 6923,
+        "sha256": "6fb61b8f7edcacaae0c51f6cdaeebce43b19a061b27e11f037dc7818966f76e9"
+      },
+      "new": {
+        "bytes": 6913,
+        "sha256": "6e1f2659601d0c48a627d7a95ae67df41565b928c87926a029cf6d8965098adc"
+      }
+    },
+    {
+      "path": "tests/test-history-guard.test.mjs",
+      "old": {
+        "bytes": 20810,
+        "sha256": "eecefa280d88c98ed86be3adbdff2939cbde5645626366b74e0df4fd90ba070c"
+      },
+      "new": {
+        "bytes": 33480,
+        "sha256": "d03c4554265e05008598756104c0fca122b831ad7b8937ba28f3378108d39f9c"
+      }
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "docs/design/lot0-history-guard.md",
+      "bytes": 3072,
+      "sha256": "930838fe40e0c4b3dd649e74157720cf1e072450c4d3dd3b61714c8c909d4338"
+    }
+  ],
+  "followUp": {
+    "author": "muse-spark-1.3",
+    "base": "7ab4074",
+    "scope": "Review 7ab4074 against the closed-by-default rule; probe indirect and dynamic bypasses; reject call/apply/bind and Reflect targets plus dynamic import and variable require specifiers.",
+    "changes": [
+      "Reject indirect process invocation through call, apply, bind or Reflect with a process API target.",
+      "Resolve dynamic import specifiers and require specifiers by literal value, treating unresolved specifiers as potential child_process modules.",
+      "Resolve preparation helpers built through createRequire alongside the global require.",
+      "Add adversarial tests for indirect invocation and for unresolved executables through dynamic import and variable require specifiers.",
+      "Extend the guard scope note with indirect invocation and dynamic import and require coverage."
+    ],
+    "red": {
+      "command": "timeout --kill-after=5s 60s node --test --test-name-pattern='should reject indirect|should reject unresolved executables through dynamic' tests/test-history-guard.test.mjs",
+      "exitCode": 1,
+      "tests": 2,
+      "passed": 0,
+      "failed": 2,
+      "observed": "Indirect call/apply/bind and Reflect forms plus dynamic import and variable require forms with unresolved executables returned zero diagnostics before the fix."
+    },
+    "verification": [
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0
+      },
+      {
+        "command": "npm run typecheck:compat",
+        "exitCode": 0
+      },
+      {
+        "command": "timeout --kill-after=5s 90s node --test tests/test-history-guard.test.mjs tests/profile-corpus-pin-final.test.mjs tests/lot0-squash-readiness.test.mjs tests/profile-s123-receipt.test.mjs",
+        "exitCode": 0,
+        "tests": 23,
+        "passed": 23,
+        "failed": 0
+      },
+      {
+        "command": "timeout --kill-after=5s 120s node --test tests/brand-baseline.test.mjs tests/brand-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/history-attribution.test.mjs tests/lot0-squash-readiness.test.mjs tests/path-guard.test.mjs tests/profile-brand-guard.test.mjs tests/profile-corpus-pin-final.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-schema.test.mjs tests/profile-twin-proof.test.mjs tests/test-history-guard.test.mjs",
+        "exitCode": 0,
+        "tests": 367,
+        "passed": 367,
+        "failed": 0
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run typecheck:compat",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "timeout --kill-after=5s 90s node --test tests/test-history-guard.test.mjs tests/profile-corpus-pin-final.test.mjs tests/lot0-squash-readiness.test.mjs tests/profile-s123-receipt.test.mjs",
+      "exitCode": 0,
+      "tests": 21,
+      "passed": 21,
+      "failed": 0
+    },
+    {
+      "command": "timeout --kill-after=5s 120s node --test tests/brand-baseline.test.mjs tests/brand-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/history-attribution.test.mjs tests/lot0-squash-readiness.test.mjs tests/path-guard.test.mjs tests/profile-brand-guard.test.mjs tests/profile-corpus-pin-final.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-schema.test.mjs tests/profile-twin-proof.test.mjs tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "files": 18,
+      "tests": 365,
+      "passed": 365,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    {
+      "command": "timeout --kill-after=5s 60s node --test tests/aui.browser.test.mjs",
+      "environment": {
+        "CHROMIUM": "cached browser resolved at runtime through playwright-core"
+      },
+      "exitCode": 0,
+      "tests": 19,
+      "passed": 19,
+      "failed": 0
+    },
+    {
+      "command": "timeout --kill-after=5s 1200s node --test tests/*.test.mjs",
+      "environment": {
+        "CHROMIUM": "cached browser resolved at runtime through playwright-core"
+      },
+      "exitCode": 0,
+      "files": 91,
+      "tests": 2654,
+      "passed": 2654,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "durationMs": 987625.811528,
+      "elapsedMs": 987914,
+      "forcedExit": false
+    },
+    {
+      "command": "timeout --kill-after=5s 90s node --test tests/test-history-guard.test.mjs tests/profile-corpus-pin-final.test.mjs tests/path-guard.test.mjs",
+      "exitCode": 0,
+      "tests": 18,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "note": "Final receipt and successor pins checked after recording the full-run outcome."
+    }
+  ],
+  "predecessorInventorySha256": "a213190ca9ea16bbb0c581a70c650b2ead54015f896242dd83e87f2f3d0a49f5",
+  "changes": [
+    "Identify child_process APIs by lexical bindings through named, default and namespace imports, require, aliases, member access and destructuring.",
+    "Expand controlled literal call spreads; reject unresolved child_process executables and commands outside controlled Git forwarding.",
+    "Reject shell execution mentioning Git, cat-file --batch* and --stdin before the path separator on every Git subcommand.",
+    "Retain all three existing review 4 reproductions; add all four unresolved-call and all four stdin-mode reproductions from review 5, plus binding and positive controls.",
+    "Preserve HEAD/main reads, main commit reads and the unchanged two-entry published allowance.",
+    "Use literal executables in existing non-Git runners so the repository scan satisfies the exact rule.",
+    "Connect the explicit successor seals without changing historical receipts or predecessor pins."
+  ],
+  "red": {
+    "command": "timeout --kill-after=5s 60s node --test --test-name-pattern='should reject review 5|should preserve safe process' tests/test-history-guard.test.mjs",
+    "exitCode": 1,
+    "tests": 3,
+    "passed": 0,
+    "failed": 3,
+    "observed": "The unresolved executable and stdin-mode reproductions returned zero diagnostics; an unrelated same-named function was incorrectly rejected."
+  },
+  "initialFullRun": {
+    "command": "timeout --kill-after=5s 900s node --test tests/*.test.mjs",
+    "exitCode": 124,
+    "elapsedMs": 900148,
+    "fullSuiteCompleted": false,
+    "observed": "The default Snap browser failed to create its DBus transient scope in the test environment; the run stalled and reached its timeout.",
+    "resolution": "The cached browser passed the 19-check probe and the subsequent full suite without repository changes."
+  },
+  "processCleanup": {
+    "allTestProcessesTerminated": true,
+    "finalRunner": "The bounded runner sent TERM and then KILL to its child process group on completion; its Node test run finished naturally."
+  },
+  "scopeAudit": {
+    "bytesOutsideGuardDocReceiptAndSealsChanged": true,
+    "requiredRunnerChanges": [
+      "tests/brand-release-gate.test.mjs",
+      "tests/helpers/workbench-parity-proof.mjs",
+      "tests/helpers/workbench-proof.mjs",
+      "tests/io-consumer-types.test.mjs",
+      "tests/lot0-squash-readiness.test.mjs",
+      "tests/p3/prepare.mjs",
+      "tests/profile-s123-receipt.test.mjs"
+    ],
+    "sealVerifierChanges": [
+      "tests/helpers/lot0-history-pins.mjs",
+      "tests/profile-corpus-pin-final.test.mjs"
+    ],
+    "productionSourceChanged": false,
+    "vendoredCorpusChanged": false,
+    "historicalReceiptsChanged": false,
+    "predecessorPinsChanged": false,
+    "expectationSha256": "b6ee671974e399fefeb1ff105978969ef95db9dc75ca5f6c8f361dcb1f278d2d",
+    "expectationSealSha256": "0fdb6c8524ae9b93e3fe30fe9532f80b3a0117b2db91c9389fe7885c4e3762c9",
+    "brandBaselineRows": 131,
+    "untrackedWork": "Not staged or edited."
+  },
+  "authoritativeCheck": {
+    "scope": "Fresh-squash full run without branch objects",
+    "performed": true,
+    "branchHead": "760a1314c084838d87f549722c435b68af2632fa",
+    "squashCommit": "6f880b27a02c3389756a25434568a187db6614b4",
+    "squashTree": "20e93c4e24c806cf0dca268fd2c4590ad95f721b",
+    "command": "timeout -k 60 14400 node --test --test-concurrency=1 --test-timeout=1200000 tests/*.test.mjs",
+    "mode": "serial run without --test-force-exit",
+    "tests": 2656,
+    "passed": 2656,
+    "failed": 0,
+    "cancelled": 0,
+    "exitCode": 0,
+    "branchObjects": "absent from the clone",
+    "addedAbsolutePathLines": 0,
+    "postMerge": "CI on main where branch objects never exist",
+    "note": "The full suite ran serially on the fresh squash without branch objects; the lint and focused Git shims do not replace this run."
+  },
+  "finalAddedFileScan": {
+    "files": 12,
+    "brandIssues": 0,
+    "homePathIssues": 0
+  }
+}

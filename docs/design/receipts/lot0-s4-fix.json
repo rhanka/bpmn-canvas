@@ -1,0 +1,559 @@
+{
+  "format": "profile-lot0-step4-fix/1",
+  "authority": {
+    "revision": "R3.2",
+    "source": "DESIGN.R32.md",
+    "sha256": "feb133295c88a54841c62f8a19a81aa2fb4372f4af564d5380d611220e8c3497",
+    "verified": true,
+    "currentDesignIgnored": "Current DESIGN.md has R3.3 bytes; the pinned archived R3.2 bytes govern this correction."
+  },
+  "baseline": "b4d041508dc232da6cd2bd156c7149221587d512",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "commits": {
+    "red": "31ba9bb",
+    "green": "40714d3",
+    "receipt": "self; see git history"
+  },
+  "findings": [
+    {
+      "id": "MAJOR-1",
+      "status": "fixed",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:728",
+        "DESIGN.R32.md:794"
+      ],
+      "change": "Detached preparation may advance semantic revision; prepared and report output revisions must still equal the result revision.",
+      "tests": [
+        "MAJOR-1"
+      ],
+      "regressionTests": 1,
+      "implementationEvidence": [
+        "src/profile/results.ts:94",
+        "src/profile/results.ts:103",
+        "src/profile/results.ts:126"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MAJOR-2",
+      "status": "fixed-with-partial-rejection",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:556",
+        "DESIGN.R32.md:601",
+        "DESIGN.R32.md:658",
+        "DESIGN.R32.md:728",
+        "DESIGN.R32.md:744"
+      ],
+      "change": "Validate theme payload page/occurrence ordering, pair uniqueness and coverage agreement; semantic placements and envelope binding; supported successful byte capabilities and sorted maps; snapshot non-null content and normalized stored bags.",
+      "rejected": {
+        "claim": "Normalization placements require bounds.",
+        "reason": "The exact derived placement record is elementId, ownerProcessId, regionKey, optional anchorAssociationId and relatedAssociationIds. It has no bounds. Validate these closed records and their defined order; do not invent geometry fields.",
+        "authority": "DESIGN.R32.md:556"
+      },
+      "tests": [
+        "MAJOR-2a",
+        "MAJOR-2b",
+        "MAJOR-2c",
+        "MAJOR-2d"
+      ],
+      "regressionTests": 31,
+      "implementationEvidence": [
+        "src/profile/results.ts:42",
+        "src/profile/results.ts:68",
+        "src/profile/results.ts:115",
+        "src/profile/results.ts:119",
+        "src/profile/results.ts:124",
+        "src/profile/presentation-contracts.ts:160",
+        "src/profile/presentation-contracts.ts:217",
+        "src/profile/presentation-contracts.ts:232",
+        "schemas/profile/result-1.schema.json:521"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MAJOR-3",
+      "status": "fixed",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:501"
+      ],
+      "change": "Omitted paths retain the indexed node coordinate; supplied relative pointers are decisive; empty string properties are unavailable.",
+      "tests": [
+        "MAJOR-3"
+      ],
+      "regressionTests": 5,
+      "implementationEvidence": [
+        "src/profile/report.ts:113"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MAJOR-4",
+      "status": "fixed",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:601",
+        "DESIGN.R32.md:656",
+        "DESIGN.R32.md:658",
+        "DESIGN.R32.md:742"
+      ],
+      "change": "Validate element shape and tokens before canonical order, guard occurrence sort and pin arrays, and reject null DI before callbacks. Render diagnostics retain the explicit Report/2 null exceptions.",
+      "tests": [
+        "MAJOR-4"
+      ],
+      "scopeNotes": {
+        "claim": "Apply recursive no-null validation to report diagnostics inside RenderData, or test layout tokens.",
+        "reason": "Report coordinates and genuine before/after JSON values may contain null. Layout geometry has no style tokens, so its combined-invalid candidate uses malformed bounds; render uses invalid tokens.",
+        "authority": [
+          "DESIGN.R32.md:658",
+          "DESIGN.R32.md:742"
+        ]
+      },
+      "regressionTests": 13,
+      "implementationEvidence": [
+        "src/profile/presentation-contracts.ts:52",
+        "src/profile/presentation-contracts.ts:81",
+        "src/profile/presentation-contracts.ts:128",
+        "src/profile/presentation-contracts.ts:160",
+        "src/profile/presentation-contracts.ts:200",
+        "src/profile/presentation-contracts.ts:217"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MINOR-1",
+      "status": "fixed-with-partial-rejection",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:225",
+        "DESIGN.R32.md:728",
+        "DESIGN.R32.md:730",
+        "DESIGN.R32.md:742",
+        "DESIGN.R32.md:744"
+      ],
+      "change": "Require ascending artifact entry indexes and nonempty optional entry strings; compare absent and null symmetrically. Preserve unresolved null/string ratification.",
+      "rejected": {
+        "claim": "Report.operation has a closed enum in the schema and should use Result operation names.",
+        "reason": "Report/2 defines operation without a closed enum; the baseline schemas also specify nonempty text. Reports cover import and compileProfile as well as Result operations. Preserve this supplied-fact contract.",
+        "authority": [
+          "DESIGN.R32.md:225",
+          "DESIGN.R32.md:728",
+          "DESIGN.R32.md:730"
+        ],
+        "baselineEvidence": "b4d0415:schemas/profile/report-2.schema.json:12 has type string and minLength 1, with no operation enum."
+      },
+      "tests": [
+        "MINOR-1"
+      ],
+      "regressionTests": 3,
+      "implementationEvidence": [
+        "src/profile/report.ts:43",
+        "src/profile/report.ts:57",
+        "src/profile/report.ts:96"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MINOR-2",
+      "status": "fixed",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:728",
+        "DESIGN.R32.md:742"
+      ],
+      "change": "Exclude successful in-process byte payloads from JSON syntax explicitly; mirror optional-string and coordinate constraints across the three affected schemas.",
+      "tests": [
+        "MINOR-2"
+      ],
+      "regressionTests": 23,
+      "implementationEvidence": [
+        "schemas/profile/report-2.schema.json",
+        "schemas/profile/render-data-1.schema.json",
+        "schemas/profile/result-1.schema.json"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MINOR-3",
+      "status": "fixed",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:728"
+      ],
+      "change": "Prepared-artifact admission recomputes viewRevision asynchronously. Synchronous Result validation is documented as shape-only; queued preparation and byte admission call full freshness validation.",
+      "tests": [
+        "MINOR-3"
+      ],
+      "regressionTests": 3,
+      "implementationEvidence": [
+        "src/profile/results.ts:54",
+        "src/profile/results.ts:63",
+        "src/profile/results.ts:154",
+        "src/profile/results.ts:156"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    },
+    {
+      "id": "MINOR-4",
+      "status": "fixed",
+      "commit": "40714d3",
+      "evidence": [
+        "DESIGN.R32.md:459",
+        "DESIGN.R32.md:461",
+        "DESIGN.R32.md:482",
+        "DESIGN.R32.md:575"
+      ],
+      "change": "Require exactly one matching stage-policy table; support explicit stage and draft/accept pipeline requests; accept and validate optional bindings; align method parameters and compile-time contract tests.",
+      "tests": [
+        "MINOR-4"
+      ],
+      "regressionTests": 10,
+      "implementationEvidence": [
+        "src/profile/lint-contracts.ts:50",
+        "src/profile/lint-contracts.ts:69",
+        "src/profile/lint-contracts.ts:94",
+        "src/profile/results.ts:18",
+        "tests/types/profile-contracts.ts:4"
+      ],
+      "regressionFile": "tests/profile-s4-fix.test.mjs",
+      "verification": "All named regressions passed again on 40714d3 during resume."
+    }
+  ],
+  "verification": {
+    "red": {
+      "tests": 86,
+      "passed": 12,
+      "failed": 74,
+      "typeContracts": "failed as expected",
+      "command": "rtk node --test tests/profile-s4-fix.test.mjs"
+    },
+    "focused": {
+      "tests": 284,
+      "passed": 284,
+      "failed": 0,
+      "origin": "Previous run on 40714d3; all of these focused suites were included again in the resume profile run.",
+      "command": "rtk node --test tests/profile-s4-fix.test.mjs tests/profile-{snapshot,render-contract,report,result,lint-contract,boundary-schema,s4-scope}.test.mjs"
+    },
+    "brand": {
+      "command": "rtk proxy node --test tests/profile-brand-guard.test.mjs tests/profile-s4-scope.test.mjs tests/profile-s4-fix.test.mjs",
+      "tests": 91,
+      "passed": 91,
+      "failed": 0,
+      "regressions": 89,
+      "guards": 2,
+      "resume": true
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0,
+      "resume": true
+    },
+    "typeContracts": {
+      "command": "rtk npm run typecheck:compat",
+      "exitCode": 0,
+      "resume": true
+    },
+    "full": {
+      "status": "completed-with-frozen-and-sandbox-browser-failures",
+      "command": "rtk npm test",
+      "execution": "per-command filesystem and PID sandbox",
+      "implementationHead": "40714d3b6799e924624c27d4dcab4fc277f26667",
+      "exitCode": 1,
+      "tests": 1908,
+      "passed": 1873,
+      "failed": 35,
+      "skipped": 0,
+      "cancelled": 0,
+      "durationMs": 1571864.106599,
+      "frozenFailures": [
+        "s123-s1-minor-up-unknown",
+        "s123-s1-minor-up-unavailable",
+        "s123-s1-minor-down-unknown",
+        "s123-s1-minor-down-unavailable",
+        "s123-s2-document-schema-supported-unknown",
+        "s123-s2-document-schema-supported-unavailable",
+        "s123-s2-document-schema-unsupported-unknown",
+        "s123-s2-document-schema-unsupported-unavailable",
+        "s123-s2-document-schema-supported-available"
+      ],
+      "browserFailures": [
+        {
+          "test": "adapter inside a real assistant-ui 0.15.22 runtime",
+          "file": "tests/aui.browser.test.mjs"
+        },
+        {
+          "test": "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+          "file": "tests/browser-dist.browser.test.mjs"
+        },
+        {
+          "test": "colored profile in a real browser",
+          "file": "tests/colored.browser.test.mjs"
+        },
+        {
+          "test": "core in a real browser",
+          "file": "tests/core.browser.test.mjs"
+        },
+        {
+          "test": "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+          "file": "tests/demo.browser.test.mjs"
+        },
+        {
+          "test": "active diagram across a new document version; undo and redo across a profile switch",
+          "file": "tests/history.browser.test.mjs"
+        },
+        {
+          "test": "shipped browser IIFE: C1–C7 parity and second-review refusals",
+          "file": "tests/io-review-2.browser.test.mjs"
+        },
+        {
+          "test": "shipped browser IIFE: third-review refusals and resolved namespaces",
+          "file": "tests/io-review-3.browser.test.mjs"
+        },
+        {
+          "test": "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+          "file": "tests/io-review-4.browser.test.mjs"
+        },
+        {
+          "test": "io codecs in a real browser",
+          "file": "tests/io.browser.test.mjs"
+        },
+        {
+          "test": "boundary events follow their host in autoLayout, in one command",
+          "file": "tests/layout-boundary.browser.test.mjs"
+        },
+        {
+          "test": "(kept) the canvas applies the corpus geometry to the DI",
+          "file": "tests/layout-corpus.browser.test.mjs"
+        },
+        {
+          "test": "layoutOnLoad: a server document is laid out as part of its load",
+          "file": "tests/layout-on-load.browser.test.mjs"
+        },
+        {
+          "test": "legend profile in a real browser",
+          "file": "tests/legend.browser.test.mjs"
+        },
+        {
+          "test": "legend profile parity in a real browser",
+          "file": "tests/legend2.browser.test.mjs"
+        },
+        {
+          "test": "legend tokens, data IO lifecycle and hit outlines in a real browser",
+          "file": "tests/legend3.browser.test.mjs"
+        },
+        {
+          "test": "palette layout and token-driven icons in a real browser",
+          "file": "tests/palette.browser.test.mjs"
+        },
+        {
+          "test": "react and assistant-ui adapters in a real browser",
+          "file": "tests/react.browser.test.mjs"
+        },
+        {
+          "test": "rendering in both looks",
+          "file": "tests/render-looks.browser.test.mjs"
+        },
+        {
+          "test": "workshop primitives (menu, tabs) in a real browser",
+          "file": "tests/ui.browser.test.mjs"
+        },
+        {
+          "test": "0.2 canvas API in a real browser",
+          "file": "tests/v02.browser.test.mjs"
+        },
+        {
+          "test": "bpmn.io logo: visible by default, hidden only with a named license",
+          "file": "tests/watermark.browser.test.mjs"
+        },
+        {
+          "test": "workshop: atomic exports",
+          "file": "tests/workshop-export.browser.test.mjs"
+        },
+        {
+          "test": "workshop: current model local exports",
+          "file": "tests/workshop-served.browser.test.mjs"
+        },
+        {
+          "test": "workshop structure with the step-0 contract options",
+          "file": "tests/workshop-structure.browser.test.mjs"
+        },
+        {
+          "test": "workshop in a real browser",
+          "file": "tests/workshop.browser.test.mjs"
+        }
+      ],
+      "browserFailureSignature": "Chromium Snap cannot create transient scope; DBus UnixProcessIdUnknown or InvalidArgs under the per-command PID sandbox.",
+      "browserRerunNeeded": true,
+      "sourceAndTestBytesUnchangedDuringRun": true,
+      "termination": {
+        "reason": "Only browser-dist.browser.test.mjs and demo.browser.test.mjs workers remained idle after their sandbox browser launch failures. Their servers are created before the try/finally cleanup, leaving workers alive. All other workers, including the sealed-byte mutation test, had already exited.",
+        "action": "Verified exact command lines and direct parent 113311, then sent SIGTERM only to task-owned workers 113319 and 113323. The npm test runner itself completed and reported its original 35 failures.",
+        "files": [
+          "tests/browser-dist.browser.test.mjs",
+          "tests/demo.browser.test.mjs"
+        ]
+      },
+      "browserFailuresResolvedByRerun": true,
+      "interpretation": "The full npm test invocation was not green: nine frozen compatibility disagreements and 26 sandbox-only browser launch failures. The isolated browser rerun passed every browser test without implementation/test changes. Full release acceptance remains false."
+    },
+    "profiles": {
+      "command": "rtk proxy node --input-type=module; spawn node --test over sorted tests/profile-*.test.mjs excluding profile-golden-independence.test.mjs",
+      "tests": 948,
+      "passed": 939,
+      "failed": 9,
+      "skipped": 0,
+      "excludedLongSuite": "profile-golden-independence.test.mjs is included in the full npm test run",
+      "frozenFailures": [
+        "s123-s1-minor-up-unknown",
+        "s123-s1-minor-up-unavailable",
+        "s123-s1-minor-down-unknown",
+        "s123-s1-minor-down-unavailable",
+        "s123-s2-document-schema-supported-unknown",
+        "s123-s2-document-schema-supported-unavailable",
+        "s123-s2-document-schema-unsupported-unknown",
+        "s123-s2-document-schema-unsupported-unavailable",
+        "s123-s2-document-schema-supported-available"
+      ],
+      "discardedAttempt": "Previous-run evidence only: An earlier profile-only run overlapped npm build cleanup, causing missing dist modules. Discarded as verification evidence. The invalid run was terminated by this task (exit 130) to avoid duplicating the long seal-mutation test.",
+      "resume": true,
+      "exitCode": 1
+    },
+    "artifactDigests": {
+      "count": 11,
+      "commit": "40714d3",
+      "matchesWorkingTreeAndCommit": true
+    },
+    "goldenIndependence": {
+      "status": "passed",
+      "execution": "included in full npm test",
+      "everyNonWhitespaceExpectationByteMutated": true,
+      "durationMs": 1011215.580594
+    },
+    "browserRerun": {
+      "status": "passed",
+      "command": "rtk proxy node --test --test-concurrency=1 tests/*.browser.test.mjs",
+      "execution": "outside filesystem and PID sandbox; browser files alone, serially",
+      "exitCode": 0,
+      "tests": 483,
+      "passed": 483,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "durationMs": 132514.82097,
+      "sourceAndTestBytesUnchanged": true
+    },
+    "receiptBrandScan": {
+      "passed": true,
+      "scanner": "tests/helpers/brand.mjs",
+      "exceptions": []
+    },
+    "finalIntegrity": {
+      "artifactsMatched": 11,
+      "sourceAndTestCommit": "40714d3",
+      "protectedPathsUnchanged": true,
+      "reviewNotesRemoved": 3,
+      "onlyReceiptToStage": true
+    }
+  },
+  "expectationDisputes": [],
+  "preservation": {
+    "protectedDiffEmpty": true,
+    "compatibilityUnchanged": true,
+    "nineFrozenVectorsUnchanged": true,
+    "sealedFixturesUnchanged": true,
+    "sealsUnchanged": true,
+    "newSeal": false,
+    "stashTouched": false,
+    "tmpTouched": false,
+    "layoutDocumentTouched": false,
+    "pushed": false,
+    "step5OrLater": false,
+    "protectedPathsVerified": [
+      "src/profile/compatibility.ts",
+      "tests/fixtures/profile-lot0/",
+      "tests/fixtures/profile-parity-corpus/",
+      "tests/fixtures/profile-parity-corpus.pin.json",
+      "tests/fixtures/parity-corpus/",
+      "docs/design/receipts/lot0-s123-seal.json",
+      "docs/design/receipts/lot0-s4-expect.json",
+      "tests/helpers/profile-seal.mjs",
+      "tests/profile-compatibility.test.mjs"
+    ],
+    "protectedBaseline": "b4d0415"
+  },
+  "review": {
+    "status": "incomplete",
+    "target": "40714d3",
+    "reason": "The previous run recorded an automatic approval rejection before external review execution. No independent review verdict exists; the resume did not retry the external launch.",
+    "notesDisposition": "Removed the three lot0-s4-fix review notes: they contained provider/model names and no completed review evidence.",
+    "localVerification": "All eight findings were checked against the consensus, pinned archived R3.2 authority, implementation diff and regression tests. This verification does not claim independent consensus."
+  },
+  "fullReleaseAcceptance": false,
+  "artifacts": [
+    {
+      "path": "schemas/profile/render-data-1.schema.json",
+      "bytes": 14195,
+      "sha256": "9adee70a88aa42d759064367f575150778a8c8825430db0a92067e88084e1976"
+    },
+    {
+      "path": "schemas/profile/report-2.schema.json",
+      "bytes": 10406,
+      "sha256": "b09009f12659aa132ff517509e1e5cd2cea8fa51a603b772a59cfbcf61c20141"
+    },
+    {
+      "path": "schemas/profile/result-1.schema.json",
+      "bytes": 52395,
+      "sha256": "7494b30f3c193fc9404446d4a41cbbaf92f6f0d384d4efaa8da17e5ffe8bf070"
+    },
+    {
+      "path": "src/profile/lint-contracts.ts",
+      "bytes": 10520,
+      "sha256": "dd5102bd4f8fd23bfd813bbd36bfba27048a965f9fdb8b91c522f197a0d1c55b"
+    },
+    {
+      "path": "src/profile/presentation-contracts.ts",
+      "bytes": 21826,
+      "sha256": "fc7f4b5fd453b4ade5f760d999660c306b4b0f9138b5e6d3e75e276256c151b9"
+    },
+    {
+      "path": "src/profile/report.ts",
+      "bytes": 13352,
+      "sha256": "6dd1fad697995a17d433cca61d0f6bae56024d805b91cdb207a14f5bd85de5ab"
+    },
+    {
+      "path": "src/profile/results.ts",
+      "bytes": 17242,
+      "sha256": "f6040a0bf5794feff32976d201511719edf348f4d973e80950e35be5a8347ff8"
+    },
+    {
+      "path": "tests/profile-result.test.mjs",
+      "bytes": 3932,
+      "sha256": "12325f464f31b11c4a0eb3b409ab8ebd0d95e8d7bd550f3f80715a1b72e644f3"
+    },
+    {
+      "path": "tests/profile-s4-fix.test.mjs",
+      "bytes": 13865,
+      "sha256": "927f07273be7dd09334e8cc956ebdb3ba87657e15c3dc904887834fc9e8f3465"
+    },
+    {
+      "path": "tests/profile-s4-scope.test.mjs",
+      "bytes": 911,
+      "sha256": "7e59d3c5bef8ba8100ff706e5ae3e2728ae64be851bc7ab6f26801c9507c11f9"
+    },
+    {
+      "path": "tests/types/profile-contracts.ts",
+      "bytes": 2208,
+      "sha256": "a1120d3377858640e1c1e6d607d1b99855bc6b493f9a9e3c61db54e761eea36b"
+    }
+  ],
+  "compatibilityScope": "R3.3 compatibility activation is a separate later task. The nine recorded S1/S2 failures remain frozen and are not release acceptance."
+}

@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { runInBrowser } from "./browser/harness.mjs";
 
+/** Overlap of the application band on its activity (the layout and the renderer share it). */
+const APP_BOX = { overlap: 10 };
+
 const root = fileURLToPath(new URL("../", import.meta.url));
 
 test("legend profile in a real browser", { timeout: 120000 }, async (t) => {
@@ -20,6 +23,13 @@ test("legend profile in a real browser", { timeout: 120000 }, async (t) => {
   });
   await t.test("a linked [App] annotation is hidden and redrawn under its task", () => {
     assert.equal(o.a.APP.display, "none");
+  });
+  await t.test("a sub-process [+] marker stays above its application band, and is unchanged without one", () => {
+    const { withApp, withoutApp } = o.marker;
+    assert.ok(withApp && withoutApp, "both sub-processes draw the marker");
+    assert.ok(withApp.bottom <= withApp.height - APP_BOX.overlap - 4, `${withApp.bottom} <= ${withApp.height} - ${APP_BOX.overlap} - 4`);
+    assert.equal(withoutApp.bottom, withoutApp.height - 4);
+    assert.deepEqual([withApp.pointer, withoutApp.pointer], ["all", "all"]);
   });
   await t.test("an instance without the profile draws nothing in legend style", () => {
     for (const id of Object.keys(o.plain)) assert.equal(o.plain[id].legend, false, id);

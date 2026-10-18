@@ -1,0 +1,535 @@
+{
+  "format": "lot0-squash-readiness-receipt/1",
+  "date": "2026-10-16T04:46:24.741Z",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "initialHead": "c817d693df2300639e69f292b3873f7d74892c2d",
+  "main": {
+    "revision": "62ec95fb4e16dfb50e63a52286fc48e2960c0137",
+    "rewritten": false
+  },
+  "decisions": {
+    "publishedCommitExceptions": [
+      {
+        "commit": "07be09e21d852beb592314d50e0370e883c9b842",
+        "line": 1,
+        "sha256": "583423608eda0cb63146a67a6ad655858bc511ba6f0d4fd742c0d898b684295a"
+      },
+      {
+        "commit": "45aa6903174462e8dd95137971510f28ba5b4a19",
+        "line": 7,
+        "sha256": "32ed8e0a3026bc02976abc70f27ddfe1f149b8f4dc5dad00a1451dd7e86e42e9"
+      }
+    ],
+    "exceptionPolicy": "Frozen closed list; exact commit, line and SHA-256 only. Every other occurrence reachable from main remains strict.",
+    "predecessorPolicy": "Nineteen original byte lengths and SHA-256 digests were independently verified against the original Git objects before being pinned in the repository. Earlier receipts remain unchanged."
+  },
+  "historyPins": {
+    "path": "tests/fixtures/lot0-history.pin.json",
+    "sha256": "3b79fe0d7dcfddf39e18b472414c32bbab875b0ce8560d9a4a7c18da59cd1fe3",
+    "predecessorCount": 19,
+    "verificationEvidenceSha256": "8244c005273f8c33a09aa47ead374371647d4bdd6af60699d6f2e111ff628771"
+  },
+  "supersedesFiles": [
+    {
+      "path": "tests/brand-baseline.test.mjs",
+      "old": {
+        "bytes": 5815,
+        "sha256": "7d11748b03735d7012eb0a811ab4f9baeee999a23aea345b45ed59d09e7876ce"
+      },
+      "new": {
+        "bytes": 5848,
+        "sha256": "d4c5a3ea009fa507ce4f6796d7a5ba6a0826bfc999b979cfb1e3439c961ae42c"
+      }
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "old": {
+        "bytes": 8156,
+        "sha256": "83efb43364cd02728e19817361509b06cff68227b70a02cacf124329e39b775d"
+      },
+      "new": {
+        "bytes": 8220,
+        "sha256": "b29a1291b4beb295c3aa70810899de9e306150574b85f3033fc2c34b6d98ae62"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 6839,
+        "sha256": "ed0802b1b9d18248ffc4027b932827b50bd79036a52f934f382c6960f87d0dff"
+      },
+      "new": {
+        "bytes": 6923,
+        "sha256": "6fb61b8f7edcacaae0c51f6cdaeebce43b19a061b27e11f037dc7818966f76e9"
+      }
+    }
+  ],
+  "historyAudit": {
+    "sources": "All test sources (.mjs, .js, .cjs, .ts and .sh) searched for show, rev-parse and cat-file, including dynamically selected receipt revisions.",
+    "removedObjectDependencies": [
+      "f3a54c5435c06de2b18448b9551a99f75c9769ba",
+      "3dc02616d65cd82e301978063d1c589647cbe7b5",
+      "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32"
+    ],
+    "remainingObjectReads": "Runtime object reads use HEAD, main and reachable histories; no fixed branch revision is materialized.",
+    "regression": "A Git shim rejects show/rev-parse/cat-file with commit IDs; both predecessor validation tests pass under that shim."
+  },
+  "red": {
+    "label": "red",
+    "command": [
+      "node",
+      "--test",
+      "--test-name-pattern=should freeze exactly|should reject a third|should seal every predecessor|should verify remediation and reconciliation|no banned identifier anywhere",
+      "tests/lot0-squash-readiness.test.mjs",
+      "tests/package-shape.test.mjs"
+    ],
+    "started": "2026-10-16T04:08:27.432Z",
+    "finished": "2026-10-16T04:08:28.486Z",
+    "exitCode": 1,
+    "signal": null,
+    "outputSha256": "d4cd1e49bcf1a1d22dc3fc94856484cec44dfac135aabc2042d8aecafa3f2b88",
+    "tests": 5,
+    "passed": 0,
+    "failed": 5,
+    "skipped": 0,
+    "failures": [
+      "should freeze exactly the two published commit occurrence exceptions",
+      "should reject a third commit and changed lines or hashes on either published commit",
+      "should seal every predecessor pin and reject unapproved history substitutions",
+      "should verify remediation and reconciliation when intermediate Git objects are unavailable",
+      "no banned identifier anywhere: tracked files (tests and docs included) and every commit message"
+    ]
+  },
+  "green": {
+    "label": "green",
+    "command": [
+      "node",
+      "--test",
+      "--test-name-pattern=should freeze exactly|should reject a third|should seal every predecessor|should verify remediation and reconciliation|no banned identifier anywhere",
+      "tests/lot0-squash-readiness.test.mjs",
+      "tests/package-shape.test.mjs"
+    ],
+    "started": "2026-10-16T04:08:58.732Z",
+    "finished": "2026-10-16T04:08:59.850Z",
+    "exitCode": 0,
+    "signal": null,
+    "outputSha256": "15ccb68d1cf424ff52dcbbb8b54002c8e954f3c0b7eb9b1bd5bcb2205928e588",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "failures": []
+  },
+  "successorRed": {
+    "label": "successor-red",
+    "command": [
+      "node",
+      "--test",
+      "--test-name-pattern=should supersede historical inventories",
+      "tests/profile-s123-receipt.test.mjs"
+    ],
+    "started": "2026-10-16T04:12:38.921Z",
+    "finished": "2026-10-16T04:12:39.118Z",
+    "exitCode": 1,
+    "signal": null,
+    "outputSha256": "7df665c1f2ead43bc842b995eb6448ddde2f967278d914b1676410cbc5070cc9",
+    "tests": 1,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "failures": [
+      "should supersede historical inventories with current byte lengths and digests"
+    ]
+  },
+  "successorGreen": {
+    "label": "successor-green",
+    "command": [
+      "node",
+      "--test",
+      "tests/brand-baseline.test.mjs",
+      "tests/profile-corpus.test.mjs",
+      "tests/profile-s123-receipt.test.mjs",
+      "tests/lot0-squash-readiness.test.mjs"
+    ],
+    "started": "2026-10-16T04:12:56.695Z",
+    "finished": "2026-10-16T04:12:58.759Z",
+    "exitCode": 0,
+    "signal": null,
+    "outputSha256": "1127e1c6f6e2fc69c799a6616c6da413c05292b8cdaf1dbaeaf37cf17700838e",
+    "tests": 33,
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "failures": []
+  },
+  "validation": {
+    "typecheck": {
+      "label": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "started": "2026-10-16T04:09:40.156Z",
+      "finished": "2026-10-16T04:09:43.181Z",
+      "exitCode": 0,
+      "signal": null,
+      "outputSha256": "92ddabfc57fc7aaef42edac1d35143a6c95fb5dbe352ec05013d4fbe28dafcba",
+      "tests": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    "brand": {
+      "label": "brand-final",
+      "command": [
+        "node",
+        "--test",
+        "tests/brand-baseline.test.mjs",
+        "tests/brand-guard.test.mjs",
+        "tests/brand-legacy-gates.test.mjs",
+        "tests/brand-release-gate.test.mjs",
+        "tests/profile-brand-guard.test.mjs",
+        "tests/lot0-squash-readiness.test.mjs"
+      ],
+      "started": "2026-10-16T04:15:12.857Z",
+      "finished": "2026-10-16T04:15:18.852Z",
+      "exitCode": 0,
+      "signal": null,
+      "outputSha256": "1ef3a4bf0db822ffdf826549fc930b4bb76f2994ec6f98f4de937a23ae17e889",
+      "tests": 30,
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    "profile": {
+      "label": "profile-final",
+      "command": [
+        "node",
+        "--test",
+        "tests/profile-*.test.mjs"
+      ],
+      "started": "2026-10-16T04:14:05.737Z",
+      "finished": "2026-10-16T04:29:56.466Z",
+      "exitCode": 0,
+      "signal": null,
+      "outputSha256": "d50b7b3a92878ac99e8f2ab5f549b6502e3d1c319397022855864838dcb229c3",
+      "tests": 1021,
+      "passed": 1021,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    "full": {
+      "label": "full-final",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "started": "2026-10-16T04:25:27.825Z",
+      "finished": "2026-10-16T04:43:36.484Z",
+      "exitCode": 1,
+      "signal": null,
+      "outputSha256": "94df60be253f4aa5293b8af61fd97442d66acc655eb213804455d117dde86d6d",
+      "tests": null,
+      "passed": null,
+      "failed": 22,
+      "skipped": null,
+      "failures": [
+        "adapter inside a real assistant-ui 0.15.22 runtime",
+        "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+        "colored profile in a real browser",
+        "core in a real browser",
+        "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+        "active diagram across a new document version; undo and redo across a profile switch",
+        "shipped browser IIFE: C1–C7 parity and second-review refusals",
+        "shipped browser IIFE: third-review refusals and resolved namespaces",
+        "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+        "io codecs in a real browser",
+        "boundary events follow their host in autoLayout, in one command",
+        "(kept) the canvas applies the corpus geometry to the DI",
+        "layoutOnLoad: a server document is laid out as part of its load",
+        "legend profile in a real browser",
+        "legend profile parity in a real browser",
+        "legend tokens, data IO lifecycle and hit outlines in a real browser",
+        "palette layout and token-driven icons in a real browser",
+        "react and assistant-ui adapters in a real browser",
+        "rendering in both looks",
+        "workshop primitives (menu, tabs) in a real browser",
+        "0.2 canvas API in a real browser",
+        "bpmn.io logo: visible by default, hidden only with a named license"
+      ],
+      "summaryComplete": false,
+      "observedTopLevelResults": 1877,
+      "outputNote": "Node --test-force-exit truncated the TAP tail and final summary. The affected tail files are verified separately by full-tail; no total test count is claimed.",
+      "exhaustiveIntegrityTestPassed": true
+    },
+    "fullTail": {
+      "label": "full-tail",
+      "command": [
+        "node",
+        "--test",
+        "tests/workbench-f1.test.mjs",
+        "tests/workbench-f7.test.mjs",
+        "tests/workbench-g0.test.mjs",
+        "tests/workbench-parity-f1.test.mjs",
+        "tests/workbench-parity-f7.test.mjs",
+        "tests/xsd.test.mjs"
+      ],
+      "started": "2026-10-16T04:46:09.135Z",
+      "finished": "2026-10-16T04:46:10.915Z",
+      "exitCode": 0,
+      "signal": null,
+      "outputSha256": "1d1e47c5688e3ec198f8def50a5ea881d372b222990daede55521fd5af27db8a",
+      "tests": 104,
+      "passed": 104,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    }
+  },
+  "freshClone": {
+    "main": "62ec95fb4e16dfb50e63a52286fc48e2960c0137",
+    "squash": "fa871add2e03e050ad1e7e4ac4e846c7b151030f",
+    "tree": "62c6c16067cf6dea89a3d19b35e385b164079281",
+    "reachableCommits": 51,
+    "absentIntermediateObjects": [
+      "f3a54c5435c06de2b18448b9551a99f75c9769ba",
+      "3dc02616d65cd82e301978063d1c589647cbe7b5",
+      "309e8dc90ebcae4ea1e096ceffb62d8adfb56f32",
+      "c817d693df2300639e69f292b3873f7d74892c2d"
+    ],
+    "dependencyInstall": "Shared node_modules symlink; independent Git objects, index, working tree and build output.",
+    "method": "Clone main with --no-local --single-branch, create one test squash commit with main as its sole parent, then clone that source again with --no-local --single-branch. All intermediate branch objects are absent, not merely unreachable.",
+    "validatedWith": [
+      "npm",
+      "test"
+    ],
+    "receiptTiming": "This receipt was written after validation; the tested tree contains all seven code and test artifacts listed below."
+  },
+  "sandboxChromiumFailures": [
+    {
+      "test": "adapter inside a real assistant-ui 0.15.22 runtime",
+      "location": "tests/aui.browser.test.mjs:10:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1346][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+      "location": "tests/browser-dist.browser.test.mjs:22:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2666][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "colored profile in a real browser",
+      "location": "tests/colored.browser.test.mjs:36:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1424][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "core in a real browser",
+      "location": "tests/core.browser.test.mjs:24:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=833][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+      "location": "tests/demo.browser.test.mjs:24:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2053][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "active diagram across a new document version; undo and redo across a profile switch",
+      "location": "tests/history.browser.test.mjs:9:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1354][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "shipped browser IIFE: C1–C7 parity and second-review refusals",
+      "location": "tests/io-review-2.browser.test.mjs:7:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1344][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "shipped browser IIFE: third-review refusals and resolved namespaces",
+      "location": "tests/io-review-3.browser.test.mjs:8:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1339][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+      "location": "tests/io-review-4.browser.test.mjs:8:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1345][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "io codecs in a real browser",
+      "location": "tests/io.browser.test.mjs:28:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1337][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "boundary events follow their host in autoLayout, in one command",
+      "location": "tests/layout-boundary.browser.test.mjs:10:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1377][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "(kept) the canvas applies the corpus geometry to the DI",
+      "location": "tests/layout-corpus.browser.test.mjs:11:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1338][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "layoutOnLoad: a server document is laid out as part of its load",
+      "location": "tests/layout-on-load.browser.test.mjs:9:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1413][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "legend profile in a real browser",
+      "location": "tests/legend.browser.test.mjs:11:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1831][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "legend profile parity in a real browser",
+      "location": "tests/legend2.browser.test.mjs:14:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1857][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "legend tokens, data IO lifecycle and hit outlines in a real browser",
+      "location": "tests/legend3.browser.test.mjs:8:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1794][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "palette layout and token-driven icons in a real browser",
+      "location": "tests/palette.browser.test.mjs:16:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=1788][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "react and assistant-ui adapters in a real browser",
+      "location": "tests/react.browser.test.mjs:15:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2348][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "rendering in both looks",
+      "location": "tests/render-looks.browser.test.mjs:29:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2221][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "workshop primitives (menu, tabs) in a real browser",
+      "location": "tests/ui.browser.test.mjs:11:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2279][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "0.2 canvas API in a real browser",
+      "location": "tests/v02.browser.test.mjs:17:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2435][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    },
+    {
+      "test": "bpmn.io logo: visible by default, hidden only with a named license",
+      "location": "tests/watermark.browser.test.mjs:8:1",
+      "signature": [
+        "browserType.launchPersistentContext: Target page, context or browser has been closed",
+        "[pid=2591][err] internal error, please report: running \"chromium\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.UnixProcessIdUnknown\": [Failed to set unit properties: No such process]"
+      ]
+    }
+  ],
+  "runner": {
+    "effectiveTestCommand": "node --test-force-exit --test tests/*.test.mjs",
+    "wrapperSha256": "45ffed74bc0a9d91c30ee666d69c99f72451a29905502d49ef14ae27d39e190a",
+    "outputLimitation": "Force-exit truncated the full run TAP summary; the six affected tail files passed separately. Exact full-suite totals are not claimed.",
+    "fullSuiteOption": "--test-force-exit lets Node terminate after tests complete when failed browser launches leave handles open; no tests are skipped by this option.",
+    "interruptedAttempts": "Earlier profile/full attempts were stopped after the receipt-chain correction or to enable force-exit. Only completed final campaigns are reported in validation."
+  },
+  "artifacts": [
+    {
+      "path": "tests/helpers/brand-baseline.mjs",
+      "bytes": 4955,
+      "sha256": "eac476db5ca186b7accdab7ce37989155b3e369f7dff8f5c7c0132ea71daab27"
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "bytes": 1095,
+      "sha256": "e3b0253a7c27d8306524e9eae1bfa876abe3963bcce185697885d3edc52aa036"
+    },
+    {
+      "path": "tests/fixtures/lot0-history.pin.json",
+      "bytes": 5267,
+      "sha256": "3b79fe0d7dcfddf39e18b472414c32bbab875b0ce8560d9a4a7c18da59cd1fe3"
+    },
+    {
+      "path": "tests/brand-baseline.test.mjs",
+      "bytes": 5848,
+      "sha256": "d4c5a3ea009fa507ce4f6796d7a5ba6a0826bfc999b979cfb1e3439c961ae42c"
+    },
+    {
+      "path": "tests/profile-corpus.test.mjs",
+      "bytes": 8220,
+      "sha256": "b29a1291b4beb295c3aa70810899de9e306150574b85f3033fc2c34b6d98ae62"
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "bytes": 6923,
+      "sha256": "6fb61b8f7edcacaae0c51f6cdaeebce43b19a061b27e11f037dc7818966f76e9"
+    },
+    {
+      "path": "tests/lot0-squash-readiness.test.mjs",
+      "bytes": 4899,
+      "sha256": "65fb0280a3309cfde15c1768eb8ef6a41667a4a7099850189047c695b9d542ef"
+    }
+  ],
+  "push": false
+}

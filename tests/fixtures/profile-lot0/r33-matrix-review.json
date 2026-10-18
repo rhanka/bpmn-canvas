@@ -1,0 +1,2908 @@
+{
+  "format": "profile-r33-matrix-review/1",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "author": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "role": "independent expectation author"
+  },
+  "inventory": {
+    "sha256": "79c25e5370bc2976b19728468d3614bb43713e1464bce808a4ee5c8ac3890a3e",
+    "total": 66,
+    "sealed": 45,
+    "unsealed": 21,
+    "changedFromR32": [
+      "s123-s1-minor-up-unknown",
+      "s123-s1-minor-up-unavailable",
+      "s123-s1-minor-down-unknown",
+      "s123-s1-minor-down-unavailable",
+      "s123-s2-document-schema-unsupported-unknown",
+      "s123-s2-document-schema-unsupported-unavailable",
+      "s123-s2-document-schema-supported-available",
+      "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+      "s123-regression: should check source availability for 1.1.9 with unknown [call 1]",
+      "s123-regression: should check source availability for 1.1.9 with unavailable [call 1]",
+      "s123-regression: should check source availability for 1.3.0 with unknown [call 1]",
+      "s123-regression: should check source availability for 1.3.0 with unavailable [call 1]",
+      "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+      "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]"
+    ],
+    "recordedExpectationChangesBeyondDisputes": [
+      "compatibility-test: should require validated migration results before accepting a different identity [call 2]",
+      "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+      "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+      "s123-regression: should refuse schema identity disagreement before unavailable source and migration [call 1]",
+      "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]"
+    ],
+    "disposition": "All 45 sealed inputs independently reviewed. The other 21 entries are historical/unsealed code assertions, not sealed vectors; runtime disagreement is measured only after sealing."
+  },
+  "preservation": {
+    "inputs": "38901f5edde4775bf644c85b3589e76ae9b1b2fd24d9bf341612eb6b74e8805c",
+    "unaffectedOutputs": "d2b533ba389aae57e6d8b9b1cf58cc16d7435ade9d72ae19b72f12e098f6b008"
+  },
+  "vectors": [
+    {
+      "caseId": "s2b-compat-exact",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "f72eb52ff3485a3772f7e3e4d564d428813c69fc2e9475c08186d1df6629423b",
+      "old": {
+        "expectedStatus": "ok",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "ok"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": true,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "ok",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "ok"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": true,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:313",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:320",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "All identity dimensions, capabilities and source availability agree; acceptance remains subject to structural/readiness checks."
+    },
+    {
+      "caseId": "s2b-compat-document-0",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "8777138cb7b14afb3c6ead83e09af615d6028980038ec3f01894d7dcbd43ba36",
+      "old": {
+        "expectedStatus": "refused:document-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:298",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:302",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "An unsupported envelope version refuses whether older or newer; no implicit envelope upgrade is allowed."
+    },
+    {
+      "caseId": "s2b-compat-document-2",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "21cb1baf4f8e7078146c7957025bdf9409b42517c308715fc3dfdbbfa42c40bb",
+      "old": {
+        "expectedStatus": "refused:document-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:298",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:302",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "An unsupported envelope version refuses whether older or newer; no implicit envelope upgrade is allowed."
+    },
+    {
+      "caseId": "s2b-compat-missing",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "4f92cdf52a7633fb1f584331c4300600306cf98c983b7e6de8fdf47225487c9b",
+      "old": {
+        "expectedStatus": "refused:profile-metadata-missing",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-metadata-missing"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false,
+              "genericReadOnlyPreviewAllowed": true
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-metadata-missing",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-metadata-missing"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false,
+              "genericReadOnlyPreviewAllowed": true
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:299",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:303",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The envelope lacks profile identity; only a generic read-only preview is allowed before an explicit activation plan."
+    },
+    {
+      "caseId": "s2b-compat-xml-alone",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "5eb5ac912bc492163cb1e220ccbaee87503cf11fb814693ea15106fcfa5e81da",
+      "old": {
+        "expectedStatus": "refused:profile-metadata-missing",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-metadata-missing"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false,
+              "genericReadOnlyPreviewAllowed": true
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-metadata-missing",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-metadata-missing"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false,
+              "genericReadOnlyPreviewAllowed": true
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:299",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:303",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Standalone XML supplies no envelope identity/bindings manifest; exporter metadata cannot activate the injected profile."
+    },
+    {
+      "caseId": "s2b-compat-conflict",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "56801ca178245338f54ffa1f68797b97bf632bfc030a6c5dc880be7c8c6e7214",
+      "old": {
+        "expectedStatus": "refused:profile-metadata-conflict",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-metadata-conflict"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-metadata-conflict",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-metadata-conflict"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:300",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:304",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Host identity conflicts with the snapshot and document; no identity source wins by recency."
+    },
+    {
+      "caseId": "s2b-compat-schema",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "1a4e430791444432a4de5cc7aabcb5cbd20463febf9bce47154cf9ccaeeda34c",
+      "old": {
+        "expectedStatus": "refused:profile-schema-version",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-schema-version",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The injected profile schema version is not among the runtime's advertised supported schemas."
+    },
+    {
+      "caseId": "s2b-compat-mechanism",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "ae9ad773d7741ba17b623c644f06b31600ac7a20221d8d2d0dc6350bb7a44c1b",
+      "old": {
+        "expectedStatus": "refused:mechanism-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "mechanism-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:mechanism-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "mechanism-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:306",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The injected profile mechanism is unsupported even though its business identity is otherwise familiar."
+    },
+    {
+      "caseId": "s2b-compat-document-mechanism",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "05afa319d9ceb31f472d5f96831f43e3f6fde38a72c769e50c57887e56bfa3ca",
+      "old": {
+        "expectedStatus": "refused:document-mechanism-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-mechanism-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-mechanism-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-mechanism-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:302",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:307",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The document mechanism is unsupported by this runtime; applying the supported target cannot reinterpret it."
+    },
+    {
+      "caseId": "s2b-compat-mechanism-migration",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "86884b7a36a687cb91ad6f749d9750376f2d39f2e0a64e51d92d8282aa55f561",
+      "old": {
+        "expectedStatus": "refused:mechanism-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "mechanism-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:mechanism-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "mechanism-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:303",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:309",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Both mechanisms are supported but unequal, requiring an explicit migration from the exact source path."
+    },
+    {
+      "caseId": "s2b-compat-capability",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "9b5e72b59a74e5dbf8673d12d6968bf9d6f95360f6484f68b6b3de1cc9516ce0",
+      "old": {
+        "expectedStatus": "refused:profile-capability",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-capability"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-capability",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-capability"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:304",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:311",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The required recipes/1 capability is absent and evaluation must not start."
+    },
+    {
+      "caseId": "s2b-compat-asset",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "487f4b740c4b56e42e2a1eda7629fc6fdbe42b1037a0e5bf8155d54208f16208",
+      "old": {
+        "expectedStatus": "refused:profile-resource-missing",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-resource-missing"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-resource-missing",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-resource-missing"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:304",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:311",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The required injected metric asset is absent; compatible identities alone do not authorize evaluation."
+    },
+    {
+      "caseId": "s2b-compat-base",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "c0ee9a4c0240512a46fb66db81c3cf73d3fc14b4b027bd0ae436b1df0b25b00c",
+      "old": {
+        "expectedStatus": "refused:base-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "base-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:base-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "base-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:305",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:312",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The document and injected profile pin different base digests and no migration has been selected."
+    },
+    {
+      "caseId": "s2b-compat-descriptor",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "b78de430f1043069999f9894e43e9836531c37e5a15033b69ef79afe73cdea32",
+      "old": {
+        "expectedStatus": "refused:descriptor-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "descriptor-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:descriptor-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "descriptor-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:305",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:312",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The descriptor ID/version agree but the exact digest differs; descriptor pins are not interchangeable."
+    },
+    {
+      "caseId": "s2b-compat-business-id",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "85a63e1ac05a15298509cf790d209fb638d8279b6cace613eb26cc15b30316f9",
+      "old": {
+        "expectedStatus": "refused:profile-major-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-major-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-major-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-major-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:306",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Different business profile IDs require explicit business migration even when the native vocabulary matches."
+    },
+    {
+      "caseId": "s2b-compat-business-major",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "77a6bc0e7a507f1843d5bbabf5fff89e16369aef5b9526e118138d6316bd5103",
+      "old": {
+        "expectedStatus": "refused:profile-major-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-major-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-major-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-major-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:306",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "A different business major cannot be reinterpreted under the injected package."
+    },
+    {
+      "caseId": "s2b-compat-digest",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "b33227f2bc30cc276407d45c1f9f48f782637b8cd9f4b115a1168236c3f03ed9",
+      "old": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:307",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Equal package identity/version with unequal digest is an identity conflict, including a token-only change."
+    },
+    {
+      "caseId": "s2b-compat-digest-migration-no-waiver",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "61ff5de1eee712e371c4dd229f1c7b765f4d248242ced2108fa5147cbca856a6",
+      "old": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:307",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Selecting a migration cannot waive a conflicting digest under the same package version; a new version is required."
+    },
+    {
+      "caseId": "s2b-compat-patch-up",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "91809ddccfb34feeb7b1f31881dae7fcc7a26413bd95734b5c5601bc86452207",
+      "old": {
+        "expectedStatus": "refused:profile-patch-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-patch-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-patch-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-patch-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:308",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The source patch is older and both packages are known; even a patch requires explicit migration or exact-source reopening."
+    },
+    {
+      "caseId": "s2b-compat-patch-down",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "c7d8631b5ab7681692ccf818a412bc5ee07c3bd044d3b4b0f6effab7b00b60b5",
+      "old": {
+        "expectedStatus": "refused:profile-patch-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-patch-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-patch-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-patch-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:309",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:316",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The source patch is newer; the injected older patch cannot silently downgrade it."
+    },
+    {
+      "caseId": "s2b-compat-minor-up",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "d4d7718a09fc45319a9c269a368d4181e941e15544a1684f12642ad2b281eb33",
+      "old": {
+        "expectedStatus": "refused:profile-minor-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-minor-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:310",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The source minor is older; apparent vocabulary compatibility does not authorize automatic migration."
+    },
+    {
+      "caseId": "s2b-compat-minor-down",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "6adab8ee095605eef14315bfaa98cd1bd5a64a245f1a82156d39271d57f40665",
+      "old": {
+        "expectedStatus": "refused:profile-minor-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-minor-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:311",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The source minor is newer and must not lose new notions through an automatic downgrade."
+    },
+    {
+      "caseId": "s2b-compat-source-unavailable",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "91f11b531080db7a90a52a64171d2757d0cfff11fb7a9cd60b4faca15a701f81",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The exact source package is unavailable; preserving source without a latest fallback is required."
+    },
+    {
+      "caseId": "s2b-compat-precedence-version",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "95c8aa0e986208280d63a037504d1af54a0d2961f6dc63a700642b0bf52577a2",
+      "old": {
+        "expectedStatus": "refused:document-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-version-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-version-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:298",
+        "DESIGN.md:299",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:302",
+        "DESIGN.md:303",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Unsupported envelope version is checked before missing metadata, so row 302 wins over row 303."
+    },
+    {
+      "caseId": "s2b-compat-precedence-capability",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "497806613e99049fce6d7809c96aa7c26bf6c2529514711bf0755c5d04bc4016",
+      "old": {
+        "expectedStatus": "refused:profile-capability",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-capability"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-capability",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-capability"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:304",
+        "DESIGN.md:306",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:311",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Missing required capability precedes business-major mismatch; the first matching matrix row is 304."
+    },
+    {
+      "caseId": "s2b-compat-precedence-base",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "122965083bb6b1e71e9060655e1096d21c1e2fdec1641aaf59b7dd69f5f5cbee",
+      "old": {
+        "expectedStatus": "refused:base-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "base-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:base-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "base-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:305",
+        "DESIGN.md:306",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Base mismatch precedes business-major mismatch; source identity is never interpreted by a later row first."
+    },
+    {
+      "caseId": "s123-s1-patch-up-unknown",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "0567e77c6ef2e7d54e8a29510a8dd18f595e7842f232f7322d8338b36d7d255b",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:308",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The patch remedy requires known versions/digests and an available exact source. P1 and the source-unavailable row retain the refusal and preserve source state."
+    },
+    {
+      "caseId": "s123-s1-patch-up-unavailable",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "698cc63821430eace250e7c5fd03326c608501817d4b44977d00bd6bd5b0b962",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:308",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:315",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The patch remedy requires known versions/digests and an available exact source. P1 and the source-unavailable row retain the refusal and preserve source state."
+    },
+    {
+      "caseId": "s123-s1-patch-down-unknown",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "4732b6b20ee40fbc40ef9d47f0f738843aeecfec21dd66cd168b773c4aeb4f4b",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:309",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:316",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The patch remedy requires known versions/digests and an available exact source. P1 and the source-unavailable row retain the refusal and preserve source state."
+    },
+    {
+      "caseId": "s123-s1-patch-down-unavailable",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "5c1c0f4715fcc508d3879045ee26e26b63ad5a118b305a4fffbd3ef34561c94b",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:309",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:316",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The patch remedy requires known versions/digests and an available exact source. P1 and the source-unavailable row retain the refusal and preserve source state."
+    },
+    {
+      "caseId": "s123-s1-minor-up-unknown",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "fdbab196590054de11dc08e99431e5764240a637a58b00c32c830e6ff9d72fd7",
+      "old": {
+        "expectedStatus": "refused:profile-minor-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:310",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected."
+    },
+    {
+      "caseId": "s123-s1-minor-up-unavailable",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "86c2661f225a2933950eaf1e262deac0d0cb3c20557fd4bce23f45de0d9cf983",
+      "old": {
+        "expectedStatus": "refused:profile-minor-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:310",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:317",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected."
+    },
+    {
+      "caseId": "s123-s1-minor-down-unknown",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "d42f0e2d3f89c7790937b56966a1277537b1588e5551ca1cd1083ee16bf03909",
+      "old": {
+        "expectedStatus": "refused:profile-minor-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:311",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected."
+    },
+    {
+      "caseId": "s123-s1-minor-down-unavailable",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "b1bfb4c7551047b80476899f2525399d840ddc9d4e6b4fb3c579166278ab4579",
+      "old": {
+        "expectedStatus": "refused:profile-minor-downgrade-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-minor-downgrade-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:311",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:318",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P1 requires an available exact source for the minor-version remedy; unknown or unavailable source therefore refuses profile-source-unavailable before a migration can be selected."
+    },
+    {
+      "caseId": "s123-s1-digest-unknown",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "a23a23ff66b6ae0cf4b2d6994baf35539813779b85c1f35e15c0d2ae4b330288",
+      "old": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:307",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Both unequal digests are explicitly known for the same profile ID/version. P1 preserves this ordered identity-conflict diagnostic even when the package is unknown or unavailable."
+    },
+    {
+      "caseId": "s123-s1-digest-unavailable",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "311c0645fe6f019465a557404f7c20f531d891e5cb3f37f64e2fe0cf5d0750a6",
+      "old": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-digest-mismatch",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-digest-mismatch"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:307",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:314",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "Both unequal digests are explicitly known for the same profile ID/version. P1 preserves this ordered identity-conflict diagnostic even when the package is unknown or unavailable."
+    },
+    {
+      "caseId": "s123-s2-injected-schema-unknown",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "d876472b18ea1b40194cd64bbdc9aec86f6fbf5073bfc3e3fb9c5b951c87eaf9",
+      "old": {
+        "expectedStatus": "refused:profile-schema-version",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-schema-version",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The injected schema is unsupported. P1 preserves that ordered diagnostic regardless of source availability; P2 reserves profile-schema-version for this P-schema boundary."
+    },
+    {
+      "caseId": "s123-s2-injected-schema-unavailable",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "852e11948546259174723f7997501799724dcd16338476acf5afaf362c32ece8",
+      "old": {
+        "expectedStatus": "refused:profile-schema-version",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-schema-version",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-version"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:312",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:305",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "The injected schema is unsupported. P1 preserves that ordered diagnostic regardless of source availability; P2 reserves profile-schema-version for this P-schema boundary."
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-unknown",
+      "disputed": true,
+      "changed": false,
+      "inputSha256": "76100fa492ee842e558d171dc92cfc09cdcd94ce9d93a649d1638e8f1dd3941a",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P1 applies at the supported unequal-schema row: without an available exact source the refusal remains profile-source-unavailable. P2 changes its defining row, not its verdict."
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-unavailable",
+      "disputed": true,
+      "changed": false,
+      "inputSha256": "f9cc73cbe9c1eb67ed796f8414b2c93761944afe941f5001841900156e380a5f",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P1 applies at the supported unequal-schema row: without an available exact source the refusal remains profile-source-unavailable. P2 changes its defining row, not its verdict."
+    },
+    {
+      "caseId": "s123-s2-document-schema-unsupported-unknown",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "1323dbd64e1d776cdc2a4c03f0ab1d23c9afb681f125e183c6510b04e0421a21",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-schema-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:308",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P2 adds the ordered unsupported document-schema row. Unsupported D schema refuses document-schema-unsupported before source availability; unsupported P schema is a separate diagnostic."
+    },
+    {
+      "caseId": "s123-s2-document-schema-unsupported-unavailable",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "e5e90697cc52481691216aa3d3c9fddd600298b8f864cdcde0348560489fbd1a",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:document-schema-unsupported",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "document-schema-unsupported"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:315"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:308",
+        "DESIGN.md:319",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P2 adds the ordered unsupported document-schema row. Unsupported D schema refuses document-schema-unsupported before source availability; unsupported P schema is a separate diagnostic."
+    },
+    {
+      "caseId": "s123-s2-document-schema-supported-available",
+      "disputed": true,
+      "changed": true,
+      "inputSha256": "7898c44d5abbfc26e6e2bb20d04e53264deb9ad719dd2a3891fe931988c42daf",
+      "old": {
+        "expectedStatus": "refused",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-schema-migration-required",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-schema-migration-required"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:301",
+        "DESIGN.md:313",
+        "DESIGN.md:315",
+        "DESIGN.md:421"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:310",
+        "DESIGN.md:322",
+        "DESIGN.md:324"
+      ],
+      "reason": "P2 separates supported unequal schema identities from unsupported schemas. Both schemas and the exact source are available, so explicit schema migration is required; the former bare refusal is superseded."
+    },
+    {
+      "caseId": "s123-s2-envelope-invalid-available",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "0daf93efc69bcc5ff6828837465c48a99528fa8efd69b090a6f0c2ab98d737e6",
+      "old": {
+        "expectedStatus": "refused",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:315",
+        "DESIGN.md:421"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:320",
+        "DESIGN.md:322",
+        "DESIGN.md:324",
+        "DESIGN.md:430"
+      ],
+      "reason": "Identities and source availability agree but the envelope is invalid. R3.3 explicitly retains a bare refusal and assigns no new diagnostic to this residual case."
+    },
+    {
+      "caseId": "s123-s2-envelope-invalid-unavailable",
+      "disputed": false,
+      "changed": false,
+      "inputSha256": "a3d4ce2d153c8127f6cda603f84c6eade763333476287848b4d0ffb9b6740d9c",
+      "old": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "refused:profile-source-unavailable",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "refused",
+              "code": "profile-source-unavailable"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "acceptedUnderInjectedProfile": false,
+              "sourcePreserved": true,
+              "migrationExecuted": false
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:294",
+        "DESIGN.md:312",
+        "DESIGN.md:313",
+        "DESIGN.md:315",
+        "DESIGN.md:421"
+      ],
+      "provenance": [
+        "DESIGN.md:296",
+        "DESIGN.md:298",
+        "DESIGN.md:319",
+        "DESIGN.md:320",
+        "DESIGN.md:322",
+        "DESIGN.md:324",
+        "DESIGN.md:430"
+      ],
+      "reason": "The unavailable-source row matches before the final valid-envelope acceptance row; source state remains preserved and no migration executes."
+    }
+  ],
+  "additionalMatrixCitations": [
+    {
+      "caseId": "s2b-envelope-profile-change",
+      "old": {
+        "expectedStatus": "ok",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "ok"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "tree": {
+                "$type": "bpmn:Definitions",
+                "id": "Definitions_A",
+                "targetNamespace": "urn:neutral:1",
+                "exporterVersion": "fixture-2",
+                "rootElements": [
+                  {
+                    "$type": "bpmn:Process",
+                    "id": "Process_A",
+                    "name": "Source",
+                    "isExecutable": false,
+                    "flowElements": [
+                      {
+                        "$type": "bpmn:Task",
+                        "id": "Task_A",
+                        "name": "Task",
+                        "documentation": [
+                          {
+                            "$type": "bpmn:Documentation",
+                            "text": "Source\nbytes",
+                            "textFormat": "text/plain"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral/1",
+                "version": "1.1.1",
+                "sha256": "558742fcd32a2fc3c6d3f7290d3236c8486112655c3831ffff7fa552b873f8d1",
+                "base": {
+                  "id": "neutral-base/1",
+                  "version": "fixture-2",
+                  "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-descriptors/1",
+                    "version": "fixture-2",
+                    "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                  }
+                ]
+              },
+              "baseRevision": "851037164c3008d87d820ba45c9ee7ef81e234ae756faebaa20c2a6c74063c05",
+              "revision": "0e4424fd88cd70380d9c3ea0b45f0d2d72ed3646049002d49f1a041daba7803e",
+              "newHistoryEpoch": true
+            }
+          }
+        ]
+      },
+      "new": {
+        "expectedStatus": "ok",
+        "expectedArtifacts": [
+          {
+            "role": "verdict",
+            "json": {
+              "status": "ok"
+            }
+          },
+          {
+            "role": "output",
+            "json": {
+              "tree": {
+                "$type": "bpmn:Definitions",
+                "id": "Definitions_A",
+                "targetNamespace": "urn:neutral:1",
+                "exporterVersion": "fixture-2",
+                "rootElements": [
+                  {
+                    "$type": "bpmn:Process",
+                    "id": "Process_A",
+                    "name": "Source",
+                    "isExecutable": false,
+                    "flowElements": [
+                      {
+                        "$type": "bpmn:Task",
+                        "id": "Task_A",
+                        "name": "Task",
+                        "documentation": [
+                          {
+                            "$type": "bpmn:Documentation",
+                            "text": "Source\nbytes",
+                            "textFormat": "text/plain"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral/1",
+                "version": "1.1.1",
+                "sha256": "558742fcd32a2fc3c6d3f7290d3236c8486112655c3831ffff7fa552b873f8d1",
+                "base": {
+                  "id": "neutral-base/1",
+                  "version": "fixture-2",
+                  "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-descriptors/1",
+                    "version": "fixture-2",
+                    "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                  }
+                ]
+              },
+              "baseRevision": "851037164c3008d87d820ba45c9ee7ef81e234ae756faebaa20c2a6c74063c05",
+              "revision": "0e4424fd88cd70380d9c3ea0b45f0d2d72ed3646049002d49f1a041daba7803e",
+              "newHistoryEpoch": true
+            }
+          }
+        ]
+      },
+      "oldProvenance": [
+        "DESIGN.md:258",
+        "DESIGN.md:260",
+        "DESIGN.md:262",
+        "DESIGN.md:266",
+        "DESIGN.md:315",
+        "DESIGN.md:421",
+        "DESIGN.md:603",
+        "DESIGN.md:685"
+      ],
+      "provenance": [
+        "DESIGN.md:260",
+        "DESIGN.md:262",
+        "DESIGN.md:264",
+        "DESIGN.md:268",
+        "DESIGN.md:322",
+        "DESIGN.md:430",
+        "DESIGN.md:612",
+        "DESIGN.md:694"
+      ],
+      "reason": "The semantic revision includes the exact profile identity. R3.3 retains this identity/revision requirement; no compatibility operation or verdict is asserted by this envelope witness."
+    }
+  ]
+}

@@ -1,0 +1,2111 @@
+{
+  "format": "lot0-twin-proof/1",
+  "status": "pass",
+  "initialHead": "e5839c3",
+  "date": "2026-10-16",
+  "testPath": "tests/profile-twin-proof.test.mjs",
+  "manifestIdentity": {
+    "result": "pass",
+    "pinPath": "tests/fixtures/profile-parity-corpus.pin.json",
+    "manifestPath": "tests/fixtures/profile-parity-corpus/profile-parity-corpus/1/manifest.json",
+    "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf",
+    "manifestListedFiles": 176,
+    "manifestListedMatches": 176,
+    "vendoredFiles": 198,
+    "vendoredMatches": 198,
+    "disputes": []
+  },
+  "runtime": {
+    "result": "pass",
+    "matrixPath": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/r33-matrix-vectors.public.json",
+    "matrixSha256": "4c0d7f85c3c51b2213160022668996dbf975ff1b6100a80009fb9137488821c3",
+    "sourcePath": "src/profile/compatibility.ts",
+    "builtPath": "dist/profile/compatibility.js",
+    "count": 151,
+    "sections": {
+      "existing": 66,
+      "added": 85
+    },
+    "requestedExpectedCount": 45,
+    "countExplanation": "The full public file contains 151 cases (66 existing and 85 added). The revendor receipt records 45 cases overlapping the 486 sealed vectors. Every public case is executed here.",
+    "expectationMapping": {
+      "existing": "expectedR33",
+      "added": "expected"
+    },
+    "comparison": "Deep equality of the complete runtime decision: verdict status, optional code, and all output fields. Historical sealedR32 and recordedExpectations entries remain historical evidence.",
+    "matches": 151,
+    "disputes": [],
+    "cases": [
+      {
+        "caseId": "s2b-compat-exact",
+        "result": "match",
+        "verdict": {
+          "status": "ok"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": true,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-document-0",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-version-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-document-2",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-version-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-missing",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-metadata-missing"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false,
+          "genericReadOnlyPreviewAllowed": true
+        }
+      },
+      {
+        "caseId": "s2b-compat-xml-alone",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-metadata-missing"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false,
+          "genericReadOnlyPreviewAllowed": true
+        }
+      },
+      {
+        "caseId": "s2b-compat-conflict",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-metadata-conflict"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-schema",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-mechanism",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "mechanism-version-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-document-mechanism",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-mechanism-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-mechanism-migration",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "mechanism-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-capability",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-capability"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-asset",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-resource-missing"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-base",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "base-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-descriptor",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "descriptor-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-business-id",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-major-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-business-major",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-major-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-digest",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-digest-migration-no-waiver",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-patch-up",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-patch-down",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-downgrade-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-minor-up",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-minor-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-minor-down",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-minor-downgrade-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-source-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-precedence-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-version-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-precedence-capability",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-capability"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s2b-compat-precedence-base",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "base-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-patch-up-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-patch-up-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-patch-down-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-patch-down-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-minor-up-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-minor-up-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-minor-down-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-minor-down-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-digest-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s1-digest-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-injected-schema-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-injected-schema-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-document-schema-supported-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-document-schema-supported-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-document-schema-unsupported-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-schema-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-document-schema-unsupported-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-schema-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-document-schema-supported-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-envelope-invalid-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-s2-envelope-invalid-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "compatibility-test: should require validated migration results before accepting a different identity [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "compatibility-test: should require validated migration results before accepting a different identity [call 2]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "compatibility-test: should refuse invalid exact envelopes and schema identity disagreement [call 2]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.2.2 with known-and-available [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.2.2 with unknown [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.2.2 with unavailable [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.2.4 with known-and-available [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-downgrade-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.2.4 with unknown [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.2.4 with unavailable [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.1.9 with known-and-available [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-minor-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.1.9 with unknown [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.1.9 with unavailable [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.3.0 with known-and-available [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-minor-downgrade-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.3.0 with unknown [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should check source availability for 1.3.0 with unavailable [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should keep earlier identity conflicts ahead of unavailable source [call 2]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should refuse schema identity disagreement before unavailable source and migration [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should refuse schema identity disagreement before known-and-available source and migration [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "s123-regression: should refuse invalid exact envelopes without an invented parity code [call 1]",
+        "result": "match",
+        "verdict": {
+          "status": "refused"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "mechanism-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-base-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "base-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-base-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-base-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-base-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-base-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-base-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-descriptor-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "descriptor-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-descriptor-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-descriptor-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-descriptor-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-descriptor-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-descriptor-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-business-id-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-major-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-business-id-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-business-id-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-business-id-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-business-id-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-business-id-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-major-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-major-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-major-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-major-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-major-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-major-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-major-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-up-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-up-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-up-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-up-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-up-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-up-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-down-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-patch-downgrade-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-down-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-down-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-down-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-down-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-patch-down-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-up-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-minor-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-up-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-up-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-up-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-up-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-up-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-down-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-minor-downgrade-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-down-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-down-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-down-unknown-source-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-down-unknown-source-sha256",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-minor-down-selected-migration-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-D-schema-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-schema-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-P-schema-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-known-digest-conflict-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-equal-supported-schemas-known-and-available",
+        "result": "match",
+        "verdict": {
+          "status": "ok"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": true,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-D-schema-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-schema-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-P-schema-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-known-digest-conflict-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-equal-supported-schemas-unknown",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-D-schema-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-schema-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-P-schema-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-known-digest-conflict-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-digest-mismatch"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-equal-supported-schemas-unavailable",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-up",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-schema-before-capability",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-mechanism-before-schema",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "mechanism-migration-required"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-D-schema-before-mechanism-difference",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-schema-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-P-schema-before-D-schema",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-schema-version"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-document-version-before-schema",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-version-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-metadata-conflict-before-schema",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-metadata-conflict"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-unsupported-D-mechanism-before-D-schema",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "document-mechanism-unsupported"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-capability-before-source",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-capability"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-asset-before-source",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-resource-missing"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-invalid-exact-envelope",
+        "result": "match",
+        "verdict": {
+          "status": "refused"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-exact-unknown-digest",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      },
+      {
+        "caseId": "r33-exact-unknown-version",
+        "result": "match",
+        "verdict": {
+          "status": "refused",
+          "code": "profile-source-unavailable"
+        },
+        "outcome": {
+          "acceptedUnderInjectedProfile": false,
+          "sourcePreserved": true,
+          "migrationExecuted": false
+        }
+      }
+    ]
+  },
+  "sealedConsistency": {
+    "result": "pass",
+    "receiptPath": "docs/design/receipts/lot0-corpus-v1-revendor.json",
+    "receiptSha256": "45d05c4b6ccefd6b521341b20048aaf1fa7cb2f579afbcefd097a1be5e4b9fef",
+    "count": 486,
+    "publicMatrixOverlap": 45,
+    "disputes": [],
+    "expectationFile": {
+      "path": "tests/fixtures/profile-lot0/expectations.json",
+      "bytes": 1802403,
+      "sha256": "b6ee671974e399fefeb1ff105978969ef95db9dc75ca5f6c8f361dcb1f278d2d"
+    },
+    "expectationSeal": {
+      "path": "tests/fixtures/profile-lot0/expectations.seal.json",
+      "bytes": 465,
+      "sha256": "0fdb6c8524ae9b93e3fe30fe9532f80b3a0117b2db91c9389fe7885c4e3762c9"
+    }
+  },
+  "pythonReference": {
+    "manifestSha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf",
+    "contractsPath": "contracts/",
+    "contractsTree": "0c6bf891f147079e175a46d0d34f42ff308d235c",
+    "commit": "cb46b3b8f893996a83c056f31f8aa92aa2364bd3",
+    "tagName": "profile-corpus-v1.0.0",
+    "tagStatus": "final",
+    "tagAccepted": true,
+    "tagObject": "dfb8a986933dd86ad176022df13efecb6c73b325",
+    "provenance": "Canonical tree identity supplied by the conductor; local tests verify vendored bytes and canvas runtime decisions."
+  },
+  "validation": {
+    "red": {
+      "command": "rtk node --test tests/profile-twin-proof.test.mjs",
+      "exitCode": 1,
+      "tests": 154,
+      "pass": 153,
+      "fail": 1,
+      "reason": "The receipt did not exist. Every runtime comparison and vendored hash assertion passed.",
+      "runtimeDisputes": []
+    },
+    "newTests": {
+      "command": "rtk node --test tests/profile-twin-proof.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.61,
+      "processGroupTerminated": true,
+      "tests": 154,
+      "suites": 0,
+      "pass": 154,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "profiles": {
+      "command": "rtk node --test --test-skip-pattern=^should detect every changed expectation byte including IDs, pointers and reports$ tests/profile-boundary-schema.test.mjs tests/profile-brand-guard.test.mjs tests/profile-canonical.test.mjs tests/profile-compatibility.test.mjs tests/profile-corpus-revendor.test.mjs tests/profile-corpus-s123.test.mjs tests/profile-corpus-step2b.test.mjs tests/profile-corpus-step4.test.mjs tests/profile-corpus.test.mjs tests/profile-envelope.test.mjs tests/profile-golden-independence.test.mjs tests/profile-identity.test.mjs tests/profile-lint-contract.test.mjs tests/profile-r32-expectations.test.mjs tests/profile-r33-seal.test.mjs tests/profile-r33.test.mjs tests/profile-render-contract.test.mjs tests/profile-report.test.mjs tests/profile-result.test.mjs tests/profile-s123-receipt.test.mjs tests/profile-s123-regressions.test.mjs tests/profile-s4-fix.test.mjs tests/profile-s4-scope.test.mjs tests/profile-schema.test.mjs tests/profile-snapshot.test.mjs tests/profile-static.test.mjs tests/profile-twin-proof.test.mjs tests/lot0-squash-readiness.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.7,
+      "processGroupTerminated": true,
+      "tests": 1182,
+      "suites": 0,
+      "pass": 1182,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": [],
+      "excludedTests": [
+        "should detect every changed expectation byte including IDs, pointers and reports"
+      ],
+      "scope": "All profile-*.test.mjs files and lot0-squash-readiness.test.mjs; excludes the existing exhaustive single-byte mutation campaign."
+    },
+    "guards": {
+      "command": "rtk node --test tests/brand-guard.test.mjs tests/brand-baseline.test.mjs tests/profile-brand-guard.test.mjs tests/path-guard.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 28.8,
+      "processGroupTerminated": true,
+      "tests": 41,
+      "suites": 0,
+      "pass": 41,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "failedTests": []
+    },
+    "typecheck": {
+      "command": "rtk npm run typecheck",
+      "exitCode": 0
+    },
+    "build": {
+      "command": "rtk npx tsc -p tsconfig.build.json",
+      "exitCode": 0
+    },
+    "guardInventory": {
+      "newBrandHits": 0,
+      "newAbsolutePathHits": 0
+    },
+    "processCleanup": {
+      "remainingNodeTestProcesses": 0,
+      "allStartedTestProcessesExited": true,
+      "guardedTestProcessGroupsTerminated": true
+    }
+  },
+  "limits": [
+    "The corpus tag remains pending; this receipt does not accept or publish it.",
+    "Runtime parity is established for every public matrix case, while the 486-vector consistency summary references the existing revendor receipt and verifies its unchanged seal bytes.",
+    "No vendored file, sealed file, runtime source, or historical receipt is changed."
+  ]
+}

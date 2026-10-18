@@ -1,0 +1,574 @@
+{
+  "format": "lot0-release-immutability/1",
+  "completedAt": "2026-10-16T08:46:14.803700+00:00",
+  "status": "completed-with-sandbox-browser-failures",
+  "branch": "workbench/functions-20261004-profile-lot0",
+  "initialHead": "7c84c8c",
+  "supersedes": {
+    "path": "docs/design/receipts/lot0-squash-block-fix.json",
+    "section": "changes.release.consumption",
+    "reason": "Checkout-local consumption cannot enforce single use across fresh CI checkouts."
+  },
+  "changes": {
+    "release": {
+      "script": "scripts/check-brand-release.mjs",
+      "tests": "tests/brand-release-gate.test.mjs",
+      "binding": [
+        "exact package version",
+        "npm pack tarball SHA-256",
+        "committed owner decision reference",
+        "owner",
+        "GO",
+        "current UTC date",
+        "baseline SHA-256"
+      ],
+      "singleUse": "npm version immutability; an already published version refuses approval in every checkout. No consumption state is persisted in Git or CI.",
+      "retry": "The same approved version and tarball may retry while unpublished and while the owner decision continues to satisfy all checks.",
+      "registryQuery": "npm view <pkg>@<version> version --json --fetch-retries=0 --fetch-timeout=15000",
+      "registryTimeoutMs": 20000,
+      "registryAbsence": "Only npm exit status 1 with structured E404 output establishes that the version is unpublished.",
+      "typedRefusals": {
+        "VERSION_ALREADY_PUBLISHED": "The queried version is published.",
+        "REGISTRY_UNAVAILABLE": "Registry unreachable, authentication failed, timeout, command failure or invalid/ambiguous output.",
+        "INVALID_OVERRIDE": "Override or artifact validation failed."
+      },
+      "injection": "checkRelease accepts queryRegistry. Integration tests inject a fixture npm executable through PATH; registry queries are simulated, while prepublishOnly and npm pack remain real.",
+      "ledger": "Ledger creation and consumption tests removed. No existing release-override-uses directory was present in this checkout."
+    },
+    "documentation": "docs/release.md",
+    "squashMessage": {
+      "path": ".h2a/squash-prep/MESSAGE.txt",
+      "ignored": true,
+      "change": "Replaced reuse wording with registry immutability, unpublished-artifact retry and registry refusal behavior."
+    }
+  },
+  "red": {
+    "command": [
+      "node",
+      "--test",
+      "tests/brand-release-gate.test.mjs"
+    ],
+    "returnCode": 1,
+    "elapsedSeconds": 18.0,
+    "log": {
+      "path": ".h2a/squash-prep/validation/lot0-release-immutability-red.log",
+      "sha256": "5016f88889c066f200831d6db3d457a8f24c3fe9d8129c20397ce84bc1666faf"
+    },
+    "cleanup": [],
+    "remainingProcesses": 0,
+    "tests": 18,
+    "pass": 13,
+    "fail": 5,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 16504.918576,
+    "failures": [
+      {
+        "name": "should accept a retry of the same unpublished artifact",
+        "path": "tests/brand-release-gate.test.mjs:121:1"
+      },
+      {
+        "name": "should refuse an already published version in a fresh checkout",
+        "path": "tests/brand-release-gate.test.mjs:128:1"
+      },
+      {
+        "name": "should refuse the same artifact once the registry reports it published",
+        "path": "tests/brand-release-gate.test.mjs:136:1"
+      },
+      {
+        "name": "should refuse with a typed message when the registry is unreachable",
+        "path": "tests/brand-release-gate.test.mjs:145:1"
+      },
+      {
+        "name": "should refuse registry authentication failures and ambiguous responses",
+        "path": "tests/brand-release-gate.test.mjs:154:1"
+      }
+    ]
+  },
+  "redInterpretation": "Five regressions reproduced before implementation: same-artifact retry refused; already published version accepted in a fresh checkout; publication transition lacked a typed refusal; unreachable registry accepted; authentication failure and ambiguous registry output accepted.",
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "returnCode": 0,
+      "elapsedSeconds": 4.0,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-release-immutability-typecheck.log",
+        "sha256": "75b00b0358d963d3426e2fd6affbf3e17c73e9ef8689826d4c051e18c05e604d"
+      },
+      "cleanup": [],
+      "remainingProcesses": 0,
+      "failures": []
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/brand-release-gate.test.mjs"
+      ],
+      "returnCode": 0,
+      "elapsedSeconds": 20.0,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-release-immutability-green.log",
+        "sha256": "464213272be31409fb35b8fb61dba2eb783a4aea236a693e74afb79f279c133b"
+      },
+      "cleanup": [],
+      "remainingProcesses": 0,
+      "tests": 18,
+      "pass": 18,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 18937.79054,
+      "failures": []
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/brand-baseline.test.mjs",
+        "tests/brand-guard.test.mjs",
+        "tests/brand-legacy-gates.test.mjs",
+        "tests/brand-release-gate.test.mjs",
+        "tests/path-guard.test.mjs",
+        "tests/lot0-squash-readiness.test.mjs",
+        "tests/profile-boundary-schema.test.mjs",
+        "tests/profile-brand-guard.test.mjs",
+        "tests/profile-canonical.test.mjs",
+        "tests/profile-compatibility.test.mjs",
+        "tests/profile-corpus-s123.test.mjs",
+        "tests/profile-corpus-step2b.test.mjs",
+        "tests/profile-corpus-step4.test.mjs",
+        "tests/profile-corpus.test.mjs",
+        "tests/profile-envelope.test.mjs",
+        "tests/profile-golden-independence.test.mjs",
+        "tests/profile-identity.test.mjs",
+        "tests/profile-lint-contract.test.mjs",
+        "tests/profile-r32-expectations.test.mjs",
+        "tests/profile-r33-seal.test.mjs",
+        "tests/profile-r33.test.mjs",
+        "tests/profile-render-contract.test.mjs",
+        "tests/profile-report.test.mjs",
+        "tests/profile-result.test.mjs",
+        "tests/profile-s123-receipt.test.mjs",
+        "tests/profile-s123-regressions.test.mjs",
+        "tests/profile-s4-fix.test.mjs",
+        "tests/profile-s4-scope.test.mjs",
+        "tests/profile-schema.test.mjs",
+        "tests/profile-snapshot.test.mjs",
+        "tests/profile-static.test.mjs"
+      ],
+      "returnCode": 0,
+      "elapsedSeconds": 940.16,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-release-immutability-focused.log",
+        "sha256": "4ecf2b7fee5c508557f78e4667ef42c502dd7b0510869105d8a5569adecb77ba"
+      },
+      "cleanup": [],
+      "remainingProcesses": 0,
+      "tests": 1066,
+      "pass": 1066,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 939043.354781,
+      "failures": []
+    },
+    {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "returnCode": 1,
+      "elapsedSeconds": 1032.55,
+      "log": {
+        "path": ".h2a/squash-prep/validation/lot0-release-immutability-full-rerun.log",
+        "sha256": "9b7434d718ea238d6a0f8cfc5519e27e20259761df3bff5042d417b66417e56f"
+      },
+      "cleanup": [],
+      "remainingProcesses": 0,
+      "tests": 2023,
+      "pass": 1997,
+      "fail": 26,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 1027016.306838,
+      "failures": [
+        {
+          "name": "adapter inside a real assistant-ui 0.15.22 runtime",
+          "path": "tests/aui.browser.test.mjs:10:1"
+        },
+        {
+          "name": "browser build from a CDN path: ESM and IIFE, with and without strict CSP",
+          "path": "tests/browser-dist.browser.test.mjs:22:1"
+        },
+        {
+          "name": "colored profile in a real browser",
+          "path": "tests/colored.browser.test.mjs:36:1"
+        },
+        {
+          "name": "core in a real browser",
+          "path": "tests/core.browser.test.mjs:24:1"
+        },
+        {
+          "name": "the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas",
+          "path": "tests/demo.browser.test.mjs:24:1"
+        },
+        {
+          "name": "active diagram across a new document version; undo and redo across a profile switch",
+          "path": "tests/history.browser.test.mjs:9:1"
+        },
+        {
+          "name": "shipped browser IIFE: C1\u2013C7 parity and second-review refusals",
+          "path": "tests/io-review-2.browser.test.mjs:7:1"
+        },
+        {
+          "name": "shipped browser IIFE: third-review refusals and resolved namespaces",
+          "path": "tests/io-review-3.browser.test.mjs:8:1"
+        },
+        {
+          "name": "shipped browser IIFE: fourth-review supported placements and endpoint identity",
+          "path": "tests/io-review-4.browser.test.mjs:8:1"
+        },
+        {
+          "name": "io codecs in a real browser",
+          "path": "tests/io.browser.test.mjs:28:1"
+        },
+        {
+          "name": "boundary events follow their host in autoLayout, in one command",
+          "path": "tests/layout-boundary.browser.test.mjs:10:1"
+        },
+        {
+          "name": "(kept) the canvas applies the corpus geometry to the DI",
+          "path": "tests/layout-corpus.browser.test.mjs:11:1"
+        },
+        {
+          "name": "layoutOnLoad: a server document is laid out as part of its load",
+          "path": "tests/layout-on-load.browser.test.mjs:9:1"
+        },
+        {
+          "name": "legend profile in a real browser",
+          "path": "tests/legend.browser.test.mjs:11:1"
+        },
+        {
+          "name": "legend profile parity in a real browser",
+          "path": "tests/legend2.browser.test.mjs:14:1"
+        },
+        {
+          "name": "legend tokens, data IO lifecycle and hit outlines in a real browser",
+          "path": "tests/legend3.browser.test.mjs:8:1"
+        },
+        {
+          "name": "palette layout and token-driven icons in a real browser",
+          "path": "tests/palette.browser.test.mjs:16:1"
+        },
+        {
+          "name": "react and assistant-ui adapters in a real browser",
+          "path": "tests/react.browser.test.mjs:15:1"
+        },
+        {
+          "name": "rendering in both looks",
+          "path": "tests/render-looks.browser.test.mjs:29:1"
+        },
+        {
+          "name": "workshop primitives (menu, tabs) in a real browser",
+          "path": "tests/ui.browser.test.mjs:11:1"
+        },
+        {
+          "name": "0.2 canvas API in a real browser",
+          "path": "tests/v02.browser.test.mjs:17:1"
+        },
+        {
+          "name": "bpmn.io logo: visible by default, hidden only with a named license",
+          "path": "tests/watermark.browser.test.mjs:8:1"
+        },
+        {
+          "name": "workshop: atomic exports",
+          "path": "tests/workshop-export.browser.test.mjs:9:1"
+        },
+        {
+          "name": "workshop: current model local exports",
+          "path": "tests/workshop-served.browser.test.mjs:7:1"
+        },
+        {
+          "name": "workshop structure with the step-0 contract options",
+          "path": "tests/workshop-structure.browser.test.mjs:12:1"
+        },
+        {
+          "name": "workshop in a real browser",
+          "path": "tests/workshop.browser.test.mjs:20:1"
+        }
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "path": "tests/aui.browser.test.mjs:10:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/browser-dist.browser.test.mjs:22:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/colored.browser.test.mjs:36:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/core.browser.test.mjs:24:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/demo.browser.test.mjs:24:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/history.browser.test.mjs:9:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/io-review-2.browser.test.mjs:7:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/io-review-3.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/io-review-4.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/io.browser.test.mjs:28:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/layout-boundary.browser.test.mjs:10:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/layout-corpus.browser.test.mjs:11:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/layout-on-load.browser.test.mjs:9:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/legend.browser.test.mjs:11:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/legend2.browser.test.mjs:14:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/legend3.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/palette.browser.test.mjs:16:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/react.browser.test.mjs:15:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/render-looks.browser.test.mjs:29:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/ui.browser.test.mjs:11:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/v02.browser.test.mjs:17:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/watermark.browser.test.mjs:8:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/workshop-export.browser.test.mjs:9:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/workshop-served.browser.test.mjs:7:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/workshop-structure.browser.test.mjs:12:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    },
+    {
+      "path": "tests/workshop.browser.test.mjs:20:1",
+      "category": "sandbox-chromium-launch",
+      "signature": "browserType.launchPersistentContext: Target page, context or browser has been closed"
+    }
+  ],
+  "failureSummary": {
+    "sandboxChromiumLaunch": 26,
+    "other": 0
+  },
+  "initialFullAttempt": {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "returnCode": 1,
+    "elapsedSeconds": 62.0,
+    "log": {
+      "path": ".h2a/squash-prep/validation/lot0-release-immutability-full.log",
+      "sha256": "bba93cdc173adcc9f7c261cc383d346bbe0299207176e5bfb193d5e95861ea33"
+    },
+    "cleanup": [
+      {
+        "pid": 130,
+        "path": "tests/aui.browser.test.mjs",
+        "signal": "SIGTERM",
+        "reason": "Worker retained handles after recorded sandbox Chromium failure."
+      }
+    ],
+    "remainingProcesses": 0,
+    "failures": [
+      {
+        "name": "adapter inside a real assistant-ui 0.15.22 runtime",
+        "path": "tests/aui.browser.test.mjs:10:1"
+      }
+    ],
+    "status": "interrupted-by-supervisor-error",
+    "explanation": "The supervisor matched the parent test runner as a browser worker and terminated it. Runner exclusion was corrected; npm test was rerun in full. This interrupted run is not completion evidence."
+  },
+  "processCleanup": {
+    "supervisedRuns": [
+      "red",
+      "green",
+      "typecheck",
+      "focused",
+      "full",
+      "full-rerun",
+      "post-receipt"
+    ],
+    "manualWorkerCleanup": [
+      {
+        "pid": 3825945,
+        "path": "tests/browser-dist.browser.test.mjs",
+        "signal": "SIGTERM",
+        "reason": "Idle worker retained HTTP server handles after the sandbox Chromium launch attempt; no child browser remained."
+      },
+      {
+        "pid": 3825959,
+        "path": "tests/demo.browser.test.mjs",
+        "signal": "SIGTERM",
+        "reason": "Idle worker retained HTTP server handles after the sandbox Chromium launch attempt; no child browser remained."
+      }
+    ],
+    "remainingProcesses": 0,
+    "scope": "All test processes started by this task completed or were terminated. Browser configuration and assertions were unchanged.",
+    "finalAudit": {
+      "knownWorkerPidsChecked": [
+        3806609,
+        3827602,
+        3825945,
+        3825959
+      ],
+      "remaining": [],
+      "remainingProcesses": 0
+    }
+  },
+  "review": {
+    "status": "selection-failed",
+    "dossier": ".h2a/reviews/lot0-release-immutability.md",
+    "reason": "No live peer sessions and no configured live model catalog endpoint; two complementary review legs could not be resolved. No consensus review claimed."
+  },
+  "artifacts": [
+    {
+      "path": "scripts/check-brand-release.mjs",
+      "bytes": 4892,
+      "sha256": "5638a08c97b6de96aaf027343ba9ac0dc58c7df765abe97c120e86defa306d55"
+    },
+    {
+      "path": "tests/brand-release-gate.test.mjs",
+      "bytes": 9021,
+      "sha256": "f4c75f798eda03ffe2d0218a2882a7d370009f9785369becf3afc750a1d31ea0"
+    },
+    {
+      "path": "docs/release.md",
+      "bytes": 2897,
+      "sha256": "13f7871e00ce952261a644d4c171ef17b77ac3906afddac74325fb7571354950"
+    },
+    {
+      "path": ".h2a/squash-prep/MESSAGE.txt",
+      "bytes": 1780,
+      "sha256": "6018b372ccc5b3c718950868177829ab4d7986835848485d5b8a231efb6832e8"
+    }
+  ],
+  "preservation": {
+    "published": false,
+    "pushed": false,
+    "historyRewritten": false,
+    "attributionTrailersAdded": false,
+    "excludedPathsTouched": false,
+    "excludedPaths": [
+      "tmp/",
+      "docs/design/0.3.1-layout-on-load.md"
+    ],
+    "stagePolicy": "Explicit paths only."
+  },
+  "postReceiptVerification": {
+    "command": [
+      "node",
+      "--test",
+      "tests/path-guard.test.mjs",
+      "tests/brand-baseline.test.mjs",
+      "tests/brand-guard.test.mjs",
+      "tests/lot0-squash-readiness.test.mjs",
+      "tests/profile-s123-receipt.test.mjs"
+    ],
+    "returnCode": 0,
+    "elapsedSeconds": 2.0,
+    "log": {
+      "path": ".h2a/squash-prep/validation/lot0-release-immutability-post-receipt.log",
+      "sha256": "b92f1f3d31c0b7d9c9dc67d4bbf44b5ab8438ec4bc44ad8be4ace899ebbf9a31"
+    },
+    "cleanup": [],
+    "remainingProcesses": 0,
+    "tests": 22,
+    "pass": 22,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 1636.862879,
+    "failures": []
+  }
+}

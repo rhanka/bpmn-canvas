@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:sem="https://sentropic.com/schema/bpmn/semantics/1" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-builder">
+  <bpmn:collaboration id="Q_A_review_fast_track__collab">
+    <bpmn:participant id="Q_A_review_fast_track__pool" name="Q&#38;A &#60;review&#62; &#34;fast&#34; &#39;track&#39;" processRef="Q_A_review_fast_track" />
+  </bpmn:collaboration>
+  <bpmn:process id="Q_A_review_fast_track" name="Q&#38;A &#60;review&#62; &#34;fast&#34; &#39;track&#39;" isExecutable="false">
+    <bpmn:laneSet id="Q_A_review_fast_track__lanes">
+      <bpmn:lane id="R_D" name="R&#38;D">
+        <bpmn:flowNodeRef>D_but</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Cost_10_20</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Fin</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="D_but" name="Début">
+      <bpmn:extensionElements>
+        <sem:info order="0" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_D_but_Cost_10_20</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Cost_10_20" name="Cost &#62; 10 € &#38; &#60; 20 $">
+      <bpmn:extensionElements>
+        <sem:info order="1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_D_but_Cost_10_20</bpmn:incoming>
+      <bpmn:outgoing>Flow_Cost_10_20__Fin</bpmn:outgoing>
+      <bpmn:property id="In_Note_v2__Cost_10_20_target" />
+      <bpmn:dataInputAssociation id="In_Note_v2__Cost_10_20">
+        <bpmn:extensionElements>
+          <sem:info order="1002" />
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>Note_v2</bpmn:sourceRef>
+        <bpmn:targetRef>In_Note_v2__Cost_10_20_target</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
+    <bpmn:dataObject id="Note_v2__obj" />
+    <bpmn:dataObjectReference id="Note_v2" name="Note &#39;v2&#39;" dataObjectRef="Note_v2__obj">
+      <bpmn:extensionElements>
+        <sem:info order="2" laneRef="R_D" direction="in" primaryAssociationRef="In_Note_v2__Cost_10_20" />
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:endEvent id="Fin" name="Fin">
+      <bpmn:extensionElements>
+        <sem:info order="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Cost_10_20__Fin</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_D_but_Cost_10_20" sourceRef="D_but" targetRef="Cost_10_20">
+      <bpmn:extensionElements>
+        <sem:info order="1000" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Cost_10_20__Fin" sourceRef="Cost_10_20" targetRef="Fin">
+      <bpmn:extensionElements>
+        <sem:info order="1001" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="App_Cost_10_20">
+      <bpmn:text>[App] Tool "A" &amp; B</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="AppLink_Cost_10_20" sourceRef="App_Cost_10_20" targetRef="Cost_10_20">
+      <bpmn:extensionElements>
+        <sem:info order="1005" />
+      </bpmn:extensionElements>
+    </bpmn:association>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Q_A_review_fast_track__diagram" name="Q&#38;A &#60;review&#62; &#34;fast&#34; &#39;track&#39;">
+    <bpmndi:BPMNPlane id="Q_A_review_fast_track__plane" bpmnElement="Q_A_review_fast_track__collab">
+      <bpmndi:BPMNShape id="Q_A_review_fast_track__pool_di" bpmnElement="Q_A_review_fast_track__pool" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="580" height="234" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="R_D_di" bpmnElement="R_D" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="550" height="234" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="D_but_di" bpmnElement="D_but">
+        <dc:Bounds x="100" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="108" y="95" width="34" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Cost_10_20_di" bpmnElement="Cost_10_20">
+        <dc:Bounds x="264.0625" y="26.1875" width="127.5" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Note_v2_di" bpmnElement="Note_v2">
+        <dc:Bounds x="223.3125" y="140" width="40" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="220" y="194" width="47" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Fin_di" bpmnElement="Fin">
+        <dc:Bounds x="460" y="41" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475" y="95" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_D_but_Cost_10_20_di" bpmnElement="Flow_D_but_Cost_10_20">
+        <di:waypoint x="150" y="66" />
+        <di:waypoint x="264" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Cost_10_20__Fin_di" bpmnElement="Flow_Cost_10_20__Fin">
+        <di:waypoint x="391" y="66" />
+        <di:waypoint x="460" y="66" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="In_Note_v2__Cost_10_20_di" bpmnElement="In_Note_v2__Cost_10_20">
+        <di:waypoint x="243" y="140" />
+        <di:waypoint x="243" y="133" />
+        <di:waypoint x="281" y="133" />
+        <di:waypoint x="281" y="126" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="App_Cost_10_20_di" bpmnElement="App_Cost_10_20">
+        <dc:Bounds x="275" y="96" width="104" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="AppLink_Cost_10_20_di" bpmnElement="AppLink_Cost_10_20">
+        <di:waypoint x="327" y="96" />
+        <di:waypoint x="327" y="100" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

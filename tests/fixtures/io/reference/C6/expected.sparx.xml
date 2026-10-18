@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://bpmn.io/schema/bpmn" exporter="test-exporter" exporterVersion="9.9">
+    <bpmn:process id="Q_A_review_fast_track" name="Q&amp;A &lt;review&gt; &quot;fast&quot; 'track'" isExecutable="false">
+        <bpmn:laneSet id="LaneSet_Q_A_review_fast_track">
+            <bpmn:lane id="R_D" name="R&amp;D">
+                <bpmn:flowNodeRef>D_but</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Cost_10_20</bpmn:flowNodeRef>
+                <bpmn:flowNodeRef>Fin</bpmn:flowNodeRef>
+            </bpmn:lane>
+        </bpmn:laneSet>
+        <bpmn:startEvent id="D_but" name="Début"/>
+        <bpmn:task id="Cost_10_20" name="Cost &gt; 10 € &amp; &lt; 20 $"/>
+        <bpmn:dataObjectReference id="Note_v2" name="Note 'v2'"/>
+        <bpmn:endEvent id="Fin" name="Fin"/>
+        <bpmn:textAnnotation id="App_Cost_10_20">
+            <bpmn:text>[App] Tool &quot;A&quot; &amp; B</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:sequenceFlow id="D_but_Cost_10_20" name="" sourceRef="D_but" targetRef="Cost_10_20"/>
+        <bpmn:sequenceFlow id="Cost_10_20_Fin" name="" sourceRef="Cost_10_20" targetRef="Fin"/>
+        <bpmn:association id="Note_v2_Cost_10_20" sourceRef="Note_v2" targetRef="Cost_10_20"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_Q_A_review_fast_track" name="Q&amp;A &lt;review&gt; &quot;fast&quot; 'track' - Diagram">
+        <bpmndi:BPMNPlane id="BPMNPlane_Q_A_review_fast_track" bpmnElement="Q_A_review_fast_track">
+            <bpmndi:BPMNShape id="R_D_gui" bpmnElement="R_D" isHorizontal="true">
+                <dc:Bounds x="30" y="0" width="550" height="234"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="D_but_gui" bpmnElement="D_but">
+                <dc:Bounds x="100" y="41" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Cost_10_20_gui" bpmnElement="Cost_10_20">
+                <dc:Bounds x="264.0625" y="26.1875" width="127.5" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Note_v2_gui" bpmnElement="Note_v2">
+                <dc:Bounds x="223.3125" y="140" width="40" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Fin_gui" bpmnElement="Fin">
+                <dc:Bounds x="460" y="41" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="App_Cost_10_20_gui" bpmnElement="App_Cost_10_20">
+                <dc:Bounds x="275" y="96" width="104" height="30"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="D_but_Cost_10_20_gui" bpmnElement="D_but_Cost_10_20">
+                <di:waypoint x="150.0" y="66.0"/>
+                <di:waypoint x="264.0625" y="66.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Cost_10_20_Fin_gui" bpmnElement="Cost_10_20_Fin">
+                <di:waypoint x="391.0" y="66.0"/>
+                <di:waypoint x="460.0" y="66.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Note_v2_Cost_10_20_gui" bpmnElement="Note_v2_Cost_10_20">
+                <di:waypoint x="243.0" y="140.0"/>
+                <di:waypoint x="243.0" y="133.0"/>
+                <di:waypoint x="281.0" y="133.0"/>
+                <di:waypoint x="281.0" y="106.1875"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>
