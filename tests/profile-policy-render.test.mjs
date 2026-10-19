@@ -23,7 +23,7 @@ const input = (c, role) => {
 for (const entry of load("manifest.json").cases) {
   const c = load(entry.path);
   if (!["x24.render.badges", "x24.classify.kind"].includes(c.operation)) continue;
-  if (c.operation === "x24.classify.kind" && input(c, "renderer") !== "annotated") continue;
+  if (c.operation === "x24.classify.kind" && input(c, "family") !== "annotated") continue;
   test(`${c.caseId} sealed drawing policy`, () => {
     for (const suffix of c.inputArtifacts.some(a => a.role === "policy-a") ? ["a", "b"] : [""]) {
       const policy = input(c, suffix ? `policy-${suffix}` : "policy");
