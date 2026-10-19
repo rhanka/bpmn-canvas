@@ -1,20 +1,19 @@
 import type { LegendTokens, ProfileDefinition } from "../../internal/contracts.js";
-import { LEGEND_ACTION_IDS, LegendPaletteModule } from "./palette.js";
-import { LegendFollowModule, LegendRendererModule } from "./renderer.js";
-import { DEFAULT_LEGEND_TOKENS, resolveLegendTokens } from "./tokens.js";
+import type { BusinessPolicy } from "../../internal/business-policy.js";
+import { ProfileContractError } from "../../profile/canonical.js";
+import { resolveLegendTokens } from "./tokens.js";
+import { LegendRendererModule, LegendFollowModule } from "./renderer.js";
+import { LegendPaletteModule } from "./palette.js";
+export function legendProfile(tokens?: Partial<LegendTokens>, businessPolicy?: BusinessPolicy): ProfileDefinition {
+  const look = businessPolicy?.presentation?.looks?.find((look: any) => look.renderer === "annotated");
+  if (!businessPolicy || !look) throw new ProfileContractError("profile-resource-missing");
 
-export { DEFAULT_LEGEND_TOKENS, LEGEND_ACTION_IDS, resolveLegendTokens };
-export type { LegendTokens };
-
-/**
- * The opt-in `legend` profile. Draw only what it draws faithfully, leave the
- * rest to upstream bpmn-js. Core injects `tokens` as `config.bpmnCanvas.legend`.
- */
-export function legendProfile(tokens?: Partial<LegendTokens>): ProfileDefinition {
   return {
-    id: "legend",
+    id: look.alias,
+    businessPolicy,
+    renderer: look.renderer,
     modelerModules: [LegendRendererModule, LegendFollowModule, LegendPaletteModule],
     viewerModules: [LegendRendererModule],
-    tokens: resolveLegendTokens(tokens),
+    tokens: resolveLegendTokens(tokens, look.tokens),
   };
 }

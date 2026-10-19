@@ -1,3 +1,5 @@
+import type { BusinessPolicy } from "../../internal/business-policy.js";
+import { badgeSize, badgeBoxes, documentRect } from "../../internal/legacy-policy.js";
 // Pure helpers of the `legend` profile: which elements it draws, colours and
 // the geometry shared with the swimlane layout. Adapted from an internal
 // implementation (render style + draw.io-reference geometry). No DOM, no bpmn-js.
@@ -57,7 +59,7 @@ const PLAIN_EVENTS = new Set([
  * events, transactions, ad-hoc and expanded sub-processes, groups and data
  * stores all fall in that case.
  */
-export function legendKind(bo: LegendBoLike, di: LegendDiFacts = {}): LegendShapeKind | undefined {
+export function legendKind(bo: LegendBoLike, di: LegendDiFacts = {}, policy?: BusinessPolicy): LegendShapeKind | undefined {
   switch (bo.$type) {
     case "bpmn:Task":
       return "task";
@@ -77,8 +79,8 @@ export function legendKind(bo: LegendBoLike, di: LegendDiFacts = {}): LegendShap
       return bo.dataState || bo.isCollection || bo.dataObjectRef?.isCollection ? undefined : "data";
     case "bpmn:TextAnnotation": {
       const text = typeof bo.text === "string" ? bo.text : "";
-      if (isDocumentAnnotation(text)) return "document";
-      if (isAppAnnotation(text)) return "application";
+      if (isDocumentAnnotation(text, policy)) return "document";
+      if (isAppAnnotation(text, policy)) return "application";
       return undefined;
     }
     case "bpmn:Participant":
@@ -138,15 +140,9 @@ export function contrastText(fill: string, dark: string, light: string): string 
  * centred under its task, top at task bottom - 10. Long names widen the box up
  * to the task width, then wrap and grow in height. Same rule as the layout.
  */
-export const APP_BOX = { minWidth: 80, height: 30, overlap: 10, gap: 4, font: 12, chrome: 31, margin: 10 } as const;
 
-export function appBoxSize(name: string, hostWidth: number): { width: number; height: number } {
-  const wanted = textWidth(name, APP_BOX.font, true) + APP_BOX.chrome;
-  const maxWidth = Math.max(APP_BOX.minWidth, hostWidth - 2 * APP_BOX.margin);
-  const width = Math.min(maxWidth, Math.max(APP_BOX.minWidth, Math.ceil(wanted)));
-  if (wanted <= width) return { width, height: APP_BOX.height };
-  const lines = wrapText(name, APP_BOX.font, width - APP_BOX.chrome, true).length;
-  return { width, height: Math.max(APP_BOX.height, Math.ceil(lines * APP_BOX.font * 1.2 + 8)) };
+export function appBoxSize(name: string, hostWidth: number, policy?: BusinessPolicy): { width: number; height: number } {
+  return badgeSize(name, hostWidth, policy);
 }
 
 export interface AppBox {
@@ -158,21 +154,11 @@ export interface AppBox {
 }
 
 /** Boxes (relative to the task) for the task's applications, side by side. */
-export function appBoxes(names: readonly string[], hostWidth: number, hostHeight: number): AppBox[] {
-  const sizes = names.map((n) => appBoxSize(n, hostWidth));
-  const total = sizes.reduce((a, b) => a + b.width, 0) + APP_BOX.gap * Math.max(0, names.length - 1);
-  let x = (hostWidth - total) / 2;
-  return names.map((name, i) => {
-    const size = sizes[i] as { width: number; height: number };
-    const box = { name, x, y: hostHeight - APP_BOX.overlap, width: size.width, height: size.height };
-    x += size.width + APP_BOX.gap;
-    return box;
-  });
+export function appBoxes(names: readonly string[], hostWidth: number, hostHeight: number, policy?: BusinessPolicy): AppBox[] {
+  return badgeBoxes(names, hostWidth, hostHeight, policy) as AppBox[];
 }
 
 /** Lane header column and pool strip widths. */
-export const LANE_HEADER = 40;
-export const POOL_STRIP = 30;
 
 /**
  * Document outline with a wavy bottom. Shared by the drawing and by the hit
@@ -185,16 +171,10 @@ export function documentPath(w: number, h: number): string {
 }
 
 /** Document geometry shared with the layout. */
-export const DOC = { band: 15, textTop: 20, waveTop: 0.74, padX: 6, padBottom: 4 } as const;
 
 /** Area the document name may use: under the band, above the wave crest. */
-export function documentTextRect(w: number, h: number): { x: number; y: number; width: number; height: number } {
-  return {
-    x: DOC.padX,
-    y: DOC.textTop,
-    width: w - 2 * DOC.padX,
-    height: Math.max(0, h * DOC.waveTop - DOC.textTop - DOC.padBottom),
-  };
+export function documentTextRect(w: number, h: number, policy?: BusinessPolicy): { x: number; y: number; width: number; height: number } {
+  return documentRect(w, h, policy) as { x: number; y: number; width: number; height: number };
 }
 
 export function waypointsPath(waypoints: ReadonlyArray<{ x: number; y: number }> = []): string {

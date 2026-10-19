@@ -1,10 +1,11 @@
+import type { BusinessPolicy } from "./internal/business-policy.js";
 /** Public types. Nothing here references bpmn-js, diagram-js or any DOM-only global at runtime. */
 
 import type { LegendTokens } from "./internal/contracts.js";
 
 export type { LegendTokens };
 /** `standard`: upstream bpmn-js. `legend`: the legend look. `colored`: upstream notation, drawn by upstream, recoloured by tokens. */
-export type ProfileId = "standard" | "legend" | "colored";
+export type ProfileId = string;
 
 export type PaletteColumns = 1 | 2 | "auto";
 
@@ -108,9 +109,9 @@ export interface SetXmlOptions {
 /** Look options of a profile. */
 export interface ProfileOptions {
   /** `legend`: the legend palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
-  readonly palette?: "legend" | "upstream";
+  readonly palette?: string;
   /** `colored` only. `classic`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes recoloured. */
-  readonly drawing?: "upstream" | "classic";
+  readonly drawing?: string;
 }
 
 /** One consistent capture of the canvas for an export (see `BpmnCanvasHandle.snapshot`). */
@@ -146,6 +147,9 @@ export interface WatermarkOptions {
 }
 
 export interface BpmnCanvasOptions {
+  readonly ioSetSelections?: Readonly<Record<string, string>>;
+  readonly tokens?: Partial<LegendTokens>;
+  readonly businessPolicy?: BusinessPolicy;
   readonly xml?: string;
   readonly revision?: string;
   readonly profile?: ProfileId;
@@ -245,6 +249,9 @@ export interface BpmnCanvasHandle {
 }
 
 export interface RenderOptions {
+  readonly tokens?: Partial<LegendTokens>;
+  readonly profileOptions?: ProfileOptions;
+  readonly businessPolicy?: BusinessPolicy;
   readonly profile?: ProfileId;
   readonly legendTokens?: Partial<LegendTokens>;
   readonly coloredTokens?: Partial<LegendTokens>;

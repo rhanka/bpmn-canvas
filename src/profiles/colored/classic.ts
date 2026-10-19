@@ -1,3 +1,7 @@
+import { roleLabel } from "../../internal/business-policy.js";
+import { ProfileContractError } from "../../profile/canonical.js";
+import type { BusinessPolicy } from "../../internal/business-policy.js";
+import { annotationKind, layoutPolicy } from "../../internal/legacy-policy.js";
 /**
  * `drawing: "classic"` of the `colored` profile: flat shapes in the profile's colours (rounded activities with a
  * 1.4 line, a thick end ring with an inner dot, a flat gateway with a bold marker, data pages, open-bracket
@@ -11,7 +15,7 @@ import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as 
 
 import type { BpmnCanvasConfig, LegendTokens } from "../../internal/contracts.js";
 import { appsOf } from "../legend/renderer.js";
-import { APP_BOX, contrastText } from "../legend/style.js";
+import { contrastText } from "../legend/style.js";
 import { resolveColoredTokens } from "./tokens.js";
 
 type Any = any; // diagram-js and bpmn-js services are untyped here, as in the other profiles.
@@ -21,10 +25,10 @@ const WHITE = "#ffffff";
 
 type Kind = "task" | "subprocess" | "external" | "event" | "gateway" | "input" | "output" | "data" | "document" | "application" | "lane" | "pool";
 
-function kindOf(element: Any): Kind | undefined {
+function kindOf(element: Any, policy?: BusinessPolicy): Kind | undefined {
   const bo = element?.businessObject;
   if (!bo || element.labelTarget || element.waypoints) return undefined;
-  if (is(element, "bpmn:TextAnnotation")) return /^\s*\[Reference\]/.test(typeof bo.text === "string" ? bo.text : "") ? "document" : "application";
+  if (is(element, "bpmn:TextAnnotation")) return annotationKind(typeof bo.text === "string" ? bo.text : "", "flat", policy) as Kind;
   if (is(element, "bpmn:Participant")) return "pool";
   if (is(element, "bpmn:Lane")) return "lane";
   if (is(element, "bpmn:StartEvent") || is(element, "bpmn:EndEvent") || is(element, "bpmn:IntermediateThrowEvent") || is(element, "bpmn:IntermediateCatchEvent")) return "event";
@@ -61,20 +65,22 @@ export class ClassicRenderer extends BaseRenderer {
   private readonly textRenderer: Any;
   private readonly tokens: LegendTokens;
 
+  private readonly businessPolicy: BusinessPolicy | undefined;
   constructor(eventBus: Any, textRenderer: Any, config: BpmnCanvasConfig | undefined) {
     super(eventBus, RENDER_PRIORITY);
+    this.businessPolicy = config?.businessPolicy;
     this.textRenderer = textRenderer;
-    this.tokens = config?.colored ?? resolveColoredTokens();
+    this.tokens = config?.lookTokens ?? (() => { throw new ProfileContractError("profile-resource-missing"); })();
   }
 
   override canRender(element: Any): boolean {
-    return kindOf(element) !== undefined;
+    return kindOf(element, this.businessPolicy) !== undefined;
   }
 
   override drawShape(parentGfx: Any, element: Any): SVGElement {
     const gfx = svgCreate("g");
     svgAppend(parentGfx, gfx);
-    const kind = kindOf(element)!;
+    const kind = kindOf(element, this.businessPolicy)!;
     const defaults = colours(kind, this.tokens);
     const fill = getFillColor(element, defaults.fill);
     const stroke = getStrokeColor(element, defaults.stroke);
@@ -88,7 +94,7 @@ export class ClassicRenderer extends BaseRenderer {
         const rect = svgCreate("rect");
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 9, fill, stroke, "stroke-width": call ? 3.5 : 1.4 });
         svgAppend(gfx, rect);
-        if (kind === "subprocess" || call) this.subprocessMarker(gfx, w, h, stroke, appsOf(element).length ? APP_BOX.overlap : 0);
+        if (kind === "subprocess" || call) this.subprocessMarker(gfx, w, h, stroke, appsOf(element).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
         this.embeddedLabel(gfx, element, kind, w, h, 12, fill, stroke);
         break;
       }
@@ -174,7 +180,7 @@ export class ClassicRenderer extends BaseRenderer {
   }
 
   override getShapePath(element: Any): string {
-    const kind = kindOf(element);
+    const kind = kindOf(element, this.businessPolicy);
     const w: number = element.width;
     const h: number = element.height;
     if (kind === "event") {
@@ -203,7 +209,7 @@ export class ClassicRenderer extends BaseRenderer {
   private embeddedLabel(gfx: Any, element: Any, kind: Kind, w: number, h: number, fontSize: number, fill: string, stroke: string): void {
     const bo = element.businessObject;
     const name = (kind === "document" || kind === "application") && typeof bo?.text === "string"
-      ? bo.text.replace(/^\s*\[(Reference|Component)\]\s*/, "")
+      ? roleLabel(bo.text, this.businessPolicy)
       : (bo?.name as string) || "";
     const text = this.textRenderer.createText(name, {
       box: { width: w - 12, height: h, x: w / 2 - (w - 12) / 2, y: 0 },

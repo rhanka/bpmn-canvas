@@ -1,7 +1,10 @@
+import { ProfileContractError } from "../../profile/canonical.js";
+import { applicationHost, type BusinessPolicy } from "../../internal/business-policy.js";
+import { attachedAnnotations, layoutPolicy } from "../../internal/legacy-policy.js";
 // `legend` renderer for bpmn-js. Display only: the BPMN XML is never written by it.
 // Adapted from an internal implementation of a draw.io-reference look.
 //
-// An "[Component] X" text annotation associated to an activity is drawn as an
+// An "[LX-MK-2] X" text annotation associated to an activity is drawn as an
 // application component box under that activity (part of the activity's
 // graphics, so it moves and selects with it); the annotation and its
 // association are hidden (display="none"). BPMN-in-Color attributes always win
@@ -20,22 +23,17 @@ import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as 
 import type { BpmnCanvasConfig, LegendTokens } from "../../internal/contracts.js";
 import {
   annotationName,
-  APP_BOX,
   appBoxes,
   contrastText,
-  DOC,
   documentPath,
   documentTextRect,
   isAppAnnotation,
-  LANE_HEADER,
   legendConnectionKind,
   legendKind,
-  POOL_STRIP,
   waypointsPath,
   type LegendBoLike,
   type LegendShapeKind,
 } from "./style.js";
-import { DEFAULT_LEGEND_TOKENS, resolveLegendTokens } from "./tokens.js";
 
 const RENDER_PRIORITY = 1500;
 /** Sentinel default: tells "no BPMN-in-Color fill set" apart from a colour. */
@@ -66,13 +64,13 @@ export interface DiagramElement {
 
 // --- model helpers ------------------------------------------------------------
 
-function isAppShape(el: DiagramElement | undefined): boolean {
+function isAppShape(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
   const bo = el?.businessObject;
-  return Boolean(bo) && bo.$type === "bpmn:TextAnnotation" && isAppAnnotation(typeof bo.text === "string" ? bo.text : "");
+  return Boolean(bo) && bo.$type === "bpmn:TextAnnotation" && isAppAnnotation(typeof bo.text === "string" ? bo.text : "", policy);
 }
 
-function isActivity(el: DiagramElement | undefined): boolean {
-  return Boolean(el?.businessObject) && is(el as object, "bpmn:Activity");
+function isActivity(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+  return !!el?.businessObject && applicationHost(el.businessObject, policy);
 }
 
 /** Other ends of the bpmn:Association connections of an element. */
@@ -86,29 +84,28 @@ function associated(el: DiagramElement): DiagramElement[] {
   return out;
 }
 
-/** [Component] annotations associated to this activity (none for other types). */
-export function appsOf(host: DiagramElement): DiagramElement[] {
-  if (!isActivity(host)) return [];
-  return associated(host).filter(isAppShape);
+/** [LX-MK-2] annotations associated to this activity (none for other types). */
+export function appsOf(host: DiagramElement, policy?: BusinessPolicy): DiagramElement[] {
+  return attachedAnnotations(host, policy) as DiagramElement[];
 }
 
-/** An [Component] annotation linked to at least one activity. */
-export function isLinkedApp(el: DiagramElement | undefined): boolean {
-  return Boolean(el) && isAppShape(el) && associated(el as DiagramElement).some(isActivity);
+/** An [LX-MK-2] annotation linked to at least one activity. */
+export function isLinkedApp(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+  return Boolean(el) && isAppShape(el, policy) && associated(el as DiagramElement).some(e => isActivity(e, policy));
 }
 
-/** Elements the legend hides: linked [Component] annotations and their links. */
-export function isHiddenInLegend(el: DiagramElement): boolean {
+/** Elements the legend hides: linked [LX-MK-2] annotations and their links. */
+export function isHiddenInLegend(el: DiagramElement, policy?: BusinessPolicy): boolean {
   if (el.waypoints) {
     return (
       el.type === "bpmn:Association" &&
-      ((isLinkedApp(el.source) && isActivity(el.target)) || (isLinkedApp(el.target) && isActivity(el.source)))
+      ((isLinkedApp(el.source, policy) && isActivity(el.target, policy)) || (isLinkedApp(el.target, policy) && isActivity(el.source, policy)))
     );
   }
-  return isLinkedApp(el);
+  return isLinkedApp(el, policy);
 }
 
-function shapeKindOf(element: object): LegendShapeKind | undefined {
+function shapeKindOf(element: object, policy?: BusinessPolicy): LegendShapeKind | undefined {
   const bo = (element as DiagramElement).businessObject as LegendBoLike | undefined;
   if (!bo) return undefined;
   const facts: { expanded?: boolean; horizontal?: boolean } = {};
@@ -118,7 +115,7 @@ function shapeKindOf(element: object): LegendShapeKind | undefined {
   if (bo.$type === "bpmn:Participant" || bo.$type === "bpmn:Lane") {
     facts.horizontal = Boolean(isHorizontal(element as never));
   }
-  return legendKind(bo, facts);
+  return legendKind(bo, facts, policy);
 }
 
 // --- renderer ------------------------------------------------------------------
@@ -132,13 +129,15 @@ export class LegendRenderer extends BaseRenderer {
   private readonly instanceId: string;
   private readonly tokens: LegendTokens;
 
+  private readonly businessPolicy: BusinessPolicy | undefined;
   constructor(eventBus: Any, textRenderer: Any, canvas: Any, config: BpmnCanvasConfig | undefined, bpmnRenderer: Any) {
     super(eventBus, RENDER_PRIORITY);
+    this.businessPolicy = config?.businessPolicy;
     this.upstream = bpmnRenderer;
     this.textRenderer = textRenderer;
     this.canvas = canvas;
     this.instanceId = config?.instanceId ?? `legend-${Math.random().toString(36).slice(2, 8)}`;
-    this.tokens = config?.legend ?? resolveLegendTokens();
+    this.tokens = config?.lookTokens ?? (() => { throw new ProfileContractError("profile-resource-missing"); })();
   }
 
   private get arrowId(): string {
@@ -155,15 +154,15 @@ export class LegendRenderer extends BaseRenderer {
     if (el.type === "label") return this.recolorsLabels && Boolean(el.businessObject);
     if (!el.businessObject) return false;
     if (el.waypoints) return this.connectionKind(el) !== undefined;
-    return shapeKindOf(element) !== undefined;
+    return shapeKindOf(element, this.businessPolicy) !== undefined;
   }
 
   private endsOnDocument(el: DiagramElement): boolean {
-    return [el.source, el.target].some((end) => end?.businessObject && legendKind(end.businessObject as LegendBoLike) === "document");
+    return [el.source, el.target].some((end) => end?.businessObject && legendKind(end.businessObject as LegendBoLike, {}, this.businessPolicy) === "document");
   }
 
   /**
-   * The legend draws plain associations, and every association to a `[Reference]` annotation, whatever its
+   * The legend draws plain associations, and every association to a `[LX-MK-1]` annotation, whatever its
    * direction (the reference look has no arrow on it). Other directional ones stay upstream's.
    */
   private connectionKind(el: DiagramElement): ReturnType<typeof legendConnectionKind> {
@@ -173,7 +172,7 @@ export class LegendRenderer extends BaseRenderer {
   }
 
   private get recolorsLabels(): boolean {
-    return this.tokens.labelText !== DEFAULT_LEGEND_TOKENS.labelText;
+    return true;
   }
 
   override drawConnection(parentGfx: Any, connection: Any): SVGElement {
@@ -241,7 +240,7 @@ export class LegendRenderer extends BaseRenderer {
   }
 
   private draw(gfx: Any, element: DiagramElement): void {
-    const kind = shapeKindOf(element);
+    const kind = shapeKindOf(element, this.businessPolicy);
     if (!kind) return;
     const t = this.tokens;
     const defaultFill = this.defaultFill(kind);
@@ -260,7 +259,7 @@ export class LegendRenderer extends BaseRenderer {
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill: body, stroke, "stroke-width": sw });
         svgClasses(rect).add("legend-task");
         svgAppend(gfx, rect);
-        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, appsOf(element).length ? APP_BOX.overlap : 0);
+        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, appsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
         this.label(gfx, element, fill, stroke, w, h);
         this.drawApps(gfx, element);
         break;
@@ -329,11 +328,11 @@ export class LegendRenderer extends BaseRenderer {
         svgAttr(body, { d: documentPath(w, h), fill, stroke, "stroke-width": sw });
         svgAppend(gfx, body);
         const bar = svgCreate("line");
-        svgAttr(bar, { x1: 0, y1: DOC.band, x2: w, y2: DOC.band, stroke, "stroke-width": sw });
+        svgAttr(bar, { x1: 0, y1: layoutPolicy(this.businessPolicy).document.band, x2: w, y2: layoutPolicy(this.businessPolicy).document.band, stroke, "stroke-width": sw });
         svgAppend(gfx, bar);
         // Text between the band and the wave crest (the layout sized the height for it).
-        const inner = documentTextRect(w, h);
-        const docText = this.textRenderer.createText(annotationName(element.businessObject?.text), {
+        const inner = documentTextRect(w, h, this.businessPolicy);
+        const docText = this.textRenderer.createText(annotationName(element.businessObject?.text, this.businessPolicy), {
           box: { width: inner.width, height: inner.height },
           align: "center-top",
           padding: 0,
@@ -341,7 +340,7 @@ export class LegendRenderer extends BaseRenderer {
             fill: getLabelColor(element as never, t.text, stroke),
             fontSize: Math.max(8, t.fontSize - 1),
             fontFamily: t.fontFamily,
-            lineHeight: 1.2,
+            lineHeight: this.businessPolicy!.metrics.lineHeight,
           },
         });
         svgAttr(docText, { transform: `translate(${inner.x} ${inner.y})` });
@@ -350,8 +349,8 @@ export class LegendRenderer extends BaseRenderer {
         break;
       }
       case "application": {
-        // Unlinked [Component] annotation (linked ones are hidden and drawn under their activity).
-        this.appBox(gfx, { name: annotationName(element.businessObject?.text), x: 0, y: 0, width: w, height: h }, fill, stroke);
+        // Unlinked [LX-MK-2] annotation (linked ones are hidden and drawn under their activity).
+        this.appBox(gfx, { name: annotationName(element.businessObject?.text, this.businessPolicy), x: 0, y: 0, width: w, height: h }, fill, stroke);
         break;
       }
       case "lane": {
@@ -359,10 +358,10 @@ export class LegendRenderer extends BaseRenderer {
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, fill: "none", stroke, "stroke-width": sw });
         svgAppend(gfx, rect);
         const header = svgCreate("rect");
-        svgAttr(header, { x: 0, y: 0, width: LANE_HEADER, height: h, fill: t.laneHeaderFill, stroke, "stroke-width": sw });
+        svgAttr(header, { x: 0, y: 0, width: layoutPolicy(this.businessPolicy).laneHeaderWidth, height: h, fill: t.laneHeaderFill, stroke, "stroke-width": sw });
         svgClasses(header).add("legend-lane-header");
         svgAppend(gfx, header);
-        this.verticalHeader(gfx, element, h, LANE_HEADER, t.fontSize + 2);
+        this.verticalHeader(gfx, element, h, layoutPolicy(this.businessPolicy).laneHeaderWidth, t.fontSize + 2);
         break;
       }
       case "pool": {
@@ -370,10 +369,10 @@ export class LegendRenderer extends BaseRenderer {
         svgAttr(body, { x: 0, y: 0, width: w, height: h, fill: "none", stroke, "stroke-width": sw });
         svgAppend(gfx, body);
         const strip = svgCreate("rect");
-        svgAttr(strip, { x: 0, y: 0, width: POOL_STRIP, height: h, fill, stroke, "stroke-width": sw });
+        svgAttr(strip, { x: 0, y: 0, width: layoutPolicy(this.businessPolicy).poolStrip, height: h, fill, stroke, "stroke-width": sw });
         svgClasses(strip).add("legend-pool-strip");
         svgAppend(gfx, strip);
-        this.verticalHeader(gfx, element, h, POOL_STRIP, t.fontSize + 2);
+        this.verticalHeader(gfx, element, h, layoutPolicy(this.businessPolicy).poolStrip, t.fontSize + 2);
         break;
       }
     }
@@ -435,9 +434,9 @@ export class LegendRenderer extends BaseRenderer {
 
   /** Application component boxes of an activity, under its bottom edge. */
   private drawApps(gfx: Any, element: DiagramElement): void {
-    const apps = appsOf(element);
+    const apps = appsOf(element, this.businessPolicy);
     if (apps.length === 0) return;
-    const names = apps.map((a) => annotationName(a.businessObject?.text));
+    const names = apps.map((a) => annotationName(a.businessObject?.text, this.businessPolicy));
     // The layout stores the annotation where the box goes (text-fitted, space
     // reserved): use that DI when it sits in the activity's bottom band, else
     // compute the box (applications added in the editor).
@@ -446,7 +445,7 @@ export class LegendRenderer extends BaseRenderer {
     const boxes =
       one && rel && rel.y >= element.height - 20 && rel.y <= element.height + 5 && rel.x >= -5 && rel.x + one.width <= element.width + 5
         ? [{ name: names[0] as string, x: rel.x, y: rel.y, width: one.width, height: one.height }]
-        : appBoxes(names, element.width, element.height);
+        : appBoxes(names, element.width, element.height, this.businessPolicy);
     boxes.forEach((box, i) => {
       const app = apps[i] as DiagramElement;
       this.appBox(gfx, box, getFillColor(app as never, this.tokens.appFill), getStrokeColor(app as never, this.tokens.appLine));
@@ -530,7 +529,7 @@ export class LegendRenderer extends BaseRenderer {
   private label(gfx: Any, element: DiagramElement, fill: string, stroke: string, w: number, h: number): void {
     const t = this.tokens;
     // Above the application band when the activity has one (the layout reserved that height).
-    const band = appsOf(element).length ? APP_BOX.overlap : 0;
+    const band = appsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0;
     const text = this.textRenderer.createText((element.businessObject?.name as string) || "", {
       box: { width: w, height: h - band },
       align: "center-middle",
@@ -613,7 +612,7 @@ export class LegendRenderer extends BaseRenderer {
 
   override getShapePath(shape: Any): string {
     const element = shape as DiagramElement;
-    const kind = shapeKindOf(shape);
+    const kind = shapeKindOf(shape, this.businessPolicy);
     const w = element.width;
     const h = element.height;
     // Hit/interaction outlines follow the drawn shape, not the bounding box.
@@ -629,7 +628,7 @@ export class LegendRenderer extends BaseRenderer {
   }
 }
 
-// --- sync: hide linked [Component] annotations, redraw their hosts -------------------
+// --- sync: hide linked [LX-MK-2] annotations, redraw their hosts -------------------
 
 interface Registry {
   getAll(): DiagramElement[];
@@ -637,12 +636,14 @@ interface Registry {
 }
 
 export class LegendSync {
-  static $inject = ["eventBus", "elementRegistry", "graphicsFactory"];
+  static $inject = ["eventBus", "elementRegistry", "graphicsFactory", "config.bpmnCanvas"];
 
   private readonly registry: Registry;
   private readonly graphicsFactory: Any;
 
-  constructor(eventBus: Any, elementRegistry: Registry, graphicsFactory: Any) {
+  private readonly businessPolicy: BusinessPolicy | undefined;
+  constructor(eventBus: Any, elementRegistry: Registry, graphicsFactory: Any, config?: BpmnCanvasConfig) {
+    this.businessPolicy = config?.businessPolicy;
     this.registry = elementRegistry;
     this.graphicsFactory = graphicsFactory;
     // import.render.complete: after importXML and after every open(diagram).
@@ -659,11 +660,11 @@ export class LegendSync {
       if (!gfx) continue;
       // diagram-js `hidden`: GraphicsFactory.update sets display="none" (kept
       // across ChangeSupport redraws; display-only, never exported to XML).
-      const hide = isHiddenInLegend(el);
+      const hide = isHiddenInLegend(el, this.businessPolicy);
       const toggled = Boolean(el.hidden) !== hide;
       el.hidden = hide;
-      const kind = shapeKindOf(el);
-      const host = !el.waypoints && (isActivity(el) || kind === "data" || kind === "input" || kind === "output");
+      const kind = shapeKindOf(el, this.businessPolicy);
+      const host = !el.waypoints && (isActivity(el, this.businessPolicy) || kind === "data" || kind === "input" || kind === "output");
       if (all || host || toggled) {
         try {
           this.graphicsFactory.update(el.waypoints ? "connection" : "shape", el, gfx);
@@ -678,14 +679,16 @@ export class LegendSync {
 // --- editing: the hidden annotation follows its activity -----------------------
 
 export class LegendAppFollow {
-  static $inject = ["eventBus"];
+  static $inject = ["eventBus", "config.bpmnCanvas"];
 
-  constructor(eventBus: Any) {
+  private readonly businessPolicy: BusinessPolicy | undefined;
+  constructor(eventBus: Any, config?: BpmnCanvasConfig) {
+    this.businessPolicy = config?.businessPolicy;
     const interceptor = new CommandInterceptor(eventBus);
     interceptor.preExecute("elements.move", (event: { context: { shapes: DiagramElement[] } }) => {
       const shapes = event.context.shapes;
       for (const shape of [...shapes]) {
-        for (const app of appsOf(shape)) {
+        for (const app of appsOf(shape, this.businessPolicy)) {
           if (!shapes.includes(app)) shapes.push(app);
         }
       }
@@ -706,4 +709,3 @@ export const LegendFollowModule = {
   legendAppFollow: ["type", LegendAppFollow],
 };
 
-export { DEFAULT_LEGEND_TOKENS };

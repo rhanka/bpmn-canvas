@@ -1,11 +1,12 @@
+import { lineKeys, resolveTokens } from "../legend/tokens.js";
+import { ProfileContractError } from "../../profile/canonical.js";
 import type { LegendTokens } from "../../internal/contracts.js";
-import { LINE_KEYS, NEUTRAL_TOKENS, resolveTokens } from "../legend/tokens.js";
 
 /** Neutral defaults: the same 33 fields and fallbacks as the legend tokens, without the reference Custom look. */
-export const DEFAULT_COLORED_TOKENS: LegendTokens = NEUTRAL_TOKENS;
 /** As the legend tokens, except that external labels follow `text` unless `labelText` is named. */
-export function resolveColoredTokens(overrides?: Partial<LegendTokens>): LegendTokens {
-  const resolved = resolveTokens(DEFAULT_COLORED_TOKENS, overrides);
+export function resolveColoredTokens(overrides?: Partial<LegendTokens>, base?: LegendTokens): LegendTokens {
+  if (!base) throw new ProfileContractError("profile-resource-missing");
+  const resolved = resolveTokens(base, overrides);
   return overrides?.labelText === undefined ? ({ ...resolved, labelText: resolved.text } as LegendTokens) : resolved;
 }
 
@@ -21,7 +22,7 @@ export function hasTokens(tokens?: Partial<LegendTokens>): boolean {
 export function namedColoredTokens(tokens?: Partial<LegendTokens>): string[] {
   const names = new Set<string>();
   for (const [key, value] of Object.entries(tokens ?? {})) if (value !== undefined) names.add(key);
-  if (names.has("stroke")) for (const key of LINE_KEYS) names.add(key);
+  if (names.has("stroke")) for (const key of lineKeys) names.add(key);
   if (names.has("fill")) names.add("taskFill");
   if (names.has("text")) names.add("labelText");
   return [...names];

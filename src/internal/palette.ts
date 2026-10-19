@@ -66,8 +66,8 @@ class PaletteSupport {
       palette._toggleState = (state = {}) => toggle("twoColumn" in state ? state : { ...state, twoColumn: columns === 2 });
     }
 
-    const tokens = config?.legend ?? config?.colored;
-    const colored = !!config?.colored;
+    const tokens = config?.lookTokens ?? config?.lookTokens;
+    const colored = config?.renderer === "recolor";
     let applied: string[] = [];
     let root: HTMLElement | null = null;
 

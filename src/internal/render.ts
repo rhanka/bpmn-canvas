@@ -16,7 +16,7 @@ export async function renderDiagrams(xml: string, options: RenderOptions = {}): 
   };
   check();
   const minSize = options.minSize ?? 20;
-  const [Viewer, profile] = await Promise.all([loadViewer(), loadProfile(options.profile ?? "standard", options.profile === "colored" ? options.coloredTokens : options.legendTokens)]);
+  const [Viewer, profile] = await Promise.all([loadViewer(), loadProfile(options.profile ?? "", options.tokens ?? options.coloredTokens ?? options.legendTokens, options.profileOptions ?? {}, options.businessPolicy)]);
   check();
 
   const diagnostics: Diagnostic[] = [];

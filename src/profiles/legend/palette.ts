@@ -1,3 +1,6 @@
+import { ProfileContractError } from "../../profile/canonical.js";
+import type { BpmnCanvasConfig } from "../../internal/contracts.js";
+import { paletteEntries } from "../../internal/legacy-policy.js";
 // Legend palette for the bpmn-js modeler: one entry per legend element. This
 // module REPLACES the default palette provider (no duplicate task/start/end/
 // gateway entries, no non-legend tools): additionalModules order makes our
@@ -30,97 +33,27 @@ export interface PaletteEntry {
 }
 
 /** bpmn-font icon per entry. Without a className the palette renders empty buttons. */
-export const PALETTE_ICONS: Readonly<Record<string, string>> = {
-  "legend.start": "bpmn-icon-start-event-none",
-  "legend.end": "bpmn-icon-end-event-none",
-  "legend.intermediate-event": "bpmn-icon-intermediate-event-none",
-  "legend.task": "bpmn-icon-task",
-  "legend.subprocess": "bpmn-icon-subprocess-collapsed",
-  "legend.external-process": "bpmn-icon-call-activity",
-  "legend.gateway-or": "bpmn-icon-gateway-xor",
-  "legend.gateway-and": "bpmn-icon-gateway-parallel",
-  "legend.data-input": "bpmn-icon-data-object",
-  "legend.data-output": "bpmn-icon-data-object",
-  "legend.external-input": "bpmn-icon-data-input",
-  "legend.process-output": "bpmn-icon-data-output",
-  "legend.document": "bpmn-icon-text-annotation",
-  "legend.application": "bpmn-icon-text-annotation",
-  "legend.lane": "bpmn-icon-lane-insert-below",
-  "legend.sequence-flow": "bpmn-icon-connection-multi",
-};
 
-export const PALETTE_ENTRIES: readonly PaletteEntry[] = [
-  { id: "legend.start", title: "Start", bpmnType: "bpmn:StartEvent", group: "events" },
-  { id: "legend.end", title: "End", bpmnType: "bpmn:EndEvent", group: "events" },
-  { id: "legend.intermediate-event", title: "Intermediate event", bpmnType: "bpmn:IntermediateThrowEvent", group: "events" },
-  { id: "legend.task", title: "Task", bpmnType: "bpmn:Task", group: "activities" },
-  {
-    id: "legend.subprocess",
-    title: "Sub-process (collapsed)",
-    bpmnType: "bpmn:SubProcess",
-    group: "activities",
-    preset: { collapsed: true },
-  },
-  { id: "legend.external-process", title: "External call", bpmnType: "bpmn:CallActivity", group: "activities" },
-  { id: "legend.gateway-or", title: "Gateway OR", bpmnType: "bpmn:ExclusiveGateway", group: "gateways", preset: { subtype: "or" } },
-  { id: "legend.gateway-and", title: "Gateway AND", bpmnType: "bpmn:ParallelGateway", group: "gateways", preset: { subtype: "and" } },
-  { id: "legend.data-input", title: "Task input", bpmnType: "bpmn:DataObjectReference", group: "data", preset: { name: "Input" } },
-  { id: "legend.data-output", title: "Task output", bpmnType: "bpmn:DataObjectReference", group: "data", preset: { name: "Output" } },
-  { id: "legend.external-input", title: "External input", bpmnType: "bpmn:DataInput", group: "data", preset: { name: "External input" } },
-  { id: "legend.process-output", title: "Process output", bpmnType: "bpmn:DataOutput", group: "data", preset: { name: "Process output" } },
-  { id: "legend.document", title: "Document reference", bpmnType: "bpmn:TextAnnotation", group: "annotations", preset: { text: "[Reference] " } },
-  { id: "legend.application", title: "Application", bpmnType: "bpmn:TextAnnotation", group: "annotations", preset: { text: "[Component] " } },
-  { id: "legend.lane", title: "Lane", bpmnType: "bpmn:Lane", group: "structure" },
-  { id: "legend.sequence-flow", title: "Sequence flow", bpmnType: "bpmn:SequenceFlow", group: "flows", tool: "connect" },
-];
+
+
 
 /** Stable palette action ids (the `data-action` of each palette entry and the keys of the icon CSS). */
-export const LEGEND_ACTION_IDS: readonly string[] = Object.freeze(PALETTE_ENTRIES.map((e) => e.id));
+
 
 /** diagram-js palette provider: click/drag creates the legend element. */
 export class LegendPaletteProvider {
-  static $inject = ["palette", "create", "elementFactory", "globalConnect"];
-
-  private readonly create: Any;
-  private readonly elementFactory: Any;
-  private readonly globalConnect: Any;
-
-  constructor(palette: Any, create: Any, elementFactory: Any, globalConnect: Any) {
-    this.create = create;
-    this.elementFactory = elementFactory;
-    this.globalConnect = globalConnect;
-    palette.registerProvider(this);
-  }
-
+  static $inject = ["palette", "create", "elementFactory", "globalConnect", "config.bpmnCanvas"];
+  constructor(palette: Any, private readonly create: Any, private readonly elementFactory: Any, private readonly globalConnect: Any, private readonly config?: BpmnCanvasConfig) { palette.registerProvider(this); }
   getPaletteEntries(): Record<string, object> {
-    const entries: Record<string, object> = {};
-    for (const entry of PALETTE_ENTRIES) {
-      entries[entry.id] = {
-        group: entry.group,
-        className: PALETTE_ICONS[entry.id] ?? "bpmn-icon-task",
-        title: `Create ${entry.title}`,
-        html: `<div class="entry" draggable="true" title="Create ${entry.title}"></div>`,
-        action: {
-          dragstart: (event: Event) => this.startCreate(event, entry),
-          click: (event: Event) => this.startCreate(event, entry),
-        },
-      };
-    }
-    return entries;
+    return Object.fromEntries(paletteEntries(this.config?.businessPolicy).map(entry => [entry.id, {
+      group: entry.group, className: entry.className, title: entry.title, html: entry.html,
+      action: { dragstart: (event: Event) => this.startCreate(event, entry), click: (event: Event) => this.startCreate(event, entry) },
+    }]));
   }
-
-  private startCreate(event: Event, entry: PaletteEntry): void {
-    if (entry.tool === "connect") {
-      this.globalConnect.start(event);
-      return;
-    }
-    const attrs: Record<string, unknown> = { type: entry.bpmnType };
-    if (entry.preset?.name) attrs["name"] = entry.preset.name;
-    if (entry.preset?.text) attrs["text"] = entry.preset.text;
-    if (entry.preset?.collapsed) attrs["isExpanded"] = false;
-    const shape = this.elementFactory.createShape(attrs);
-    // elementFactory ignores `name`: set it so created elements are labelled.
-    if (entry.preset?.name) shape.businessObject.name = entry.preset.name;
+  private startCreate(event: Event, entry: Record<string, any>): void {
+    if (entry.create.tool === "connect") { this.globalConnect.start(event); return; }
+    const shape = this.elementFactory.createShape(entry.create);
+    for (const field of ["name", "text"]) if (entry.create[field] !== undefined) shape.businessObject[field] = entry.create[field];
     this.create.start(event, shape);
   }
 }
@@ -205,13 +138,13 @@ const UpdaterBase = BpmnUpdater as unknown as {
   $inject: string[];
 };
 export class LegendBpmnUpdater extends UpdaterBase {
-  static override $inject: string[] = (BpmnUpdater as Any).$inject;
+  static override $inject: string[] = [...(BpmnUpdater as Any).$inject, "config.bpmnCanvas"];
 
   private readonly bpmnFactory: Any;
   /** Specifications this updater created: only those are removed again when they end up empty. */
   private readonly created = new WeakSet<object>();
 
-  constructor(eventBus: Any, bpmnFactory: Any, connectionDocking: Any) {
+  constructor(eventBus: Any, bpmnFactory: Any, connectionDocking: Any, private readonly config?: BpmnCanvasConfig) {
     super(eventBus, bpmnFactory, connectionDocking);
     this.bpmnFactory = bpmnFactory;
   }
@@ -221,6 +154,13 @@ export class LegendBpmnUpdater extends UpdaterBase {
       super.updateSemanticParent(businessObject, newParent, visualParent);
       return;
     }
+    const owner = newParent ? resolveProcess(newParent) : null;
+    const direction = businessObject.$type === "bpmn:DataInput";
+    const candidates = owner?.ioSpecification?.get(direction ? "inputSets" : "outputSets") ?? [];
+    const requested = this.config?.ioSetSelections?.[businessObject.id];
+    const memberships = candidates.filter((set: Any) => set.get(direction ? "dataInputRefs" : "dataOutputRefs").includes(businessObject));
+    const selected = requested !== undefined ? candidates.find((set: Any) => set.id === requested) : memberships.length === 1 ? memberships[0] : candidates.length === 1 ? candidates[0] : undefined;
+    if (owner && ((candidates.length > 1 && !selected) || (requested !== undefined && !selected))) throw new ProfileContractError("io-set-selection-required");
     const previous = businessObject.$parent;
     detachDataIo(businessObject);
     this.dropEmptySpecification(previous);
@@ -239,7 +179,7 @@ export class LegendBpmnUpdater extends UpdaterBase {
     ioSpec.get(input ? "dataInputs" : "dataOutputs").push(businessObject);
     businessObject.$parent = ioSpec;
     // Put the item in the first set so it belongs to at least one, as BPMN requires.
-    const set = ioSpec.get(input ? "inputSets" : "outputSets")[0];
+    const set = selected ?? ioSpec.get(input ? "inputSets" : "outputSets")[0];
     set?.get(input ? "dataInputRefs" : "dataOutputRefs").push(businessObject);
   }
 

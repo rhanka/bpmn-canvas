@@ -1,22 +1,21 @@
 import type { LegendTokens, ProfileDefinition } from "../../internal/contracts.js";
+import type { BusinessPolicy } from "../../internal/business-policy.js";
+import { ProfileContractError } from "../../profile/canonical.js";
+import { resolveColoredTokens, hasTokens, namedColoredTokens } from "./tokens.js";
 import { ColoredRendererModule } from "./renderer.js";
-import { DEFAULT_COLORED_TOKENS, hasTokens, namedColoredTokens, resolveColoredTokens } from "./tokens.js";
+export function coloredProfile(tokens?: Partial<LegendTokens>, businessPolicy?: BusinessPolicy): ProfileDefinition {
+  const look = businessPolicy?.presentation?.looks?.find((look: any) => look.renderer === "recolor");
+  if (!businessPolicy || !look) throw new ProfileContractError("profile-resource-missing");
 
-export { DEFAULT_COLORED_TOKENS, resolveColoredTokens };
-
-/**
- * The `colored` profile: upstream notation, recoloured per kind from tokens. Without any token the profile adds no
- * module at all, so it draws exactly like `standard`. With `drawing: "classic"` the shapes are drawn flat in the
- * profile's colours (classic.ts). Core injects the tokens as `config.bpmnCanvas.colored`.
- */
-export function coloredProfile(tokens?: Partial<LegendTokens>): ProfileDefinition {
-  if (!hasTokens(tokens)) return { id: "colored", modelerModules: [], viewerModules: [] };
+  if (!hasTokens(tokens)) return { id: look.alias, modelerModules: [], viewerModules: [] };
   const modules = [ColoredRendererModule];
   return {
-    id: "colored",
+    id: look.alias,
+    businessPolicy,
+    renderer: look.renderer,
     modelerModules: modules,
     viewerModules: modules,
-    tokens: resolveColoredTokens(tokens),
+    tokens: resolveColoredTokens(tokens, look.tokens),
     named: namedColoredTokens(tokens),
   };
 }

@@ -1,3 +1,6 @@
+import { ProfileContractError } from "../../profile/canonical.js";
+import type { BusinessPolicy } from "../../internal/business-policy.js";
+import { annotationKind } from "../../internal/legacy-policy.js";
 /**
  * Upstream bpmn-js notation, recoloured per element kind from tokens.
  *
@@ -24,11 +27,9 @@ interface Colours {
   stroke?: string;
 }
 
-const isDocument = (text: unknown): boolean => /^\s*\[Reference\]/.test(typeof text === "string" ? text : "");
-const isApplication = (text: unknown): boolean => /^\s*\[Component\]/.test(typeof text === "string" ? text : "");
 
 /** Kind of a diagram-js element for colouring, or undefined when the upstream colours stay. */
-export function coloredKind(element: Any): ColoredKind | undefined {
+export function coloredKind(element: Any, policy?: BusinessPolicy): ColoredKind | undefined {
   if (!element?.businessObject) return undefined;
   if (element.labelTarget) return "label";
   if (is(element, "bpmn:Participant")) return "pool";
@@ -41,7 +42,7 @@ export function coloredKind(element: Any): ColoredKind | undefined {
   if (is(element, "bpmn:DataObjectReference") || is(element, "bpmn:DataStoreReference") || is(element, "bpmn:DataObject")) return "data";
   if (is(element, "bpmn:TextAnnotation")) {
     const text = element.businessObject.text;
-    return isDocument(text) ? "doc" : isApplication(text) ? "app" : "annotation";
+    return annotationKind(typeof text === "string" ? text : "", "recolor", policy) as never;
   }
   if (is(element, "bpmn:SequenceFlow") || is(element, "bpmn:MessageFlow")) return "flow";
   if (is(element, "bpmn:Association") || is(element, "bpmn:DataAssociation")) return "link";
@@ -83,11 +84,13 @@ export class ColoredRenderer extends BaseRenderer {
   private readonly tokens: LegendTokens;
   private readonly named: ReadonlySet<string> | undefined;
 
+  private readonly businessPolicy: BusinessPolicy | undefined;
   constructor(eventBus: Any, bpmnRenderer: Any, config: BpmnCanvasConfig | undefined) {
     super(eventBus, RENDER_PRIORITY);
+    this.businessPolicy = config?.businessPolicy;
     this.upstream = bpmnRenderer;
-    this.tokens = config?.colored ?? resolveColoredTokens();
-    this.named = config?.coloredNamed ? new Set(config.coloredNamed) : undefined;
+    this.tokens = config?.lookTokens ?? (() => { throw new ProfileContractError("profile-resource-missing"); })();
+    this.named = config?.namedTokens ? new Set(config.namedTokens) : undefined;
   }
 
   override canRender(element: Any): boolean {
@@ -126,7 +129,7 @@ export class ColoredRenderer extends BaseRenderer {
     return colours;
   }
 
-  /** Text colour, and the background of [Reference]/[Component] annotations (the upstream annotation draws none). */
+  /** Text colour, and the background of [LX-MK-1]/[LX-MK-2] annotations (the upstream annotation draws none). */
   private finish(visuals: Any, element: Any, kind: ColoredKind | undefined): void {
     if (!kind || kind === "flow" || kind === "link") return;
     const t = this.tokens;
@@ -145,14 +148,14 @@ export class ColoredRenderer extends BaseRenderer {
   }
 
   override drawShape(visuals: Any, element: Any, attrs: Any = {}): SVGElement {
-    const kind = coloredKind(element);
+    const kind = coloredKind(element, this.businessPolicy);
     const drawn = this.upstream.drawShape(visuals, element, { ...this.coloursOf(kind, element), ...attrs });
     this.finish(visuals, element, kind);
     return drawn;
   }
 
   override drawConnection(visuals: Any, connection: Any, attrs: Any = {}): SVGElement {
-    const kind = coloredKind(connection);
+    const kind = coloredKind(connection, this.businessPolicy);
     return this.upstream.drawConnection(visuals, connection, { ...this.coloursOf(kind, connection), ...attrs });
   }
 }

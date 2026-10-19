@@ -57,7 +57,7 @@ export function roleLabel(text: string | undefined, policy?: BusinessPolicy, lay
   return rule.labelCase === "upper" ? fullUppercase(value) : value;
 }
 
-export function applicationHost(element: { readonly $type?: string; readonly type?: string; $instanceOf?: (type: string) => boolean }, policy?: BusinessPolicy): boolean {
+export function applicationHost(element: { readonly $type?: string | undefined; readonly type?: string | undefined; $instanceOf?: (type: string) => boolean }, policy?: BusinessPolicy): boolean {
   const host = policy?.attachment.applicationHost;
   if (!host) return false;
   const type = element.$type ?? element.type;
@@ -65,4 +65,10 @@ export function applicationHost(element: { readonly $type?: string; readonly typ
   if (host.mode === "exact") return false;
   if (element.$instanceOf) return element.$instanceOf(host.type);
   return host.type === "bpmn:Activity" && !!type && /^(?:bpmn:)?(?:\w*Task|SubProcess|Transaction|AdHocSubProcess|CallActivity)$/.test(type);
+}
+
+export function insertRole(text: string, role: AnnotationRole["role"], policy?: BusinessPolicy): string {
+  const rule = policy?.classification.annotationRoles.find(rule => rule.role === role);
+  if (!rule) throw new ProfileContractError("profile-symbol");
+  return rule.prefix + policy!.classification.insertSeparator + text;
 }

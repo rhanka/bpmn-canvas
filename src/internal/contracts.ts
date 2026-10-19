@@ -1,3 +1,4 @@
+import type { BusinessPolicy } from "./business-policy.js";
 /**
  * Internal contracts shared by the core, the profiles and the layout module.
  * None of this is public API.
@@ -8,14 +9,16 @@
  * Modules read it with `static $inject = ['config.bpmnCanvas']` (or `$inject = [...]`).
  */
 export interface BpmnCanvasConfig {
+  readonly ioSetSelections?: Readonly<Record<string, string>>;
   /** Unique per canvas instance. Prefix every DOM id, SVG marker and gradient id with it. */
   readonly instanceId: string;
+  readonly lookTokens?: LegendTokens;
+  readonly namedTokens?: readonly string[];
+  readonly renderer?: string;
+  readonly businessPolicy?: BusinessPolicy;
   /** Present only for the `legend` profile. */
-  readonly legend?: LegendTokens;
   /** Present only for the `colored` profile. */
-  readonly colored?: LegendTokens;
   /** `colored` only: the token names the host gave. Only those recolour; the others keep the upstream colour. */
-  readonly coloredNamed?: readonly string[];
   readonly paletteColumns?: 1 | 2 | "auto";
 }
 
@@ -45,7 +48,7 @@ export interface LegendTokens {
   readonly flow: string;
   /** Association and data-link stroke. */
   readonly link: string;
-  /** Stroke of an association that ends on a `[Reference]` annotation. Falls back to `link`. */
+  /** Stroke of an association that ends on a `[LX-MK-1]` annotation. Falls back to `link`. */
   readonly docLink: string;
   /** `stroke-dasharray` of that association, for instance `5 5`. */
   readonly docLinkDash: string;
@@ -72,19 +75,23 @@ export interface LegendTokens {
   /** External (call) process, external input and process output. */
   readonly externalLine: string;
   readonly externalFill: string;
-  /** `[Reference]` annotation (document). */
+  /** `[LX-MK-1]` annotation (document). */
   readonly docLine: string;
   readonly docFill: string;
   /** Task input and output (data object). */
   readonly dataLine: string;
   readonly dataFill: string;
-  /** `[Component]` annotation (application component box). */
+  /** `[LX-MK-2]` annotation (application component box). */
   readonly appLine: string;
   readonly appFill: string;
 }
 
 export interface ProfileDefinition {
-  readonly id: "standard" | "legend" | "colored";
+  readonly businessPolicy?: BusinessPolicy;
+  readonly renderer?: string;
+  readonly paletteFloor?: number;
+  readonly markerSelectors?: readonly string[];
+  readonly id: string;
   /** diagram-js modules added to the Modeler. Empty for `standard`. */
   readonly modelerModules: readonly unknown[];
   /** diagram-js modules added to the render-only Viewer. */

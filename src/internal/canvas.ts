@@ -65,8 +65,6 @@ interface ZoomScrollLike {
 }
 
 /** Selectors of the sub-process expansion marker and drill-down icon, for both profiles. */
-const MARKER_SELECTOR = ".bjs-drilldown, [data-marker='sub-process'], [data-marker='process-icon'], .legend-marker";
-const PALETTE_FLOOR: Record<ProfileId, number> = { standard: 56, legend: 112, colored: 56 };
 const ZOOM_STEP_IN = 1.15;
 const ZOOM_STEP_OUT = 0.87;
 const DEFAULT_ZOOM_MIN = 0.2;
@@ -102,6 +100,7 @@ export class CanvasController implements BpmnCanvasHandle {
   private drilldownListener: ((e: MouseEvent) => void) | undefined;
   private abortListener: (() => void) | undefined;
   private profileId: ProfileId;
+  private activeProfile: LoadedProfile | undefined;
   private tokens: Partial<LegendTokens> | undefined;
   private profileOptions: ProfileOptions;
   /** Diagrams of a document loaded with layoutOnLoad that are laid out the first time they are shown. */
@@ -129,8 +128,8 @@ export class CanvasController implements BpmnCanvasHandle {
     this.host = host;
     this.options = options;
     this.hostReadOnly = options.readOnly === true;
-    this.profileId = options.profile ?? "standard";
-    this.tokens = options.profile === "colored" ? options.coloredTokens : options.legendTokens;
+    this.profileId = options.profile ?? "";
+    this.tokens = options.tokens ?? options.coloredTokens ?? options.legendTokens;
     this.profileOptions = options.profileOptions ?? {};
     this.fitMode = options.fitMode ?? "readable";
     this.baseRevision = options.revision;
@@ -291,7 +290,8 @@ export class CanvasController implements BpmnCanvasHandle {
 
   private async init(): Promise<void> {
     try {
-      const [engine, profile, layout] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.tokensFor(this.profileId), this.profileOptions), this.layoutModules()]);
+      const [engine, profile, layout] = await Promise.all([loadEngine(), loadProfile(this.profileId, this.tokensFor(this.profileId), this.profileOptions, this.options.businessPolicy), this.layoutModules()]);
+      this.activeProfile = profile;
       if (this.destroyed) return;
       this.createModeler(engine, profile, layout);
       this.setupResizeObserver();
@@ -311,7 +311,7 @@ export class CanvasController implements BpmnCanvasHandle {
     const modeler = new engine.Modeler({
       container: this.root,
       additionalModules: [ReadOnlyModule, PaletteSupportModule, ...profile.modelerModules, ...layout],
-      bpmnCanvas: profileConfig(this.instanceId, profile, this.options.paletteColumns),
+      bpmnCanvas: profileConfig(this.instanceId, profile, this.options.paletteColumns, this.options.ioSetSelections),
       ...(limits ? { zoomScroll: { ...(limits.min !== undefined ? { minZoom: limits.min } : {}), ...(limits.max !== undefined ? { maxZoom: limits.max } : {}) } } : {}),
     });
     this.modeler = modeler;
@@ -447,7 +447,7 @@ export class CanvasController implements BpmnCanvasHandle {
       type: el.type,
       name: typeof bo.name === "string" ? bo.name : "",
       ...(calledElement !== undefined ? { calledElement } : {}),
-      marker: !!target?.closest?.(MARKER_SELECTOR),
+      marker: !!this.activeProfile?.markerSelectors?.length && !!target?.closest?.(this.activeProfile.markerSelectors.join(", ")),
     });
   }
 
@@ -714,7 +714,7 @@ export class CanvasController implements BpmnCanvasHandle {
       const palette = this.root.querySelector(".djs-palette")?.getBoundingClientRect();
       const left = this.root.getBoundingClientRect().left;
       const measured = palette && palette.width > 0 ? palette.right - left + 8 : 0;
-      const view = initialView(shapes, canvas.getSize(), inset ?? Math.max(measured, PALETTE_FLOOR[this.profileId]), mode === "whole");
+      const view = initialView(shapes, canvas.getSize(), inset ?? Math.max(measured, (this.activeProfile?.paletteFloor ?? 0)), mode === "whole");
       if (!view) canvas.zoom("fit-viewport", "auto");
       else canvas.viewbox(view.viewbox);
       this.fittedOnce = true;
@@ -819,7 +819,8 @@ export class CanvasController implements BpmnCanvasHandle {
   /** What a profile switch needs, read before its commit point. Changes nothing but the old stack's position, which
    * captureHistory puts back. */
   private async prepareSwitch(epoch: number, profile: ProfileId, tokens: Partial<LegendTokens> | undefined, options: ProfileOptions): Promise<PreparedSwitch> {
-    const [engine, next, layout] = await Promise.all([loadEngine(), loadProfile(profile, tokens, options), this.layoutModules()]);
+    const [engine, next, layout] = await Promise.all([loadEngine(), loadProfile(profile, tokens, options, this.options.businessPolicy), this.layoutModules()]);
+    this.activeProfile = next;
     this.assertLive(epoch);
     const old = this.modeler;
     const hadDocument = !!old && this.diagrams.length > 0;
