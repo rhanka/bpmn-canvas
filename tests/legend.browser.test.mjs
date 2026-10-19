@@ -21,7 +21,7 @@ test("legend profile in a real browser", { timeout: 120000 }, async (t) => {
     assert.equal(o.a.GI.circles, 1, "inclusive gateway shows its circle marker");
     assert.equal(o.a.BT.circles, 3, "boundary timer keeps its double circle and clock");
   });
-  await t.test("a linked [App] annotation is hidden and redrawn under its task", () => {
+  await t.test("a linked [Component] annotation is hidden and redrawn under its task", () => {
     assert.equal(o.a.APP.display, "none");
   });
   await t.test("a sub-process [+] marker stays above its application band, and is unchanged without one", () => {

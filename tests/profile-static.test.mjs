@@ -13,8 +13,8 @@ test("should verify injected resource bytes in their raw digest domain before us
   const bytes = readFileSync(new URL("profile-mechanism/1/neutral-metrics.json", vendor));
   const assets = new Map([[profile.resources[0].assetKey, bytes]]);
   await verifyResourcePins(profile.resources, assets);
-  await assert.rejects(() => verifyResourcePins(profile.resources, new Map()), { code: "profile-resource-missing" });
-  await assert.rejects(() => verifyResourcePins(profile.resources, new Map([[profile.resources[0].assetKey, Buffer.concat([bytes, Buffer.from("\n")])]])), error => error.code === undefined);
+  assert.throws(() => verifyResourcePins(profile.resources, new Map()), { code: "profile-resource-missing" });
+  assert.throws(() => verifyResourcePins(profile.resources, new Map([[profile.resources[0].assetKey, Buffer.concat([bytes, Buffer.from("\n")])]])), error => error.code === undefined);
 });
 for (const v of expectations.filter(v => v.family === "static-rules")) {
   test(`should enforce sealed ${v.caseId}`, async () => {
@@ -37,7 +37,7 @@ for (const v of expectations.filter(v => v.family === "static-rules")) {
     }
     const run = () => checkStaticRule(ruleId, subject, runtimeContext);
     if (expected.status === "ok") await run();
-    else await assert.rejects(run, { code: expected.code });
+    else assert.throws(run, { code: expected.code });
     assert.equal(JSON.stringify(v), before);
   });
 }
@@ -59,7 +59,7 @@ test("should require both reparent writes and explicit envelope/artifact writes"
   const step = { op: "reparent", target: "child", parent: "parent", property: "flowElements" };
   const writes = [{ binding: "child", path: "", mode: "reparent" }, { binding: "parent", path: "/flowElements", mode: "reparent" }];
   assert.deepEqual(requiredWrites(step), writes);
-  await assert.rejects(() => checkStaticRule("CR-06", { steps: [step], writes: writes.slice(0, 1) }, { phase: "edit" }), { code: "profile-write-set" });
+  assert.throws(() => checkStaticRule("CR-06", { steps: [step], writes: writes.slice(0, 1) }, { phase: "edit" }), { code: "profile-write-set" });
   assert.deepEqual(requiredWrites({ op: "ensure", parent: "p", property: "a/b" }), [
     { binding: "p", path: "/a~1b", mode: "create" }, { binding: "envelope", path: "/bindings", mode: "binding" }
   ]);
@@ -67,12 +67,12 @@ test("should require both reparent writes and explicit envelope/artifact writes"
 });
 
 test("should refuse ID edits, unknown operations and non-scalar create fields", async () => {
-  await assert.rejects(() => checkStaticRule("CR-06", {
+  assert.throws(() => checkStaticRule("CR-06", {
     steps: [{ op: "set", target: "self", path: "/id", value: { op: "literal", value: "new" } }],
     writes: [{ binding: "self", path: "/id", mode: "set" }]
   }, { phase: "edit" }), { code: "profile-producer" });
   assert.throws(() => requiredWrites({ op: "execute" }), { code: "profile-schema" });
-  await assert.rejects(() => checkStaticRule("CR-02", { location: "create.fields", type: "bpmn:Task",
+  assert.throws(() => checkStaticRule("CR-02", { location: "create.fields", type: "bpmn:Task",
     fields: [{ name: "documentation", value: { op: "literal", value: "x" } }] }, { descriptors }), { code: "profile-type" });
 });
 
@@ -80,7 +80,7 @@ test("should type nested values and selectors without accepting unknown bindings
   for (const value of [
     { op: "concat", values: [{ op: "read", binding: "absent", path: "/name" }] },
     { op: "case", value: { op: "literal", value: false }, mode: "upper" }
-  ]) await assert.rejects(() => checkStaticRule("CR-02", { location: "value", value }, { descriptors, bindings: {} }));
-  await assert.rejects(() => checkStaticRule("CR-03", { from: "self", via: "reference", property: "name", order: "id" },
+  ]) assert.throws(() => checkStaticRule("CR-02", { location: "value", value }, { descriptors, bindings: {} }));
+  assert.throws(() => checkStaticRule("CR-03", { from: "self", via: "reference", property: "name", order: "id" },
     { descriptors, bindings: { self: "bpmn:Task" } }), { code: "profile-selector-property" });
 });

@@ -10,7 +10,7 @@ for(const v of vectors.filter(v=>v.family==="lint-contract")) test(`should enfor
   if(["rule-missing","rule-thrown","config-missing","config-thrown"].includes(s)) {const o=input(v,"resolver-outcome"); await refuses(()=>resolveLint(o.kind,o.name,()=>{if(o.behavior==="undefined")return undefined;throw Object.assign(Error("unknown"),{code:o.kind==="rule"?"MODULE_NOT_FOUND":"CONFIG_NOT_FOUND"});}),v);return;}
   if(s==="info-restoration"||s==="profile-warning") {
     const policy=input(v,"effective-policy"),raw=s==="info-restoration"?input(v,"rawStandardFindings"):[];
-    const e=s==="info-restoration"?standardFinding(raw[0],policy,{Z:"/rootElements/0/flowElements/0"},"post-normalize"):profileFinding(input(v,"transport"),{id:"task-named",code:"task-name-missing",message:"invalid"},policy,{Z:"/rootElements/0/flowElements/0"},"post-normalize");
+    const e=s==="info-restoration"?standardFinding(raw[0],policy,{Z:"/rootElements/0/flowElements/0"},"post-normalize"):profileFinding(input(v,"transport"),{id:"task-named",code:"task-name-missing",message:"invalid"},policy,{ids:{Z:"/rootElements/0/flowElements/0"},pointers:new Set(["/rootElements/0/flowElements/0", "/rootElements/0/flowElements/0/name"])},"post-normalize");
     const report=buildReport("validate",{entries:[e],rawStandardFindings:raw});assert.deepEqual(report,expected(v,"report")); assert.equal(new TextDecoder().decode(serializeReport(report)),v.expectedArtifacts.find(a=>a.role==="report").canonical);
     if(s==="info-restoration") assert.deepEqual(lintSummary(report.entries),expected(v,"summary"));else assert.equal(lintSummary(report.entries).ok,true);return;
   }
@@ -24,7 +24,7 @@ for(const v of vectors.filter(v=>v.family==="lint-contract")) test(`should enfor
   if(s==="compiled-unknown-field") return refuses(()=>validateCompiledOptions(i,i),v);
   if(s==="draft-integrity") {assert.deepEqual(lintSummary([entry({...i.finding})]),{ok:false,counts:{info:0,warn:0,error:1}});return;}
   if(s==="release-barrier") {assert.deepEqual(lintOperationStages(i.operation),expected(v,"adapter-contract").stages);assert.equal(lintBarrier([entry({stage:"release",severity:"error"})]),false);return;}
-  if(s==="malformed-custom") return assert.throws(()=>profileFinding(i,{id:"task-named",code:i.code,message:"invalid"},{severity:"warn",classification:"readiness"},{},"post-normalize"),{code:"lint-rule-error"});
+  if(s==="malformed-custom") return assert.throws(()=>profileFinding(i,{id:"task-named",code:i.code,message:"invalid"},{severity:"warn",classification:"readiness"},{ids:{},pointers:new Set()},"post-normalize"),{code:"lint-rule-error"});
   if(s==="unresolved-id") return assert.deepEqual({source:sourceCoordinate(i.originalIndex,i)},expected(v,"adapter-contract"));
   if(s==="corrected-history") {const r=lintSummary(i.entries);assert.deepEqual({...r,historyEntriesRetained:i.entries.length},expected(v,"adapter-contract"));return;}
   assert.fail(`unhandled ${v.caseId}`);

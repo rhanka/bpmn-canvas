@@ -1,0 +1,963 @@
+{
+  "format": "f1-expectations/1",
+  "family": "reserved-names",
+  "title": "Reserved-name XML and JSON collision vectors",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+  "pinnedReference": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0"
+  },
+  "pointerDomain": "f1-expectations-pointer/1",
+  "vectors": [
+    {
+      "caseId": "reserved-json-attrs-type",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "$type": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/$type"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"$type\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-parent",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "$parent": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/$parent"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"$parent\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-get",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "get": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/get"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"get\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-set",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "set": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/set"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"set\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-type",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "type_": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/type_"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"type_\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-instance-of",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "instance_of": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/instance_of"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"instance_of\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-to-canonical-dict",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "to_canonical_dict": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/to_canonical_dict"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"to_canonical_dict\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-proto",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "__proto__": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/__proto__"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"__proto__\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-attrs-dict",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "__dict__": "shadow"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/__dict__"
+          }
+        ]
+      },
+      "derivation": "The generic $attrs key \"__dict__\" is in the closed reserved union, so the boundary refuses before native construction instead of letting it shadow a runtime member or be dropped.",
+      "provenance": [
+        "plan rev d: reserved-name row and closed-union requirement",
+        "plan rev d step-1 note: twin reserved members",
+        "reserved-names.json in this directory"
+      ]
+    },
+    {
+      "caseId": "reserved-json-misplaced-children",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "$children": []
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/$children"
+          }
+        ]
+      },
+      "derivation": "$children is schema-owned only on a generic element; on a registered Task it is a reserved member outside its defined position.",
+      "provenance": [
+        "plan rev d: wire model generic fields and reserved-name row"
+      ]
+    },
+    {
+      "caseId": "reserved-json-misplaced-parent",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {},
+                        "$parent": "Proc_Expect"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$parent"
+          }
+        ]
+      },
+      "derivation": "$parent is a runtime link omitted from JSON; its presence as wire data is a reserved-name refusal, not a parent assignment.",
+      "provenance": [
+        "plan rev d: runtime links omission and reserved-name row"
+      ]
+    },
+    {
+      "caseId": "reserved-json-misplaced-descriptor",
+      "operation": "f1-json-hydrate",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {},
+                        "$descriptor": {}
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$descriptor"
+          }
+        ]
+      },
+      "derivation": "$descriptor is a runtime object omitted from JSON; wire presence is refused before construction.",
+      "provenance": [
+        "plan rev d: runtime links omission and reserved-name row"
+      ]
+    },
+    {
+      "caseId": "reserved-json-control-generic-ok",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {}
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {}
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "derivation": "Control: the same generic shape with an empty reserved-free $attrs map is admitted; schema-owned $type/$name/$attrs positions are not themselves reserved refusals.",
+      "provenance": [
+        "plan rev d: generic wire model and reserved-name allowed positions"
+      ]
+    },
+    {
+      "caseId": "reserved-xml-generic-attr-get",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:thing xmlns:ext=\"urn:example:ext\" get=\"shadow\"/></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/get"
+          }
+        ]
+      },
+      "derivation": "A foreign XML attribute named get on a generic element would collide with a runtime member in at least one runtime (in the twin it is silently filtered today); the F1 boundary refuses with reserved-name at the projected attribute location instead of dropping it.",
+      "provenance": [
+        "plan rev d: reserved-name BEFORE native construction",
+        "twin generic attribute filtering read as the silent-drop hazard, not as expected behaviour"
+      ]
+    },
+    {
+      "caseId": "reserved-xml-generic-attr-set",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:thing xmlns:ext=\"urn:example:ext\" set=\"shadow\"/></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/set"
+          }
+        ]
+      },
+      "derivation": "A foreign XML attribute named set on a generic element would collide with a runtime member in at least one runtime (in the twin it is silently filtered today); the F1 boundary refuses with reserved-name at the projected attribute location instead of dropping it.",
+      "provenance": [
+        "plan rev d: reserved-name BEFORE native construction",
+        "twin generic attribute filtering read as the silent-drop hazard, not as expected behaviour"
+      ]
+    },
+    {
+      "caseId": "reserved-xml-generic-attr-type_",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:thing xmlns:ext=\"urn:example:ext\" type_=\"shadow\"/></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/type_"
+          }
+        ]
+      },
+      "derivation": "A foreign XML attribute named type_ on a generic element would collide with a runtime member in at least one runtime (in the twin it is silently filtered today); the F1 boundary refuses with reserved-name at the projected attribute location instead of dropping it.",
+      "provenance": [
+        "plan rev d: reserved-name BEFORE native construction",
+        "twin generic attribute filtering read as the silent-drop hazard, not as expected behaviour"
+      ]
+    },
+    {
+      "caseId": "reserved-xml-generic-attr-instance_of",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:thing xmlns:ext=\"urn:example:ext\" instance_of=\"shadow\"/></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/instance_of"
+          }
+        ]
+      },
+      "derivation": "A foreign XML attribute named instance_of on a generic element would collide with a runtime member in at least one runtime (in the twin it is silently filtered today); the F1 boundary refuses with reserved-name at the projected attribute location instead of dropping it.",
+      "provenance": [
+        "plan rev d: reserved-name BEFORE native construction",
+        "twin generic attribute filtering read as the silent-drop hazard, not as expected behaviour"
+      ]
+    },
+    {
+      "caseId": "reserved-xml-generic-attr-__proto__",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:thing xmlns:ext=\"urn:example:ext\" __proto__=\"shadow\"/></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/extensionElements/values/0/$attrs/__proto__"
+          }
+        ]
+      },
+      "derivation": "A foreign XML attribute named __proto__ on a generic element would collide with a runtime member in at least one runtime (in the twin it is silently filtered today); the F1 boundary refuses with reserved-name at the projected attribute location instead of dropping it.",
+      "provenance": [
+        "plan rev d: reserved-name BEFORE native construction",
+        "twin generic attribute filtering read as the silent-drop hazard, not as expected behaviour"
+      ]
+    },
+    {
+      "caseId": "reserved-xml-registered-attr-get",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\" get=\"shadow\"/></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:reserved-name",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "reserved-name",
+            "pointer": "/rootElements/0/flowElements/0/$attrs/get"
+          }
+        ]
+      },
+      "derivation": "The reserved-name refusal also covers foreign attributes on registered owners, before the attribute can land in the native attribute map under a runtime member name.",
+      "provenance": [
+        "plan rev d: reserved-name row (both boundary adapters, foreign attributes/properties)"
+      ]
+    }
+  ]
+}

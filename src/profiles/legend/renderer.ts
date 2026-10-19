@@ -1,7 +1,7 @@
 // `legend` renderer for bpmn-js. Display only: the BPMN XML is never written by it.
 // Adapted from an internal implementation of a draw.io-reference look.
 //
-// An "[App] X" text annotation associated to an activity is drawn as an
+// An "[Component] X" text annotation associated to an activity is drawn as an
 // application component box under that activity (part of the activity's
 // graphics, so it moves and selects with it); the annotation and its
 // association are hidden (display="none"). BPMN-in-Color attributes always win
@@ -86,18 +86,18 @@ function associated(el: DiagramElement): DiagramElement[] {
   return out;
 }
 
-/** [App] annotations associated to this activity (none for other types). */
+/** [Component] annotations associated to this activity (none for other types). */
 export function appsOf(host: DiagramElement): DiagramElement[] {
   if (!isActivity(host)) return [];
   return associated(host).filter(isAppShape);
 }
 
-/** An [App] annotation linked to at least one activity. */
+/** An [Component] annotation linked to at least one activity. */
 export function isLinkedApp(el: DiagramElement | undefined): boolean {
   return Boolean(el) && isAppShape(el) && associated(el as DiagramElement).some(isActivity);
 }
 
-/** Elements the legend hides: linked [App] annotations and their links. */
+/** Elements the legend hides: linked [Component] annotations and their links. */
 export function isHiddenInLegend(el: DiagramElement): boolean {
   if (el.waypoints) {
     return (
@@ -163,7 +163,7 @@ export class LegendRenderer extends BaseRenderer {
   }
 
   /**
-   * The legend draws plain associations, and every association to a `[Doc]` annotation, whatever its
+   * The legend draws plain associations, and every association to a `[Reference]` annotation, whatever its
    * direction (the reference look has no arrow on it). Other directional ones stay upstream's.
    */
   private connectionKind(el: DiagramElement): ReturnType<typeof legendConnectionKind> {
@@ -350,7 +350,7 @@ export class LegendRenderer extends BaseRenderer {
         break;
       }
       case "application": {
-        // Unlinked [App] annotation (linked ones are hidden and drawn under their activity).
+        // Unlinked [Component] annotation (linked ones are hidden and drawn under their activity).
         this.appBox(gfx, { name: annotationName(element.businessObject?.text), x: 0, y: 0, width: w, height: h }, fill, stroke);
         break;
       }
@@ -629,7 +629,7 @@ export class LegendRenderer extends BaseRenderer {
   }
 }
 
-// --- sync: hide linked [App] annotations, redraw their hosts -------------------
+// --- sync: hide linked [Component] annotations, redraw their hosts -------------------
 
 interface Registry {
   getAll(): DiagramElement[];

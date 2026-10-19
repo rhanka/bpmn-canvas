@@ -1,0 +1,324 @@
+{
+  "format": "f1-expectations/1",
+  "family": "encoding",
+  "title": "Input encoding registry vectors (raw bytes)",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+  "pinnedReference": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0"
+  },
+  "pointerDomain": "f1-expectations-pointer/1",
+  "vectors": [
+    {
+      "caseId": "encoding-iso-8859-1-declared",
+      "operation": "f1-xml-bytes-to-native",
+      "input": {
+        "kind": "xml-bytes",
+        "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8YnBtbjpkZWZpbml0aW9ucyB4bWxuczpicG1uPSJodHRwOi8vd3d3Lm9tZy5vcmcvc3BlYy9CUE1OLzIwMTAwNTI0L01PREVMIiBpZD0iRGVmc19FeHBlY3QiIHRhcmdldE5hbWVzcGFjZT0idXJuOmV4YW1wbGU6ZjEtZXhwZWN0Ij48YnBtbjpwcm9jZXNzIGlkPSJQcm9jX0V4cGVjdCIgaXNFeGVjdXRhYmxlPSJmYWxzZSI+PGJwbW46dGFzayBpZD0iVGFza19FeHBlY3QiIG5hbWU9IkGAn+n/Ii8+PC9icG1uOnByb2Nlc3M+PC9icG1uOmRlZmluaXRpb25zPgo=",
+        "byteLength": 305,
+        "sha256": "834974c2ba0408385023a3f3f1d5e425ad10d37e626c9fcaf1527ba25def02ac",
+        "declaredEncoding": "ISO-8859-1"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Aéÿ",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedName": "Aéÿ",
+        "expectedCodePoints": [
+          65,
+          128,
+          159,
+          233,
+          255
+        ]
+      },
+      "derivation": "Declared ISO-8859-1 decodes by the identity byte-to-code-point mapping: 0x80 becomes U+0080 and 0x9F becomes U+009F (never Windows-1252 replacements such as U+20AC), 0xE9 becomes U+00E9 and 0xFF becomes U+00FF in the Task name.",
+      "provenance": [
+        "plan rev d: decode declared ISO-8859-1 with the actual U+0000..U+00FF mapping; never the browser latin1 decoder",
+        "registry default in README: ISO-8859-1 admitted"
+      ]
+    },
+    {
+      "caseId": "encoding-iso-8859-1-c1-range",
+      "operation": "f1-xml-bytes-to-native",
+      "input": {
+        "kind": "xml-bytes",
+        "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8YnBtbjpkZWZpbml0aW9ucyB4bWxuczpicG1uPSJodHRwOi8vd3d3Lm9tZy5vcmcvc3BlYy9CUE1OLzIwMTAwNTI0L01PREVMIiBpZD0iRGVmc19FeHBlY3QiIHRhcmdldE5hbWVzcGFjZT0idXJuOmV4YW1wbGU6ZjEtZXhwZWN0Ij48YnBtbjpwcm9jZXNzIGlkPSJQcm9jX0V4cGVjdCIgaXNFeGVjdXRhYmxlPSJmYWxzZSI+PGJwbW46dGFzayBpZD0iVGFza19FeHBlY3QiIG5hbWU9IlBhcGVyIGtpdGUiPjxicG1uOmRvY3VtZW50YXRpb24+gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp88L2JwbW46ZG9jdW1lbnRhdGlvbj48L2JwbW46dGFzaz48L2JwbW46cHJvY2Vzcz48L2JwbW46ZGVmaW5pdGlvbnM+Cg==",
+        "byteLength": 394,
+        "sha256": "8069849c2bc9b0baba7671b641c57b900a8d3eb75146fcddf0fe7b3e32e9d870",
+        "declaredEncoding": "ISO-8859-1"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedText": "",
+        "expectedCodePoints": [
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159
+        ]
+      },
+      "derivation": "All 32 bytes 0x80..0x9F in a Documentation body map one-to-one to U+0080..U+009F in order; no byte is remapped, dropped or replaced.",
+      "provenance": [
+        "plan rev d: freeze all bytes 0x80-0x9F against U+0080-U+009F"
+      ]
+    },
+    {
+      "caseId": "encoding-utf8-default-no-declaration",
+      "operation": "f1-xml-bytes-to-native",
+      "input": {
+        "kind": "xml-bytes",
+        "base64": "PGJwbW46ZGVmaW5pdGlvbnMgeG1sbnM6YnBtbj0iaHR0cDovL3d3dy5vbWcub3JnL3NwZWMvQlBNTi8yMDEwMDUyNC9NT0RFTCIgaWQ9IkRlZnNfRXhwZWN0IiB0YXJnZXROYW1lc3BhY2U9InVybjpleGFtcGxlOmYxLWV4cGVjdCI+PGJwbW46cHJvY2VzcyBpZD0iUHJvY19FeHBlY3QiIGlzRXhlY3V0YWJsZT0iZmFsc2UiPjxicG1uOnRhc2sgaWQ9IlRhc2tfRXhwZWN0IiBuYW1lPSJDYWbDqSDwkICAIi8+PC9icG1uOnByb2Nlc3M+PC9icG1uOmRlZmluaXRpb25zPgo=",
+        "byteLength": 266,
+        "sha256": "b040ed2dc18457da183a6180b10b7adcdc3ffd718487d46fd97e67b0fb2d6c0b",
+        "declaredEncoding": null
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Café 𐀀",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedName": "Café 𐀀",
+        "expectedCodePoints": [
+          67,
+          97,
+          102,
+          233,
+          32,
+          65536
+        ]
+      },
+      "derivation": "With no XML declaration the encoding defaults to UTF-8: the two-byte sequence for U+00E9 and the four-byte sequence for U+10000 decode to those scalars in the Task name.",
+      "provenance": [
+        "plan rev d / native handling: no encoding declaration uses the UTF-8 default",
+        "pinned file note: files without a declaration use the UTF-8 default"
+      ]
+    },
+    {
+      "caseId": "encoding-utf8-declared",
+      "operation": "f1-xml-bytes-to-native",
+      "input": {
+        "kind": "xml-bytes",
+        "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGJwbW46ZGVmaW5pdGlvbnMgeG1sbnM6YnBtbj0iaHR0cDovL3d3dy5vbWcub3JnL3NwZWMvQlBNTi8yMDEwMDUyNC9NT0RFTCIgaWQ9IkRlZnNfRXhwZWN0IiB0YXJnZXROYW1lc3BhY2U9InVybjpleGFtcGxlOmYxLWV4cGVjdCI+PGJwbW46cHJvY2VzcyBpZD0iUHJvY19FeHBlY3QiIGlzRXhlY3V0YWJsZT0iZmFsc2UiPjxicG1uOnRhc2sgaWQ9IlRhc2tfRXhwZWN0IiBuYW1lPSJDYWbDqSDwkICAIi8+PC9icG1uOnByb2Nlc3M+PC9icG1uOmRlZmluaXRpb25zPgo=",
+        "byteLength": 305,
+        "sha256": "96ae74eda4f6d6c98579936a897fe2841b2c4a796e7bfd98b74a4c9082cfd1f1",
+        "declaredEncoding": "UTF-8"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Café 𐀀",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedName": "Café 𐀀",
+        "expectedCodePoints": [
+          67,
+          97,
+          102,
+          233,
+          32,
+          65536
+        ]
+      },
+      "derivation": "An explicit UTF-8 declaration gives the same tree as the default case.",
+      "provenance": [
+        "native reader: a UTF-8 declaration needs no fallback warning"
+      ]
+    },
+    {
+      "caseId": "encoding-unsupported-windows-1252",
+      "operation": "f1-xml-bytes-to-native",
+      "input": {
+        "kind": "xml-bytes",
+        "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0id2luZG93cy0xMjUyIj8+CjxicG1uOmRlZmluaXRpb25zIHhtbG5zOmJwbW49Imh0dHA6Ly93d3cub21nLm9yZy9zcGVjL0JQTU4vMjAxMDA1MjQvTU9ERUwiIGlkPSJEZWZzX0V4cGVjdCIgdGFyZ2V0TmFtZXNwYWNlPSJ1cm46ZXhhbXBsZTpmMS1leHBlY3QiPjxicG1uOnByb2Nlc3MgaWQ9IlByb2NfRXhwZWN0IiBpc0V4ZWN1dGFibGU9ImZhbHNlIj48YnBtbjp0YXNrIGlkPSJUYXNrX0V4cGVjdCIgbmFtZT0iUGxhaW4iLz48L2JwbW46cHJvY2Vzcz48L2JwbW46ZGVmaW5pdGlvbnM+Cg==",
+        "byteLength": 307,
+        "sha256": "0ab79673bd597ddefc2f2d55166e58a11a065c39d959cdfc55586e90756e45e6",
+        "declaredEncoding": "windows-1252"
+      },
+      "expectedStatus": "refused:unsupported-encoding",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "unsupported-encoding",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "windows-1252 is outside the admitted registry (design default), so the boundary refuses before decoding; it does not silently decode through a browser latin1 mapping.",
+      "provenance": [
+        "plan rev d: unsupported-encoding code and explicit encoding registry",
+        "README design default 1"
+      ]
+    },
+    {
+      "caseId": "encoding-invalid-utf8-sequence",
+      "operation": "f1-xml-bytes-to-native",
+      "input": {
+        "kind": "xml-bytes",
+        "base64": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGJwbW46ZGVmaW5pdGlvbnMgeG1sbnM6YnBtbj0iaHR0cDovL3d3dy5vbWcub3JnL3NwZWMvQlBNTi8yMDEwMDUyNC9NT0RFTCIgaWQ9IkRlZnNfRXhwZWN0IiB0YXJnZXROYW1lc3BhY2U9InVybjpleGFtcGxlOmYxLWV4cGVjdCI+PGJwbW46cHJvY2VzcyBpZD0iUHJvY19FeHBlY3QiIGlzRXhlY3V0YWJsZT0iZmFsc2UiPjxicG1uOnRhc2sgaWQ9IlRhc2tfRXhwZWN0IiBuYW1lPSJBwyhCIi8+PC9icG1uOnByb2Nlc3M+PC9icG1uOmRlZmluaXRpb25zPgo=",
+        "byteLength": 299,
+        "sha256": "3ef83658ff0d03156784904457dce009c237f58d01234befa17d8092868366a9",
+        "declaredEncoding": "UTF-8"
+      },
+      "expectedStatus": "refused:invalid-encoding",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "invalid-encoding",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "The byte sequence 0xC3 0x28 inside the name is malformed UTF-8 (a lead byte followed by a non-continuation byte), so decoding refuses with invalid-encoding and no tree is built.",
+      "provenance": [
+        "plan rev d: invalid-encoding for malformed byte input"
+      ]
+    }
+  ]
+}

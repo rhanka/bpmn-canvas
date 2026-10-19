@@ -78,9 +78,9 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
     const t = local(el);
     if (t === "textAnnotation") {
       const text = (el.textContent ?? "").trim();
-      if (text.startsWith("[App]")) apps.set(id, text.slice(5).trim());
-      else if (text.startsWith("[Doc]")) {
-        nodes.set(id, { type: "DOCUMENT", label: id, text: text.slice(5).trim() || id });
+      if (text.startsWith("[Component]")) apps.set(id, text.slice(11).trim());
+      else if (text.startsWith("[Reference]")) {
+        nodes.set(id, { type: "DOCUMENT", label: id, text: text.slice(11).trim() || id });
         docIds.add(id);
       }
       continue;

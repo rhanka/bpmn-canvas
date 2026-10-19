@@ -1,0 +1,125 @@
+{
+  "format": "f1-expectations/1",
+  "family": "doctype-entity",
+  "title": "DOCTYPE and ENTITY refusal vectors",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+  "pinnedReference": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0"
+  },
+  "pointerDomain": "f1-expectations-pointer/1",
+  "vectors": [
+    {
+      "caseId": "doctype-simple",
+      "operation": "f1-xml-boundary",
+      "input": {
+        "kind": "xml-text",
+        "text": "<!DOCTYPE bpmn:definitions>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"/></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-doctype-forbidden",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-doctype-forbidden",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "A bare DOCTYPE is refused at the boundary before any native construction; no DTD processing, entity expansion or external resolution takes place.",
+      "provenance": [
+        "plan rev d: DTD/ENTITY refusal before native construction and named diagnostic codes"
+      ]
+    },
+    {
+      "caseId": "doctype-with-entity-reports-doctype",
+      "operation": "f1-xml-boundary",
+      "input": {
+        "kind": "xml-text",
+        "text": "<!DOCTYPE bpmn:definitions [ <!ENTITY greeting \"hello\"> ]>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\">\n<bpmn:task id=\"Task_Expect\" name=\"&greeting;\"/></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-doctype-forbidden",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-doctype-forbidden",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "Design default (document-level priority): when a DOCTYPE is present its refusal is reported; the nested ENTITY does not change the code. The standalone vectors below isolate the entity code.",
+      "provenance": [
+        "plan rev d: DTD/ENTITY refusal before native construction and named diagnostic codes"
+      ]
+    },
+    {
+      "caseId": "entity-standalone-internal",
+      "operation": "f1-xml-boundary",
+      "input": {
+        "kind": "xml-text",
+        "text": "<!ENTITY greeting \"hello\">\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"/></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-entity-declaration-forbidden",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-entity-declaration-forbidden",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "Standalone ENTITY declaration with no DOCTYPE: isolates xml-entity-declaration-forbidden. The boundary refuses before native construction even though the prologue is not a well-formed document.",
+      "provenance": [
+        "plan rev d: DTD/ENTITY refusal before native construction and named diagnostic codes"
+      ]
+    },
+    {
+      "caseId": "entity-standalone-external",
+      "operation": "f1-xml-boundary",
+      "input": {
+        "kind": "xml-text",
+        "text": "<!ENTITY ext SYSTEM \"urn:example:external-resource\">\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"/></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-entity-declaration-forbidden",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-entity-declaration-forbidden",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "External entity declarations are refused with the same code; the named resource is never fetched or resolved.",
+      "provenance": [
+        "plan rev d: DTD/ENTITY refusal before native construction and named diagnostic codes"
+      ]
+    },
+    {
+      "caseId": "entity-expansion-in-doctype",
+      "operation": "f1-xml-boundary",
+      "input": {
+        "kind": "xml-text",
+        "text": "<!DOCTYPE bpmn:definitions [ <!ENTITY a \"0123456789\"> <!ENTITY b \"&a;&a;&a;&a;&a;\"> <!ENTITY c \"&b;&b;&b;&b;&b;\"> ]>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"/></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-doctype-forbidden",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-doctype-forbidden",
+            "pointer": ""
+          }
+        ]
+      },
+      "derivation": "Nested entity expansion (amplification shape) is stopped by the DOCTYPE refusal; no expansion is performed and no expanded text reaches the tree.",
+      "provenance": [
+        "plan rev d: DTD/ENTITY refusal before native construction and named diagnostic codes"
+      ]
+    }
+  ]
+}

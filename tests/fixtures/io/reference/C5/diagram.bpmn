@@ -59,11 +59,11 @@
     <bpmn:sequenceFlow id="Flow_Request_details_Check_order" sourceRef="Request_details" targetRef="Check_order" />
     <bpmn:sequenceFlow id="Flow_Ship_order_Order_shipped" sourceRef="Ship_order" targetRef="Order_shipped" />
     <bpmn:textAnnotation id="Doc_Shipping_policy">
-      <bpmn:text>[Doc] Shipping policy</bpmn:text>
+      <bpmn:text>[Reference] Shipping policy</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="DocLink_Shipping_policy_Ship_order" associationDirection="One" sourceRef="Ship_order" targetRef="Doc_Shipping_policy" />
     <bpmn:textAnnotation id="App_Check_order">
-      <bpmn:text>[App] Order desk</bpmn:text>
+      <bpmn:text>[Component] Order desk</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="AppLink_Check_order" sourceRef="App_Check_order" targetRef="Check_order" />
   </bpmn:process>

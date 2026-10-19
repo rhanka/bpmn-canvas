@@ -54,7 +54,7 @@ export function layoutChanges(registry: El, participant: El, lay: ProcessLayout,
     const lb = lay.labels[id];
     if (lb && el.label) changes.push({ element: el.label, bounds: move(lb) });
   }
-  // [App] annotations are stored where the legend render draws the box.
+  // [Component] annotations are stored where the legend render draws the box.
   for (const [hostId, a] of Object.entries(lay.apps)) {
     const host = registry.get(hostId);
     const t = lay.nodes[hostId];

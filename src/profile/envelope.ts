@@ -1,7 +1,7 @@
 import { canonicalize, canonicalDigest, rawDigest } from "./canonical.js";
 import { parseProfileText } from "./contracts.js";
 import type { SchemaValidator } from "./contracts.js";
-import { cloneJson, compareBindings, failContract, pointerKey, nativeIndex, validateBindingKeys, validateSupportBindings } from "./native-contracts.js";
+import { cloneJson, compareBindings, failContract, pointerKey, validateNativeReferences, validateBindingKeys, validateSupportBindings } from "./native-contracts.js";
 import type { DescriptorIndex, NativeNode, SupportBinding, SupportRole } from "./native-contracts.js";
 
 export interface IdentityPin { readonly id: string; readonly version: string; readonly sha256: string }
@@ -19,7 +19,7 @@ export function sortBindings(bindings: readonly SupportBinding[]): readonly Supp
 }
 
 /** Hash-only boundary: ownership and projection must be checked separately. */
-export function semanticRevision(tree: NativeNode, profileIdentity: ProfileIdentity, bindings: readonly SupportBinding[]): Promise<string> {
+export function semanticRevision(tree: NativeNode, profileIdentity: ProfileIdentity, bindings: readonly SupportBinding[]): string {
   return canonicalDigest({ tree, profileIdentity, bindings: sortBindings(bindings) });
 }
 
@@ -31,7 +31,7 @@ export type CompleteProfileDocument = Omit<ProfileIdentity, "sha256"> & {
 
 /** Syntax validation belongs to the loader; this boundary additionally refuses
  * partial records so an identity pin can never stand in for the whole package. */
-export async function profileIdentity(completeProfileDocument: CompleteProfileDocument): Promise<ProfileIdentity> {
+export function profileIdentity(completeProfileDocument: CompleteProfileDocument): ProfileIdentity {
   const profile = completeProfileDocument;
   const record = (value: unknown): value is Record<string, unknown> => !!value && typeof value === "object" && !Array.isArray(value);
   if (!record(profile) || Object.hasOwn(profile, "sha256") ||
@@ -39,13 +39,14 @@ export async function profileIdentity(completeProfileDocument: CompleteProfileDo
     !Object.hasOwn(profile, "base") || !record(profile.base) || !Object.hasOwn(profile, "policies") || !record(profile.policies) ||
     profileArraySections.some(key => !Object.hasOwn(profile, key) || !Array.isArray(profile[key]))) failContract("profile-schema");
   return { mechanismVersion: profile.mechanismVersion, schemaVersion: profile.schemaVersion, profile: profile.profile,
-    version: profile.version, sha256: await canonicalDigest(completeProfileDocument), base: cloneJson(profile.base), descriptors: cloneJson(profile.descriptors) };
+    version: profile.version, sha256: canonicalDigest(completeProfileDocument), base: cloneJson(profile.base), descriptors: cloneJson(profile.descriptors) };
 }
 
 export async function validateEnvelope(value: unknown, context: {
   readonly syntax: SchemaValidator; readonly descriptors: DescriptorIndex; readonly supportRoles: readonly SupportRole[];
   readonly storageValidator: (tree: unknown) => boolean;
   readonly descriptorRoles?: readonly DescriptorRole[];
+  readonly idRefScalars?: readonly string[];
 }): Promise<DocumentEnvelope> {
   canonicalize(value);
   function rejectNull(data: unknown): void {
@@ -60,7 +61,7 @@ export async function validateEnvelope(value: unknown, context: {
   if (!context.storageValidator(envelope.tree)) failContract();
   if (envelope.tree.$type !== "bpmn:Definitions" || typeof envelope.tree.targetNamespace !== "string" || !envelope.tree.targetNamespace ||
     typeof envelope.tree.exporterVersion !== "string" || !envelope.tree.exporterVersion) failContract();
-  nativeIndex(envelope.tree, context.descriptors);
+  validateNativeReferences(envelope.tree, context.descriptors, context.idRefScalars);
   const projection = projectSemanticTree(envelope.tree, context.descriptors, context.descriptorRoles ?? []);
   if (canonicalize(projection.tree) !== canonicalize(envelope.tree)) failContract();
   validateSupportBindings(envelope.tree, envelope.bindings, context.descriptors, context.supportRoles);
@@ -71,10 +72,10 @@ export async function validateEnvelope(value: unknown, context: {
 /** This hashes XML bytes supplied by an already validated import path; it does
  * not parse XML or change the existing XML API. Native JSON is strictly parsed.
  */
-export async function importRevision(format: "native-json" | "bpmn-xml", source: string): Promise<{ readonly sourceDigest: string; readonly baseRevision: string }> {
+export function importRevision(format: "native-json" | "bpmn-xml", source: string): { readonly sourceDigest: string; readonly baseRevision: string } {
   if (format !== "native-json" && format !== "bpmn-xml") failContract("profile-type");
-  const sourceDigest = format === "native-json" ? await canonicalDigest(parseProfileText(source)) : await rawDigest(source);
-  return { sourceDigest, baseRevision: await canonicalDigest({ domain: "profile-import/1", format, sourceDigest }) };
+  const sourceDigest = format === "native-json" ? canonicalDigest(parseProfileText(source)) : rawDigest(source);
+  return { sourceDigest, baseRevision: canonicalDigest({ domain: "profile-import/1", format, sourceDigest }) };
 }
 
 export interface DescriptorRole { readonly property: string; readonly role: "semantic" | "presentation"; readonly valueType?: string }

@@ -1,0 +1,675 @@
+{
+  "format": "f1-expectations/1",
+  "family": "round-trips",
+  "title": "project(hydrate(J)) == J round trips",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+  "pinnedReference": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0"
+  },
+  "pointerDomain": "f1-expectations-pointer/1",
+  "vectors": [
+    {
+      "caseId": "roundtrip-typed-minimal",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ]
+        },
+        "invariant": "project(hydrate(J)) == J"
+      },
+      "derivation": "Registered-only document already in sealed normal form (Definitions and Activity defaults present) is an exact fixed point; absent optional references stay absent.",
+      "provenance": [
+        "plan rev d: F1 invariant project(hydrate(J)) == J in sealed normal form after explicit-default expansion"
+      ]
+    },
+    {
+      "caseId": "roundtrip-generic-presence",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Note",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {},
+                        "$body": "",
+                        "$children": []
+                      },
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Note",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "data-note": "01"
+                        }
+                      },
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Box",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns:ext": "urn:example:ext"
+                        },
+                        "$body": "Folded paper",
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "ext:Leaf",
+                              "uri": "urn:example:ext"
+                            },
+                            "$attrs": {},
+                            "$body": "Inner"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Note",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {},
+                        "$body": "",
+                        "$children": []
+                      },
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Note",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "data-note": "01"
+                        }
+                      },
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Box",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns:ext": "urn:example:ext"
+                        },
+                        "$body": "Folded paper",
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "ext:Leaf",
+                              "uri": "urn:example:ext"
+                            },
+                            "$attrs": {},
+                            "$body": "Inner"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "invariant": "project(hydrate(J)) == J"
+      },
+      "derivation": "Presence is preserved exactly: an explicitly empty $body string and an explicitly empty $children array stay present, a generic without them stays without, and nested generic body/children round-trip in order.",
+      "provenance": [
+        "plan rev d: F1 invariant project(hydrate(J)) == J in sealed normal form after explicit-default expansion"
+      ]
+    },
+    {
+      "caseId": "roundtrip-generic-declarations",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns": "urn:example:ext",
+                          "xmlns:ext": "urn:example:ext",
+                          "data-note": "01"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "plain",
+                              "uri": ""
+                            },
+                            "$attrs": {
+                              "xmlns": ""
+                            }
+                          },
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "ext:Inner",
+                              "uri": "urn:example:ext"
+                            },
+                            "$attrs": {
+                              "xmlns:ext": "urn:example:ext"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns": "urn:example:ext",
+                          "xmlns:ext": "urn:example:ext",
+                          "data-note": "01"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "plain",
+                              "uri": ""
+                            },
+                            "$attrs": {
+                              "xmlns": ""
+                            }
+                          },
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "ext:Inner",
+                              "uri": "urn:example:ext"
+                            },
+                            "$attrs": {
+                              "xmlns:ext": "urn:example:ext"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "invariant": "project(hydrate(J)) == J"
+      },
+      "derivation": "Declarations live only inside $attrs: the default declaration, a prefixed declaration and an xmlns=\"\" reset on the child each round-trip, with child URIs following the declarations.",
+      "provenance": [
+        "plan rev d: F1 invariant project(hydrate(J)) == J in sealed normal form after explicit-default expansion"
+      ]
+    },
+    {
+      "caseId": "roundtrip-utf16-key-order",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "𐀀note": "supplementary-key",
+                          "note": "private-key"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "𐀀note": "supplementary-key",
+                          "note": "private-key"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "invariant": "project(hydrate(J)) == J"
+      },
+      "derivation": "Attribute-map keys sort by UTF-16 code units: the key starting with U+10000 (lead surrogate 0xD800) precedes the key starting with U+E000, the reverse of code-point order. The sealed form already uses that order and is a fixed point.",
+      "provenance": [
+        "plan rev d: F1 invariant project(hydrate(J)) == J in sealed normal form after explicit-default expansion"
+      ]
+    },
+    {
+      "caseId": "roundtrip-typed-attrs-empty-vs-absent",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_A",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "$attrs": {}
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_B",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_A",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "$attrs": {}
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_B",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1
+                }
+              ]
+            }
+          ]
+        },
+        "invariant": "project(hydrate(J)) == J"
+      },
+      "derivation": "Registered owners keep their $attrs omission convention: Task_A with an explicitly empty $attrs map keeps {}, Task_B without $attrs stays without.",
+      "provenance": [
+        "plan rev d: F1 invariant project(hydrate(J)) == J in sealed normal form after explicit-default expansion"
+      ]
+    },
+    {
+      "caseId": "roundtrip-generic-descendant-json",
+      "operation": "f1-json-round-trip",
+      "input": {
+        "kind": "f1-json",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Wrapper",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns:ext": "urn:example:ext"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "bpmn:task",
+                              "uri": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+                            },
+                            "$attrs": {
+                              "id": "Inner_Shadow"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "round-trip",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:Wrapper",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns:ext": "urn:example:ext"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "bpmn:task",
+                              "uri": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+                            },
+                            "$attrs": {
+                              "id": "Inner_Shadow"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "invariant": "project(hydrate(J)) == J"
+      },
+      "derivation": "A JSON generic child whose QName is bpmn:task stays a generic ($any) value through hydrate and project; it is never reclassified as a registered Task.",
+      "provenance": [
+        "plan rev d: F1 invariant project(hydrate(J)) == J in sealed normal form after explicit-default expansion"
+      ]
+    }
+  ]
+}

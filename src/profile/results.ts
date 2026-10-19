@@ -6,6 +6,7 @@ import { normalizeDiStyles, normalizeOverrides, validateLayout, validateRenderDa
 import type { RenderBinding, RenderData, Snapshot } from "./presentation-contracts.js";
 import { buildReport, capabilities, sortIdMap, validateEntry, validateReport, resultOperations } from "./report.js";
 import type { Capability, IdMapping, Report, ReportEntry } from "./report.js";
+import { lintSummary } from "./lint-contracts.js";
 
 export type PureResult<T> = { readonly status: "ok"; readonly payload: T; readonly diagnostics: readonly ReportEntry[] } |
   { readonly status: "refused"; readonly code: string; readonly diagnostics: readonly ReportEntry[] };
@@ -113,7 +114,12 @@ export function validateResult<T = unknown>(value: unknown): Result<T> {
     if (operation === "applyCommands") { text(payload.transactionId); choice(payload.changed, [true, false]); } if (Object.hasOwn(payload, "historyEpoch")) text(payload.historyEpoch);
   } else if (operation === "setTheme") { const payload = record(p, ["viewRevision"]); digest(payload.viewRevision); }
   else if (operation === "normalize") { const payload = record(p, ["envelope", "placements", "report"]); validateEnvelopeShape(payload.envelope); validatePlacements(payload.placements); validateReport(payload.report); }
-  else if (operation === "validate") validateReport(p);
+  else if (operation === "validate") {
+    const payload = record(p, ["ok", "counts"]), counts = record(payload.counts, ["info", "warn", "error"]);
+    for (const count of Object.values(counts)) if (!Number.isSafeInteger(count) || (count as number) < 0) failContract();
+    if (payload.ok !== (counts.error === 0)) failContract();
+    if (!equal(payload, lintSummary(report.entries))) failContract();
+  }
   else if (operation === "resolveTheme") validateRenderDataShape(p);
   else if (["serializePrepared", "exportPrepared"].includes(operation)) {
     const payload = record(p, ["format", "bytes", "digest", "idMap", "capability"]); text(payload.format); digest(payload.digest); array(payload.idMap); if (!equal(sortIdMap(payload.idMap as IdMapping[]), payload.idMap)) failContract(); choice(payload.capability, ["engine-byte-compatible", "structural"]);

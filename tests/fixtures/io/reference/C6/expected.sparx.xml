@@ -13,7 +13,7 @@
         <bpmn:dataObjectReference id="Note_v2" name="Note 'v2'"/>
         <bpmn:endEvent id="Fin" name="Fin"/>
         <bpmn:textAnnotation id="App_Cost_10_20">
-            <bpmn:text>[App] Tool &quot;A&quot; &amp; B</bpmn:text>
+            <bpmn:text>[Component] Tool &quot;A&quot; &amp; B</bpmn:text>
         </bpmn:textAnnotation>
         <bpmn:sequenceFlow id="D_but_Cost_10_20" name="" sourceRef="D_but" targetRef="Cost_10_20"/>
         <bpmn:sequenceFlow id="Cost_10_20_Fin" name="" sourceRef="Cost_10_20" targetRef="Fin"/>

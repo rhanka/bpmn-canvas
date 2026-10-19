@@ -104,8 +104,8 @@ export async function decodeDrawio(xml: string, options?: IoOptions): Promise<Gr
       const style = styleOf(cell);
       const value = cell.getAttribute("value") || "";
       let label = style.get("html") === "1" ? new DOMParser().parseFromString(value, "text/html").body.textContent || "" : value;
-      if (style.get("appType") === "comp") label = `[App] ${label}`;
-      if (style.get("shape") === "mxgraph.archimate3.representation") label = `[Doc] ${label}`;
+      if (style.get("appType") === "comp") label = `[Component] ${label}`;
+      if (style.get("shape") === "mxgraph.archimate3.representation") label = `[Reference] ${label}`;
       return { id: idMap.get(id) ?? id, kind, label, bounds: absolute(id), parent: idMap.get(cell.getAttribute("parent") || "") };
     });
     const nodeIds = new Set(nodes.map((n) => n.id));
@@ -126,7 +126,7 @@ export async function decodeDrawio(xml: string, options?: IoOptions): Promise<Gr
       });
     for (const node of nodes) {
       const parent = nodes.find((n) => n.id === node.parent);
-      if (parent?.kind === "task" && node.label.startsWith("[App] ")) {
+      if (parent?.kind === "task" && node.label.startsWith("[Component] ")) {
         edges.push({ id: `${node.id}_attachment`, kind: "association", label: "", source: node.id, target: parent.id, points: [] });
       }
       if (parent && !["participant", "lane"].includes(parent.kind)) node.parent = parent.parent;

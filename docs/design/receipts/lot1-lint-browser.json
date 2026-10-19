@@ -1,0 +1,95 @@
+{
+  "format": "lot1-lint-browser/1",
+  "package": "@sentropic/bpmn-canvas@0.4.0",
+  "budgetGzip": 153600,
+  "incremental": {
+    "entry": "src/profile/lint-bridge.ts",
+    "bytes": 41031,
+    "gzip": 13329,
+    "sha256": "f7fe33ffab2495952c9d24c687e6c6140b434da15c7dc20dd8d2d9ed9c6f3810"
+  },
+  "zeroLintEntries": [
+    {
+      "entry": "src/index.ts",
+      "markers": []
+    },
+    {
+      "entry": "src/browser/entry.ts",
+      "markers": []
+    }
+  ],
+  "dynamicLoadProbe": [
+    {
+      "pattern": "/import\\s*\\(/",
+      "found": false
+    },
+    {
+      "pattern": "fetch(",
+      "found": false
+    },
+    {
+      "pattern": "XMLHttpRequest",
+      "found": false
+    }
+  ],
+  "bundler": {
+    "name": "esbuild",
+    "version": "0.28.2",
+    "flags": {
+      "bundle": true,
+      "minify": true,
+      "platform": "browser",
+      "target": [
+        "es2020"
+      ],
+      "format": "esm",
+      "production": true
+    }
+  },
+  "baseline": {
+    "engine": "bpmnlint",
+    "version": "11.15.0",
+    "pinned": "11.15.0"
+  },
+  "node": "v22.22.1",
+  "productionBrowser": {
+    "version": "0.4.0",
+    "files": {
+      "bpmn-canvas.min.js": {
+        "bytes": 822175,
+        "gzip": 240688,
+        "brotli": 202001,
+        "integrity": "sha384-UM8/djQQMc1kJV2I0tMBljDpPE+d855gWodljhtAWRgpJMtEXQtcV3DJRPklNh8g"
+      },
+      "bpmn-canvas.iife.min.js": {
+        "bytes": 824445,
+        "gzip": 241006,
+        "brotli": 202205,
+        "integrity": "sha384-u9L563k4UvRr4YP0c/ptug0z1S6jkqQauoZVKlLsxvmODf8MOdvmPWcNsERnEPnN"
+      }
+    },
+    "bundled": [
+      "@bpmn-io/diagram-js-ui",
+      "bpmn-auto-layout",
+      "bpmn-js",
+      "bpmn-moddle",
+      "clsx",
+      "diagram-js",
+      "diagram-js-direct-editing",
+      "didi",
+      "domify",
+      "htm",
+      "ids",
+      "inherits-browser",
+      "min-dash",
+      "min-dom",
+      "moddle",
+      "moddle-xml",
+      "object-refs",
+      "path-intersection",
+      "preact",
+      "saxen",
+      "tiny-svg"
+    ]
+  }
+}

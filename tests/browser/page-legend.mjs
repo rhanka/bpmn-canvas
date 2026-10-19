@@ -13,7 +13,7 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
     <bpmn:inclusiveGateway id="GI"/>
     <bpmn:endEvent id="E"/>
     <bpmn:userTask id="UT" name="User task"/>
-    <bpmn:textAnnotation id="APP"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="APP"><bpmn:text>[Component] CRM</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="AS" sourceRef="T1" targetRef="APP"/>
     <bpmn:sequenceFlow id="F1" sourceRef="S" targetRef="T1"/>
     <bpmn:sequenceFlow id="F2" sourceRef="T1" targetRef="GX"/>
@@ -38,13 +38,13 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
   </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
 
-// Two collapsed sub-processes, one with an application band ([App] annotation), one without.
+// Two collapsed sub-processes, one with an application band ([Component] annotation), one without.
 const SP_XML = `<?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="DSP" targetNamespace="http://example.org/sp">
   <bpmn:process id="PSP" isExecutable="false">
     <bpmn:subProcess id="SPA" name="With application"/>
     <bpmn:subProcess id="SPN" name="Without application"/>
-    <bpmn:textAnnotation id="SPAPP"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="SPAPP"><bpmn:text>[Component] CRM</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="SPAS" sourceRef="SPA" targetRef="SPAPP"/>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BDSP"><bpmndi:BPMNPlane id="PLSP" bpmnElement="PSP">

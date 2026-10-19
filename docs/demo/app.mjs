@@ -54,7 +54,7 @@ function intentOf(text) {
 let callSeq = 0;
 
 /** The simulated model: streams a short answer, then emits a tool call or acts on the canvas. */
-function simulatedModel(app) {
+function simulatedModel(host) {
   return {
     async *run({ messages, abortSignal }) {
       const last = messages[messages.length - 1];
@@ -80,12 +80,12 @@ function simulatedModel(app) {
         return;
       }
       if (intent.kind === "layout") {
-        const result = await app.layout();
+        const result = await host.layout();
         yield* say(result === null ? "Open a diagram first." : `Arranged: ${result.changed} element(s) moved${result.skipped.length ? `, ${result.skipped.length} left in place` : ""}. One undo (Ctrl+Z) restores the previous layout.`);
         return;
       }
       if (intent.kind === "look") {
-        app.setFormat(intent.format);
+        host.setFormat(intent.format);
         yield* say(intent.format === "bpmn" ? "Switched to the BPMN look: the standard notation, recoloured." : "Switched to the Custom look.");
         return;
       }
@@ -98,8 +98,8 @@ const Text = ({ text }) => h("p", null, text);
 const UserMessage = () => h(MessagePrimitive.Root, { className: "msg user" }, h(MessagePrimitive.Parts, { components: { Text } }));
 const AssistantMessage = () => h(MessagePrimitive.Root, { className: "msg assistant" }, h(MessagePrimitive.Parts, { components: { Text } }));
 
-function Chat({ app }) {
-  const model = useMemo(() => simulatedModel(app), [app]);
+function Chat({ host }) {
+  const model = useMemo(() => simulatedModel(host), [host]);
   const runtime = useLocalRuntime(model);
   const toolkit = useMemo(() => createBpmnToolkit({
     toolNames: ["draw_process"],
@@ -108,9 +108,9 @@ function Chat({ app }) {
       const m = MODELS[key];
       return m ? { documentId: key, revision: "1", xml: m.xml, title: m.title } : null;
     },
-    onOpen: (artifact) => app.open(artifact.documentId),
+    onOpen: (artifact) => host.open(artifact.documentId),
     labels: { running: "Drawing…", open: "Open in the canvas" },
-  }), [app]);
+  }), [host]);
   const config = useMemo(() => AuiConfig({ tools: Tools({ toolkit }) }), [toolkit]);
   const ask = (text) => runtime.thread.append({ role: "user", content: [{ type: "text", text }] });
   return h(AssistantRuntimeProvider, { runtime, config },
@@ -130,14 +130,14 @@ function App() {
   const workshop = useRef(null);
   const [doc, setDoc] = useState({ key: "onboarding", xml: MODELS.onboarding.xml, revision: undefined });
   const [format, setFormat] = useState("custom");
-  const app = useMemo(() => ({
+  const host = useMemo(() => ({
     open: (key) => { const m = MODELS[key]; if (m) setDoc({ key, xml: m.xml, revision: undefined }); },
     layout: async () => { const c = workshop.current?.canvas; return c ? c.autoLayout() : null; },
     setFormat: (id) => setFormat(id),
   }), []);
   const onXmlChange = useCallback((xml, change) => setDoc((d) => ({ ...d, xml, revision: change.revision })), []);
   return h("div", { className: "app" },
-    h("aside", { className: "chat", "aria-label": "Assistant" }, h(Chat, { app })),
+    h("aside", { className: "chat", "aria-label": "Assistant" }, h(Chat, { host })),
     h("main", { className: "canvas", "aria-label": "Diagram" },
       h(BpmnWorkshop, {
         ref: workshop,

@@ -1,0 +1,160 @@
+{
+  "format": "block-a-j4-fix/1",
+  "branch": "workbench/functions-20261018-block-a-fix-j4",
+  "base": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+  "scope": [
+    13,
+    14,
+    21,
+    22,
+    23
+  ],
+  "status": "Implemented; independent verification pending",
+  "testFile": "tests/f1-extensions-j4.test.mjs",
+  "redEvidence": {
+    "initial": {
+      "source": "Unmodified bfed4a3, npm ci then npm run build; tests added before runtime changes.",
+      "tests": 18,
+      "passed": 0,
+      "failed": 18,
+      "exit": 1
+    },
+    "extended": {
+      "source": "Fresh transpilation of original IO sources from bfed4a3 into dist, restored from in-memory buffers in finally.",
+      "tests": 31,
+      "passed": 0,
+      "failed": 31,
+      "exit": 1
+    },
+    "note": "The Report/2 adapter case is additional integration coverage, not claimed as a discriminating baseline probe for that new API."
+  },
+  "findings": [
+    {
+      "finding": 13,
+      "tests": [
+        "J4 #13 should accept an empty injected extension map across F1 boundaries",
+        "J4 #13 should derive collection multiplicity from descriptors"
+      ],
+      "red": "Empty injected map refused invalid-configuration; two entries in an isMany Element slot refused duplicate-extension.",
+      "fix": "Remove forced descriptor equality and named singleton policy. Hydrate/project use caller descriptors; parsing shares its validated factory with the observer and native reader.",
+      "green": "Both tests pass: exact minimal Definitions probe, empty-map parse/project and repeated collection entries."
+    },
+    {
+      "finding": 14,
+      "tests": [
+        "J4 #14 should refuse effective descriptor uri drift",
+        "J4 #14 should refuse effective descriptor inheritance drift",
+        "J4 #14 should refuse effective descriptor xml drift"
+      ],
+      "red": "All three configurations projected without a refusal (Missing expected exception).",
+      "fix": "Compare complete effective descriptors and non-enumerable package identity, including inherited packages, URI and XML metadata. Cache is per conversion.",
+      "green": "Each drift refuses descriptor-mismatch; the original configuration still projects afterward."
+    },
+    {
+      "finding": 21,
+      "tests": [
+        "J4 #21 should preserve attribute pointer segment a.b",
+        "J4 #21 should preserve attribute pointer segment a~b",
+        "J4 #21 should preserve attribute pointer segment a/b",
+        "J4 #21 should preserve attribute pointer segment a[0]",
+        "J4 #21 should retain ancestor targets for primitive failures",
+        "J4 #21 should locate F7 geometry failures with an ancestor target",
+        "J4 #21 should preserve ancestor targets on native warnings",
+        "J4 #21 should satisfy sealed coordinates for <caseId> (all 12 reserved/entity/numeric vectors)"
+      ],
+      "red": "a.b became a/b, a~b lacked ~0, a/b lacked ~1 and a[0] became a/0. Primitive errors had no target; F7 had no diagnostic path. All 12 sealed XML coordinates were empty.",
+      "fix": "Quote opaque display-path segments and encode RFC 6901 pointers from parsed segments. Keep ancestor IDs through primitive, warning, F7 and deferred reference validation. Observe source coordinates through the pinned tokenizer before native construction.",
+      "green": "Nineteen tests pass; all 12 independently sealed coordinates compare exactly. ID-less bounds error points to width and targets Shape."
+    },
+    {
+      "finding": 22,
+      "tests": [
+        "J4 #22 should refuse misplaced reserved typed fields with reserved-name",
+        "J4 #22 should refuse own generic get in project and F7",
+        "J4 #22 should refuse own generic set in project and F7",
+        "J4 #22 should enforce every independently sealed reserved name"
+      ],
+      "red": "Misplaced $parent used unknown-property; generic get/set were accepted silently. Final union probe failed with Missing expected exception: __contains__ before adding four omitted sealed members.",
+      "fix": "Apply the closed union to unknown typed fields and generic foreign properties. Recognize only non-enumerable callable runtime methods; overwritten methods refuse. Apply reserved-name per reviewer D1 arbitration. Add hasType, __contains__, __getitem__ and __setitem__ from the existing sealed enumeration.",
+      "green": "All four tests pass, including every sealed reserved name through hydrate, project and F7."
+    },
+    {
+      "finding": 23,
+      "tests": [
+        "J4 #23 should expose mixed content loss at the XML boundary",
+        "J4 #23 should expose native integer coercion without changing the value",
+        "J4 #23 should refuse an unbound foreign writer attribute before writing",
+        "J4 #23 should preserve upstream prefix-loss bytes and expose a diagnostic",
+        "J4 #23 should adapt normalization to Report/2 with exact presence and source"
+      ],
+      "red": "Mixed text, 1.5-to-1 coercion and prefix stripping yielded empty diagnostics; unbound foreign attribute writing resolved successfully.",
+      "fix": "Observe mixed content and primitive coercion at XML events. Refuse unbound writer attributes. Add serializeBpmnWithDiagnostics with unchanged native bytes and typed prefix-loss diagnostics; add a Report/2 adapter requiring caller-supplied presence/values and coordinate-domain selection.",
+      "green": "Four discriminating probes and the additional Report/2 integration case pass; writer bytes equal the upstream oracle."
+    }
+  ],
+  "verification": {
+    "install": "npm ci passed",
+    "build": "npm run build passed",
+    "typecheck": "npm run typecheck passed",
+    "compatibility": "npm run typecheck:compat passed",
+    "suite": {
+      "command": "timeout -k 5s 180s node --test --test-reporter=tap tests/f1-extensions-*.test.mjs tests/workbench-f1.test.mjs tests/workbench-f7.test.mjs tests/workbench-g0.test.mjs tests/workbench-parity-f1.test.mjs tests/workbench-parity-f7.test.mjs tests/brand-guard.test.mjs tests/profile-brand-guard.test.mjs tests/profile-report.test.mjs",
+      "tests": 228,
+      "passed": 228,
+      "failed": 0
+    },
+    "testEnvironment": "Owner-specified GIT_CONFIG_COUNT/KEY/VALUE hook override exported for every node test run; no test-force-exit. All test processes exited within timeout.",
+    "scopeCheck": "Explicit paths only; no push."
+  },
+  "sharedFilesTouched": [
+    {
+      "path": "src/io/moddle-json.ts",
+      "reason": "Codec fixes; parse entry point invokes coordinate/loss observer while preserving lexical refusal precedence."
+    },
+    {
+      "path": "src/io/f1-extensions.ts",
+      "reason": "Opaque path segments, nearest warning targets, and optional numeric scanning to avoid duplicate losses."
+    },
+    {
+      "path": "src/io/serialize-bpmn.ts",
+      "reason": "F7 source paths/targets, reserved-name enforcement, unbound attribute refusal and prefix-loss diagnostics."
+    },
+    {
+      "path": "src/io/index.ts",
+      "reason": "Two additive exports: serializeBpmnWithDiagnostics and f1DiagnosticEntry."
+    },
+    {
+      "path": "tests/workbench-f1.test.mjs",
+      "reason": "Replace required-private-map rejection with malformed-map rejection; apply D1 reserved-name arbitration."
+    },
+    {
+      "path": "tests/workbench-parity-f1.test.mjs",
+      "reason": "Replace the superseded hard-coded singleton assertion with descriptor collection preservation; original sealed bytes unchanged."
+    },
+    {
+      "path": "docs/design/receipts/block-a-f1-disputes.json",
+      "reason": "Record all adopted reviewer arbitrations, explicit reseal chain and historical evidence."
+    },
+    {
+      "path": "tests/fixtures/f1-extensions/expectations/02-warning-truncation.json",
+      "reason": "Only authorized representation corrections and their explicit seals."
+    },
+    {
+      "path": "tests/fixtures/f1-extensions/expectations/06-generic-namespaces.json",
+      "reason": "Only authorized representation corrections and their explicit seals."
+    },
+    {
+      "path": "tests/fixtures/f1-extensions/expectations/seal.json",
+      "reason": "Only authorized representation corrections and their explicit seals."
+    }
+  ],
+  "arbitrations": "docs/design/receipts/block-a-f1-disputes.json#fixRoundJ4",
+  "infeasibleItems": [],
+  "newFiles": [
+    "src/io/f1-source.ts",
+    "src/io/saxen.d.ts",
+    "src/io/f1-report.ts",
+    "tests/f1-extensions-j4.test.mjs",
+    "docs/design/receipts/block-a-j4-fix.json"
+  ]
+}

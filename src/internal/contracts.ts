@@ -45,7 +45,7 @@ export interface LegendTokens {
   readonly flow: string;
   /** Association and data-link stroke. */
   readonly link: string;
-  /** Stroke of an association that ends on a `[Doc]` annotation. Falls back to `link`. */
+  /** Stroke of an association that ends on a `[Reference]` annotation. Falls back to `link`. */
   readonly docLink: string;
   /** `stroke-dasharray` of that association, for instance `5 5`. */
   readonly docLinkDash: string;
@@ -72,13 +72,13 @@ export interface LegendTokens {
   /** External (call) process, external input and process output. */
   readonly externalLine: string;
   readonly externalFill: string;
-  /** `[Doc]` annotation (document). */
+  /** `[Reference]` annotation (document). */
   readonly docLine: string;
   readonly docFill: string;
   /** Task input and output (data object). */
   readonly dataLine: string;
   readonly dataFill: string;
-  /** `[App]` annotation (application component box). */
+  /** `[Component]` annotation (application component box). */
   readonly appLine: string;
   readonly appFill: string;
 }

@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { hashOf } from "./brand.mjs";
+import { phase1SourcePin } from "./block-a-phase1-pins.mjs";
+import { phase2SourcePin } from "./block-a-phase2-pins.mjs";
 
 // Historical digests were checked against the original objects before squash.
 // Edited tests have explicit successor pins; earlier receipts stay intact.
@@ -50,7 +52,26 @@ export function finalCorpusPin(path, previous) {
 export function historyGuardPin(path, previous) {
   const entry = JSON.parse(readFileSync(new URL("../../docs/design/receipts/lot0-history-guard-2.json", import.meta.url)))
     .supersedesFiles.find(entry => entry.path === path);
-  if (!entry) return previous;
-  assert.deepEqual({ bytes: previous.bytes, sha256: previous.sha256 }, entry.old, `${path} history guard reseal predecessor`);
-  return entry.new;
+  if (entry) {
+    assert.deepEqual({ bytes: previous.bytes, sha256: previous.sha256 }, entry.old, `${path} history guard reseal predecessor`);
+    previous = entry.new;
+  }
+  return j5SourcePin(path, previous);
+}
+
+export function j5SourcePin(path, previous) {
+  const fix = JSON.parse(readFileSync(new URL("../../docs/design/receipts/block-a-j5-reseal.json", import.meta.url)));
+  assert.equal(fix.format, "block-a-j5-source-reseal/1");
+  assert.equal(fix.baseCommit, "bfed4a302446a3abbfec8b6bba46843dec432eca");
+  const successor = fix.supersedesFiles.find(entry => entry.path === path);
+  if (!successor) return phase2SourcePin(path, phase1SourcePin(path, previous));
+  const parallel = JSON.parse(readFileSync(new URL("../../docs/design/receipts/lot0-history-guard-2.json", import.meta.url)))
+    .supersedesFiles.find(entry => entry.path === path);
+  if (parallel && previous.bytes === parallel.new.bytes && previous.sha256 === parallel.new.sha256 &&
+    (previous.bytes !== successor.old.bytes || previous.sha256 !== successor.old.sha256)) {
+    assert.deepEqual(parallel.old, successor.old, `${path} parallel reseal predecessor`);
+    previous = parallel.old;
+  }
+  assert.deepEqual({ bytes: previous.bytes, sha256: previous.sha256 }, successor.old, `${path} J5 reseal predecessor`);
+  return phase2SourcePin(path, phase1SourcePin(path, successor.new));
 }

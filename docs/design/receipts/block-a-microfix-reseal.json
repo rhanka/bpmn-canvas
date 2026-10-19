@@ -1,0 +1,139 @@
+{
+  "format": "block-a-microfix-reseal/1",
+  "baseCommit": "05f737885bd44fddea84bf1b4d55ae5428704855",
+  "reason": "Record only the targeted public-reference, XML-location, schema-name and hygiene successors; retain all historical source pins and expectation seal hashes.",
+  "files": [
+    {
+      "path": "src/io/f1-source.ts",
+      "old": {
+        "bytes": 8375,
+        "sha256": "b5ffdcfd66e97ee76318bc8fde03b7dd628138821181f6f07e4d0afebc7d3a33"
+      },
+      "current": {
+        "bytes": 8342,
+        "sha256": "c6df69ef85977b955a278f9d7cfbd45f4defc95588cc7cfe891f4be12edc506f"
+      }
+    },
+    {
+      "path": "src/profile/compiler-static.ts",
+      "old": {
+        "bytes": 23059,
+        "sha256": "eaa2a42525198cadd8352522d41091cf73f3abeb3a42de43ac777e9967fd742b"
+      },
+      "current": {
+        "bytes": 23051,
+        "sha256": "4d30917043d2c2eb8872822af608b8d7599de93d0f09f4f08fa66e43ad4aa008"
+      }
+    },
+    {
+      "path": "src/profile/compiler.ts",
+      "old": {
+        "bytes": 54364,
+        "sha256": "cddeb801f38c688565e831aeb8ee7f84a14679fd4f0a5cec7b4daeb6dd4af855"
+      },
+      "current": {
+        "bytes": 54534,
+        "sha256": "73e5884af8ad122c480ba99d60ab73e837ba8e6b9e511ee216666411585e7229"
+      }
+    },
+    {
+      "path": "src/profile/public-compiler.ts",
+      "old": {
+        "bytes": 2643,
+        "sha256": "425b8dc384a734ff34392880675a231326a3c55842654dcfddfff24a0f68909d"
+      },
+      "current": {
+        "bytes": 2754,
+        "sha256": "4d087edd62c3303319f2fdea6d74ef6bf301f1418b5923e1236fbb9ca53dede2"
+      }
+    },
+    {
+      "path": "src/profile/validate.ts",
+      "old": {
+        "bytes": 7315,
+        "sha256": "6ea0beda91bf9663bf107720fe263359201c740d73f0a87a3c71b18a3e2d8b00"
+      },
+      "current": {
+        "bytes": 7357,
+        "sha256": "5e687b72160108af010dd480bf425c9727fca11dc1be9367c283d3862ae81b2e"
+      }
+    },
+    {
+      "path": "tests/block-a-phase2-integration.test.mjs",
+      "old": {
+        "bytes": 2420,
+        "sha256": "d981572290808c0681de3e808a7e5e80155eaf78d5e53c08c7145abff17fafc3"
+      },
+      "current": {
+        "bytes": 3052,
+        "sha256": "25f5d37620e38b7e95ab2b08ff5bf9bfc3750ecc68b5d6299f49cf33fecac08b"
+      }
+    },
+    {
+      "path": "tests/f1-extensions-j4.test.mjs",
+      "old": {
+        "bytes": 9520,
+        "sha256": "73488f9b5631a036f2fc050b4fc9d5d2c6eed14430dba3edb46f4dbd0e566a99"
+      },
+      "current": {
+        "bytes": 10077,
+        "sha256": "961dfecccf0da0c6292893c45296f39cc8d806ec68d7d18f37e61a794ab6767b"
+      }
+    },
+    {
+      "path": "tests/f1-seal-integrity.test.mjs",
+      "old": {
+        "bytes": 2784,
+        "sha256": "5c76f4ba13445120000b47ac31d7e26b3ebd9a0abf551bd8185ec1e9a80fa4e7"
+      },
+      "current": {
+        "bytes": 2833,
+        "sha256": "b3a1deb39e34533f67b4b493145643722a0f063e1c8820dc0be4a53a1784c6aa"
+      }
+    },
+    {
+      "path": "tests/helpers/block-a-phase2-pins.mjs",
+      "old": {
+        "bytes": 1655,
+        "sha256": "91d0d3e5bc61b2af00e58d4b91a7068b9551fdb8332689643af5023ace4909db"
+      },
+      "current": {
+        "bytes": 2223,
+        "sha256": "4946143ba1b471bab6e1c5aca1f211318e91df95e97da0bf32cc200f594a9a89"
+      }
+    },
+    {
+      "path": "tests/profile-compiler-j2.test.mjs",
+      "old": {
+        "bytes": 18112,
+        "sha256": "bcc6f89edbe9765a03422c57c11f21c6151213172c3fb23f44bd7ab91ab9275f"
+      },
+      "current": {
+        "bytes": 18153,
+        "sha256": "9790a309f81957bf193da59dd811901fd0ffca79d97ae67e70c8565a452790b9"
+      }
+    },
+    {
+      "path": "tests/profile-compiler.test.mjs",
+      "old": {
+        "bytes": 17765,
+        "sha256": "08204b775e5b242f7264ed23fb506f667d66af05b03a7fc84e89245149e92651"
+      },
+      "current": {
+        "bytes": 17757,
+        "sha256": "b82dd06c0256ebd64760cf3128183fe44a484ccd7a55dcaef21f540b788c45fd"
+      }
+    },
+    {
+      "path": "tests/profile-public-api.test.mjs",
+      "old": {
+        "bytes": 9717,
+        "sha256": "0266b06637e2b8b0a880062d4c2bcaf4949b96d6a61be385d9297142e3e5d469"
+      },
+      "current": {
+        "bytes": 13504,
+        "sha256": "7b9924cf40e10cc65577bc595c946e7df35309e2ed97b425ff4902448cdcb765"
+      }
+    }
+  ]
+}

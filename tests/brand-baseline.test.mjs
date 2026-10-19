@@ -19,20 +19,16 @@ test("should reject every tracked occurrence outside the approved business basel
   assert.deepEqual(outsideBaseline(scanTracked(repo), baseline), []);
 });
 
-test("should allow the pinned baseline to shrink while rejecting additions and substitutions", async () => {
+test("should keep the emptied lot 2 baseline closed to additions and substitutions", async () => {
   const { parseBaseline, verifyBaseline } = await loadGuard();
   const text = fixture("brand-baseline.tsv");
   const pin = JSON.parse(fixture("brand-baseline.pin.json"));
   const rows = parseBaseline(text);
-  verifyBaseline(text, pin);
-  assert.ok(rows.length > 0);
-  verifyBaseline(rows.slice(1).join("\n") + "\n", pin);
-  verifyBaseline("", pin);
+  assert.deepEqual(rows, []);
+  assert.deepEqual(verifyBaseline(text, pin), []);
   const added = `tests/neutral-probe.txt:1\t${hashOf("neutralprobe")}`;
-  assert.throws(() => verifyBaseline(text + added + "\n", pin), /baseline/);
-  assert.throws(() => verifyBaseline([added, ...rows.slice(1)].sort().join("\n") + "\n", pin), /baseline/);
-  assert.throws(() => verifyBaseline(text + rows[0] + "\n", pin), /baseline/);
-  assert.throws(() => verifyBaseline(text, { ...pin, sha256: "0".repeat(64) }), /baseline/);
+  assert.throws(() => verifyBaseline(`${added}\n`, pin), /baseline/);
+  assert.throws(() => verifyBaseline(`${added}\n${added}\n`, pin), /baseline/);
 });
 
 test("should reject synthetic new files, lines and hashes without disclosing their text", async () => {

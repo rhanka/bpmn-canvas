@@ -8,7 +8,7 @@ neutralised; the brand guard of `tests/package-shape.test.mjs` runs over this fo
 
 | File | What it is |
 |---|---|
-| `diagram.bpmn` | The document, shaped like the BPMN the original engine writes: one collaboration and process per page, lanes, data objects, `ioSpecification`, `[Doc]` and `[App]` annotations, DI planes in the engine's order (pool, lanes, nodes, links, applications). |
+| `diagram.bpmn` | The document, shaped like the BPMN the original engine writes: one collaboration and process per page, lanes, data objects, `ioSpecification`, `[Reference]` and `[Component]` annotations, DI planes in the engine's order (pool, lanes, nodes, links, applications). |
 | `process.json` | The normalised ProcessList saved with it (keys sorted, `json.dumps` separators and ASCII escapes), the input of `readFacts`. |
 | `expected.drawio`, `expected.sparx.xml` | Reference exports with the facts. |
 | `expected-nofacts.drawio`, `expected-nofacts.sparx.xml` | Reference exports without facts (C1–C4, C7). |

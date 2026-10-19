@@ -1,0 +1,787 @@
+{
+  "format": "j5-package-artifact/1",
+  "sha256": "6ec6aa8147ca4ce6e4397a8d29f8dc28e6f39d14b99e7016f5b304f6e50fa0d6",
+  "bytes": 1523099,
+  "members": [
+    {
+      "path": "LICENSE",
+      "bytes": 1525
+    },
+    {
+      "path": "README.md",
+      "bytes": 40393
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 7398
+    },
+    {
+      "path": "dist/assets/bpmn-font/css/bpmn.css",
+      "bytes": 9781
+    },
+    {
+      "path": "dist/assets/bpmn-font/font/bpmn.eot",
+      "bytes": 48804
+    },
+    {
+      "path": "dist/assets/bpmn-font/font/bpmn.svg",
+      "bytes": 136016
+    },
+    {
+      "path": "dist/assets/bpmn-font/font/bpmn.ttf",
+      "bytes": 48652
+    },
+    {
+      "path": "dist/assets/bpmn-font/font/bpmn.woff",
+      "bytes": 16160
+    },
+    {
+      "path": "dist/assets/bpmn-font/font/bpmn.woff2",
+      "bytes": 13204
+    },
+    {
+      "path": "dist/assets/inline/inline-01.svg",
+      "bytes": 186
+    },
+    {
+      "path": "dist/assets/inline/inline-02.svg",
+      "bytes": 189
+    },
+    {
+      "path": "dist/assets/inline/inline-03.svg",
+      "bytes": 189
+    },
+    {
+      "path": "dist/assets/inline/inline-04.svg",
+      "bytes": 241
+    },
+    {
+      "path": "dist/assets/inline/inline-05.svg",
+      "bytes": 206
+    },
+    {
+      "path": "dist/assets/inline/inline-06.svg",
+      "bytes": 314
+    },
+    {
+      "path": "dist/assets/inline/inline-07.svg",
+      "bytes": 266
+    },
+    {
+      "path": "dist/assets/inline/inline-08.svg",
+      "bytes": 250
+    },
+    {
+      "path": "dist/assets/inline/inline-09.svg",
+      "bytes": 247
+    },
+    {
+      "path": "dist/assets/inline/inline-10.svg",
+      "bytes": 281
+    },
+    {
+      "path": "dist/assets/inline/inline-11.svg",
+      "bytes": 281
+    },
+    {
+      "path": "dist/assets/inline/inline-12.svg",
+      "bytes": 306
+    },
+    {
+      "path": "dist/assets/inline/inline-13.svg",
+      "bytes": 307
+    },
+    {
+      "path": "dist/assets/inline/inline-14.svg",
+      "bytes": 250
+    },
+    {
+      "path": "dist/assets/inline/inline-15.svg",
+      "bytes": 325
+    },
+    {
+      "path": "dist/assets/inline/inline-16.svg",
+      "bytes": 238
+    },
+    {
+      "path": "dist/assets/inline/inline-17.svg",
+      "bytes": 245
+    },
+    {
+      "path": "dist/assistant-ui/index.d.ts",
+      "bytes": 2750
+    },
+    {
+      "path": "dist/assistant-ui/index.js",
+      "bytes": 5459
+    },
+    {
+      "path": "dist/browser/bpmn-canvas.iife.min.js",
+      "bytes": 844054
+    },
+    {
+      "path": "dist/browser/bpmn-canvas.iife.min.js.map",
+      "bytes": 1233803
+    },
+    {
+      "path": "dist/browser/bpmn-canvas.licenses.txt",
+      "bytes": 36052
+    },
+    {
+      "path": "dist/browser/bpmn-canvas.min.js",
+      "bytes": 841738
+    },
+    {
+      "path": "dist/browser/bpmn-canvas.min.js.map",
+      "bytes": 1221162
+    },
+    {
+      "path": "dist/browser/entry.d.ts",
+      "bytes": 555
+    },
+    {
+      "path": "dist/browser/entry.js",
+      "bytes": 555
+    },
+    {
+      "path": "dist/browser/sri.json",
+      "bytes": 833
+    },
+    {
+      "path": "dist/index.d.ts",
+      "bytes": 579
+    },
+    {
+      "path": "dist/index.js",
+      "bytes": 168
+    },
+    {
+      "path": "dist/internal/annotations.d.ts",
+      "bytes": 462
+    },
+    {
+      "path": "dist/internal/annotations.js",
+      "bytes": 532
+    },
+    {
+      "path": "dist/internal/assets.generated.d.ts",
+      "bytes": 162
+    },
+    {
+      "path": "dist/internal/assets.generated.js",
+      "bytes": 1733
+    },
+    {
+      "path": "dist/internal/canvas.d.ts",
+      "bytes": 6244
+    },
+    {
+      "path": "dist/internal/canvas.js",
+      "bytes": 47708
+    },
+    {
+      "path": "dist/internal/contracts.d.ts",
+      "bytes": 4764
+    },
+    {
+      "path": "dist/internal/contracts.js",
+      "bytes": 128
+    },
+    {
+      "path": "dist/internal/css.generated.d.ts",
+      "bytes": 58245
+    },
+    {
+      "path": "dist/internal/css.generated.js",
+      "bytes": 58263
+    },
+    {
+      "path": "dist/internal/diagnostics.d.ts",
+      "bytes": 1428
+    },
+    {
+      "path": "dist/internal/diagnostics.js",
+      "bytes": 7298
+    },
+    {
+      "path": "dist/internal/engine.d.ts",
+      "bytes": 2763
+    },
+    {
+      "path": "dist/internal/engine.js",
+      "bytes": 2695
+    },
+    {
+      "path": "dist/internal/layout/autoLayout.d.ts",
+      "bytes": 2755
+    },
+    {
+      "path": "dist/internal/layout/autoLayout.js",
+      "bytes": 13609
+    },
+    {
+      "path": "dist/internal/layout/boundary.d.ts",
+      "bytes": 826
+    },
+    {
+      "path": "dist/internal/layout/boundary.js",
+      "bytes": 2523
+    },
+    {
+      "path": "dist/internal/layout/index.d.ts",
+      "bytes": 187
+    },
+    {
+      "path": "dist/internal/layout/index.js",
+      "bytes": 134
+    },
+    {
+      "path": "dist/internal/palette.d.ts",
+      "bytes": 1926
+    },
+    {
+      "path": "dist/internal/palette.js",
+      "bytes": 3266
+    },
+    {
+      "path": "dist/internal/processModel.d.ts",
+      "bytes": 673
+    },
+    {
+      "path": "dist/internal/processModel.js",
+      "bytes": 12948
+    },
+    {
+      "path": "dist/internal/readonly.d.ts",
+      "bytes": 1017
+    },
+    {
+      "path": "dist/internal/readonly.js",
+      "bytes": 1906
+    },
+    {
+      "path": "dist/internal/render.d.ts",
+      "bytes": 310
+    },
+    {
+      "path": "dist/internal/render.js",
+      "bytes": 3365
+    },
+    {
+      "path": "dist/internal/styles.d.ts",
+      "bytes": 661
+    },
+    {
+      "path": "dist/internal/styles.js",
+      "bytes": 4122
+    },
+    {
+      "path": "dist/internal/swimlaneLayout.d.ts",
+      "bytes": 2017
+    },
+    {
+      "path": "dist/internal/swimlaneLayout.js",
+      "bytes": 25123
+    },
+    {
+      "path": "dist/internal/textMetrics.d.ts",
+      "bytes": 464
+    },
+    {
+      "path": "dist/internal/textMetrics.js",
+      "bytes": 4179
+    },
+    {
+      "path": "dist/internal/viewbox.d.ts",
+      "bytes": 1074
+    },
+    {
+      "path": "dist/internal/viewbox.js",
+      "bytes": 3329
+    },
+    {
+      "path": "dist/io/build.d.ts",
+      "bytes": 175
+    },
+    {
+      "path": "dist/io/build.js",
+      "bytes": 5043
+    },
+    {
+      "path": "dist/io/drawio-decode.d.ts",
+      "bytes": 185
+    },
+    {
+      "path": "dist/io/drawio-decode.js",
+      "bytes": 9126
+    },
+    {
+      "path": "dist/io/drawio-encode.d.ts",
+      "bytes": 345
+    },
+    {
+      "path": "dist/io/drawio-encode.js",
+      "bytes": 3789
+    },
+    {
+      "path": "dist/io/drawio-pages.d.ts",
+      "bytes": 253
+    },
+    {
+      "path": "dist/io/drawio-pages.js",
+      "bytes": 3241
+    },
+    {
+      "path": "dist/io/errors.d.ts",
+      "bytes": 3688
+    },
+    {
+      "path": "dist/io/errors.js",
+      "bytes": 741
+    },
+    {
+      "path": "dist/io/f1-extensions.d.ts",
+      "bytes": 7824
+    },
+    {
+      "path": "dist/io/f1-extensions.js",
+      "bytes": 28165
+    },
+    {
+      "path": "dist/io/graph.d.ts",
+      "bytes": 1196
+    },
+    {
+      "path": "dist/io/graph.js",
+      "bytes": 1174
+    },
+    {
+      "path": "dist/io/index.d.ts",
+      "bytes": 5010
+    },
+    {
+      "path": "dist/io/index.js",
+      "bytes": 8186
+    },
+    {
+      "path": "dist/io/moddle-json.d.ts",
+      "bytes": 2762
+    },
+    {
+      "path": "dist/io/moddle-json.js",
+      "bytes": 29280
+    },
+    {
+      "path": "dist/io/project.d.ts",
+      "bytes": 173
+    },
+    {
+      "path": "dist/io/project.js",
+      "bytes": 6025
+    },
+    {
+      "path": "dist/io/pyserial.d.ts",
+      "bytes": 1923
+    },
+    {
+      "path": "dist/io/pyserial.js",
+      "bytes": 4745
+    },
+    {
+      "path": "dist/io/reference-drawio.d.ts",
+      "bytes": 245
+    },
+    {
+      "path": "dist/io/reference-drawio.js",
+      "bytes": 9239
+    },
+    {
+      "path": "dist/io/reference-model.d.ts",
+      "bytes": 2079
+    },
+    {
+      "path": "dist/io/reference-model.js",
+      "bytes": 29038
+    },
+    {
+      "path": "dist/io/reference-sparx.d.ts",
+      "bytes": 369
+    },
+    {
+      "path": "dist/io/reference-sparx.js",
+      "bytes": 8717
+    },
+    {
+      "path": "dist/io/semantics.json",
+      "bytes": 1027
+    },
+    {
+      "path": "dist/io/serialize-bpmn.d.ts",
+      "bytes": 470
+    },
+    {
+      "path": "dist/io/serialize-bpmn.js",
+      "bytes": 10480
+    },
+    {
+      "path": "dist/io/xml.d.ts",
+      "bytes": 875
+    },
+    {
+      "path": "dist/io/xml.js",
+      "bytes": 3021
+    },
+    {
+      "path": "dist/layout-corpus.json",
+      "bytes": 12531
+    },
+    {
+      "path": "dist/layout/index.d.ts",
+      "bytes": 482
+    },
+    {
+      "path": "dist/layout/index.js",
+      "bytes": 352
+    },
+    {
+      "path": "dist/profile/boundary.d.ts",
+      "bytes": 812
+    },
+    {
+      "path": "dist/profile/boundary.js",
+      "bytes": 2192
+    },
+    {
+      "path": "dist/profile/canonical.d.ts",
+      "bytes": 1018
+    },
+    {
+      "path": "dist/profile/canonical.js",
+      "bytes": 3632
+    },
+    {
+      "path": "dist/profile/compatibility.d.ts",
+      "bytes": 2069
+    },
+    {
+      "path": "dist/profile/compatibility.js",
+      "bytes": 4658
+    },
+    {
+      "path": "dist/profile/compiler.d.ts",
+      "bytes": 3265
+    },
+    {
+      "path": "dist/profile/compiler.js",
+      "bytes": 50303
+    },
+    {
+      "path": "dist/profile/contracts.d.ts",
+      "bytes": 1301
+    },
+    {
+      "path": "dist/profile/contracts.js",
+      "bytes": 16466
+    },
+    {
+      "path": "dist/profile/descriptor-context.d.ts",
+      "bytes": 1239
+    },
+    {
+      "path": "dist/profile/descriptor-context.js",
+      "bytes": 3418
+    },
+    {
+      "path": "dist/profile/envelope.d.ts",
+      "bytes": 3272
+    },
+    {
+      "path": "dist/profile/envelope.js",
+      "bytes": 6456
+    },
+    {
+      "path": "dist/profile/index.d.ts",
+      "bytes": 956
+    },
+    {
+      "path": "dist/profile/index.js",
+      "bytes": 471
+    },
+    {
+      "path": "dist/profile/lint-bridge.d.ts",
+      "bytes": 4682
+    },
+    {
+      "path": "dist/profile/lint-bridge.js",
+      "bytes": 17636
+    },
+    {
+      "path": "dist/profile/lint-contracts.d.ts",
+      "bytes": 3622
+    },
+    {
+      "path": "dist/profile/lint-contracts.js",
+      "bytes": 8012
+    },
+    {
+      "path": "dist/profile/native-bridge.d.ts",
+      "bytes": 1557
+    },
+    {
+      "path": "dist/profile/native-bridge.js",
+      "bytes": 3038
+    },
+    {
+      "path": "dist/profile/native-contracts.d.ts",
+      "bytes": 5477
+    },
+    {
+      "path": "dist/profile/native-contracts.js",
+      "bytes": 16345
+    },
+    {
+      "path": "dist/profile/presentation-contracts.d.ts",
+      "bytes": 6750
+    },
+    {
+      "path": "dist/profile/presentation-contracts.js",
+      "bytes": 17706
+    },
+    {
+      "path": "dist/profile/public-compiler.d.ts",
+      "bytes": 1502
+    },
+    {
+      "path": "dist/profile/public-compiler.js",
+      "bytes": 1654
+    },
+    {
+      "path": "dist/profile/report.d.ts",
+      "bytes": 4478
+    },
+    {
+      "path": "dist/profile/report.js",
+      "bytes": 11236
+    },
+    {
+      "path": "dist/profile/results.d.ts",
+      "bytes": 5716
+    },
+    {
+      "path": "dist/profile/results.js",
+      "bytes": 14185
+    },
+    {
+      "path": "dist/profile/sha256.d.ts",
+      "bytes": 59
+    },
+    {
+      "path": "dist/profile/sha256.js",
+      "bytes": 2740
+    },
+    {
+      "path": "dist/profile/static-contracts.d.ts",
+      "bytes": 629
+    },
+    {
+      "path": "dist/profile/static-contracts.js",
+      "bytes": 21489
+    },
+    {
+      "path": "dist/profile/unicode-case.d.ts",
+      "bytes": 1930
+    },
+    {
+      "path": "dist/profile/unicode-case.js",
+      "bytes": 8186
+    },
+    {
+      "path": "dist/profile/validate.d.ts",
+      "bytes": 696
+    },
+    {
+      "path": "dist/profile/validate.js",
+      "bytes": 6228
+    },
+    {
+      "path": "dist/profiles/colored/classic.d.ts",
+      "bytes": 1273
+    },
+    {
+      "path": "dist/profiles/colored/classic.js",
+      "bytes": 10595
+    },
+    {
+      "path": "dist/profiles/colored/index.d.ts",
+      "bytes": 637
+    },
+    {
+      "path": "dist/profiles/colored/index.js",
+      "bytes": 934
+    },
+    {
+      "path": "dist/profiles/colored/renderer.d.ts",
+      "bytes": 1828
+    },
+    {
+      "path": "dist/profiles/colored/renderer.js",
+      "bytes": 7865
+    },
+    {
+      "path": "dist/profiles/colored/tokens.d.ts",
+      "bytes": 955
+    },
+    {
+      "path": "dist/profiles/colored/tokens.js",
+      "bytes": 1480
+    },
+    {
+      "path": "dist/profiles/legend/index.d.ts",
+      "bytes": 570
+    },
+    {
+      "path": "dist/profiles/legend/index.js",
+      "bytes": 726
+    },
+    {
+      "path": "dist/profiles/legend/palette.d.ts",
+      "bytes": 3336
+    },
+    {
+      "path": "dist/profiles/legend/palette.js",
+      "bytes": 12446
+    },
+    {
+      "path": "dist/profiles/legend/renderer.d.ts",
+      "bytes": 3968
+    },
+    {
+      "path": "dist/profiles/legend/renderer.js",
+      "bytes": 27843
+    },
+    {
+      "path": "dist/profiles/legend/style.d.ts",
+      "bytes": 4142
+    },
+    {
+      "path": "dist/profiles/legend/style.js",
+      "bytes": 6794
+    },
+    {
+      "path": "dist/profiles/legend/tokens.d.ts",
+      "bytes": 1205
+    },
+    {
+      "path": "dist/profiles/legend/tokens.js",
+      "bytes": 3925
+    },
+    {
+      "path": "dist/react/index.d.ts",
+      "bytes": 2193
+    },
+    {
+      "path": "dist/react/index.js",
+      "bytes": 3192
+    },
+    {
+      "path": "dist/react/labels.d.ts",
+      "bytes": 1034
+    },
+    {
+      "path": "dist/react/labels.js",
+      "bytes": 977
+    },
+    {
+      "path": "dist/react/ui/contracts.d.ts",
+      "bytes": 2065
+    },
+    {
+      "path": "dist/react/ui/contracts.js",
+      "bytes": 67
+    },
+    {
+      "path": "dist/react/ui/DiagramTabs.d.ts",
+      "bytes": 261
+    },
+    {
+      "path": "dist/react/ui/DiagramTabs.js",
+      "bytes": 1928
+    },
+    {
+      "path": "dist/react/ui/icons.d.ts",
+      "bytes": 1560
+    },
+    {
+      "path": "dist/react/ui/icons.js",
+      "bytes": 2089
+    },
+    {
+      "path": "dist/react/ui/Menu.d.ts",
+      "bytes": 243
+    },
+    {
+      "path": "dist/react/ui/Menu.js",
+      "bytes": 8086
+    },
+    {
+      "path": "dist/react/workshop.d.ts",
+      "bytes": 6583
+    },
+    {
+      "path": "dist/react/workshop.js",
+      "bytes": 21292
+    },
+    {
+      "path": "dist/styles.css",
+      "bytes": 55747
+    },
+    {
+      "path": "dist/types.d.ts",
+      "bytes": 12236
+    },
+    {
+      "path": "dist/types.js",
+      "bytes": 111
+    },
+    {
+      "path": "licenses/Adobe-AFM-copyright.txt",
+      "bytes": 270
+    },
+    {
+      "path": "licenses/Adobe-AFM-readme.txt",
+      "bytes": 828
+    },
+    {
+      "path": "licenses/bpmn-font.OFL-1.1.txt",
+      "bytes": 4351
+    },
+    {
+      "path": "licenses/bpmn-js.LICENSE",
+      "bytes": 1390
+    },
+    {
+      "path": "licenses/bpmn-moddle.LICENSE",
+      "bytes": 1087
+    },
+    {
+      "path": "licenses/bpmnlint.LICENSE",
+      "bytes": 1094
+    },
+    {
+      "path": "licenses/diagram-js.LICENSE",
+      "bytes": 1095
+    },
+    {
+      "path": "licenses/miwg/LICENSE.txt",
+      "bytes": 272
+    },
+    {
+      "path": "licenses/tiny-svg.LICENSE",
+      "bytes": 1128
+    },
+    {
+      "path": "package.json",
+      "bytes": 3623
+    }
+  ]
+}

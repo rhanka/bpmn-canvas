@@ -65,11 +65,11 @@
     <bpmn:sequenceFlow id="Flow_Resolve_issue_Escalate" sourceRef="Resolve_issue" targetRef="Escalate" />
     <bpmn:sequenceFlow id="Flow_Escalate_Request_done" sourceRef="Escalate" targetRef="Request_done" />
     <bpmn:textAnnotation id="Doc_Desk_manual">
-      <bpmn:text>[Doc] Desk manual</bpmn:text>
+      <bpmn:text>[Reference] Desk manual</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="DocLink_Desk_manual_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome" associationDirection="One" sourceRef="Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome" targetRef="Doc_Desk_manual" />
     <bpmn:textAnnotation id="App_Log_request">
-      <bpmn:text>[App] Ticket tool</bpmn:text>
+      <bpmn:text>[Component] Ticket tool</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="AppLink_Log_request" sourceRef="App_Log_request" targetRef="Log_request" />
   </bpmn:process>

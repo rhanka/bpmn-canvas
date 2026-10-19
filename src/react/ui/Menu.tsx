@@ -64,13 +64,13 @@ export function Menu(props: MenuProps): ReactElement {
   useEffect(() => {
     if (!open) return undefined;
     const root = triggerRef.current?.getRootNode();
-    const doc = triggerRef.current?.ownerDocument;
+    const hostDoc = triggerRef.current?.ownerDocument;
     if (!root) return undefined;
     const onDown = (e: Event): void => {
       if (!e.composedPath().includes(wrapperRef.current as EventTarget)) close(false);
     };
     // A click in the light DOM does not cross a shadow root, so the document listens too.
-    const targets = new Set<EventTarget>([root, ...(doc ? [doc] : [])]);
+    const targets = new Set<EventTarget>([root, ...(hostDoc ? [hostDoc] : [])]);
     for (const t of targets) t.addEventListener("pointerdown", onDown, true);
     return () => {
       for (const t of targets) t.removeEventListener("pointerdown", onDown, true);

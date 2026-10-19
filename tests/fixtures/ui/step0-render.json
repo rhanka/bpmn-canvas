@@ -1010,7 +1010,7 @@
      },
      {
       "tag": "text",
-      "text": "[Doc]Deskmanual",
+      "text": "[Reference]Deskmanual",
       "fontSize": "11",
       "fontWeight": "normal",
       "fill": "#3a3a3a"
@@ -1029,7 +1029,7 @@
      },
      {
       "tag": "text",
-      "text": "[App]Tickettool",
+      "text": "[Component]Tickettool",
       "fontSize": "11",
       "fontWeight": "normal",
       "fill": "#3a3a3a"

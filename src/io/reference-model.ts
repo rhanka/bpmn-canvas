@@ -291,9 +291,9 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     let label = e.name ?? "", type = FLOW_TAG[k] ?? (k === "DataInput" ? "EXTERNAL_INPUT" : k === "DataOutput" ? "PROCESS_OUTPUT" : "DATA_OBJECT");
     if (k === "TextAnnotation") {
       const t = (e.text ?? "").trim();
-      if (t.startsWith("[App]")) { appAnnotations.set(e.id, { box, text: t.slice(5).trim() }); continue; }
-      if (!t.startsWith("[Doc]")) fail("free-annotation", e, "Only [App] and [Doc] annotations are exported");
-      type = "DOCUMENT"; label = t.slice(5).trim();
+      if (t.startsWith("[Component]")) { appAnnotations.set(e.id, { box, text: t.slice(11).trim() }); continue; }
+      if (!t.startsWith("[Reference]")) fail("free-annotation", e, "Only [Component] and [Reference] annotations are exported");
+      type = "DOCUMENT"; label = t.slice(11).trim();
     }
     const li = artifact(e) ? laneEls.indexOf(v?.laneRef) : laneOf.get(e);
     if (artifact(e) && (li === undefined || li < 0)) fail("missing-semantics", e, "Artifact lane is required");

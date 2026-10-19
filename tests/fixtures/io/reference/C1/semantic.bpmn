@@ -118,7 +118,7 @@
       <bpmn:extensionElements>
         <sem:info order="6" laneRef="Sales" primaryAssociationRef="DocLink_Shipping_policy_Ship_order" />
       </bpmn:extensionElements>
-      <bpmn:text>[Doc] Shipping policy</bpmn:text>
+      <bpmn:text>[Reference] Shipping policy</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="DocLink_Shipping_policy_Ship_order" associationDirection="One" sourceRef="Doc_Shipping_policy" targetRef="Ship_order">
       <bpmn:extensionElements>
@@ -126,7 +126,7 @@
       </bpmn:extensionElements>
     </bpmn:association>
     <bpmn:textAnnotation id="App_Check_order">
-      <bpmn:text>[App] Order desk</bpmn:text>
+      <bpmn:text>[Component] Order desk</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="AppLink_Check_order" sourceRef="App_Check_order" targetRef="Check_order">
       <bpmn:extensionElements>

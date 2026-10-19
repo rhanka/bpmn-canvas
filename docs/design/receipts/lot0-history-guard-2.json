@@ -16,6 +16,28 @@
   "review6Disposition": "The 3 MAJOR findings of LOT0-SOL-REVIEW-6 are deferred as out of scope by design; no guard code changes, docs-only alignment plus this authoritative check record.",
   "supersedesFiles": [
     {
+      "path": "src/profile/lint-contracts.ts",
+      "old": {
+        "bytes": 10520,
+        "sha256": "dd5102bd4f8fd23bfd813bbd36bfba27048a965f9fdb8b91c522f197a0d1c55b"
+      },
+      "new": {
+        "bytes": 11665,
+        "sha256": "d966e6e51f461a792490585237e9f92ee0ee33dffa339c390c9dedc734b3ea85"
+      }
+    },
+    {
+      "path": "tests/brand-baseline.test.mjs",
+      "old": {
+        "bytes": 5848,
+        "sha256": "d4c5a3ea009fa507ce4f6796d7a5ba6a0826bfc999b979cfb1e3439c961ae42c"
+      },
+      "new": {
+        "bytes": 5570,
+        "sha256": "ff62c3e1cc18d2064d148ccc7d28386593e3b81ea343603e1d2800bd4f99f843"
+      }
+    },
+    {
       "path": "tests/brand-release-gate.test.mjs",
       "old": {
         "bytes": 9021,
@@ -93,6 +115,17 @@
       }
     },
     {
+      "path": "tests/profile-canonical.test.mjs",
+      "old": {
+        "bytes": 2911,
+        "sha256": "30e24423708c5a696bf8ff260d850d3ec73a25c10e93551b6fbd8e2993309f58"
+      },
+      "new": {
+        "bytes": 2939,
+        "sha256": "ee4dea1bf697a787a779a664694ff155c1d65132d566122babbb653f4dad5505"
+      }
+    },
+    {
       "path": "tests/profile-corpus-pin-final.test.mjs",
       "old": {
         "bytes": 3651,
@@ -100,7 +133,18 @@
       },
       "new": {
         "bytes": 5160,
-        "sha256": "b3a0a17d57d68ecf3a6b12899c39031fa0a243c09b31cb32d5192524d4a262e9"
+        "sha256": "d601c6610bc703abc8514af5e2fcf020f08b06c0941e973c92a5112ef57b653e"
+      }
+    },
+    {
+      "path": "tests/profile-lint-contract.test.mjs",
+      "old": {
+        "bytes": 4514,
+        "sha256": "bbbcb89a2827928f49fea54ac8f9aa1c03202684f4c8a421b71a3ec405d17a5b"
+      },
+      "new": {
+        "bytes": 4637,
+        "sha256": "5c5c0bf1618c77d38a77b16a14da404725e020d1771e001813787bc84ebccee6"
       }
     },
     {
@@ -244,7 +288,7 @@
       "note": "Final receipt and successor pins checked after recording the full-run outcome."
     }
   ],
-  "predecessorInventorySha256": "a213190ca9ea16bbb0c581a70c650b2ead54015f896242dd83e87f2f3d0a49f5",
+  "predecessorInventorySha256": "10d67fdb8d37a4b7df31bb42f14a1efb5063749cc6313399ddd65c8232d1f324",
   "changes": [
     "Identify child_process APIs by lexical bindings through named, default and namespace imports, require, aliases, member access and destructuring.",
     "Expand controlled literal call spreads; reject unresolved child_process executables and commands outside controlled Git forwarding.",

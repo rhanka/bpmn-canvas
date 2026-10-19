@@ -1,5 +1,5 @@
 // Builds the invented reference fixtures: for each case of cases.mjs, `diagram.bpmn` shaped like the engine's BPMN
-// (one collaboration + process per page, lanes, data objects, ioSpecification, [Doc]/[App] annotations, DI planes in
+// (one collaboration + process per page, lanes, data objects, ioSpecification, [Reference]/[Component] annotations, DI planes in
 // the engine's order) and `process.json` (the normalised ProcessList, keys sorted, as the engine saves it).
 // Geometry comes from this library's own layout port. Run after `npm run build`: node tests/fixtures/io/reference/build.mjs
 // The expected export bytes are not written here.
@@ -70,7 +70,7 @@ async function buildOne(m, ids, proc, idx) {
         e = m.create("bpmn:DataOutput", { id: ids(label, "DataOutput"), name: label });
         dataOutputs.push(e);
       } else if (t === "DOCUMENT") {
-        e = m.create("bpmn:TextAnnotation", { id: ids("Doc_" + label, "Doc"), text: `[Doc] ${label}` });
+        e = m.create("bpmn:TextAnnotation", { id: ids("Doc_" + label, "Doc"), text: `[Reference] ${label}` });
         artifacts.push(e);
       } else {
         const tag = { START: "bpmn:StartEvent", END: "bpmn:EndEvent", "SUB-PROCESS": "bpmn:SubProcess", EXTERNAL_PROCESS: "bpmn:CallActivity", EVENT: "bpmn:IntermediateThrowEvent" }[t]
@@ -112,7 +112,7 @@ async function buildOne(m, ids, proc, idx) {
   const appSem = new Map();
   for (const label of Object.keys(lay.apps)) {
     const node = proc.lanes.flatMap((l) => l.nodes).find((x) => x.label === label);
-    const ann = m.create("bpmn:TextAnnotation", { id: ids(`App_${label}`, "App"), text: `[App] ${node.app_label}` });
+    const ann = m.create("bpmn:TextAnnotation", { id: ids(`App_${label}`, "App"), text: `[Component] ${node.app_label}` });
     const assoc = m.create("bpmn:Association", { id: ids(`AppLink_${label}`, "Assoc"), sourceRef: ann, targetRef: el.get(label) });
     artifacts.push(ann, assoc);
     appSem.set(label, [ann, assoc]);

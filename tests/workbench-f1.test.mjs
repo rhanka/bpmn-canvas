@@ -89,18 +89,23 @@ const invalid = [
   ["wrong containment", (j) => { j.rootElements[0].flowElements[1] = { $type: "bpmn:Lane", id: "Wrong" }; }, "invalid-containment", "$.rootElements[0].flowElements[1]"],
   ["nonfinite coordinates", (j) => { j.diagrams[0].plane.planeElement[0].bounds.x = Infinity; }, "invalid-value", "$.diagrams[0].plane.planeElement[0].bounds.x"],
   ["wrong primitive types", (j) => { task(j).startQuantity = "01"; }, "invalid-value", "$.rootElements[0].flowElements[1].startQuantity"],
-  ["unknown attributes", (j) => { task(j).$attrs = { "extra:note": "01" }; }, "unsupported-extension", "$.rootElements[0].flowElements[1].$attrs.extra:note"],
   ["unknown required extension versions", (j) => { j.$attrs["xmlns:sem"] += "/2"; }, "unsupported-extension", "$.$attrs.xmlns:sem"],
-  ["runtime fields in JSON", (j) => { task(j).$parent = "Process_Paper"; }, "unknown-property", "$.rootElements[0].flowElements[1].$parent"],
+  ["runtime fields in JSON", (j) => { task(j).$parent = "Process_Paper"; }, "reserved-name", "$.rootElements[0].flowElements[1].$parent"],
 ];
 for (const [name, mutate, code, path] of invalid) test(`F1 should reject ${name} with a typed path`, () => {
   const j = localJson(); mutate(j);
   for (let i = 0; i < 3; i++) refusal(() => io.hydrate(j, configuration), code, path);
 });
+test("F1 should preserve qualified foreign attributes on typed owners", () => {
+  const j = localJson(); task(j).$attrs = { "extra:note": "01" };
+  for (let i = 0; i < 3; i++) {
+    assert.deepEqual(task(io.project(io.hydrate(j, configuration), configuration)).$attrs, { "extra:note": "01" });
+  }
+});
 test("F1 should reject invalid root and configuration explicitly", () => {
   refusal(() => io.hydrate({ $type: "bpmn:Task" }, configuration), "not-bpmn", "$");
   refusal(() => io.hydrate(localJson(), { ...configuration, contractVersion: "2" }), "invalid-configuration", "$.configuration");
-  refusal(() => io.hydrate(localJson(), { ...configuration, descriptors: {} }), "invalid-configuration", "$.configuration.descriptors");
+  refusal(() => io.hydrate(localJson(), { ...configuration, descriptors: { invalid: {} } }), "invalid-configuration", "$.configuration.descriptors");
 });
 test("F1 should reject detached same-ID objects during projection", () => {
   const m = io.hydrate(localJson(), configuration);

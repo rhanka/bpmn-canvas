@@ -55,7 +55,7 @@
       </bpmn:extensionElements>
     </bpmn:sequenceFlow>
     <bpmn:textAnnotation id="App_Cost_10_20">
-      <bpmn:text>[App] Tool "A" &amp; B</bpmn:text>
+      <bpmn:text>[Component] Tool "A" &amp; B</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="AppLink_Cost_10_20" sourceRef="App_Cost_10_20" targetRef="Cost_10_20">
       <bpmn:extensionElements>

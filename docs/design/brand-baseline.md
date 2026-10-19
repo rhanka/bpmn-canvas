@@ -1,10 +1,15 @@
 # Temporary business-content baseline
 
 `tests/fixtures/brand-baseline.tsv` contains only repository path:line and
-lowercase SHA-256, one row per distinct line/hash. It covers the 131 business
+lowercase SHA-256, one row per distinct line/hash. It covered the 131 business
 content rows classified by conductor arbitration at f3a54c5. Repeated matches
 of the same hash on one line share a row, as in the supplied occurrence report.
 The two confirmed leaks are excluded.
+
+Lot 2 closure: the marker lexicon was externalized to generic annotation
+names, the tracked-file guard reports zero live occurrences, and the baseline
+is empty, so the release gate passes without an owner override. The pin file
+is retained to keep the closed-to-additions proof working.
 
 The tracked-file brand guard rejects every unlisted occurrence, including
 tracked paths, new files, moved lines and replacement hashes. Diagnostics contain

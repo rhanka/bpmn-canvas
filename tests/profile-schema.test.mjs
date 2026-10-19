@@ -71,9 +71,9 @@ test("should check keywords only at schema positions", async () => {
 });
 
 test("should enforce registry hashes, explicit references and the closed pattern inventory", async () => {
-  await assert.rejects(compileSchema({ $ref: "https://invalid.example/schema" }), { code: "profile-schema-ref" });
-  await assert.rejects(compileSchema({ type: "string", pattern: ".*" }), { code: "profile-schema-pattern" });
-  await assert.rejects(compileSchema({ $ref: "urn:profile-mechanism:1:profile" }, [{
+  assert.throws(() => compileSchema({ $ref: "https://invalid.example/schema" }), { code: "profile-schema-ref" });
+  assert.throws(() => compileSchema({ type: "string", pattern: ".*" }), { code: "profile-schema-pattern" });
+  assert.throws(() => compileSchema({ $ref: "urn:profile-mechanism:1:profile" }, [{
     bytes: readFileSync(new URL(schemaPath, vendor)), sha256: "0".repeat(64)
   }]), { code: "profile-schema-ref" });
 });

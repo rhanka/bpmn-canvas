@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:neutral="urn:neutral:extension:1" id="StableDefs" targetNamespace="urn:neutral:stability">
+  <bpmn:process id="StableProcess" name="Stable" isExecutable="false">
+    <bpmn:startEvent id="StableStart" name="Begin"/>
+    <bpmn:task id="StableTask" name="Original name"/>
+    <bpmn:endEvent id="StableEnd" name="Finish"/>
+    <bpmn:sequenceFlow id="StableFlow1" sourceRef="StableStart" targetRef="StableTask"/>
+    <bpmn:sequenceFlow id="StableFlow2" sourceRef="StableTask" targetRef="StableEnd"/>
+    <bpmn:extensionElements>
+      <neutral:review neutral:state="pending" neutral:owner="stability-lane">held for a later iteration</neutral:review>
+    </bpmn:extensionElements>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="StableDiagram" name="Stable"><bpmndi:BPMNPlane id="StablePlane" bpmnElement="StableProcess">
+    <bpmndi:BPMNShape id="StableStart_di" bpmnElement="StableStart"><dc:Bounds x="100" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="StableTask_di" bpmnElement="StableTask"><dc:Bounds x="200" y="78" width="120" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="StableEnd_di" bpmnElement="StableEnd"><dc:Bounds x="380" y="100" width="36" height="36"/></bpmndi:BPMNShape>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

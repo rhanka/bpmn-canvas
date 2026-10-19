@@ -16,12 +16,12 @@ const BPMN_LOOK = {
   "task and sub-process: rx 9, stroke 1.4; call activity stroke 3.5": [TASK, LONG, "Resolve_issue", "Escalate"],
   "start 1.5; end 4 with an inner filled circle": ["Request_in", "Request_done"],
   "gateway: diamond 1.4 and the step-0 marker": ["Valid"],
-  "[Doc] and [App]: the open bracket, unfilled, 1.4; [App] shown": ["Doc_Desk_manual", "App_Log_request", "AppLink_Log_request"],
+  "[Reference] and [Component]: the open bracket, unfilled, 1.4; [Component] shown": ["Doc_Desk_manual", "App_Log_request", "AppLink_Log_request"],
   "pool and lane: rect 1.4 plus the header line at x = 30": ["Service_desk_pool", "Front_desk", "Back_office"],
   "items and links": ["Request_form", "Ticket", "In_Request_form_Log_request", "Out_Log_request_Ticket", "Flow_Valid__Request_done", "DocLink_Desk_manual_Check_the_incoming_request_against_all_the_applicable_rules_and_record_the_outcome"],
 };
 const CUSTOM_LOOK = {
-  "application box under its activity, [App] annotation and link hidden": [TASK, "App_Log_request", "AppLink_Log_request"],
+  "application box under its activity, [Component] annotation and link hidden": [TASK, "App_Log_request", "AppLink_Log_request"],
   "long label wrapped inside its task": [LONG],
   "end ring, lateral pool header, document page, items without arrows": ["Request_done", "Service_desk_pool", "Front_desk", "Doc_Desk_manual", "Request_form", "In_Request_form_Log_request"],
 };

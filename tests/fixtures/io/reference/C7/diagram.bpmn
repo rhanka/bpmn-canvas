@@ -48,13 +48,13 @@
     <bpmn:sequenceFlow id="Flow_Go_Assemble" sourceRef="Go" targetRef="Assemble" />
     <bpmn:sequenceFlow id="Flow_Assemble_Stop" sourceRef="Assemble" targetRef="Stop" />
     <bpmn:textAnnotation id="Doc_Doc_one">
-      <bpmn:text>[Doc] Doc one</bpmn:text>
+      <bpmn:text>[Reference] Doc one</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="Doc_Doc_two">
-      <bpmn:text>[Doc] Doc two</bpmn:text>
+      <bpmn:text>[Reference] Doc two</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="Doc_Doc_three">
-      <bpmn:text>[Doc] Doc three</bpmn:text>
+      <bpmn:text>[Reference] Doc three</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="DocLink_Doc_one_Assemble" associationDirection="One" sourceRef="Assemble" targetRef="Doc_Doc_one" />
     <bpmn:association id="DocLink_Doc_two_Assemble" associationDirection="One" sourceRef="Assemble" targetRef="Doc_Doc_two" />
