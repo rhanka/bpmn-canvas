@@ -1,3 +1,4 @@
+import { insertRole } from "../internal/business-policy.js";
 // Reference Sparx export: the original exporter's BPMN 2.0 interchange file, rule for rule (ids made from labels with
 // one set of used ids over all pages, lanes keyed by name with the last homonymous lane winning, `_gui` DI ids,
 // anchors as fractions, waypoints rebuilt from them), written with its serializer (minidom `toprettyxml`). Element
@@ -12,9 +13,9 @@ const BPMNDI = "http://www.omg.org/spec/BPMN/20100524/DI";
 const DC = "http://www.omg.org/spec/DD/20100524/DC";
 const DI = "http://www.omg.org/spec/DD/20100524/DI";
 const ELEMENT_TAG: Readonly<Record<string, string>> = {
-  TASK: "task", "SUB-PROCESS": "subProcess", EXTERNAL_PROCESS: "callActivity", START: "startEvent", END: "endEvent",
-  EVENT: "intermediateThrowEvent", TASK_INPUT: "dataObjectReference", TASK_OUTPUT: "dataObjectReference",
-  EXTERNAL_INPUT: "dataObjectReference", PROCESS_OUTPUT: "dataObjectReference", DOCUMENT: "textAnnotation",
+  "task": "task", "subprocess": "subProcess", "call": "callActivity", "start": "startEvent", "end": "endEvent",
+  "event": "intermediateThrowEvent", "object-in": "dataObjectReference", "object-out": "dataObjectReference",
+  "port-in": "dataObjectReference", "port-out": "dataObjectReference", "document": "textAnnotation",
 };
 const FLOW_NODE_TAGS = new Set(["task", "subProcess", "callActivity", "startEvent", "endEvent", "exclusiveGateway", "parallelGateway", "inclusiveGateway", "intermediateThrowEvent"]);
 
@@ -34,7 +35,7 @@ function slug(text: string, prefix: string): string {
 
 interface SElement { id: string; type: string; name: string; parent: string | undefined; b: RefBox }
 interface SLane { id: string; name: string; b: RefBox }
-interface SConnector { id: string; source: string; target: string; name: string; kind: "FLOW" | "ASSOC"; waypoints: readonly RefPoint[]; exitX: number; exitY: number; entryX: number; entryY: number }
+interface SConnector { id: string; source: string; target: string; name: string; kind: "sequence" | "ASSOC"; waypoints: readonly RefPoint[]; exitX: number; exitY: number; entryX: number; entryY: number }
 
 /** BPMN (as shown) → the reference Sparx file. */
 export function referenceSparx(pages: readonly RefPage[], options?: IoOptions): string {
@@ -58,7 +59,7 @@ export function referenceSparx(pages: readonly RefPage[], options?: IoOptions): 
     const elemIds = new Map<string, string>();
     for (const id of page.order) {
       const n = page.nodes.get(id)!;
-      const tag = n.type === "GATEWAY" ? (n.subtype === "AND" ? "parallelGateway" : "exclusiveGateway") : ELEMENT_TAG[n.type] ?? "task";
+      const tag = n.type === "gateway" ? (n.subtype === "AND" ? "parallelGateway" : "exclusiveGateway") : ELEMENT_TAG[n.type] ?? "task";
       const eid = fresh(n.label, "Node");
       elemIds.set(id, eid);
       elements.push({ id: eid, type: tag, name: n.label, parent: laneIds.get(n.laneName ?? ""), b: n.box });
@@ -66,8 +67,8 @@ export function referenceSparx(pages: readonly RefPage[], options?: IoOptions): 
     for (const host of page.flowOrder) {
       const app = page.apps.get(host);
       const n = page.nodes.get(host)!;
-      if (!app || !n.appLabel) continue;
-      elements.push({ id: fresh(`App_${n.label}`, "App"), type: "textAnnotation", name: `[Component] ${n.appLabel}`, parent: laneIds.get(n.laneName ?? ""), b: app.box });
+      if (!app || !n.application) continue;
+      elements.push({ id: fresh(`App_${n.label}`, "App"), type: "textAnnotation", name: insertRole(n.application, "application", options?.businessPolicy), parent: laneIds.get(n.laneName ?? ""), b: app.box });
     }
     const connectors: SConnector[] = [];
     for (const conn of page.connections) {
@@ -88,7 +89,7 @@ export function referenceSparx(pages: readonly RefPage[], options?: IoOptions): 
       const t = page.nodes.get(conn.target)!.label;
       connectors.push({
         id: fresh(`${s}_${t}`, "Flow"), source: elemIds.get(conn.source)!, target: elemIds.get(conn.target)!, name: conn.label || "",
-        kind: conn.kind === "FLOW" ? "FLOW" : "ASSOC", waypoints: pts.length > 2 ? pts.slice(1, -1) : [], exitX, exitY, entryX, entryY,
+        kind: conn.kind === "sequence" ? "sequence" : "ASSOC", waypoints: pts.length > 2 ? pts.slice(1, -1) : [], exitX, exitY, entryX, entryY,
       });
     }
     return { name: page.name, procId, swimlanes, elements, connectors };
