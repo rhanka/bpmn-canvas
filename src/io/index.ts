@@ -49,7 +49,7 @@ export async function parseDefinitions(xml: string, options?: IoOptions): Promis
   // This covers Info/info and qualified aliases without Integer coercion erasing wire values.
   const lexicalDescriptor = options?.descriptor ? structuredClone(options.descriptor) : undefined;
   const orderField = options?.businessPolicy?.exportFacts?.properties.order;
-  if (lexicalDescriptor && orderField) for (const type of lexicalDescriptor.types) for (const property of type.properties ?? []) if (property.name === orderField) property.type = "String";
+  if (lexicalDescriptor && orderField) for (const type of lexicalDescriptor.types) for (const property of type.properties ?? []) if (property.name.split(":").at(-1) === orderField.split(":").at(-1)) property.type = "String";
   let wire;
   try { wire = await new BpmnModdle(lexicalDescriptor ? { [lexicalDescriptor.prefix]: lexicalDescriptor } : {}).fromXML(xml); }
   catch (error) { throw new IoError("invalid-xml", String(error)); }
