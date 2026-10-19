@@ -1,17 +1,13 @@
-/**
- * `[Component]` and `[Reference]` text-annotation prefixes. A convention of the `legend` profile
- * and of the swimlane layout, not general BPMN semantics.
- */
+import { annotationRole, roleLabel, type BusinessPolicy } from "./business-policy.js";
 
-export function isDocumentAnnotation(text: string | undefined): boolean {
-  return /^\s*\[Reference\]/.test(text ?? "");
+export function isDocumentAnnotation(text: string | undefined, policy?: BusinessPolicy): boolean {
+  return annotationRole(text, policy)?.role === "document";
 }
 
-export function isAppAnnotation(text: string | undefined): boolean {
-  return /^\s*\[Component\]/.test(text ?? "");
+export function isAppAnnotation(text: string | undefined, policy?: BusinessPolicy): boolean {
+  return annotationRole(text, policy)?.role === "application";
 }
 
-/** Visible name of an `[Component]`/`[Reference]` annotation. */
-export function annotationName(text: string | undefined): string {
-  return (text ?? "").replace(/^\s*\[(Reference|Component)\]\s*/, "");
+export function annotationName(text: string | undefined, policy?: BusinessPolicy): string {
+  return roleLabel(text, policy);
 }
