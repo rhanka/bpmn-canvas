@@ -1,7 +1,7 @@
-import { hydrate, project, semanticDescriptor, serializeBpmn } from "../../src/io/index.js";
+import { hydrate, project, serializeBpmn } from "../../src/io/index.js";
 import type { BpmnDefinitions, BpmnXmlOptions, JsonCodecConfiguration, ModdleJsonElement } from "../../src/io/index.js";
 
-const configuration: JsonCodecConfiguration = { contractVersion: "1", defaults: "explicit", descriptors: { sem: semanticDescriptor } };
+const configuration: JsonCodecConfiguration = { contractVersion: "1", defaults: "explicit", descriptors: {} };
 const json: ModdleJsonElement = { $type: "bpmn:Definitions", rootElements: [] };
 const model: BpmnDefinitions = hydrate(json, configuration);
 export const projected: ModdleJsonElement = project(model, configuration);

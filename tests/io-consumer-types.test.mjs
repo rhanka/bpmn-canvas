@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { cpSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,7 +10,8 @@ for (const subpath of ["", "/io", "/layout", "/react", "/assistant-ui", "/browse
   const root = fileURLToPath(new URL("../", import.meta.url));
   const dir = mkdtempSync(join(tmpdir(), "io-consumer-"));
   try {
-    cpSync(join(root, "dist"), join(dir, "package/dist"), { recursive: true });
+    mkdirSync(join(dir, "package"));
+    symlinkSync(join(root, "dist"), join(dir, "package/dist"), "dir");
     cpSync(join(root, "package.json"), join(dir, "package/package.json"));
     symlinkSync(join(root, "node_modules"), join(dir, "node_modules"), "dir");
     writeFileSync(join(dir, "package.json"), '{"type":"module"}');
@@ -18,11 +19,11 @@ for (const subpath of ["", "/io", "/layout", "/react", "/assistant-ui", "/browse
 import * as entry from "@sentropic/bpmn-canvas${subpath}";
 import { createModdle, parseDefinitions, export as exportModel } from "@sentropic/bpmn-canvas${subpath}";
 import type { BpmnDefinitions, ModdleElement } from "@sentropic/bpmn-canvas${subpath}";
-import { hydrate, project, semanticDescriptor, ModdleJsonError } from "@sentropic/bpmn-canvas${subpath}";
+import { hydrate, project, ModdleJsonError } from "@sentropic/bpmn-canvas${subpath}";
 import type { JsonCodecConfiguration, ModdleJsonElement } from "@sentropic/bpmn-canvas${subpath}";
 import { serializeBpmn } from "@sentropic/bpmn-canvas${subpath}";
 import type { BpmnXmlOptions } from "@sentropic/bpmn-canvas${subpath}";
-const config: JsonCodecConfiguration = { contractVersion: "1", defaults: "explicit", descriptors: { sem: semanticDescriptor } };
+const config: JsonCodecConfiguration = { contractVersion: "1", defaults: "explicit", descriptors: {} };
 const json: ModdleJsonElement = { $type: "bpmn:Definitions", id: "Defs", rootElements: [] };
 const model: BpmnDefinitions = hydrate(json, config);
 const projected: ModdleJsonElement = project(model, config);

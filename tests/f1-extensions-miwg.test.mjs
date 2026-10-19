@@ -1,3 +1,4 @@
+import { fixtureDescriptor } from "./helpers/injected-descriptor.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
@@ -16,7 +17,7 @@ const hashes = [
   "f8c125a7c492d218d1f6962fe03920bec4b1e4a9c2efae0746926667a67f44cc",
   "c2d2fd90db5f6fd71d942918bf935ab393d0826c3e354c7e32f065b902899755",
 ];
-const configuration = { contractVersion: "1", defaults: "explicit", descriptors: { sem: io.semanticDescriptor } };
+const configuration = { contractVersion: "1", defaults: "explicit", descriptors: { [fixtureDescriptor.prefix]: fixtureDescriptor } };
 const options = { format: false, preamble: true };
 const digest = value => createHash("sha256").update(value).digest("hex");
 const ids = json => {

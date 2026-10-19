@@ -9,7 +9,8 @@ let sources;
 export async function policyModule(masked) {
   const identity = ledger.files[masked]?.pathSha256;
   sources ??= walk("src");
-  const source = sources.find(path => hash(path) === identity);
+  const category = masked.replace("src/profiles/", "src/presentation/").replace(/\{LX-TH-1:[a-f0-9]+\}/g, "annotated").replace(/\{LX-TH-2:[a-f0-9]+\}/g, "recolor").replace(/\{LX-TH-5:[a-f0-9]+\}/g, "flat");
+  const source = sources.find(path => hash(path) === identity) ?? sources.find(path => path === category);
   if (!source) throw new Error("Source identity unavailable");
   const url = new URL(source.replace(/^src\//, "dist/").replace(/\.tsx?$/, ".js"), root);
   let code = readFileSync(url, "utf8");

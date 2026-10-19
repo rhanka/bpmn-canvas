@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { annotationKind, selectLook, lookTokens, paletteEntries, navigationTarget } from "../dist/internal/legacy-policy.js";
+import { createLegacyAdapter, annotationKind, selectLook, lookTokens, paletteEntries, navigationTarget } from "../dist/internal/legacy-policy.js";
 import { differences, substitution } from "./fixtures/x24-externalization/expectations/derive/comparators.mjs";
 
 const root = new URL("./fixtures/x24-externalization/expectations/", import.meta.url);
@@ -15,13 +15,18 @@ const input = (c, role) => {
   assert.equal(createHash("sha256").update(bytes).digest("hex"), a.sha256);
   return JSON.parse(bytes);
 };
-const operations = new Set(["x24.classify.kind", "x24.tokens.resolve", "x24.theme.select", "x24.palette", "x24.navigation"]);
+const operations = new Set(["x24.classify.kind", "x24.tokens.resolve", "x24.theme.select", "x24.palette", "x24.navigation", "x24.surface.workshop"]);
 function observe(c, policy) {
   const vectors = input(c, "vectors");
-  if (c.operation === "x24.palette") return paletteEntries(policy);
+  const adapter = policy ? createLegacyAdapter(policy) : undefined;
+  if (c.operation === "x24.surface.workshop") return {
+    formats: input(c, "formats").map(format => ({ id: format.id, selection: selectLook({ look: format.look, ...(format.tokens ? { tokens: format.tokens } : {}), ...(format.options ? { options: format.options } : {}) }, policy) })),
+    navigation: vectors.map(vector => navigationTarget(vector, input(c, "index") ?? { processes: [], entries: [] }, policy)),
+  };
+  if (c.operation === "x24.palette") return adapter ? adapter.paletteEntries() : paletteEntries();
   return vectors.map(v => {
-    if (c.operation === "x24.classify.kind") return { text: v.text, kind: annotationKind(v.text, input(c, "family"), policy) };
-    if (c.operation === "x24.theme.select") return selectLook(v, policy);
+    if (c.operation === "x24.classify.kind") return { text: v.text, kind: adapter ? adapter.kind(v.text, input(c, "family")) : annotationKind(v.text, input(c, "family")) };
+    if (c.operation === "x24.theme.select") return adapter ? adapter.selectLook(v) : selectLook(v);
     if (c.operation === "x24.navigation") {
       const data = v.navigation ? { ...policy, navigation: v.navigation } : policy;
       const result = navigationTarget(v, input(c, "index") ?? { processes: [], entries: [] }, data);

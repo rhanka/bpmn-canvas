@@ -10,7 +10,7 @@ const load = path => JSON.parse(readFileSync(new URL(path, root)));
 const input = (c, role) => { const a = c.inputArtifacts.find(a => a.role === role); return a?.path ? load(a.path) : a?.json; };
 const drawing = await policyModule("src/profiles/{LX-TH-1:ba29297b}/renderer.ts");
 const aids = drawing.member("63194f6a821b45846017bf0a64cbceca12ab37ae7e41ba868b0accfb25a06f4c");
-const hidden = drawing.member("826ce6114813a8b2d256e9ebd0e096a1524afaef711b0cce224d4a96db3093e6");
+const hidden = drawing.module.isHiddenInAnnotated;
 const follow = Object.values(drawing.module).find(value => typeof value === "function" && value.$inject?.length === 2);
 const layout = (await policyModule("src/internal/layout/autoLayout.ts")).module;
 function graphOf(graph) {

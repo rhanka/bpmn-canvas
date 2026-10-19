@@ -64,10 +64,10 @@ function sparxProjection(xml) {
   });
 }
 function pageProjection(pages) {
-  return pages.map(page => ({ ...page, nodes: Object.fromEntries([...page.nodes].map(([id, node]) => {
+  return pages.map(({ applicationsByHost, ...page }) => ({ ...page, nodes: Object.fromEntries([...page.nodes].map(([id, node]) => {
     const { type, ...rest } = node;
     return [id, { ...rest, kind: type, ...(node.dir === "doc" ? { dir: "document" } : {}) }];
-  })), apps: Object.fromEntries(page.apps), connections: page.connections.map(c => ({ ...c, kind: c.kind })) }));
+  })), apps: Object.fromEntries(applicationsByHost), connections: page.connections.map(c => ({ ...c, kind: c.kind })) }));
 }
 async function observe(c, suffix = "") {
   const policy = artifact(c, suffix ? `policy-${suffix}` : "policy");
