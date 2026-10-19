@@ -1,3 +1,4 @@
+import { annotationRole, roleLabel, applicationHost, type BusinessPolicy } from "./business-policy.js";
 // BPMN XML -> layout input. Adapted from an internal TypeScript implementation that
 // mirrors an internal Python model (parse a process, normalize connection kinds and
 // artifact types, repair attachments on non-activity nodes). Keys are element ids
@@ -7,32 +8,32 @@
 import { ARTIFACT_TYPES, FLOW_TYPES, type LayoutConnection, type LayoutNode, type LayoutProcessInput } from "./swimlaneLayout.js";
 
 const FLOW_TAG: Record<string, [string, string | null]> = {
-  startEvent: ["START", null],
-  endEvent: ["END", null],
-  task: ["TASK", null],
-  subProcess: ["SUB-PROCESS", null],
-  callActivity: ["EXTERNAL_PROCESS", null],
-  exclusiveGateway: ["GATEWAY", "OR"],
-  parallelGateway: ["GATEWAY", "AND"],
-  inclusiveGateway: ["GATEWAY", "OR"],
-  intermediateThrowEvent: ["EVENT", null],
-  intermediateCatchEvent: ["EVENT", null],
+  startEvent: ["start", null],
+  endEvent: ["end", null],
+  task: ["task", null],
+  subProcess: ["subprocess", null],
+  callActivity: ["call", null],
+  exclusiveGateway: ["gateway", "OR"],
+  parallelGateway: ["gateway", "AND"],
+  inclusiveGateway: ["gateway", "OR"],
+  intermediateThrowEvent: ["event", null],
+  intermediateCatchEvent: ["event", null],
 };
 const ACTIVITY_TAGS = new Set([
   "task", "subProcess", "callActivity", "exclusiveGateway", "parallelGateway", "inclusiveGateway",
   "startEvent", "endEvent", "intermediateThrowEvent", "intermediateCatchEvent",
 ]);
-const ACTIVITY_TYPES = new Set(["TASK", "SUB-PROCESS", "EXTERNAL_PROCESS"]);
+const ACTIVITY_TYPES = new Set(["task", "subprocess", "call"]);
 
 type N = LayoutNode & { _pending?: boolean };
 const local = (el: Element): string => el.localName;
 const kids = (el: Element, name: string): Element[] => [...el.children].filter((c) => local(c) === name);
-const tOf = (n: LayoutNode): string => (n.type || "TASK").trim().toUpperCase();
+const tOf = (n: LayoutNode): string => (n.type || "task").trim().toLowerCase();
 
 export type ParsedProcess = { id: string; proc: LayoutProcessInput };
 
 /** Every process of a BPMN XML, parsed like the agent's bpmn_xml_to_process_list. */
-export function parseProcesses(xml: string): ParsedProcess[] {
+export function parseProcesses(xml: string, policy?: BusinessPolicy): ParsedProcess[] {
   if (typeof DOMParser === "undefined") throw new Error("parseProcesses needs a DOM (DOMParser)");
   const doc = new DOMParser().parseFromString(xml, "application/xml");
   const roots = [...doc.documentElement.children];
@@ -41,7 +42,7 @@ export function parseProcesses(xml: string): ParsedProcess[] {
   const collab = roots
     .filter((c) => local(c) === "collaboration")
     .flatMap((c) => [...c.children].filter((a) => local(a) === "textAnnotation" || local(a) === "association"));
-  return roots.filter((c) => local(c) === "process").map((p) => ({ id: p.getAttribute("id") ?? "", proc: parseProcess(p, collab) }));
+  return roots.filter((c) => local(c) === "process").map((p) => ({ id: p.getAttribute("id") ?? "", proc: parseProcess(p, collab, policy) }));
 }
 
 function processArtifacts(procEl: Element, collab: Element[]): Element[] {
@@ -62,7 +63,7 @@ function processArtifacts(procEl: Element, collab: Element[]): Element[] {
   return collab.filter((a) => keep.has(a.getAttribute("id")));
 }
 
-function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInput {
+function parseProcess(procEl: Element, collab: Element[] = [], policy?: BusinessPolicy): LayoutProcessInput {
   const all = [procEl, ...procEl.getElementsByTagName("*")];
   for (const art of processArtifacts(procEl, collab)) all.push(art, ...art.getElementsByTagName("*"));
   const byId = new Map<string, Element>();
@@ -77,10 +78,11 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
   for (const [id, el] of byId) {
     const t = local(el);
     if (t === "textAnnotation") {
-      const text = (el.textContent ?? "").trim();
-      if (text.startsWith("[Component]")) apps.set(id, text.slice(11).trim());
-      else if (text.startsWith("[Reference]")) {
-        nodes.set(id, { type: "DOCUMENT", label: id, text: text.slice(11).trim() || id });
+      const text = el.textContent ?? "";
+      const role = annotationRole(text, policy)?.role;
+      if (role === "application") apps.set(id, roleLabel(text, policy, true));
+      else if (role === "document") {
+        nodes.set(id, { type: "document", label: id, text: roleLabel(text, policy, true) || id });
         docIds.add(id);
       }
       continue;
@@ -88,10 +90,14 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
     if (t in FLOW_TAG) {
       const [type, subtype] = FLOW_TAG[t] as [string, string | null];
       nodes.set(id, { type, label: id, text: name(el) || id, ...(subtype ? { subtype } : {}) });
-    } else if (t === "dataInput") nodes.set(id, { type: "EXTERNAL_INPUT", label: id, text: name(el) || id });
-    else if (t === "dataOutput") nodes.set(id, { type: "PROCESS_OUTPUT", label: id, text: name(el) || id });
-    else if (t === "dataObjectReference") nodes.set(id, { type: "TASK_OUTPUT", label: id, text: name(el) || id, _pending: true });
+    } else if (t === "dataInput") nodes.set(id, { type: "port-in", label: id, text: name(el) || id });
+    else if (t === "dataOutput") nodes.set(id, { type: "port-out", label: id, text: name(el) || id });
+    else if (t === "dataObjectReference") nodes.set(id, { type: "object-out", label: id, text: name(el) || id, _pending: true });
   }
+  const eligible = (id: string): boolean => {
+    const tag = byId.get(id)?.localName ?? "";
+    return applicationHost({ $type: "bpmn:" + tag.charAt(0).toUpperCase() + tag.slice(1) }, policy);
+  };
   const laneNames: string[] = [];
   const laneMembers = new Map<string, number>();
   for (const laneSet of procEl.getElementsByTagName("*")) {
@@ -111,13 +117,13 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
     if (t === "sequenceFlow") {
       const s = el.getAttribute("sourceRef") ?? "";
       const g = el.getAttribute("targetRef") ?? "";
-      if (nodes.has(s) && nodes.has(g)) conns.push({ source: s, target: g, kind: "FLOW", ...(el.getAttribute("name") ? { label: el.getAttribute("name") } : {}) });
+      if (nodes.has(s) && nodes.has(g)) conns.push({ id, source: s, target: g, kind: "sequence", ...(el.getAttribute("name") ? { label: el.getAttribute("name") } : {}) });
     } else if (t === "association") {
       const s = el.getAttribute("sourceRef") ?? "";
       const g = el.getAttribute("targetRef") ?? "";
-      if (apps.has(s) && nodes.has(g)) nodes.get(g)!.app_label = apps.get(s) ?? null;
-      else if (apps.has(g) && nodes.has(s)) nodes.get(s)!.app_label = apps.get(g) ?? null;
-      else if (nodes.has(s) && nodes.has(g) && (docIds.has(s) || docIds.has(g))) conns.push({ source: s, target: g, kind: "DOC" });
+      if (apps.has(s) && nodes.has(g) && eligible(g)) nodes.get(g)!.application = apps.get(s) ?? null;
+      else if (apps.has(g) && nodes.has(s) && eligible(s)) nodes.get(s)!.application = apps.get(g) ?? null;
+      else if (nodes.has(s) && nodes.has(g) && (docIds.has(s) || docIds.has(g))) conns.push({ id, source: s, target: g, kind: "document" });
     } else if (t === "dataInputAssociation" || t === "dataOutputAssociation") {
       const owner = el.parentElement && ACTIVITY_TAGS.has(local(el.parentElement)) ? el.parentElement.getAttribute("id") : null;
       if (!owner || !nodes.has(owner)) continue;
@@ -126,10 +132,10 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
         const item = (r.textContent ?? "").trim();
         if (!nodes.has(item)) continue;
         const n = nodes.get(item)!;
-        if (t === "dataInputAssociation") conns.push({ source: item, target: owner, kind: "DATA" });
-        else conns.push({ source: owner, target: item, kind: "DATA" });
+        if (t === "dataInputAssociation") conns.push({ id, source: item, target: owner, kind: "data" });
+        else conns.push({ id, source: owner, target: item, kind: "data" });
         if (n._pending) {
-          n.type = t === "dataInputAssociation" ? "TASK_INPUT" : "TASK_OUTPUT";
+          n.type = t === "dataInputAssociation" ? "object-in" : "object-out";
           delete n._pending;
         }
       }
@@ -143,11 +149,11 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
     const s = nodes.get(c.source);
     const g = nodes.get(c.target);
     if (!s || !g) continue;
-    if (c.kind === "DATA") {
-      const [art, act] = tOf(s) === "TASK_INPUT" || tOf(s) === "EXTERNAL_INPUT" ? [c.source, c.target] : [c.target, c.source];
+    if (c.kind === "data") {
+      const [art, act] = tOf(s) === "object-in" || tOf(s) === "port-in" ? [c.source, c.target] : [c.target, c.source];
       taskLane.set(art, laneMembers.get(act) ?? 0);
-    } else if (c.kind === "DOC") {
-      const art = tOf(g) === "DOCUMENT" ? c.target : c.source;
+    } else if (c.kind === "document") {
+      const art = tOf(g) === "document" ? c.target : c.source;
       const other = art === c.target ? c.source : c.target;
       taskLane.set(art, laneMembers.get(other) ?? 0);
     }
@@ -156,7 +162,7 @@ function parseProcess(procEl: Element, collab: Element[] = []): LayoutProcessInp
   for (const [id, n] of nodes) lanes[laneMembers.get(id) ?? taskLane.get(id) ?? 0]?.nodes.push(n);
   const proc: LayoutProcessInput = { name: procEl.getAttribute("name") || procEl.getAttribute("id") || "", lanes, connections: conns };
   normalize(proc);
-  repairNonTaskAttachments(proc);
+  reportAttachmentHosts(proc);
   return proc;
 }
 
@@ -170,91 +176,39 @@ export function normalize(proc: LayoutProcessInput): LayoutProcessInput {
     if (!s || !t) continue;
     const ts = tOf(s);
     const tt = tOf(t);
-    const kind = tt === "DOCUMENT" || ts === "DOCUMENT" ? "DOC" : ARTIFACT_TYPES.has(tt) || ARTIFACT_TYPES.has(ts) ? "DATA" : "FLOW";
+    const kind = tt === "document" || ts === "document" ? "document" : ARTIFACT_TYPES.has(tt) || ARTIFACT_TYPES.has(ts) ? "data" : "sequence";
     c.kind = kind;
-    if (kind === "FLOW") continue;
+    if (kind === "sequence") continue;
     const [art, act, dir] = ARTIFACT_TYPES.has(tt) ? [t, s, "out"] : [s, t, "in"];
     if (!FLOW_TYPES.has(tOf(act))) continue;
     const a = tOf(art);
-    if (a === "DATA_OBJECT") art.type = dir === "out" ? "TASK_OUTPUT" : "TASK_INPUT";
-    else if (a === "EXTERNAL_DATA_OBJECT") art.type = dir === "out" ? "PROCESS_OUTPUT" : "EXTERNAL_INPUT";
+    if (a === "object-in") art.type = dir === "out" ? "object-out" : "object-in";
+    else if (a === "port-in") art.type = dir === "out" ? "port-out" : "port-in";
     if (art._task === undefined) art._task = act.label;
-    if (art._dir === undefined) art._dir = kind === "DOC" ? "doc" : dir;
+    if (art._dir === undefined) art._dir = kind === "document" ? "doc" : dir;
   }
   for (const n of nodes.values()) {
     const a = tOf(n);
     if (ARTIFACT_TYPES.has(a) && n._dir === undefined) {
-      n._dir = ({ TASK_INPUT: "in", EXTERNAL_INPUT: "in", DOCUMENT: "doc" } as Record<string, string>)[a] ?? "out";
-      if (a === "DATA_OBJECT") n.type = "TASK_INPUT";
-      else if (a === "EXTERNAL_DATA_OBJECT") n.type = "EXTERNAL_INPUT";
+      n._dir = ({ "object-in": "in", "port-in": "in", "document": "doc" } as Record<string, string>)[a] ?? "out";
+      if (a === "object-in") n.type = "object-in";
+      else if (a === "object-in") n.type = "port-in";
     }
   }
   return proc;
 }
 
-/** legend_model.repair_non_task_attachments: DATA / DOC links on a non-activity move to the nearest preceding activity. */
-export function repairNonTaskAttachments(proc: LayoutProcessInput): void {
-  const nodes = new Map<string, LayoutNode>();
-  for (const lane of proc.lanes) for (const n of lane.nodes) if (!nodes.has(n.label)) nodes.set(n.label, n);
-  const preds = new Map<string, string[]>();
-  for (const c of proc.connections) {
-    if ((c.kind || "FLOW").toUpperCase() !== "FLOW") continue;
-    if (nodes.has(c.source) && nodes.has(c.target)) preds.set(c.target, [...(preds.get(c.target) ?? []), c.source]);
+export function reportAttachmentHosts(proc: LayoutProcessInput): void {
+  const nodes = new Map(proc.lanes.flatMap(lane => lane.nodes).map(node => [node.label, node]));
+  const diagnostics: any[] = [];
+  for (const connection of proc.connections) {
+    if (connection.kind === "sequence") continue;
+    const source = nodes.get(connection.source), target = nodes.get(connection.target);
+    if (!source || !target) continue;
+    const sourceArtifact = ARTIFACT_TYPES.has(tOf(source));
+    const artifact = sourceArtifact ? source : target, host = sourceArtifact ? target : source;
+    if (!ARTIFACT_TYPES.has(tOf(artifact)) || ACTIVITY_TYPES.has(tOf(host))) continue;
+    diagnostics.push({ code: "attachment-host-not-activity", severity: "warn", artifact: artifact.label, host: host.label, connection: { source: connection.source, target: connection.target, kind: connection.kind } });
   }
-  const nearest = (label: string): string | null => {
-    const seen = new Set([label]);
-    const queue = [...(preds.get(label) ?? [])];
-    while (queue.length) {
-      const cand = queue.shift()!;
-      if (seen.has(cand)) continue;
-      seen.add(cand);
-      const n = nodes.get(cand);
-      if (n && ACTIVITY_TYPES.has(tOf(n))) return cand;
-      queue.push(...(preds.get(cand) ?? []).filter((p) => !seen.has(p)));
-    }
-    return null;
-  };
-  const kept: LayoutConnection[] = [];
-  for (let c of proc.connections) {
-    const kind = (c.kind || "FLOW").toUpperCase();
-    if (kind !== "DATA" && kind !== "DOC") {
-      kept.push(c);
-      continue;
-    }
-    const s = nodes.get(c.source);
-    const t = nodes.get(c.target);
-    if (!s || !t) {
-      kept.push(c);
-      continue;
-    }
-    let art: string;
-    let host: string;
-    if (kind === "DOC") {
-      if (tOf(s) === "DOCUMENT") [art, host] = [c.source, c.target];
-      else if (tOf(t) === "DOCUMENT") [art, host] = [c.target, c.source];
-      else {
-        kept.push(c);
-        continue;
-      }
-    } else {
-      if (ARTIFACT_TYPES.has(tOf(s)) && ARTIFACT_TYPES.has(tOf(t))) {
-        kept.push(c);
-        continue;
-      }
-      art = ARTIFACT_TYPES.has(tOf(s)) ? c.source : c.target;
-      host = ARTIFACT_TYPES.has(tOf(s)) ? c.target : c.source;
-    }
-    const hostIsSource = host === c.source;
-    if (ACTIVITY_TYPES.has(tOf(nodes.get(host)!))) {
-      kept.push(c);
-      continue;
-    }
-    const newHost = nearest(host);
-    if (newHost === null) continue;
-    c = hostIsSource ? { ...c, source: newHost } : { ...c, target: newHost };
-    const a = nodes.get(art);
-    if (a) a._task = newHost;
-    kept.push(c);
-  }
-  proc.connections = kept;
+  proc.diagnostics = diagnostics;
 }

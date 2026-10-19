@@ -1,3 +1,5 @@
+import { applicationHost, type BusinessPolicy } from "../business-policy.js";
+import { layoutPolicy } from "../legacy-policy.js";
 // On-demand auto-layout. Adapted from an internal implementation (a command that
 // reads the open diagram, lays it out with swimlaneLayout.ts and writes bounds,
 // waypoints and their DI as one undoable command). Each pool keeps its position;
@@ -22,16 +24,16 @@ export type LayoutChange = { element: El; bounds?: Box; waypoints?: Point[] };
 const COMMAND = "bpmnCanvas.autoLayout";
 
 const CONN_TYPES: Record<string, string[]> = {
-  FLOW: ["bpmn:SequenceFlow"],
-  DATA: ["bpmn:DataInputAssociation", "bpmn:DataOutputAssociation"],
-  DOC: ["bpmn:Association"],
+  "sequence": ["bpmn:SequenceFlow"],
+  "data": ["bpmn:DataInputAssociation", "bpmn:DataOutputAssociation"],
+  "document": ["bpmn:Association"],
 };
 
 /**
  * Changes (bounds / waypoints) that apply a layout to the participant's elements.
  * Layout items that have no element in the registry are reported in `missing`.
  */
-export function layoutChanges(registry: El, participant: El, lay: ProcessLayout, missing: string[] = []): LayoutChange[] {
+export function layoutChanges(registry: El, participant: El, lay: ProcessLayout, missing: string[] = [], policy?: BusinessPolicy): LayoutChange[] {
   const dx = participant.x - lay.pool.x;
   const dy = participant.y - lay.pool.y;
   const move = (b: Box): Box => ({ x: b.x + dx, y: b.y + dy, w: b.w, h: b.h });
@@ -54,22 +56,22 @@ export function layoutChanges(registry: El, participant: El, lay: ProcessLayout,
     const lb = lay.labels[id];
     if (lb && el.label) changes.push({ element: el.label, bounds: move(lb) });
   }
-  // [Component] annotations are stored where the legend render draws the box.
+  // [LX-MK-2] annotations are stored where the legend render draws the box.
   for (const [hostId, a] of Object.entries(lay.apps)) {
     const host = registry.get(hostId);
     const t = lay.nodes[hostId];
-    if (!host || !t) continue;
+    if (!host || !t || !applicationHost(host.businessObject ?? host, policy)) continue;
     const links = [...(host.incoming ?? []), ...(host.outgoing ?? [])].filter((c: El) => c.type === "bpmn:Association");
     let i = 0;
     for (const link of links) {
       const ann = link.source === host ? link.target : link.source;
-      if (ann?.type !== "bpmn:TextAnnotation" || !isAppAnnotation(ann.businessObject?.text)) continue;
-      const ab = move({ ...a, x: a.x + i * (a.w + 4) });
+      if (ann?.type !== "bpmn:TextAnnotation" || !isAppAnnotation(ann.businessObject?.text, policy)) continue;
+      const ab = move({ ...a, x: a.x + i * (a.w + layoutPolicy(policy).appBadge.gap) });
       i += 1;
       changes.push({ element: ann, bounds: ab });
       const x = ab.x + Math.floor(ab.w / 2);
       const tb = move(t);
-      const pts: Point[] = [[x, ab.y], [x, tb.y + tb.h - 20]];
+      const pts: Point[] = [[x, ab.y], [x, tb.y + tb.h - layoutPolicy(policy).appBadge.linkInset]];
       changes.push({ element: link, waypoints: link.source === ann ? pts : [...pts].reverse() });
     }
   }
@@ -80,7 +82,7 @@ export function layoutChanges(registry: El, participant: El, lay: ProcessLayout,
   lay.connections.forEach((c, i) => {
     const pts = lay.edges[i];
     if (!pts?.length) return;
-    const el = (CONN_TYPES[c.kind || "FLOW"] ?? [])
+    const el = (CONN_TYPES[c.kind || "sequence"] ?? [])
       .map((t) => connByEnds.get(`${c.source}\u0000${c.target}\u0000${t}`) ?? connByEnds.get(`${c.target}\u0000${c.source}\u0000${t}`))
       .find(Boolean);
     if (!el) {
@@ -97,8 +99,8 @@ export function layoutChanges(registry: El, participant: El, lay: ProcessLayout,
 }
 
 /** Layout input of every participant's process, read from the diagram XML. */
-export function processesByParticipant(xml: string, registry: El): Array<{ participant: El; proc: LayoutProcessInput }> {
-  const parsed = new Map(parseProcesses(xml).map((p) => [p.id, p.proc]));
+export function processesByParticipant(xml: string, registry: El, policy?: BusinessPolicy): Array<{ participant: El; proc: LayoutProcessInput }> {
+  const parsed = new Map(parseProcesses(xml, policy).map((p) => [p.id, p.proc]));
   return registry
     .getAll()
     .filter((e: El) => e.type === "bpmn:Participant" && e.businessObject?.processRef)
@@ -234,15 +236,17 @@ const abortError = (): Error => new DOMException("Layout superseded or canvas de
  * edited meanwhile; otherwise it rejects with an AbortError and touches nothing.
  */
 export class BpmnCanvasLayout implements BpmnCanvasLayoutService {
-  static $inject = ["commandStack", "elementRegistry", "bpmnjs", "eventBus"];
+  static $inject = ["commandStack", "elementRegistry", "bpmnjs", "eventBus", "config.bpmnCanvas"];
 
   private commandStack: El;
   private registry: El;
   private bpmnjs: El;
   private generation = 0;
+  private readonly businessPolicy: BusinessPolicy | undefined;
   private destroyed = false;
 
-  constructor(commandStack: El, elementRegistry: El, bpmnjs: El, eventBus: El) {
+  constructor(commandStack: El, elementRegistry: El, bpmnjs: El, eventBus: El, config?: { businessPolicy?: BusinessPolicy }) {
+    this.businessPolicy = config?.businessPolicy;
     commandStack.registerHandler(COMMAND, AutoLayoutHandler);
     this.commandStack = commandStack;
     this.registry = elementRegistry;
@@ -266,10 +270,10 @@ export class BpmnCanvasLayout implements BpmnCanvasLayoutService {
 
     const changes: LayoutChange[] = [];
     const missing: string[] = [];
-    for (const { participant, proc } of processesByParticipant(xml, this.registry)) {
-      const lay = await layoutProcess(proc);
+    for (const { participant, proc } of processesByParticipant(xml, this.registry, this.businessPolicy)) {
+      const lay = await layoutProcess(proc, {}, this.businessPolicy);
       if (!alive()) throw abortError();
-      changes.push(...layoutChanges(this.registry, participant, lay, missing));
+      changes.push(...layoutChanges(this.registry, participant, lay, missing, this.businessPolicy));
     }
 
     const boundary = boundaryChanges(this.registry, changes);
