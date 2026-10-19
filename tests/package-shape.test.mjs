@@ -19,7 +19,7 @@ test("package identity and license", () => {
 });
 
 test("exports name only implemented entries", () => {
-  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./react", "./semantics.json", "./styles.css"]);
+  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./profile", "./profile-lint", "./profile/compiler", "./react", "./semantics.json", "./styles.css"]);
   assert.equal(pkg.unpkg, "./dist/browser/bpmn-canvas.iife.min.js");
   assert.equal(pkg.jsdelivr, "./dist/browser/bpmn-canvas.iife.min.js");
   for (const [key, target] of Object.entries(pkg.exports)) {
@@ -37,7 +37,8 @@ test("root entry imports in Node without DOM and exposes the core API", async ()
 test("react peer is optional and no UI library is a dependency", () => {
   assert.equal(pkg.peerDependenciesMeta.react.optional, true);
   const deps = Object.keys(pkg.dependencies).sort();
-  assert.deepEqual(deps, ["bpmn-auto-layout", "bpmn-js", "bpmn-moddle", "diagram-js", "tiny-svg"]);
+  assert.deepEqual(deps, ["bpmn-auto-layout", "bpmn-js", "bpmn-moddle", "bpmnlint", "diagram-js", "saxen", "tiny-svg"]);
+  assert.equal(pkg.dependencies["bpmnlint"], "11.15.0");
 });
 
 test("shipped BPMN font bytes equal bpmn-font 0.13.0 (unmodified)", () => {
@@ -73,6 +74,7 @@ test("third-party license texts are byte-exact", () => {
     "licenses/diagram-js.LICENSE": "39e5358fd556ba6cb3b7eb1ff69ff43766e2f29c4e1d67e43cab08ad74016632",
     "licenses/tiny-svg.LICENSE": "ee9092be4d5377d9aa640656edb7ee2a42991664b95c53a5e4a6abf071e27669",
     "licenses/bpmn-moddle.LICENSE": "3082b548bd9c98364ebbed1cbd40bfe1721c7edf2376f26f25fb06c729cc077a",
+    "licenses/bpmnlint.LICENSE": "30791648b8d0c4d558a0d977568e5baf397bd9409fe1f57fa02f6e8b27c26390",
     "licenses/bpmn-font.OFL-1.1.txt": "e8b9c680806960866fef0bddc98903f61b0e4a53de59fb1e90c0c2723eb06c02",
     "licenses/Adobe-AFM-readme.txt": "311bfca694884d86006fb96de443b0f4359635921b95fc6c161bb94d013b7292",
   };

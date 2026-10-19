@@ -25,7 +25,7 @@
         <bpmn:endEvent id="Order_shipped" name="Order shipped"/>
         <bpmn:task id="Process_order_2" name="Process order"/>
         <bpmn:textAnnotation id="App_Check_order">
-            <bpmn:text>[App] Order desk</bpmn:text>
+            <bpmn:text>[Component] Order desk</bpmn:text>
         </bpmn:textAnnotation>
         <bpmn:sequenceFlow id="Order_received_Check_order" name="" sourceRef="Order_received" targetRef="Check_order"/>
         <bpmn:sequenceFlow id="Check_order_Order_complete" name="" sourceRef="Check_order" targetRef="Order_complete"/>

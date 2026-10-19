@@ -22,6 +22,14 @@ export interface SupportRole {
 }
 export const failContract = (code?: string): never => { throw new ProfileContractError(code); };
 export const cloneJson = <T>(value: T): T => JSON.parse(canonicalize(value)) as T;
+/** Only call on owned JSON snapshots, never on caller-owned objects. */
+export function freezeJson<T>(value: T): T {
+  if (value && typeof value === "object" && !Object.isFrozen(value)) {
+    for (const child of Object.values(value)) freezeJson(child);
+    Object.freeze(value);
+  }
+  return value;
+}
 const own = (object: object, key: string): boolean => Object.hasOwn(object, key);
 const validNativeId = (id: string): boolean => /^[A-Za-z_][A-Za-z0-9_.-]{0,255}$/.exec(id)?.[0] === id;
 
@@ -246,7 +254,7 @@ export function readNative(node: NativeNode, path: string, descriptors: Descript
   return MISSING;
 }
 
-export function validateNativeReferences(tree: NativeNode, descriptors: DescriptorIndex): void {
+export function validateNativeReferences(tree: NativeNode, descriptors: DescriptorIndex, idRefScalars: readonly string[] = []): ReturnType<typeof nativeIndex> {
   const index = nativeIndex(tree, descriptors);
   for (const { node } of index.entries) for (const [field, targets] of Object.entries(descriptors[node.$type]!.references)) {
     if (!own(node, field)) continue;
@@ -257,6 +265,12 @@ export function validateNativeReferences(tree: NativeNode, descriptors: Descript
       if (!targets.some(type => typeMatches(target!.node.$type, type, "assignable", descriptors))) failContract("profile-type");
     }
   }
+  for (const { node } of index.entries) for (const field of descriptors[node.$type]!.scalars) {
+    if (!idRefScalars.includes(`${node.$type}.${field}`) || !own(node, field)) continue;
+    const values = Array.isArray(node[field]) ? node[field] as unknown[] : [node[field]];
+    for (const value of values) if (typeof value !== "string" || !index.byId.has(value)) failContract("reference-dangling");
+  }
+  return index;
 }
 
 /** Validate precomputed deletion evidence; does not compute a dependency closure

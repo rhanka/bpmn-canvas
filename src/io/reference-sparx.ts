@@ -67,7 +67,7 @@ export function referenceSparx(pages: readonly RefPage[], options?: IoOptions): 
       const app = page.apps.get(host);
       const n = page.nodes.get(host)!;
       if (!app || !n.appLabel) continue;
-      elements.push({ id: fresh(`App_${n.label}`, "App"), type: "textAnnotation", name: `[App] ${n.appLabel}`, parent: laneIds.get(n.laneName ?? ""), b: app.box });
+      elements.push({ id: fresh(`App_${n.label}`, "App"), type: "textAnnotation", name: `[Component] ${n.appLabel}`, parent: laneIds.get(n.laneName ?? ""), b: app.box });
     }
     const connectors: SConnector[] = [];
     for (const conn of page.connections) {

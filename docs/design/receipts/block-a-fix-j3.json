@@ -1,0 +1,373 @@
+{
+  "format": "block-a-fix-j3/1",
+  "baseRevision": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+  "branch": "workbench/functions-20261018-block-a-fix-j3",
+  "scope": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "authority": [
+    "DESIGN.md R3.3 sections 2.5, 3.1, 8.1, 10.1",
+    "F1-EXTENSIONS-PLAN.md revision d lines 29-43, 58-80, 106"
+  ],
+  "initialRed": {
+    "source": "unchanged bfed4a3 worktree source before implementation",
+    "command": "timeout --signal=TERM --kill-after=5s 120s node --test --test-reporter=spec tests/f1-xml-boundary-j3.test.mjs",
+    "tests": 32,
+    "pass": 8,
+    "fail": 24,
+    "exitCode": 1
+  },
+  "supplementalRed": {
+    "source": "three literal boundary source files read from bfed4a3 with git show and transpiled into ignored dist/j3-baseline; relative imports alone rerouted in the probe copy",
+    "tests": 39,
+    "pass": 9,
+    "fail": 30,
+    "exitCode": 1,
+    "note": "The added tokenizer-only control imports the current observer. All failing probes call the literal baseline modules. The independent F7 overwrite probe was also rerun alone: one test, one failure, missing expected rejection."
+  },
+  "green": {
+    "exitCode": 0,
+    "summary": [
+      "# tests 254",
+      "# suites 0",
+      "# pass 254",
+      "# fail 0",
+      "# cancelled 0",
+      "# skipped 0",
+      "# todo 0",
+      "# duration_ms 15074.295155"
+    ],
+    "tests": 254,
+    "pass": 254,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "themeRegressionTests": 39,
+    "timeoutSeconds": 180,
+    "concurrency": 1
+  },
+  "staticChecks": {
+    "npm run typecheck": "passed",
+    "npm run typecheck:compat": "passed",
+    "git diff --check": "passed"
+  },
+  "sourceSuccession": [
+    {
+      "path": "src/io/f1-extensions.ts",
+      "old": {
+        "bytes": 28552,
+        "sha256": "852cc474aaabbc691aa28c1e5555a6873a1005b783788d6af2a90b29bfef7b08"
+      },
+      "new": {
+        "bytes": 36130,
+        "sha256": "a526d87e7233eb45a86197ceeb31046fb5e4859d6812630e7b6e4633512e8767"
+      }
+    },
+    {
+      "path": "src/io/moddle-json.ts",
+      "old": {
+        "bytes": 31017,
+        "sha256": "3a7b66d0071688989338587404018293c33c7718f2ce0e8c073819a0bb500937"
+      },
+      "new": {
+        "bytes": 33083,
+        "sha256": "2d87b3de7b4e6c4a6f39cc15057cbcc6a1fc715c5092cd0a0e022ff9e3e4e49a"
+      }
+    },
+    {
+      "path": "src/io/serialize-bpmn.ts",
+      "old": {
+        "bytes": 10389,
+        "sha256": "66ee515483d739b7e88b116922830468fc40136b7e5eaddffbf4f516e5e5c314"
+      },
+      "new": {
+        "bytes": 11707,
+        "sha256": "570a5817b6b626fb930378a28212964eebabb4de1769715d06bdd9f12ced1923"
+      }
+    },
+    {
+      "path": "package.json",
+      "old": {
+        "bytes": 3402,
+        "sha256": "61206de6c42cd537a2948d65b50bba6eea52e401c5862612e7ad97cfe240efd9"
+      },
+      "new": {
+        "bytes": 3425,
+        "sha256": "88ae760da7439d9c8683eac871e8fef4baa5a8dd3b37d7a24f28887d6e8d9343"
+      }
+    },
+    {
+      "path": "package-lock.json",
+      "old": {
+        "bytes": 177311,
+        "sha256": "5dde3cda13ab00eb706009440b62b720fbd853239baac7381fcee945b4665c08"
+      },
+      "new": {
+        "bytes": 177338,
+        "sha256": "e579be75b4fd788597efbb37df786f4f6e1c689acd83f439f51e34aecc65fa86"
+      }
+    }
+  ],
+  "sharedFiles": [
+    "src/io/f1-extensions.ts",
+    "src/io/moddle-json.ts",
+    "src/io/serialize-bpmn.ts",
+    "package.json",
+    "package-lock.json"
+  ],
+  "newFiles": [
+    "src/io/saxen.d.ts",
+    "tests/f1-xml-boundary-j3.test.mjs",
+    "docs/design/receipts/block-a-fix-j3.md",
+    "docs/design/receipts/block-a-fix-j3.json"
+  ],
+  "sealedExpectationsChanged": [],
+  "reseals": [],
+  "infeasibleItems": [],
+  "probes": [
+    {
+      "name": "J3 #15 XML depth 255 should enforce the limit before construction",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML depth 256 should enforce the limit before construction",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML depth 257 should enforce the limit before construction",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML attributes 1023 should count declarations before construction",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML attributes 1024 should count declarations before construction",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML attributes 1025 should count declarations before construction",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML attribute length 1048575 should bound UTF-16 units",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML attribute length 1048576 should bound UTF-16 units",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML attribute length 1048577 should bound UTF-16 units",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 hydrate should refuse 6000 levels without a stack overflow",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 F7 should enforce projected object size before invoking the writer",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 all boundaries should count typed and foreign attributes together",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 all boundaries should enforce typed attribute UTF-16 length",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 tokenizer should count one million elements without constructing a tree",
+      "finding": 15,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 F7 should use exact JCS byte boundaries without allocating serialized JSON",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #15 XML should enforce object size even when raw and decoded sizes fit",
+      "finding": 15,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #16 encoding should ignore nondeclaration <!--",
+      "finding": 16,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #16 encoding should ignore nondeclaration <?hi",
+      "finding": 16,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #16 encoding should ignore ordinary attribute",
+      "finding": 16,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #16 encoding should honor only an initial declaration including BOM",
+      "finding": 16,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 reserved attributes should allow attribute-shaped documentation",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity foo_bar should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity _foo should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity é should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity a.b should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity a-b should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity a:b should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity 𐀀 should be refused before native construction",
+      "finding": 17,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #17 entity and reserved scans should exempt comments PI and CDATA",
+      "finding": 17,
+      "baseline": "passed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #18 XML should reject duplicate expanded attribute names",
+      "finding": 18,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #18 namespace aliases should resolve declarations and preserve distinct values",
+      "finding": 18,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #18 JSON and F7 should refuse foreign attributes colliding with declared names",
+      "finding": 18,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #18 project should refuse native foreign attributes colliding with declared names",
+      "finding": 18,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #18 F7 should refuse a declared attribute overwrite independently of hydration",
+      "finding": 18,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #18 generic local rebinding should survive project and hydrate",
+      "finding": 18,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #19 F7 should refuse malformed generic QName before writing",
+      "finding": 19,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #19 F7 should refuse generic namespace NUL before encoding",
+      "finding": 19,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #19 F7 should refuse generic namespace surrogate before encoding",
+      "finding": 19,
+      "baseline": "failed",
+      "green": "passed"
+    },
+    {
+      "name": "J3 #20 reader to F7 should accept a generic element without namespace URI",
+      "finding": 20,
+      "baseline": "failed",
+      "green": "passed"
+    }
+  ],
+  "limitations": [
+    "Local rebinding is proven by native project/hydrate equality. The upstream writer itself rejects the sample with an unresolved generated prefix; no writer parity claim is made for that sample.",
+    "The existing sealed-vector suite retains its previously recorded dispute policy; this fix round does not close findings 21-23 or 25.",
+    "All test commands used the prescribed Git environment, a timeout, and natural completion; no test process remains active."
+  ]
+}

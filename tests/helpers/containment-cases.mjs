@@ -83,7 +83,7 @@ export async function injectChild(c) {
   const child = m.moddle.create(c.childType, { id: "Injected_child" });
   if (child.$descriptor.properties.some((p) => p.name === "name")) child.name = "Injected child";
   // Use valid semantic data wherever a simple drawable/relation can be exported.
-  if (c.childType === "bpmn:TextAnnotation") child.text = "[Doc] Injected document";
+  if (c.childType === "bpmn:TextAnnotation") child.text = "[Reference] Injected document";
   if (c.childType === "sem:Info") child.order = 99999;
   if (c.childType === "bpmn:SequenceFlow") {
     child.sourceRef = m.elementsById.Order_received;

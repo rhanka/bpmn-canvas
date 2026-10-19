@@ -95,7 +95,7 @@ for (const scenario of ["import-json-spacing", "import-xml-spacing"]) {
 
 test("should omit all revisions when strict native parsing fails", async () => {
   const i = input(v("parse-failure"));
-  await assert.rejects(() => importRevision(i.format, i.source), error => !Object.hasOwn(error, "baseRevision") && !Object.hasOwn(error, "revision"));
+  assert.throws(() => importRevision(i.format, i.source), error => !Object.hasOwn(error, "baseRevision") && !Object.hasOwn(error, "revision"));
 });
 
 test("should reject unsorted bindings, nested identity extras, null and storage refusal", async () => {

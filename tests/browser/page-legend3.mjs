@@ -1,4 +1,4 @@
-// Legend profile: [Doc] link and lane-header tokens, DataInput/DataOutput lifecycle, getShapePath hit outlines.
+// Legend profile: [Reference] link and lane-header tokens, DataInput/DataOutput lifecycle, getShapePath hit outlines.
 import Modeler from "bpmn-js/lib/Modeler";
 import { legendProfile } from "../../dist/profiles/legend/index.js";
 
@@ -12,7 +12,7 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
     <bpmn:task id="T" name="Task"><bpmn:dataOutputAssociation id="DA"><bpmn:targetRef>DO</bpmn:targetRef></bpmn:dataOutputAssociation></bpmn:task>
     <bpmn:dataObjectReference id="DO" name="Out"/>
     <bpmn:exclusiveGateway id="G"/>
-    <bpmn:textAnnotation id="DOC"><bpmn:text>[Doc] Form</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="DOC"><bpmn:text>[Reference] Form</bpmn:text></bpmn:textAnnotation>
     <bpmn:textAnnotation id="NOTE"><bpmn:text>plain note</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="AD" sourceRef="T" targetRef="DOC"/>
     <bpmn:association id="AN" sourceRef="T" targetRef="NOTE"/>
@@ -78,7 +78,7 @@ const countIo = async (m) => {
 window.runLegend3 = async () => {
   const out = {};
 
-  // (1) [Doc] link and lane header tokens.
+  // (1) [Reference] link and lane header tokens.
   const neutral = await make();
   out.neutral = { directional: { doc: linkOf(neutral.host, "AO"), note: linkOf(neutral.host, "AP") }, doc: linkOf(neutral.host, "AD"), note: linkOf(neutral.host, "AN"), header: headerFill(neutral.host), warnings: neutral.warnings };
   const given = await make({ link: "#112233", docLink: "#b85450", docLinkDash: "3 4", laneFill: "#aabbcc", laneHeaderFill: "#fbf9f6" });

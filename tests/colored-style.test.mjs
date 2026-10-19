@@ -56,8 +56,8 @@ test("kind mapping of element types", async () => {
     [["bpmn:Group"], undefined],
   ];
   for (const [types, kind] of cases) assert.equal(coloredKind(el(types)), kind, types.join());
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "[Doc] x" })), "doc");
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: " [App] y" })), "app");
+  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "[Reference] x" })), "doc");
+  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: " [Component] y" })), "app");
   assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "plain" })), "annotation");
   assert.equal(coloredKind({ type: "label", labelTarget: {}, businessObject: { $instanceOf: () => true } }), "label");
 });

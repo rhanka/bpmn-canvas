@@ -39,8 +39,8 @@ test("palette entries: unique ids, an icon each, create-flow metadata", () => {
   const byId = Object.fromEntries(palette.PALETTE_ENTRIES.map((e) => [e.id, e]));
   assert.equal(byId["legend.external-input"].bpmnType, "bpmn:DataInput");
   assert.equal(byId["legend.process-output"].bpmnType, "bpmn:DataOutput");
-  assert.equal(byId["legend.document"].preset.text, "[Doc] ");
-  assert.equal(byId["legend.application"].preset.text, "[App] ");
+  assert.equal(byId["legend.document"].preset.text, "[Reference] ");
+  assert.equal(byId["legend.application"].preset.text, "[Component] ");
   assert.equal(byId["legend.sequence-flow"].tool, "connect");
   assert.equal(byId["legend.subprocess"].preset.collapsed, true);
 });

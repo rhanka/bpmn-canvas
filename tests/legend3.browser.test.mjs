@@ -9,16 +9,16 @@ test("legend tokens, data IO lifecycle and hit outlines in a real browser", { ti
   const { result: o, consoleLines } = await runInBrowser(root + "tests/browser/page-legend3.mjs", "legend3", (page) => page.evaluate(() => window.runLegend3()));
   if (process.env.LEGEND3_DUMP) console.log(JSON.stringify(o, null, 1));
 
-  await t.test("[Doc] association: the defaults (reference look) draw it red, dashed 5 5, like the plain link", () => {
+  await t.test("[Reference] association: the defaults (reference look) draw it red, dashed 5 5, like the plain link", () => {
     assert.deepEqual(o.neutral.doc, { stroke: "#b85450", dash: "5 5" });
     assert.deepEqual(o.neutral.note, { stroke: "#b85450", dash: "5 5" });
     assert.deepEqual(o.neutral.warnings, []);
   });
-  await t.test("docLink and docLinkDash colour only the associations to a [Doc]", () => {
+  await t.test("docLink and docLinkDash colour only the associations to a [Reference]", () => {
     assert.deepEqual(o.given.doc, { stroke: "#b85450", dash: "3 4" });
     assert.deepEqual(o.given.note, { stroke: "#112233", dash: "5 5" });
   });
-  await t.test("a directional association to a [Doc] is drawn the same way (no arrow); to a plain note it stays upstream's", () => {
+  await t.test("a directional association to a [Reference] is drawn the same way (no arrow); to a plain note it stays upstream's", () => {
     assert.deepEqual(o.given.directional, { stroke: "#b85450", dash: "3 4" });
     assert.equal(o.neutral.directional.note, null, "upstream draws it");
   });
@@ -30,7 +30,7 @@ test("legend tokens, data IO lifecycle and hit outlines in a real browser", { ti
     assert.equal(o.labels.neutral, "#22242a");
     assert.equal(o.labels.named, "#445566");
   });
-  await t.test("without docLink the [Doc] association follows the host's link", () => {
+  await t.test("without docLink the [Reference] association follows the host's link", () => {
     assert.deepEqual(o.followed.doc, { stroke: "#112233", dash: "5 5" });
   });
   await t.test("laneHeaderFill paints the lane header; a host naming laneFill alone gets it on the header; default white", () => {

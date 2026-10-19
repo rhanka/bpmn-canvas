@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { runInBrowser } from "./browser/harness.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const STEP0_TITLES = ["Start", "End", "Intermediate event", "Task", "Sub-process (collapsed)", "External process", "Gateway OR", "Gateway AND", "Task input", "Task output", "External input", "Process output", "Document reference", "Application", "Lane", "Sequence flow"];
+const STEP0_TITLES = ["Start", "End", "Intermediate event", "Task", "Sub-process (collapsed)", "External call", "Gateway OR", "Gateway AND", "Task input", "Task output", "External input", "Process output", "Document reference", "Application", "Lane", "Sequence flow"];
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/ui/step0-structure.json", import.meta.url), "utf8"));
 
 test("workshop structure with the step-0 contract options", { timeout: 240000 }, async (t) => {

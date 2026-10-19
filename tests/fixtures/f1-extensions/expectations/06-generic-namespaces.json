@@ -1,0 +1,358 @@
+{
+  "format": "f1-expectations/1",
+  "family": "generic-namespaces",
+  "title": "No-namespace URI and generic-descendant rule",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used. Reviewer arbitration D-default-ns-qname corrects only the representation specified in the disputes receipt; the original independent derivation is retained as provenance.",
+  "pinnedReference": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0"
+  },
+  "pointerDomain": "f1-expectations-pointer/1",
+  "vectors": [
+    {
+      "caseId": "generic-no-namespace-uri",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><plain>hello</plain></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "plain",
+                          "uri": ""
+                        },
+                        "$attrs": {},
+                        "$body": "hello"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": []
+      },
+      "derivation": "An unprefixed extension element with no in-scope default namespace is generic with qname plain and uri equal to the empty string (design default for the no-namespace representation). Its text becomes $body.",
+      "provenance": [
+        "plan rev d step-1 item m4: no-namespace URI representation (default chosen in README)",
+        "native generic handling: name and namespace descriptor are retained via the generic factory"
+      ]
+    },
+    {
+      "caseId": "generic-default-namespace",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><thing xmlns=\"urn:example:ext\"><child/></thing></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ns0:thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns": "urn:example:ext"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "ns0:child",
+                              "uri": "urn:example:ext"
+                            },
+                            "$attrs": {}
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": []
+      },
+      "derivation": "A default namespace applies to element names: both the generic element and its unprefixed child resolve to that URI. The declaration itself stays as an ordinary xmlns entry in the element $attrs.",
+      "provenance": [
+        "plan rev d: declarations stay inside $attrs; default namespaces apply to element names"
+      ]
+    },
+    {
+      "caseId": "generic-default-reset",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><thing xmlns=\"urn:example:ext\"><inner xmlns=\"\"><plain/></inner></thing></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ns0:thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns": "urn:example:ext"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "ns1:inner",
+                              "uri": ""
+                            },
+                            "$attrs": {
+                              "xmlns": ""
+                            },
+                            "$children": [
+                              {
+                                "$type": "$any",
+                                "$name": {
+                                  "qname": "ns1:plain",
+                                  "uri": ""
+                                },
+                                "$attrs": {}
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": []
+      },
+      "derivation": "xmlns=\"\" resets the default namespace: the resetting element and its child have the empty-string URI, while the outer element keeps its URI. The reset declaration is retained in $attrs.",
+      "provenance": [
+        "plan rev d: preserve native treatment of xmlns=\"\""
+      ]
+    },
+    {
+      "caseId": "generic-descendant-registered-qname-stays-generic",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:wrapper xmlns:ext=\"urn:example:ext\"><bpmn:task id=\"Inner_Shadow\"/></ext:wrapper></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:wrapper",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns:ext": "urn:example:ext"
+                        },
+                        "$children": [
+                          {
+                            "$type": "$any",
+                            "$name": {
+                              "qname": "bpmn:task",
+                              "uri": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+                            },
+                            "$attrs": {
+                              "id": "Inner_Shadow"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "note": "No bpmn:Task is created; Inner_Shadow is a plain string in $attrs and never enters the typed ID/reference index."
+      },
+      "derivation": "Generic descendant rule: every descendant of a generic element is handled generically, even when its QName (bpmn:task) belongs to a registered namespace. The child keeps its exact QName and MODEL URI as a generic identity.",
+      "provenance": [
+        "plan rev d: all descendants handled generically remain generic, even with a registered QName",
+        "native generic child handling always delegates to the generic handler"
+      ]
+    },
+    {
+      "caseId": "generic-unprefixed-attribute-no-namespace",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:extensionElements><ext:thing xmlns:ext=\"urn:example:ext\" xmlns=\"urn:example:ext\" data-note=\"01\"/></bpmn:extensionElements></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "extensionElements": {
+                    "$type": "bpmn:ExtensionElements",
+                    "values": [
+                      {
+                        "$type": "$any",
+                        "$name": {
+                          "qname": "ext:thing",
+                          "uri": "urn:example:ext"
+                        },
+                        "$attrs": {
+                          "xmlns:ext": "urn:example:ext",
+                          "xmlns": "urn:example:ext",
+                          "data-note": "01"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": []
+      },
+      "derivation": "The default namespace does not apply to unprefixed attributes: data-note stays the plain key data-note in $attrs, alongside both retained declarations.",
+      "provenance": [
+        "plan rev d: default namespaces apply to element names, not unprefixed attributes"
+      ]
+    }
+  ]
+}

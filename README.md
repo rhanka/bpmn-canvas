@@ -97,7 +97,7 @@ Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-
 
 `profile: "standard"` (default) is upstream bpmn-js: its renderer, palette and context pad, so every
 BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in look (rounded task
-boxes, `[App]`/`[Doc]` annotations, a legend palette) that draws only the shapes it can draw
+boxes, `[Component]`/`[Reference]` annotations, a legend palette) that draws only the shapes it can draw
 faithfully; everything else falls through to the upstream renderer.
 
 ## The workshop (`/react`)
@@ -167,7 +167,7 @@ const titles = io.listDiagrams(xmlInput).map((d) => d.name); // diagram, else pr
   that graph and use its DI for geometry. The exporter never normalizes, lays out or repairs a model.
 - Formatted exports preserve the reference codecs' cell/element order, IDs, styles, geometry, anchors, page links,
   rounding and escaping. They support one pool per page, tasks, collapsed sub-processes, call activities,
-  start/end/throw events, exclusive/parallel gateways, data objects/inputs/outputs, `[Doc]` and `[App]` annotations,
+  start/end/throw events, exclusive/parallel gateways, data objects/inputs/outputs, `[Reference]` and `[Component]` annotations,
   sequence flows and data/document links. All pages need complete valid DI. Unsupported content or missing required
   facts refuses the whole conversion with an `IoError` carrying a stable `code` and offending `ids`.
 - Semantic metadata lives in `sem:Info` within `extensionElements`: `order`, `laneRef`, `direction`, `label`,
@@ -455,14 +455,14 @@ when you do not name it. An explicit per-type value always wins.
 | Group | Keys |
 |---|---|
 | Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns), `labelText` (labels outside their shape; `colored`: follows `text`, `legend`: upstream colour unless named) |
-| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Doc]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
+| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Reference]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
 | Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
 | Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
 | Pool, lane | `poolLine`, `poolFill`, `laneLine`, `laneFill`, `laneHeaderFill` (header column, default: `laneFill`) |
-| External process, external input, process output | `externalLine`, `externalFill` |
-| `[Doc]` annotation | `docLine`, `docFill` |
+| External call, external input, process output | `externalLine`, `externalFill` |
+| `[Reference]` annotation | `docLine`, `docFill` |
 | Task input and output (data object) | `dataLine`, `dataFill` |
-| `[App]` annotation (component box) | `appLine`, `appFill` |
+| `[Component]` annotation (component box) | `appLine`, `appFill` |
 
 A BPMN-in-Color fill or stroke set on an element in the XML wins over the token.
 
@@ -516,7 +516,7 @@ await canvas.setProfile("colored", coloredTokens);
   (`DEFAULT_COLORED_TOKENS`; only the named keys recolour) (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
   no module and draws exactly like `standard`.
 - **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data
-  input and output), data (data object and data store), doc and app (text annotations starting `[Doc]` / `[App]`),
+  input and output), data (data object and data store), doc and app (text annotations starting `[Reference]` / `[Component]`),
   flow (sequence and message flows), link (associations and data associations). Plain annotations use `stroke`; groups
   keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`, external labels use `labelText` (default: `text`). `dataLinkArrow: false` (legend look) draws task input and output associations without the arrow head.
 - Only the tokens the host names recolour: a kind whose token is missing keeps the upstream colour (name `taskFill` alone and flows, events and texts stay as in `standard`). `stroke` names every line colour, `fill` the task fill, `text` the labels too.
@@ -524,5 +524,5 @@ await canvas.setProfile("colored", coloredTokens);
 - Markers (arrowheads, message-flow ends, conditional markers) are created by the upstream renderer with the flow
   colour and with ids unique to the instance, so two instances with different tokens never share one.
 - Not applied: `strokeWidth` (it would also change the inner decorations), `taskFillEnd` (no gradient is drawn) and the
-  font tokens. The `[Doc]`/`[App]` background is the only thing added to the upstream drawing: a fill on the existing
+  font tokens. The `[Reference]`/`[Component]` background is the only thing added to the upstream drawing: a fill on the existing
   annotation box.

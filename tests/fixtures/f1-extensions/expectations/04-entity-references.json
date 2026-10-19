@@ -1,0 +1,533 @@
+{
+  "format": "f1-expectations/1",
+  "family": "entity-references",
+  "title": "Predefined/uppercase entities and numeric character references",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+  "pinnedReference": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0"
+  },
+  "pointerDomain": "f1-expectations-pointer/1",
+  "vectors": [
+    {
+      "caseId": "entity-lowercase-positive",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>A &amp; B &lt; C &gt; D &quot;E&quot; F &apos;G&apos;</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "A & B < C > D \"E\" F 'G'",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedText": "A & B < C > D \"E\" F 'G'",
+        "expectedCodePoints": [
+          65,
+          32,
+          38,
+          32,
+          66,
+          32,
+          60,
+          32,
+          67,
+          32,
+          62,
+          32,
+          68,
+          32,
+          34,
+          69,
+          34,
+          32,
+          70,
+          32,
+          39,
+          71,
+          39
+        ]
+      },
+      "derivation": "The five predefined lowercase references decode with the pinned native semantics in element text.",
+      "provenance": [
+        "saxen decoding: five predefined names",
+        "plan rev d: only the five predefined references and numeric references decode"
+      ]
+    },
+    {
+      "caseId": "entity-uppercase-positive",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>A &AMP; B &LT; C &GT; D &QUOT;E&QUOT; F &APOS;G&APOS;</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "A & B < C > D \"E\" F 'G'",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedText": "A & B < C > D \"E\" F 'G'",
+        "expectedCodePoints": [
+          65,
+          32,
+          38,
+          32,
+          66,
+          32,
+          60,
+          32,
+          67,
+          32,
+          62,
+          32,
+          68,
+          32,
+          34,
+          69,
+          34,
+          32,
+          70,
+          32,
+          39,
+          71,
+          39
+        ]
+      },
+      "derivation": "All-uppercase variants of the five predefined names decode exactly like the lowercase forms in both lanes; this sealed behaviour is intentional native parity, not an error.",
+      "provenance": [
+        "saxen decoding: uppercase variants are added to the same mapping",
+        "plan rev d: accept native uppercase variants in both lanes; seal a documenting vector"
+      ]
+    },
+    {
+      "caseId": "entity-mixed-case-refused",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>A &Amp; B</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-entity-reference-unsupported",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-entity-reference-unsupported",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ]
+      },
+      "derivation": "Mixed-case &Amp; is not one of the five names nor its all-uppercase variant; natively it would pass through literally, but the boundary admits only the closed decoded set and refuses the undeclared named reference.",
+      "provenance": [
+        "plan rev d: closed decoded set and xml-entity-reference-unsupported",
+        "saxen decoding: unknown names fall back to literal text (the behaviour the boundary must not silently keep)"
+      ]
+    },
+    {
+      "caseId": "entity-unknown-nbsp-refused",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>A &nbsp; B</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "refused:xml-entity-reference-unsupported",
+      "expected": {
+        "kind": "refused",
+        "diagnostics": [
+          {
+            "code": "xml-entity-reference-unsupported",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ]
+      },
+      "derivation": "An undeclared named reference outside the closed set is refused at the boundary with a pointer at the containing text; it is neither decoded nor retained as literal text.",
+      "provenance": [
+        "plan rev d: xml-entity-reference-unsupported for undeclared named references"
+      ]
+    },
+    {
+      "caseId": "numeric-hex-supplementary-truncated",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>&#x1F600;</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [
+          {
+            "code": "moddle-content-normalized",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ],
+        "expectedText": "",
+        "expectedCodePoints": [
+          62976
+        ]
+      },
+      "derivation": "Hexadecimal supplementary reference: the native decoder converts through a 16-bit character conversion, so U+1F600 (128512) truncates modulo 65536 to the single BMP code unit U+F600. The value is retained with a moddle-content-normalized diagnostic; U+F600 is a valid character, so the writer stage does not refuse it.",
+      "provenance": [
+        "saxen decoding: numeric references use a 16-bit fromCharCode conversion",
+        "plan rev d: mirror truncation, seal &#x1F600;, retain the truncation diagnostic"
+      ]
+    },
+    {
+      "caseId": "numeric-decimal-supplementary-truncated",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>&#128512;</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [
+          {
+            "code": "moddle-content-normalized",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ],
+        "expectedText": "",
+        "expectedCodePoints": [
+          62976
+        ]
+      },
+      "derivation": "Decimal form of the same code point (128512 = 0x1F600) truncates identically to U+F600; decimal and hexadecimal supplementary references agree.",
+      "provenance": [
+        "saxen decoding: decimal and hex branches share the 16-bit conversion",
+        "plan rev d: freeze decimal and hex supplementary-plane vectors"
+      ]
+    },
+    {
+      "caseId": "numeric-nul",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>&#0;</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "\u0000",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [
+          {
+            "code": "moddle-content-normalized",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ],
+        "expectedText": "\u0000",
+        "expectedCodePoints": [
+          0
+        ],
+        "expectedF7": {
+          "status": "refused",
+          "diagnostics": [
+            {
+              "code": "invalid-xml-character",
+              "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+            }
+          ]
+        }
+      },
+      "derivation": "NUL reference decodes to U+0000 in the native text. F1 retains the decoded value with a moddle-content-normalized diagnostic; the writer stage then refuses that string as invalid-xml-character (expectedF7).",
+      "provenance": [
+        "plan rev d: seal &#0; and its writer-stage refusal interaction",
+        "writer string rule: NUL and forbidden controls refuse before encoding"
+      ]
+    },
+    {
+      "caseId": "numeric-lone-surrogate",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>&#xD800;</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "\ud800",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [
+          {
+            "code": "moddle-content-normalized",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ],
+        "expectedText": "\ud800",
+        "expectedCodePoints": [
+          55296
+        ],
+        "expectedF7": {
+          "status": "refused",
+          "diagnostics": [
+            {
+              "code": "invalid-xml-character",
+              "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+            }
+          ]
+        }
+      },
+      "derivation": "Lone-surrogate reference decodes to the single code unit U+D800. The JSON form escapes it as \\ud800. F1 retains it with a moddle-content-normalized diagnostic; the writer stage refuses it as invalid-xml-character. The decimal spelling &#55296; denotes the same code unit and has the same expectation.",
+      "provenance": [
+        "plan rev d: seal &#xD800; and its writer-stage refusal interaction",
+        "writer string rule: lone surrogates refuse before encoding"
+      ]
+    },
+    {
+      "caseId": "numeric-raw-supplementary-positive",
+      "operation": "f1-xml-to-native",
+      "input": {
+        "kind": "xml-text",
+        "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" id=\"Defs_Expect\" targetNamespace=\"urn:example:f1-expect\"><bpmn:process id=\"Proc_Expect\" isExecutable=\"false\"><bpmn:task id=\"Task_Expect\" name=\"Paper kite\"><bpmn:documentation>😀</bpmn:documentation></bpmn:task></bpmn:process></bpmn:definitions>\n"
+      },
+      "expectedStatus": "ok",
+      "expected": {
+        "kind": "native-projected",
+        "json": {
+          "$type": "bpmn:Definitions",
+          "id": "Defs_Expect",
+          "targetNamespace": "urn:example:f1-expect",
+          "expressionLanguage": "http://www.w3.org/1999/XPath",
+          "typeLanguage": "http://www.w3.org/2001/XMLSchema",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Proc_Expect",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_Expect",
+                  "name": "Paper kite",
+                  "isForCompensation": false,
+                  "startQuantity": 1,
+                  "completionQuantity": 1,
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "😀",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "$attrs": {
+            "xmlns:bpmn": "http://www.omg.org/spec/BPMN/20100524/MODEL"
+          }
+        },
+        "diagnostics": [],
+        "expectedText": "😀",
+        "expectedCodePoints": [
+          128512
+        ]
+      },
+      "derivation": "Control: a raw valid supplementary character already present in the source text is preserved as the scalar U+1F600 (a surrogate pair in UTF-16) with no truncation and no diagnostic; only the numeric-reference spelling truncates.",
+      "provenance": [
+        "plan rev d: raw valid supplementary characters remain positive cases"
+      ]
+    }
+  ]
+}

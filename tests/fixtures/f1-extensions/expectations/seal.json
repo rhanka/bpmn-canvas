@@ -1,0 +1,54 @@
+{
+  "format": "f1-expectations-seal/1",
+  "method": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+  "excluded": [
+    "seal.json"
+  ],
+  "files": [
+    {
+      "path": "01-reserved-names.json",
+      "bytes": 36621,
+      "sha256": "d7f33b9500f1ad36946457ee5c0feb35d4f40b34173f242ab849461e39f7d970"
+    },
+    {
+      "path": "02-warning-truncation.json",
+      "bytes": 143119,
+      "sha256": "f4eea4b5b6a993f10fb934cce35e3453378c6b725b84e95f13ab5d77cb0cc554"
+    },
+    {
+      "path": "03-doctype-entity.json",
+      "bytes": 5536,
+      "sha256": "23a503c07875fa013ab2cbede7a8cc7c81424c672a7d074b635ea542da2e0354"
+    },
+    {
+      "path": "04-entity-references.json",
+      "bytes": 21136,
+      "sha256": "a46e85c402801400ee9980cb91017e7c66edbb3f118bae61eb72657206cb7530"
+    },
+    {
+      "path": "05-encoding.json",
+      "bytes": 12856,
+      "sha256": "f37705f8a3cb697d89adc4bded950ac8c5363942b76ef53781c7f6270f6e65d6"
+    },
+    {
+      "path": "06-generic-namespaces.json",
+      "bytes": 15301,
+      "sha256": "ce6221fc6a92fe2fbc3c8ac5c81028928c492a1de1270111be78b5b1635c8ec5"
+    },
+    {
+      "path": "07-round-trips.json",
+      "bytes": 24051,
+      "sha256": "aeeb0dcee2fe2d66bf6ce0d477d8c3d91cd6287fb59d815431c0281e64dee3d4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6456,
+      "sha256": "0a358aec538e870466ac7b2fa667b97251f64ab138634b9c8f2fa4dccef92d0a"
+    },
+    {
+      "path": "reserved-names.json",
+      "bytes": 3475,
+      "sha256": "c029d4d17634ced33e91e4ac48f72fdbe60d5ef00a22294805c1ea3e385d3788"
+    }
+  ]
+}

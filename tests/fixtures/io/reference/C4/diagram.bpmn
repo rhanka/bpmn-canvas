@@ -40,12 +40,12 @@
     <bpmn:sequenceFlow id="Flow_Prepare_Review" sourceRef="Prepare" targetRef="Review" />
     <bpmn:sequenceFlow id="Flow_Review_Closed" sourceRef="Review" targetRef="Closed" />
     <bpmn:textAnnotation id="Doc_Guide">
-      <bpmn:text>[Doc] Guide</bpmn:text>
+      <bpmn:text>[Reference] Guide</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="DocLink_Guide_Prepare" associationDirection="One" sourceRef="Prepare" targetRef="Doc_Guide" />
     <bpmn:association id="DocLink_Guide_Review" associationDirection="One" sourceRef="Review" targetRef="Doc_Guide" />
     <bpmn:textAnnotation id="App_Prepare">
-      <bpmn:text>[App] File tool</bpmn:text>
+      <bpmn:text>[Component] File tool</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="AppLink_Prepare" sourceRef="App_Prepare" targetRef="Prepare" />
   </bpmn:process>

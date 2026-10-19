@@ -28,7 +28,7 @@ test("legend profile parity in a real browser", { timeout: 180000 }, async (t) =
     }
   });
 
-  await t.test("(b) the [App] annotation is a component box under its task, neutral tokens", () => {
+  await t.test("(b) the [Component] annotation is a component box under its task, neutral tokens", () => {
     assert.ok(o.app, "g.legend-app inside the task");
     assert.equal(o.app.width, "80");
     assert.equal(o.app.height, "30");
@@ -37,7 +37,7 @@ test("legend profile parity in a real browser", { timeout: 180000 }, async (t) =
     assert.match(o.app.text, /SAP/);
   });
 
-  await t.test("(b) [App] and its link are hidden; [Doc] and its link are kept", () => {
+  await t.test("(b) [Component] and its link are hidden; [Reference] and its link are kept", () => {
     assert.equal(o.visibility.APP, "none");
     assert.equal(o.visibility.A1, "none");
     assert.notEqual(o.visibility.DOC, "none");

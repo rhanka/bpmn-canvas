@@ -1,0 +1,52 @@
+BASE bfed4a302446a3abbfec8b6bba46843dec432eca
+FAIL J2 #2 CR-01 rejects unknown and duplicate capabilities: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-02 rejects numeric concat through the complete compiler: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-03 rejects native page order and bad reference traversal: ERR_ASSERTION; actual=ok expected=refused
+PASS J2 #2 CR-04 checks count and reachability bounds
+FAIL J2 #2 CR-05 rejects ghost binding: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-05 rejects message: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-05 rejects glyph: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-05 rejects resource: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-05 rejects theme duplicate: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-05 rejects forward binding: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-06 applies the pinned producer delta: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-07 rejects containment identity on an ID-bearing task: ERR_ASSERTION; actual=ok expected=refused
+PASS J2 #2 CR-08 refuses missing validation coverage
+FAIL J2 #2 CR-08 resolves only allowlisted acyclic lint configurations: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-09 checks theme token types and binding uniqueness: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-10 requires typed UI recipe arguments: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-11 rejects numeric export IDs: ERR_ASSERTION; actual=ok expected=refused
+PASS J2 #2 CR-12 rejects a migration to its own source
+FAIL J2 #2 CR-13 preserves the fallback refusal at schema admission: ERR_ASSERTION; actual=profile-schema expected=profile-bind-fallbacks
+FAIL J2 #2 CR-14 preserves the action phase refusal at schema admission: ERR_ASSERTION; actual=profile-schema expected=profile-action-phase
+FAIL J2 #2 rejects an empty descriptor registry: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 CR-01 requires exact admitted registry signatures: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks unknown field path throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks unknown parameter throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks repair recipe throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks theme fallback cycle throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks glyph dimensions throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks duplicate message name throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks bad alias destination throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks typed render traversal throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #2 checks native predicate on render handle throughout the profile: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #3 rejects a registry rule-table mismatch: ERR_ASSERTION; actual=undefined expected=profile-capability
+FAIL J2 #3 rejects descriptor byte and identity drift: ERR_ASSERTION; actual=undefined expected=descriptor-mismatch
+PASS J2 #3 snapshots schema bytes before asynchronous digest checks
+FAIL J2 #4 snapshots descriptor bytes before asynchronous admission: ERR_ASSERTION; actual=false expected=true
+PASS J2 #2 keeps unrelated schema errors ahead of specialized static codes
+FAIL J2 #3 refuses forged base and descriptor pins: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #3 refuses a substituted schema and rule table: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #3 verifies bytes and declared digest domains: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #4 deeply freezes validated and compiled identity data: ERR_ASSERTION; actual=undefined expected=undefined
+FAIL J2 #4 refuses reconstructed validated profiles with stale identities: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #4 deeply freezes descriptor authority and rejects forged contexts: ERR_ASSERTION; actual=undefined expected=undefined
+FAIL J2 #9 counts active AST depth separately from selected cardinality: ERR_ASSERTION; actual=refused expected=ok
+FAIL J2 #10 finds longer admissible paths after a short visit: ERR_ASSERTION; actual=false expected=true
+FAIL J2 #10 bounds cyclic reachability by node and hop state: ERR_ASSERTION; actual=false expected=true
+FAIL J2 #11 refuses dangling references before predicate, selector and value evaluation: ERR_ASSERTION; actual=ok expected=refused
+FAIL J2 #11 checks base-declared ID-valued scalars before evaluation: ERR_ASSERTION; actual=undefined expected=reference-dangling
+FAIL J2 #11 refuses a dangling envelope with a valid revision: ERR_ASSERTION; actual=undefined expected=object
+FAIL J2 #12 preserves BOM lexical parity for strings and bytes: ERR_ASSERTION; actual=ok expected=refused
+SUMMARY regressions.test.mjs {"tests":49,"failed":44,"passed":5,"cancelled":0,"skipped":0,"todo":0,"topLevel":49,"suites":0}
+SUMMARY ALL {"tests":49,"failed":44,"passed":5,"cancelled":0,"skipped":0,"todo":0,"topLevel":49,"suites":0}

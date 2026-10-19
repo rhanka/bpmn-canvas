@@ -1,0 +1,28 @@
+{
+  "format": "miwg-originals/1",
+  "source": "https://github.com/bpmn-miwg/bpmn-miwg-test-suite",
+  "commit": "386baa55bf9a200f13ce26bef18557eceb19031f",
+  "license": "CC-BY-3.0",
+  "files": [
+    {
+      "path": "Reference/B.1.0.bpmn",
+      "bytes": 48346,
+      "sha256": "cf3764f7a15a7f3402eabcc0a90dd67c81d29a3512e3cf959792dd1d27fe77e2"
+    },
+    {
+      "path": "Reference/C.4.0.bpmn",
+      "bytes": 97992,
+      "sha256": "7edfadee4c488f7192bca9313613e2b3fb14634c073bc9d759823d0cc8a7faf7"
+    },
+    {
+      "path": "Reference/C.5.0.bpmn",
+      "bytes": 111539,
+      "sha256": "f8c125a7c492d218d1f6962fe03920bec4b1e4a9c2efae0746926667a67f44cc"
+    },
+    {
+      "path": "LICENSE.txt",
+      "bytes": 272,
+      "sha256": "c2d2fd90db5f6fd71d942918bf935ab393d0826c3e354c7e32f065b902899755"
+    }
+  ]
+}

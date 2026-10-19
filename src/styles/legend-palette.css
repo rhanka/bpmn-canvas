@@ -101,7 +101,7 @@
 }
 
 /*
- * Navigation markers (collapsed sub-process [+], external process icon). diagram-js draws a transparent
+ * Navigation markers (collapsed sub-process [+], external call icon). diagram-js draws a transparent
  * hit rectangle over the whole element; without these rules it swallows every click and a marker can never
  * be the event target. With them, a click on the body targets the body, a click on the marker targets the marker.
  */

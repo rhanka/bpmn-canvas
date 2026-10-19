@@ -96,19 +96,19 @@
       <bpmn:extensionElements>
         <sem:info order="2" laneRef="Unit" primaryAssociationRef="DocLink_Doc_one_Assemble" />
       </bpmn:extensionElements>
-      <bpmn:text>[Doc] Doc one</bpmn:text>
+      <bpmn:text>[Reference] Doc one</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="Doc_Doc_two">
       <bpmn:extensionElements>
         <sem:info order="3" laneRef="Unit" primaryAssociationRef="DocLink_Doc_two_Assemble" />
       </bpmn:extensionElements>
-      <bpmn:text>[Doc] Doc two</bpmn:text>
+      <bpmn:text>[Reference] Doc two</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="Doc_Doc_three">
       <bpmn:extensionElements>
         <sem:info order="4" laneRef="Unit" primaryAssociationRef="DocLink_Doc_three_Assemble" />
       </bpmn:extensionElements>
-      <bpmn:text>[Doc] Doc three</bpmn:text>
+      <bpmn:text>[Reference] Doc three</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="DocLink_Doc_one_Assemble" associationDirection="One" sourceRef="Doc_Doc_one" targetRef="Assemble">
       <bpmn:extensionElements>

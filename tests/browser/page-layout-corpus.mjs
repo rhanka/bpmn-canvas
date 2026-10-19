@@ -24,13 +24,13 @@ window.corpus = {
     for (const e of registry.getAll()) {
       const bo = e.businessObject;
       if (!bo || e.type === "label" || e.type === "bpmn:Participant" || e.type === "bpmn:Lane" || e.type === "bpmn:Collaboration" || e.type === "bpmn:Process") continue;
-      const text = bo.name ?? (typeof bo.text === "string" ? bo.text.replace(/^\[Doc\]\s*/, "") : undefined);
+      const text = bo.name ?? (typeof bo.text === "string" ? bo.text.replace(/^\[Reference\]\s*/, "") : undefined);
       if (e.waypoints) {
         const pts = e.waypoints.map((p) => [p.x, p.y]);
         // The corpus connection is document→activity; BPMN associations are activity→document.
-        edges[e.id] = e.type === "bpmn:Association" && bo.targetRef?.text?.startsWith("[Doc]") ? pts.reverse() : pts;
+        edges[e.id] = e.type === "bpmn:Association" && bo.targetRef?.text?.startsWith("[Reference]") ? pts.reverse() : pts;
       }
-      else if (text && !String(bo.text ?? "").startsWith("[App]")) nodes[text] = { x: e.x, y: e.y, w: e.width, h: e.height };
+      else if (text && !String(bo.text ?? "").startsWith("[Component]")) nodes[text] = { x: e.x, y: e.y, w: e.width, h: e.height };
     }
     h.destroy();
     host.remove();

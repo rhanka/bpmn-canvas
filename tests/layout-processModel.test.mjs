@@ -10,8 +10,8 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="D">
   <bpmn:collaboration id="C">
     <bpmn:participant id="P" processRef="Proc"/>
-    <bpmn:textAnnotation id="AppNote"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>
-    <bpmn:textAnnotation id="DocNote"><bpmn:text>[Doc] Invoice</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="AppNote"><bpmn:text>[Component] CRM</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="DocNote"><bpmn:text>[Reference] Invoice</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="A1" sourceRef="AppNote" targetRef="T1"/>
     <bpmn:association id="A2" sourceRef="DocNote" targetRef="T1"/>
   </bpmn:collaboration>
@@ -49,7 +49,7 @@ test("parseProcesses reads lanes, node types, connections, annotations and data 
   assert.equal(types.E, "END");
   assert.equal(types.DO1, "TASK_INPUT", "data object read by an activity becomes a task input");
   assert.equal(types.DocNote, "DOCUMENT");
-  assert.equal(types.AppNote, undefined, "[App] annotations are folded into app_label, not nodes");
+  assert.equal(types.AppNote, undefined, "[Component] annotations are folded into app_label, not nodes");
   const t1 = proc.lanes.flatMap((l) => l.nodes).find((n) => n.label === "T1");
   assert.equal(t1.app_label, "CRM");
   assert.equal(t1.text, "Enter order");

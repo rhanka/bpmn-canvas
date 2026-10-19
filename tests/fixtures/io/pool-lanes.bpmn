@@ -15,7 +15,7 @@
     <bpmn:endEvent id="End" name="Done"/>
     <bpmn:dataObject id="DObj"/>
     <bpmn:dataObjectReference id="Data" name="Form data" dataObjectRef="DObj"/>
-    <bpmn:textAnnotation id="App"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="App"><bpmn:text>[Component] CRM</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="AppLink" sourceRef="Fill" targetRef="App"/>
     <bpmn:sequenceFlow id="F1" sourceRef="Start" targetRef="Fill"/>
     <bpmn:sequenceFlow id="F2" name="submit" sourceRef="Fill" targetRef="Gate"/>

@@ -155,7 +155,32 @@ export type { IoErrorCode } from "./errors.js";
 export type { GraphEdge, GraphNode, GraphPage, NodeKind } from "./graph.js";
 
 export type { BpmnDefinitions, ModdleElement } from "../types.js";
-export { hydrate, project, ModdleJsonError } from "./moddle-json.js";
-export type { JsonCodecConfiguration, ModdleDescriptor, ModdleJsonElement, ModdleJsonValue } from "./moddle-json.js";
-export { serializeBpmn } from "./serialize-bpmn.js";
+export { hydrate, project, projectWithDiagnostics, parseF1Xml, ModdleJsonError } from "./moddle-json.js";
+export type { JsonCodecConfiguration, ModdleDescriptor, ModdleJsonElement, ModdleJsonValue, F1ParseResult } from "./moddle-json.js";
+export {
+  F1_LIMITS,
+  F1_ENCODING_REGISTRY,
+  F1_RESERVED_NAMES,
+  F1BoundaryError,
+  assertF1Encodable,
+  assertF1InputSize,
+  assertF1TagIntegrity,
+  assertF1XmlSafety,
+  canonicalJsonBytes,
+  capF1Warnings,
+  classifyF1AttributeName,
+  classifyF1Warning,
+  decodeF1Bytes,
+  f1Pointer,
+  isF1EncodingFallbackWarning,
+  isF1QName,
+  isF1ReservedName,
+  nativeElementPaths,
+  scanF1ReservedAttributes,
+  scanF1XmlLosses,
+  splitF1QName,
+} from "./f1-extensions.js";
+export type { F1Diagnostic, F1EncodingEntry } from "./f1-extensions.js";
+export { serializeBpmn, serializeBpmnWithDiagnostics } from "./serialize-bpmn.js";
+export { f1DiagnosticEntry } from "./f1-report.js";
 export type { BpmnXmlOptions } from "./serialize-bpmn.js";

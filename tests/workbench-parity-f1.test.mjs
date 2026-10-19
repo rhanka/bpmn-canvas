@@ -24,10 +24,18 @@ for (const name of index.validF1) test(`G1 Python/JS parity ${name}: expected se
     assert.equal(canonical(project(m, codecConfig)), canonical(py));
   }
 });
-for (const name of index.invalidF1) test(`G1 Python/JS parity ${name}: complete shared diagnostic tuple`, () => {
+for (const name of index.invalidF1.filter(name => name !== "W09-extension")) test(`G1 Python/JS parity ${name}: complete shared diagnostic tuple`, () => {
   assert.deepEqual(comparators.diagnostics, ["code", "path"]);
   const j = freeze(load(`cases/${name}.json`)), expected = load(`expected/${name}.diagnostic.json`);
   for (let repeat = 0; repeat < config.repeatCount; repeat++) assert.throws(() => hydrate(j, codecConfig), e => { assert.deepEqual(e.diagnostic, expected); return true; });
+});
+test("G1 W09-extension should preserve descriptor-defined collection multiplicity", () => {
+  // Finding 13 supersedes the historical private singleton refusal; sealed
+  // fixture bytes stay intact. See the J4 arbitration/succession receipt.
+  const input = freeze(load("cases/W09-extension.json"));
+  const once = project(hydrate(input, codecConfig), codecConfig);
+  assert.deepEqual(once.rootElements[0].flowElements[5].extensionElements.values, input.rootElements[0].flowElements[5].extensionElements.values);
+  assert.equal(canonical(project(hydrate(once, codecConfig), codecConfig)), canonical(once));
 });
 test("G1 should isolate corpus case order W01 W07 W01", () => {
   for (const name of ["W01", "W07", "W01"]) assert.equal(canonical(project(hydrate(load(`cases/${name}.json`), codecConfig), codecConfig)), canonical(load(`expected/${name}.json`)));

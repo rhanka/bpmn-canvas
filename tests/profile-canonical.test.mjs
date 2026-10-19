@@ -53,7 +53,8 @@ test("should refuse cycles and executable objects without invoking callbacks", (
 
 test("should keep the new comparator private and the legacy comparator unchanged", () => {
   const exports = JSON.parse(readFileSync(new URL("../package.json", import.meta.url))).exports;
-  assert.ok(!Object.keys(exports).some(key => key.includes("profile")));
+  assert.deepEqual(Object.keys(exports).filter(key => key.includes("profile")), ["./profile-lint", "./profile", "./profile/compiler"]);
+  assert.equal(exports["./profile/canonical"], undefined);
   const source = readFileSync(new URL("../src/io/moddle-json.ts", import.meta.url), "utf8");
   assert.ok(!source.includes("profile/canonical"));
 });

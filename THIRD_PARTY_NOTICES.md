@@ -29,6 +29,17 @@ license texts are in `licenses/`.
   of their code into `dist/`, this notice and the matching license text must
   stay in the tarball.
 
+## bpmnlint (declared dependency)
+
+- Version: `11.15.0` (exact). MIT by bpmn.io contributors.
+- Text: `licenses/bpmnlint.LICENSE`.
+- Treatment here: the synchronous facade shared by `./profile-lint`,
+  `./profile` and `./profile/compiler` exposes `validate()`. Its internal lint
+  bridge executes pinned upstream recommended factories and the single
+  profile rule directly through upstream `Linter.applyRule`; the resolver
+  supplies pinned factories and configurations. The module build consumes
+  bpmnlint as an external npm dependency.
+
 ## bpmn-auto-layout (declared dependency)
 
 - Version: `1.3.0`. The npm registry metadata and the upstream README at
@@ -115,3 +126,12 @@ in `dist/`; the pack test enforces that.
   and the other bundled packages are under their own licenses (MIT, ISC, Apache-2.0), as listed.
   The bpmn.io watermark code is bundled unchanged and the badge stays visible by default (see the
   README for the explicit, licensed `watermark` option).
+
+## MIWG reference corpus
+
+The unchanged B.1.0, C.4.0 and C.5.0 reference diagrams are test data from
+[bpmn-miwg-test-suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite), commit
+`386baa55bf9a200f13ce26bef18557eceb19031f`. They are distributed under
+CC-BY-3.0; the original attribution and license text are preserved in
+`licenses/miwg/LICENSE.txt` and beside the originals. The byte inventory is
+`tests/fixtures/f1-extensions/miwg/manifest.json`. No original bytes were changed.

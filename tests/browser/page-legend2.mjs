@@ -1,4 +1,4 @@
-// Legend profile parity (headers, [App] box, marker hit areas, tokens, palette) through the public API.
+// Legend profile parity (headers, [Component] box, marker hit areas, tokens, palette) through the public API.
 import { createBpmnCanvas } from "../../dist/index.js";
 import { DEFAULT_LEGEND_TOKENS, LEGEND_ACTION_IDS } from "../../dist/profiles/legend/index.js";
 
@@ -16,8 +16,8 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
     <bpmn:callActivity id="CA" name="Other process"/>
     <bpmn:subProcess id="SP" name="Sub"/>
     <bpmn:dataObjectReference id="DO" name="Data"/>
-    <bpmn:textAnnotation id="APP"><bpmn:text>[App] SAP</bpmn:text></bpmn:textAnnotation>
-    <bpmn:textAnnotation id="DOC"><bpmn:text>[Doc] Form</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="APP"><bpmn:text>[Component] SAP</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="DOC"><bpmn:text>[Reference] Form</bpmn:text></bpmn:textAnnotation>
     <bpmn:association id="A1" sourceRef="T" targetRef="APP"/>
     <bpmn:association id="A2" sourceRef="T" targetRef="DOC"/>
     <bpmn:sequenceFlow id="F1" sourceRef="S" targetRef="T"/>
@@ -99,7 +99,7 @@ window.runLegend2 = async () => {
   out.poolHeaders = headerReport(host, "legend-pool-strip");
   out.laneHeaders = headerReport(host, "legend-lane-header");
 
-  // (b) [App] box under its task; [App] and its link hidden, [Doc] and its link kept.
+  // (b) [Component] box under its task; [Component] and its link hidden, [Reference] and its link kept.
   const task = gfx(host, "T");
   const app = task.querySelector("g.legend-app");
   out.app = app && {

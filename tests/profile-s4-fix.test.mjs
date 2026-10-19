@@ -157,12 +157,12 @@ test("MINOR-3 should refuse a tampered prepared view revision", async () => {
 
 test("MINOR-4 should refuse duplicate stage-policy tables", async () => {
   const p = copy(shared.profile); p.validation.push(copy(p.validation[0]));
-  await assert.rejects(() => compileLintPolicy(p,{phase:"import",readinessPolicy:"draft"}),{code:"lint-config-incomplete"});
+  assert.throws(() => compileLintPolicy(p,{phase:"import",readinessPolicy:"draft"}),{code:"lint-config-incomplete"});
 });
 test("MINOR-4 should preserve optional lint bindings and refuse duplicate binding keys", async () => {
   const bindings = [{ownerId:"Process_1",role:"support",targetId:"Z"}], selector = {phase:"import",readinessPolicy:"draft"};
   const out = await compileLintPolicy(shared.profile,selector,{},[],bindings); assert.deepEqual(out.compiledOptions.bindings,bindings);
-  await assert.rejects(() => compileLintPolicy(shared.profile,selector,{},[],[...bindings,...bindings]),contract);
+  assert.throws(() => compileLintPolicy(shared.profile,selector,{},[],[...bindings,...bindings]),contract);
 });
 for (const [operation,stages] of [
   ["import",["import"]],["pre-normalize",["pre-normalize"]],["post-normalize",["post-normalize"]],

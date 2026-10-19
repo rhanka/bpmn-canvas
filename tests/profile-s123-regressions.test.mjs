@@ -65,7 +65,7 @@ for (const domain of ["RenderData", "PageHandle"]) for (const order of ["page-oc
   test(`should check ${domain} occurrence traversal with ${order} order`, async () => {
     const run = () => checkStaticRule("CR-03", { from: "source", via: "occurrences", order }, { bindings: { source: domain }, location: "export" });
     if (order === "page-occurrence") await run();
-    else await assert.rejects(run, { code: "profile-selector-order" });
+    else assert.throws(run, { code: "profile-selector-order" });
   });
 }
 for (const domain of ["RenderData", "PageHandle"]) for (const location of ["export", "render", "validation", "create", undefined]) {
@@ -73,7 +73,7 @@ for (const domain of ["RenderData", "PageHandle"]) for (const location of ["expo
     const context = { bindings: { source: domain }, ...(location ? { location } : {}) };
     const run = () => checkStaticRule("CR-03", { from: "source", via: "occurrences", order: "page-occurrence" }, context);
     if (["export", "render"].includes(location)) await run();
-    else await assert.rejects(run, { code: "profile-type" });
+    else assert.throws(run, { code: "profile-type" });
   });
 }
 for (const [domain, traversal] of [["RenderData", { via: "pages", order: "page-occurrence" }],
@@ -84,14 +84,14 @@ for (const [domain, traversal] of [["RenderData", { via: "pages", order: "page-o
       const context = { bindings: { source: domain }, ...(location ? { location } : {}) };
       const run = () => checkStaticRule("CR-03", { from: "source", ...traversal }, context);
       if (["export", "render"].includes(location)) await run();
-      else await assert.rejects(run, { code: "profile-type" });
+      else assert.throws(run, { code: "profile-type" });
     });
   }
 }
 
 // DESIGN.md:260,421,425: these refusals have no specified diagnostic code.
 test("should refuse mismatched resource bytes without an invented parity code", async () => {
-  await assert.rejects(() => verifyResourcePins([{ assetKey: "neutral", sha256: "0".repeat(64) }], new Map([["neutral", new Uint8Array([1])]])), bareRefusal);
+  assert.throws(() => verifyResourcePins([{ assetKey: "neutral", sha256: "0".repeat(64) }], new Map([["neutral", new Uint8Array([1])]])), bareRefusal);
 });
 test("should refuse live deletion dependencies without an invented parity code", () => {
   assert.throws(() => checkDeletionReferences([{ sourceId: "dependent" }], [], "refuseIfReferenced"), bareRefusal);
@@ -135,7 +135,7 @@ test("should preserve inherited scalar types through multiple parents and child 
   assert.deepEqual(descriptors.types.Grandchild.scalarTypes, { name: "string", flag: "string" });
   const concat = path => ({ location: "value", value: { op: "concat", values: [{ op: "read", binding: "self", path }] } });
   await checkStaticRule("CR-02", concat("/name"), { descriptors, bindings: { self: "Child" } });
-  await assert.rejects(() => checkStaticRule("CR-02", concat("/flag"), { descriptors, bindings: { self: "Child" } }), { code: "profile-type" });
+  assert.throws(() => checkStaticRule("CR-02", concat("/flag"), { descriptors, bindings: { self: "Child" } }), { code: "profile-type" });
   await checkStaticRule("CR-02", concat("/flag"), { descriptors, bindings: { self: "Grandchild" } });
 });
 
@@ -149,14 +149,14 @@ test("should hash the complete profile including every injected section", async 
 });
 test("should refuse identity-only arguments to the complete-profile identity helper", async () => {
   const { sha256, ...identityOnly } = identity;
-  await assert.rejects(() => profileIdentity(identityOnly), { code: "profile-schema" });
-  await assert.rejects(() => profileIdentity(identity), { code: "profile-schema" });
+  assert.throws(() => profileIdentity(identityOnly), { code: "profile-schema" });
+  assert.throws(() => profileIdentity(identity), { code: "profile-schema" });
 });
 const profileSchema = JSON.parse(readFileSync(new URL("../schemas/profile/profile-mechanism-1.schema.json", import.meta.url)));
 for (const section of profileSchema.required) {
   test(`should refuse a profile digest when required section ${section} is absent`, async () => {
     const incomplete = structuredClone(completeProfile);
     delete incomplete[section];
-    await assert.rejects(() => profileIdentity(incomplete), { code: "profile-schema" });
+    assert.throws(() => profileIdentity(incomplete), { code: "profile-schema" });
   });
 }

@@ -18,7 +18,7 @@
         <bpmn:task id="Review" name="Review"/>
         <bpmn:endEvent id="Closed" name="Closed"/>
         <bpmn:textAnnotation id="App_Prepare">
-            <bpmn:text>[App] File tool</bpmn:text>
+            <bpmn:text>[Component] File tool</bpmn:text>
         </bpmn:textAnnotation>
         <bpmn:sequenceFlow id="Received_Prepare" name="" sourceRef="Received" targetRef="Prepare"/>
         <bpmn:sequenceFlow id="Prepare_Review" name="" sourceRef="Prepare" targetRef="Review"/>

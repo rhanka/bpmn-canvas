@@ -7,8 +7,8 @@ import { runInBrowser } from "./browser/harness.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const r = (p) => readFileSync(root + p, "utf8");
 const pool = r("tests/fixtures/io/pool-lanes.bpmn").replace(
-  '<bpmn:textAnnotation id="App"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation>',
-  '<bpmn:textAnnotation id="App"><bpmn:text>[App] CRM</bpmn:text></bpmn:textAnnotation><bpmn:textAnnotation id="DocA"><bpmn:text>[Doc] Form</bpmn:text></bpmn:textAnnotation>',
+  '<bpmn:textAnnotation id="App"><bpmn:text>[Component] CRM</bpmn:text></bpmn:textAnnotation>',
+  '<bpmn:textAnnotation id="App"><bpmn:text>[Component] CRM</bpmn:text></bpmn:textAnnotation><bpmn:textAnnotation id="DocA"><bpmn:text>[Reference] Form</bpmn:text></bpmn:textAnnotation>',
 ).replace("</bpmndi:BPMNPlane>", '<bpmndi:BPMNShape id="dDoc" bpmnElement="DocA"><dc:Bounds x="500" y="30" width="90" height="30"/></bpmndi:BPMNShape></bpmndi:BPMNPlane>');
 const ce4 = r("experiments/e3/corpus/ce4-two-pools-message.bpmn");
 const notation = r("tests/fixtures/corpus/notation.bpmn");

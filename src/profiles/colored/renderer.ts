@@ -24,8 +24,8 @@ interface Colours {
   stroke?: string;
 }
 
-const isDocument = (text: unknown): boolean => /^\s*\[Doc\]/.test(typeof text === "string" ? text : "");
-const isApplication = (text: unknown): boolean => /^\s*\[App\]/.test(typeof text === "string" ? text : "");
+const isDocument = (text: unknown): boolean => /^\s*\[Reference\]/.test(typeof text === "string" ? text : "");
+const isApplication = (text: unknown): boolean => /^\s*\[Component\]/.test(typeof text === "string" ? text : "");
 
 /** Kind of a diagram-js element for colouring, or undefined when the upstream colours stay. */
 export function coloredKind(element: Any): ColoredKind | undefined {
@@ -126,7 +126,7 @@ export class ColoredRenderer extends BaseRenderer {
     return colours;
   }
 
-  /** Text colour, and the background of [Doc]/[App] annotations (the upstream annotation draws none). */
+  /** Text colour, and the background of [Reference]/[Component] annotations (the upstream annotation draws none). */
   private finish(visuals: Any, element: Any, kind: ColoredKind | undefined): void {
     if (!kind || kind === "flow" || kind === "link") return;
     const t = this.tokens;

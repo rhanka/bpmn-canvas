@@ -109,7 +109,7 @@ const refusal = (code: string): never => { throw new ProfileContractError(code);
  * coercion or executable extension point. Registry bytes are explicitly pinned.
  * This validates syntax only; it is not the production static compiler.
  */
-export async function compileSchema(input: unknown, registry: readonly PinnedSchema[] = []): Promise<SchemaValidator> {
+export function compileSchema(input: unknown, registry: readonly PinnedSchema[] = []): SchemaValidator {
   // Copy only JSON data; never execute an accessor or toJSON callback.
   const root = JSON.parse(canonicalize(input)) as Schema;
   const documents = new Map<string, Schema>();
@@ -122,7 +122,7 @@ export async function compileSchema(input: unknown, registry: readonly PinnedSch
   }
   register(root);
   for (const pin of registry) {
-    if (!/^[0-9a-f]{64}$/.test(pin.sha256) || await rawDigest(pin.bytes) !== pin.sha256) refusal("profile-schema-ref");
+    if (!/^[0-9a-f]{64}$/.test(pin.sha256) || rawDigest(pin.bytes) !== pin.sha256) refusal("profile-schema-ref");
     let schema: Schema;
     try { schema = JSON.parse(new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(pin.bytes)) as Schema; }
     catch { return refusal("profile-schema-ref"); }

@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { finalCorpusPin, historyGuardPin } from "./helpers/lot0-history-pins.mjs";
+import { finalCorpusPin, historyGuardPin, j5SourcePin } from "./helpers/lot0-history-pins.mjs";
 
 const repo = new URL("../", import.meta.url);
 const load = path => JSON.parse(readFileSync(new URL(path, repo)));
@@ -61,17 +61,17 @@ test("should bind every history guard successor to explicit predecessor and curr
   assert.equal(receipt.initialHead, "9c7f2eac858f1b4b8c51449cc3214e3a571f2460");
   assert.deepEqual(receipt.closedAllowance, ["07be09e", "45aa690"]);
   const predecessors = receipt.supersedesFiles.map(({ path, old }) => ({ path, ...old }));
-  assert.equal(receipt.predecessorInventorySha256, "a213190ca9ea16bbb0c581a70c650b2ead54015f896242dd83e87f2f3d0a49f5");
+  assert.equal(receipt.predecessorInventorySha256, "10d67fdb8d37a4b7df31bb42f14a1efb5063749cc6313399ddd65c8232d1f324");
   assert.equal(digest(JSON.stringify(predecessors)), receipt.predecessorInventorySha256);
   const paths = receipt.supersedesFiles.map(entry => entry.path);
   assert.deepEqual(paths, [...new Set(paths)].sort());
   for (const entry of [...receipt.supersedesFiles, ...receipt.addedFiles.map(({ path, ...pin }) => ({ path, new: pin }))]) {
-    assert.match(entry.path, /^(?:tests\/|docs\/design\/)/);
+    assert.ok(/^(?:tests\/|docs\/design\/)/.test(entry.path) || entry.path === "src/profile/lint-contracts.ts");
     const bytes = readFileSync(new URL(entry.path, repo));
-    assert.deepEqual({ bytes: bytes.length, sha256: digest(bytes) }, entry.new, entry.path);
+    assert.deepEqual({ bytes: bytes.length, sha256: digest(bytes) }, j5SourcePin(entry.path, entry.new), entry.path);
     if (entry.old) {
       assert.notDeepEqual(entry.old, entry.new, entry.path);
-      assert.deepEqual(historyGuardPin(entry.path, entry.old), entry.new, entry.path);
+      assert.deepEqual(historyGuardPin(entry.path, entry.old), j5SourcePin(entry.path, entry.new), entry.path);
       assert.throws(() => historyGuardPin(entry.path, { ...entry.old, sha256: "0".repeat(64) }), /history guard reseal predecessor/);
     }
   }

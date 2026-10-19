@@ -1,3 +1,4 @@
+import { sha256 } from "./sha256.js";
 /** Private profile-c14n/2 utilities. The existing XML comparator is independent. */
 export class ProfileContractError extends Error {
   declare readonly code?: string;
@@ -62,19 +63,18 @@ export function canonicalize(value: unknown): string {
 }
 
 /** B(bytes), with no canonicalization, normalization or trailing-LF removal. */
-export async function rawDigest(bytes: string | Uint8Array): Promise<string> {
+export function rawDigest(bytes: string | Uint8Array): string {
   const input = typeof bytes === "string" ? new TextEncoder().encode(bytes) : new Uint8Array(bytes);
-  const hash = await globalThis.crypto.subtle.digest("SHA-256", input);
-  return Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, "0")).join("");
+  return sha256(input);
 }
 
 /** H(value). Browser and Node use the same UTF-8 bytes and digest domain. */
-export function canonicalDigest(value: unknown): Promise<string> {
+export function canonicalDigest(value: unknown): string {
   return rawDigest(canonicalize(value));
 }
 
 /** stable-id/1: callers supply the allocation owner explicitly. */
-export async function stableId(ownerId: string, slot: string, stableKey: string): Promise<string> {
+export function stableId(ownerId: string, slot: string, stableKey: string): string {
   if ([ownerId, slot, stableKey].some(value => typeof value !== "string")) throw new ProfileContractError("profile-type");
-  return `g_${await canonicalDigest(["profile-mechanism/1", ownerId, slot, stableKey])}`;
+  return `g_${canonicalDigest(["profile-mechanism/1", ownerId, slot, stableKey])}`;
 }

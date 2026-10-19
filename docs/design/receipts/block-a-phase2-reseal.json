@@ -1,0 +1,446 @@
+{
+  "format": "block-a-phase2-reseal/1",
+  "baseCommit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+  "phase1Head": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+  "j1Head": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+  "sourceCommits": [
+    "a152e8f04d860dcce72d19975b5c9c59740b8eef",
+    "b844f71d839e0b4e8bed7bf0dc519df68b9e6402",
+    "5c6ff62f84fd486a0c7cebb6051a2ccf862ee745",
+    "178a3fab9f682f38d11e0f2467926b984aaeb761",
+    "c831c49a2d0f3f7bf23096fea0c60900708f2a41",
+    "4e5583e18901afaf14a85071889326b738bb650b",
+    "a11336c8e780ea3e7452e0e015ddc318a23970d5",
+    "72ad7e8146f92cb41ee3172015bd0e91614e650c"
+  ],
+  "reason": "Combine complete lint configuration and original containment coordinates with synchronous public validation; preserve every branch ledger entry and all discriminating tests.",
+  "historyGuardUnion": {
+    "path": "docs/design/receipts/lot0-history-guard-2.json",
+    "j1Paths": [
+      "src/profile/lint-contracts.ts",
+      "tests/profile-lint-contract.test.mjs"
+    ],
+    "predecessorInventorySha256": "10d67fdb8d37a4b7df31bb42f14a1efb5063749cc6313399ddd65c8232d1f324",
+    "entries": [
+      {
+        "path": "src/profile/lint-contracts.ts",
+        "old": {
+          "bytes": 10520,
+          "sha256": "dd5102bd4f8fd23bfd813bbd36bfba27048a965f9fdb8b91c522f197a0d1c55b"
+        },
+        "new": {
+          "bytes": 11665,
+          "sha256": "d966e6e51f461a792490585237e9f92ee0ee33dffa339c390c9dedc734b3ea85"
+        }
+      },
+      {
+        "path": "tests/brand-baseline.test.mjs",
+        "old": {
+          "bytes": 5848,
+          "sha256": "d4c5a3ea009fa507ce4f6796d7a5ba6a0826bfc999b979cfb1e3439c961ae42c"
+        },
+        "new": {
+          "bytes": 5570,
+          "sha256": "ff62c3e1cc18d2064d148ccc7d28386593e3b81ea343603e1d2800bd4f99f843"
+        }
+      },
+      {
+        "path": "tests/brand-release-gate.test.mjs",
+        "old": {
+          "bytes": 9021,
+          "sha256": "f4c75f798eda03ffe2d0218a2882a7d370009f9785369becf3afc750a1d31ea0"
+        },
+        "new": {
+          "bytes": 9029,
+          "sha256": "a0573282e909f22717b38c2473ae2b28bbcb3c0211380a6f81aa64919d83ab24"
+        }
+      },
+      {
+        "path": "tests/helpers/lot0-history-pins.mjs",
+        "old": {
+          "bytes": 2488,
+          "sha256": "c4542a465bceaa66cfd0983e77f75d256df74ce8acc51d915565c98f35739aeb"
+        },
+        "new": {
+          "bytes": 2915,
+          "sha256": "bb5e0e1f1f6e2e69e230d56bd9f855cd0e40b0ad1d272c327fe22d2e9e69bab4"
+        }
+      },
+      {
+        "path": "tests/helpers/workbench-parity-proof.mjs",
+        "old": {
+          "bytes": 6087,
+          "sha256": "b171d49776797b0276e1c557fb8860a7cca74b987114155bb6928bfa6d99b1dc"
+        },
+        "new": {
+          "bytes": 6077,
+          "sha256": "d59560bac046a4cbc2f4c01b2821923f3c064e783ca469eba773732813d6bf8e"
+        }
+      },
+      {
+        "path": "tests/helpers/workbench-proof.mjs",
+        "old": {
+          "bytes": 11382,
+          "sha256": "cee9a33179fd323b43e0a11ac3bd281ee87ef950ce2b2ed7205ecafb7b0d5d64"
+        },
+        "new": {
+          "bytes": 11372,
+          "sha256": "c7d585ddc4b70d0f854f85285e47fcb2bf657b9a8b894f20fd92006037a11a18"
+        }
+      },
+      {
+        "path": "tests/io-consumer-types.test.mjs",
+        "old": {
+          "bytes": 3331,
+          "sha256": "d7496e25c67ddc02dd0945f8500e4c466edf4d2f7abc96f132562593dab136d4"
+        },
+        "new": {
+          "bytes": 3321,
+          "sha256": "86268065ec2f5b5904b8390cf3718910325090cd86b4eef672884b122c1958b1"
+        }
+      },
+      {
+        "path": "tests/lot0-squash-readiness.test.mjs",
+        "old": {
+          "bytes": 6308,
+          "sha256": "ed71e6fa2632d81a6258e7108f640d35fea9c6eb1099d072fb1fde77ba04f20d"
+        },
+        "new": {
+          "bytes": 6351,
+          "sha256": "910dca0e1a8ba1e5df785d98b8788a0bd2c7239b6ff8560747d3944a23ad42af"
+        }
+      },
+      {
+        "path": "tests/p3/prepare.mjs",
+        "old": {
+          "bytes": 3246,
+          "sha256": "b2158c1c5e0389d09f609770f716a43b571f0e06d2b1b5d76da2162e3d9f4ff0"
+        },
+        "new": {
+          "bytes": 3559,
+          "sha256": "cbe1c393b4d721d1420ff56ec779806b9443dec4114c421da9b100e0fd73ee5f"
+        }
+      },
+      {
+        "path": "tests/profile-canonical.test.mjs",
+        "old": {
+          "bytes": 2911,
+          "sha256": "30e24423708c5a696bf8ff260d850d3ec73a25c10e93551b6fbd8e2993309f58"
+        },
+        "new": {
+          "bytes": 2939,
+          "sha256": "ee4dea1bf697a787a779a664694ff155c1d65132d566122babbb653f4dad5505"
+        }
+      },
+      {
+        "path": "tests/profile-corpus-pin-final.test.mjs",
+        "old": {
+          "bytes": 3651,
+          "sha256": "a8a77aad2ff58dd83deb6ec9e7c74669b10856952ed5f30d0d88fcb3cff7cfba"
+        },
+        "new": {
+          "bytes": 5160,
+          "sha256": "d601c6610bc703abc8514af5e2fcf020f08b06c0941e973c92a5112ef57b653e"
+        }
+      },
+      {
+        "path": "tests/profile-lint-contract.test.mjs",
+        "old": {
+          "bytes": 4514,
+          "sha256": "bbbcb89a2827928f49fea54ac8f9aa1c03202684f4c8a421b71a3ec405d17a5b"
+        },
+        "new": {
+          "bytes": 4637,
+          "sha256": "5c5c0bf1618c77d38a77b16a14da404725e020d1771e001813787bc84ebccee6"
+        }
+      },
+      {
+        "path": "tests/profile-s123-receipt.test.mjs",
+        "old": {
+          "bytes": 6923,
+          "sha256": "6fb61b8f7edcacaae0c51f6cdaeebce43b19a061b27e11f037dc7818966f76e9"
+        },
+        "new": {
+          "bytes": 6913,
+          "sha256": "6e1f2659601d0c48a627d7a95ae67df41565b928c87926a029cf6d8965098adc"
+        }
+      },
+      {
+        "path": "tests/test-history-guard.test.mjs",
+        "old": {
+          "bytes": 20810,
+          "sha256": "eecefa280d88c98ed86be3adbdff2939cbde5645626366b74e0df4fd90ba070c"
+        },
+        "new": {
+          "bytes": 33480,
+          "sha256": "d03c4554265e05008598756104c0fca122b831ad7b8937ba28f3378108d39f9c"
+        }
+      }
+    ]
+  },
+  "retainedLedgers": [
+    {
+      "path": "docs/design/receipts/block-a-j5-reseal.json",
+      "bytes": 9177,
+      "sha256": "d63ff53f3b4a46165a3fb150c4c17c9fbf5a49c5abb55ba246acf8d61db4dfd4"
+    },
+    {
+      "path": "docs/design/receipts/block-a-phase1-reseal.json",
+      "bytes": 49671,
+      "sha256": "b5129a2ce6e1001875515cdcc5763940875983881afe8101549db84c1b5c552f"
+    },
+    {
+      "path": "docs/design/receipts/j2-reseal.json",
+      "bytes": 2118,
+      "sha256": "1306928e9e67404453a92bcd241f8fbf6009632b44f509112c0431503799807f"
+    },
+    {
+      "path": "docs/design/receipts/lot0-history-guard-fix.json",
+      "bytes": 3086,
+      "sha256": "18d026485c570e05a0bb94d1a2513132bfdcd3d12decf87f4c6c45206117e185"
+    },
+    {
+      "path": "docs/design/receipts/lot0-squash-paths-reseal.json",
+      "bytes": 1268,
+      "sha256": "758a10870789384f0cebf0fec43b03f060d86c45a75c78a39c80f888d6b4a24c"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/design/receipts/lot0-history-guard-2.json",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 14263,
+          "sha256": "23d4f4698d258b408f1340de32d342e10c978401a9043ad39988cb63fb64e5be"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 14263,
+          "sha256": "23d4f4698d258b408f1340de32d342e10c978401a9043ad39988cb63fb64e5be"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 14918,
+          "sha256": "df2bd8490d9d32a4ee6b4eface47d220969c0174cc568ede162da43b35fb1141"
+        }
+      ],
+      "current": {
+        "bytes": 14918,
+        "sha256": "7e7614bcfd94b7f6e03b3f54d390855951d371ebd7b6314aa0d95dfdb13d907a"
+      }
+    },
+    {
+      "path": "src/profile/lint-bridge.ts",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 19163,
+          "sha256": "173b7102b16f58d5c2bf0d59951271abeb5c3114cf581cf0217052341fda2d6d"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 20106,
+          "sha256": "2c793481f0d7cbb4a2727894388ee933b3c6c9d823ea1e9cdf18ab1a5ebf3ac0"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 21846,
+          "sha256": "0be383667f6386a2bf28bbf98a273cb34b59ffc75fefbe513710a2b94338802e"
+        }
+      ],
+      "current": {
+        "bytes": 22783,
+        "sha256": "eb946dc02e19b563c2da72051d7e4ffcc3a1ec654d23301894b1ee08f49b8c91"
+      }
+    },
+    {
+      "path": "src/profile/lint-contracts.ts",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 10520,
+          "sha256": "dd5102bd4f8fd23bfd813bbd36bfba27048a965f9fdb8b91c522f197a0d1c55b"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 10493,
+          "sha256": "c4117d1a392f56a1da0f81c949f7d74ca09c54ef89d4b943b62eeb4f3290768c"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 11665,
+          "sha256": "d966e6e51f461a792490585237e9f92ee0ee33dffa339c390c9dedc734b3ea85"
+        }
+      ],
+      "current": {
+        "bytes": 11638,
+        "sha256": "a33421bea411f4ab6c8dd72f8b82335c9d7948ad4b40c562acc960dd74d36e09"
+      }
+    },
+    {
+      "path": "src/profile/validate.ts",
+      "predecessors": [
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 7322,
+          "sha256": "7633c09426898851a0ad46515cb2832f19c3404510e321d169eadf74ed7f1ef1"
+        }
+      ],
+      "current": {
+        "bytes": 7315,
+        "sha256": "6ea0beda91bf9663bf107720fe263359201c740d73f0a87a3c71b18a3e2d8b00"
+      }
+    },
+    {
+      "path": "tests/block-a-phase2-integration.test.mjs",
+      "predecessors": [],
+      "current": {
+        "bytes": 2420,
+        "sha256": "d981572290808c0681de3e808a7e5e80155eaf78d5e53c08c7145abff17fafc3"
+      }
+    },
+    {
+      "path": "tests/helpers/block-a-phase2-pins.mjs",
+      "predecessors": [],
+      "current": {
+        "bytes": 1655,
+        "sha256": "91d0d3e5bc61b2af00e58d4b91a7068b9551fdb8332689643af5023ace4909db"
+      }
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 2915,
+          "sha256": "bb5e0e1f1f6e2e69e230d56bd9f855cd0e40b0ad1d272c327fe22d2e9e69bab4"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 3613,
+          "sha256": "e4160e62d145edf6630c3ef3781b7a217037ea16286a2d612ced46d5c5ef1667"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 2915,
+          "sha256": "bb5e0e1f1f6e2e69e230d56bd9f855cd0e40b0ad1d272c327fe22d2e9e69bab4"
+        }
+      ],
+      "current": {
+        "bytes": 4220,
+        "sha256": "6f0681393ae18aeacb968f819c5f802af3e9bcbf28c7d4a9d1b61575d67db878"
+      }
+    },
+    {
+      "path": "tests/package-shape.test.mjs",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 11577,
+          "sha256": "fa39f2622fb72b2e5b6a561e2b17db92e6ef66c60c6c8f73df72c53b01ac8484"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 11612,
+          "sha256": "29e06ba0edd7efd4bd2a3cfeb25b1e78807f752c1ad473497beade934c967e55"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 11577,
+          "sha256": "fa39f2622fb72b2e5b6a561e2b17db92e6ef66c60c6c8f73df72c53b01ac8484"
+        }
+      ],
+      "current": {
+        "bytes": 11621,
+        "sha256": "e66e35da9eec42abe114b101249de252b681b28b244ddd17c8cb87282ddb98b6"
+      }
+    },
+    {
+      "path": "tests/profile-corpus-pin-final.test.mjs",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 5160,
+          "sha256": "d601c6610bc703abc8514af5e2fcf020f08b06c0941e973c92a5112ef57b653e"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 5223,
+          "sha256": "2fdc316b2eac433d2e8c8c3490f0821abc0fe9454b3b48ce9b808279753f7c6f"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 5160,
+          "sha256": "d601c6610bc703abc8514af5e2fcf020f08b06c0941e973c92a5112ef57b653e"
+        }
+      ],
+      "current": {
+        "bytes": 5275,
+        "sha256": "fa97649385739157491eb2a58d88e4cc703ddae9aed6407d522a6ca9aa4be5c3"
+      }
+    },
+    {
+      "path": "tests/profile-lint-bridge.test.mjs",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 13616,
+          "sha256": "2c2d56ad9ae3e5f15e29f171e6182f75a6562abb455b74df12eee5d76d94f3c1"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 13616,
+          "sha256": "2c2d56ad9ae3e5f15e29f171e6182f75a6562abb455b74df12eee5d76d94f3c1"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 27202,
+          "sha256": "1bdfdb8576273e4f3715981f806894e95ef9b34f3efba62397ae6c8d08c472d8"
+        }
+      ],
+      "current": {
+        "bytes": 27202,
+        "sha256": "1bdfdb8576273e4f3715981f806894e95ef9b34f3efba62397ae6c8d08c472d8"
+      }
+    },
+    {
+      "path": "tests/profile-lint-contract.test.mjs",
+      "predecessors": [
+        {
+          "commit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+          "bytes": 4514,
+          "sha256": "bbbcb89a2827928f49fea54ac8f9aa1c03202684f4c8a421b71a3ec405d17a5b"
+        },
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 4514,
+          "sha256": "bbbcb89a2827928f49fea54ac8f9aa1c03202684f4c8a421b71a3ec405d17a5b"
+        },
+        {
+          "commit": "178a3fab9f682f38d11e0f2467926b984aaeb761",
+          "bytes": 4637,
+          "sha256": "5c5c0bf1618c77d38a77b16a14da404725e020d1771e001813787bc84ebccee6"
+        }
+      ],
+      "current": {
+        "bytes": 4637,
+        "sha256": "5c5c0bf1618c77d38a77b16a14da404725e020d1771e001813787bc84ebccee6"
+      }
+    },
+    {
+      "path": "tests/profile-public-api.test.mjs",
+      "predecessors": [
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 8845,
+          "sha256": "b1e9278e8d14eb18f462b6159f80ae0d7503ffc381220342a22ab3d5bbbfd869"
+        }
+      ],
+      "current": {
+        "bytes": 9717,
+        "sha256": "0266b06637e2b8b0a880062d4c2bcaf4949b96d6a61be385d9297142e3e5d469"
+      }
+    }
+  ]
+}

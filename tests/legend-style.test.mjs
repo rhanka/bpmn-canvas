@@ -68,11 +68,11 @@ test("sub-process, pool and lane depend on the DI", () => {
   assert.equal(style.legendKind(bo("bpmn:Lane"), { horizontal: false }), undefined);
 });
 
-test("[Doc] and [App] annotations only; plain annotations stay upstream", () => {
-  assert.equal(style.legendKind(bo("bpmn:TextAnnotation", { text: "[Doc] Spec" })), "document");
-  assert.equal(style.legendKind(bo("bpmn:TextAnnotation", { text: "  [App] CRM" })), "application");
-  assert.equal(style.annotationName("[App]  CRM"), "CRM");
-  assert.equal(style.annotationName("[Doc] Spec"), "Spec");
+test("[Reference] and [Component] annotations only; plain annotations stay upstream", () => {
+  assert.equal(style.legendKind(bo("bpmn:TextAnnotation", { text: "[Reference] Spec" })), "document");
+  assert.equal(style.legendKind(bo("bpmn:TextAnnotation", { text: "  [Component] CRM" })), "application");
+  assert.equal(style.annotationName("[Component]  CRM"), "CRM");
+  assert.equal(style.annotationName("[Reference] Spec"), "Spec");
 });
 
 test("connections: conditional, default, message and directed associations stay upstream", () => {

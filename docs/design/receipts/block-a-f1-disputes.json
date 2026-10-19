@@ -1,0 +1,570 @@
+{
+  "format": "block-a-f1-disputes/1",
+  "branch": "workbench/functions-20261018-block-a",
+  "base": "fea609a",
+  "mergedTips": {
+    "f1": "fe15f42",
+    "f1Expect": "760aaf9",
+    "lot12": "b69fcd1"
+  },
+  "ownerDecision": "preserve unknown extensions with a faithful XML round trip",
+  "upstream": {
+    "bpmnModdle": "10.3.1",
+    "moddleXml": "12.3.1",
+    "moddle": "8.2.1",
+    "saxen": "11.2.0",
+    "node": "v22.22.1"
+  },
+  "method": "Historical block A observations remain below. The owner adopted reviewer arbitrations for J4; fixRoundJ4 records every expectation reseal and the superseded legacy singleton assertion.",
+  "seal": {
+    "result": "pass",
+    "sealJsonSha256": "0e07489b4a0de4c8f96d22be9ab2a2da41e99f381786a11d4c5484547089d6cd",
+    "sealJsonBytes": 1645,
+    "filesChecked": 9,
+    "note": "Explicit J4 reseals are chained in fixRoundJ4.reseals; historical seal retained."
+  },
+  "summary": {
+    "totalVectors": 51,
+    "agree": 30,
+    "fixed": 21,
+    "disputed": 0
+  },
+  "fixes": [
+    {
+      "id": "F-reserved-misplaced",
+      "vectors": [
+        "01-reserved-names.json#reserved-json-misplaced-children"
+      ],
+      "change": "walkTyped now refuses $children/$body on a registered type with reserved-name instead of unknown-property.",
+      "planBasis": "Sealed derivation (plan rev d wire model + reserved-name row): $children is schema-owned only on a generic element.",
+      "files": [
+        "src/io/moddle-json.ts"
+      ]
+    },
+    {
+      "id": "F-warning-locations",
+      "vectors": [
+        "02-warning-truncation.json#warnings-1001-truncated-at-1000"
+      ],
+      "change": "Native warnings now resolve to projected locations by element identity (unknown-attribute warnings name their $attrs entry); the truncation diagnostic points at the first omitted warning. Verified: all 1001 diagnostic tuples now equal the sealed tuples byte for byte (diagnostics SHA-256 48e54327f97afd7eab45a4dd6afe7bac0a4327ef1ebfbac4eeccc6a5a6dac5a2 both sides).",
+      "planBasis": "Sealed design default 6 (one moddle-warning per native warning at its projected element/attribute location) + plan 1000-cap row.",
+      "files": [
+        "src/io/f1-extensions.ts",
+        "src/io/moddle-json.ts"
+      ]
+    },
+    {
+      "id": "F-encoding-warning",
+      "vectors": [
+        "05-encoding.json#encoding-iso-8859-1-declared",
+        "05-encoding.json#encoding-iso-8859-1-c1-range"
+      ],
+      "change": "parseF1Xml drops the reader encoding-fallback notice: F1 decodes bytes through its own registry before the native reader runs, so 'unsupported document encoding <ISO-8859-1>, falling back to UTF-8' can never describe a real fallback in the F1 flow.",
+      "planBasis": "F1 explicit input-encoding registry (UTF-8/ISO-8859-1 admitted, true byte map).",
+      "files": [
+        "src/io/f1-extensions.ts",
+        "src/io/moddle-json.ts"
+      ]
+    },
+    {
+      "id": "F-empty-namespace-uri",
+      "vectors": [
+        "06-generic-namespaces.json#generic-no-namespace-uri",
+        "07-round-trips.json#roundtrip-generic-declarations"
+      ],
+      "change": "The no-namespace URI is the empty string: hydrate accepts $name.uri '', project maps a missing native uri to '', the F7 writer accepts '' (writes unprefixed; verified natively). Non-string URIs still refuse.",
+      "planBasis": "Sealed design default 2 (plan rev d step-1 item m4, representation chosen in README).",
+      "files": [
+        "src/io/moddle-json.ts",
+        "src/io/serialize-bpmn.ts"
+      ]
+    },
+    {
+      "id": "F-qname-ranges",
+      "vectors": [
+        "07-round-trips.json#roundtrip-utf16-key-order"
+      ],
+      "change": "Name checks follow XML 1.0 NameStartChar/NameChar ranges (pure range tests, no case mapping, no Unicode tables). Ordinary foreign $attrs keys are opaque map entries in the JSON lane (the native reader never produces out-of-range names; the F7 writer still gates writability); namespace declarations and $name keep strict shape.",
+      "planBasis": "Plan F1 invariant project(hydrate(J)) == J; sealed key-order derivation (UTF-16 code-unit order, already the comparator order).",
+      "files": [
+        "src/io/f1-extensions.ts",
+        "src/io/moddle-json.ts"
+      ]
+    },
+    {
+      "id": "F-xml-codes",
+      "vectors": [],
+      "change": "New fail-closed tag scan (assertF1TagIntegrity) in parseF1Xml: same-tag duplicate attribute key refuses as duplicate-key (duplicate-namespace for xmlns redeclaration); element/attribute prefix with no in-scope xmlns binding refuses as unbound-prefix. Nested shadowing stays legal; malformed tags bail so native reports xml-invalid. Adds the duplicate-key code to errors.ts.",
+      "planBasis": "Owner requirement: enforce each code wherever upstream detects it (probes below).",
+      "files": [
+        "src/io/errors.ts",
+        "src/io/f1-extensions.ts",
+        "src/io/moddle-json.ts",
+        "src/io/index.ts"
+      ]
+    },
+    {
+      "id": "F-loss-wiring",
+      "vectors": [],
+      "change": "parseF1Xml now returns the scanF1XmlLosses pre-scan (comment/PI/CDATA/numeric classes) ahead of native warnings; previously built but never wired, so numeric truncation was silent at the boundary. Pointers stay document-level (see D-numeric-pointer).",
+      "planBasis": "F1 C0: anything the native libraries drop is a typed diagnostic; nothing silently ignored.",
+      "files": [
+        "src/io/moddle-json.ts"
+      ]
+    }
+  ],
+  "vectorResults": {
+    "agree": [
+      "01-reserved-names.json#reserved-json-attrs-type (two vectors share this caseId; both agree)",
+      "01-reserved-names.json#reserved-json-attrs-parent",
+      "01-reserved-names.json#reserved-json-attrs-get",
+      "01-reserved-names.json#reserved-json-attrs-set",
+      "01-reserved-names.json#reserved-json-attrs-instance-of",
+      "01-reserved-names.json#reserved-json-attrs-to-canonical-dict",
+      "01-reserved-names.json#reserved-json-attrs-proto",
+      "01-reserved-names.json#reserved-json-attrs-dict",
+      "01-reserved-names.json#reserved-json-misplaced-parent",
+      "01-reserved-names.json#reserved-json-misplaced-descriptor",
+      "01-reserved-names.json#reserved-json-control-generic-ok",
+      "03-doctype-entity.json#doctype-simple",
+      "03-doctype-entity.json#doctype-with-entity-reports-doctype",
+      "03-doctype-entity.json#entity-standalone-internal",
+      "03-doctype-entity.json#entity-standalone-external",
+      "03-doctype-entity.json#entity-expansion-in-doctype",
+      "04-entity-references.json#entity-lowercase-positive",
+      "04-entity-references.json#entity-uppercase-positive",
+      "04-entity-references.json#numeric-raw-supplementary-positive",
+      "05-encoding.json#encoding-utf8-default-no-declaration",
+      "05-encoding.json#encoding-utf8-declared",
+      "05-encoding.json#encoding-unsupported-windows-1252",
+      "05-encoding.json#encoding-invalid-utf8-sequence",
+      "06-generic-namespaces.json#generic-descendant-registered-qname-stays-generic",
+      "06-generic-namespaces.json#generic-unprefixed-attribute-no-namespace",
+      "07-round-trips.json#roundtrip-typed-minimal",
+      "07-round-trips.json#roundtrip-generic-presence",
+      "07-round-trips.json#roundtrip-generic-descendant-json",
+      "07-round-trips.json#roundtrip-typed-attrs-empty-vs-absent"
+    ],
+    "fixed": [
+      "01-reserved-names.json#reserved-json-misplaced-children",
+      "05-encoding.json#encoding-iso-8859-1-declared",
+      "05-encoding.json#encoding-iso-8859-1-c1-range",
+      "06-generic-namespaces.json#generic-no-namespace-uri",
+      "07-round-trips.json#roundtrip-generic-declarations",
+      "07-round-trips.json#roundtrip-utf16-key-order",
+      "01-reserved-names.json#reserved-xml-generic-attr-get",
+      "01-reserved-names.json#reserved-xml-generic-attr-set",
+      "01-reserved-names.json#reserved-xml-generic-attr-type_",
+      "01-reserved-names.json#reserved-xml-generic-attr-instance_of",
+      "01-reserved-names.json#reserved-xml-generic-attr-__proto__",
+      "01-reserved-names.json#reserved-xml-registered-attr-get",
+      "02-warning-truncation.json#warnings-1001-truncated-at-1000",
+      "04-entity-references.json#entity-mixed-case-refused",
+      "04-entity-references.json#entity-unknown-nbsp-refused",
+      "04-entity-references.json#numeric-hex-supplementary-truncated",
+      "04-entity-references.json#numeric-decimal-supplementary-truncated",
+      "04-entity-references.json#numeric-nul",
+      "04-entity-references.json#numeric-lone-surrogate",
+      "06-generic-namespaces.json#generic-default-namespace",
+      "06-generic-namespaces.json#generic-default-reset"
+    ],
+    "disputed": []
+  },
+  "disputes": [
+    {
+      "id": "D-prefix-parity",
+      "kind": "upstream-parity",
+      "title": "Generic same-namespace prefixed attribute loses its prefix on write (ext:level -> level)",
+      "status": "resolved in J4; independent verification pending",
+      "upstreamReproduction": {
+        "input": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:ext=\"urn:example:ext\" id=\"Defs_1\" targetNamespace=\"urn:example:target\"><bpmn:process id=\"P1\"><bpmn:extensionElements><ext:note id=\"Note_1\" ext:level=\"high\">hello</ext:note></bpmn:extensionElements></bpmn:process></bpmn:definitions>",
+        "upstreamImport": "parses with no warnings; generic element keeps own key ext:level ($type ext:note, descriptor ns {prefix ext, localName note, uri urn:example:ext})",
+        "upstreamOutput": "<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:ext=\"urn:example:ext\" id=\"Defs_1\" targetNamespace=\"urn:example:target\"><bpmn:process id=\"P1\"><bpmn:extensionElements><ext:note id=\"Note_1\" level=\"high\">hello</ext:note></bpmn:extensionElements></bpmn:process></bpmn:definitions>",
+        "mechanism": "moddle-xml ElementSerializer.nsAttributeName strips the prefix when the attribute namespace equals the element namespace ('strip prefix if same namespace like parent'); the reparse (key level) rewrites byte-identically, so the loss is stable.",
+        "ourOutput": "byte-identical to upstreamOutput through serializeBpmn (verified)"
+      },
+      "contrast": "A prefixed foreign attribute on a TYPED element (bpmn:process ext:release with xmlns:ext declared) is kept by upstream on import->export AND by our writer; covered by a new keep-vector (see F7 suite), not a dispute.",
+      "ownerOptions": "accept upstream parity (current), or post-process generic output to restore same-namespace prefixes outside the unchanged native writer",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Keep upstream bytes and expose the prefix loss."
+      }
+    },
+    {
+      "id": "D-reserved-pointer",
+      "kind": "pointer-precision",
+      "vectors": [
+        "01-reserved-names.json#reserved-xml-generic-attr-get",
+        "01-reserved-names.json#reserved-xml-generic-attr-set",
+        "01-reserved-names.json#reserved-xml-generic-attr-type_",
+        "01-reserved-names.json#reserved-xml-generic-attr-instance_of",
+        "01-reserved-names.json#reserved-xml-generic-attr-__proto__",
+        "01-reserved-names.json#reserved-xml-registered-attr-get"
+      ],
+      "sealed": {
+        "code": "reserved-name",
+        "pointer": "per-vector structural $attrs location, e.g. /rootElements/0/flowElements/0/extensionElements/values/0/$attrs/get"
+      },
+      "runtime": {
+        "code": "reserved-name",
+        "pointer": ""
+      },
+      "agreed": "refusal code on all six vectors",
+      "disputed": "pointer only: document-level vs structural $attrs location",
+      "rationale": "The refusal fires lexically before native construction (prototype-pollution safety: a __proto__ attribute must never reach moddle construction), where no structural tree exists to point into. Locating it would need a parallel descriptor-aware reader. The post-parse structural check (assertNoReservedNative) exists but the pre-scan correctly fires first.",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Sealed coordinates are correct; fix runtime pointers."
+      },
+      "status": "resolved in J4; independent verification pending"
+    },
+    {
+      "id": "D-02-presence",
+      "kind": "representation",
+      "vectors": [
+        "02-warning-truncation.json#warnings-1001-truncated-at-1000"
+      ],
+      "sealed": {
+        "diagnosticsSha256": "48e54327f97afd7eab45a4dd6afe7bac0a4327ef1ebfbac4eeccc6a5a6dac5a2",
+        "process": "flowElements present as []"
+      },
+      "runtime": {
+        "diagnosticsSha256": "48e54327f97afd7eab45a4dd6afe7bac0a4327ef1ebfbac4eeccc6a5a6dac5a2",
+        "process": "flowElements omitted (absent)"
+      },
+      "agreed": "all 1001 diagnostic tuples (1000 moddle-warning at /$attrs/wNNNN + truncation at /$attrs/w1000) and the full $attrs projection (1002 keys)",
+      "disputed": "projection presence only: sealed Process carries flowElements [], runtime omits it",
+      "rationale": "The native reader leaves empty containment absent (verified: Object.hasOwn(process, flowElements) === false after parsing a childless process), and the committed contract pins absent-stays-absent (workbench-f1: rootElements[1] without flowElements stays without). Emitting [] would break that contract.",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Runtime is correct; amend the sealed representation explicitly."
+      },
+      "status": "resolved in J4; independent verification pending"
+    },
+    {
+      "id": "D-entity-pointer",
+      "kind": "pointer-precision",
+      "vectors": [
+        "04-entity-references.json#entity-mixed-case-refused",
+        "04-entity-references.json#entity-unknown-nbsp-refused"
+      ],
+      "sealed": {
+        "code": "xml-entity-reference-unsupported",
+        "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+      },
+      "runtime": {
+        "code": "xml-entity-reference-unsupported",
+        "pointer": ""
+      },
+      "agreed": "refusal code on both vectors",
+      "disputed": "pointer only: document-level vs containing-text location",
+      "rationale": "Same structural-locator gap as D-reserved-pointer: the refusal fires on masked text before construction. Mapping the offense offset to a projected text path would need tag-to-containment resolution (a parallel reader).",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Sealed coordinates are correct; fix runtime pointers."
+      },
+      "status": "resolved in J4; independent verification pending"
+    },
+    {
+      "id": "D-numeric-pointer",
+      "kind": "pointer-precision",
+      "vectors": [
+        "04-entity-references.json#numeric-hex-supplementary-truncated",
+        "04-entity-references.json#numeric-decimal-supplementary-truncated",
+        "04-entity-references.json#numeric-nul",
+        "04-entity-references.json#numeric-lone-surrogate"
+      ],
+      "sealed": {
+        "diagnostics": [
+          {
+            "code": "moddle-content-normalized",
+            "pointer": "/rootElements/0/flowElements/0/documentation/0/text"
+          }
+        ],
+        "projectionSha256": "1c02fb4aeab5deb5a0ec6b218e092b3f84e59b6e04ebd6833635bd67b47fc881 (hex/decimal), ba4a028c54d380acf117969d7b25eed02e490aa8e71a1bb37106757967db34ae (nul), f6f7a937c83eb222f3ab30fd994c9cc8674890fa79cdb3934edf3036b2b87dba (lone surrogate)"
+      },
+      "runtime": {
+        "diagnostics": [
+          {
+            "code": "moddle-content-normalized",
+            "pointer": ""
+          }
+        ],
+        "projectionSha256": "identical to sealed on all four vectors"
+      },
+      "agreed": "projection bytes (identical SHA-256) and diagnostic code on all four vectors; writer-stage invalid-xml-character refusal for NUL/lone-surrogate values is already implemented (assertF1Encodable, covered by the F7 suite)",
+      "disputed": "pointer only: document-level vs containing-text location",
+      "rationale": "The loss scan is lexical (decoded values cannot distinguish &#x1F600; from a raw U+F600 character post-parse), so per-node text paths need the same parallel-reader mapping as D-entity-pointer. Detection is now wired into parseF1Xml diagnostics (was silent before this combination).",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Sealed coordinates are correct; fix runtime pointers."
+      },
+      "status": "resolved in J4; independent verification pending"
+    },
+    {
+      "id": "D-default-ns-qname",
+      "kind": "representation",
+      "vectors": [
+        "06-generic-namespaces.json#generic-default-namespace",
+        "06-generic-namespaces.json#generic-default-reset"
+      ],
+      "sealedNames": [
+        "thing",
+        "child",
+        "inner",
+        "plain"
+      ],
+      "runtimeNames": [
+        "ns0:thing",
+        "ns0:child",
+        "ns0:inner",
+        "plain"
+      ],
+      "sealedProjectionSha256": "1b5425cd90e80ebd7a65760b6c38d454d6a9d3f55633c53195118d784ad59dc5 (default-namespace), ba4ae6f40672f27aaad0be8cc2741fa3a51ed54e25770810ef30835d4a8c6d39 (default-reset)",
+      "runtimeProjectionSha256": "83b5fa6b5f7697348068f39dc9fd368642676bfec987a2cdefa72f509330cb21 (default-namespace), bce3e311ee0198c6afdbafe47546868698db44decf2bbcc3188e7f5b2a3c605f (default-reset)",
+      "agreed": "empty diagnostics; no-namespace descendants now project uri '' on both sides",
+      "disputed": "generic $name.qname for default-namespace elements: sealed prefix-less (thing), runtime carries the native synthetic prefix (ns0:thing)",
+      "rationale": "The pinned native reader synthesizes ns0:/ns1: prefixes for prefix-less namespaces (verified: descriptor ns {prefix ns0, uri urn:example:ext}, $type ns0:thing) and round-trips them to prefix-less XML on write, so the XML round trip is faithful while the JSON qname carries the synthetic prefix. Stripping it in project (and re-deriving it in hydrate) would need synthetic-prefix detection with writer implications; no native configuration yields the sealed qname.",
+      "ownerOptions": "accept native qnames in projection (current), or normalize synthetic prefixes in project/hydrate with writer coverage",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Runtime is correct; amend the sealed representation explicitly."
+      },
+      "status": "resolved in J4; independent verification pending"
+    },
+    {
+      "id": "D-reserved-rule-tension",
+      "kind": "contract-note",
+      "vectors": [],
+      "sealedRule": "reserved-names.json: every listed name outside its schema-owned position refuses with reserved-name",
+      "committedContract": "workbench-f1 'runtime fields in JSON' pins $parent on a registered Task as unknown-property",
+      "resolution": "Narrow fix (F-reserved-misplaced) satisfies every asserted case: $children/$body on a registered type refuse as reserved-name (sealed vector), all other reserved names keep the committed unknown-property contract. Full closed-union adoption on typed nodes needs an owner decision (it would change the committed $parent expectation).",
+      "status": "resolved in J4; independent verification pending",
+      "arbitration": {
+        "decidedBy": "reviewer",
+        "adoptedBy": "owner",
+        "round": "J4",
+        "authority": "Read-only block A review; DESIGN R3.3 section 8.1/10.1; F1 plan rev d D1",
+        "decision": "Use reserved-name per plan rev d D1."
+      }
+    }
+  ],
+  "upstreamProbes": {
+    "typedPrefixedAttribute": {
+      "input": "bpmn:process with ext:release=7 and xmlns:ext declared, import then export",
+      "upstreamOutput": "prefix kept: <bpmn:process id=\"P1\" ext:release=\"7\" />",
+      "ourOutput": "prefix kept (byte-identical through serializeBpmn)",
+      "conclusion": "parity verified; keep-vector added to the F7 suite"
+    },
+    "duplicateAttribute": {
+      "input": "bpmn:process with id=P1 id=P2 in one start-tag",
+      "upstream": "parses with warning 'unparsable content <bpmn:process> ... attribute <id> already defined'; first wins (id=P1); export drops the duplicate",
+      "ourBehavior": "refuses duplicate-key before construction (fail-closed; upstream only warns)"
+    },
+    "unboundPrefixElement": {
+      "input": "foo:note with no xmlns:foo declaration",
+      "upstream": "fromXML throws 'unparsable content <foo:note> ... missing namespace on <foo:note>'",
+      "ourBehavior": "refuses unbound-prefix before construction"
+    },
+    "unboundPrefixAttribute": {
+      "input": "bpmn:process with foo:level and no xmlns:foo declaration",
+      "upstream": "parses with warning 'unparsable content <bpmn:process> ... missing namespace for prefix <foo>'; attribute dropped, element kept",
+      "ourBehavior": "refuses unbound-prefix before construction (fail-closed; upstream only warns)"
+    },
+    "duplicateNamespaceSame": {
+      "input": "xmlns:ext declared twice with the same URI in one start-tag",
+      "upstream": "parses with warning 'attribute <xmlns:ext> already defined'; first kept",
+      "ourBehavior": "refuses duplicate-namespace before construction"
+    },
+    "duplicateNamespaceDifferent": {
+      "input": "xmlns:ext declared twice with different URIs in one start-tag",
+      "upstream": "parses with warning 'attribute <xmlns:ext> already defined'; first kept",
+      "ourBehavior": "refuses duplicate-namespace before construction"
+    },
+    "duplicateKeyJsonLane": {
+      "input": "{\"a\":1,\"a\":2} as F1 JSON text",
+      "upstream": "JSON.parse keeps the last value silently ({a:2}); hydrate receives objects, never text, so no JSON-text boundary exists in F1",
+      "ourBehavior": "gap noted: duplicate JSON keys collapse in JSON.parse before hydrate; the duplicate-key code covers same-tag duplicate XML attribute keys. No JSON-text entry point is added in F1."
+    }
+  },
+  "codes": [
+    {
+      "code": "duplicate-key",
+      "resolution": "added to errors.ts and enforced at the F1 XML boundary (same-tag duplicate attribute keys); JSON-lane gap noted above"
+    },
+    {
+      "code": "unbound-prefix",
+      "resolution": "enforced at the F1 XML boundary wherever upstream detects it (element throw + attribute warn-drop)"
+    },
+    {
+      "code": "duplicate-namespace",
+      "resolution": "enforced at the F1 XML boundary wherever upstream detects it (same-tag redeclaration, same or different URI); nested shadowing across elements stays legal"
+    }
+  ],
+  "fixRoundJ4": {
+    "base": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+    "findings": [
+      13,
+      14,
+      21,
+      22,
+      23
+    ],
+    "reseals": [
+      {
+        "arbitration": "D-02-presence",
+        "path": "tests/fixtures/f1-extensions/expectations/02-warning-truncation.json",
+        "oldSha256": "b344e6109eeb3e6b3fb20cde31443806059a86da451e8b6fb28ac0cdeb377fd2",
+        "newSha256": "f4eea4b5b6a993f10fb934cce35e3453378c6b725b84e95f13ab5d77cb0cc554",
+        "oldBytes": 142987,
+        "newBytes": 143119,
+        "changes": [
+          {
+            "caseId": "warnings-1001-truncated-at-1000",
+            "old": "flowElements: []",
+            "new": "flowElements absent"
+          },
+          {
+            "field": "/method",
+            "old": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+            "new": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used. Reviewer arbitration D-02-presence corrects only the representation specified in the disputes receipt; the original independent derivation is retained as provenance."
+          }
+        ]
+      },
+      {
+        "arbitration": "D-default-ns-qname",
+        "path": "tests/fixtures/f1-extensions/expectations/06-generic-namespaces.json",
+        "oldSha256": "e4f9c9c14cf0525ce34d91e699ff72b8189ee3c43378a50073272b3722019c48",
+        "newSha256": "8dbf22d13dcd77c046e6f16b5421fee6a1d98155e600c15c68a30c305b26b344",
+        "oldBytes": 15110,
+        "newBytes": 15293,
+        "changes": [
+          {
+            "caseId": "generic-default-namespace",
+            "old": "thing",
+            "new": "ns0:thing"
+          },
+          {
+            "caseId": "generic-default-namespace",
+            "old": "child",
+            "new": "ns0:child"
+          },
+          {
+            "caseId": "generic-default-reset",
+            "old": "thing",
+            "new": "ns0:thing"
+          },
+          {
+            "field": "/method",
+            "old": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used.",
+            "new": "Hand-derived from the pinned source rules named in provenance; no F1 hydrate, project or serializer output was observed or used. Reviewer arbitration D-default-ns-qname corrects only the representation specified in the disputes receipt; the original independent derivation is retained as provenance."
+          }
+        ]
+      },
+      {
+        "path": "tests/fixtures/f1-extensions/expectations/seal.json",
+        "oldSha256": "119a3b499f487b7290d7bdac569310b03ebdc8ba8c3aaceab44895f6f1ba21d8",
+        "newSha256": "a2acaa89f2c564d7aa684c6516480ae616fa36a4253c70a1dc4bfdb2ec40d6a4",
+        "oldBytes": 1645,
+        "newBytes": 1645
+      },
+      {
+        "arbitration": "D-default-ns-qname",
+        "path": "tests/fixtures/f1-extensions/expectations/06-generic-namespaces.json",
+        "oldSha256": "8dbf22d13dcd77c046e6f16b5421fee6a1d98155e600c15c68a30c305b26b344",
+        "newSha256": "ce6221fc6a92fe2fbc3c8ac5c81028928c492a1de1270111be78b5b1635c8ec5",
+        "oldBytes": 15293,
+        "newBytes": 15301,
+        "reason": "The empty namespace reset is assigned the next native synthetic prefix, ns1. The full-result comparison exposed an incomplete first amendment; no runtime change or other expectation change.",
+        "changes": [
+          {
+            "old": "inner",
+            "new": "ns1:inner"
+          },
+          {
+            "old": "plain",
+            "new": "ns1:plain"
+          }
+        ]
+      },
+      {
+        "path": "tests/fixtures/f1-extensions/expectations/seal.json",
+        "oldSha256": "a2acaa89f2c564d7aa684c6516480ae616fa36a4253c70a1dc4bfdb2ec40d6a4",
+        "newSha256": "0e07489b4a0de4c8f96d22be9ab2a2da41e99f381786a11d4c5484547089d6cd",
+        "oldBytes": 1645,
+        "newBytes": 1645
+      }
+    ],
+    "verification": "Author checks only; different-model verification remains external.",
+    "legacySingletonExpectation": {
+      "path": "tests/fixtures/parity-corpus/expected/W09-extension.diagnostic.json",
+      "sha256": "a01d4b02b70cb15fade57c62a5c4e83bacd50f466adae33465c537bf8bf02b1e",
+      "status": "Historical bytes unchanged. Finding 13 supersedes the codec-level singleton refusal: effective ExtensionElements.values is many. The regression now proves repeated entries survive; no generic codec policy may name one extension type."
+    },
+    "checks": {
+      "initialRed": {
+        "tests": 18,
+        "passed": 0,
+        "failed": 18,
+        "source": "Unmodified bfed4a3 build, before any runtime edit."
+      },
+      "baselineReplay": {
+        "tests": 31,
+        "passed": 0,
+        "failed": 31,
+        "source": "Fresh TypeScript transpilation of the four original IO modules from git show bfed4a3, temporarily installed in dist and restored in finally. Each reserved/entity/numeric vector was tested separately."
+      },
+      "targetedGreen": {
+        "tests": 228,
+        "passed": 228,
+        "failed": 0
+      },
+      "typecheck": "pass",
+      "compatibilityTypecheck": "pass",
+      "verificationScope": "Author evidence; independent model verification is pending."
+    },
+    "closedUnionCorrection": {
+      "test": "J4 #22 should enforce every independently sealed reserved name",
+      "red": "Missing expected exception: __contains__",
+      "added": [
+        "hasType",
+        "__contains__",
+        "__getitem__",
+        "__setitem__"
+      ],
+      "sealedExpectation": "Existing reserved-names.json unchanged; runtime follows its full enumeration."
+    }
+  },
+  "historicalMethod": "Every sealed vector was executed against the F1 runtime (hydrate/project/parseF1Xml from dist). A mismatch is recorded here with both values; the sealed bytes were never edited (seal check below). Code was changed only where the expectation follows the plan (cited per fix); pointer-precision and representation gaps stay disputes for the owner.",
+  "historicalSummary": {
+    "totalVectors": 51,
+    "agree": 30,
+    "fixed": 6,
+    "disputed": 15
+  },
+  "historicalSeal": {
+    "result": "pass",
+    "sealJsonSha256": "119a3b499f487b7290d7bdac569310b03ebdc8ba8c3aaceab44895f6f1ba21d8",
+    "sealJsonBytes": 1645,
+    "filesChecked": 9,
+    "note": "Byte length and SHA-256 of each file listed in seal.json recomputed offline with Node only; no codec executed."
+  }
+}

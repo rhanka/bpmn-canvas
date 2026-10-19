@@ -146,11 +146,11 @@ export async function presentationBinding(ctx: PresentationContext): Promise<Vie
   return { semanticRevision: ctx.envelope.semanticRevision, profileDigest, descriptorDigest: await pinDigest(ctx.envelope.profileIdentity.descriptors, true), layoutDigest: await canonicalDigest(ctx.layout), themeId: ctx.themeId,
     themeDigest: await canonicalDigest({ themeId: ctx.themeId, themes: chain }), overridesDigest: await canonicalDigest(overrides), diStylesDigest: await canonicalDigest(styles), metricsDigest: await pinDigest(ctx.metricPins, false) };
 }
-export function viewRevision(binding: Pick<ViewBinding, "semanticRevision" | "layoutDigest" | "themeId" | "themeDigest" | "overridesDigest" | "diStylesDigest" | "metricsDigest">): Promise<string> {
+export async function viewRevision(binding: Pick<ViewBinding, "semanticRevision" | "layoutDigest" | "themeId" | "themeDigest" | "overridesDigest" | "diStylesDigest" | "metricsDigest">): Promise<string> {
   const { semanticRevision, layoutDigest, themeId, themeDigest, overridesDigest, diStylesDigest, metricsDigest } = binding;
   return canonicalDigest({ semanticRevision, layoutDigest, themeId, themeDigest, overridesDigest, diStylesDigest, metricsDigest });
 }
-export function payloadDigest(value: Pick<RenderData, "pages" | "occurrences" | "coverage" | "diagnostics">): Promise<string> {
+export async function payloadDigest(value: Pick<RenderData, "pages" | "occurrences" | "coverage" | "diagnostics">): Promise<string> {
   const { pages, occurrences, coverage, diagnostics } = value; return canonicalDigest({ pages, occurrences, coverage, diagnostics });
 }
 export function validateRenderBinding(value: unknown): RenderBinding {

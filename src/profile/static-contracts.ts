@@ -17,12 +17,12 @@ const actionPhases: Readonly<Record<string, readonly string[]>> = {
   place: ["normalize"], emit: ["export"], loss: ["export"], remove: ["edit", "convert", "migrate"]
 };
 const own = (value: object, key: string): boolean => Object.hasOwn(value, key);
-export async function verifyResourcePins(resources: readonly { readonly assetKey: string; readonly sha256: string }[], assets: ReadonlyMap<string, Uint8Array>): Promise<void> {
+export function verifyResourcePins(resources: readonly { readonly assetKey: string; readonly sha256: string }[], assets: ReadonlyMap<string, Uint8Array>): void {
   canonicalize(resources);
   for (const resource of resources) {
     const bytes = assets.get(resource.assetKey);
     if (!bytes) failContract("profile-resource-missing");
-    if (/^[0-9a-f]{64}$/.exec(resource.sha256)?.[0] !== resource.sha256 || await rawDigest(bytes!) !== resource.sha256) failContract();
+    if (/^[0-9a-f]{64}$/.exec(resource.sha256)?.[0] !== resource.sha256 || rawDigest(bytes!) !== resource.sha256) failContract();
   }
 }
 export function checkActionPhase(op: string, phase: string): void {
@@ -186,7 +186,7 @@ const exportFields: Readonly<Record<string, { readonly required: readonly string
   label: { required: ["id", "text"], optional: [] }, metadata: { required: ["name", "value"], optional: [] }
 };
 
-export async function checkStaticRule(ruleId: string, input: Ast, suppliedContext: Context): Promise<void> {
+export function checkStaticRule(ruleId: string, input: Ast, suppliedContext: Context): void {
   // Clone with the strict JSON encoder before reading any data properties.
   const subject = cloneJson(input), context = cloneJson(suppliedContext);
   switch (ruleId) {
@@ -248,7 +248,7 @@ export async function checkStaticRule(ruleId: string, input: Ast, suppliedContex
         }
       } else if (subject.extends) {
         for (const name of subject.extends) if (!context.allowlist?.includes(name) || !context.configs || !own(context.configs, name)) failContract("lint-config-unknown");
-      } else if (context.optionsSchema && !(await compileSchema(context.optionsSchema))(subject.options).valid) failContract("profile-schema");
+      } else if (context.optionsSchema && !(compileSchema(context.optionsSchema))(subject.options).valid) failContract("profile-schema");
       return;
     }
     case "CR-09": {

@@ -1,0 +1,73 @@
+{
+  "format": "compiler-fix-reseal/1",
+  "sourceCommit": "bfed4a302446a3abbfec8b6bba46843dec432eca",
+  "independentExpectationsChanged": false,
+  "supersedesFiles": [
+    {
+      "path": "src/profile/compiler.ts",
+      "old": {
+        "bytes": 49135,
+        "sha256": "f73bcdedac48e3186410ca1af76ceffa7f9d95682d2929966619a2d12aaeaa75"
+      },
+      "new": {
+        "bytes": 54484,
+        "sha256": "01b469d05e21421cbe8527ecc7f37e2e8627a196256e716a6c8b29d6fbc23462"
+      }
+    },
+    {
+      "path": "src/profile/descriptor-context.ts",
+      "old": {
+        "bytes": 3956,
+        "sha256": "6a0f3218265b749cbdd213973659ced5343f17bc9c28aeed9a62973a0773699b"
+      },
+      "new": {
+        "bytes": 4293,
+        "sha256": "0ccd8f082f529f2a20201e81ff0fb4488e1507a77cfa669a9699842c00e6585e"
+      }
+    },
+    {
+      "path": "src/profile/envelope.ts",
+      "old": {
+        "bytes": 8236,
+        "sha256": "f4f923c0e6e59defe8c1cd171a574120e5ed21e3a01f2c5a58177842b5884994"
+      },
+      "new": {
+        "bytes": 8329,
+        "sha256": "51257b2ad876b41d557b6da55fbb84aa2f286735ef9e8d308d1d210d93af99cc"
+      }
+    },
+    {
+      "path": "src/profile/native-contracts.ts",
+      "old": {
+        "bytes": 18464,
+        "sha256": "1d5cd26d883920b34fae331f3a2da2b723d7b50521ba5dd6ab479a4bd5a885df"
+      },
+      "new": {
+        "bytes": 19250,
+        "sha256": "95bf52229b2689f0cbdb7fbc85cbac85498da492140458359796c03017e374de"
+      }
+    },
+    {
+      "path": "tests/profile-compiler.test.mjs",
+      "old": {
+        "bytes": 17366,
+        "sha256": "a42851b270bbde6693b94656f66470423e540972b573f6cce886c7308abdaabc"
+      },
+      "new": {
+        "bytes": 17765,
+        "sha256": "08204b775e5b242f7264ed23fb506f667d66af05b03a7fc84e89245149e92651"
+      }
+    },
+    {
+      "path": "tests/profile-s123-receipt.test.mjs",
+      "old": {
+        "bytes": 6913,
+        "sha256": "6e1f2659601d0c48a627d7a95ae67df41565b928c87926a029cf6d8965098adc"
+      },
+      "new": {
+        "bytes": 7322,
+        "sha256": "9c02fc9263f4d42696f940d83e17c43622b43828dbafa8bd0840ac2b3d859027"
+      }
+    }
+  ]
+}
