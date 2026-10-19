@@ -1,5 +1,9 @@
 "use client";
 
+import type { BusinessPolicy } from "../internal/business-policy.js";
+import { navigationTarget } from "../internal/legacy-policy.js";
+import { documentNavigationIndex } from "../internal/navigation-policy.js";
+
 import { useCallback, useEffect, useId, useImperativeHandle, useRef, useState } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
 import { createBpmnCanvas } from "../internal/canvas.js";
@@ -14,7 +18,7 @@ import type {
   DiagramInfo,
   ElementClick,
   FitMode,
-  LegendTokens,
+  AnnotatedTokens,
   PaletteColumns,
   ProfileId,
   ProfileOptions,
@@ -35,11 +39,11 @@ export interface FormatOption {
   readonly id: string;
   readonly label: string;
   readonly profile: ProfileId;
-  /** Tokens of the `legend` or `colored` profile. */
-  readonly tokens?: Partial<LegendTokens>;
-  /** `legend`: the legend palette in this look too. */
+  /** Tokens of the `annotated` or `recolor` profile. */
+  readonly tokens?: Partial<AnnotatedTokens>;
+  /** `annotated`: the annotated palette in this look too. */
   readonly palette?: ProfileOptions["palette"];
-  /** `colored` only: `classic` flat shapes. */
+  /** `recolor` only: `flat` flat shapes. */
   readonly drawing?: ProfileOptions["drawing"];
 }
 
@@ -53,7 +57,7 @@ export interface DownloadContext {
 }
 
 /** Rules a sub-process marker uses to find the diagram it opens, tried on each diagram in order. */
-export type NavigationRule = "calledElement" | "exactName" | "sectionNumber" | "substring";
+export type NavigationRule = NonNullable<BusinessPolicy["navigation"]["rules"]>[number];
 
 export interface WorkshopHandle {
   /** The complete current document, after any pending edit and save. */
@@ -69,6 +73,7 @@ export interface WorkshopNotice {
 }
 
 export interface BpmnWorkshopProps {
+  readonly businessPolicy?: BusinessPolicy;
   readonly xml: string;
   /** Pass back the `revision` of the last `onXmlChange` change together with the xml you stored, so the echo is ignored. */
   readonly revision?: string;
@@ -129,49 +134,18 @@ export interface BpmnWorkshopProps {
   readonly ref?: Ref<WorkshopHandle>;
 }
 
-const norm = (s: string | undefined): string => (s ?? "").trim().toLowerCase();
 
 /** Called element first (by id or name), then the element's own name; never the diagram already shown. */
-export function defaultResolveTarget(click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined): string | null {
-  const others = diagrams.filter((d) => d.id !== activeId);
-  const called = norm(click.calledElement);
-  if (called) {
-    const hit = others.find((d) => norm(d.id) === called || norm(d.name) === called);
-    if (hit) return hit.id;
-  }
-  const name = norm(click.name);
-  if (!name) return null;
-  return others.find((d) => norm(d.name) === name)?.id ?? null;
+export function defaultResolveTarget(click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined, policy?: BusinessPolicy, index?: Record<string, any>): string | null {
+  const result = navigationTarget({ click, diagrams, activeId, activeDiagramId: activeId }, index ?? { processes: [], entries: [] }, policy);
+  return result.kind === "open" || result.kind === "current" ? result.diagramId : null;
 }
 
-const SECTION_NUMBER = /\b\d+(?:\.\d+)+\b/;
-
-/**
- * A marker resolver from rules: diagrams are walked in order, the shown one skipped, and the first diagram that
- * matches any rule wins. `calledElement`: the called element is the diagram's id or name. `exactName`: same name.
- * `sectionNumber`: both names carry the same dotted number (`2.1`). `substring`: one name contains the other.
- */
+/** Resolve diagrams using caller-provided navigation rule categories. */
 export function navigationResolver(rules: readonly NavigationRule[]): (click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined) => string | null {
-  const on = new Set(rules);
   return (click, diagrams, activeId) => {
-    const name = norm(click.name);
-    const called = norm(click.calledElement);
-    const isSub = click.type === "bpmn:SubProcess" || click.type === "bpmn:CallActivity" || !!called;
-    if (!isSub && !name) return null;
-    for (const d of diagrams) {
-      if (d.id === activeId) continue;
-      const dn = norm(d.name);
-      if (on.has("calledElement") && called && (norm(d.id) === called || dn === called)) return d.id;
-      if (!name) continue;
-      if (on.has("exactName") && dn === name) return d.id;
-      if (on.has("sectionNumber")) {
-        const a = SECTION_NUMBER.exec(name)?.[0];
-        const b = SECTION_NUMBER.exec(dn)?.[0];
-        if (a && b && a === b) return d.id;
-      }
-      if (on.has("substring") && dn && (dn.includes(name) || name.includes(dn))) return d.id;
-    }
-    return null;
+    const result = navigationTarget({ click, diagrams, activeId }, { processes: [], entries: [] }, { navigation: { mode: "legacy-rules", rules } });
+    return result.kind === "open" ? result.diagramId : null;
   };
 }
 
@@ -198,7 +172,7 @@ function defaultDownload(file: DiagramFile): void {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-const DEFAULT_FORMATS: readonly FormatOption[] = [{ id: "standard", label: "BPMN", profile: "standard" }];
+const DEFAULT_FORMATS: readonly FormatOption[] = [{ id: "", label: "BPMN", profile: "" }];
 
 export function BpmnWorkshop(props: BpmnWorkshopProps | NativeProfileWorkshopProps): ReactElement {
   return "businessProfile" in props ? <NativeProfileWorkshop {...props} /> : <XmlWorkshop {...props} />;
@@ -206,8 +180,9 @@ export function BpmnWorkshop(props: BpmnWorkshopProps | NativeProfileWorkshopPro
 
 function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
   const labels: WorkshopLabels = { ...DEFAULT_LABELS, ...props.labels };
-  const formats = props.formats && props.formats.length > 0 ? props.formats : DEFAULT_FORMATS;
-  const [ownFormat, setOwnFormat] = useState<string>(props.format ?? formats[0]?.id ?? "standard");
+  const formats: readonly FormatOption[] = props.formats && props.formats.length > 0 ? props.formats : props.businessPolicy?.presentation?.looks?.map((look: any) => ({ id: look.alias, label: look.alias, profile: look.alias })) ?? DEFAULT_FORMATS;
+  const [navigationChoices, setNavigationChoices] = useState<string[]>([]);
+  const [ownFormat, setOwnFormat] = useState<string>(props.format ?? formats[0]?.id ?? "");
   const formatId = props.format ?? ownFormat;
   const format = formats.find((f) => f.id === formatId) ?? formats[0] ?? DEFAULT_FORMATS[0];
 
@@ -269,7 +244,7 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
     });
   }, []);
 
-  const { paletteColumns, wheel, styles, styleNonce, allowLossyEdit, assetBase } = props;
+  const { paletteColumns, wheel, styles, styleNonce, allowLossyEdit, assetBase, businessPolicy } = props;
   const wmHidden = props.watermark?.hidden === true;
   const wmLicense = props.watermark?.license;
   useEffect(() => {
@@ -281,11 +256,12 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
     const options: BpmnCanvasOptions = {
       xml: p.xml,
       ...(p.revision !== undefined ? { revision: p.revision } : {}),
-      profile: fmt?.profile ?? "standard",
+      profile: fmt?.profile ?? "",
+      ...(p.businessPolicy ? { businessPolicy: p.businessPolicy } : {}),
       profileOptions: profileOptionsOf(fmt),
       ...(p.layoutOnLoad ? { layoutOnLoad: true } : {}),
-      ...(tokens && fmt?.profile === "legend" ? { legendTokens: tokens } : {}),
-      ...(tokens && fmt?.profile === "colored" ? { coloredTokens: tokens } : {}),
+      ...(tokens ? { tokens } : {}),
+
       ...(paletteColumns !== undefined ? { paletteColumns } : {}),
       ...(styles !== undefined ? { styles } : {}),
       ...(styleNonce !== undefined ? { styleNonce } : {}),
@@ -322,10 +298,17 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
         if (!click.marker) return;
         const h = handleRef.current;
         if (!h) return;
-        const nav = latest.current.navigation;
-        const resolve = nav ? navigationResolver(nav.rules) : (latest.current.resolveTarget ?? defaultResolveTarget);
-        const target = resolve(click, diagramsRef.current, activeRef.current);
-        if (target && target !== activeRef.current) void h.selectDiagram(target).catch(() => undefined);
+        const p = latest.current;
+        const explicit = p.resolveTarget;
+        if (explicit) {
+          const target = explicit(click, diagramsRef.current, activeRef.current);
+          if (target && target !== activeRef.current) void h.selectDiagram(target).catch(() => undefined);
+          return;
+        }
+        const result = navigationTarget({ click, diagrams: diagramsRef.current, activeId: activeRef.current, activeDiagramId: activeRef.current }, documentNavigationIndex(p.xml), p.businessPolicy);
+        if (result.kind === "open") void h.selectDiagram(result.diagramId).catch(() => undefined);
+        if (result.kind === "chooser") setNavigationChoices(result.diagramIds);
+
       },
     };
     const handle = createBpmnCanvas(host, options);
@@ -337,7 +320,7 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
       handle.destroy();
       if (handleRef.current === handle) handleRef.current = null;
     };
-  }, [paletteColumns, wheel, styles, styleNonce, allowLossyEdit, assetBase, wmHidden, wmLicense, addNotice, pullXml, refreshView]);
+  }, [paletteColumns, wheel, styles, styleNonce, allowLossyEdit, assetBase, businessPolicy, wmHidden, wmLicense, addNotice, pullXml, refreshView]);
 
   useEffect(() => {
     const h = handleRef.current;
@@ -414,8 +397,8 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
       if (docSeq.current !== seq) throw abortError();
       const p = latest.current;
       initializeCodecs(p.ioOptions);
-      const definitions = (await parseDefinitions(snap.xml)).rootElement;
-      const bytes = await exportModel(definitions, fmt);
+      const definitions = (await parseDefinitions(snap.xml, { ...p.ioOptions, ...(p.businessPolicy ? { businessPolicy: p.businessPolicy } : {}) })).rootElement;
+      const bytes = await exportModel(definitions, fmt, { ...p.ioOptions, ...(p.businessPolicy ? { businessPolicy: p.businessPolicy } : {}) });
       if (docSeq.current !== seq) throw abortError();
       const file: DiagramFile = { xml: new TextDecoder().decode(bytes), filename: fmt === "drawio" ? "diagram.drawio" : fmt === "sparx" ? "diagram.sparx.xml" : "diagram.bpmn", mimeType: fmt === "drawio" ? "application/vnd.jgraph.mxfile" : fmt === "sparx" ? "application/xml" : "application/bpmn+xml", fidelity: [] };
       (p.onDownload ?? defaultDownload)(file, { xml: snap.xml, revision: snap.revision, diagramId: snap.diagramId, profile: snap.profile, touched: snap.touched });
@@ -547,6 +530,7 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
         />
         {props.toolbarTrailing}
       </div>
+      {navigationChoices.length > 0 && <select aria-label="Choose diagram" defaultValue="" onChange={event => { const id = event.target.value; setNavigationChoices([]); if (id) void handleRef.current?.selectDiagram(id); }}><option value="">Choose diagram</option>{navigationChoices.map(id => <option key={id} value={id}>{diagrams.find(diagram => diagram.id === id)?.name ?? id}</option>)}</select>}
       <DiagramTabs
         tabs={diagrams.map((d) => ({ id: d.id, label: d.name }))}
         activeId={activeId}

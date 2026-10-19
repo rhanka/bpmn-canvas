@@ -1,7 +1,7 @@
 import { ProfileContractError } from "../../profile/canonical.js";
 import { applicationHost, type BusinessPolicy } from "../../internal/business-policy.js";
 import { attachedAnnotations, layoutPolicy } from "../../internal/legacy-policy.js";
-// `legend` renderer for bpmn-js. Display only: the BPMN XML is never written by it.
+// `annotated` renderer for bpmn-js. Display only: the BPMN XML is never written by it.
 // Adapted from an internal implementation of a draw.io-reference look.
 //
 // An "[LX-MK-2] X" text annotation associated to an activity is drawn as an
@@ -10,7 +10,7 @@ import { attachedAnnotations, layoutPolicy } from "../../internal/legacy-policy.
 // association are hidden (display="none"). BPMN-in-Color attributes always win
 // over the token defaults.
 //
-// The renderer draws only what `legendKind` / `legendConnectionKind` accept.
+// The renderer draws only what `annotatedKind` / `annotatedConnectionKind` accept.
 // Everything else falls through to the upstream bpmn-js renderer.
 
 import BaseRenderer from "diagram-js/lib/draw/BaseRenderer.js";
@@ -20,7 +20,7 @@ import { isExpanded, isHorizontal } from "bpmn-js/lib/util/DiUtil.js";
 import { getFillColor, getLabelColor, getStrokeColor } from "bpmn-js/lib/draw/BpmnRenderUtil.js";
 import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as svgCreate, selectAll as svgSelectAll } from "tiny-svg";
 
-import type { BpmnCanvasConfig, LegendTokens } from "../../internal/contracts.js";
+import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
 import {
   annotationName,
   appBoxes,
@@ -28,16 +28,16 @@ import {
   documentPath,
   documentTextRect,
   isAppAnnotation,
-  legendConnectionKind,
-  legendKind,
+  annotatedConnectionKind,
+  annotatedKind,
   waypointsPath,
-  type LegendBoLike,
-  type LegendShapeKind,
+  type AnnotatedBoLike,
+  type AnnotatedShapeKind,
 } from "./style.js";
 
 const RENDER_PRIORITY = 1500;
 /** Sentinel default: tells "no BPMN-in-Color fill set" apart from a colour. */
-const NO_COLOUR = "legend-no-colour";
+const NO_COLOUR = "annotated-no-colour";
 
 // diagram-js services and elements are structurally typed here: the package
 // does not freeze bpmn-js internals in its own types.
@@ -94,8 +94,8 @@ export function isLinkedApp(el: DiagramElement | undefined, policy?: BusinessPol
   return Boolean(el) && isAppShape(el, policy) && associated(el as DiagramElement).some(e => isActivity(e, policy));
 }
 
-/** Elements the legend hides: linked [LX-MK-2] annotations and their links. */
-export function isHiddenInLegend(el: DiagramElement, policy?: BusinessPolicy): boolean {
+/** Elements the annotated hides: linked [LX-MK-2] annotations and their links. */
+export function isHiddenInAnnotated(el: DiagramElement, policy?: BusinessPolicy): boolean {
   if (el.waypoints) {
     return (
       el.type === "bpmn:Association" &&
@@ -105,8 +105,8 @@ export function isHiddenInLegend(el: DiagramElement, policy?: BusinessPolicy): b
   return isLinkedApp(el, policy);
 }
 
-function shapeKindOf(element: object, policy?: BusinessPolicy): LegendShapeKind | undefined {
-  const bo = (element as DiagramElement).businessObject as LegendBoLike | undefined;
+function shapeKindOf(element: object, policy?: BusinessPolicy): AnnotatedShapeKind | undefined {
+  const bo = (element as DiagramElement).businessObject as AnnotatedBoLike | undefined;
   if (!bo) return undefined;
   const facts: { expanded?: boolean; horizontal?: boolean } = {};
   if (bo.$type === "bpmn:SubProcess" || bo.$type === "bpmn:Participant") {
@@ -115,19 +115,19 @@ function shapeKindOf(element: object, policy?: BusinessPolicy): LegendShapeKind 
   if (bo.$type === "bpmn:Participant" || bo.$type === "bpmn:Lane") {
     facts.horizontal = Boolean(isHorizontal(element as never));
   }
-  return legendKind(bo, facts, policy);
+  return annotatedKind(bo, facts, policy);
 }
 
 // --- renderer ------------------------------------------------------------------
 
-export class LegendRenderer extends BaseRenderer {
+export class AnnotatedRenderer extends BaseRenderer {
   static $inject = ["eventBus", "textRenderer", "canvas", "config.bpmnCanvas", "bpmnRenderer"];
 
   private readonly upstream: Any;
   private readonly textRenderer: Any;
   private readonly canvas: Any;
   private readonly instanceId: string;
-  private readonly tokens: LegendTokens;
+  private readonly tokens: AnnotatedTokens;
 
   private readonly businessPolicy: BusinessPolicy | undefined;
   constructor(eventBus: Any, textRenderer: Any, canvas: Any, config: BpmnCanvasConfig | undefined, bpmnRenderer: Any) {
@@ -136,16 +136,16 @@ export class LegendRenderer extends BaseRenderer {
     this.upstream = bpmnRenderer;
     this.textRenderer = textRenderer;
     this.canvas = canvas;
-    this.instanceId = config?.instanceId ?? `legend-${Math.random().toString(36).slice(2, 8)}`;
+    this.instanceId = config?.instanceId ?? `annotated-${Math.random().toString(36).slice(2, 8)}`;
     this.tokens = config?.lookTokens ?? (() => { throw new ProfileContractError("profile-resource-missing"); })();
   }
 
   private get arrowId(): string {
-    return `${this.instanceId}-legend-arrow`;
+    return `${this.instanceId}-annotated-arrow`;
   }
 
   private get gradientId(): string {
-    return `${this.instanceId}-legend-task-gradient`;
+    return `${this.instanceId}-annotated-task-gradient`;
   }
 
   override canRender(element: Any): boolean {
@@ -158,15 +158,15 @@ export class LegendRenderer extends BaseRenderer {
   }
 
   private endsOnDocument(el: DiagramElement): boolean {
-    return [el.source, el.target].some((end) => end?.businessObject && legendKind(end.businessObject as LegendBoLike, {}, this.businessPolicy) === "document");
+    return [el.source, el.target].some((end) => end?.businessObject && annotatedKind(end.businessObject as AnnotatedBoLike, {}, this.businessPolicy) === "document");
   }
 
   /**
-   * The legend draws plain associations, and every association to a `[LX-MK-1]` annotation, whatever its
+   * The annotated draws plain associations, and every association to a `[LX-MK-1]` annotation, whatever its
    * direction (the reference look has no arrow on it). Other directional ones stay upstream's.
    */
-  private connectionKind(el: DiagramElement): ReturnType<typeof legendConnectionKind> {
-    const kind = legendConnectionKind(el.businessObject);
+  private connectionKind(el: DiagramElement): ReturnType<typeof annotatedConnectionKind> {
+    const kind = annotatedConnectionKind(el.businessObject);
     if (kind === undefined && el.businessObject?.$type === "bpmn:Association" && this.endsOnDocument(el)) return "link";
     return kind;
   }
@@ -189,7 +189,7 @@ export class LegendRenderer extends BaseRenderer {
         "stroke-linejoin": "round",
         "marker-end": `url(#${this.arrowMarker(getStrokeColor(el as never, t.flow))})`,
       });
-      svgClasses(path).add("legend-flow");
+      svgClasses(path).add("annotated-flow");
     } else {
       // Associations. Data associations carry a direction, so they keep their arrow.
       const toDoc = this.endsOnDocument(el);
@@ -202,7 +202,7 @@ export class LegendRenderer extends BaseRenderer {
         "stroke-dasharray": toDoc ? t.docLinkDash : "5 5",
         ...(kind === "data-link" && t.dataLinkArrow ? { "marker-end": `url(#${this.arrowMarker(colour)})` } : {}),
       });
-      svgClasses(path).add("legend-link");
+      svgClasses(path).add("annotated-link");
     }
     svgAppend(parentGfx, path);
     return path as unknown as SVGElement;
@@ -233,7 +233,7 @@ export class LegendRenderer extends BaseRenderer {
   override drawShape(parentGfx: Any, shape: Any): SVGElement {
     if ((shape as DiagramElement).type === "label") return this.drawLabel(parentGfx, shape);
     const gfx = svgCreate("g");
-    svgClasses(gfx).add("legend-shape");
+    svgClasses(gfx).add("annotated-shape");
     svgAppend(parentGfx, gfx);
     this.draw(gfx, shape as DiagramElement);
     return gfx as unknown as SVGElement;
@@ -257,7 +257,7 @@ export class LegendRenderer extends BaseRenderer {
         const rect = svgCreate("rect");
         const body = custom === NO_COLOUR ? `url(#${this.taskGradient()})` : fill;
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill: body, stroke, "stroke-width": sw });
-        svgClasses(rect).add("legend-task");
+        svgClasses(rect).add("annotated-task");
         svgAppend(gfx, rect);
         if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, appsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
         this.label(gfx, element, fill, stroke, w, h);
@@ -278,8 +278,8 @@ export class LegendRenderer extends BaseRenderer {
           "pointer-events": "all",
           "data-marker": "process-icon",
         });
-        svgClasses(icon).add("legend-process-icon");
-        svgClasses(icon).add("legend-marker");
+        svgClasses(icon).add("annotated-process-icon");
+        svgClasses(icon).add("annotated-marker");
         svgAppend(gfx, icon);
         this.label(gfx, element, fill, stroke, w, h);
         this.drawApps(gfx, element);
@@ -319,7 +319,7 @@ export class LegendRenderer extends BaseRenderer {
           stroke,
           "stroke-width": 1.2,
         });
-        svgClasses(arrow).add(kind === "output" ? "legend-output" : "legend-input");
+        svgClasses(arrow).add(kind === "output" ? "annotated-output" : "annotated-input");
         svgAppend(gfx, arrow);
         break;
       }
@@ -359,7 +359,7 @@ export class LegendRenderer extends BaseRenderer {
         svgAppend(gfx, rect);
         const header = svgCreate("rect");
         svgAttr(header, { x: 0, y: 0, width: layoutPolicy(this.businessPolicy).laneHeaderWidth, height: h, fill: t.laneHeaderFill, stroke, "stroke-width": sw });
-        svgClasses(header).add("legend-lane-header");
+        svgClasses(header).add("annotated-lane-header");
         svgAppend(gfx, header);
         this.verticalHeader(gfx, element, h, layoutPolicy(this.businessPolicy).laneHeaderWidth, t.fontSize + 2);
         break;
@@ -370,7 +370,7 @@ export class LegendRenderer extends BaseRenderer {
         svgAppend(gfx, body);
         const strip = svgCreate("rect");
         svgAttr(strip, { x: 0, y: 0, width: layoutPolicy(this.businessPolicy).poolStrip, height: h, fill, stroke, "stroke-width": sw });
-        svgClasses(strip).add("legend-pool-strip");
+        svgClasses(strip).add("annotated-pool-strip");
         svgAppend(gfx, strip);
         this.verticalHeader(gfx, element, h, layoutPolicy(this.businessPolicy).poolStrip, t.fontSize + 2);
         break;
@@ -378,7 +378,7 @@ export class LegendRenderer extends BaseRenderer {
     }
   }
 
-  private defaultFill(kind: LegendShapeKind): string {
+  private defaultFill(kind: AnnotatedShapeKind): string {
     const t = this.tokens;
     switch (kind) {
       case "task":
@@ -405,7 +405,7 @@ export class LegendRenderer extends BaseRenderer {
     }
   }
 
-  private lineFor(kind: LegendShapeKind): string {
+  private lineFor(kind: AnnotatedShapeKind): string {
     const t = this.tokens;
     switch (kind) {
       case "task":
@@ -455,7 +455,7 @@ export class LegendRenderer extends BaseRenderer {
   private appBox(gfx: Any, box: { name: string; x: number; y: number; width: number; height: number }, fill: string, stroke: string): void {
     const t = this.tokens;
     const g = svgCreate("g");
-    svgClasses(g).add("legend-app");
+    svgClasses(g).add("annotated-app");
     svgAttr(g, { transform: `translate(${box.x} ${box.y})` });
     const rect = svgCreate("rect");
     svgAttr(rect, { x: 0, y: 0, width: box.width, height: box.height, fill, stroke, "stroke-width": t.strokeWidth });
@@ -494,7 +494,7 @@ export class LegendRenderer extends BaseRenderer {
     return defs as unknown as SVGElement;
   }
 
-  /** Classic end arrow, one per canvas and colour. The id is prefixed by the instance id. */
+  /** Flat end arrow, one per canvas and colour. The id is prefixed by the instance id. */
   private arrowMarker(colour: string): string {
     const id = colour === this.tokens.flow ? this.arrowId : `${this.arrowId}-${colour.replace(/[^0-9a-zA-Z]/g, "")}`;
     const defs = this.defsFor(id);
@@ -558,17 +558,17 @@ export class LegendRenderer extends BaseRenderer {
   private subprocessMarker(gfx: Any, w: number, h: number, stroke: string, band = 0): void {
     h -= band;
     const group = svgCreate("g");
-    svgClasses(group).add("legend-subprocess-marker");
-    svgClasses(group).add("legend-marker");
+    svgClasses(group).add("annotated-subprocess-marker");
+    svgClasses(group).add("annotated-marker");
     svgAttr(group, { "data-marker": "sub-process", "pointer-events": "all" });
     group.setAttribute("pointer-events", "all");
     const box = svgCreate("rect");
     svgAttr(box, { x: w / 2 - 7, y: h - 18, width: 14, height: 14, fill: "transparent", stroke, "stroke-width": 1.2, "pointer-events": "all" });
-    svgClasses(box).add("legend-marker");
+    svgClasses(box).add("annotated-marker");
     svgAppend(group, box);
     const plus = svgCreate("path");
     svgAttr(plus, { d: `M${w / 2 - 4} ${h - 11}h8M${w / 2} ${h - 15}v8`, stroke, "stroke-width": 1.2, "pointer-events": "all" });
-    svgClasses(plus).add("legend-marker");
+    svgClasses(plus).add("annotated-marker");
     svgAppend(group, plus);
     svgAppend(gfx, group);
   }
@@ -581,7 +581,7 @@ export class LegendRenderer extends BaseRenderer {
     svgAppend(gfx, diamond);
   }
 
-  /** `+` for parallel, `X` for exclusive. `legendKind` admits no other gateway. */
+  /** `+` for parallel, `X` for exclusive. `annotatedKind` admits no other gateway. */
   private gatewayMarker(gfx: Any, element: DiagramElement, w: number, h: number, colour: string): void {
     const cx = w / 2;
     const cy = h / 2;
@@ -602,11 +602,11 @@ export class LegendRenderer extends BaseRenderer {
     const path = svgCreate("path");
     const dog = Math.round(Math.min(w, h) * 0.2);
     svgAttr(path, { d: `M0 0h${w - dog}l${dog} ${dog}v${h - dog}h-${w}Z`, fill, stroke, "stroke-width": sw });
-    svgClasses(path).add("legend-data-page");
+    svgClasses(path).add("annotated-data-page");
     svgAppend(gfx, path);
     const fold = svgCreate("path");
     svgAttr(fold, { d: `M${w - dog} 0v${dog}h${dog}`, fill: "none", stroke, "stroke-width": sw });
-    svgClasses(fold).add("legend-data-fold");
+    svgClasses(fold).add("annotated-data-fold");
     svgAppend(gfx, fold);
   }
 
@@ -635,7 +635,7 @@ interface Registry {
   getGraphics(el: DiagramElement): SVGElement | undefined;
 }
 
-export class LegendSync {
+export class AnnotatedSync {
   static $inject = ["eventBus", "elementRegistry", "graphicsFactory", "config.bpmnCanvas"];
 
   private readonly registry: Registry;
@@ -660,7 +660,7 @@ export class LegendSync {
       if (!gfx) continue;
       // diagram-js `hidden`: GraphicsFactory.update sets display="none" (kept
       // across ChangeSupport redraws; display-only, never exported to XML).
-      const hide = isHiddenInLegend(el, this.businessPolicy);
+      const hide = isHiddenInAnnotated(el, this.businessPolicy);
       const toggled = Boolean(el.hidden) !== hide;
       el.hidden = hide;
       const kind = shapeKindOf(el, this.businessPolicy);
@@ -678,7 +678,7 @@ export class LegendSync {
 
 // --- editing: the hidden annotation follows its activity -----------------------
 
-export class LegendAppFollow {
+export class AnnotatedAppFollow {
   static $inject = ["eventBus", "config.bpmnCanvas"];
 
   private readonly businessPolicy: BusinessPolicy | undefined;
@@ -697,15 +697,15 @@ export class LegendAppFollow {
 }
 
 /** Renderer + sync. Safe in a render-only Viewer. */
-export const LegendRendererModule = {
-  __init__: ["legendRenderer", "legendSync"],
-  legendRenderer: ["type", LegendRenderer],
-  legendSync: ["type", LegendSync],
+export const AnnotatedRendererModule = {
+  __init__: ["annotatedRenderer", "annotatedSync"],
+  annotatedRenderer: ["type", AnnotatedRenderer],
+  annotatedSync: ["type", AnnotatedSync],
 };
 
 /** Editing behaviour on top of the renderer. Modeler only. */
-export const LegendFollowModule = {
-  __init__: ["legendAppFollow"],
-  legendAppFollow: ["type", LegendAppFollow],
+export const AnnotatedFollowModule = {
+  __init__: ["annotatedAppFollow"],
+  annotatedAppFollow: ["type", AnnotatedAppFollow],
 };
 

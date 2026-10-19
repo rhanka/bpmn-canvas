@@ -102,7 +102,7 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
     for (const k of [1, 2]) for (const h of ["tall", "short"]) assert.equal(c[k][h].open, true);
   });
   for (const cols of [1, 2]) {
-    await t.test(`columns=${cols} survives resize, setProfile legend/standard and read-only toggles`, () => {
+    await t.test(`columns=${cols} survives resize, setProfile annotated/standard and read-only toggles`, () => {
       const s = o.survive[cols];
       for (const [name, info] of Object.entries(s)) {
         assert.equal(info.twoColumn, cols === 2, `${name}: ${JSON.stringify(info)}`);
@@ -128,13 +128,13 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
   });
   await t.test("legend profile: each of the 16 palette icons is painted with the colour of its group", () => {
     for (const [action, token] of Object.entries(LEGEND_GROUP)) {
-      assert.equal(o.legendStyles[`legend.${action}`].beforeBg, rgb(TOKENS[token]), action);
+      assert.equal(o.legendStyles[`annotated.${action}`].beforeBg, rgb(TOKENS[token]), action);
     }
   });
   await t.test("two instances with different tokens are independent, and destroying one changes nothing in the other", () => {
     for (const [action, token] of Object.entries(LEGEND_GROUP)) {
-      assert.equal(o.second.styles[`legend.${action}`].beforeBg, rgb(OTHER[token]), `second ${action}`);
-      assert.equal(o.firstStylesStill[`legend.${action}`].beforeBg, rgb(TOKENS[token]), `first ${action}`);
+      assert.equal(o.second.styles[`annotated.${action}`].beforeBg, rgb(OTHER[token]), `second ${action}`);
+      assert.equal(o.firstStylesStill[`annotated.${action}`].beforeBg, rgb(TOKENS[token]), `first ${action}`);
     }
     assert.equal(o.second.root.vars["--bpmn-canvas-icon-task"], OTHER.taskLine);
     assert.equal(o.second.firstRootStill.vars["--bpmn-canvas-icon-task"], TOKENS.taskLine);

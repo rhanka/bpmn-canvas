@@ -15,7 +15,7 @@ test("workshop structure with the step-0 contract options", { timeout: 240000 },
   for (const look of ["custom", "bpmn"]) {
     await t.test(`${look}: toolbar controls equal to step 0`, () => assert.deepEqual(o[look].controls, fixture.looks[look].controls));
     await t.test(`${look}: Fit, Format and Export menus equal to step 0`, () => assert.deepEqual(o[look].menus, fixture.looks[look].menus));
-    await t.test(`${look}: palette = the 16 legend entries, two columns`, () => {
+    await t.test(`${look}: palette = the 16 annotated entries, two columns`, () => {
       assert.equal(o[look].palette.length, 16);
       assert.deepEqual(o[look].palette.map((p) => [p.entry, p.classes]), fixture.looks[look].palette.map((p) => [p.entry, p.classes]));
       assert.equal(o[look].paletteTwoColumns, true);

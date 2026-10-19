@@ -36,12 +36,12 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     const legBody = await ev(([i]) => window.v02.rectOf(i, '.djs-element[data-element-id="Sub_1"] .djs-hit-all'), [leg.id]);
     await clickAt(bodyPoint(legBody));
     const legMarker = await ev(([i]) => window.v02.rectOf(i, '[data-element-id="Sub_1"] .legend-marker'), [leg.id]);
-    o.legendMarkerFound = !!legMarker;
+    o.annotatedMarkerFound = !!legMarker;
     if (legMarker) await clickAt(centre(legMarker));
-    o.legendClicks = await ev(([i]) => window.v02.log(i).clicks, [leg.id]);
+    o.annotatedClicks = await ev(([i]) => window.v02.log(i).clicks, [leg.id]);
     const legDrill = await ev(([i]) => window.v02.rectOf(i, ".bjs-drilldown"), [leg.id]);
     if (legDrill) await clickAt(centre(legDrill));
-    o.legendDrillClicks = (await ev(([i]) => window.v02.log(i).clicks.length, [leg.id])) - o.legendClicks.length;
+    o.annotatedDrillClicks = (await ev(([i]) => window.v02.log(i).clicks.length, [leg.id])) - o.annotatedClicks.length;
     await ev(([i]) => window.v02.destroy(i), [leg.id]);
 
     const nat = await ev(([x]) => window.v02.mount(x, { profile: "standard" }), [ce3]);
@@ -135,7 +135,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     const after = await ev(([i]) => {
       const it = window.v02.get(i);
       return {
-        legendShapes: it.host.querySelectorAll(".legend-shape").length,
+        annotatedShapes: it.host.querySelectorAll(".legend-shape").length,
         containers: it.host.querySelectorAll(".djs-container").length,
         badges: it.host.querySelectorAll(".bjs-powered-by").length,
         active: it.handle.getActiveDiagramId(),
@@ -152,7 +152,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     const xmlAfter = await ev(([i]) => window.v02.call(i, "getXml"), [p.id]);
     o.profileSwitch = { preRev, preCount, preX, after, hasEdits: xmlAfter.includes('name="SWITCHED"') && xmlAfter.includes('name="OTHER"') };
     await ev(([i]) => window.v02.call(i, "setProfile", "standard"), [p.id]);
-    o.backToStandard = await ev(([i]) => ({ legendShapes: window.v02.get(i).host.querySelectorAll(".legend-shape").length, containers: window.v02.get(i).host.querySelectorAll(".djs-container").length }), [p.id]);
+    o.backToStandard = await ev(([i]) => ({ annotatedShapes: window.v02.get(i).host.querySelectorAll(".legend-shape").length, containers: window.v02.get(i).host.querySelectorAll(".djs-container").length }), [p.id]);
     await ev(([i]) => window.v02.destroy(i), [p.id]);
 
     const u = await ev(([x]) => window.v02.mount(x), [ce4]);
@@ -197,11 +197,11 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.notEqual(out.standardEventModeNavigated, "Sub_1_plane", "event mode must not navigate");
   });
   await t.test("L1 legend profile: the legend marker is a marker click; the drill-down button too", () => {
-    assert.ok(out.legendMarkerFound);
-    assert.equal(out.legendClicks.length, 2, JSON.stringify(out.legendClicks));
-    assert.equal(out.legendClicks[0].marker, false);
-    assert.equal(out.legendClicks[1].marker, true);
-    assert.equal(out.legendDrillClicks, 1);
+    assert.ok(out.annotatedMarkerFound);
+    assert.equal(out.annotatedClicks.length, 2, JSON.stringify(out.annotatedClicks));
+    assert.equal(out.annotatedClicks[0].marker, false);
+    assert.equal(out.annotatedClicks[1].marker, true);
+    assert.equal(out.annotatedDrillClicks, 1);
   });
   await t.test("drilldown native: the displayed diagram and the active diagram id stay in step, with a diagram-switch change", () => {
     assert.equal(out.native.root, "Sub_1_plane");
@@ -242,7 +242,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.equal(s.after.active, "DiagB");
     assert.equal(s.after.showsB, true);
     assert.equal(s.after.showsA, false);
-    assert.ok(s.after.legendShapes > 0, "legend look applied");
+    assert.ok(s.after.annotatedShapes > 0, "legend look applied");
     assert.equal(s.after.containers, 1);
     assert.equal(s.after.badges, 1);
     assert.equal(s.after.canUndo, true, "the edits can still be undone after the switch");

@@ -109,7 +109,7 @@ test("active diagram across a new document version; undo and redo across a profi
   await t.test("B4 core: undo and redo survive a profile switch, a second switch too; a new document clears them", () => {
     assert.equal(c.layoutMoved, true);
     assert.deepEqual(c.beforeSwitch, { canUndo: true, canRedo: false });
-    assert.deepEqual(c.afterSwitch, { canUndo: true, canRedo: false, legendShapes: 0 });
+    assert.deepEqual(c.afterSwitch, { canUndo: true, canRedo: false, annotatedShapes: 0 });
     assert.equal(c.afterUndo.taskX, c.afterUndo.x0, "undo after the switch restores the layout before the edit");
     assert.deepEqual([c.afterUndo.canUndo, c.afterUndo.canRedo, c.afterUndo.profileKept], [false, true, true]);
     assert.equal(c.afterRedo.taskX, c.afterRedo.x1);

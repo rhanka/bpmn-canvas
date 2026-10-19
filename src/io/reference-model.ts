@@ -22,7 +22,7 @@ export interface RefPage {
   readonly processId: string; readonly index: number; readonly name: string; readonly pool: RefBox;
   readonly lanes: ReadonlyArray<{ readonly id: string; readonly name: string; readonly box: RefBox }>;
   readonly nodes: ReadonlyMap<string, RefNode>; readonly order: readonly string[]; readonly flowOrder: readonly string[];
-  readonly apps: ReadonlyMap<string, { readonly box: RefBox; readonly text: string }>; readonly connections: readonly RefConnection[];
+  readonly applicationsByHost: ReadonlyMap<string, { readonly box: RefBox; readonly text: string }>; readonly connections: readonly RefConnection[];
 }
 const FLOW_TAG: Readonly<Record<string, string>> = {
   StartEvent: "start", EndEvent: "end", Task: "task", SubProcess: "subprocess", CallActivity: "call",
@@ -92,15 +92,15 @@ class ProjectionConsumption {
     properties.forEach((p) => fields.add(p));
     this.used.set(e, fields);
   }
-  info(e: E): Record<string, any> | undefined {
-    const v = factsOf(e, this.policy);
-    if (v) {
+  categoryFacts(e: E): Record<string, any> | undefined {
+    const facts = factsOf(e, this.policy);
+    if (facts) {
       this.consume(e, "extensionElements");
       this.consume(e.extensionElements, "values");
       const native = factElement(e, this.policy);
       if (native) this.consume(native, ...Object.values(this.policy!.exportFacts.properties));
     }
-    return v;
+    return facts;
   }
   io(owner: E): void {
     const io = owner.ioSpecification;
@@ -130,7 +130,7 @@ class ProjectionConsumption {
       for (const p of e.$descriptor?.properties ?? []) {
         if (p.isVirtual || fields.has(p.name)) continue;
         const value = e[p.name], children = Array.isArray(value) ? value : [value];
-        const child = children.find((v) => v?.$type && !di.has(v));
+        const child = children.find((facts) => facts?.$type && !di.has(facts));
         if (!child) continue;
         if (p.isReference) throw new IoError("unsupported-element", `${e.$type}.${p.name} is not consumed`, [e.$type === "bpmn:Process" ? "" : e.id ?? ""]);
         // Preserve the historical owner diagnostic for anonymous activity loops.
@@ -166,26 +166,26 @@ export function validateSemantics(definitions: E, policy?: BusinessPolicy, descr
   for (const e of all) {
     validateIoSpecification(e);
     const values = list(e.extensionElements ?? {}, "values");
-    const infos = values.filter((v) => v.$type === policy?.exportFacts?.extensionType);
-    const unknown = values.find((v) => {
+    const infos = values.filter((facts) => facts.$type === policy?.exportFacts?.extensionType);
+    const unknown = values.find((facts) => {
       // Typed descriptors carry the URI on their registered package, not on ns.
-      const uri = v.$descriptor?.$pkg?.uri ?? v.$descriptor?.ns?.uri ?? v.$attrs?.xmlns ?? "";
-      return v.$type === policy?.exportFacts?.extensionType ? uri !== descriptorUri : !!policy?.exportFacts?.namespaceFamily && uri.startsWith(policy.exportFacts.namespaceFamily);
+      const uri = facts.$descriptor?.$pkg?.uri ?? facts.$descriptor?.ns?.uri ?? facts.$attrs?.xmlns ?? "";
+      return facts.$type === policy?.exportFacts?.extensionType ? uri !== descriptorUri : !!policy?.exportFacts?.namespaceFamily && uri.startsWith(policy.exportFacts.namespaceFamily);
     });
     if (unknown) fail("unknown-semantics-version", e, "Unknown semantic namespace version");
     if (infos.length > 1) fail("invalid-semantics", e, "Duplicate facts element");
-    const v = factsOf(e, policy); if (!v) continue;
+    const facts = factsOf(e, policy); if (!facts) continue;
     const k = kind(e), item = artifact(e);
-    if (v.order !== undefined) {
-      if (!Number.isSafeInteger(v.order) || v.order < 0) fail("invalid-semantics", e, "Order must be a nonnegative integer");
+    if (facts.order !== undefined) {
+      if (!Number.isSafeInteger(facts.order) || facts.order < 0) fail("invalid-semantics", e, "Order must be a nonnegative integer");
       const p = processOf.get(e);
-      if (p) { const used = orders.get(p) ?? new Set<number>(); if (used.has(v.order)) fail("invalid-semantics", e, "Duplicate semantic order"); used.add(v.order); orders.set(p, used); }
+      if (p) { const used = orders.get(p) ?? new Set<number>(); if (used.has(facts.order)) fail("invalid-semantics", e, "Duplicate semantic order"); used.add(facts.order); orders.set(p, used); }
     }
-    if (v.direction !== undefined && (k !== "DataObjectReference" || !["in", "out"].includes(v.direction))) fail("invalid-semantics", e, "Invalid direction or owner");
-    if (v.label !== undefined && !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(k)) fail("invalid-semantics", e, "Relation label on wrong owner");
-    if (v.lane !== undefined && (!item || v.lane.$type !== "bpmn:Lane" || !contained.has(v.lane) || processOf.get(v.lane) !== processOf.get(e))) fail("invalid-semantics", e, "Lane reference must belong to this process");
-    if (v.primary !== undefined && (!item || !contained.has(v.primary) || !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(kind(v.primary)))) fail("invalid-semantics", e, "Invalid primary association");
-    if (v.process !== undefined && (!["Task", "SubProcess"].includes(k) || !processes.includes(v.process))) fail("invalid-semantics", e, "Navigation target must be a root Process");
+    if (facts.direction !== undefined && (k !== "DataObjectReference" || !["in", "out"].includes(facts.direction))) fail("invalid-semantics", e, "Invalid direction or owner");
+    if (facts.label !== undefined && !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(k)) fail("invalid-semantics", e, "Relation label on wrong owner");
+    if (facts.lane !== undefined && (!item || facts.lane.$type !== "bpmn:Lane" || !contained.has(facts.lane) || processOf.get(facts.lane) !== processOf.get(e))) fail("invalid-semantics", e, "Lane reference must belong to this process");
+    if (facts.primary !== undefined && (!item || !contained.has(facts.primary) || !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(kind(facts.primary)))) fail("invalid-semantics", e, "Invalid primary association");
+    if (facts.process !== undefined && (!["Task", "SubProcess"].includes(k) || !processes.includes(facts.process))) fail("invalid-semantics", e, "Navigation target must be a root Process");
   }
   return byId;
 }
@@ -270,12 +270,12 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
   for (const lane of laneEls) consumed.consume(lane, "flowNodeRef");
   const rank = new Map<E, number>();
   semantic.forEach((e, i) => {
-    if (kind(e) !== "DataObject") rank.set(e, consumed.info(e)?.order ?? i);
+    if (kind(e) !== "DataObject") rank.set(e, consumed.categoryFacts(e)?.order ?? i);
   });
-  const nodes = new Map<string, RefNode>(), appAnnotations = new Map<string, { box: RefBox; text: string }>();
+  const nodes = new Map<string, RefNode>(), annotationBoxes = new Map<string, { box: RefBox; text: string }>();
   const drawable = semantic.filter((e) => kind(e) in FLOW_TAG || artifact(e));
   for (const e of drawable) {
-    const k = kind(e), v = consumed.info(e), shape = shapes.get(e), box = boxOf(shape, e);
+    const k = kind(e), facts = consumed.categoryFacts(e), shape = shapes.get(e), box = boxOf(shape, e);
     consumed.consume(e);
     if (k in FLOW_TAG) {
       consumed.consume(e, "incoming", "outgoing");
@@ -294,13 +294,13 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     if (k === "TextAnnotation") {
       const t = e.text ?? "";
       const role = annotationRole(t, policy)?.role;
-      if (role === "application") { appAnnotations.set(e.id, { box, text: roleLabel(t, policy, true) }); continue; }
+      if (role === "application") { annotationBoxes.set(e.id, { box, text: roleLabel(t, policy, true) }); continue; }
       if (role !== "document") fail("free-annotation", e, "Unrecognised annotation role");
       type = "document"; label = roleLabel(t, policy, true);
     }
-    const li = artifact(e) ? laneEls.indexOf(v?.lane) : laneOf.get(e);
+    const li = artifact(e) ? laneEls.indexOf(facts?.lane) : laneOf.get(e);
     if (artifact(e) && (li === undefined || li < 0)) fail("missing-semantics", e, "Artifact lane is required");
-    let target = v?.process;
+    let target = facts?.process;
     if (k === "CallActivity" && e.calledElement !== undefined) {
       target = list(definitions, "rootElements").find((p) => p.$type === "bpmn:Process" && p.id === e.calledElement);
       if (!target) fail("invalid-semantics", e, "calledElement must identify a root Process");
@@ -309,14 +309,14 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     if (li !== undefined && li >= 0) { n.laneIndex = li; n.laneName = lanes[li]!.name; }
     nodes.set(e.id, n);
   }
-  const apps = new Map<string, { box: RefBox; text: string }>(), usedApps = new Set<string>();
+  const applicationsByHost = new Map<string, { box: RefBox; text: string }>(), usedApps = new Set<string>();
   const relations = semantic.filter((e) => ["SequenceFlow", "Association"].includes(kind(e)));
   const ownerOf = new Map<E, E>();
   for (const e of semantic) if (ACTIVITIES.has(FLOW_TAG[kind(e)]!)) {
     consumed.consume(e, "dataInputAssociations", "dataOutputAssociations");
     for (const a of [...list(e, "dataInputAssociations"), ...list(e, "dataOutputAssociations")]) { relations.push(a); ownerOf.set(a, e); }
   }
-  relations.forEach((e, i) => rank.set(e, consumed.info(e)?.order ?? i));
+  relations.forEach((e, i) => rank.set(e, consumed.categoryFacts(e)?.order ?? i));
   relations.sort((a, b) => rank.get(a)! - rank.get(b)!);
   const connections: RefConnection[] = [];
   for (const a of relations) {
@@ -347,11 +347,11 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     if (k === "SequenceFlow") {
       if (!semantic.includes(s) || !semantic.includes(t) || !list(s, "outgoing").includes(a) || !list(t, "incoming").includes(a)) fail("invalid-semantics", a, "Flow endpoints and incoming/outgoing must agree");
     }
-    if (k === "Association" && (appAnnotations.has(s?.id) || appAnnotations.has(t?.id))) {
-      const ann = appAnnotations.has(s?.id) ? s : t, host = ann === s ? t : s;
+    if (k === "Association" && (annotationBoxes.has(s?.id) || annotationBoxes.has(t?.id))) {
+      const ann = annotationBoxes.has(s?.id) ? s : t, host = ann === s ? t : s;
       if (!host || !applicationHost(host, policy)) fail("orphan-application", ann, "Application needs an activity");
-      if (usedApps.has(ann.id) || apps.has(host.id)) fail("unsupported-element", a, "Multiple application attachments are not exported");
-      usedApps.add(ann.id); if (!apps.has(host.id)) { apps.set(host.id, appAnnotations.get(ann.id)!); nodes.get(host.id)!.application = appAnnotations.get(ann.id)!.text; }
+      if (usedApps.has(ann.id) || applicationsByHost.has(host.id)) fail("unsupported-element", a, "Multiple application attachments are not exported");
+      usedApps.add(ann.id); if (!applicationsByHost.has(host.id)) { applicationsByHost.set(host.id, annotationBoxes.get(ann.id)!); nodes.get(host.id)!.application = annotationBoxes.get(ann.id)!.text; }
       continue;
     }
     if (!nodes.has(s?.id) || !nodes.has(t?.id)) fail("missing-endpoint", a, "Relation endpoint is not exported");
@@ -364,19 +364,19 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     });
     connections.push({ id: a.id, source: s.id, target: t.id, kind: ck, label: ck === "sequence" ? a.name ?? "" : factsOf(a, policy)?.label ?? "", points, semanticOrder: rank.get(a)! });
   }
-  for (const id of appAnnotations.keys()) if (!usedApps.has(id)) fail("orphan-application", byId.get(id)!, "Application is not attached");
+  for (const id of annotationBoxes.keys()) if (!usedApps.has(id)) fail("orphan-application", byId.get(id)!, "Application is not attached");
   connections.sort((a, b) => Number(a.kind !== "sequence") - Number(b.kind !== "sequence") || a.semanticOrder - b.semanticOrder);
   for (const e of drawable.filter(artifact)) {
     const n = nodes.get(e.id); if (!n) continue;
-    const v = factsOf(e, policy), incident = connections.filter((c) => c.kind !== "sequence" && (c.source === n.id || c.target === n.id));
+    const facts = factsOf(e, policy), incident = connections.filter((c) => c.kind !== "sequence" && (c.source === n.id || c.target === n.id));
     const role = (c: RefConnection): "in" | "out" => c.source === n.id ? "in" : "out";
     const roles = new Set(incident.filter((c) => c.kind === "data").map(role));
     if (kind(e) === "DataObjectReference") {
-      const direction = v?.direction ?? (roles.size === 1 ? [...roles][0] : undefined);
+      const direction = facts?.direction ?? (roles.size === 1 ? [...roles][0] : undefined);
       if (!direction) fail("missing-semantics", e, "Ambiguous or unlinked item requires direction");
       n.type = direction === "in" ? "object-in" : "object-out";
     }
-    const primary = v?.primary;
+    const primary = facts?.primary;
     const c = primary ? incident.find((a) => a.id === primary.id) : incident[0];
     if (primary && !c) fail("invalid-semantics", e, "Primary association must be incident");
     if (c) {
@@ -397,5 +397,5 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
   const boxes = [...lanes.map((l) => l.box), ...seq.map((n) => n.box)];
   const x = boxes.length ? Math.min(...boxes.map((b) => b.x)) : 0, y = boxes.length ? Math.min(...boxes.map((b) => b.y)) : 0;
   const pool = poolOwner ? boxOf(shapes.get(poolOwner.participant), poolOwner.participant) : { x, y, w: boxes.length ? Math.max(...boxes.map((b) => b.x + b.w)) - x : 0, h: boxes.length ? Math.max(...boxes.map((b) => b.y + b.h)) - y : 0 };
-  return { processId: process.id, index, name: poolOwner?.participant.name || process.name || `Process ${index + 1}`, pool, lanes, nodes, order, flowOrder, apps, connections };
+  return { processId: process.id, index, name: poolOwner?.participant.name || process.name || `Process ${index + 1}`, pool, lanes, nodes, order, flowOrder, applicationsByHost, connections };
 }

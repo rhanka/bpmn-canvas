@@ -1,11 +1,14 @@
 "use client";
 
+import type { BusinessPolicy } from "../internal/business-policy.js";
+
 import { createElement, useEffect, useRef } from "react";
 import type { CSSProperties, ReactElement } from "react";
 import { createBpmnCanvas } from "../internal/canvas.js";
 import type { BpmnCanvasHandle, BpmnCanvasOptions, BpmnChange, CanvasState, Diagnostic, ProfileId, WatermarkOptions, WheelMode } from "../types.js";
 
 export interface BpmnCanvasProps {
+  readonly businessPolicy?: BusinessPolicy;
   readonly xml: string;
   /** Pass the `revision` of the last `onChange` back with the XML you saved, so the echo is ignored and undo/camera survive. */
   readonly revision?: string;
@@ -39,7 +42,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
   const applied = useRef<{ xml: string; revision: string | undefined } | null>(null);
   const latest = useRef(props);
   latest.current = props;
-  const { profile, wheel, styles, styleNonce, allowLossyEdit, assetBase } = props;
+  const { profile, wheel, styles, styleNonce, allowLossyEdit, assetBase, businessPolicy } = props;
   const wmHidden = props.watermark?.hidden === true;
   const wmLicense = props.watermark?.license;
 
@@ -49,6 +52,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
     const p = latest.current;
     const options: BpmnCanvasOptions = {
       xml: p.xml,
+      ...(businessPolicy ? { businessPolicy } : {}),
       ...(p.revision !== undefined ? { revision: p.revision } : {}),
       ...(profile !== undefined ? { profile } : {}),
       ...(wheel !== undefined ? { wheel } : {}),
@@ -70,7 +74,7 @@ export function BpmnCanvas(props: BpmnCanvasProps): ReactElement {
       handle.destroy();
       if (handleRef.current === handle) handleRef.current = null;
     };
-  }, [profile, wheel, styles, styleNonce, allowLossyEdit, assetBase, wmHidden, wmLicense]);
+  }, [profile, wheel, styles, styleNonce, allowLossyEdit, assetBase, businessPolicy, wmHidden, wmLicense]);
 
   useEffect(() => {
     const handle = handleRef.current;

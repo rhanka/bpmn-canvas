@@ -5,8 +5,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { baselineHashAllowlist, outsideBaselineHashes } from "./helpers/brand-baseline.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const dist = process.env.LEGEND_DIST ?? `${root}dist`;
-const load = (f) => import(pathToFileURL(`${dist}/profiles/legend/${f}`).href);
+const dist = process.env.ANNOTATED_DIST ?? `${root}dist`;
+const load = (f) => import(pathToFileURL(`${dist}/presentation/annotated/${f}`).href);
 const style = await load("style.js");
 const tokens = await load("tokens.js");
 
@@ -154,13 +154,13 @@ test("tokens: an explicit per-type value wins over the conveniences", () => {
 
 test("legend sources contain no banned symbol", () => {
   const allowed = baselineHashAllowlist();
-  const dir = `${root}src/profiles/legend/`;
+  const dir = `${root}src/presentation/annotated/`;
   const banned = /localStorage|sessionStorage|@\/lib|\.bjs-powered-by|prototype\.\w+\s*=/;
   for (const f of readdirSync(dir)) {
     if (!/\.(ts|mjs)$/.test(f)) continue;
     const text = readFileSync(dir + f, "utf8");
     assert.ok(!banned.test(text), `${f} contains a banned symbol: ${banned.exec(text)?.[0]}`);
-    assert.deepEqual(outsideBaselineHashes(`src/profiles/legend/${f}`, text, allowed), [], `${f} keeps a banned identifier`);
+    assert.deepEqual(outsideBaselineHashes(`src/presentation/annotated/${f}`, text, allowed), [], `${f} keeps a banned identifier`);
     assert.ok(!/#[0-9a-fA-F]{6}\b/.test(f === "tokens.ts" ? "" : text), `${f} hard-codes a colour outside tokens.ts`);
   }
 });

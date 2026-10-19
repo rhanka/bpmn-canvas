@@ -12,23 +12,23 @@ export interface BpmnCanvasConfig {
   readonly ioSetSelections?: Readonly<Record<string, string>>;
   /** Unique per canvas instance. Prefix every DOM id, SVG marker and gradient id with it. */
   readonly instanceId: string;
-  readonly lookTokens?: LegendTokens;
+  readonly lookTokens?: AnnotatedTokens;
   readonly namedTokens?: readonly string[];
   readonly renderer?: string;
   readonly businessPolicy?: BusinessPolicy;
-  /** Present only for the `legend` profile. */
-  /** Present only for the `colored` profile. */
-  /** `colored` only: the token names the host gave. Only those recolour; the others keep the upstream colour. */
+  /** Present only for the `annotated` profile. */
+  /** Present only for the `recolor` profile. */
+  /** `recolor` only: the token names the host gave. Only those recolour; the others keep the upstream colour. */
   readonly paletteColumns?: 1 | 2 | "auto";
 }
 
 /**
- * Host-overridable look inputs for the `legend` and `colored` profiles. A host passes a `Partial`; missing keys
- * fall back to the profile defaults (legend: the reference Custom look; colored: neutral values), with two
+ * Host-overridable look inputs for the `annotated` and `recolor` profiles. A host passes a `Partial`; missing keys
+ * fall back to the profile defaults (annotated: the reference Custom look; recolor: neutral values), with two
  * convenience fallbacks: `stroke` feeds every `*Line` and `flow` not given, and `fill`
  * feeds `taskFill` when not given. `taskFillEnd` is derived from `taskFill` when not given.
  */
-export interface LegendTokens {
+export interface AnnotatedTokens {
   readonly fontFamily: string;
   readonly fontSize: number;
   readonly strokeWidth: number;
@@ -38,8 +38,8 @@ export interface LegendTokens {
   readonly fill: string;
   readonly text: string;
   /**
-   * Colour of the labels placed outside their shape (events, gateways, flows). `colored` look: falls back to `text`.
-   * `legend` look: the upstream colour (`#22242a`) is kept unless the host names this token.
+   * Colour of the labels placed outside their shape (events, gateways, flows). `recolor` look: falls back to `text`.
+   * `annotated` look: the upstream colour (`#22242a`) is kept unless the host names this token.
    */
   readonly labelText: string;
   /** Text colour of pool and lane header columns. */
@@ -53,7 +53,7 @@ export interface LegendTokens {
   /** `stroke-dasharray` of that association, for instance `5 5`. */
   readonly docLinkDash: string;
   /**
-   * Legend look only: draw the arrow head on task input and output associations. Default false (the reference
+   * Annotated look only: draw the arrow head on task input and output associations. Default false (the reference
    * look draws plain dashed lines); true follows the BPMN notation.
    */
   readonly dataLinkArrow: boolean;
@@ -70,7 +70,7 @@ export interface LegendTokens {
   readonly poolFill: string;
   readonly laneLine: string;
   readonly laneFill: string;
-  /** Fill of the header column of a lane (legend look). Falls back to `laneFill`. */
+  /** Fill of the header column of a lane (annotated look). Falls back to `laneFill`. */
   readonly laneHeaderFill: string;
   /** External (call) process, external input and process output. */
   readonly externalLine: string;
@@ -97,8 +97,8 @@ export interface ProfileDefinition {
   /** diagram-js modules added to the render-only Viewer. */
   readonly viewerModules: readonly unknown[];
   /** Extra Modeler/Viewer options merged under `bpmnCanvas`. */
-  readonly tokens?: LegendTokens;
-  /** `colored` only: names of the tokens the host gave, with the `stroke`/`fill` conveniences expanded. */
+  readonly tokens?: AnnotatedTokens;
+  /** `recolor` only: names of the tokens the host gave, with the `stroke`/`fill` conveniences expanded. */
   readonly named?: readonly string[];
 }
 

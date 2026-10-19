@@ -1,10 +1,10 @@
 import type { BusinessPolicy } from "./internal/business-policy.js";
 /** Public types. Nothing here references bpmn-js, diagram-js or any DOM-only global at runtime. */
 
-import type { LegendTokens } from "./internal/contracts.js";
+import type { AnnotatedTokens } from "./internal/contracts.js";
 
-export type { LegendTokens };
-/** `standard`: upstream bpmn-js. `legend`: the legend look. `colored`: upstream notation, drawn by upstream, recoloured by tokens. */
+export type { AnnotatedTokens };
+/** `standard`: upstream bpmn-js. `annotated`: the annotated look. `recolor`: upstream notation, drawn by upstream, recoloured by tokens. */
 export type ProfileId = string;
 
 export type PaletteColumns = 1 | 2 | "auto";
@@ -108,9 +108,9 @@ export interface SetXmlOptions {
 
 /** Look options of a profile. */
 export interface ProfileOptions {
-  /** `legend`: the legend palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
+  /** `annotated`: the annotated palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
   readonly palette?: string;
-  /** `colored` only. `classic`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes recoloured. */
+  /** `recolor` only. `flat`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes recoloured. */
   readonly drawing?: string;
 }
 
@@ -148,7 +148,7 @@ export interface WatermarkOptions {
 
 export interface BpmnCanvasOptions {
   readonly ioSetSelections?: Readonly<Record<string, string>>;
-  readonly tokens?: Partial<LegendTokens>;
+  readonly tokens?: Partial<AnnotatedTokens>;
   readonly businessPolicy?: BusinessPolicy;
   readonly xml?: string;
   readonly revision?: string;
@@ -157,10 +157,10 @@ export interface BpmnCanvasOptions {
   readonly profileOptions?: ProfileOptions;
   /** `layoutOnLoad` for the first document (see `SetXmlOptions`). */
   readonly layoutOnLoad?: boolean;
-  /** Look inputs for the `legend` profile. Missing keys fall back to its defaults, the reference Custom look. */
-  readonly legendTokens?: Partial<LegendTokens>;
-  /** Colours of the `colored` profile, same fields as the legend tokens. Only the keys given recolour; see the README. */
-  readonly coloredTokens?: Partial<LegendTokens>;
+  /** Look inputs for the `annotated` profile. Missing keys fall back to its defaults, the reference Custom look. */
+  readonly annotatedTokens?: Partial<AnnotatedTokens>;
+  /** Colours of the `recolor` profile, same fields as the annotated tokens. Only the keys given recolour; see the README. */
+  readonly recolorTokens?: Partial<AnnotatedTokens>;
   /** Palette layout: one column, two, or diagram-js default (`auto`, which switches on the available height). */
   readonly paletteColumns?: PaletteColumns;
   readonly readOnly?: boolean;
@@ -235,7 +235,7 @@ export interface BpmnCanvasHandle {
    * `destroy()`). Emits `onChange` with cause `profile-switch`
    * and no new content revision.
    */
-  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>, options?: ProfileOptions): Promise<void>;
+  setProfile(profile: ProfileId, tokens?: Partial<AnnotatedTokens>, options?: ProfileOptions): Promise<void>;
   /** One consistent capture for an export: document, revision, diagram, profile and `touched`. Refused during a drag. */
   snapshot(): Promise<CanvasSnapshot>;
   canUndo(): boolean;
@@ -249,12 +249,12 @@ export interface BpmnCanvasHandle {
 }
 
 export interface RenderOptions {
-  readonly tokens?: Partial<LegendTokens>;
+  readonly tokens?: Partial<AnnotatedTokens>;
   readonly profileOptions?: ProfileOptions;
   readonly businessPolicy?: BusinessPolicy;
   readonly profile?: ProfileId;
-  readonly legendTokens?: Partial<LegendTokens>;
-  readonly coloredTokens?: Partial<LegendTokens>;
+  readonly annotatedTokens?: Partial<AnnotatedTokens>;
+  readonly recolorTokens?: Partial<AnnotatedTokens>;
   /** Diagrams whose SVG is smaller than this edge length in px are reported as `filtered-small` (default 20). */
   readonly minSize?: number;
   readonly signal?: AbortSignal;

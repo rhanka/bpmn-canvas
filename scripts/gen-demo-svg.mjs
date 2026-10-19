@@ -1,4 +1,4 @@
-// Regenerates docs/demo/{standard,legend,colored}.svg from docs/demo/B.1.0.bpmn with the static renderer.
+// Regenerates docs/demo/{standard,annotated,recolor}.svg from docs/demo/B.1.0.bpmn with the static renderer.
 // Needs `npm run build` first and the bundled Chromium (CHROMIUM overrides the executable path).
 import { chromium } from "playwright-core";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -18,7 +18,7 @@ try {
   const page = ctx.pages()[0] ?? (await ctx.newPage());
   await page.goto(`${server.origin}/page/index.html`);
   await page.waitForFunction(() => window.__ready === true);
-  const cases = { standard: { profile: "standard" }, legend: { profile: "legend" }, colored: { profile: "colored", coloredTokens: DEMO_TOKENS } };
+  const cases = { standard: { profile: "standard" }, annotated: { profile: "annotated" }, recolor: { profile: "recolor", recolorTokens: DEMO_TOKENS } };
   for (const [name, options] of Object.entries(cases)) {
     const r = await page.evaluate(([x, o]) => window.demo.render(x, o), [xml, options]);
     const svg = r.diagrams[0].svg.replace(/^<\?xml[^>]*>\s*/, "").replace(/<!DOCTYPE[^>]*>\s*/, "");

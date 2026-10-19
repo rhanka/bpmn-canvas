@@ -65,7 +65,7 @@ export function referenceSparx(pages: readonly RefPage[], options?: IoOptions): 
       elements.push({ id: eid, type: tag, name: n.label, parent: laneIds.get(n.laneName ?? ""), b: n.box });
     }
     for (const host of page.flowOrder) {
-      const app = page.apps.get(host);
+      const app = page.applicationsByHost.get(host);
       const n = page.nodes.get(host)!;
       if (!app || !n.application) continue;
       elements.push({ id: fresh(`App_${n.label}`, "App"), type: "textAnnotation", name: insertRole(n.application, "application", options?.businessPolicy), parent: laneIds.get(n.laneName ?? ""), b: app.box });

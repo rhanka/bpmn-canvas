@@ -18,7 +18,7 @@ export type {
   FitOptions,
   HistoryState,
   LayoutResult,
-  LegendTokens,
+  AnnotatedTokens,
   PaletteColumns,
   ProfileId,
   RenderOptions,

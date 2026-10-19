@@ -13,14 +13,14 @@ import BaseRenderer from "diagram-js/lib/draw/BaseRenderer.js";
 import { getDi, is } from "bpmn-js/lib/util/ModelUtil.js";
 import { attr as svgAttr, select as svgSelect, selectAll as svgSelectAll } from "tiny-svg";
 
-import type { BpmnCanvasConfig, LegendTokens } from "../../internal/contracts.js";
+import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
 import { resolveColoredTokens } from "./tokens.js";
 
-type Any = any; // diagram-js and bpmn-js services are untyped here, as in the legend profile.
+type Any = any; // diagram-js and bpmn-js services are untyped here, as in the annotated profile.
 
 const RENDER_PRIORITY = 1500;
 
-export type ColoredKind = "task" | "event" | "gateway" | "pool" | "lane" | "external" | "doc" | "data" | "app" | "annotation" | "flow" | "link" | "label";
+export type RecolorKind = "task" | "event" | "gateway" | "pool" | "lane" | "external" | "doc" | "data" | "app" | "annotation" | "flow" | "link" | "label";
 
 interface Colours {
   fill?: string;
@@ -29,7 +29,7 @@ interface Colours {
 
 
 /** Kind of a diagram-js element for colouring, or undefined when the upstream colours stay. */
-export function coloredKind(element: Any, policy?: BusinessPolicy): ColoredKind | undefined {
+export function recolorKind(element: Any, policy?: BusinessPolicy): RecolorKind | undefined {
   if (!element?.businessObject) return undefined;
   if (element.labelTarget) return "label";
   if (is(element, "bpmn:Participant")) return "pool";
@@ -62,7 +62,7 @@ function userColour(element: Any, what: "fill" | "stroke" | "label"): boolean {
 }
 
 /** The token behind the fill and the stroke of each kind, to leave the upstream colour when it was not named. */
-const TOKENS_OF: Partial<Record<ColoredKind, { fill?: keyof LegendTokens; stroke?: keyof LegendTokens }>> = {
+const TOKENS_OF: Partial<Record<RecolorKind, { fill?: keyof AnnotatedTokens; stroke?: keyof AnnotatedTokens }>> = {
   task: { fill: "taskFill", stroke: "taskLine" },
   event: { fill: "eventFill", stroke: "eventLine" },
   gateway: { fill: "gatewayFill", stroke: "gatewayLine" },
@@ -77,11 +77,11 @@ const TOKENS_OF: Partial<Record<ColoredKind, { fill?: keyof LegendTokens; stroke
   link: { stroke: "link" },
 };
 
-export class ColoredRenderer extends BaseRenderer {
+export class RecolorRenderer extends BaseRenderer {
   static $inject = ["eventBus", "bpmnRenderer", "config.bpmnCanvas"];
 
   private readonly upstream: Any;
-  private readonly tokens: LegendTokens;
+  private readonly tokens: AnnotatedTokens;
   private readonly named: ReadonlySet<string> | undefined;
 
   private readonly businessPolicy: BusinessPolicy | undefined;
@@ -97,11 +97,11 @@ export class ColoredRenderer extends BaseRenderer {
     return !!element?.businessObject && is(element, "bpmn:BaseElement");
   }
 
-  private isNamed(token: keyof LegendTokens): boolean {
+  private isNamed(token: keyof AnnotatedTokens): boolean {
     return this.named === undefined || this.named.has(token);
   }
 
-  private coloursOf(kind: ColoredKind | undefined, element: Any): Colours {
+  private coloursOf(kind: RecolorKind | undefined, element: Any): Colours {
     const t = this.tokens;
     let colours: Colours;
     switch (kind) {
@@ -130,7 +130,7 @@ export class ColoredRenderer extends BaseRenderer {
   }
 
   /** Text colour, and the background of [LX-MK-1]/[LX-MK-2] annotations (the upstream annotation draws none). */
-  private finish(visuals: Any, element: Any, kind: ColoredKind | undefined): void {
+  private finish(visuals: Any, element: Any, kind: RecolorKind | undefined): void {
     if (!kind || kind === "flow" || kind === "link") return;
     const t = this.tokens;
     const textToken = kind === "pool" || kind === "lane" ? "headerText" : kind === "label" ? "labelText" : "text";
@@ -148,20 +148,20 @@ export class ColoredRenderer extends BaseRenderer {
   }
 
   override drawShape(visuals: Any, element: Any, attrs: Any = {}): SVGElement {
-    const kind = coloredKind(element, this.businessPolicy);
+    const kind = recolorKind(element, this.businessPolicy);
     const drawn = this.upstream.drawShape(visuals, element, { ...this.coloursOf(kind, element), ...attrs });
     this.finish(visuals, element, kind);
     return drawn;
   }
 
   override drawConnection(visuals: Any, connection: Any, attrs: Any = {}): SVGElement {
-    const kind = coloredKind(connection, this.businessPolicy);
+    const kind = recolorKind(connection, this.businessPolicy);
     return this.upstream.drawConnection(visuals, connection, { ...this.coloursOf(kind, connection), ...attrs });
   }
 }
 
 /** Safe in a render-only Viewer: it only draws. */
-export const ColoredRendererModule = {
-  __init__: ["coloredRenderer"],
-  coloredRenderer: ["type", ColoredRenderer],
+export const RecolorRendererModule = {
+  __init__: ["recolorRenderer"],
+  recolorRenderer: ["type", RecolorRenderer],
 };

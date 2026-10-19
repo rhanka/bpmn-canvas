@@ -47,36 +47,36 @@ export function createLayout(input?: BusinessPolicy) {
   const l = layoutPolicy(policy);
   const textWidth = (text: string, size: number, bold = false): number => measureWidth(text, size, bold, policy);
   const wrapText = (text: string, size: number, width: number, bold = false): string[] => wrapMeasured(text, size, width, bold, policy);
-const POOL_HEADER = l.poolHeader;
-const LANE_HEADER = l.laneHeader;
-const LEFT_PAD = 40;
-const COL_GAP = 70;
-const CHANNEL = l.channel;
-const ROW_GAP = 24;
-const MIN_LANE_H = l.minLaneHeight;
-const RIGHT_PAD = 70;
-const GROUP_GAP = 10;
-const CENTRE_GAP = 10;
-const FONT = l.fontSize;
-const LABEL_FONT = l.labelFontSize;
-const LINE_HEIGHT = policy.metrics.lineHeight;
-const EVENT = l.nodeSizes.find((n: any) => n.kind === "start").width;
-const ITEM_W = l.nodeSizes.find((n: any) => n.kind === "object-in").width;
-const ITEM_H = l.nodeSizes.find((n: any) => n.kind === "object-in").height;
-const LABEL_MAX_W = { EVENT: l.labelMaxWidth.event, ITEM: l.labelMaxWidth.item };
-const SIZES: Record<string, [number, number]> = Object.fromEntries(l.nodeSizes.map((n: any) => [n.kind, [n.width, n.height]]));
-const ACTIVITIES = new Set(["task", "subprocess", "call"]);
-const APP_MIN_W = l.appBadge.minWidth;
-const APP_H = l.appBadge.height;
-const APP_OVERLAP = l.appBadge.overlap;
-const APP_CHROME = l.appBadge.chrome;
-const APP_MARGIN = l.appBadge.margin;
-const DOC_W = l.document.width;
-const DOC_TEXT_TOP = l.document.textTop;
-const DOC_WAVE_TOP = l.document.waveTop;
-const DOC_PAD_X = l.document.padX;
-const DOC_PAD_BOTTOM = l.document.padBottom;
-const CELL_W = 150;
+const poolHeader = l.poolHeader;
+const laneHeader = l.laneHeader;
+const leftPad = 40;
+const colGap = 70;
+const layoutChannel = l.channel;
+const fixedRowGap = 24;
+const minLaneH = l.minLaneHeight;
+const rightPad = 70;
+const groupGap = 10;
+const centreGap = 10;
+const font = l.fontSize;
+const labelFont = l.labelFontSize;
+const lineHeight = policy.metrics.lineHeight;
+const event = l.nodeSizes.find((n: any) => n.kind === "start").width;
+const itemW = l.nodeSizes.find((n: any) => n.kind === "object-in").width;
+const itemH = l.nodeSizes.find((n: any) => n.kind === "object-in").height;
+const labelMaxW = { event: l.labelMaxWidth.event, ITEM: l.labelMaxWidth.item };
+const sizes: Record<string, [number, number]> = Object.fromEntries(l.nodeSizes.map((n: any) => [n.kind, [n.width, n.height]]));
+const activities = new Set(["task", "subprocess", "call"]);
+const appMinW = l.appBadge.minWidth;
+const appH = l.appBadge.height;
+const appOverlap = l.appBadge.overlap;
+const appChrome = l.appBadge.chrome;
+const appMargin = l.appBadge.margin;
+const docW = l.document.width;
+const docTextTop = l.document.textTop;
+const docWaveTop = l.document.waveTop;
+const docPadX = l.document.padX;
+const docPadBottom = l.document.padBottom;
+const cellW = 150;
 
 const cx = (b: Box): number => b.x + Math.floor(b.w / 2);
 const textOf = (n: LayoutNode): string => n.text ?? n.label ?? "";
@@ -101,7 +101,7 @@ function fit(
     w = o.maxW;
     lines = wrapText(text, size, o.maxW - 2 * padX, o.bold).length;
   }
-  const h = Math.max(o.minH, lines * size * LINE_HEIGHT + 2 * padY + (o.extraH ?? 0));
+  const h = Math.max(o.minH, lines * size * lineHeight + 2 * padY + (o.extraH ?? 0));
   return [Math.ceil(w), Math.ceil(h)];
 }
 
@@ -109,51 +109,51 @@ function labelBox(text: string, size: number, maxW: number, bold = false): [numb
   if (!(text ?? "").trim()) return [0, 0];
   const lines = wrapText(text, size, maxW, bold);
   const w = Math.max(...lines.map((l) => textWidth(l, size, bold)));
-  return [Math.ceil(Math.min(maxW, w) + 4), Math.ceil(lines.length * size * LINE_HEIGHT + 2)];
+  return [Math.ceil(Math.min(maxW, w) + 4), Math.ceil(lines.length * size * lineHeight + 2)];
 }
 
 // --- sizes ------------------------------------------------------------------
 
 function appBoxSizeLayout(name: string, hostW: number): [number, number] {
-  const wanted = textWidth(name, l.appBadge.font, true) + APP_CHROME;
-  const maxW = Math.max(APP_MIN_W, hostW - 2 * APP_MARGIN);
-  const w = Math.trunc(Math.min(maxW, Math.max(APP_MIN_W, Math.ceil(wanted))));
-  if (wanted <= w) return [w, APP_H];
-  const lines = wrapText(name, l.appBadge.font, w - APP_CHROME, true).length;
-  return [w, Math.trunc(Math.max(APP_H, Math.ceil(lines * l.appBadge.font * policy.metrics.lineHeight + 8)))];
+  const wanted = textWidth(name, l.appBadge.font, true) + appChrome;
+  const maxW = Math.max(appMinW, hostW - 2 * appMargin);
+  const w = Math.trunc(Math.min(maxW, Math.max(appMinW, Math.ceil(wanted))));
+  if (wanted <= w) return [w, appH];
+  const lines = wrapText(name, l.appBadge.font, w - appChrome, true).length;
+  return [w, Math.trunc(Math.max(appH, Math.ceil(lines * l.appBadge.font * policy.metrics.lineHeight + 8)))];
 }
 
 function appMinHostW(name: string): number {
   const words = (name ?? "").split(/\s+/).filter(Boolean);
   const longest = words.length ? Math.max(...words.map((w) => textWidth(w, l.appBadge.font, true))) : 0;
-  return Math.trunc(Math.ceil(longest + APP_CHROME + 2 * APP_MARGIN));
+  return Math.trunc(Math.ceil(longest + appChrome + 2 * appMargin));
 }
 
 function docHeight(label: string): number {
-  const block = wrapText(label, LABEL_FONT, DOC_W - 2 * DOC_PAD_X).length * LABEL_FONT * policy.metrics.lineHeight;
-  return Math.trunc(Math.max(l.document.minHeight, Math.ceil((DOC_TEXT_TOP + block + DOC_PAD_BOTTOM) / DOC_WAVE_TOP)));
+  const block = wrapText(label, labelFont, docW - 2 * docPadX).length * labelFont * policy.metrics.lineHeight;
+  return Math.trunc(Math.max(l.document.minHeight, Math.ceil((docTextTop + block + docPadBottom) / docWaveTop)));
 }
 
 function kindOf(n: LayoutNode): string {
   const t = (n.type || "task").trim().toLowerCase();
-  return t in SIZES ? t : "task";
+  return t in sizes ? t : "task";
 }
 
 function nodeSize(n: LayoutNode, kind: string): [number, number] {
-  const own = SIZES[kind] ?? SIZES.task!;
+  const own = sizes[kind] ?? sizes.task!;
   const nativeType = ({ task: "bpmn:Task", subprocess: "bpmn:SubProcess", call: "bpmn:CallActivity" } as Record<string, string>)[kind];
   const app = nativeType && applicationHost({ $type: nativeType }, policy) ? String(n.application || "") : "";
-  const base = kind === "subprocess" ? SIZES.subprocess! : SIZES.task!;
+  const base = kind === "subprocess" ? sizes.subprocess! : sizes.task!;
   const minimum = app ? Math.min(200, Math.max(base[0]!, appMinHostW(app))) : base[0]!;
-  if (kind === "task" || kind === "subprocess") return fit(textOf(n), FONT, { minW: minimum, maxW: Math.max(200, minimum), minH: base[1]!, padX: 8, padY: 8, extraH: app ? APP_OVERLAP : 0 });
-  if (kind === "call") return fit(textOf(n), FONT, { minW: Math.max(own[0]!, app ? minimum : own[0]!), maxW: 200, minH: own[1]!, padX: 14, padY: 8, extraH: 10 });
-  if (kind === "document") return [DOC_W, docHeight(textOf(n))];
+  if (kind === "task" || kind === "subprocess") return fit(textOf(n), font, { minW: minimum, maxW: Math.max(200, minimum), minH: base[1]!, padX: 8, padY: 8, extraH: app ? appOverlap : 0 });
+  if (kind === "call") return fit(textOf(n), font, { minW: Math.max(own[0]!, app ? minimum : own[0]!), maxW: 200, minH: own[1]!, padX: 14, padY: 8, extraH: 10 });
+  if (kind === "document") return [docW, docHeight(textOf(n))];
   return own as [number, number];
 }
 
 // --- bpmn-io columns (bpmnio_grid.py) ---------------------------------------
 
-const TAG: Record<string, string> = {
+const nativeTags: Record<string, string> = {
   "start": "startEvent", "end": "endEvent", "event": "intermediateThrowEvent",
   "subprocess": "subProcess", "call": "callActivity",
 };
@@ -180,7 +180,7 @@ function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>): { xml: st
   const parts = nodes.map((n) => {
     const i = ids.get(n.label)!;
     const t = (n.type || "task").trim().toLowerCase();
-    const tag = t === "gateway" ? ((n.subtype || "").trim().toUpperCase() === "AND" ? "parallelGateway" : "exclusiveGateway") : (TAG[t] ?? "task");
+    const tag = t === "gateway" ? ((n.subtype || "").trim().toUpperCase() === "AND" ? "parallelGateway" : "exclusiveGateway") : (nativeTags[t] ?? "task");
     const refs = inc.get(i)!.map((f) => `<bpmn:incoming>${f}</bpmn:incoming>`).join("") +
       out.get(i)!.map((f) => `<bpmn:outgoing>${f}</bpmn:outgoing>`).join("");
     return `<bpmn:${tag} id="${i}" name="${xmlEscape(textOf(n))}">${refs}</bpmn:${tag}>`;
@@ -192,7 +192,7 @@ function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>): { xml: st
   return { xml, ids };
 }
 
-const BOUNDS = /bpmnElement="(n\d+)"[^>]*>\s*<dc:Bounds x="(-?[\d.]+)" y="(-?[\d.]+)" width="([\d.]+)" height="([\d.]+)"/g;
+const bounds = /bpmnElement="(n\d+)"[^>]*>\s*<dc:Bounds x="(-?[\d.]+)" y="(-?[\d.]+)" width="([\d.]+)" height="([\d.]+)"/g;
 
 async function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string, string]>): Promise<Map<string, number> | null> {
   if (!nodes.length) return new Map();
@@ -204,7 +204,7 @@ async function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string, string]>
     return null;
   }
   const col = new Map<string, number>();
-  for (const m of out.matchAll(BOUNDS)) col.set(m[1] ?? "", Math.floor((Number(m[2]) + Number(m[4]) / 2) / CELL_W));
+  for (const m of out.matchAll(bounds)) col.set(m[1] ?? "", Math.floor((Number(m[2]) + Number(m[4]) / 2) / cellW));
   if (col.size !== ids.size) return null;
   const base = Math.min(...col.values());
   const res = new Map<string, number>();
@@ -314,8 +314,8 @@ async function layoutProcess(
   const labelsWh = new Map<string, [number, number]>();
   for (const [n, nd] of nodeOf) {
     const k = kind.get(n)!;
-    if (k === "start" || k === "end" || k === "event" || k === "gateway") labelsWh.set(n, labelBox(textOf(nd), LABEL_FONT, LABEL_MAX_W.EVENT));
-    else if (ARTIFACT_TYPES.has(k) && k !== "document") labelsWh.set(n, labelBox(textOf(nd), LABEL_FONT, LABEL_MAX_W.ITEM));
+    if (k === "start" || k === "end" || k === "event" || k === "gateway") labelsWh.set(n, labelBox(textOf(nd), labelFont, labelMaxW.event));
+    else if (ARTIFACT_TYPES.has(k) && k !== "document") labelsWh.set(n, labelBox(textOf(nd), labelFont, labelMaxW.ITEM));
   }
   const appWh = new Map<string, [number, number]>();
   for (const n of flowOrder) {
@@ -340,7 +340,7 @@ async function layoutProcess(
   const lw0 = (l: string): [number, number] => labelsWh.get(l) ?? [0, 0];
   const blockW = (l: string): number => (kind.get(l) === "document" ? size.get(l)![0] : Math.max(size.get(l)![0], lw0(l)[0]));
   const itemH = (l: string): number => size.get(l)![1] + (lw0(l)[1] ? 4 + lw0(l)[1] : 0);
-  const groupW = (items: string[]): number => items.reduce((a, i) => a + blockW(i), 0) + GROUP_GAP * Math.max(0, items.length - 1);
+  const groupW = (items: string[]): number => items.reduce((a, i) => a + blockW(i), 0) + groupGap * Math.max(0, items.length - 1);
   const splitDocs = (n: string): [string[], string[]] => {
     const d = docs.get(n) ?? [];
     const half = Math.floor((d.length + 1) / 2);
@@ -371,18 +371,18 @@ async function layoutProcess(
     const up = h / 2 + (ds.length ? rowHalf.get(k)! - h / 2 + Math.max(...ds.map((d) => size.get(d)![1])) + 14 : 0);
     const appHalf = appWh.has(n) ? appWh.get(n)![0] / 2 : 0;
     let below = 0;
-    if (appWh.has(n)) below = appWh.get(n)![1] - APP_OVERLAP;
+    if (appWh.has(n)) below = appWh.get(n)![1] - appOverlap;
     const itemStart = below + 14;
     const its = [...(ins.get(n) ?? []), ...(outs.get(n) ?? [])];
     if (its.length) below = itemStart + Math.max(...its.map(itemH));
     if (labelsWh.has(n) && lw0(n)[1]) below = Math.max(below, 4 + lw0(n)[1]);
-    const side = Math.max(appHalf, CENTRE_GAP);
-    const left = Math.max(w / 2, CENTRE_GAP + groupW(leftDocs), side + 8 + groupW(ins.get(n) ?? []), lw0(n)[0] / 2);
-    const right = Math.max(w / 2, CENTRE_GAP + groupW(rightDocs), side + 8 + groupW(outs.get(n) ?? []), lw0(n)[0] / 2);
+    const side = Math.max(appHalf, centreGap);
+    const left = Math.max(w / 2, centreGap + groupW(leftDocs), side + 8 + groupW(ins.get(n) ?? []), lw0(n)[0] / 2);
+    const right = Math.max(w / 2, centreGap + groupW(rightDocs), side + 8 + groupW(outs.get(n) ?? []), lw0(n)[0] / 2);
     ext.set(n, { left, right, up, down: h / 2 + below, itemStart });
   }
 
-  const contentX = POOL_HEADER + LANE_HEADER + LEFT_PAD;
+  const contentX = poolHeader + laneHeader + leftPad;
   const colMax = (c: number, f: (e: Ext) => number): number => {
     const v = flowOrder.filter((n) => rank.get(n) === c).map((n) => f(ext.get(n)!));
     return v.length ? Math.max(...v) : 60;
@@ -398,10 +398,10 @@ async function layoutProcess(
   for (let c = 0; c <= maxRank; c++) {
     x += colLeft[c] ?? 0;
     colX.push(x);
-    x += (colRight[c] ?? 0) + COL_GAP;
+    x += (colRight[c] ?? 0) + colGap;
   }
-  const looseW = lanes.map((_, li) => (loose.get(li) ?? []).reduce((a, i) => a + blockW(i) + GROUP_GAP, 0));
-  const poolW = Math.trunc(Math.max(x - COL_GAP + RIGHT_PAD, contentX + (looseW.length ? Math.max(...looseW) : 0) + RIGHT_PAD));
+  const looseW = lanes.map((_, li) => (loose.get(li) ?? []).reduce((a, i) => a + blockW(i) + groupGap, 0));
+  const poolW = Math.trunc(Math.max(x - colGap + rightPad, contentX + (looseW.length ? Math.max(...looseW) : 0) + rightPad));
 
   const rowUp = new Map<string, number>();
   const rowDown = new Map<string, number>();
@@ -422,19 +422,19 @@ async function layoutProcess(
       const up = rowUp.has(k) ? rowUp.get(k)! : 40;
       const down = rowDown.has(k) ? rowDown.get(k)! : 40;
       rowTop.set(k, y);
-      rowCy.set(k, Math.trunc(y + CHANNEL + up));
-      y = Math.trunc(y + CHANNEL + up + down + ROW_GAP);
+      rowCy.set(k, Math.trunc(y + layoutChannel + up));
+      y = Math.trunc(y + layoutChannel + up + down + fixedRowGap);
     }
     const ls = loose.get(li) ?? [];
     if (ls.length) {
       looseY.set(li, y);
-      y += Math.max(...ls.map((i) => (kind.get(i) !== "document" ? itemH(i) : size.get(i)![1]))) + ROW_GAP;
+      y += Math.max(...ls.map((i) => (kind.get(i) !== "document" ? itemH(i) : size.get(i)![1]))) + fixedRowGap;
     }
-    const h = Math.max(MIN_LANE_H, y - top);
+    const h = Math.max(minLaneH, y - top);
     y = top + h;
-    laneBoxes.push([lane.name || "", box(POOL_HEADER, top, poolW - POOL_HEADER, h)]);
+    laneBoxes.push([lane.name || "", box(poolHeader, top, poolW - poolHeader, h)]);
   });
-  const pool = box(0, originY, poolW, Math.max(y - originY, MIN_LANE_H));
+  const pool = box(0, originY, poolW, Math.max(y - originY, minLaneH));
 
   const nodes: Record<string, Box> = {};
   const at = (id: string): Box => nodes[id] as Box;
@@ -462,37 +462,37 @@ async function layoutProcess(
     }
     if (appWh.has(n)) {
       const [aw, ah] = appWh.get(n)!;
-      apps[n] = box(ncx - Math.floor(aw / 2), b.y + b.h - APP_OVERLAP, aw, ah);
+      apps[n] = box(ncx - Math.floor(aw / 2), b.y + b.h - appOverlap, aw, ah);
     }
     const [leftDocs, rightDocs] = splitDocs(n);
     const docBottom = ncy - Math.trunc(rowHalf.get(k)!) - 14;
-    let xr = ncx - CENTRE_GAP;
+    let xr = ncx - centreGap;
     for (const d of [...leftDocs].reverse()) {
       const [dw, dh] = size.get(d)!;
       xr -= dw;
       nodes[d] = box(xr, docBottom - dh, dw, dh);
-      xr -= GROUP_GAP;
+      xr -= groupGap;
     }
-    let xl = ncx + CENTRE_GAP;
+    let xl = ncx + centreGap;
     for (const d of rightDocs) {
       const [dw, dh] = size.get(d)!;
       nodes[d] = box(xl, docBottom - dh, dw, dh);
-      xl += dw + GROUP_GAP;
+      xl += dw + groupGap;
     }
-    const side = Math.max(apps[n] ? Math.floor(apps[n].w / 2) : 0, CENTRE_GAP) + 8;
+    const side = Math.max(apps[n] ? Math.floor(apps[n].w / 2) : 0, centreGap) + 8;
     const top = Math.trunc(ncy + h / 2 + ext.get(n)!.itemStart);
     xr = ncx - side;
     for (const i of [...(ins.get(n) ?? [])].reverse()) {
       const bw = blockW(i);
       xr -= bw;
       placeItem(i, xr, top, bw);
-      xr -= GROUP_GAP;
+      xr -= groupGap;
     }
     xl = ncx + side;
     for (const i of outs.get(n) ?? []) {
       const bw = blockW(i);
       placeItem(i, xl, top, bw);
-      xl += bw + GROUP_GAP;
+      xl += bw + groupGap;
     }
   }
   for (const [li, items] of loose) {
@@ -501,7 +501,7 @@ async function layoutProcess(
       const bw = blockW(i);
       if (kind.get(i) === "document") nodes[i] = box(xl, looseY.get(li)!, size.get(i)![0], size.get(i)![1]);
       else placeItem(i, xl, looseY.get(li)!, bw);
-      xl += bw + GROUP_GAP;
+      xl += bw + groupGap;
     }
   }
 
@@ -521,7 +521,7 @@ async function layoutProcess(
     const hi = Math.max(x0, x1);
     return flowOrder.some((n) => !skip.includes(n) && at(n).x < hi && at(n).x + at(n).w > lo && at(n).y <= yy && yy <= at(n).y + at(n).h);
   };
-  const gapX = (c: number): number => Math.trunc((colX[c] ?? 0) - (colLeft[c] ?? 0) - COL_GAP / 2);
+  const gapX = (c: number): number => Math.trunc((colX[c] ?? 0) - (colLeft[c] ?? 0) - colGap / 2);
   for (const c of flow) {
     const sn = c.source;
     const tn = c.target;
@@ -554,7 +554,7 @@ async function layoutProcess(
     }
     edges.push(pts);
     if (c.label) {
-      const [lw, lh] = labelBox(c.label, LABEL_FONT, 120);
+      const [lw, lh] = labelBox(c.label, labelFont, 120);
       const [p0, p1, p2, p3] = pts as [Point, Point, Point, Point];
       const elbow = pts.length === 4 && p1[0] === p2[0] && p0[1] === p1[1];
       const [[x1, y1], [x2, y2]] = elbow ? [p2, p3] : [p0, p1];

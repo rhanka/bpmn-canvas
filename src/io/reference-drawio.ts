@@ -13,40 +13,40 @@ import type { RefBox, RefNode, RefPage, RefPoint } from "./reference-model.js";
 function writer(policy?: BusinessPolicy) {
   const styles = policy?.presentation?.exportStyles?.drawio;
   if (!styles) throw new ProfileContractError("profile-resource-missing");
-const POOL_STYLE = styles.pool;
-const LANE_STYLE = styles.lane;
-const START_STYLE = styles.start;
-const END_STYLE = styles.end;
-const TASK_STYLE = styles.task;
-const GATEWAY_BASE = styles.gatewayBase;
-const EXTERNAL_STYLE = styles.external;
-const APP_STYLE = styles.application;
-const DOC_STYLE = styles.document;
-const ITEM_STYLE = styles.item;
-const EDGE_HEAD = styles.edgeHead;
-const FLOW_TAIL = styles.flowTail;
-const LINK_TAIL = styles.linkTail;
-const SUBPROCESS_STYLE = styles.subprocess;
-const EVENT_STYLE = styles.event;
-const POOL_HEADER_W = styles.poolHeaderWidth;
-const DX = styles.dx;
-const DY = styles.dy;
-const APP_BAND = styles.application;
+const poolStyle = styles.pool;
+const laneStyle = styles.lane;
+const startStyle = styles.start;
+const endStyle = styles.end;
+const taskStyle = styles.task;
+const gatewayBase = styles.gatewayBase;
+const externalStyle = styles.external;
+const appStyle = styles.application;
+const docStyle = styles.document;
+const itemStyle = styles.item;
+const edgeHead = styles.edgeHead;
+const flowTail = styles.flowTail;
+const linkTail = styles.linkTail;
+const subprocessStyle = styles.subprocess;
+const eventStyle = styles.event;
+const poolHeaderW = styles.poolHeaderWidth;
+const dx = styles.dx;
+const dy = styles.dy;
+const appBand = styles.appBand;
 function nodeStyle(n: RefNode): string {
   switch (n.type) {
-    case "start": return START_STYLE;
-    case "end": return END_STYLE;
-    case "gateway": return `${GATEWAY_BASE}${n.subtype === "AND" ? "parallel" : "exclusive"};`;
-    case "subprocess": return SUBPROCESS_STYLE;
-    case "call": return EXTERNAL_STYLE;
-    case "event": return EVENT_STYLE;
-    case "document": return DOC_STYLE;
+    case "start": return startStyle;
+    case "end": return endStyle;
+    case "gateway": return `${gatewayBase}${n.subtype === "AND" ? "parallel" : "exclusive"};`;
+    case "subprocess": return subprocessStyle;
+    case "call": return externalStyle;
+    case "event": return eventStyle;
+    case "document": return docStyle;
     default:
       if (ITEM_TYPES.has(n.type)) {
         const out = n.type === "object-out" || n.type === "port-out";
-        return `${ITEM_STYLE}bpmnTransferType=${out ? "output" : "input"};`;
+        return `${itemStyle}bpmnTransferType=${out ? "output" : "input"};`;
       }
-      return TASK_STYLE;
+      return taskStyle;
   }
 }
 
@@ -71,10 +71,10 @@ function sideAnchor(p: RefPoint, toward: RefPoint, box: Rect): [number, number] 
 function edgeStyle(points: readonly RefPoint[], src: Rect, tgt: Rect, link: boolean): string {
   const [ex, ey] = sideAnchor(points[0]!, points[1]!, src);
   const [nx, ny] = sideAnchor(points[points.length - 1]!, points[points.length - 2]!, tgt);
-  return `${EDGE_HEAD}exitX=${pyFmt(ex)};exitY=${pyFmt(ey)};entryX=${pyFmt(nx)};entryY=${pyFmt(ny)};${link ? LINK_TAIL : FLOW_TAIL}`;
+  return `${edgeHead}exitX=${pyFmt(ex)};exitY=${pyFmt(ey)};entryX=${pyFmt(nx)};entryY=${pyFmt(ny)};${link ? linkTail : flowTail}`;
 }
 
-function pageLink(n: RefNode, page: RefPage, pages: readonly RefPage[]): string | undefined {
+function processPageHref(n: RefNode, page: RefPage, pages: readonly RefPage[]): string | undefined {
   const target = pages.find((p) => p.processId === n.calledProcess);
   return target && target.index !== page.index ? `data:page/id,diagram-${target.index}` : undefined;
 }
@@ -101,17 +101,17 @@ function buildPage(page: RefPage, pages: readonly RefPage[]): XmlNode {
   };
 
   const pool: RefBox = page.pool;
-  const poolW = pool.w + DX;
-  const poolH = pool.h + DY;
+  const poolW = pool.w + dx;
+  const poolH = pool.h + dy;
   const px = pool.x;
   const py = pool.y;
-  const poolCell = vertex("1", page.name, POOL_STYLE, px, py, poolW, poolH);
+  const poolCell = vertex("1", page.name, poolStyle, px, py, poolW, poolH);
   const laneCell = new Map<string, readonly [string, number, number]>();
   for (const lane of page.lanes) {
     if (laneCell.has(lane.name)) continue;
-    const lx = POOL_HEADER_W;
-    const ly = lane.box.y - py + DY;
-    laneCell.set(lane.name, [vertex(poolCell, lane.name, LANE_STYLE, lx, ly, poolW - POOL_HEADER_W, lane.box.h), px + lx, py + ly]);
+    const lx = poolHeaderW;
+    const ly = lane.box.y - py + dy;
+    laneCell.set(lane.name, [vertex(poolCell, lane.name, laneStyle, lx, ly, poolW - poolHeaderW, lane.box.h), px + lx, py + ly]);
   }
   const cellOf = new Map<string, string>();
   const absBox = new Map<string, Rect>();
@@ -119,25 +119,25 @@ function buildPage(page: RefPage, pages: readonly RefPage[]): XmlNode {
   const appBox = new Map<string, Rect>();
   for (const id of page.order) {
     const n = page.nodes.get(id)!;
-    const x = n.box.x + DX;
-    const y = n.box.y + DY;
+    const x = n.box.x + dx;
+    const y = n.box.y + dy;
     const key = n.laneIndex === undefined ? undefined : n.laneName || `Lane ${n.laneIndex + 1}`;
     const host = key === undefined ? undefined : laneCell.get(key);
     const [parent, ox, oy] = host ?? [poolCell, px, py];
     let style = nodeStyle(n) + labelStyle(n);
-    if (page.apps.has(id)) style += `spacingBottom=${APP_BAND};`;
-    cellOf.set(id, vertex(parent, n.label, style, x - ox, y - oy, n.box.w, n.box.h, pageLink(n, page, pages)));
+    if (page.applicationsByHost.has(id)) style += `spacingBottom=${appBand};`;
+    cellOf.set(id, vertex(parent, n.label, style, x - ox, y - oy, n.box.w, n.box.h, processPageHref(n, page, pages)));
     absBox.set(id, [x, y, n.box.w, n.box.h]);
-    const app = page.apps.get(id);
+    const app = page.applicationsByHost.get(id);
     if (n.application && app) {
       const a = app.box;
-      appCell.set(id, vertex(cellOf.get(id)!, String(n.application), APP_STYLE, a.x - n.box.x, a.y - n.box.y, a.w, a.h));
-      appBox.set(id, [a.x + DX, a.y + DY, a.w, a.h]);
+      appCell.set(id, vertex(cellOf.get(id)!, String(n.application), appStyle, a.x - n.box.x, a.y - n.box.y, a.w, a.h));
+      appBox.set(id, [a.x + dx, a.y + dy, a.w, a.h]);
     }
   }
   for (const conn of page.connections) {
     if (conn.points.length < 2 || !cellOf.has(conn.source) || !cellOf.has(conn.target)) continue;
-    const points = conn.points.map(([x, y]) => [x + DX, y + DY] as const);
+    const points = conn.points.map(([x, y]) => [x + dx, y + dy] as const);
     const end = (id: string): readonly [string, Rect] =>
       conn.kind === "data" && appCell.has(id) ? [appCell.get(id)!, appBox.get(id)!] : [cellOf.get(id)!, absBox.get(id)!];
     const [sCell, sBox] = end(conn.source);

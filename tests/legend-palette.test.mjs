@@ -4,16 +4,16 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const dist = process.env.LEGEND_DIST ?? `${root}dist`;
+const dist = process.env.ANNOTATED_DIST ?? `${root}dist`;
 
 // palette.js imports bpmn-js internals, which Node cannot load as ESM (extensionless
 // internal imports). Stub the two imports so the data and the updater logic run in Node.
 // Real bpmn-js behaviour is covered by the browser smoke.
-const stubbed = readFileSync(`${dist}/profiles/legend/palette.js`, "utf8")
+const stubbed = readFileSync(`${dist}/presentation/annotated/palette.js`, "utf8")
   .replace(/import BpmnUpdater from "[^"]+";/, "class BpmnUpdater { static $inject = ['eventBus','bpmnFactory','connectionDocking']; updateSemanticParent() { globalThis.__upstreamCalled = true; } }")
   .replace(/import \{ is \} from "[^"]+";/, "const is = (el, type) => el?.$type === type;");
 const palette = await import(`data:text/javascript;base64,${Buffer.from(stubbed).toString("base64")}`);
-const index = await import(pathToFileURL(`${dist}/profiles/legend/tokens.js`).href);
+const index = await import(pathToFileURL(`${dist}/presentation/annotated/tokens.js`).href);
 
 // Minimal moddle-like objects.
 const make = (type, props = {}) => {

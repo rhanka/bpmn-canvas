@@ -162,7 +162,7 @@ test("browser build from a CDN path: ESM and IIFE, with and without strict CSP",
         assert.equal(proof.state, "ready");
 
         assert.equal(proof.state, "ready");
-        assert.ok(proof.legendShapes >= 5, `legend look rendered (${proof.legendShapes} shapes)`);
+        assert.ok(proof.legendShapes >= 5, `annotated look rendered (${proof.annotatedShapes} shapes)`);
         assert.ok(proof.exports.includes("createBpmnCanvas") && proof.exports.includes("renderDiagrams") && proof.exports.includes("importDiagram") && proof.exports.includes("layoutProcess"), proof.exports.join(","));
         // Without any stylesheet diagram-js cannot edit (its hit areas live in the CSS): that case must be told, not hidden.
         if (broken !== "styles-missing") assert.ok(moved && Number(moved) > 320, `the drag moved the task in the XML (x=${moved})`);

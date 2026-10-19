@@ -5,19 +5,19 @@ import { fileURLToPath } from "node:url";
 import { baselineHashAllowlist, outsideBaselineHashes } from "./helpers/brand-baseline.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const dist = (p) => import(root + "dist/profiles/colored/" + p);
+const dist = (p) => import(root + "dist/presentation/recolor/" + p);
 
 test("coloredProfile without tokens adds no module and no tokens: it is the upstream drawing", async () => {
-  const { coloredProfile } = await dist("index.js");
+  const { recolorProfile } = await dist("index.js");
   for (const tokens of [undefined, {}, { taskLine: undefined }]) {
-    const p = coloredProfile(tokens);
+    const p = recolorProfile(tokens);
     assert.deepEqual({ id: p.id, modelerModules: p.modelerModules, viewerModules: p.viewerModules, tokens: p.tokens }, { id: "colored", modelerModules: [], viewerModules: [], tokens: undefined });
   }
 });
 
 test("coloredProfile with tokens adds the renderer to the modeler and to the viewer, and resolves the 33 tokens", async () => {
-  const { coloredProfile } = await dist("index.js");
-  const p = coloredProfile({ taskLine: "#101010" });
+  const { recolorProfile } = await dist("index.js");
+  const p = recolorProfile({ taskLine: "#101010" });
   assert.equal(p.modelerModules.length, 1);
   assert.equal(p.viewerModules.length, 1);
   assert.equal(Object.keys(p.tokens).length, 33);
@@ -36,7 +36,7 @@ test("token fallbacks: stroke feeds the lines, fill feeds the task fill, explici
 });
 
 test("kind mapping of element types", async () => {
-  const { coloredKind } = await dist("renderer.js");
+  const { recolorKind } = await dist("renderer.js");
   const el = (types, extra = {}) => ({ type: "x", businessObject: { $instanceOf: (t) => types.includes(t), ...extra }, ...("label" in extra ? { labelTarget: {} } : {}) });
   const cases = [
     [["bpmn:Participant", "bpmn:BaseElement"], "pool"],
@@ -55,18 +55,18 @@ test("kind mapping of element types", async () => {
     [["bpmn:DataInputAssociation", "bpmn:DataAssociation"], "link"],
     [["bpmn:Group"], undefined],
   ];
-  for (const [types, kind] of cases) assert.equal(coloredKind(el(types)), kind, types.join());
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "[Reference] x" })), "doc");
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: " [Component] y" })), "app");
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "plain" })), "annotation");
-  assert.equal(coloredKind({ type: "label", labelTarget: {}, businessObject: { $instanceOf: () => true } }), "label");
+  for (const [types, kind] of cases) assert.equal(recolorKind(el(types)), kind, types.join());
+  assert.equal(recolorKind(el(["bpmn:TextAnnotation"], { text: "[Reference] x" })), "doc");
+  assert.equal(recolorKind(el(["bpmn:TextAnnotation"], { text: " [Component] y" })), "app");
+  assert.equal(recolorKind(el(["bpmn:TextAnnotation"], { text: "plain" })), "annotation");
+  assert.equal(recolorKind({ type: "label", labelTarget: {}, businessObject: { $instanceOf: () => true } }), "label");
 });
 
 test("the profile sources and build carry no banned word, no storage, no prototype patch, no watermark handling", () => {
   const allowed = baselineHashAllowlist();
   const banned = /localStorage|sessionStorage|@\/lib|bjs-powered-by|prototype\.\w+\s*=/i;
   const files = [];
-  for (const dir of ["src/profiles/colored/", "dist/profiles/colored/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
+  for (const dir of ["src/presentation/recolor/", "dist/presentation/recolor/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
   assert.ok(files.length >= 6);
   for (const f of files) {
     const text = readFileSync(root + f, "utf8");
@@ -76,7 +76,7 @@ test("the profile sources and build carry no banned word, no storage, no prototy
 });
 
 test("colored tokens: labelText follows text unless named", async () => {
-  const { resolveColoredTokens } = await import("../dist/profiles/colored/tokens.js");
+  const { resolveColoredTokens } = await import("../dist/presentation/recolor/tokens.js");
   assert.equal(resolveColoredTokens({ text: "#111111" }).labelText, "#111111");
   assert.equal(resolveColoredTokens({ text: "#111111", labelText: "#22242a" }).labelText, "#22242a");
 });
@@ -92,7 +92,7 @@ test("namedColoredTokens: the names the host gave, with stroke, fill and text ex
 
 test("colored defaults stay neutral; the legend defaults are the reference Custom look", async () => {
   const { DEFAULT_COLORED_TOKENS } = await dist("tokens.js");
-  const { DEFAULT_LEGEND_TOKENS } = await import(root + "dist/profiles/legend/tokens.js");
+  const { DEFAULT_LEGEND_TOKENS } = await import(root + "dist/presentation/annotated/tokens.js");
   assert.equal(DEFAULT_COLORED_TOKENS.stroke, "#333333");
   assert.equal(DEFAULT_COLORED_TOKENS.taskFill, "#ffffff");
   assert.equal(DEFAULT_COLORED_TOKENS.dataLinkArrow, true);

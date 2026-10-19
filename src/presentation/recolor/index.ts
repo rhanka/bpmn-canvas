@@ -1,14 +1,14 @@
-import type { LegendTokens, ProfileDefinition } from "../../internal/contracts.js";
+import type { AnnotatedTokens, ProfileDefinition } from "../../internal/contracts.js";
 import type { BusinessPolicy } from "../../internal/business-policy.js";
 import { ProfileContractError } from "../../profile/canonical.js";
 import { resolveColoredTokens, hasTokens, namedColoredTokens } from "./tokens.js";
-import { ColoredRendererModule } from "./renderer.js";
-export function coloredProfile(tokens?: Partial<LegendTokens>, businessPolicy?: BusinessPolicy): ProfileDefinition {
+import { RecolorRendererModule } from "./renderer.js";
+export function recolorProfile(tokens?: Partial<AnnotatedTokens>, businessPolicy?: BusinessPolicy): ProfileDefinition {
   const look = businessPolicy?.presentation?.looks?.find((look: any) => look.renderer === "recolor");
   if (!businessPolicy || !look) throw new ProfileContractError("profile-resource-missing");
 
   if (!hasTokens(tokens)) return { id: look.alias, modelerModules: [], viewerModules: [] };
-  const modules = [ColoredRendererModule];
+  const modules = [RecolorRendererModule];
   return {
     id: look.alias,
     businessPolicy,

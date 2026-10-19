@@ -112,7 +112,7 @@ export function movedShapes(shapes: readonly Rec[], policy?: BusinessPolicy): Re
   return out;
 }
 
-export function navigationTarget(vector: Rec, index: Rec, policy?: BusinessPolicy): Rec {
+export function navigationTarget(vector: Rec, index: Rec, policy?: Pick<BusinessPolicy, "navigation">): Rec {
   const mode = policy?.navigation.mode ?? "called-element";
   const click = vector.click;
   if (mode === "called-element") {

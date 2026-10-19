@@ -8,7 +8,7 @@ import type {
   FitMode,
   FitOptions,
   LayoutResult,
-  LegendTokens,
+  AnnotatedTokens,
   ProfileId,
   SetXmlOptions,
   SetXmlResult,
@@ -101,7 +101,7 @@ export class CanvasController implements BpmnCanvasHandle {
   private abortListener: (() => void) | undefined;
   private profileId: ProfileId;
   private activeProfile: LoadedProfile | undefined;
-  private tokens: Partial<LegendTokens> | undefined;
+  private tokens: Partial<AnnotatedTokens> | undefined;
   private profileOptions: ProfileOptions;
   /** Diagrams of a document loaded with layoutOnLoad that are laid out the first time they are shown. */
   private layoutPending = new Set<string>();
@@ -129,7 +129,7 @@ export class CanvasController implements BpmnCanvasHandle {
     this.options = options;
     this.hostReadOnly = options.readOnly === true;
     this.profileId = options.profile ?? "";
-    this.tokens = options.tokens ?? options.coloredTokens ?? options.legendTokens;
+    this.tokens = options.tokens ?? options.recolorTokens ?? options.annotatedTokens;
     this.profileOptions = options.profileOptions ?? {};
     this.fitMode = options.fitMode ?? "readable";
     this.baseRevision = options.revision;
@@ -284,7 +284,7 @@ export class CanvasController implements BpmnCanvasHandle {
     return p;
   }
 
-  private tokensFor(_profile: ProfileId): Partial<LegendTokens> | undefined {
+  private tokensFor(_profile: ProfileId): Partial<AnnotatedTokens> | undefined {
     return this.tokens;
   }
 
@@ -760,7 +760,7 @@ export class CanvasController implements BpmnCanvasHandle {
     this.zoomTo(this.getZoom() * factor, center);
   }
 
-  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>, options?: ProfileOptions): Promise<void> {
+  setProfile(profile: ProfileId, tokens?: Partial<AnnotatedTokens>, options?: ProfileOptions): Promise<void> {
     if (this.destroyed) return Promise.reject(abortError());
     const epoch = this.epoch;
     return this.enqueue(epoch, async () => {
@@ -818,7 +818,7 @@ export class CanvasController implements BpmnCanvasHandle {
 
   /** What a profile switch needs, read before its commit point. Changes nothing but the old stack's position, which
    * captureHistory puts back. */
-  private async prepareSwitch(epoch: number, profile: ProfileId, tokens: Partial<LegendTokens> | undefined, options: ProfileOptions): Promise<PreparedSwitch> {
+  private async prepareSwitch(epoch: number, profile: ProfileId, tokens: Partial<AnnotatedTokens> | undefined, options: ProfileOptions): Promise<PreparedSwitch> {
     const [engine, next, layout] = await Promise.all([loadEngine(), loadProfile(profile, tokens, options, this.options.businessPolicy), this.layoutModules()]);
     this.activeProfile = next;
     this.assertLive(epoch);

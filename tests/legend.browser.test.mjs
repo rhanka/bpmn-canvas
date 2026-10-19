@@ -16,7 +16,7 @@ test("legend profile in a real browser", { timeout: 120000 }, async (t) => {
     assert.equal(o.a.GX.xMark, true, "exclusive gateway keeps its X");
   });
   await t.test("upstream notation falls through: no rectangle, no X for these", () => {
-    for (const id of ["UT", "GI", "BT", "SM"]) assert.equal(o.a[id].legend, false, `${id} must be drawn by upstream`);
+    for (const id of ["UT", "GI", "BT", "SM"]) assert.equal(o.a[id].annotated, false, `${id} must be drawn by upstream`);
     assert.equal(o.a.GI.xMark, false, "inclusive gateway is not an exclusive X");
     assert.equal(o.a.GI.circles, 1, "inclusive gateway shows its circle marker");
     assert.equal(o.a.BT.circles, 3, "boundary timer keeps its double circle and clock");

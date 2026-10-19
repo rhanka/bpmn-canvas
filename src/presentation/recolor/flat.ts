@@ -3,7 +3,7 @@ import { ProfileContractError } from "../../profile/canonical.js";
 import type { BusinessPolicy } from "../../internal/business-policy.js";
 import { annotationKind, layoutPolicy } from "../../internal/legacy-policy.js";
 /**
- * `drawing: "classic"` of the `colored` profile: flat shapes in the profile's colours (rounded activities with a
+ * `drawing: "flat"` of the `recolor` profile: flat shapes in the profile's colours (rounded activities with a
  * 1.4 line, a thick end ring with an inner dot, a flat gateway with a bold marker, data pages, open-bracket
  * annotations, pools and lanes with a header line), each label inside its shape. Connections and external labels
  * stay with the upstream renderer (recoloured by the profile). Colours the user set on an element keep priority.
@@ -13,9 +13,9 @@ import { is } from "bpmn-js/lib/util/ModelUtil.js";
 import { getFillColor, getLabelColor, getStrokeColor } from "bpmn-js/lib/draw/BpmnRenderUtil.js";
 import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as svgCreate } from "tiny-svg";
 
-import type { BpmnCanvasConfig, LegendTokens } from "../../internal/contracts.js";
-import { appsOf } from "../legend/renderer.js";
-import { contrastText } from "../legend/style.js";
+import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
+import { appsOf } from "../annotated/renderer.js";
+import { contrastText } from "../annotated/style.js";
 import { resolveColoredTokens } from "./tokens.js";
 
 type Any = any; // diagram-js and bpmn-js services are untyped here, as in the other profiles.
@@ -42,7 +42,7 @@ function kindOf(element: Any, policy?: BusinessPolicy): Kind | undefined {
   return undefined;
 }
 
-function colours(kind: Kind, t: LegendTokens): { fill: string; stroke: string } {
+function colours(kind: Kind, t: AnnotatedTokens): { fill: string; stroke: string } {
   switch (kind) {
     case "event": return { fill: t.eventFill, stroke: t.eventLine };
     case "gateway": return { fill: t.gatewayFill, stroke: t.gatewayLine };
@@ -59,11 +59,11 @@ function colours(kind: Kind, t: LegendTokens): { fill: string; stroke: string } 
   }
 }
 
-export class ClassicRenderer extends BaseRenderer {
+export class FlatRenderer extends BaseRenderer {
   static $inject = ["eventBus", "textRenderer", "config.bpmnCanvas"];
 
   private readonly textRenderer: Any;
-  private readonly tokens: LegendTokens;
+  private readonly tokens: AnnotatedTokens;
 
   private readonly businessPolicy: BusinessPolicy | undefined;
   constructor(eventBus: Any, textRenderer: Any, config: BpmnCanvasConfig | undefined) {
@@ -195,7 +195,7 @@ export class ClassicRenderer extends BaseRenderer {
   private subprocessMarker(gfx: Any, w: number, h: number, stroke: string, band: number): void {
     h -= band;
     const group = svgCreate("g");
-    svgClasses(group).add("classic-marker");
+    svgClasses(group).add("flat-marker");
     svgAttr(group, { "data-marker": "sub-process", "pointer-events": "all" });
     const box = svgCreate("rect");
     svgAttr(box, { x: w / 2 - 7, y: h - 18, width: 14, height: 14, fill: "transparent", stroke, "stroke-width": 1.2, "pointer-events": "all" });
@@ -222,7 +222,7 @@ export class ClassicRenderer extends BaseRenderer {
   }
 }
 
-export const ClassicRendererModule = {
-  __init__: ["classicRenderer"],
-  classicRenderer: ["type", ClassicRenderer],
+export const FlatRendererModule = {
+  __init__: ["flatRenderer"],
+  flatRenderer: ["type", FlatRenderer],
 };

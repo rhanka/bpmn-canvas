@@ -7,7 +7,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 
 test("legend tokens, data IO lifecycle and hit outlines in a real browser", { timeout: 180000 }, async (t) => {
   const { result: o, consoleLines } = await runInBrowser(root + "tests/browser/page-legend3.mjs", "legend3", (page) => page.evaluate(() => window.runLegend3()));
-  if (process.env.LEGEND3_DUMP) console.log(JSON.stringify(o, null, 1));
+  if (process.env.ANNOTATED3_DUMP) console.log(JSON.stringify(o, null, 1));
 
   await t.test("[Reference] association: the defaults (reference look) draw it red, dashed 5 5, like the plain link", () => {
     assert.deepEqual(o.neutral.doc, { stroke: "#b85450", dash: "5 5" });

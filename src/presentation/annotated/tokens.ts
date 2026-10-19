@@ -1,16 +1,16 @@
-import type { LegendTokens } from "../../internal/contracts.js";
+import type { AnnotatedTokens } from "../../internal/contracts.js";
 import { ProfileContractError } from "../../profile/canonical.js";
 import { shade } from "./style.js";
 export const lineKeys = ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"] as const;
 
-/** The legend defaults, then the host's `stroke`/`fill` conveniences, then the host's explicit per-type values. */
-export function resolveLegendTokens(overrides?: Partial<LegendTokens>, base?: LegendTokens): LegendTokens {
+/** The annotated defaults, then the host's `stroke`/`fill` conveniences, then the host's explicit per-type values. */
+export function resolveLegendTokens(overrides?: Partial<AnnotatedTokens>, base?: AnnotatedTokens): AnnotatedTokens {
   if (!base) throw new ProfileContractError("profile-resource-missing");
   return resolveTokens(base, overrides);
 }
 
 /** `defaults`, then the host's `stroke`/`fill` conveniences, then the host's explicit per-type values. */
-export function resolveTokens(defaults: LegendTokens, overrides?: Partial<LegendTokens>): LegendTokens {
+export function resolveTokens(defaults: AnnotatedTokens, overrides?: Partial<AnnotatedTokens>): AnnotatedTokens {
   const given: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(overrides ?? {})) if (value !== undefined) given[key] = value;
   const out: Record<string, unknown> = { ...defaults };
@@ -24,5 +24,5 @@ export function resolveTokens(defaults: LegendTokens, overrides?: Partial<Legend
   if (given["taskFillEnd"] === undefined && typeof out["taskFill"] === "string" && out["taskFill"] !== defaults.taskFill) {
     out["taskFillEnd"] = shade(out["taskFill"], 0.95);
   }
-  return out as unknown as LegendTokens;
+  return out as unknown as AnnotatedTokens;
 }

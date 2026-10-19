@@ -1,16 +1,16 @@
 import { ProfileContractError } from "../../profile/canonical.js";
 import type { BpmnCanvasConfig } from "../../internal/contracts.js";
 import { paletteEntries } from "../../internal/legacy-policy.js";
-// Legend palette for the bpmn-js modeler: one entry per legend element. This
+// Annotated palette for the bpmn-js modeler: one entry per annotated element. This
 // module REPLACES the default palette provider (no duplicate task/start/end/
-// gateway entries, no non-legend tools): additionalModules order makes our
+// gateway entries, no non-annotated tools): additionalModules order makes our
 // `paletteProvider` win over the bpmn-js default. Adapted from an internal
 // implementation.
 //
 // External Input / Process Output are created as bpmn:DataInput / bpmn:DataOutput
 // in the process ioSpecification (not DataObjectReference). Upstream bpmn-js has
 // no containment branch for creating them, so this module (a) allows their
-// creation drops through LegendRules and (b) overrides the `bpmnUpdater` service
+// creation drops through AnnotatedRules and (b) overrides the `bpmnUpdater` service
 // of THIS instance (never the prototype) so create, move, delete and undo work.
 // An ioSpecification created here always carries the inputSet and outputSet the
 // BPMN schema requires.
@@ -40,8 +40,8 @@ export interface PaletteEntry {
 /** Stable palette action ids (the `data-action` of each palette entry and the keys of the icon CSS). */
 
 
-/** diagram-js palette provider: click/drag creates the legend element. */
-export class LegendPaletteProvider {
+/** diagram-js palette provider: click/drag creates the annotated element. */
+export class AnnotatedPaletteProvider {
   static $inject = ["palette", "create", "elementFactory", "globalConnect", "config.bpmnCanvas"];
   constructor(palette: Any, private readonly create: Any, private readonly elementFactory: Any, private readonly globalConnect: Any, private readonly config?: BpmnCanvasConfig) { palette.registerProvider(this); }
   getPaletteEntries(): Record<string, object> {
@@ -63,7 +63,7 @@ export class LegendPaletteProvider {
 const DATA_IO_TARGETS = ["bpmn:Lane", "bpmn:Participant", "bpmn:Process", "bpmn:SubProcess"];
 
 /** Creation drops of DataInput/DataOutput, which the default rules reject. */
-export class LegendRules {
+export class AnnotatedRules {
   static $inject = ["eventBus"];
 
   constructor(eventBus: Any) {
@@ -137,7 +137,7 @@ const UpdaterBase = BpmnUpdater as unknown as {
   };
   $inject: string[];
 };
-export class LegendBpmnUpdater extends UpdaterBase {
+export class AnnotatedBpmnUpdater extends UpdaterBase {
   static override $inject: string[] = [...(BpmnUpdater as Any).$inject, "config.bpmnCanvas"];
 
   private readonly bpmnFactory: Any;
@@ -220,9 +220,9 @@ export class LegendBpmnUpdater extends UpdaterBase {
 }
 
 /** Palette, creation rules and the instance-safe updater. Modeler only. */
-export const LegendPaletteModule = {
-  __init__: ["paletteProvider", "legendRules"],
-  paletteProvider: ["type", LegendPaletteProvider],
-  legendRules: ["type", LegendRules],
-  bpmnUpdater: ["type", LegendBpmnUpdater],
+export const AnnotatedPaletteModule = {
+  __init__: ["paletteProvider", "annotatedRules"],
+  paletteProvider: ["type", AnnotatedPaletteProvider],
+  annotatedRules: ["type", AnnotatedRules],
+  bpmnUpdater: ["type", AnnotatedBpmnUpdater],
 };

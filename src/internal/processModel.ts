@@ -166,7 +166,7 @@ function parseProcess(procEl: Element, collab: Element[] = [], policy?: Business
   return proc;
 }
 
-/** legend_model.normalize: connection kinds, item types by direction, _task / _dir. */
+/** annotated_model.normalize: connection kinds, item types by direction, _task / _dir. */
 export function normalize(proc: LayoutProcessInput): LayoutProcessInput {
   const nodes = new Map<string, LayoutNode>();
   for (const lane of proc.lanes) for (const n of lane.nodes) if (!nodes.has(n.label)) nodes.set(n.label, n);

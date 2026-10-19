@@ -10,7 +10,7 @@ import { getExternalLabelMid } from "bpmn-js/lib/util/LabelUtil.js";
 import { getMid } from "diagram-js/lib/layout/LayoutUtil.js";
 
 import type { BpmnCanvasLayoutService } from "../contracts.js";
-import { isAppAnnotation } from "../annotations.js";
+import { isAppAnnotation as isApplicationRole } from "../annotations.js";
 import { parseProcesses } from "../processModel.js";
 import { boundaryChanges } from "./boundary.js";
 import { layoutProcess, type Box, type LayoutProcessInput, type Point, type ProcessLayout } from "../swimlaneLayout.js";
@@ -56,7 +56,7 @@ export function layoutChanges(registry: El, participant: El, lay: ProcessLayout,
     const lb = lay.labels[id];
     if (lb && el.label) changes.push({ element: el.label, bounds: move(lb) });
   }
-  // [LX-MK-2] annotations are stored where the legend render draws the box.
+  // [LX-MK-2] annotations are stored where the annotated render draws the box.
   for (const [hostId, a] of Object.entries(lay.apps)) {
     const host = registry.get(hostId);
     const t = lay.nodes[hostId];
@@ -65,7 +65,7 @@ export function layoutChanges(registry: El, participant: El, lay: ProcessLayout,
     let i = 0;
     for (const link of links) {
       const ann = link.source === host ? link.target : link.source;
-      if (ann?.type !== "bpmn:TextAnnotation" || !isAppAnnotation(ann.businessObject?.text, policy)) continue;
+      if (ann?.type !== "bpmn:TextAnnotation" || !isApplicationRole(ann.businessObject?.text, policy)) continue;
       const ab = move({ ...a, x: a.x + i * (a.w + layoutPolicy(policy).appBadge.gap) });
       i += 1;
       changes.push({ element: ann, bounds: ab });

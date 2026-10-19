@@ -1,5 +1,7 @@
 "use client";
 
+import { canonicalDigest } from "../profile/canonical.js";
+
 /**
  * assistant-ui adapter. The coupling is structural: nothing here imports `@assistant-ui/react`
  * at runtime or for types, and the structural shapes are checked against the real package
@@ -13,7 +15,7 @@
 import { createElement, useEffect, useState } from "react";
 import type { ReactElement } from "react";
 import { renderDiagrams } from "../internal/render.js";
-import type { RenderedDiagram } from "../types.js";
+import type { RenderedDiagram, RenderOptions } from "../types.js";
 
 export interface BpmnArtifact {
   readonly documentId: string;
@@ -82,11 +84,11 @@ export function useBpmnArtifact(part: ToolCallPartLike, resolveArtifact: Artifac
 const previewCache = new Map<string, Promise<RenderedDiagram | null>>();
 const PREVIEW_CACHE_MAX = 50;
 
-function preview(artifact: BpmnArtifact): Promise<RenderedDiagram | null> {
-  const key = artifact.revision !== undefined ? `${artifact.documentId}@${artifact.revision}` : `${artifact.documentId}#${artifact.xml.length}:${artifact.xml.slice(0, 64)}`;
+function preview(artifact: BpmnArtifact, renderOptions: RenderOptions = {}): Promise<RenderedDiagram | null> {
+  const key = canonicalDigest(JSON.parse(JSON.stringify({ xml: artifact.xml, ...renderOptions, signal: undefined })));
   let hit = previewCache.get(key);
   if (!hit) {
-    hit = renderDiagrams(artifact.xml).then(
+    hit = renderDiagrams(artifact.xml, renderOptions).then(
       (r) => r.diagrams[0] ?? null,
       () => null,
     );
@@ -106,6 +108,7 @@ export interface BpmnToolLabels {
 const DEFAULT_LABELS: BpmnToolLabels = { running: "Working on the diagram…", failed: "The diagram could not be produced.", open: "Open", missing: "Diagram not available." };
 
 export interface BpmnToolCardProps {
+  readonly renderOptions?: RenderOptions;
   readonly part: ToolCallPartLike;
   readonly resolveArtifact: ArtifactResolver;
   readonly onOpen?: (artifact: BpmnArtifact) => void;
@@ -113,7 +116,7 @@ export interface BpmnToolCardProps {
 }
 
 /** Static card: status, then a preview of the first diagram and an Open action. Historical parts stay static. */
-export function BpmnToolCard({ part, resolveArtifact, onOpen, labels }: BpmnToolCardProps): ReactElement {
+export function BpmnToolCard({ part, resolveArtifact, onOpen, labels, renderOptions }: BpmnToolCardProps): ReactElement {
   const text = { ...DEFAULT_LABELS, ...labels };
   const state = toolPartState(part);
   const load = useBpmnArtifact(part, resolveArtifact);
@@ -126,13 +129,13 @@ export function BpmnToolCard({ part, resolveArtifact, onOpen, labels }: BpmnTool
       return undefined;
     }
     let live = true;
-    void preview(artifact).then((d) => {
+    void preview(artifact, renderOptions).then((d) => {
       if (live) setImage(d);
     });
     return () => {
       live = false;
     };
-  }, [artifact]);
+  }, [artifact, renderOptions]);
 
   const body: ReactElement[] = [];
   if (state === "running" || load.state === "loading") body.push(createElement("span", { key: "s", role: "status" }, text.running));
@@ -163,6 +166,7 @@ export type BpmnToolkitEntry = {
 };
 
 export interface CreateBpmnToolkitOptions {
+  readonly renderOptions?: RenderOptions;
   /** Tool names to render. No name is hard-coded. */
   readonly toolNames: readonly string[];
   readonly resolveArtifact: ArtifactResolver;
@@ -177,6 +181,7 @@ export function createBpmnToolkit(options: CreateBpmnToolkitOptions): Record<str
     createElement(BpmnToolCard, {
       part,
       resolveArtifact: options.resolveArtifact,
+      ...(options.renderOptions ? { renderOptions: options.renderOptions } : {}),
       ...(options.onOpen ? { onOpen: options.onOpen } : {}),
       ...(options.labels ? { labels: options.labels } : {}),
     });

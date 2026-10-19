@@ -1,6 +1,6 @@
 import type { BusinessPolicy } from "../../internal/business-policy.js";
 import { badgeSize, badgeBoxes, documentRect } from "../../internal/legacy-policy.js";
-// Pure helpers of the `legend` profile: which elements it draws, colours and
+// Pure helpers of the `annotated` profile: which elements it draws, colours and
 // the geometry shared with the swimlane layout. Adapted from an internal
 // implementation (render style + draw.io-reference geometry). No DOM, no bpmn-js.
 
@@ -9,7 +9,7 @@ import { textWidth, wrapText } from "../../internal/textMetrics.js";
 
 export { annotationName, isAppAnnotation, isDocumentAnnotation };
 
-export type LegendShapeKind =
+export type AnnotatedShapeKind =
   | "task"
   | "subprocess"
   | "event"
@@ -23,10 +23,10 @@ export type LegendShapeKind =
   | "lane"
   | "pool";
 
-export type LegendConnectionKind = "sequence" | "link" | "data-link";
+export type AnnotatedConnectionKind = "sequence" | "link" | "data-link";
 
 /** The subset of a bpmn-moddle business object the kind decision reads. */
-export interface LegendBoLike {
+export interface AnnotatedBoLike {
   readonly $type: string;
   readonly text?: unknown;
   readonly eventDefinitions?: readonly unknown[] | undefined;
@@ -40,7 +40,7 @@ export interface LegendBoLike {
 }
 
 /** Diagram-interchange facts bpmn-js derives from the DI, not from the semantic element. */
-export interface LegendDiFacts {
+export interface AnnotatedDiFacts {
   readonly expanded?: boolean | undefined;
   readonly horizontal?: boolean | undefined;
 }
@@ -53,13 +53,13 @@ const PLAIN_EVENTS = new Set([
 ]);
 
 /**
- * The legend shape of a business object, or `undefined` when the legend does
+ * The annotated shape of a business object, or `undefined` when the annotated does
  * not draw it faithfully. `undefined` means: leave it to the upstream renderer.
  * Typed events, typed tasks, inclusive/event-based/complex gateways, boundary
  * events, transactions, ad-hoc and expanded sub-processes, groups and data
  * stores all fall in that case.
  */
-export function legendKind(bo: LegendBoLike, di: LegendDiFacts = {}, policy?: BusinessPolicy): LegendShapeKind | undefined {
+export function annotatedKind(bo: AnnotatedBoLike, di: AnnotatedDiFacts = {}, policy?: BusinessPolicy): AnnotatedShapeKind | undefined {
   switch (bo.$type) {
     case "bpmn:Task":
       return "task";
@@ -92,11 +92,11 @@ export function legendKind(bo: LegendBoLike, di: LegendDiFacts = {}, policy?: Bu
   }
 }
 
-/** The legend connection style of a business object, or `undefined` to leave it upstream. */
-export function legendConnectionKind(bo: LegendBoLike): LegendConnectionKind | undefined {
+/** The annotated connection style of a business object, or `undefined` to leave it upstream. */
+export function annotatedConnectionKind(bo: AnnotatedBoLike): AnnotatedConnectionKind | undefined {
   switch (bo.$type) {
     case "bpmn:SequenceFlow":
-      // Conditional and default flows carry markers the legend does not draw.
+      // Conditional and default flows carry markers the annotated does not draw.
       if (bo.conditionExpression) return undefined;
       if (bo.sourceRef && bo.sourceRef.default === bo) return undefined;
       return "sequence";
