@@ -1,0 +1,1447 @@
+{
+  "format": "c24-campaign/1",
+  "files": 115,
+  "tests": 2890,
+  "passed": 2747,
+  "failed": 142,
+  "skipped": 1,
+  "cancelled": 0,
+  "globalTimeout": 1200000,
+  "groups": {
+    "new-consumer-or-freeze": 110,
+    "starting-head": 3,
+    "new-frozen-scope": 20,
+    "expected-P-006": 1,
+    "new-sealed-input": 7,
+    "new-earlier-source-guard": 1
+  },
+  "failures": [
+    {
+      "id": "F-001",
+      "testOrdinal": 6,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "af6c4f148695d314df5b70d485eab74db65f0acd418b0500ad4ce9b31462688f",
+      "diagnosticSha256": "d2be3fba4602dbc8a5120b2cdb5d1c2b6468d022d15e1f5fcb37640f5a0a7f17"
+    },
+    {
+      "id": "F-002",
+      "testOrdinal": 7,
+      "classification": "starting-head",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "282da8d2de03c89b0e5ed2f4c932def12061f58da00d43fc7cf202688685a14a",
+      "diagnosticSha256": "8e9e6a35ee15448fbc6a7881d68a19fe27bd3139ee932d8c362e308ee5a946e2"
+    },
+    {
+      "id": "F-003",
+      "testOrdinal": 14,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "2d5f7cfb3333bd0a4e99b9867c0b4a55d8a4a81ff9b959983e082327728d8bc2",
+      "diagnosticSha256": "677379f6d3ee515c997e3d0d61f4e0145c8729ab7800a56dbafe9309c3437f75"
+    },
+    {
+      "id": "F-004",
+      "testOrdinal": 15,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "09bfa111746d9deb2ced6c18f4faa07f26975817125af23bff1eafd7f9002ce1",
+      "diagnosticSha256": "ebb4e74d99da70cd52eeef6a9f22a93ee41985b7d35ccb53229f65dcdc65afbc"
+    },
+    {
+      "id": "F-005",
+      "testOrdinal": 47,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "84294ae9ce9f3689f985164dccbdcb82d14ad54488e8a1165c5f7b7fa67eacc4",
+      "diagnosticSha256": "980e3d6fd472c623f993201bc978a79b2ed5fc0bdf7a8ed4e41b7b1c8d60b7ad"
+    },
+    {
+      "id": "F-006",
+      "testOrdinal": 48,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "02ec4229430a618080339ae5784866317213577f527102cfe70aa4d923fe3614",
+      "diagnosticSha256": "51234adcdc3062fbfc82968dabe8362b3aaab633e9c6cae33b021947ddd0e60a"
+    },
+    {
+      "id": "F-007",
+      "testOrdinal": 49,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "56cf68e2792ab54695c3bbf15658281af501b4ac5ba60617aadfcab7c43d6a8a",
+      "diagnosticSha256": "53b09d34fd7dc52beeef08bf6e0039b6adc6781ef22a9aaf5b03972ada67e85b"
+    },
+    {
+      "id": "F-008",
+      "testOrdinal": 50,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1499f8f0745ed85d3bab334755d3e34ee24a3740164ce6590aba3f2146352f3f",
+      "diagnosticSha256": "47809db23894189a95f0acb8d5fc07d692da074100207df884d9efd72158d98a"
+    },
+    {
+      "id": "F-009",
+      "testOrdinal": 52,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "633b82fda23aca659ebf68524e807a14564b997e5b4bc7897057ef5269e38e05",
+      "diagnosticSha256": "b88a1bb479996a6c2d1c4f0cac6c4e8d081a5ac4f7e5651b00302827a1ec403c"
+    },
+    {
+      "id": "F-010",
+      "testOrdinal": 54,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "522ec15c468165398e331a17a0e7a8244cb20b46bca9e7ea9777106481d842e5",
+      "diagnosticSha256": "630a1688de6c14c9536086464053880167a1019d527dc3117085d8247e7d06b2"
+    },
+    {
+      "id": "F-011",
+      "testOrdinal": 755,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "9eed064c09c9b5ef239e3a4541030f73365f1ee8aaa72ab185e9c8b047137ec0",
+      "diagnosticSha256": "b4f962da425bf1d226f4374ae3d539b0b927da9870de18bd382ddfe652bf78c0"
+    },
+    {
+      "id": "F-012",
+      "testOrdinal": 759,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "647045731d696ed675d08e15aaa2ecedd16a13433b21bc230d1fbc273a90f985",
+      "diagnosticSha256": "9267ba42f504a4781b2544ac5121e53262aae4c909647a305beb97d29d8b57b5"
+    },
+    {
+      "id": "F-013",
+      "testOrdinal": 761,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "2952e610f2197bfc9d51416e6d5409391b990d1052758e7510f1e496f02fae21",
+      "diagnosticSha256": "bf673ecc9056a16a92275d082df523b66009d8d3af040d160b96f18c6b4d4500"
+    },
+    {
+      "id": "F-014",
+      "testOrdinal": 762,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "6d133bc922a25afb690f5cac9c1f9cc4e7782bb554601efcfc7ad577fa9a94b5",
+      "diagnosticSha256": "b12f648084f4fe5e3c07f760273b554e3aae4361d48ca64f8538d668a13a64ae"
+    },
+    {
+      "id": "F-015",
+      "testOrdinal": 763,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "ea139ede7a291368d389ae373db08a4ae121ba077144f9c231e5b32bff7fc037",
+      "diagnosticSha256": "d3ff5a71df15f2cb6847d4e8838faf48b6d2647b65c495fcc7e6f9c370103bdc"
+    },
+    {
+      "id": "F-016",
+      "testOrdinal": 764,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "35c7a0732d292ad3b6227e696c3cebaed4aaf4d2f107fd2b70a8d421772ac9fd",
+      "diagnosticSha256": "b08e547f7076ce7ee2ab4386cd0f58a56f93b9bff0d807b4efb91957d6762d8c"
+    },
+    {
+      "id": "F-017",
+      "testOrdinal": 766,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "caa7b79f346e073cb161feb68d332b8d69f18f9683223673fc832e50b4937701",
+      "diagnosticSha256": "6d3d8da9b38a61af507deeffc7cf9beeacdad71d587b6326e3fd457a53403252"
+    },
+    {
+      "id": "F-018",
+      "testOrdinal": 767,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1429f4b981480b2320cc6478a0150caa815fc2109cb71117d17c748ce1eeca99",
+      "diagnosticSha256": "2fc03e5e271ed667e75d591a75753f86c222acfd8cd5ab1601325b97a5b895d4"
+    },
+    {
+      "id": "F-019",
+      "testOrdinal": 768,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "5bccc83fc07234f1164fa8a918336086d863469cdfdaff5e720f4048f6310df6",
+      "diagnosticSha256": "614bac9f40d3428ca3cd8f59120c66f12cb3bb1bcec692968119fd007cad39b1"
+    },
+    {
+      "id": "F-020",
+      "testOrdinal": 769,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "7778f1e2c5d26c1da7542befe7d242a12a7053cd33c003dd21432f2d9506eaec",
+      "diagnosticSha256": "f107a647a539b0e3616e5e7a4327e00f424e06a6058945469147efbb9b410ffd"
+    },
+    {
+      "id": "F-021",
+      "testOrdinal": 771,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "972aa5f02529b0316c9e62b6fbb545e13a85223fa044ed1f980a38ae34a54401",
+      "diagnosticSha256": "258d22fbb65a2b091b4b948ecb02495067c79cf2ce0b80633e8f0ac3de978181"
+    },
+    {
+      "id": "F-022",
+      "testOrdinal": 772,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "ff81109fc43f478b5761267b3d67db211f39ac17b035e799dd040921c1d0344c",
+      "diagnosticSha256": "3e9a18c7f539a2e210445ac4c79fe805096a02d8ba9f33297ae0ae080bf87b2c"
+    },
+    {
+      "id": "F-023",
+      "testOrdinal": 774,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "444089b7a81aae7ab0a3d82594681277ff6de713a5ed565e743a2347ad959769",
+      "diagnosticSha256": "025925c04415dcc938c5cb3245f914fe4d597b8c2d15484969ede34a402864c6"
+    },
+    {
+      "id": "F-024",
+      "testOrdinal": 775,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "3632508fba428af363018df70aa7e985ab5ac840dc2e2bf5b8796fce6137e3fe",
+      "diagnosticSha256": "988e5a0956fce925b31ccc93f9e8312637f546b3403d68e46c224418240b2fec"
+    },
+    {
+      "id": "F-025",
+      "testOrdinal": 827,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1153ef7e079d550d9fa5a0523a0fffc6a21d008520ee2059dcde93e3431b1aa0",
+      "diagnosticSha256": "740cd0c171bd586ccac42671dcc59605dfcc7b35d373c47b74394ce670185023"
+    },
+    {
+      "id": "F-026",
+      "testOrdinal": 828,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "07faec1baee19aa8eaec82609290e38b6e7d8a4cc47b630d30b38c13434c53e7",
+      "diagnosticSha256": "906bc92001e3a08ff236e0d09f6611ec90940a31bfbfc9718333ccf89637c113"
+    },
+    {
+      "id": "F-027",
+      "testOrdinal": 829,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "bcc2d5fdf504668f85a9713a1f7595c509959c0dc46c98f9e16a23fd420db626",
+      "diagnosticSha256": "a5ba8a303a875898748971a8b4bba07cc662cb020127364f274a05b3156e27f2"
+    },
+    {
+      "id": "F-028",
+      "testOrdinal": 830,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "6ef5fc535da1529b6a4aab9fa1cfa0a51dafd1a7cd96cf8af01361b821e61d8c",
+      "diagnosticSha256": "a8feabc08ff7d46cdeb8635ebe2493fe6818c005aa73fd317605e6c1c7bce189"
+    },
+    {
+      "id": "F-029",
+      "testOrdinal": 831,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "355f7a690f95896660d259efa5964e818c17844bfa11aa6a9fd5f720d50728ce",
+      "diagnosticSha256": "cfcc1da0e0955006e5b28c9b68f8e81cf13da9ca7c4185461e2076436cab1304"
+    },
+    {
+      "id": "F-030",
+      "testOrdinal": 832,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f42ba87eb15f1a3fd6bc86773bb365728185ad12863e2c5647ef01ab68763d53",
+      "diagnosticSha256": "5facd4c7d733a92ed6c34eac7d9b413d1007e4e001fe7344d2b2689a09f055bf"
+    },
+    {
+      "id": "F-031",
+      "testOrdinal": 833,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "6930d948b9f8f616e39156164a8c8210b700a8a8af79be9d53f454d49ad968d6",
+      "diagnosticSha256": "36cd012743cd3312d81a5df3766b91928e13632f0049b78114a2af601f28dedc"
+    },
+    {
+      "id": "F-032",
+      "testOrdinal": 834,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "939990aac704383b58dd2905611bf611745024145108d0857eb44173ac7fa98d",
+      "diagnosticSha256": "127d96e48539a89a724af35fed8b1546bf5f0b5f0d577db800d3bff87cbda401"
+    },
+    {
+      "id": "F-033",
+      "testOrdinal": 835,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "9875ebc63b4a28764f6d38999aa0edb428a0701f0c31641563c2b4b609292b0c",
+      "diagnosticSha256": "9fa280471f58d54a50a4a962c1a451cedc8eaac20aa6dfdf65df67d6b2e57eba"
+    },
+    {
+      "id": "F-034",
+      "testOrdinal": 836,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "0d96a1cd51d419fbb8be74222b123e1ff37593f2df97bbb0ea747c3f7d439acb",
+      "diagnosticSha256": "27b89abfbf7f9ca7ed05592b2472f161eac4fcd898faf561e785441693ea7b5b"
+    },
+    {
+      "id": "F-035",
+      "testOrdinal": 839,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "8475da017708f86d213c5c7a54d5080844da9641caa6300b69eee78ee6d8beaf",
+      "diagnosticSha256": "c132b3d77c7b8408bf0e093e5f464b418758b0f5cacdddb85f97cc90a8a3dd47"
+    },
+    {
+      "id": "F-036",
+      "testOrdinal": 840,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "e10e7ffabd6e0b0feaae12fcb01d9231979e108b02b8f98322cc34d57f614c8c",
+      "diagnosticSha256": "fad099c1e7f8fd161f1917086108d2ec7cd055309a35a17c4e074a09f4e15525"
+    },
+    {
+      "id": "F-037",
+      "testOrdinal": 841,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c90fb52e6061d23641f3e91453db447287777466367e7f526ede53b1a6c9edad",
+      "diagnosticSha256": "70301424d4de0164ff9e2e7aeffabfaa618dd92102fa5c519b3af9a5ebbae6cc"
+    },
+    {
+      "id": "F-038",
+      "testOrdinal": 842,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "8475da017708f86d213c5c7a54d5080844da9641caa6300b69eee78ee6d8beaf",
+      "diagnosticSha256": "f8c6239dadcbefc0263727bcac97d2f9c111c3bfc570782715fb5c1dd707dc06"
+    },
+    {
+      "id": "F-039",
+      "testOrdinal": 843,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "e10e7ffabd6e0b0feaae12fcb01d9231979e108b02b8f98322cc34d57f614c8c",
+      "diagnosticSha256": "1913e5d27309a93c8cef0de34492d0a6e5957f24c4930b15083916bbd456f00a"
+    },
+    {
+      "id": "F-040",
+      "testOrdinal": 844,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c90fb52e6061d23641f3e91453db447287777466367e7f526ede53b1a6c9edad",
+      "diagnosticSha256": "262991b86cbec9ea9897fb0151f88d1f5ddac341f04ca543b52ce4baecc9e326"
+    },
+    {
+      "id": "F-041",
+      "testOrdinal": 845,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "7fb9a509a6a3988cc2409069fad2569e739a2b841582a996be2a5247ea1443a5",
+      "diagnosticSha256": "d7f596215bd002002de98dc7821ebc59c6353503505ca1cdf3b1beb1f8bb73e5"
+    },
+    {
+      "id": "F-042",
+      "testOrdinal": 846,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f0d6beaf26b21784882a80ded7a3c3922455c9b08106df64ab77dd9c52596fcc",
+      "diagnosticSha256": "0189057fc00de0ce3409c6188f645181a0af9be3e603d0db7a243b97ad36cbc7"
+    },
+    {
+      "id": "F-043",
+      "testOrdinal": 847,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "5c552031caa69d6c4d794b0a9f71814cd6aa6f58116281299291b238e6552b9c",
+      "diagnosticSha256": "dc503ac22b5b10c138de973fee31b578612b5dc13e4d97dbd744df35df57432f"
+    },
+    {
+      "id": "F-044",
+      "testOrdinal": 848,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "2484d76c49904f85f8b3b3f591a92548e32965bd73b885755d1c99cfb2858b1a",
+      "diagnosticSha256": "b0d525fde3b7569c3fb6a30c0710cf86d2703f6c7350aec639c498ca2e0a1b98"
+    },
+    {
+      "id": "F-045",
+      "testOrdinal": 849,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "5f7881debffbf3a3b8ce5b8ed1d3e52804d9fc6492de4f5b44237b883f8fb67a",
+      "diagnosticSha256": "2cb536466444d8dc22ed9476e7c00e3f2db3450e8809797356d9f90f78126679"
+    },
+    {
+      "id": "F-046",
+      "testOrdinal": 850,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "b7c58ec29adc6d813d0788cb556f66d7581f8d2e6a24e13ab290beba53d6c97c",
+      "diagnosticSha256": "f389e44e1c693885c30ad1d0d69999c1ffcad1908c3e228ba3bb4299d19c48d8"
+    },
+    {
+      "id": "F-047",
+      "testOrdinal": 852,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "6cec359f406c1db9b0269e85dfc2684f040b66d9b0abde04067f2ca37fd787f1",
+      "diagnosticSha256": "d0cdb9bed9b8b22ed0c050e4cf63732f1e21632f16abc9d5adcdfcc1f5031729"
+    },
+    {
+      "id": "F-048",
+      "testOrdinal": 893,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f824e52c348ad896f3138364f8a290bd889e28d6b87d0c5cdf927817e77ed032",
+      "diagnosticSha256": "6d1b106ab7daa8b3e6facf59b32b700680325536636f44429b80acfefb5a7161"
+    },
+    {
+      "id": "F-049",
+      "testOrdinal": 894,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "7acd4e7d7a1449d954cb406c3f96eb992054ffd6bd75257aba462dd0fc8088a4",
+      "diagnosticSha256": "97f0ff78a35a151582389ff045cf5c2e1260fe0e933fcc60cd907ac6f28d3cc2"
+    },
+    {
+      "id": "F-050",
+      "testOrdinal": 895,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f3f716faed0608181ec52c1973f74e16da2576a1d959738f8adf85d5593538dd",
+      "diagnosticSha256": "8a851860270bd896a8c9960cbc5d086f7d4064236e514f85d094390cdb296634"
+    },
+    {
+      "id": "F-051",
+      "testOrdinal": 909,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "9d39f59620e9573042fb3416349f2e8ece71666176a1bd6c8d67fa3d0c632f05",
+      "diagnosticSha256": "0d1487e03528a72b10b3961b631af65f73ae48038c7c2dfd48019bf602360c3d"
+    },
+    {
+      "id": "F-052",
+      "testOrdinal": 910,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "e9820c87384ec204c251f0d2d30ec4c80e65df6b698f618a6a903d9a5df7fce0",
+      "diagnosticSha256": "95389aed087208ec13602009440bcc8f0436bd3641f09c5a1c3221434acc8a8b"
+    },
+    {
+      "id": "F-053",
+      "testOrdinal": 912,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "a54a03a7a2b110e34fd4d864f8e263187aad0f05e5f8d8852be6ad9a290b794b",
+      "diagnosticSha256": "4acb9a53a856acdbb80d95478e0ff89033f5836fd2cad83448feb771ad2be9b1"
+    },
+    {
+      "id": "F-054",
+      "testOrdinal": 913,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "70f941ef5b458b648a4e88b46bbaa0b64a319f97aa4c73835aaa0434afb96af4",
+      "diagnosticSha256": "9664afadcbff7c898ce8cabd1ef4ccab2672501561b1bd533b58d102b9294cdd"
+    },
+    {
+      "id": "F-055",
+      "testOrdinal": 915,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "a4a70da2d4b1dca951f82ad2e962630109e20a240a2682da390e901176f75e2d",
+      "diagnosticSha256": "e25f8e81e1e4b9b0cba4f9b8acd327dc6769ef009d7ca4686ddcfba588e3143b"
+    },
+    {
+      "id": "F-056",
+      "testOrdinal": 916,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "9227b47160e9371d2171c97d4e44f863f18fbbf638a4e9a2b4eeb637bdec8cee",
+      "diagnosticSha256": "5173a2412f34c61f252613aefe7e2e141ed881ae9666192011e2ad3c4257d4e3"
+    },
+    {
+      "id": "F-057",
+      "testOrdinal": 918,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "9cead1e2ccc73b4d3f1884b1f442a3c97f88b1d4111922b5e355cd48f0e45649",
+      "diagnosticSha256": "d0131c0b0b8618b3e9e8dd5f951f339a68722f0a818d77f3861fd84877cf3096"
+    },
+    {
+      "id": "F-058",
+      "testOrdinal": 919,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "459d77c7fc521712d03123bee5d029521487879d9a71a0a7aef497d6e0c71ecb",
+      "diagnosticSha256": "4ecb6928cff7e5aae253ada4856ff61e122dc3e1849f103273c20924ebf85c04"
+    },
+    {
+      "id": "F-059",
+      "testOrdinal": 921,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "657ad264c267501870ab399531382b75f20689182763b6b5431eaa2fbda3d0d7",
+      "diagnosticSha256": "9f6e23f654df61a6833a1258863e4a78b94d4e8ddf69eae31de0d942b5255aa0"
+    },
+    {
+      "id": "F-060",
+      "testOrdinal": 922,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "722d73e0c2f4ac46887936c0a5e83924dc0994b04344d95c76cae447acd1bbe1",
+      "diagnosticSha256": "cda12821619cff89e9920f1e3d158b97ee8d44af2cd4149879ef0af80396ed89"
+    },
+    {
+      "id": "F-061",
+      "testOrdinal": 924,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f16b4fde568f281bd746bc1b46a577771be464d9820725bc90acb5f72847b76b",
+      "diagnosticSha256": "405d7cc11c65ef46b4f0cea6fd6e2d788b865de2adac01ffdde69d42fa99c57a"
+    },
+    {
+      "id": "F-062",
+      "testOrdinal": 925,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1133545e7897bbde2094c639623b6141be8180b3eec02106918ac4212fb403a2",
+      "diagnosticSha256": "2d499261df8d189eb02696b45914df4488ddbb279b9953a20bd5ed31d1e10a1b"
+    },
+    {
+      "id": "F-063",
+      "testOrdinal": 947,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c424b5caf4122da4c90eabb4f41b656b038c9a1337971692d655be7947a5590b",
+      "diagnosticSha256": "d765f8f89256f8cf7045c0f7a09fd34f9f73af8b60eb61f94dd4c0f4402f7d5b"
+    },
+    {
+      "id": "F-064",
+      "testOrdinal": 949,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "a7cc20f4bb1672d8f44a80e24122c3bdb9c26a4eef48119d7753f4e484b47fc3",
+      "diagnosticSha256": "129327b3a3c193f51ad370d9d4fd02cbbb686e39e8846e97ebc8c76f4786a477"
+    },
+    {
+      "id": "F-065",
+      "testOrdinal": 950,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "b42d383c73b092d636cee4147799c0af1bf4203dbe686b27d2c665272c14ed8f",
+      "diagnosticSha256": "f0a828ef98747e3da9a6452394a451ada59ed2a59783db509c7ec441c6f35ec7"
+    },
+    {
+      "id": "F-066",
+      "testOrdinal": 951,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c2d25194d498b11a70b497c2cd06c8ded3c4569897ffecaeb7bd503e4f668a89",
+      "diagnosticSha256": "c367eda2c5eb9690e2530833a72e7b4ea97bec09c1f1687c76703025e1ae61fb"
+    },
+    {
+      "id": "F-067",
+      "testOrdinal": 952,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "eb0d66cf131bfab9ba487393ed623fea9397c647dbfa9a0c25e3d36debdd7bec",
+      "diagnosticSha256": "755884038d8555f523a143a8734a353100f3c39a94961c75e3f3a1759f385859"
+    },
+    {
+      "id": "F-068",
+      "testOrdinal": 953,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "75b7813754989bf2a5e681349cb3b5c54455fca2c0828da2f3c491ec6a14f7e3",
+      "diagnosticSha256": "d32e8362bad0698de8a4c338c8c12a30e605f95596bda73906cd4786051a4d83"
+    },
+    {
+      "id": "F-069",
+      "testOrdinal": 954,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "cf355c11e2d8d479653d673a9b5e050ea1b05d51b0053b1358e107cdacae29ac",
+      "diagnosticSha256": "2aed7e8f4c00a81d60a157b92b9be90b5932a2510a47306fdba4e5b1b26aef1c"
+    },
+    {
+      "id": "F-070",
+      "testOrdinal": 955,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1b4556779a62207c8249114da0b6243f58c333853fb138ea59ae729ae480a8c1",
+      "diagnosticSha256": "33327d07c92402a4c574c6023cbf3b0b50cbe4737e3d7009e16a58297aeea363"
+    },
+    {
+      "id": "F-071",
+      "testOrdinal": 956,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "b4a4a576c00db1169f66e18c344ad0fda527bdd7fbb7f29bdd210437a576fa34",
+      "diagnosticSha256": "e620216c71075805e3f31cab982cd739ce48ed2d57761157146d0b5f15b64675"
+    },
+    {
+      "id": "F-072",
+      "testOrdinal": 35,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "78a896c37b51a502ccddbce2d9f19002f54a473ac94e097f5eff8eaf88c6c1eb",
+      "diagnosticSha256": "4d158466daa217e5250ae5e077bb794b94de8a9f775f80ee236e1dc4e06b4390"
+    },
+    {
+      "id": "F-073",
+      "testOrdinal": 958,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "4153beb7177864a043fd4c3c015e377d283c9817a13ee9a9f048a5ddeb1849c0",
+      "diagnosticSha256": "a6c98a7ca7a365d44505f0b103006ec7945fca83a2d60ad498ceedd46d7881d6"
+    },
+    {
+      "id": "F-074",
+      "testOrdinal": 959,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "12d23d3c18a04da9265d931452778779f87b8bfceff0444ffaaabcdd5c29d080",
+      "diagnosticSha256": "3af6e7c21e55fc87a0a19a63607dd8d572b439d3cadb189f9ba9f1761055fc72"
+    },
+    {
+      "id": "F-075",
+      "testOrdinal": 960,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "3e87ac7d64c7b7c96fb344f4bba914efabdc6c6cb47f6e1282014117c222d95f",
+      "diagnosticSha256": "338a4d1524056b7ff0f01b8b368852d32362426fec38d95049e5479be962cbb1"
+    },
+    {
+      "id": "F-076",
+      "testOrdinal": 961,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "addbd6218e9ae84a09d84a53a43dc6231167e439fca0298d1ad333eed3da96a8",
+      "diagnosticSha256": "d0d259da3ca008bbb275400c21f2de7200642e91c4c425f1e1c2a07319254a60"
+    },
+    {
+      "id": "F-077",
+      "testOrdinal": 962,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1791577254975f140227fee560daac69e493434dbd61b90a9b8cb64f6f6824b4",
+      "diagnosticSha256": "f1aff28b90a8aa5250f50ca75e0b63c2a799ea8f2b2a6d15e2e6e82abfe5e005"
+    },
+    {
+      "id": "F-078",
+      "testOrdinal": 963,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "585e947d3ac4956351e653c0086a92ee0214dab55c8e5f2eb0881633ab92186c",
+      "diagnosticSha256": "ee9da210a88cab5ac5326687005ed4ae94c2640798e32566514cf396e9e315da"
+    },
+    {
+      "id": "F-079",
+      "testOrdinal": 37,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "312e1c35df3b462334956b374b4a1922226a66aebe7b22ad7185437f5279c1a9",
+      "diagnosticSha256": "91b487b485935a74766829f7f0d669419235c3adecbf86fa98831304d37f7ddf"
+    },
+    {
+      "id": "F-080",
+      "testOrdinal": 38,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "041d969a462d1068d30d1aa3337f97c27b98e0e801e06ed10f628278574d023f",
+      "diagnosticSha256": "8e53aa180c05d1157929172facf738b5f07c6aa45993b8d2a7f40248e04cae4c"
+    },
+    {
+      "id": "F-081",
+      "testOrdinal": 967,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "76d92b2948ff36a09ef015ce931f7074785f613a5f291772af05a928434dcaf7",
+      "diagnosticSha256": "b91bb0524c20424506c7921bcc34000c51e32798743fae3563cedb0a80b7744f"
+    },
+    {
+      "id": "F-082",
+      "testOrdinal": 968,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "54998d30f76803593c963c76814d28a37991b3acbebc02fd36e2e44a958a9b54",
+      "diagnosticSha256": "6ef847ce24588a724ab18a4a4cbfbe716639e698ca354ba2c6cd083db167d2c5"
+    },
+    {
+      "id": "F-083",
+      "testOrdinal": 969,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "00b9af48aaa03641922b177901aeb1549fcd547395b3da5960e3dd891e692393",
+      "diagnosticSha256": "f391e62eb6718e9196e749e97dadb502665bba08e8c8cf9022f8484a96a0e99f"
+    },
+    {
+      "id": "F-084",
+      "testOrdinal": 970,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "fc2357f6b683081364399e2fc3f5d15fb91fe635b23ff305d655f69b9b915194",
+      "diagnosticSha256": "23242850896b122d6cdffc318cd67c24b5ac626c2bdfac3e4240378ad5e5c051"
+    },
+    {
+      "id": "F-085",
+      "testOrdinal": 971,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "b2e1478e243133be6d286fd3b610ecce63597d470663ccf91bdc040fb509d9ea",
+      "diagnosticSha256": "e0ba975c33fbdbc858bbcc01855ca85de1f653356099fc3256db4fc6aabf549c"
+    },
+    {
+      "id": "F-086",
+      "testOrdinal": 972,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "35d6123c9cc5fd3fd8ec732ffb0d6c6b97bd51d61edb3965f6152c7210d1d88e",
+      "diagnosticSha256": "983e91cae17c0e9589f7ef1ba3b814942a4f5cf379838565a1ee4e8d0419e556"
+    },
+    {
+      "id": "F-087",
+      "testOrdinal": 974,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c1361346bcbff0bfa960290bd38a911d90d28490c4548459dee21685ecc624a6",
+      "diagnosticSha256": "ba31093c22a7d184d2b1deb694d3a03375e5e81be34af6b00d878f5835f3051c"
+    },
+    {
+      "id": "F-088",
+      "testOrdinal": 975,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "6e59fbe5be8059efc2373749d4cb7494d9f5f3c472cdf2d42c320cd788b5c635",
+      "diagnosticSha256": "fbfb29d7dbcde064cee991e3bb5a7c6e8495315a8350e7bf90b32f3780039e8a"
+    },
+    {
+      "id": "F-089",
+      "testOrdinal": 976,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "76914138da5a23e14588434e54fddf4d3627fb126671333774b247cc2e3ab2b3",
+      "diagnosticSha256": "66f9d4a53ba07f18525d27bba4f5ce9180758b881e9b5670d326d50ec1af48fc"
+    },
+    {
+      "id": "F-090",
+      "testOrdinal": 977,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "a7b2cfeed86547ad3a569fc6eccb0fae3c29cd0fb2da4e71ea41c9ef9997e995",
+      "diagnosticSha256": "6b252f2d17ae30ab6d6965cb611822b9296c1e037469ccafb6481a772debc4ca"
+    },
+    {
+      "id": "F-091",
+      "testOrdinal": 978,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1dec958afda768a60a92b329d7baf3fd064710a8d23d54a8b766257345644052",
+      "diagnosticSha256": "9c1175694ae59a47cf2c441613a814876205adb887c4c70b1486be3a7a5a349c"
+    },
+    {
+      "id": "F-092",
+      "testOrdinal": 980,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "0f98707870f6446b5abdf94d1c7ec3bd1cbe14a2af7d7190085f21a281f4da03",
+      "diagnosticSha256": "8540ee2e68e3a9fd91259a5053a71bf2df05d4ce884b15ca3ff85fcaca719cba"
+    },
+    {
+      "id": "F-093",
+      "testOrdinal": 984,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "cf5b27668870a4076fbac373dea9ba1603f44f73242959cec1ee7731a984d449",
+      "diagnosticSha256": "09207bdaa8a0eed278138a2d1d93853debf1ace1617db9b2f2d6f40db3225591"
+    },
+    {
+      "id": "F-094",
+      "testOrdinal": 1001,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "85893d7b996cf82a9b3fe40218af74638f58fc3082a2a49b82dcbfbc3bc4ad73",
+      "diagnosticSha256": "db6bcc3a2b6769abf2aa56e49ed6c7a6b87445535b084b2b76783aafd45c5729"
+    },
+    {
+      "id": "F-095",
+      "testOrdinal": 1002,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "36d7fc4bbdd8b5946522390101dd2334b6e2836f8d0405bf943a1c9cef56334f",
+      "diagnosticSha256": "b587f64745031ed77b5547c06509ee16d4e2370b45ca7d08fba455c2fa560fd0"
+    },
+    {
+      "id": "F-096",
+      "testOrdinal": 1003,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "e8114914f275bff4fb36ae81014cfe2aff6277e8448866e4e273e8e1d9c99407",
+      "diagnosticSha256": "1b29a16207a85fefea8e4eafa6d8436b69ae147ec024504468eab1d16ba79750"
+    },
+    {
+      "id": "F-097",
+      "testOrdinal": 1004,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "aae8afcc85cc9b1504a96b9427405649f1cb581e3ff13f63d3081f23d55edae1",
+      "diagnosticSha256": "bf0db0f8d45a7d6462e18f36d19275fff3877c5bd7acd154a5224ad665345e4c"
+    },
+    {
+      "id": "F-098",
+      "testOrdinal": 1006,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "8326ef78f2ea19ec66704781166f4d64e62ce5525841621a6652a7dc24d531ab",
+      "diagnosticSha256": "92bfbc539cfb4da9ccd6e37992250edea38ddefc52d18242e45b496bfa7280e5"
+    },
+    {
+      "id": "F-099",
+      "testOrdinal": 1007,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "7f20e2c4e6c5cdb195a3f9da50f7f5328a2b9b7c9c3d8b84fada71abd4913d1e",
+      "diagnosticSha256": "44a8fee329e774938139ca836ee47e5379264802b2a5a0e93268f1a987b52075"
+    },
+    {
+      "id": "F-100",
+      "testOrdinal": 1014,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "ed40265961dd0064341b205276612961860e28b2edfa4f62182769c46bee02e4",
+      "diagnosticSha256": "8d69a481bca7ba690045a4447d324f77a071d587367ee5276a31359b5bd6a0b0"
+    },
+    {
+      "id": "F-101",
+      "testOrdinal": 1019,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "801882742fa7481544436c017c6d68007ec9e52efb5e5478d4bc6b12e276793f",
+      "diagnosticSha256": "c6018330b7663d765c9513b9981d7e19c083408d25d9f8219c62b87b88d17f1d"
+    },
+    {
+      "id": "F-102",
+      "testOrdinal": 45,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "5bd87b60c3e416fd0a1124b35157af74c69fc3fcc419f9a2c5d0da637b86c7f1",
+      "diagnosticSha256": "f874a72e2052849a03f1cf6cb626f84a85de51c46c9abfe00bfcd86b96caeacd"
+    },
+    {
+      "id": "F-103",
+      "testOrdinal": 47,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "20ec439d7b7450da516228c90f930c355d9f09d5565a100a51d98a02b59a1375",
+      "diagnosticSha256": "d1e7fddacb990881f269534bf706016cb411f1a499809c0644d4b06de3d5c314"
+    },
+    {
+      "id": "F-104",
+      "testOrdinal": 50,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "49f434b23b5f321f97a97d8369bad017c822c8c84df7192b309fef4ad01c33cb",
+      "diagnosticSha256": "cbd1078808d27d02c58f582fcbf136177ac9c825d8fc25d5859298627d3098ed"
+    },
+    {
+      "id": "F-105",
+      "testOrdinal": 1102,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "1ed61259d46850a8c8f73a08762c1b1c9cacc9dedd8181f012ff3086fab9d79f",
+      "diagnosticSha256": "e0bd491f2783a2abbbef0557e6312ad367e478da23c196ff9267ed33f34cf33e"
+    },
+    {
+      "id": "F-106",
+      "testOrdinal": 1103,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "df2e43eddfc1b5bee006954857da6698115d60be09e425a76ebc3ebc5f7de8d6",
+      "diagnosticSha256": "09161fe44a6472ff94610812cf58d4b651e21d0ae6983b38142c815d48044c66"
+    },
+    {
+      "id": "F-107",
+      "testOrdinal": 1113,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f6b423718e88a08be12a46b6a7cc9ba3326495cd2f6295e273adc09868eb2a0c",
+      "diagnosticSha256": "a29e817674be7d44aa3ff6ca83f8ae45c1929b1b31d3953435b20d9ecab5d937"
+    },
+    {
+      "id": "F-108",
+      "testOrdinal": 1120,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "4b4c28ace4b24b9028547a21dae0212f12b9e1d053ddadb32fe4e397a31253ed",
+      "diagnosticSha256": "df4d13a5768fdca1b254eb738b358b7a5c30f5d0b66a1f7e52da7d8452ddda05"
+    },
+    {
+      "id": "F-109",
+      "testOrdinal": 1134,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f647e3ec9dc3be4396b6770ed982b1a531b668e7d3f12337f91536b3f458bd32",
+      "diagnosticSha256": "d0e216225a11e79d67e82bab95ac1065700c803c0942b7457169a93bc199948e"
+    },
+    {
+      "id": "F-110",
+      "testOrdinal": 1160,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "ab2386473ef55c4405b5033fee3b1c15b7ee2e2e841e2284cb612ef8a16a4564",
+      "diagnosticSha256": "5a93641c6085591f709c290a78a218d622fddaa3e0cff4d8c6d070b65e36db29"
+    },
+    {
+      "id": "F-111",
+      "testOrdinal": 1162,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "d330443426ffb31f18a11b73ea5f573bd08a6928390306c3d0e43aa3fd21044e",
+      "diagnosticSha256": "e38fe41da74f7e46b8fee4eec71b895365d25edd2df8410a6bd8c47ab172facc"
+    },
+    {
+      "id": "F-112",
+      "testOrdinal": 1163,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c9bb58fc2208a7385457863cd967d839f5a15d539486df4ffc937daa4f9d9645",
+      "diagnosticSha256": "b1d82f8bdfe7601744d38d577e496d4800362c2a652d2c652c74056d711a6eb5"
+    },
+    {
+      "id": "F-113",
+      "testOrdinal": 1164,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "4dcd9599c12b4a625d2f4e43423b02afb7f3282728f8c4bbcff7d2ac08104a69",
+      "diagnosticSha256": "3da4ede787158128be808d8575fc1db6c25c95f9d7a52ef68f57bf07e45f9547"
+    },
+    {
+      "id": "F-114",
+      "testOrdinal": 60,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "7a2d76a73711576d74036cdca5d87fa3746d2163e5bf93dd629f32d033314025",
+      "diagnosticSha256": "80450dd388456a7b34d9e21daae8464acacd06d0e8045261081ace3c2860abf8"
+    },
+    {
+      "id": "F-115",
+      "testOrdinal": 1175,
+      "classification": "expected-P-006",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "10c9c35c0aa1ac8482ced111be28cc17b973450e53f634ed7ac85e8f41c430f1",
+      "diagnosticSha256": "b99df5068bc75255bc573faba8dfd0027635a9fb56093fe77e2d06a75cf8b591"
+    },
+    {
+      "id": "F-116",
+      "testOrdinal": 62,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "a5aad8275715e77b11ace8d13483ed103dc7a968a8fe714f1917bcf77c11716b",
+      "diagnosticSha256": "3337e1a26f2dbf327b08c3f4400214bec71c6591d64e4e845f4c8cd6278078b6"
+    },
+    {
+      "id": "F-117",
+      "testOrdinal": 64,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f3b05d3e3cc914c6550831132742cb90fc773c78b1b7e896ae61d353ebb312ad",
+      "diagnosticSha256": "180821f09e08228cb59acbaefe70462d6132e2fe32e8dc749f0f6e004598e2a0"
+    },
+    {
+      "id": "F-118",
+      "testOrdinal": 2319,
+      "classification": "new-sealed-input",
+      "caseId": "x24-A-017",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "734285cabf0e0575e277fee33849b489bcf8dac10fca85a85cca83bb2831d635",
+      "diagnosticSha256": "4076867dad368b6af99c335459edd18b560369930828d39edb8f1fba2deb8762"
+    },
+    {
+      "id": "F-119",
+      "testOrdinal": 2320,
+      "classification": "new-sealed-input",
+      "caseId": "x24-A-018",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "1adb61066abedcbd2f84a563c98c4525998a5f9093c5b71b43b03f0b75ad0c13",
+      "diagnosticSha256": "997ba09a43e54a9cf8c8389033434fd5e8211df83313d5dfef441804830c5853"
+    },
+    {
+      "id": "F-120",
+      "testOrdinal": 2321,
+      "classification": "new-sealed-input",
+      "caseId": "x24-A-019",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "760b11f02ade71bff1817ead5c1b7e053fb800dca853ab4c7a864c23add18e07",
+      "diagnosticSha256": "810f682afaf5da18820900df3ab2f7ecb51e411150134d124821b9eaee4af6ae"
+    },
+    {
+      "id": "F-121",
+      "testOrdinal": 2322,
+      "classification": "new-sealed-input",
+      "caseId": "x24-A-021",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "4454913b8ec31215e11fe57be937cce3ada513d1a533c65277dbad791bbacc24",
+      "diagnosticSha256": "cd1bc5f91702ed940c742729ca7e1c4283a43ee508191d9dcb91b91a9a0808e5"
+    },
+    {
+      "id": "F-122",
+      "testOrdinal": 2328,
+      "classification": "new-sealed-input",
+      "caseId": "x24-X-015",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "6044f62362d247e9c038e4da3e9c08eeac871dd759c7af22ec9d6b927eb1bf1b",
+      "diagnosticSha256": "9920a919f3a8295446b0c17acdca0b464d63182fcbd70c73a84d542cdb1f86f8"
+    },
+    {
+      "id": "F-123",
+      "testOrdinal": 2329,
+      "classification": "new-sealed-input",
+      "caseId": "x24-X-016",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "2ad58bd8324fb5cd40b613dfd98f2a27c4894f2d375982dcd5250405a1e9c3d7",
+      "diagnosticSha256": "fc3541d6bb5bd506e42b62ef322a69635c038c458a7761865bd752b66e6865a0"
+    },
+    {
+      "id": "F-124",
+      "testOrdinal": 2330,
+      "classification": "new-sealed-input",
+      "caseId": "x24-X-017",
+      "c24Clause": "See the case and clause table in c24-expectation-conflicts.md",
+      "expected": "Sealed consumer observation",
+      "observed": "invalid-semantics",
+      "titleSha256": "a79165367dd8e38e314ad41b3b203ae91ffa984d2be8fd12d3d7fd350c4f6330",
+      "diagnosticSha256": "ade3ca5c945d33c21e0910943932e4810a8e7052ab0abadf9a53be1bd8ef2354"
+    },
+    {
+      "id": "F-125",
+      "testOrdinal": 2397,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c662e3444489b45f1f074664f022fbe12cfee94cc6d63a0c75bb19ecf95b2c14",
+      "diagnosticSha256": "3032c6ba16caedf8b629151e30415362eb5dfc233e3801b15c364d3ce5507cc6"
+    },
+    {
+      "id": "F-126",
+      "testOrdinal": 2460,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c7ef452419dfdebaba66c31b7506ad33bb3f324a3d6104411813fb51c7b67970",
+      "diagnosticSha256": "113c31a08492234bf301e4b8e961dd1b086cb0502f00a2ad4f1b29cff70d3e27"
+    },
+    {
+      "id": "F-127",
+      "testOrdinal": 2504,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "cc646661bf3dc1de1796a42df576fb10efc2fc89be166f1563ae9b6fc586f42e",
+      "diagnosticSha256": "ed6f470423cc22271634da009d1ff50553663a2e001608abbc7f058f112aedb9"
+    },
+    {
+      "id": "F-128",
+      "testOrdinal": 2512,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "2cda7ca16468190bc563c12d9e0bcaa0f790a92c0a4eac967d7059f3d86c3a1e",
+      "diagnosticSha256": "e86a0f79bfb284c54fa71eacfa8220bb932f392b7c64628dc45b2a01ccd14167"
+    },
+    {
+      "id": "F-129",
+      "testOrdinal": 95,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "d287dc97f35a36f6ab6f86c2635179f38029f47538b587d38afe733b8d8c3ef1",
+      "diagnosticSha256": "14a403f029fa20f7ada66571707dcb6625bf1fa1f8dabcccca8e727ff1f7efc7"
+    },
+    {
+      "id": "F-130",
+      "testOrdinal": 96,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "183a9136ddf0dbf1bf0bf5b82c1254f007dcfcdaf8cd8c3757f3225449f1f359",
+      "diagnosticSha256": "fe1c4ea597cb4a7c352e24a10f9011d6e7525221785a77be7277df5bf2dce0af"
+    },
+    {
+      "id": "F-131",
+      "testOrdinal": 97,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "212b609912dc80ca56512c853be025b88a62fd92661c2a6d0b46d7161ccdb8af",
+      "diagnosticSha256": "1436e1b53e50b8f81decc839e551985f4791032b11beb473a0814c2eba7e4dc9"
+    },
+    {
+      "id": "F-132",
+      "testOrdinal": 98,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "832161123d965bb85385828bba2f68e05a90502a5200573f62488a5288fc4737",
+      "diagnosticSha256": "4c12aced2819cf705848e61d92b547de2db7e36bc78e85ffa35e83f52d8d3112"
+    },
+    {
+      "id": "F-133",
+      "testOrdinal": 2519,
+      "classification": "starting-head",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "18c92bcfb51706fc56075889f6003fd5cb1b463620b567b9c05fe00a131e567f",
+      "diagnosticSha256": "f5207010ff69bb429d7b4a3d56e2fadeae1c1126e4d0d40f45e9c827a48fa954"
+    },
+    {
+      "id": "F-134",
+      "testOrdinal": 2520,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "9fc31db08e52b7bc7b3f0e4fcb320589ddbf14ca4356d5a6257bb726cd1c196c",
+      "diagnosticSha256": "ecabec3c11c8eeca1bb3956b0acd63ac1e9538d6389a5178fb36c961f7d9a19a"
+    },
+    {
+      "id": "F-135",
+      "testOrdinal": 101,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "e1d5436b996f48baffb427510a64febf838b87ff47acd52675e651725919c21f",
+      "diagnosticSha256": "5b6d435710bc1db35e3a9a17c72e79b16d7649f920c6a81b2dde1bf919e529ee"
+    },
+    {
+      "id": "F-136",
+      "testOrdinal": 103,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "64072b19d5470c056f81c71047f0fbbc7f03c18b9ae3398d36dcecce2386370b",
+      "diagnosticSha256": "c749bfec50d89d890b3c6ed7b6593da1f02855d89da4a141dac7b46aec5c3b0f"
+    },
+    {
+      "id": "F-137",
+      "testOrdinal": 104,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "4074ff79db727f17618711186369f2617243baff4f9ce1060a35a500dd8704de",
+      "diagnosticSha256": "072806a6715de3c7424aaa22cfe3025a458b1885188b26f2aa42814a14ce4379"
+    },
+    {
+      "id": "F-138",
+      "testOrdinal": 2604,
+      "classification": "new-earlier-source-guard",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "f2eb4d3762fd186e10e392f8c443e8abde1576fd4ee2c751dc3e6d00afe6e724",
+      "diagnosticSha256": "227093ea23be4bee435a5020578e2f977b011c19e2d0bcec036d1b5a29424607"
+    },
+    {
+      "id": "F-139",
+      "testOrdinal": 106,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "c5f1835f17c44868654b4617e76f7ae6aa39ced633b9a7941dffbff9ef165ccf",
+      "diagnosticSha256": "fe20bcaf6275025dc29cb07cc9a2a2bd0c72b746aafc2745b1e72164133fe1a0"
+    },
+    {
+      "id": "F-140",
+      "testOrdinal": 2759,
+      "classification": "new-frozen-scope",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Frozen scope length 1391",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "dd04bb26bd5751435d6eeec33c2324c7ac7893cda0dd45fd90409f4e1dc00991",
+      "diagnosticSha256": "2f2a58b09b5e4368f34233032c476dcaefabf18270dade7c62352c44b442d813"
+    },
+    {
+      "id": "F-141",
+      "testOrdinal": 2773,
+      "classification": "new-consumer-or-freeze",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "598913fe6e211871ec02b071ed10b329eb1bf3ac5188942cf92542c89336c232",
+      "diagnosticSha256": "afd59bc53e05776b6731075db115e620e72741bbeb3466492b42e20e915d817b"
+    },
+    {
+      "id": "F-142",
+      "testOrdinal": 2873,
+      "classification": "starting-head",
+      "c24Clause": "§12 L830–859; §12.1 L863–874",
+      "expected": "Preserved assertion succeeds",
+      "observed": "Assertion failed; diagnostic recorded by digest",
+      "titleSha256": "aa51eac1f93a3e2ac21e1f9cb0218f03a904406fdbfd8be1d101b1a95cfd62ff",
+      "diagnosticSha256": "6e7f34de66dfcef861b69dbd40d8a9b69714d8edea244b6e9b48b929c2a23edc"
+    }
+  ]
+}
