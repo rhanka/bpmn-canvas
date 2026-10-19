@@ -1,3 +1,4 @@
+import { createLegacyAdapter } from "../dist/internal/legacy-policy.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -41,12 +42,14 @@ for (const entry of manifest.cases) {
   test(`${c.caseId} sealed consumer vectors`, () => {
     for (const suffix of c.inputArtifacts.some(a => a.role === "policy-a") ? ["a", "b"] : [""]) {
       const policy = input(c, suffix ? `policy-${suffix}` : "policy") ?? (input(c, "policy-text") ? JSON.parse(input(c, "policy-text").text) : undefined);
+      const adapter = c.caseId.startsWith("x24-A-") && policy ? createLegacyAdapter(policy) : undefined;
       const expected = c.expectedArtifacts.find(a => a.role === (suffix ? `results-${suffix}` : "results")).json;
       const actual = input(c, "vectors").map(v => {
         if (c.operation === "x24.metrics") return { ...v, result: v.measure === "text-width"
-          ? textWidth(v.text, v.size, v.bold, policy)
-          : wrapText(v.text, v.size, v.maxWidth, v.bold, policy) };
+          ? (adapter ? adapter.textWidth(v.text, v.size, v.bold) : textWidth(v.text, v.size, v.bold, policy))
+          : (adapter ? adapter.wrapText(v.text, v.size, v.maxWidth, v.bold) : wrapText(v.text, v.size, v.maxWidth, v.bold, policy)) };
         const text = textOf(v.text);
+        if (adapter) return { ...adapter.classify(text), text: v.text };
         const document = classifiers.document(text, policy), application = classifiers.application(text, policy);
         const role = document ? "document" : application ? "application" : null;
         const layoutName = role ? roleLabel(text, policy, true) : null;

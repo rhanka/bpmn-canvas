@@ -29,7 +29,8 @@ function observe(c, policy) {
     if (c.operation === "x24.theme.select") return adapter ? adapter.selectLook(v) : selectLook(v);
     if (c.operation === "x24.navigation") {
       const data = v.navigation ? { ...policy, navigation: v.navigation } : policy;
-      const result = navigationTarget(v, input(c, "index") ?? { processes: [], entries: [] }, data);
+      const index = input(c, "index") ?? { processes: [], entries: [] };
+      const result = data ? createLegacyAdapter(data).navigate(v, index) : navigationTarget(v, index);
       return v.navigation ? { rules: v.navigation.rules, ...result } : result;
     }
     const selector = input(c, "look");
