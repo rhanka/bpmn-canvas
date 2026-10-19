@@ -1,5 +1,22 @@
 # @sentropic/bpmn-canvas
 
+## Injected compatibility policy
+
+Business recognition, attachment, measurements, look values, navigation and codec facts are caller data.
+The package supplies no compatibility defaults. Read an explicit business-policy/1 record with
+`readBusinessPolicy(text)`, then pass it as `businessPolicy` to canvas, static render, workshop and codec
+options. A look selector is an alias from that record. Preview cards and toolkit entries accept the same
+data through `renderOptions`; their cache distinguishes those inputs.
+
+`createLegacyAdapter(policy)` binds the compatibility readers to a snapshot of that record. This record
+is independent of a compiled profile; native profile consumers evaluate their compiled profile directly.
+Codec callers also supply their descriptor package and its declared `descriptorId`. No descriptor is
+registered by default. Ambiguous Process IO creation requires an explicit set selection.
+
+Older compatibility examples below describe caller-owned data. Bracketed LX references identify a
+category from the migration inventory rather than a value supplied by this package.
+
+
 A BPMN 2.0 editing canvas built on [bpmn-js](https://github.com/bpmn-io/bpmn-js):
 framework-independent core, optional React and assistant-ui adapters.
 
@@ -97,7 +114,7 @@ Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-
 
 `profile: "standard"` (default) is upstream bpmn-js: its renderer, palette and context pad, so every
 BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in look (rounded task
-boxes, `[Component]`/`[Reference]` annotations, a legend palette) that draws only the shapes it can draw
+boxes, `[LX-MK-2]`/`[LX-MK-1]` annotations, a legend palette) that draws only the shapes it can draw
 faithfully; everything else falls through to the upstream renderer.
 
 ## The workshop (`/react`)
@@ -159,18 +176,18 @@ const titles = io.listDiagrams(xmlInput).map((d) => d.name); // diagram, else pr
 - `parseDefinitions(xml)` registers the shared semantic descriptor, returns `{ rootElement, elementsById, warnings }`,
   and rejects invalid required semantics and unknown namespace versions. `createModdle()` exposes descriptor-aware
   `create`, `fromXML` and `toXML` operations for model authoring; use `parseDefinitions` for validated wire input.
-  `semanticDescriptor` and `semanticsChecksum` are exported, and the verbatim descriptor is available at
-  `@sentropic/bpmn-canvas/semantics.json`. Register it under `sem` when using another moddle instance.
+  `[LX-DS-2]` and `[LX-DS-2]` are exported, and the verbatim descriptor is available at
+  `@sentropic/bpmn-canvas/[LX-DS-2]`. Register it under `[LX-DS-4]` when using another moddle instance.
 - `export(definitions, format)` returns `Promise<Uint8Array>` containing UTF-8 bytes. The caller supplies the filename
   and MIME type. `bpmn` serializes the current moddle graph, including extensions and DI; whitespace and namespace
   spelling may change. `drawio` and `sparx` project semantic IDs, references, roles, lane membership and orders from
   that graph and use its DI for geometry. The exporter never normalizes, lays out or repairs a model.
 - Formatted exports preserve the reference codecs' cell/element order, IDs, styles, geometry, anchors, page links,
   rounding and escaping. They support one pool per page, tasks, collapsed sub-processes, call activities,
-  start/end/throw events, exclusive/parallel gateways, data objects/inputs/outputs, `[Reference]` and `[Component]` annotations,
+  start/end/throw events, exclusive/parallel gateways, data objects/inputs/outputs, `[LX-MK-1]` and `[LX-MK-2]` annotations,
   sequence flows and data/document links. All pages need complete valid DI. Unsupported content or missing required
   facts refuses the whole conversion with an `IoError` carrying a stable `code` and offending `ids`.
-- Semantic metadata lives in `sem:Info` within `extensionElements`: `order`, `laneRef`, `direction`, `label`,
+- Semantic metadata lives in `[LX-DS-1/LX-DS-4]` within `extensionElements`: `order`, `laneRef`, `direction`, `label`,
   `primaryAssociationRef` and `processRef`. References identify elements by ID; DI positions and names do not supply
   these facts. Keep this metadata consistent with edits before exporting.
 - Envelope configuration is fixed once with `initializeCodecs`: `host`, `drawio.agent` (omitted unless supplied),
@@ -354,10 +371,10 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 0.3 changes the default look of the `legend` profile and the outcome of superseded work; entries, types and methods
 are unchanged.
 
-- `DEFAULT_LEGEND_TOKENS` is now the reference Custom look (see [Legend profile](#legend-profile)): a legend canvas
+- `[LX-TH-6]` is now the reference Custom look (see [Legend profile](#legend-profile)): a legend canvas
   without tokens draws black lines, a beige task gradient, red events, green gateways, yellow external processes and
   documents, red dashed links and white lane headers. To keep the 0.2 neutral look, pass the neutral values, which
-  remain the colored profile's defaults: `legendTokens: DEFAULT_COLORED_TOKENS` (exported by
+  remain the colored profile's defaults: `legendTokens: [LX-TH-6]` (exported by
   `@sentropic/bpmn-canvas/browser`).
 - `dataLinkArrow` defaults to `false` in the legend profile (plain dashed task input and output links); pass `true`
   for the BPMN arrow head.
@@ -442,27 +459,27 @@ are in `THIRD_PARTY_NOTICES.md` and `licenses/`.
 
 Opt-in look: `createBpmnCanvas(host, { profile: "legend", legendTokens })` and
 `renderDiagrams(xml, { profile: "legend", legendTokens })`. Without tokens it draws the reference Custom look:
-black lines, beige task gradient (`#f6f1ea` → `#ECE2D4`), red events (`#E27676`), green gateways (`#60BE89`), yellow
-external processes (`#ffff99`) and documents (`#ffe599`), cyan application boxes (`#99ffff`), pool strip `#eee7df`,
-white lane headers, red dashed links (`#b85450`, `5 5`, no arrow head on task input/output links). Any token overrides it.
+black lines, beige task gradient (`[LX-PR-3]` → `[LX-PR-3]`), red events (`[LX-PR-3]`), green gateways (`[LX-PR-3]`), yellow
+external processes (`[LX-PR-3]`) and documents (`[LX-PR-3]`), cyan application boxes (`[LX-PR-3]`), pool strip `[LX-PR-3]`,
+white lane headers, red dashed links (`[LX-PR-3]`, `5 5`, no arrow head on task input/output links). Any token overrides it.
 
 ### Tokens
 
-`legendTokens` is a `Partial<LegendTokens>`. Missing keys use the defaults above (`DEFAULT_LEGEND_TOKENS`). Two conveniences: `stroke` feeds
+`legendTokens` is a `Partial<LegendTokens>`. Missing keys use the defaults above (`[LX-TH-6]`). Two conveniences: `stroke` feeds
 every `*Line` and `flow` you did not name, `fill` feeds `taskFill`; `taskFillEnd` is derived from `taskFill`
 when you do not name it. An explicit per-type value always wins.
 
 | Group | Keys |
 |---|---|
 | Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns), `labelText` (labels outside their shape; `colored`: follows `text`, `legend`: upstream colour unless named) |
-| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[Reference]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
+| Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[LX-MK-1]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
 | Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
 | Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
 | Pool, lane | `poolLine`, `poolFill`, `laneLine`, `laneFill`, `laneHeaderFill` (header column, default: `laneFill`) |
 | External call, external input, process output | `externalLine`, `externalFill` |
-| `[Reference]` annotation | `docLine`, `docFill` |
+| `[LX-MK-1]` annotation | `docLine`, `docFill` |
 | Task input and output (data object) | `dataLine`, `dataFill` |
-| `[Component]` annotation (component box) | `appLine`, `appFill` |
+| `[LX-MK-2]` annotation (component box) | `appLine`, `appFill` |
 
 A BPMN-in-Color fill or stroke set on an element in the XML wins over the token.
 
@@ -513,10 +530,10 @@ await canvas.setProfile("colored", coloredTokens);
 ```
 
 - **Tokens** are the 33 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
-  (`DEFAULT_COLORED_TOKENS`; only the named keys recolour) (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
+  (`[LX-TH-6]`; only the named keys recolour) (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
   no module and draws exactly like `standard`.
 - **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data
-  input and output), data (data object and data store), doc and app (text annotations starting `[Reference]` / `[Component]`),
+  input and output), data (data object and data store), doc and app (text annotations starting `[LX-MK-1]` / `[LX-MK-2]`),
   flow (sequence and message flows), link (associations and data associations). Plain annotations use `stroke`; groups
   keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`, external labels use `labelText` (default: `text`). `dataLinkArrow: false` (legend look) draws task input and output associations without the arrow head.
 - Only the tokens the host names recolour: a kind whose token is missing keeps the upstream colour (name `taskFill` alone and flows, events and texts stay as in `standard`). `stroke` names every line colour, `fill` the task fill, `text` the labels too.
@@ -524,5 +541,5 @@ await canvas.setProfile("colored", coloredTokens);
 - Markers (arrowheads, message-flow ends, conditional markers) are created by the upstream renderer with the flow
   colour and with ids unique to the instance, so two instances with different tokens never share one.
 - Not applied: `strokeWidth` (it would also change the inner decorations), `taskFillEnd` (no gradient is drawn) and the
-  font tokens. The `[Reference]`/`[Component]` background is the only thing added to the upstream drawing: a fill on the existing
+  font tokens. The `[LX-MK-1]`/`[LX-MK-2]` background is the only thing added to the upstream drawing: a fill on the existing
   annotation box.

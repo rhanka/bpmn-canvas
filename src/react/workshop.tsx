@@ -410,7 +410,7 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
 
   const doImport = async (readText: Promise<string>): Promise<void> => {
     try {
-      const result = await importDiagram(await readText, props.ioOptions);
+      const result = await importDiagram(await readText, { ...props.ioOptions, ...(props.businessPolicy ? { businessPolicy: props.businessPolicy } : {}) });
       for (const f of result.fidelity) addNotice("info", f.message);
       if (props.onImport) props.onImport(result);
       else {
