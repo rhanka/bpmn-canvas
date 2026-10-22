@@ -1,0 +1,32 @@
+{
+  "caseId": "render.compile.grid-profile",
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot4-layout-export/expectations/vendor/py/parity/artifacts/profile-3d0c95bd8359e3ac.json",
+    "sha256": "4b1fa6d04d9751abdcdc59ee98161c70d9343cb00b6f45350c6a8c91dbcad2f3"
+  },
+  "inputArtifacts": [],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "diagnostics": []
+      }
+    },
+    {
+      "role": "unsealed",
+      "json": [
+        {
+          "pointer": "/payload",
+          "reason": "CompiledProfile is an in-memory implementation object without a closed DESIGN wire shape (BLOCKB-PARITY-SYNC PS-35); compile success and empty diagnostics are sealed."
+        }
+      ]
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

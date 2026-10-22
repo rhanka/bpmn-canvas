@@ -1,0 +1,146 @@
+{
+ "format": "x24-probe-expectations/4",
+ "note": "Exact assertions the two acceptance probes of tests/profile-externalization.probe.mjs must satisfy once block B lands, and the hygiene rules of the sealed files. The original assertions of both probes are kept: those of probe 2 verbatim, the one of probe 1 in a literal-free form whose call the seal test binds to the digests and spans of the base lines (probe1.original); derive/base-check.mjs proves the materialization equal to the base lines. The sealed assertions are added after them, never substituted. No scanned literal is written: classifier functions are named by the SHA-256 of their export name and base literals by ledger row. Neither the probes nor the seal test read a Git object other than the index listing (git ls-files).",
+ "probe1": {
+  "test": "J5 #24 should require injected data for business classification",
+  "module": "dist/internal/annotations.js",
+  "original": {
+   "probe": "tests/profile-externalization.probe.mjs",
+   "baseBlob": "dcbd90d392395ff9f3fea2417ea3e4c16c825066",
+   "headLines": {
+    "1": "f5f094c3b5ab62194e4e5bdc5b67b6241e65ae9e2c5ca4f1a59cde778b76fd6b",
+    "2": "a317f8408e6b56d255cd9e77bc1e599c7ef4874ad632598cfaa3d8f64242bb92",
+    "3": "57f1709746dd7dd60c275d2834f4d96fb0d5da730b4974371e98141d980b3849",
+    "4": "7571c7236d81e917e5ef265d146901817322e3131c2855da79e3b0a84ea5374e"
+   },
+   "baseLines": {
+    "5": "945d5efb60001a6ead64aa5c473452cc2f8c0a84202b1de84c5ccf5ee1a5c98b",
+    "8": "120781fc357f7ad2fd1d6dabe56756805bb4b05de4a35757e79c57225d4eee12",
+    "9": "83c0885fbde8366063b32b4df3ec932b0047e72c2cd85d0dcae9c9235bb3812b"
+   },
+   "import": { "line": 5, "template": ["import { ", { "row": "I-2931" }, " } from \"../dist/internal/annotations.js\";"] },
+   "call": {
+    "line": 8,
+    "template": ["  assert.equal(", { "row": "I-2932" }, "(", { "json": "argument" }, "), false,"],
+    "function": "8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2",
+    "argument": { "concat": [{ "literal": "I-2933", "sha256": "494f15d2dc1e29c463466b475dce61be61318c06516edcf89f755216969b8bf5" }, " example"] },
+    "returns": false
+   },
+   "message": { "line": 9, "kept": "verbatim" },
+   "rule": "Materializing a template (strings as written, a row part as the text of that base ledger row, a json part as the JSON serialization of the materialized argument) gives the base line whose SHA-256 is listed. The literal-free probe calls the export of dist/internal/annotations.js whose name has the SHA-256 function (the name imported at base line 5 and called at base line 8) with the materialized argument, expects false and keeps base line 9 as its message line: the original assertion, unweakened. The probe keeps base lines 1 to 4 (headLines) verbatim. derive/base-check.mjs materializes both templates from the base tree and compares them with the base lines; the seal test checks, without the texts, that rows I-2931, I-2932 and I-2933 sit in the base probe at the template positions of lines 5 and 8 with these line digests and that the imported, called and listed function digests are one."
+  },
+  "literalSource": {
+   "rows": ["I-2933", "I-0571", "I-0569"],
+   "historyRows": { "494f15d2dc1e29c463466b475dce61be61318c06516edcf89f755216969b8bf5": ["I-0274", "I-0281"], "cfbbd53c1a09d282307db17a1811be470cc1bced560ed14d648c971da1b68f47": ["I-0265", "I-0273", "I-0282", "I-0284", "I-0286"] },
+   "rule": "A base literal that a text vector names by ledger row is the text of a tracked occurrence (strict derive/scan.mjs over the index listing git ls-files) whose literal SHA-256 is the row's; the probes read no Git object. The rows the probes materialize are the document-role and application-role markers (rows); each literal keeps history-record rows (historyRows) whose post-migration status retained-history requires them present (postMigrationPresence), so the text stays in the tracked tree after the migration."
+  },
+  "functions": [
+   { "sha256": "8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2", "returns": "boolean", "role": "document", "definedAt": "I-0467" },
+   { "sha256": "8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53", "returns": "boolean", "role": "application", "definedAt": "I-0469" },
+   { "sha256": "e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8", "returns": "string", "role": "display-name", "definedAt": "I-0473" }
+  ],
+  "signature": "Each function is the export of the module whose name has the listed SHA-256 (its base definition is the ledger row definedAt). It takes (text, policy?): policy is a parsed business-policy/1 record; without policy it uses no business data, recognises nothing and returns its text argument unchanged for the display-name function.",
+  "added": [
+   { "case": "cases/x24-P-002-probe-1-no-policy.json", "rule": "without policy: the two boolean functions return false and the display-name function returns its argument unchanged, for every sealed text, base markers included (materialized from their ledger rows)" },
+   { "case": "cases/x24-P-003-probe-1-injected.json", "rule": "with each sealed data set (legacy-shaped synthetic, neutral A, neutral B) the three functions return exactly the sealed results" }
+  ]
+ },
+ "probe2": {
+  "test": "J5 #24 should inventory occurrences and distribution members",
+  "scope": "docs/design/profile-externalization-scope.json",
+  "original": {
+   "baseLines": [[14, 15], [16, 17]],
+   "lines": [["09b0ee19cb2f911c6a8bf2966094b0556fc40f2f7e2e12e3d7db3724f3a9512a", "501f8529e4f0ae0b009abd012d061d3c63bc558ef1428f69e3862e69af971560"], ["83e9fe5d235e83d13a2777c53aa8bdd5a2035e42cbc7278a7848ea29c9b0e13e", "7199faf87c0cdc3fa45b844f6ceb6b24652ec47ff821ec3863cec57f5f870621"]],
+   "scopeLine": { "line": 13, "sha256": "e6fa9e1e10ba8ebfb08368b34a32c7c742d9ab3cab0d683eeda82b2fc54dedca" },
+   "kept": "verbatim"
+  },
+  "scopeFormat": {
+   "format": "profile-externalization-scope/2",
+   "baseLedger": { "path": "tests/fixtures/x24-externalization/expectations/ledger.json", "sha256": "the SHA-256 of the sealed ledger.json (seal.json#/files)" },
+   "occurrences": "every row of ledger.json#/occurrences, by id, with the fields of rowFields unchanged, plus postMigration {status, evidence}; rows for post-migration occurrences that have no base row are appended with ids I-P0001 upwards",
+   "distributionMembers": "every member of the post-migration package (npm pack --dry-run --json --ignore-scripts) with masked path, bytes, sha256, status (clean or carries-occurrences) and every member occurrence with the scope rows that explain it, as ledger.json#/distributionMembers records them",
+   "zeroListExceptions": "the exceptions of the zero-list rescan, each {kind, file, sha256, line, column, endLine, endColumn, entry, literal, reason} plus the fields its kind requires (rescan.zeroListExceptionKinds)",
+   "selectorBranchExceptions": "the exceptions of the look selector branch rule, each {row, file, sha256, line, column, endLine, endColumn, use, entry, literal, reason}, whose row is the base row of a base allowance or the id of a reviewed allowance (rescan.selectorBranch)"
+  },
+  "rowFields": ["file", "line", "column", "endLine", "endColumn", "form", "entry", "family", "literal", "key", "lineSha256", "rule", "category", "consumer", "targetRef", "disposition"],
+  "postMigrationStatus": {
+   "inject": ["injected"],
+   "remove": ["removed"],
+   "replace": ["replaced", "injected", "removed"],
+   "legacy-api": ["retained-legacy-api", "removed"],
+   "test-input": ["retained-test-input", "successor-public-test", "removed"],
+   "neutral-successor": ["successor-public-test", "removed"],
+   "doc-update": ["documentation-updated", "removed"],
+   "history-record": ["retained-history"],
+   "context-generic": ["retained-context", "removed"],
+   "retain-notice": ["retained-notice", "removed"]
+  },
+  "appendedRows": {
+   "idPattern": "^I-P\\d{4}$",
+   "fields": ["file", "line", "column", "endLine", "endColumn", "form", "entry", "family", "literal", "key", "lineSha256", "category", "consumer", "policy", "targetRef", "disposition", "postMigration"],
+   "dispositions": ["legacy-api", "test-input", "neutral-successor", "doc-update", "history-record", "context-generic", "retain-notice"],
+   "status": "a status listed by postMigrationStatus for the row disposition, other than removed (the occurrence is still present)"
+  },
+  "postMigrationPresence": {
+   "absent": ["removed", "injected", "replaced", "successor-public-test"],
+   "present": ["retained-legacy-api", "retained-test-input", "retained-history", "retained-context", "retained-notice"],
+   "either": ["documentation-updated"],
+   "rule": "A base row with an absent status pairs with no post-migration occurrence, a base row with a present status pairs with exactly one, and a documentation-updated row with at most one."
+  },
+  "trackedRescan": "Every occurrence of a tracked file (git ls-files) found by derive/scan.mjs (strict mode, sealed lexicon) is a scope row: a base row with the same masked file, form, entry, literal, column, endColumn and line span (endLine - line) whose lineSha256 equals the SHA-256 of the occurrence's start line (identical keys pair in source order), or else a base row relocated by lexicon.json#/relocated whose record has these values (the record's column, endColumn and lineSha256: the same occurrence on the line a block B edit left before the migration; README \"Relocated base rows\"), a base row pairing with one occurrence at most through its keys, otherwise an appended row with the occurrence's exact fields (file, line, column, endLine, endColumn, form, entry, family, literal, key, lineSha256). No path is excluded: the x24 sealed files are literal-free (sealHygiene), and the strict scan does not report a reviewed occurrence, an occurrence that lexicon.json#/reviewed binds to its exact file (path and file SHA-256) and span in an eligible block B sealed expectation file (README \"Reviewed occurrences\").",
+  "scopeHygiene": "The scope file writes no scanned literal: its relaxed scan finds nothing and derive/literals.mjs#ledgerHits finds no hit for the hashed literal set of the base rows (literal-set.json) and the texts of the current occurrences (read from the current tree at their spans).",
+  "memberHits": "Every scope distribution member lists its occurrences as ledger.json does ({line, column, endLine, endColumn, form, entry, family, literal, explainedBy, thirdParty}); the list equals a rescan of the member with the sealed lexicon (source maps: file, sources and names, one per line), every explaining id is a scope row with the occurrence's entry and, unless the lexicon entry has explainBy entry, its literal, and an occurrence without explaining rows names exactly one third-party package that rescan.thirdPartyAllowlist lists with its entry.",
+  "added": [
+   { "case": "cases/x24-P-005-probe-2-ledger-rows.json", "rule": "scope format /2, base ledger pinned, every sealed row present with equal fields, a status allowed for its disposition and a non-empty evidence string, appended rows following appendedRows, and a literal-free scope file (scopeHygiene)" },
+   { "case": "cases/x24-P-006-probe-2-rescan.json", "rule": "post-migration rescan: no unmatched tracked occurrence, no unexplained member occurrence, no zero-list occurrence outside a bound exception or an allowlisted third-party attribution, no look selector branch outside a bound exception, and no unbound exception" },
+   { "case": "cases/x24-P-007-probe-2-distribution.json", "rule": "distribution members equal the actual pack list with matching bytes; no member path carries a descriptor-family literal" }
+  ]
+ },
+ "rescan": {
+  "lexicon": "lexicon.json",
+  "zeroListEntries": ["LX-MK-1", "LX-MK-2", "LX-MK-3", "LX-MK-4", "LX-MK-5", "LX-DS-1", "LX-DS-2", "LX-DS-3", "LX-DS-4", "LX-MT-1", "LX-MT-2", "LX-MT-3", "LX-MT-4", "LX-AT-1", "LX-PR-3", "LX-ES-2", "LX-TH-6", "LX-PV-1", "LX-BR-1", "LX-EN-1", "LX-TV-2"],
+  "zeroListScope": "every member of the actual pack list (npm pack --dry-run --json --ignore-scripts) and every tracked file under src/",
+  "zeroListExceptionKinds": [
+   { "kind": "third-party-notice", "entries": ["LX-MT-1"], "rowDisposition": "retain-notice", "rowStatus": "retained-notice", "fields": ["license", "reason"], "baseRows": ["I-0144", "I-0145", "I-0146", "I-0147", "I-0424"], "reason": "required third-party notice of the metrics data (DESIGN.md:836, 874)" },
+   { "kind": "legacy-token-api", "entries": ["LX-TH-6"], "keys": ["f3ea7ed376698b214396b44b3f94308805800f79bcc9b7ec1662556d959b5d7b"], "rowRule": "R-184", "rowDisposition": "legacy-api", "rowStatus": "retained-legacy-api", "fields": ["reason"], "baseRows": ["I-1298", "I-1308", "I-1372", "I-1391"], "reason": "the stroke fan-out key list identifier of the legacy token API, generic legacy-adapter code (ledger rule R-184); the default token table identifiers stay on the zero list" }
+  ],
+  "zeroListExceptionRule": "A scope zero-list exception binds exactly one zero-list occurrence: the file's current SHA-256 equals its sha256, an occurrence of its entry with its literal (and one of the kind's keys when the kind lists keys) sits exactly at its span, the entry is listed by its kind, every field of the kind is a non-empty string, and the occurrence is backed by a scope row of the kind: in a tracked file its own scope row, otherwise (a package member) every scope row that explains it; a backing row is a base row listed by the kind's baseRows, with the kind's rowDisposition (and rowRule when listed) and the status rowStatus. An exception of an unknown kind, binding no occurrence or binding an occurrence twice fails.",
+  "thirdPartyAllowlist": [
+   { "package": "bpmn-js", "entry": "LX-MT-1" },
+   { "package": "bpmn-moddle", "entry": "LX-TH-2" },
+   { "package": "bpmn-moddle", "entry": "LX-TH-3" },
+   { "package": "domify", "entry": "LX-TH-1" },
+   { "package": "moddle-xml", "entry": "LX-TH-4" }
+  ],
+  "thirdPartyRule": "A browser bundle occurrence is third-party when the bundle source map attributes its position to node_modules/<package>/ and (package, entry) is allowlisted; bundled code of this package never is.",
+  "selectorBranch": {
+   "entries": ["LX-TH-1", "LX-TH-2", "LX-TH-3", "LX-TH-4", "LX-TH-5"],
+   "scope": "every JavaScript or TypeScript member of the pack list and every tracked JavaScript or TypeScript file under src/",
+   "rule": "derive/scan.mjs#selectorBranches (DESIGN.md:729, 837): a constant string (escapes decoded, + chains and constant template substitutions folded) whose whole value is an occurrence of one of the entries, used as an operand of ===, !==, == or != (comparison), as a case label (case), as an object or type literal key, quoted or computed (key), as an array literal element (element) or as a computed member name (member), and a bare identifier whose whole text is such an occurrence used as an object or type literal key (key), is a look selector branch.",
+   "attribution": "A branch belongs to a source module: a tracked file under src/ is its own module; dist/<p>.js belongs to src/<p>.ts or src/<p>.tsx, whichever is tracked; a position of a bundle with a source map belongs to the map source resolved against the map's directory, attributed again as above. A position attributed to node_modules/ is not this package's code and is not counted.",
+   "allowances": [
+    { "row": "I-0757", "module": "src/io/drawio-decode.ts", "use": "key", "entry": "LX-TH-3", "literal": "fe6d3468cf5c74d8ec2a95b40f2e05338c37a4202f8fad692d2b64a9cf9b468a", "count": 1, "reason": "generic draw.io outline vocabulary key (ledger rule R-059, disposition context-generic)" },
+    { "row": "I-0969", "module": "src/profile/validate.ts", "use": "key", "entry": "LX-TH-3", "literal": "fe6d3468cf5c74d8ec2a95b40f2e05338c37a4202f8fad692d2b64a9cf9b468a", "count": 1, "reason": "generic upstream lint settings key (ledger rule R-093, disposition context-generic)" }
+   ],
+   "reviewedAllowances": [
+    { "id": "RA-01", "reviewed": "RV-01", "module": "src/profile/lot4-export.ts", "sha256": "0ce2382d35f0cf09f652fb7cb63ede16568dd3d7df550aeb518f89f3879ebe6b", "line": 928, "column": 4, "endLine": 928, "endColumn": 12, "use": "key", "entry": "LX-TH-3", "literal": "fe6d3468cf5c74d8ec2a95b40f2e05338c37a4202f8fad692d2b64a9cf9b468a", "count": 1, "backingRows": ["I-0960", "I-0965"], "backingRule": "R-093", "reason": "generic upstream lint settings key of a block B module that has no base row: the key of the request object that the lot-4 pre-normalize lint passes to runLintSync, the optional caller witness of the exported interface LintRunRequest (src/profile/lint-bridge.ts:223, base row I-0960), filled with the same-named property of the compileLintPolicy result (src/profile/lint-contracts.ts:47, base row I-0965), which compiles it from the validation table of the injected profile; runLintSync refuses any value other than its own compilation (src/profile/lint-bridge.ts:265-267) and executes the compiled record. It is no comparison operand, no case label and no key of a table indexed by look names, and it selects no theme (DESIGN.md:729, 837). Both declarations are byte-identical on main (63a9258), ship in its package declarations and are kept by the base as context-generic rows of rule R-093, like the base allowance I-0969; a declaration published on main is not renamed. Reviewed token RV-01 (DESIGN.md:872, a generic word reviewed as a context match; DESIGN.md:874, exact, reviewed and narrowly anchored)." }
+   ],
+   "reviewedAllowanceRule": "A reviewed allowance admits the branches of one block B module that has no base row, for one reviewed token of lexicon.json#/reviewed. It holds only while the tracked file of its module has its sha256, a branch with its use, entry and literal sits exactly at its span (line, column, endLine, endColumn) in that file, the reviewed record named by reviewed binds that span in that file at that sha256, and every row of backingRows (base rows of rule backingRule with its entry and literal and disposition context-generic: the published declarations the key belongs to) has the scope status retained-context. A branch of a package member attributed to the module is bound under the same allowance by its own exception. Any change of the module bytes, of the span or of the token voids the allowance: its branches count again as remaining look selector branches.",
+   "exceptionRule": "A scope selector branch exception {row, file, sha256, line, column, endLine, endColumn, use, entry, literal, reason} binds exactly one branch found by the rule: the file's current SHA-256 equals its sha256, a branch with its use, entry and literal sits exactly at its span, its row names an allowance whose use, entry and literal are the branch's and whose module is the branch's module, and the reason is non-empty; a base allowance (allowances) is named by its row and requires the scope row of that base row to have status retained-context, a reviewed allowance (reviewedAllowances) is named by its id and requires reviewedAllowanceRule to hold. Per scanned file and allowance, at most count branches are bound. Every branch not bound by an exception is a remaining look selector branch and fails; an exception binding nothing fails.",
+   "baseBranchRows": ["I-0480", "I-0481", "I-0482", "I-0485", "I-0522", "I-0527", "I-0530", "I-0535", "I-0536", "I-0540", "I-0541", "I-0543", "I-0609", "I-0757", "I-0969", "I-1458", "I-1460"],
+   "baseBranchNote": "The branches the rule finds in the base tracked src/ files, as ledger rows (derive/base-check.mjs recomputes them from the base tree; the seal test checks their rows): fifteen inject rows that block B removes and the two context-generic rows of the allowances."
+  }
+ },
+ "sealHygiene": {
+  "scope": "every file listed by seal.json (files and external) and tests/x24-externalization-seal.test.mjs",
+  "literalSet": "literal-set.json: one hashed record per distinct exact text of the ledger occurrences (SHA-256, length, entry, edge classes and, from four units, a 16-bit polynomial prefilter), derived by derive/literal-set.mjs from the base tree at each row's span and checked against the row's literal SHA-256; derive/literals.mjs matches a record at the windows of its length (the prefilter, then the SHA-256), so that no text is needed and no Git object is read",
+  "rules": {
+   "R1": "the relaxed scan (derive/scan.mjs: every hashed and brand matcher applied everywhere, contexts ignored; structural patterns in their scope) of each file finds no occurrence",
+   "R2": "no literal of four or more UTF-16 units occurs anywhere (derive/literals.mjs#literalHits)",
+   "R3": "no literal of any length occurs as a whole token: an end of the literal that is a word character [A-Za-z0-9_] is not adjacent to another word character",
+   "R4": "derive/literals.mjs#ledgerHits finds no hit in ledger.json: no string field or key equals or contains a literal (R2, R3), nor does the concatenation of the string fields of any occurrence row or member hit"
+  },
+  "applyTo": "R2 and R3 apply to the text of each file, to every decoded string and key of a JSON file, to every constant string of a JavaScript file (escapes decoded, + chains and constant template substitutions folded) and to every regular-expression source of lexicon.json and classification-rules.json with its escape backslashes removed; 40- and 64-digit lowercase hexadecimal runs (Git object ids, SHA-256 digests) are blanked first.",
+  "exceptions": []
+ }
+}

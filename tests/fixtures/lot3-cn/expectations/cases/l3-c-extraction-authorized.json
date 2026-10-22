@@ -1,0 +1,431 @@
+{
+  "caseId": "l3-c-extraction-authorized",
+  "operation": "complete",
+  "phase": "complete",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn-extraction.json",
+    "sha256": "125bc7573f39468f177773bff8ec2c4beaa7c5f1b43f0275b4469ec9a13effd1"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn-extraction/1",
+          "version": "1.1.0",
+          "sha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "name": "Extracted",
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "name": "Draft task"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "eaa043bccfe84ba94db604e22bfb39d5bde5dadb02de2f0df50b775b7cc36d73"
+      }
+    },
+    {
+      "role": "mode",
+      "json": "extraction"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "operation": "complete",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn-extraction/1",
+          "version": "1.1.0",
+          "sha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "eaa043bccfe84ba94db604e22bfb39d5bde5dadb02de2f0df50b775b7cc36d73",
+        "revision": "2435f4b9e81a05263391d4357891dfccaa441f0d12e0339675c32064efcf3187",
+        "report": {
+          "reportVersion": "2",
+          "operation": "complete",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn-extraction/1",
+            "version": "1.1.0",
+            "sha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "targetIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn-extraction/1",
+            "version": "1.1.0",
+            "sha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "eaa043bccfe84ba94db604e22bfb39d5bde5dadb02de2f0df50b775b7cc36d73",
+          "outputRevision": "2435f4b9e81a05263391d4357891dfccaa441f0d12e0339675c32064efcf3187",
+          "entries": [
+            {
+              "code": "complete/set",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "c-definitions-exporter",
+              "messageKey": "complete.set",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/exporterVersion",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/exporterVersion",
+                "targetId": "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+                "provenance": "generated"
+              },
+              "property": "exporterVersion",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": "fixture-cn-1"
+            },
+            {
+              "code": "complete/set",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "c-definitions-namespace",
+              "messageKey": "complete.set",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/targetNamespace",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/targetNamespace",
+                "targetId": "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+                "provenance": "generated"
+              },
+              "property": "targetNamespace",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": "urn:neutral-cn:1"
+            },
+            {
+              "code": "complete/assignRef",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "c-topology-incoming",
+              "messageKey": "complete.assignRef",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/incoming",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/incoming",
+                "targetId": "g_aedf85ab3e3666cd67a78e330332e77f1604763fb010523797eb1217fd02cb64",
+                "provenance": "generated"
+              },
+              "property": "incoming",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": []
+            },
+            {
+              "code": "complete/assignRef",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "c-topology-outgoing",
+              "messageKey": "complete.assignRef",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/outgoing",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/outgoing",
+                "targetId": "g_aedf85ab3e3666cd67a78e330332e77f1604763fb010523797eb1217fd02cb64",
+                "provenance": "generated"
+              },
+              "property": "outgoing",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": []
+            },
+            {
+              "code": "complete/set",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "complete-process",
+              "messageKey": "complete.set",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/isExecutable",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/isExecutable",
+                "targetId": "g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4",
+                "provenance": "generated"
+              },
+              "property": "isExecutable",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": false
+            },
+            {
+              "code": "complete/allocate-id",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "stable-id/1",
+              "messageKey": "complete.allocate-id",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/id",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/id",
+                "targetId": "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+                "provenance": "generated"
+              },
+              "property": "id",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21"
+            },
+            {
+              "code": "complete/allocate-id",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "stable-id/1",
+              "messageKey": "complete.allocate-id",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/id",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/id",
+                "targetId": "g_aedf85ab3e3666cd67a78e330332e77f1604763fb010523797eb1217fd02cb64",
+                "provenance": "generated"
+              },
+              "property": "id",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": "g_aedf85ab3e3666cd67a78e330332e77f1604763fb010523797eb1217fd02cb64"
+            },
+            {
+              "code": "complete/allocate-id",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "stable-id/1",
+              "messageKey": "complete.allocate-id",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/id",
+                "targetId": null,
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/id",
+                "targetId": "g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4",
+                "provenance": "generated"
+              },
+              "property": "id",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": "g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4"
+            }
+          ],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        },
+        "payload": {
+          "documentVersion": "1",
+          "profileIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn-extraction/1",
+            "version": "1.1.0",
+            "sha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "tree": {
+            "$type": "bpmn:Definitions",
+            "id": "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+            "rootElements": [
+              {
+                "$type": "bpmn:Process",
+                "id": "g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4",
+                "name": "Extracted",
+                "flowElements": [
+                  {
+                    "$type": "bpmn:Task",
+                    "id": "g_aedf85ab3e3666cd67a78e330332e77f1604763fb010523797eb1217fd02cb64",
+                    "name": "Draft task",
+                    "incoming": [],
+                    "outgoing": []
+                  }
+                ],
+                "isExecutable": false
+              }
+            ],
+            "targetNamespace": "urn:neutral-cn:1",
+            "exporterVersion": "fixture-cn-1"
+          },
+          "bindings": [],
+          "semanticRevision": "2435f4b9e81a05263391d4357891dfccaa441f0d12e0339675c32064efcf3187"
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn-extraction/1",
+          "version": "1.1.0",
+          "sha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "name": "Extracted",
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "name": "Draft task"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "eaa043bccfe84ba94db604e22bfb39d5bde5dadb02de2f0df50b775b7cc36d73"
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2"
+  ]
+}

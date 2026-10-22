@@ -77,8 +77,19 @@
     },
     {
       "path": "tests/profile-golden-independence.test.mjs",
-      "bytes": 2011,
-      "sha256": "b7790b859671fcc7524528b75a11fe3208579e9fc1ba15125e24358a076ecef1"
+      "bytes": 2033,
+      "sha256": "c7b4e2a8091f39bdbc3ba63878558937278d9cc334354e1bb08889ebf90e37ed",
+      "g10Transition": {
+        "old": {
+          "bytes": 2011,
+          "sha256": "b7790b859671fcc7524528b75a11fe3208579e9fc1ba15125e24358a076ecef1"
+        },
+        "new": {
+          "bytes": 2033,
+          "sha256": "c7b4e2a8091f39bdbc3ba63878558937278d9cc334354e1bb08889ebf90e37ed"
+        },
+        "reason": "block B final spec pass moved the s123 inventory pin to final bytes; predecessor recorded here under fix round 2 G10"
+      }
     },
     {
       "path": "tests/profile-identity.test.mjs",

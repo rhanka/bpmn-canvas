@@ -1,0 +1,300 @@
+{
+  "caseId": "l3-c-gateway-direction-control",
+  "operation": "complete",
+  "phase": "complete",
+  "profileArtifact": {
+    "path": "profile-parity-corpus/profile-mechanism/1/neutral-profile.json",
+    "sha256": "c1319045f538a9f4ef1f3f7500af4a3e0df059e04c7c42dd7e992477c9199650"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral/1",
+          "version": "1.1.0",
+          "sha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+          "base": {
+            "id": "neutral-base/1",
+            "version": "fixture-2",
+            "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-descriptors/1",
+              "version": "fixture-2",
+              "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_A",
+          "targetNamespace": "urn:neutral:1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Control",
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_A",
+                  "name": "Work"
+                },
+                {
+                  "$type": "bpmn:ExclusiveGateway",
+                  "id": "Gateway_G",
+                  "name": "Route",
+                  "incoming": [],
+                  "outgoing": []
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_1",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Gateway_G"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "5b75a11183bac37b4078174180fe49e96d7ea19e1c03eecf1e21966c95d6540f"
+      }
+    },
+    {
+      "role": "mode",
+      "json": "retained"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "operation": "complete",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral/1",
+          "version": "1.1.0",
+          "sha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+          "base": {
+            "id": "neutral-base/1",
+            "version": "fixture-2",
+            "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-descriptors/1",
+              "version": "fixture-2",
+              "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+            }
+          ]
+        },
+        "baseRevision": "5b75a11183bac37b4078174180fe49e96d7ea19e1c03eecf1e21966c95d6540f",
+        "revision": "716f832f99abcbe18eb6bc54005f41709249b0d765d519c2dda6482e14048f7b",
+        "report": {
+          "reportVersion": "2",
+          "operation": "complete",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral/1",
+            "version": "1.1.0",
+            "sha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+            "base": {
+              "id": "neutral-base/1",
+              "version": "fixture-2",
+              "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-descriptors/1",
+                "version": "fixture-2",
+                "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+              }
+            ]
+          },
+          "targetIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral/1",
+            "version": "1.1.0",
+            "sha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+            "base": {
+              "id": "neutral-base/1",
+              "version": "fixture-2",
+              "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-descriptors/1",
+                "version": "fixture-2",
+                "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+              }
+            ]
+          },
+          "inputRevision": "5b75a11183bac37b4078174180fe49e96d7ea19e1c03eecf1e21966c95d6540f",
+          "outputRevision": "716f832f99abcbe18eb6bc54005f41709249b0d765d519c2dda6482e14048f7b",
+          "entries": [
+            {
+              "code": "complete/set",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "complete-process",
+              "messageKey": "complete.set",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/isExecutable",
+                "targetId": "Process_A",
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/isExecutable",
+                "targetId": "Process_A",
+                "provenance": "exact"
+              },
+              "property": "isExecutable",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": false
+            }
+          ],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        },
+        "payload": {
+          "documentVersion": "1",
+          "profileIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral/1",
+            "version": "1.1.0",
+            "sha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+            "base": {
+              "id": "neutral-base/1",
+              "version": "fixture-2",
+              "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-descriptors/1",
+                "version": "fixture-2",
+                "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+              }
+            ]
+          },
+          "tree": {
+            "$type": "bpmn:Definitions",
+            "id": "Definitions_A",
+            "targetNamespace": "urn:neutral:1",
+            "rootElements": [
+              {
+                "$type": "bpmn:Process",
+                "id": "Process_A",
+                "name": "Control",
+                "isExecutable": false,
+                "flowElements": [
+                  {
+                    "$type": "bpmn:Task",
+                    "id": "Task_A",
+                    "name": "Work"
+                  },
+                  {
+                    "$type": "bpmn:ExclusiveGateway",
+                    "id": "Gateway_G",
+                    "name": "Route",
+                    "incoming": [],
+                    "outgoing": []
+                  },
+                  {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1",
+                    "sourceRef": "Task_A",
+                    "targetRef": "Gateway_G"
+                  }
+                ]
+              }
+            ]
+          },
+          "bindings": [],
+          "semanticRevision": "716f832f99abcbe18eb6bc54005f41709249b0d765d519c2dda6482e14048f7b"
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral/1",
+          "version": "1.1.0",
+          "sha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+          "base": {
+            "id": "neutral-base/1",
+            "version": "fixture-2",
+            "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-descriptors/1",
+              "version": "fixture-2",
+              "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_A",
+          "targetNamespace": "urn:neutral:1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Control",
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_A",
+                  "name": "Work"
+                },
+                {
+                  "$type": "bpmn:ExclusiveGateway",
+                  "id": "Gateway_G",
+                  "name": "Route",
+                  "incoming": [],
+                  "outgoing": []
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_1",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Gateway_G"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "5b75a11183bac37b4078174180fe49e96d7ea19e1c03eecf1e21966c95d6540f"
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2"
+  ]
+}

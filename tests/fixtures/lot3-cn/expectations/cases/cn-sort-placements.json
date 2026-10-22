@@ -1,0 +1,141 @@
+{
+  "caseId": "cn-sort-placements",
+  "operation": "sortPlacements",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "placements",
+      "json": [
+        {
+          "elementId": "x",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "E",
+          "ownerProcessId": "P_2",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        },
+        {
+          "anchorAssociationId": "A1",
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": [
+            "A2"
+          ]
+        },
+        {
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "b",
+          "relatedAssociationIds": []
+        },
+        {
+          "anchorAssociationId": "A1",
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": [
+            "A1",
+            "B2"
+          ]
+        },
+        {
+          "elementId": "𐀀x",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        },
+        {
+          "anchorAssociationId": "A1",
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": [
+            "A1"
+          ]
+        },
+        {
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        }
+      ]
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "placements",
+      "json": [
+        {
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        },
+        {
+          "anchorAssociationId": "A1",
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": [
+            "A1"
+          ]
+        },
+        {
+          "anchorAssociationId": "A1",
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": [
+            "A1",
+            "B2"
+          ]
+        },
+        {
+          "anchorAssociationId": "A1",
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": [
+            "A2"
+          ]
+        },
+        {
+          "elementId": "𐀀x",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "x",
+          "ownerProcessId": "P_10",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "E",
+          "ownerProcessId": "P_10",
+          "regionKey": "b",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "E",
+          "ownerProcessId": "P_2",
+          "regionKey": "a",
+          "relatedAssociationIds": []
+        }
+      ]
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "placements-order/lot3",
+    "profile-c14n/2"
+  ]
+}

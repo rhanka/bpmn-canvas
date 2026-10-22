@@ -1,0 +1,2996 @@
+{
+ "format": "x24-classification-rules/2",
+ "note": "Hand-audited classification of every lexicon occurrence of the base tree, one occurrence at a time. The first rule whose conditions all hold decides the occurrence fields: path (ECMAScript regular expression on the masked path, derive/scan.mjs#maskPath), kind (path: line 0 only; content: lines 1 and above), lines, families, entries (the occurrence entry), keys (the SHA-256 of the occurrence normalised key) and forms. An occurrence matched by no rule is unmatched and fails the ledger build. A rule category of \"family\" takes the category of the occurrence family from familyCategory. Rules are evaluated in array order; their ids are stable labels (R-184, added by the first seal consistency review, sits before R-109). No rule names a scanned literal: version 1 line patterns became key or entry conditions.",
+ "vocabulary": {
+  "category": [
+   "classification",
+   "label-stripping",
+   "marker-insertion",
+   "type-role",
+   "attachment",
+   "metrics",
+   "navigation",
+   "descriptor",
+   "theme-selection",
+   "theme-tokens",
+   "presentation-geometry",
+   "export-style",
+   "palette",
+   "engine-metadata",
+   "generic-context"
+  ],
+  "consumer": [
+   "transactions",
+   "render",
+   "layout",
+   "ui",
+   "exporters",
+   "importers",
+   "static",
+   "workshop",
+   "assistant",
+   "descriptor",
+   "package-surface",
+   "profile-mechanism",
+   "test-suite",
+   "documentation",
+   "build-tooling",
+   "history-record",
+   "third-party"
+  ],
+  "disposition": {
+   "inject": "The hard-coded value at this site is replaced by a read of the injected data named by target (new path) or legacyAdapter (business-policy/1 path); the literal or identifier carrying the value does not remain at this site.",
+   "remove": "The policy is deleted without a library replacement; the DESIGN target behaviour applies instead.",
+   "replace": "The consumer is re-implemented as a profile-driven lot 3-5 consumer; any surviving legacy module keeps only generic code whose business reads are inject rows.",
+   "legacy-api": "Public legacy API name, literal or internal legacy-model identifier retained as an opaque key; it selects nothing by itself and every value it names is resolved through injected data.",
+   "test-input": "Test code or fixture data kept as legacy-adapter test input; the test supplies business-policy/1 or a profile explicitly and its expected values are unchanged.",
+   "neutral-successor": "Public test or fixture embedding business look values; replaced by a synthetic neutral successor, the exact business expectation moving to the private integration corpus (DESIGN.md:889).",
+   "doc-update": "Documentation or source comment rewritten to describe injected data; it describes no built-in business default.",
+   "history-record": "Immutable historical record, not shipped; retained.",
+   "context-generic": "Reviewed context match with a generic meaning; retained.",
+   "retain-notice": "Required third-party notice or third-party data; retained."
+  }
+ },
+ "modules": [
+  {
+   "id": "M-01",
+   "paths": [
+    "src/internal/annotations.ts"
+   ],
+   "consumers": [
+    "render",
+    "layout",
+    "transactions"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:830",
+    "DESIGN.md:831",
+    "DESIGN.md:887"
+   ],
+   "note": "Role classifiers keep their generic prefix and stripping algorithms and take every marker, trim and case from business-policy/1; with no policy they recognise nothing and strip nothing (probe 1)."
+  },
+  {
+   "id": "M-02",
+   "paths": [
+    "src/internal/processModel.ts"
+   ],
+   "consumers": [
+    "layout"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:855",
+    "DESIGN.md:887",
+    "DESIGN.md:896"
+   ],
+   "note": "Legacy layout input reads role markers from business-policy/1; the implicit retarget of links to an earlier activity is removed (preserve endpoints and report); legacy layout-model kinds are opaque identifiers whose kind tags are injected."
+  },
+  {
+   "id": "M-03",
+   "paths": [
+    "src/internal/swimlaneLayout.ts"
+   ],
+   "consumers": [
+    "layout"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:844",
+    "DESIGN.md:856",
+    "DESIGN.md:885"
+   ],
+   "note": "Band dimensions, corridor width, badge contribution, document geometry, node sizes, fonts and line height come from business-policy/1. Generic spacing constants (LEFT_PAD, COL_GAP, ROW_GAP, RIGHT_PAD, GROUP_GAP, CENTRE_GAP, CELL_W) and inline fit paddings and width bounds are retained as generic geometry primitives."
+  },
+  {
+   "id": "M-04",
+   "paths": [
+    "src/internal/textMetrics.ts"
+   ],
+   "consumers": [
+    "layout",
+    "render"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:836",
+    "DESIGN.md:857",
+    "DESIGN.md:885"
+   ],
+   "note": "Generic measurement and greedy wrapping retained; advance tables, fallback width, width aliases and line height are injected (resources[kind=metrics] or business-policy/1 #/metrics); no ambient normalization."
+  },
+  {
+   "id": "M-05",
+   "paths": [
+    "src/internal/layout/autoLayout.ts"
+   ],
+   "consumers": [
+    "transactions"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:627-645",
+    "DESIGN.md:844"
+   ],
+   "note": "Editor auto-layout command classifies application annotations and spaces their badges from injected data."
+  },
+  {
+   "id": "M-06",
+   "paths": [
+    "src/internal/canvas.ts",
+    "src/internal/engine.ts",
+    "src/internal/render.ts",
+    "src/internal/palette.ts",
+    "src/internal/contracts.ts"
+   ],
+   "consumers": [
+    "render",
+    "ui",
+    "static"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:729",
+    "DESIGN.md:837"
+   ],
+   "note": "Built-in look registry, default look, per-look palette clearance, marker selectors and palette icon colours are replaced by injected looks; with no look the canvas draws upstream notation."
+  },
+  {
+   "id": "M-07",
+   "paths": [
+    "src/types.ts",
+    "src/index.ts",
+    "src/browser/entry.ts",
+    "src/react/index.ts"
+   ],
+   "consumers": [
+    "package-surface"
+   ],
+   "disposition": "legacy-api",
+   "designRefs": [
+    "DESIGN.md:899",
+    "DESIGN.md:876"
+   ],
+   "note": "Legacy public names stay as opaque keys; the browser entry stops exporting the built-in default token tables and palette action ids."
+  },
+  {
+   "id": "M-08",
+   "paths": [
+    "src/io/index.ts",
+    "src/io/{LX-DS-2:37bb91b5}",
+    "package.json",
+    "scripts/build-assets.mjs"
+   ],
+   "consumers": [
+    "descriptor",
+    "package-surface"
+   ],
+   "disposition": "remove",
+   "designRefs": [
+    "DESIGN.md:853",
+    "DESIGN.md:895"
+   ],
+   "note": "No descriptor is forced into the codecs; the private descriptor document, its checksum export and the package export leave the generic distribution; callers inject descriptor packages."
+  },
+  {
+   "id": "M-09",
+   "paths": [
+    "src/io/reference-model.ts",
+    "src/io/reference-drawio.ts",
+    "src/io/reference-sparx.ts"
+   ],
+   "consumers": [
+    "exporters"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:843",
+    "DESIGN.md:886"
+   ],
+   "note": "Legacy reference exporters read role markers, application host eligibility, export styles and optional facts from business-policy/1; byte-identical old output is reproduced only from the private integration legacy data pinned in legacy-values.json."
+  },
+  {
+   "id": "M-10",
+   "paths": [
+    "src/io/drawio-decode.ts"
+   ],
+   "consumers": [
+    "importers"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:843"
+   ],
+   "note": "Reference-look symbol decoding and the role marker inserted in decoded labels come from business-policy/1 #/presentation/exportStyles/decode and the role prefixes."
+  },
+  {
+   "id": "M-11",
+   "paths": [
+    "src/profiles/{LX-TH-1:ba29297b}/index.ts",
+    "src/profiles/{LX-TH-1:ba29297b}/renderer.ts",
+    "src/profiles/{LX-TH-1:ba29297b}/style.ts",
+    "src/profiles/{LX-TH-1:ba29297b}/tokens.ts",
+    "src/profiles/{LX-TH-1:ba29297b}/palette.ts"
+   ],
+   "consumers": [
+    "render",
+    "ui",
+    "transactions"
+   ],
+   "disposition": "replace",
+   "designRefs": [
+    "DESIGN.md:829",
+    "DESIGN.md:837",
+    "DESIGN.md:887",
+    "DESIGN.md:888",
+    "DESIGN.md:717"
+   ],
+   "note": "Annotated look: tokens, geometry, palette entries and role classification are injected. Its glyph drawers (process and component icons, wavy document outline with header band, badge rows) are look geometry without a lexical anchor; in the profile path they become themes[].glyphs under the OPEN-RENDER-PRIMITIVES default (unsupported composites disabled with appearance losses); exact legacy visuals remain on the pinned release (owner decision 5, DESIGN.md:1148)."
+  },
+  {
+   "id": "M-12",
+   "paths": [
+    "src/profiles/{LX-TH-2:ca8c522a}/index.ts",
+    "src/profiles/{LX-TH-2:ca8c522a}/renderer.ts",
+    "src/profiles/{LX-TH-2:ca8c522a}/tokens.ts",
+    "src/profiles/{LX-TH-2:ca8c522a}/{LX-TH-5:b002a634}.ts"
+   ],
+   "consumers": [
+    "render"
+   ],
+   "disposition": "replace",
+   "designRefs": [
+    "DESIGN.md:837",
+    "DESIGN.md:854"
+   ],
+   "note": "Recolouring look and its flat shape drawers: classification and token defaults injected; flat drawers handled as M-11 glyph drawers."
+  },
+  {
+   "id": "M-13",
+   "paths": [
+    "src/styles/{LX-TH-1:ba29297b}-palette.css",
+    "src/styles/palette-colors.css",
+    "scripts/gen-css.mjs"
+   ],
+   "consumers": [
+    "ui",
+    "build-tooling"
+   ],
+   "disposition": "replace",
+   "designRefs": [
+    "DESIGN.md:659",
+    "DESIGN.md:837"
+   ],
+   "note": "Palette stylesheets keyed by look-prefixed action ids and the look root class; palette icons come from injected palette entries."
+  },
+  {
+   "id": "M-14",
+   "paths": [
+    "src/react/workshop.tsx"
+   ],
+   "consumers": [
+    "workshop"
+   ],
+   "disposition": "inject",
+   "designRefs": [
+    "DESIGN.md:858",
+    "DESIGN.md:859",
+    "DESIGN.md:876"
+   ],
+   "note": "The implicit name navigation default is removed (calledElement only); explicit legacy rules stay an opt-in; formats select injected looks; native props and Result/1 methods are the lot 5 surface."
+  },
+  {
+   "id": "M-15",
+   "paths": [
+    "src/assistant-ui/index.ts"
+   ],
+   "consumers": [
+    "assistant"
+   ],
+   "disposition": "replace",
+   "designRefs": [
+    "DESIGN.md:858",
+    "DESIGN.md:876"
+   ],
+   "note": "No lexicon hit. The XML-only preview through the default look becomes the tagged native preview artifact; the XML overload stays on the compatibility path with an explicitly injected look."
+  }
+ ],
+ "familyCategory": {
+  "marker": "classification",
+  "classification-api": "classification",
+  "descriptor": "descriptor",
+  "metrics": "metrics",
+  "attachment": "attachment",
+  "navigation": "navigation",
+  "type-vocabulary": "type-role",
+  "presentation": "theme-tokens",
+  "export-style": "export-style",
+  "palette": "palette",
+  "theme": "theme-selection",
+  "private": "engine-metadata",
+  "brand": "generic-context",
+  "encoded": "generic-context"
+ },
+ "targets": {
+  "T-CLS": {
+   "target": "notions[].recognition: typeIs bpmn:TextAnnotation plus textPrefix with trim ecma262-2024-start or none (DESIGN.md:146, 152, 831); legacy markers only through compatibilityAliases[kind=marker] mode explicit-adapter (DESIGN.md:830)",
+   "legacyAdapter": "business-policy/1 #/classification/annotationRoles[role] (prefix, trim)"
+  },
+  "T-STRIP": {
+   "target": "notions[].renderBindings[].label and ui[].fields[].display through stripPrefix and case (DESIGN.md:115-116, 702, 655)",
+   "legacyAdapter": "business-policy/1 #/classification/annotationRoles[role] (prefix, trim, labelCase) with the consumer's legacy name rule"
+  },
+  "T-INSERT": {
+   "target": "recipes[phase=create] create.fields concat of the marker literal; edit recipe restores the configured marker once (DESIGN.md:655, 702)",
+   "legacyAdapter": "business-policy/1 #/classification/annotationRoles[role].prefix + #/classification/insertSeparator"
+  },
+  "T-TYPE": {
+   "target": "notions[].recognition over native types and bound-region recipes; no lookup by name (DESIGN.md:833)",
+   "legacyAdapter": "none: generic legacy layout-model kind derived from the native type; its size and style come from #/presentation"
+  },
+  "T-DOCKIND": {
+   "target": "notions[].recognition of the document role (DESIGN.md:830)",
+   "legacyAdapter": "business-policy/1 #/classification/annotationRoles[role=document]"
+  },
+  "T-ATT-APP": {
+   "target": "themes[].syntheticOccurrences role attached-badge with the unique placement anchor and normalize place recipes (DESIGN.md:712, 715, 218)",
+   "legacyAdapter": "business-policy/1 #/attachment/applicationHost (type, mode)"
+  },
+  "T-ATT-REPAIR": {
+   "target": "removed from generic N: preserve endpoints and report the relation (DESIGN.md:855, 896)",
+   "legacyAdapter": "business-policy/1 #/attachment/nonActivityHost = preserve-report; legacy retarget UNSEALED (OPEN-MIGRATION)"
+  },
+  "T-MET": {
+   "target": "resources[kind=metrics] with digest, assetKey, license and attribution, themes[].metricsResource, policies.textFit (DESIGN.md:836, 869)",
+   "legacyAdapter": "business-policy/1 #/metrics (regular, bold, fallback, license, attribution)"
+  },
+  "T-MET-ALIAS": {
+   "target": "explicit injected width-alias table; no ambient normalization (DESIGN.md:857, 702)",
+   "legacyAdapter": "business-policy/1 #/metrics/aliases"
+  },
+  "T-MET-LH": {
+   "target": "policies.textFit line policy (DESIGN.md:836)",
+   "legacyAdapter": "business-policy/1 #/metrics/lineHeight"
+  },
+  "T-NAV": {
+   "target": "navigation index calledElement -> Process -> view, no name fallback (DESIGN.md:623, 859)",
+   "legacyAdapter": "business-policy/1 #/navigation (mode legacy-default or legacy-rules supplied explicitly by the caller)"
+  },
+  "T-NAV-MARKER": {
+   "target": "UI surface hit test from injected glyph data (DESIGN.md:649, 653)",
+   "legacyAdapter": "business-policy/1 #/presentation/looks[].markerSelectors"
+  },
+  "T-NAV-PAGE": {
+   "target": "export link from native calledElement only; descriptor metadata never wins silently (DESIGN.md:839, 794)",
+   "legacyAdapter": "business-policy/1 #/exportFacts (facts read only when supplied)"
+  },
+  "T-SEM": {
+   "target": "shared injected DescriptorContext and effective-base multiplicity; explicit migration recipes for old facts (DESIGN.md:839, 853, 606)",
+   "legacyAdapter": "caller-supplied descriptor package {id,version,sha256,descriptorBytes} + business-policy/1 #/exportFacts"
+  },
+  "T-SEM-PKG": {
+   "target": "removed from the generic distribution and its package exports (DESIGN.md:853, 895)",
+   "legacyAdapter": "caller-supplied descriptor package"
+  },
+  "T-THEME": {
+   "target": "themes[].id/aliases/fallback and compatibilityAliases[kind=theme] mode explicit-adapter (DESIGN.md:837, 729)",
+   "legacyAdapter": "business-policy/1 #/presentation/looks[alias]"
+  },
+  "T-TOKENS": {
+   "target": "themes[].tokens with the declared fallback chain (DESIGN.md:829, 700)",
+   "legacyAdapter": "business-policy/1 #/presentation/looks[].tokens"
+  },
+  "T-GEO": {
+   "target": "themes[].tokens region.<key>.headerWidth/padding/gap/minHeight and template parameters (DESIGN.md:721, 708-713, 856)",
+   "legacyAdapter": "business-policy/1 #/presentation/layout"
+  },
+  "T-GLYPH": {
+   "target": "themes[].glyphs native/path/template with declared appearance losses under OPEN-RENDER-PRIMITIVES (DESIGN.md:704, 717, 854)",
+   "legacyAdapter": "business-policy/1 #/presentation/looks[].renderer and #/presentation/layout"
+  },
+  "T-EXP": {
+   "target": "exports[].recipes typed export-ir/1 fields and capability data (DESIGN.md:843, 770-772)",
+   "legacyAdapter": "business-policy/1 #/presentation/exportStyles/drawio"
+  },
+  "T-DECODE": {
+   "target": "explicit migration decode data (DESIGN.md:843)",
+   "legacyAdapter": "business-policy/1 #/presentation/exportStyles/decode"
+  },
+  "T-PAL": {
+   "target": "ui[] surfaces with group, order, upstreamEntries and typed recipes (DESIGN.md:649, 655, 659)",
+   "legacyAdapter": "business-policy/1 #/presentation/palette/entries"
+  },
+  "T-IOSET": {
+   "target": "ui/reference recipe with set-selection precondition, io-set-selection-required (DESIGN.md:843, 651, 1154)",
+   "legacyAdapter": "none: first-set placement is not reproduced (owner decision 8, DESIGN.md:1154)"
+  },
+  "T-ENGINE": {
+   "target": "exports[].id/referenceArtifact pinned private oracle resource (DESIGN.md:841)",
+   "legacyAdapter": "none"
+  },
+  "T-NONE": {
+   "target": "none",
+   "legacyAdapter": "none"
+  },
+  "T-TEST": {
+   "target": "the test injects business-policy/1 or a profile explicitly",
+   "legacyAdapter": "policy-legacy-synthetic.json or the private integration legacy data pinned in legacy-values.json"
+  },
+  "T-DOCS": {
+   "target": "documentation of injected data and of the explicit legacy adapter",
+   "legacyAdapter": "none"
+  }
+ },
+ "rules": [
+  {
+   "id": "R-001",
+   "path": "^src/internal/annotations\\.ts$",
+   "lines": [
+    2,
+    14
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Source comment stating the built-in role markers as a look and layout convention."
+  },
+  {
+   "id": "R-002",
+   "path": "^src/internal/annotations\\.ts$",
+   "lines": [
+    6,
+    7
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Built-in document-role recognition: leading ECMAScript whitespace then the exact document marker."
+  },
+  {
+   "id": "R-003",
+   "path": "^src/internal/annotations\\.ts$",
+   "lines": [
+    10,
+    11
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Built-in application-role recognition: leading ECMAScript whitespace then the exact application marker."
+  },
+  {
+   "id": "R-004",
+   "path": "^src/internal/annotations\\.ts$",
+   "lines": [
+    15,
+    16
+   ],
+   "category": "label-stripping",
+   "consumer": "render",
+   "target": "T-STRIP",
+   "disposition": "inject",
+   "policy": "Built-in display name: removes leading whitespace, either role marker and the following whitespace."
+  },
+  {
+   "id": "R-005",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    81
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "layout",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Layout input recognises the application role after a full ECMAScript trim and keeps the trimmed body after the 11-character marker as the host's application label."
+  },
+  {
+   "id": "R-006",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    82
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "layout",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Layout input recognises the document role after a full ECMAScript trim."
+  },
+  {
+   "id": "R-007",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    83
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "label-stripping",
+   "consumer": "layout",
+   "target": "T-STRIP",
+   "disposition": "inject",
+   "policy": "Document body taken after the 11-character marker, trimmed, element id when empty."
+  },
+  {
+   "id": "R-008",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    83
+   ],
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "layout",
+   "target": "T-DOCKIND",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind tag of the document role, assigned to a recognised document-role annotation."
+  },
+  {
+   "id": "R-009",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    118,
+    119
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "layout",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Application label copied from an associated application-role annotation onto the associated node."
+  },
+  {
+   "id": "R-010",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    159,
+    196,
+    204,
+    252
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "layout",
+   "target": "T-ATT-REPAIR",
+   "disposition": "remove",
+   "policy": "Implicit retarget of data and document links from a non-activity host to an earlier activity found by walking sequence-flow predecessors."
+  },
+  {
+   "id": "R-011",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    195
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "layout",
+   "target": "T-ATT-REPAIR",
+   "disposition": "remove",
+   "policy": "Comment of the implicit nearest-activity retarget."
+  },
+  {
+   "id": "R-012",
+   "path": "^src/internal/processModel\\.ts$",
+   "lines": [
+    163,
+    195
+   ],
+   "families": [
+    "theme"
+   ],
+   "category": "theme-selection",
+   "consumer": "layout",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Source comment naming the private look model the layout input was ported from."
+  },
+  {
+   "id": "R-013",
+   "path": "^src/internal/processModel\\.ts$",
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "layout",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind tag for a native type or an item direction."
+  },
+  {
+   "id": "R-014",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    18
+   ],
+   "category": "attachment",
+   "consumer": "layout",
+   "target": "T-ATT-APP",
+   "disposition": "legacy-api",
+   "policy": "Public application-label field of the legacy layout input node type."
+  },
+  {
+   "id": "R-015",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    38,
+    40
+   ],
+   "category": "type-role",
+   "consumer": "layout",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Exported legacy layout-model kind sets."
+  },
+  {
+   "id": "R-016",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    43,
+    44,
+    47,
+    49
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Band dimensions and corridor width of the built-in swimlane layout."
+  },
+  {
+   "id": "R-017",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    53,
+    54
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Label font sizes of the built-in swimlane layout."
+  },
+  {
+   "id": "R-018",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    55,
+    102,
+    110
+   ],
+   "families": [
+    "metrics"
+   ],
+   "category": "metrics",
+   "consumer": "layout",
+   "target": "T-MET-LH",
+   "disposition": "inject",
+   "policy": "Wrapping line height of the built-in layout."
+  },
+  {
+   "id": "R-019",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    56,
+    57,
+    58,
+    59,
+    60,
+    62
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Node, event, item and label sizes of the built-in swimlane look."
+  },
+  {
+   "id": "R-020",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    61,
+    63,
+    64
+   ],
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "layout",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind keys of the node size table."
+  },
+  {
+   "id": "R-021",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    63,
+    64
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Item and document sizes of the built-in swimlane look."
+  },
+  {
+   "id": "R-022",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    66
+   ],
+   "category": "attachment",
+   "consumer": "layout",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Activity kinds eligible for an application badge."
+  },
+  {
+   "id": "R-023",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Application badge and document geometry of the built-in swimlane look."
+  },
+  {
+   "id": "R-024",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    115,
+    124
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "legacy-api",
+   "policy": "Generic badge-sizing algorithm name; every value it reads is injected."
+  },
+  {
+   "id": "R-025",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    116,
+    117,
+    118,
+    119,
+    120,
+    126,
+    127
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Badge sizing reads the built-in badge chrome, margins, height and font."
+  },
+  {
+   "id": "R-026",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    121,
+    131
+   ],
+   "families": [
+    "metrics"
+   ],
+   "category": "metrics",
+   "consumer": "layout",
+   "target": "T-MET-LH",
+   "disposition": "inject",
+   "policy": "Inline wrapping line height of badge and document sizing."
+  },
+  {
+   "id": "R-027",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    121,
+    131,
+    132
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Badge and document sizing read the built-in geometry, including the inline minimum document height."
+  },
+  {
+   "id": "R-028",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    137,
+    145,
+    148,
+    151,
+    150,
+    318,
+    374,
+    385,
+    425,
+    426,
+    433,
+    435,
+    437,
+    465,
+    557
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "layout",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Layout reads the built-in node sizes, fonts, band dimensions, corridor or badge overlap."
+  },
+  {
+   "id": "R-029",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    142,
+    143,
+    323
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "layout",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Application label widens and decorates hosts of the built-in activity kinds."
+  },
+  {
+   "id": "R-030",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "lines": [
+    157,
+    317
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "type-role",
+   "consumer": "layout",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model event kind tag."
+  },
+  {
+   "id": "R-031",
+   "path": "^src/internal/swimlaneLayout\\.ts$",
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "layout",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind tag."
+  },
+  {
+   "id": "R-032",
+   "path": "^src/internal/textMetrics\\.ts$",
+   "lines": [
+    1,
+    2,
+    7,
+    13,
+    18
+   ],
+   "category": "metrics",
+   "consumer": "layout",
+   "target": "T-MET",
+   "disposition": "doc-update",
+   "policy": "Comment and notice of the built-in release-derived width table; the notice travels with the metrics resource."
+  },
+  {
+   "id": "R-033",
+   "path": "^src/internal/textMetrics\\.ts$",
+   "lines": [
+    25,
+    26,
+    27,
+    28,
+    30,
+    31,
+    32,
+    33,
+    36,
+    41,
+    49,
+    50
+   ],
+   "category": "metrics",
+   "consumer": "layout",
+   "target": "T-MET",
+   "disposition": "inject",
+   "policy": "Built-in regular and bold advance-width tables and fallback width."
+  },
+  {
+   "id": "R-034",
+   "path": "^src/internal/textMetrics\\.ts$",
+   "lines": [
+    46
+   ],
+   "category": "metrics",
+   "consumer": "layout",
+   "target": "T-MET-ALIAS",
+   "disposition": "inject",
+   "policy": "Ambient canonical decomposition used to borrow the width of a base character."
+  },
+  {
+   "id": "R-035",
+   "path": "^src/internal/layout/autoLayout\\.ts$",
+   "lines": [
+    57
+   ],
+   "category": "attachment",
+   "consumer": "transactions",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment of the application badge placement written by the editor auto-layout."
+  },
+  {
+   "id": "R-036",
+   "path": "^src/internal/layout/autoLayout\\.ts$",
+   "lines": [
+    11,
+    66
+   ],
+   "category": "classification",
+   "consumer": "transactions",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Editor auto-layout recognises application-role annotations with the built-in classifier."
+  },
+  {
+   "id": "R-037",
+   "path": "^src/internal/layout/autoLayout\\.ts$",
+   "lines": [
+    67,
+    72
+   ],
+   "category": "presentation-geometry",
+   "consumer": "transactions",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Badge row spacing and link inset of the application annotations moved by the editor auto-layout."
+  },
+  {
+   "id": "R-038",
+   "path": "^src/internal/canvas\\.ts$",
+   "lines": [
+    68,
+    450
+   ],
+   "category": "navigation",
+   "consumer": "ui",
+   "target": "T-NAV-MARKER",
+   "disposition": "inject",
+   "policy": "Marker hit selectors, including the look-specific icon and marker classes, decide a navigation click."
+  },
+  {
+   "id": "R-039",
+   "path": "^src/internal/canvas\\.ts$",
+   "lines": [
+    69,
+    717
+   ],
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Per-look palette clearance table keyed by built-in look names."
+  },
+  {
+   "id": "R-040",
+   "path": "^src/internal/canvas\\.ts$",
+   "lines": [
+    132
+   ],
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-THEME",
+   "disposition": "remove",
+   "policy": "Built-in default look name; without a requested look the upstream renderer applies, with no injected palette floor or marker selector (x24 R-005, X-012)."
+  },
+  {
+   "id": "R-041",
+   "path": "^src/internal/canvas\\.ts$",
+   "lines": [
+    133
+   ],
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Token option chosen by comparing the look name with a built-in look."
+  },
+  {
+   "id": "R-042",
+   "path": "^src/internal/canvas\\.ts$",
+   "lines": [
+    11,
+    105,
+    288,
+    763,
+    821
+   ],
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-THEME",
+   "disposition": "legacy-api",
+   "policy": "Legacy public look token type and setProfile signature."
+  },
+  {
+   "id": "R-043",
+   "path": "^src/internal/contracts\\.ts$",
+   "lines": [
+    48,
+    75,
+    81
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Token documentation naming the built-in role markers."
+  },
+  {
+   "id": "R-044",
+   "path": "^src/internal/contracts\\.ts$",
+   "lines": [
+    13,
+    15,
+    17,
+    23,
+    24,
+    38,
+    39,
+    53,
+    70,
+    88,
+    94
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Contract documentation describing built-in looks and their default token tables."
+  },
+  {
+   "id": "R-045",
+   "path": "^src/internal/contracts\\.ts$",
+   "lines": [
+    14,
+    16,
+    18,
+    87
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Render configuration keyed by built-in look names."
+  },
+  {
+   "id": "R-046",
+   "path": "^src/internal/contracts\\.ts$",
+   "lines": [
+    28,
+    93
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "legacy-api",
+   "policy": "Legacy public look token record type."
+  },
+  {
+   "id": "R-047",
+   "path": "^src/internal/engine\\.ts$",
+   "lines": [
+    6,
+    74
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "legacy-api",
+   "policy": "Legacy look loader signature over look names and token records."
+  },
+  {
+   "id": "R-048",
+   "path": "^src/internal/engine\\.ts$",
+   "lines": [
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    86,
+    92,
+    94,
+    95,
+    96,
+    104
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Built-in look registry: each look name selects a module, its defaults and palette coupling."
+  },
+  {
+   "id": "R-049",
+   "path": "^src/internal/palette\\.ts$",
+   "lines": [
+    6,
+    18
+   ],
+   "category": "generic-context",
+   "consumer": "ui",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "CSS variable declarations (generic CSS term)."
+  },
+  {
+   "id": "R-050",
+   "path": "^src/internal/palette\\.ts$",
+   "lines": [
+    15
+   ],
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment naming the recolouring look."
+  },
+  {
+   "id": "R-051",
+   "path": "^src/internal/palette\\.ts$",
+   "lines": [
+    10,
+    36
+   ],
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-TOKENS",
+   "disposition": "legacy-api",
+   "policy": "Legacy look token type used by the palette icon colours."
+  },
+  {
+   "id": "R-052",
+   "path": "^src/internal/palette\\.ts$",
+   "lines": [
+    16,
+    69,
+    70,
+    81,
+    86
+   ],
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Palette support selects tokens and a root class by built-in look name."
+  },
+  {
+   "id": "R-053",
+   "path": "^src/internal/palette\\.ts$",
+   "lines": [
+    19,
+    38
+   ],
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-PAL",
+   "disposition": "inject",
+   "policy": "Palette icon colour per group mapped to look tokens."
+  },
+  {
+   "id": "R-054",
+   "path": "^src/internal/render\\.ts$",
+   "category": "theme-selection",
+   "consumer": "static",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Static render chooses the built-in default look and routes tokens by built-in look name."
+  },
+  {
+   "id": "R-055",
+   "path": "^src/index\\.ts$",
+   "category": "theme-selection",
+   "consumer": "package-surface",
+   "target": "T-TOKENS",
+   "disposition": "legacy-api",
+   "policy": "Legacy public look token type export."
+  },
+  {
+   "id": "R-056",
+   "path": "^src/browser/entry\\.ts$",
+   "category": "theme-tokens",
+   "consumer": "package-surface",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Browser entry exports the built-in look default token tables, resolvers and palette action ids."
+  },
+  {
+   "id": "R-057",
+   "path": "^src/types\\.ts$",
+   "lines": [
+    6,
+    110,
+    112,
+    156,
+    158
+   ],
+   "category": "theme-selection",
+   "consumer": "package-surface",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Public type documentation describing built-in looks and their defaults."
+  },
+  {
+   "id": "R-058",
+   "path": "^src/types\\.ts$",
+   "lines": [
+    3,
+    5,
+    7,
+    111,
+    113,
+    157,
+    159,
+    234,
+    249,
+    250
+   ],
+   "category": "theme-selection",
+   "consumer": "package-surface",
+   "target": "T-THEME",
+   "disposition": "legacy-api",
+   "policy": "Legacy public look name union, look options and token option types."
+  },
+  {
+   "id": "R-059",
+   "path": "^src/io/drawio-decode\\.ts$",
+   "lines": [
+    40
+   ],
+   "category": "generic-context",
+   "consumer": "importers",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Draw.io event outline vocabulary."
+  },
+  {
+   "id": "R-060",
+   "path": "^src/io/drawio-decode\\.ts$",
+   "lines": [
+    50,
+    51,
+    52,
+    54
+   ],
+   "families": [
+    "export-style"
+   ],
+   "category": "export-style",
+   "consumer": "importers",
+   "target": "T-DECODE",
+   "disposition": "inject",
+   "policy": "Reference-look shape decoding of call and tool symbols and of the document symbol."
+  },
+  {
+   "id": "R-061",
+   "path": "^src/io/drawio-decode\\.ts$",
+   "lines": [
+    107,
+    108
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "marker-insertion",
+   "consumer": "importers",
+   "target": "T-INSERT",
+   "disposition": "inject",
+   "policy": "Role marker inserted into the decoded label of a reference-look symbol."
+  },
+  {
+   "id": "R-062",
+   "path": "^src/io/drawio-decode\\.ts$",
+   "lines": [
+    107,
+    108
+   ],
+   "families": [
+    "export-style"
+   ],
+   "category": "export-style",
+   "consumer": "importers",
+   "target": "T-DECODE",
+   "disposition": "inject",
+   "policy": "Reference-look style keys selecting the inserted role."
+  },
+  {
+   "id": "R-063",
+   "path": "^src/io/drawio-decode\\.ts$",
+   "lines": [
+    129
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "attachment",
+   "consumer": "importers",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Application attachment synthesised for a label starting with the application marker inside a task container."
+  },
+  {
+   "id": "R-064",
+   "path": "^src/io/drawio-decode\\.ts$",
+   "lines": [
+    130
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "importers",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Synthesised application association id."
+  },
+  {
+   "id": "R-065",
+   "path": "^src/io/drawio-encode\\.ts$",
+   "category": "generic-context",
+   "consumer": "exporters",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Draw.io event outline vocabulary."
+  },
+  {
+   "id": "R-066",
+   "path": "^src/io/errors\\.ts$",
+   "category": "attachment",
+   "consumer": "exporters",
+   "target": "T-ATT-APP",
+   "disposition": "legacy-api",
+   "policy": "Legacy refusal code for an application annotation without an eligible host."
+  },
+  {
+   "id": "R-067",
+   "path": "^src/io/index\\.ts$",
+   "lines": [
+    10,
+    32,
+    33
+   ],
+   "category": "descriptor",
+   "consumer": "descriptor",
+   "target": "T-SEM-PKG",
+   "disposition": "remove",
+   "policy": "Shipped private descriptor and its public checksum export."
+  },
+  {
+   "id": "R-068",
+   "path": "^src/io/index\\.ts$",
+   "lines": [
+    40,
+    51,
+    54,
+    66,
+    71
+   ],
+   "category": "descriptor",
+   "consumer": "descriptor",
+   "target": "T-SEM",
+   "disposition": "inject",
+   "policy": "Codec forces the private descriptor into every moddle instance."
+  },
+  {
+   "id": "R-069",
+   "path": "^src/io/index\\.ts$",
+   "lines": [
+    57,
+    58
+   ],
+   "category": "descriptor",
+   "consumer": "descriptor",
+   "target": "T-SEM",
+   "disposition": "inject",
+   "policy": "Lexical order check of the private descriptor type."
+  },
+  {
+   "id": "R-070",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "lines": [
+    13
+   ],
+   "families": [
+    "theme"
+   ],
+   "category": "generic-context",
+   "consumer": "exporters",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Draw.io event outline vocabulary inside a style string."
+  },
+  {
+   "id": "R-071",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "families": [
+    "presentation"
+   ],
+   "category": "export-style",
+   "consumer": "exporters",
+   "target": "T-EXP",
+   "disposition": "inject",
+   "policy": "Reference-look colours inside the fixed export styles."
+  },
+  {
+   "id": "R-072",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "lines": [
+    17,
+    18,
+    19
+   ],
+   "families": [
+    "export-style"
+   ],
+   "category": "export-style",
+   "consumer": "exporters",
+   "target": "T-EXP",
+   "disposition": "inject",
+   "policy": "Fixed reference export styles, including the reference-look application, call and document symbols."
+  },
+  {
+   "id": "R-073",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "lines": [
+    72,
+    73,
+    124
+   ],
+   "category": "navigation",
+   "consumer": "exporters",
+   "target": "T-NAV-PAGE",
+   "disposition": "inject",
+   "policy": "Page link to the page of a target process taken from descriptor facts or calledElement."
+  },
+  {
+   "id": "R-074",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "lines": [
+    127,
+    129
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "exporters",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Application badge cell emitted under its host."
+  },
+  {
+   "id": "R-075",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "exporters",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind selecting an export style."
+  },
+  {
+   "id": "R-076",
+   "path": "^src/io/reference-drawio\\.ts$",
+   "families": [
+    "export-style"
+   ],
+   "category": "export-style",
+   "consumer": "exporters",
+   "target": "T-EXP",
+   "disposition": "inject",
+   "policy": "Fixed reference export styles and page offsets."
+  },
+  {
+   "id": "R-077",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    5
+   ],
+   "category": "descriptor",
+   "consumer": "exporters",
+   "target": "T-SEM-PKG",
+   "disposition": "remove",
+   "policy": "Exporter imports the shipped private descriptor for its namespace check."
+  },
+  {
+   "id": "R-078",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    12
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "exporters",
+   "target": "T-ATT-APP",
+   "disposition": "legacy-api",
+   "policy": "Reference page node application label field."
+  },
+  {
+   "id": "R-079",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    12,
+    305
+   ],
+   "families": [
+    "navigation"
+   ],
+   "category": "navigation",
+   "consumer": "exporters",
+   "target": "T-NAV-PAGE",
+   "disposition": "legacy-api",
+   "policy": "Reference page node navigation target field."
+  },
+  {
+   "id": "R-080",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    37,
+    95,
+    167,
+    171,
+    174,
+    362,
+    368
+   ],
+   "category": "descriptor",
+   "consumer": "exporters",
+   "target": "T-SEM",
+   "disposition": "inject",
+   "policy": "Exporter reads the private descriptor type by its built-in name and checks its namespace family."
+  },
+  {
+   "id": "R-081",
+   "path": "^src/io/reference-model\\.ts$",
+   "families": [
+    "descriptor"
+   ],
+   "category": "descriptor",
+   "consumer": "exporters",
+   "target": "T-SEM",
+   "disposition": "inject",
+   "policy": "Exporter reads a descriptor fact field through the facts binding by a built-in property name; the facts type and its property names come from injected exportFacts."
+  },
+  {
+   "id": "R-082",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    294
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "exporters",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Exporter recognises the application role after a full trim and keeps the trimmed body after the 11-character marker."
+  },
+  {
+   "id": "R-083",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    295
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "exporters",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Exporter refuses an annotation recognised by neither role and names both markers in its message."
+  },
+  {
+   "id": "R-084",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    296
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "label-stripping",
+   "consumer": "exporters",
+   "target": "T-STRIP",
+   "disposition": "inject",
+   "policy": "Document label taken after the 11-character marker and trimmed."
+  },
+  {
+   "id": "R-085",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    296
+   ],
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "exporters",
+   "target": "T-DOCKIND",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind tag of the document role, assigned to a recognised document-role annotation."
+  },
+  {
+   "id": "R-086",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    32
+   ],
+   "category": "attachment",
+   "consumer": "exporters",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Activity kinds eligible to host an application annotation."
+  },
+  {
+   "id": "R-087",
+   "path": "^src/io/reference-model\\.ts$",
+   "lines": [
+    273,
+    294,
+    309,
+    347,
+    348,
+    349,
+    350,
+    351,
+    364
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "exporters",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Application annotation attachment to one eligible host, with orphan and multiplicity refusals."
+  },
+  {
+   "id": "R-088",
+   "path": "^src/io/reference-model\\.ts$",
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "exporters",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind tag."
+  },
+  {
+   "id": "R-089",
+   "path": "^src/io/reference-sparx\\.ts$",
+   "lines": [
+    70
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "marker-insertion",
+   "consumer": "exporters",
+   "target": "T-INSERT",
+   "disposition": "inject",
+   "policy": "Application marker inserted before the application label of the exported annotation."
+  },
+  {
+   "id": "R-090",
+   "path": "^src/io/reference-sparx\\.ts$",
+   "lines": [
+    69,
+    70
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "exporters",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Application annotation exported for an application-labelled host."
+  },
+  {
+   "id": "R-091",
+   "path": "^src/io/reference-sparx\\.ts$",
+   "families": [
+    "type-vocabulary"
+   ],
+   "category": "type-role",
+   "consumer": "exporters",
+   "target": "T-TYPE",
+   "disposition": "legacy-api",
+   "policy": "Legacy layout-model kind mapped to an exported BPMN tag."
+  },
+  {
+   "id": "R-092",
+   "path": "^src/io/\\{LX-DS-2:37bb91b5\\}$",
+   "category": "descriptor",
+   "consumer": "descriptor",
+   "target": "T-SEM-PKG",
+   "disposition": "remove",
+   "policy": "Shipped private descriptor document."
+  },
+  {
+   "id": "R-093",
+   "path": "^src/profile/(lint-bridge|lint-contracts|validate)\\.ts$",
+   "category": "generic-context",
+   "consumer": "profile-mechanism",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Upstream bpmnlint settings vocabulary of the profile lint mechanism (generic word)."
+  },
+  {
+   "id": "R-094",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/\\{LX-TH-5:b002a634\\}\\.ts$",
+   "lines": [
+    27
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Flat drawing classifies every annotation as document-role when the document marker matches, otherwise as application-role."
+  },
+  {
+   "id": "R-095",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/\\{LX-TH-5:b002a634\\}\\.ts$",
+   "lines": [
+    206
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "label-stripping",
+   "consumer": "render",
+   "target": "T-STRIP",
+   "disposition": "inject",
+   "policy": "Flat drawing label removes leading whitespace, either role marker and the following whitespace."
+  },
+  {
+   "id": "R-096",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/\\{LX-TH-5:b002a634\\}\\.ts$",
+   "lines": [
+    13,
+    91
+   ],
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "render",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Flat drawing lifts the sub-process marker above linked application badges."
+  },
+  {
+   "id": "R-097",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/\\{LX-TH-5:b002a634\\}\\.ts$",
+   "lines": [
+    14,
+    91
+   ],
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "render",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Flat drawing reads the built-in badge overlap."
+  },
+  {
+   "id": "R-098",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/\\{LX-TH-5:b002a634\\}\\.ts$",
+   "lines": [
+    2,
+    5
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the flat drawing of the recolouring look."
+  },
+  {
+   "id": "R-099",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/\\{LX-TH-5:b002a634\\}\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-GLYPH",
+   "disposition": "replace",
+   "policy": "Flat shape drawers of the recolouring look, their module stem, classes and default tokens."
+  },
+  {
+   "id": "R-100",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/renderer\\.ts$",
+   "lines": [
+    27,
+    28
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Recolouring look classifies annotations by the built-in role markers."
+  },
+  {
+   "id": "R-101",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/renderer\\.ts$",
+   "lines": [
+    129
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment naming the built-in role markers."
+  },
+  {
+   "id": "R-102",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/renderer\\.ts$",
+   "families": [
+    "classification-api"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Recolouring look kind classifier definitions and calls."
+  },
+  {
+   "id": "R-103",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/renderer\\.ts$",
+   "lines": [
+    2,
+    16
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the recolouring look."
+  },
+  {
+   "id": "R-104",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/renderer\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "replace",
+   "policy": "Recolouring look renderer, its module stem, kind names and default token resolution."
+  },
+  {
+   "id": "R-105",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/index\\.ts$",
+   "lines": [
+    8,
+    9,
+    10
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the recolouring look and its flat drawing option."
+  },
+  {
+   "id": "R-106",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/index\\.ts$",
+   "lines": [
+    3,
+    5
+   ],
+   "families": [
+    "theme"
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Built-in default token table of the recolouring look."
+  },
+  {
+   "id": "R-107",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/index\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "replace",
+   "policy": "Recolouring look definition keyed by its built-in name."
+  },
+  {
+   "id": "R-108",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/tokens\\.ts$",
+   "lines": [
+    4,
+    6
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the neutral and reference token defaults."
+  },
+  {
+   "id": "R-184",
+   "path": "^src/profiles/(\\{LX-TH-2:ca8c522a\\}|\\{LX-TH-1:ba29297b\\})/tokens\\.ts$",
+   "entries": [
+    "LX-TH-6"
+   ],
+   "keys": [
+    "f3ea7ed376698b214396b44b3f94308805800f79bcc9b7ec1662556d959b5d7b"
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "legacy-api",
+   "policy": "Stroke fan-out key list of the legacy token API (a host stroke names every line token key); generic legacy-adapter code naming opaque token keys whose values come from injected looks (x24 A-011, A-012, X-011)."
+  },
+  {
+   "id": "R-109",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/tokens\\.ts$",
+   "lines": [
+    2,
+    5,
+    8
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Built-in default token table of the recolouring look (line 2 also imports the generic stroke fan-out key list)."
+  },
+  {
+   "id": "R-110",
+   "path": "^src/profiles/\\{LX-TH-2:ca8c522a\\}/tokens\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "replace",
+   "policy": "Recolouring look token resolution keyed by its built-in name."
+  },
+  {
+   "id": "R-111",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/tokens\\.ts$",
+   "lines": [
+    4,
+    42,
+    44,
+    84
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the reference look and neutral token defaults."
+  },
+  {
+   "id": "R-112",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/tokens\\.ts$",
+   "families": [
+    "presentation"
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Reference-look colour in the built-in default token table."
+  },
+  {
+   "id": "R-113",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/tokens\\.ts$",
+   "lines": [
+    5,
+    46,
+    86
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Built-in neutral and reference default token tables."
+  },
+  {
+   "id": "R-114",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/tokens\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "replace",
+   "policy": "Annotated look token resolver keyed by its built-in name."
+  },
+  {
+   "id": "R-115",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "lines": [
+    5,
+    8,
+    80,
+    81
+   ],
+   "families": [
+    "classification-api"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Annotated look kind decision uses the built-in role classifiers."
+  },
+  {
+   "id": "R-116",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "lines": [
+    60,
+    94
+   ],
+   "families": [
+    "classification-api"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Annotated look kind classifier definitions."
+  },
+  {
+   "id": "R-117",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "families": [
+    "metrics"
+   ],
+   "category": "metrics",
+   "consumer": "render",
+   "target": "T-MET-LH",
+   "disposition": "inject",
+   "policy": "Inline wrapping line height of the badge sizing."
+  },
+  {
+   "id": "R-118",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "render",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Built-in badge, lane header, pool strip and document geometry of the annotated look."
+  },
+  {
+   "id": "R-119",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "families": [
+    "attachment"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "render",
+   "target": "T-GEO",
+   "disposition": "legacy-api",
+   "policy": "Generic badge sizing and row algorithm names; every value they read is injected."
+  },
+  {
+   "id": "R-120",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "lines": [
+    1,
+    54,
+    93,
+    97
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the annotated look."
+  },
+  {
+   "id": "R-121",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/style\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "replace",
+   "policy": "Annotated look kind and type names."
+  },
+  {
+   "id": "R-122",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "lines": [
+    71,
+    72
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "marker-insertion",
+   "consumer": "ui",
+   "target": "T-INSERT",
+   "disposition": "inject",
+   "policy": "Palette creation text: role marker followed by one space."
+  },
+  {
+   "id": "R-123",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "lines": [
+    241,
+    242
+   ],
+   "category": "palette",
+   "consumer": "transactions",
+   "target": "T-IOSET",
+   "disposition": "remove",
+   "policy": "Created process input or output placed in the first IO set."
+  },
+  {
+   "id": "R-124",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "lines": [
+    130,
+    143
+   ],
+   "category": "palette",
+   "consumer": "transactions",
+   "target": "T-PAL",
+   "disposition": "inject",
+   "policy": "Creation drop targets admitted for process inputs and outputs."
+  },
+  {
+   "id": "R-125",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "families": [
+    "palette"
+   ],
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-PAL",
+   "disposition": "inject",
+   "policy": "Built-in palette entries, icons and element creation templates of the annotated look."
+  },
+  {
+   "id": "R-126",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "lines": [
+    1,
+    3,
+    10,
+    80
+   ],
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the annotated look palette."
+  },
+  {
+   "id": "R-127",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "lines": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    53,
+    54,
+    55,
+    56,
+    58,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    78
+   ],
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-PAL",
+   "disposition": "inject",
+   "policy": "Palette action ids prefixed with the look name."
+  },
+  {
+   "id": "R-128",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/palette\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-PAL",
+   "disposition": "replace",
+   "policy": "Annotated look palette provider, rules and updater module names."
+  },
+  {
+   "id": "R-129",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "lines": [
+    4,
+    89,
+    95,
+    100,
+    166,
+    353,
+    632
+   ],
+   "families": [
+    "marker"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment naming the built-in role markers."
+  },
+  {
+   "id": "R-130",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "families": [
+    "classification-api"
+   ],
+   "category": "classification",
+   "consumer": "render",
+   "target": "T-CLS",
+   "disposition": "inject",
+   "policy": "Annotated look renderer classifies annotations and connections with the built-in classifiers."
+  },
+  {
+   "id": "R-131",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "families": [
+    "attachment"
+   ],
+   "category": "attachment",
+   "consumer": "render",
+   "target": "T-ATT-APP",
+   "disposition": "inject",
+   "policy": "Annotated look attaches, hides, draws and moves application annotations of activity hosts."
+  },
+  {
+   "id": "R-132",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "families": [
+    "presentation"
+   ],
+   "category": "presentation-geometry",
+   "consumer": "render",
+   "target": "T-GEO",
+   "disposition": "inject",
+   "policy": "Annotated look reads the built-in badge, document, lane header and pool strip geometry."
+  },
+  {
+   "id": "R-133",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "families": [
+    "metrics"
+   ],
+   "category": "metrics",
+   "consumer": "render",
+   "target": "T-MET-LH",
+   "disposition": "inject",
+   "policy": "Document text line height of the annotated look."
+  },
+  {
+   "id": "R-134",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "lines": [
+    280,
+    282
+   ],
+   "families": [
+    "navigation"
+   ],
+   "category": "navigation",
+   "consumer": "render",
+   "target": "T-NAV-MARKER",
+   "disposition": "inject",
+   "policy": "Look-specific process icon marker used as a navigation hit target."
+  },
+  {
+   "id": "R-135",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "lines": [
+    248,
+    249,
+    259
+   ],
+   "families": [
+    "theme"
+   ],
+   "category": "generic-context",
+   "consumer": "render",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Local variable holding a user-set fill colour (generic word)."
+  },
+  {
+   "id": "R-136",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "lines": [
+    498
+   ],
+   "families": [
+    "theme"
+   ],
+   "category": "generic-context",
+   "consumer": "render",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Generic arrow-head drawing wording in a comment."
+  },
+  {
+   "id": "R-137",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "lines": [
+    38,
+    176,
+    709
+   ],
+   "families": [
+    "theme"
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Annotated look reads and re-exports the built-in reference token table."
+  },
+  {
+   "id": "R-138",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "lines": [
+    1,
+    10,
+    100,
+    154,
+    166,
+    585
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the annotated look."
+  },
+  {
+   "id": "R-139",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/renderer\\.ts$",
+   "families": [
+    "theme"
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-GLYPH",
+   "disposition": "replace",
+   "policy": "Annotated look renderer, sync and follow modules, look classes and glyph drawers."
+  },
+  {
+   "id": "R-140",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/index\\.ts$",
+   "lines": [
+    4,
+    6
+   ],
+   "category": "theme-tokens",
+   "consumer": "render",
+   "target": "T-TOKENS",
+   "disposition": "inject",
+   "policy": "Annotated look exports its built-in reference token table."
+  },
+  {
+   "id": "R-141",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/index\\.ts$",
+   "lines": [
+    10,
+    11
+   ],
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Comment describing the annotated look."
+  },
+  {
+   "id": "R-142",
+   "path": "^src/profiles/\\{LX-TH-1:ba29297b\\}/index\\.ts$",
+   "category": "theme-selection",
+   "consumer": "render",
+   "target": "T-THEME",
+   "disposition": "replace",
+   "policy": "Annotated look definition keyed by its built-in name."
+  },
+  {
+   "id": "R-143",
+   "path": "^src/react/workshop\\.tsx$",
+   "lines": [
+    17,
+    36,
+    37,
+    38,
+    40
+   ],
+   "category": "theme-selection",
+   "consumer": "workshop",
+   "target": "T-THEME",
+   "disposition": "legacy-api",
+   "policy": "Legacy FormatOption look tokens and options."
+  },
+  {
+   "id": "R-144",
+   "path": "^src/react/workshop\\.tsx$",
+   "lines": [
+    54,
+    108,
+    109,
+    120,
+    152
+   ],
+   "category": "navigation",
+   "consumer": "workshop",
+   "target": "T-NAV",
+   "disposition": "legacy-api",
+   "policy": "Legacy explicit navigation rule API and caller resolver option."
+  },
+  {
+   "id": "R-145",
+   "path": "^src/react/workshop\\.tsx$",
+   "lines": [
+    133,
+    135,
+    137,
+    140,
+    142
+   ],
+   "category": "navigation",
+   "consumer": "workshop",
+   "target": "T-NAV",
+   "disposition": "inject",
+   "policy": "Legacy default navigation by called element id or case-folded name, then element name; it runs only when business-policy/1 navigation.mode is legacy-default (x24 A-015), never as an implicit default."
+  },
+  {
+   "id": "R-146",
+   "path": "^src/react/workshop\\.tsx$",
+   "lines": [
+    145,
+    149,
+    150,
+    155,
+    156,
+    161,
+    162,
+    164,
+    165,
+    166,
+    167,
+    170
+   ],
+   "category": "navigation",
+   "consumer": "workshop",
+   "target": "T-NAV",
+   "disposition": "inject",
+   "policy": "Name, section-number and partial-name navigation rules applied when explicitly configured."
+  },
+  {
+   "id": "R-147",
+   "path": "^src/react/workshop\\.tsx$",
+   "lines": [
+    320
+   ],
+   "category": "navigation",
+   "consumer": "workshop",
+   "target": "T-NAV",
+   "disposition": "inject",
+   "policy": "Workshop falls back to the implicit name navigation when no rules or resolver are supplied."
+  },
+  {
+   "id": "R-148",
+   "path": "^src/react/workshop\\.tsx$",
+   "lines": [
+    199,
+    204,
+    278,
+    281,
+    282
+   ],
+   "category": "theme-selection",
+   "consumer": "workshop",
+   "target": "T-THEME",
+   "disposition": "inject",
+   "policy": "Workshop default format and token routing by built-in look name."
+  },
+  {
+   "id": "R-149",
+   "path": "^src/react/index\\.ts$",
+   "category": "navigation",
+   "consumer": "package-surface",
+   "target": "T-NAV",
+   "disposition": "legacy-api",
+   "policy": "Legacy navigation resolver and rule type exports."
+  },
+  {
+   "id": "R-150",
+   "path": "^src/styles/workshop(-shell)?\\.css$",
+   "category": "generic-context",
+   "consumer": "ui",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "CSS variable declarations (generic CSS term)."
+  },
+  {
+   "id": "R-151",
+   "path": "^src/styles/\\{LX-TH-1:ba29297b\\}-palette\\.css$",
+   "category": "palette",
+   "consumer": "ui",
+   "target": "T-PAL",
+   "disposition": "replace",
+   "policy": "Annotated look palette stylesheet keyed by look-prefixed action ids, with its glyph masks."
+  },
+  {
+   "id": "R-152",
+   "path": "^src/styles/palette-colors\\.css$",
+   "lines": [
+    4
+   ],
+   "category": "generic-context",
+   "consumer": "ui",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Generic phrase in a comment (the upstream look is untouched)."
+  },
+  {
+   "id": "R-153",
+   "path": "^src/styles/palette-colors\\.css$",
+   "category": "theme-selection",
+   "consumer": "ui",
+   "target": "T-THEME",
+   "disposition": "replace",
+   "policy": "Palette icon colours scoped to the recolouring look root class and the annotated look icon variable."
+  },
+  {
+   "id": "R-154",
+   "path": "^package\\.json$",
+   "category": "descriptor",
+   "consumer": "package-surface",
+   "target": "T-SEM-PKG",
+   "disposition": "remove",
+   "policy": "Package export of the private descriptor document."
+  },
+  {
+   "id": "R-155",
+   "path": "^package-lock\\.json$",
+   "category": "generic-context",
+   "consumer": "third-party",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Third-party dependency metadata."
+  },
+  {
+   "id": "R-156",
+   "path": "^THIRD_PARTY_NOTICES\\.md$",
+   "families": [
+    "metrics"
+   ],
+   "category": "metrics",
+   "consumer": "third-party",
+   "target": "T-MET",
+   "disposition": "retain-notice",
+   "policy": "Required notice of the release-derived font metrics data."
+  },
+  {
+   "id": "R-157",
+   "path": "^THIRD_PARTY_NOTICES\\.md$",
+   "category": "generic-context",
+   "consumer": "third-party",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "MIT licence text wording (generic word)."
+  },
+  {
+   "id": "R-158",
+   "path": "^licenses/",
+   "category": "metrics",
+   "consumer": "third-party",
+   "target": "T-MET",
+   "disposition": "retain-notice",
+   "policy": "Required third-party licence text of the font metrics data."
+  },
+  {
+   "id": "R-159",
+   "path": "^(tests/fixtures/f1-extensions/miwg/Reference/|docs/demo/)C\\.[45]\\.0\\.bpmn$",
+   "families": [
+    "metrics"
+   ],
+   "category": "generic-context",
+   "consumer": "third-party",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Third-party interchange test document declaring a diagram font name; not a width table."
+  },
+  {
+   "id": "R-160",
+   "path": "^tests/fixtures/parity-corpus/descriptors/(bioc|bpmn-in-color|bpmn)\\.json$",
+   "category": "generic-context",
+   "consumer": "third-party",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Third-party descriptor wording (colour attributes, generic terms)."
+  },
+  {
+   "id": "R-161",
+   "path": "^docs/design/receipts/",
+   "category": "generic-context",
+   "consumer": "history-record",
+   "target": "T-NONE",
+   "disposition": "history-record",
+   "policy": "Historical receipt recording a past lot state; not shipped."
+  },
+  {
+   "id": "R-162",
+   "path": "^\\.h2a/",
+   "category": "generic-context",
+   "consumer": "history-record",
+   "target": "T-NONE",
+   "disposition": "history-record",
+   "policy": "Squash preparation record; not shipped."
+  },
+  {
+   "id": "R-163",
+   "path": "^docs/design/0\\.4\\.0-test-list\\.md$",
+   "families": [
+    "private"
+   ],
+   "category": "engine-metadata",
+   "consumer": "documentation",
+   "target": "T-ENGINE",
+   "disposition": "doc-update",
+   "policy": "Private engine revision identifier quoted in a design test list; to be redacted."
+  },
+  {
+   "id": "R-164",
+   "path": "^docs/design/(0\\.4\\.0-test-list|pivot-lot1-test-list|pivot-lot1-containment-results|workbench-js-test-list)\\.md$",
+   "category": "generic-context",
+   "consumer": "history-record",
+   "target": "T-NONE",
+   "disposition": "history-record",
+   "policy": "Historical design test list of an earlier lot; not shipped."
+  },
+  {
+   "id": "R-165",
+   "path": "^docs/design/(profile-compiler-rules\\.json|profile-lot1-lint\\.md|profile-public-api\\.md)$",
+   "category": "generic-context",
+   "consumer": "profile-mechanism",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Upstream bpmnlint settings vocabulary of the profile lint mechanism (generic word)."
+  },
+  {
+   "id": "R-166",
+   "path": "^tests/fixtures/(profile-lot0|profile-parity-corpus|f1-extensions/expectations)/",
+   "families": [
+    "theme"
+   ],
+   "entries": [
+    "LX-TH-3",
+    "LX-TH-4"
+   ],
+   "category": "generic-context",
+   "consumer": "test-suite",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Generic words (lint settings vocabulary, caller-supplied wording) inside a sealed lot-0 corpus."
+  },
+  {
+   "id": "R-167",
+   "path": "^tests/fixtures/(profile-lot0|profile-parity-corpus|f1-extensions/expectations)/",
+   "category": "theme-selection",
+   "consumer": "test-suite",
+   "target": "T-NONE",
+   "disposition": "history-record",
+   "policy": "Sealed lot-0 provenance quoting DESIGN wording about looks or descriptors."
+  },
+  {
+   "id": "R-168",
+   "path": "^tests/fixtures/parity-corpus/",
+   "category": "family",
+   "consumer": "test-suite",
+   "target": "T-TEST",
+   "disposition": "test-input",
+   "policy": "Sealed F1 parity corpus using the descriptor as explicitly injected codec test data."
+  },
+  {
+   "id": "R-169",
+   "path": "^tests/fixtures/io/reference/C[1-7]/expected(-nofacts)?\\.drawio$",
+   "families": [
+    "theme"
+   ],
+   "category": "generic-context",
+   "consumer": "test-suite",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Draw.io event outline vocabulary inside a golden style."
+  },
+  {
+   "id": "R-170",
+   "path": "^tests/fixtures/io/reference/C[1-7]/expected(-nofacts)?\\.drawio$",
+   "category": "export-style",
+   "consumer": "test-suite",
+   "target": "T-EXP",
+   "disposition": "neutral-successor",
+   "policy": "Golden embedding the fixed reference export styles and reference-look colours."
+  },
+  {
+   "id": "R-171",
+   "path": "^tests/fixtures/io/reference/",
+   "category": "family",
+   "consumer": "test-suite",
+   "target": "T-TEST",
+   "disposition": "test-input",
+   "policy": "Legacy reference export input, golden or builder using the role markers, descriptor facts or legacy kinds."
+  },
+  {
+   "id": "R-172",
+   "path": "^tests/fixtures/ui/step0-render\\.json$",
+   "families": [
+    "presentation"
+   ],
+   "category": "theme-tokens",
+   "consumer": "test-suite",
+   "target": "T-TOKENS",
+   "disposition": "neutral-successor",
+   "policy": "Captured render embedding reference-look colours."
+  },
+  {
+   "id": "R-173",
+   "path": "^tests/fixtures/(ui|layout-corpus|io)/",
+   "category": "family",
+   "consumer": "test-suite",
+   "target": "T-TEST",
+   "disposition": "test-input",
+   "policy": "Legacy look, layout or IO fixture using role markers, legacy kinds or look names."
+  },
+  {
+   "id": "R-174",
+   "path": "^tests/",
+   "families": [
+    "presentation"
+   ],
+   "category": "theme-tokens",
+   "consumer": "test-suite",
+   "target": "T-TOKENS",
+   "disposition": "neutral-successor",
+   "policy": "Test asserting reference-look colours or built-in look geometry."
+  },
+  {
+   "id": "R-175",
+   "path": "^tests/(profile-[a-z0-9-]+\\.test\\.mjs|fixtures/profile-lot0/author-[a-z0-9]+\\.mjs)$",
+   "families": [
+    "theme"
+   ],
+   "entries": [
+    "LX-TH-3",
+    "LX-TH-4"
+   ],
+   "category": "generic-context",
+   "consumer": "test-suite",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Generic words (lint settings vocabulary, caller-supplied wording) in profile mechanism tests."
+  },
+  {
+   "id": "R-176",
+   "path": "^tests/",
+   "category": "family",
+   "consumer": "test-suite",
+   "target": "T-TEST",
+   "disposition": "test-input",
+   "policy": "Legacy behaviour test: role markers, classifiers, looks, palette, metrics, navigation, descriptor or attachment."
+  },
+  {
+   "id": "R-177",
+   "path": "^README\\.md$",
+   "entries": [
+    "LX-TH-3",
+    "LX-TH-4"
+   ],
+   "lines": [
+    99,
+    507
+   ],
+   "category": "generic-context",
+   "consumer": "documentation",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "Generic wording (notation, licence text, CSS variables)."
+  },
+  {
+   "id": "R-178",
+   "path": "^README\\.md$",
+   "category": "family",
+   "consumer": "documentation",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Shipped README documenting built-in looks, role markers, palette, navigation rules or the descriptor."
+  },
+  {
+   "id": "R-179",
+   "path": "^docs/demo/",
+   "category": "family",
+   "consumer": "documentation",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Demo page or generated look image of the built-in looks."
+  },
+  {
+   "id": "R-180",
+   "path": "^scripts/licenses\\.mjs$",
+   "category": "generic-context",
+   "consumer": "build-tooling",
+   "target": "T-NONE",
+   "disposition": "context-generic",
+   "policy": "MIT licence text wording (generic word)."
+  },
+  {
+   "id": "R-181",
+   "path": "^scripts/build-assets\\.mjs$",
+   "category": "descriptor",
+   "consumer": "build-tooling",
+   "target": "T-SEM-PKG",
+   "disposition": "remove",
+   "policy": "Build step shipping the private descriptor document."
+  },
+  {
+   "id": "R-182",
+   "path": "^scripts/gen-css\\.mjs$",
+   "category": "palette",
+   "consumer": "build-tooling",
+   "target": "T-PAL",
+   "disposition": "replace",
+   "policy": "Build step embedding the annotated look palette stylesheet."
+  },
+  {
+   "id": "R-183",
+   "path": "^scripts/gen-demo-svg\\.mjs$",
+   "category": "theme-selection",
+   "consumer": "build-tooling",
+   "target": "T-DOCS",
+   "disposition": "doc-update",
+   "policy": "Demo image generator rendering the built-in looks."
+  }
+ ]
+}

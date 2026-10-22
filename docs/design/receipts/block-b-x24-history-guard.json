@@ -1,0 +1,574 @@
+{
+  "format": "block-b-x24-history-guard/1",
+  "date": "2026-10-19",
+  "round": "X24 integration micro-reseal: test history guard compliance (no Git object read by the seal test and the probe) and classification of the occurrences reported by the zero-literal scan of history rule I1; relink after the integration micro-reseal of the JS lot-5 seal, which removed the class (a) occurrences (I1: 0 unmatched)",
+  "inputs": [
+    "BLOCKB-SEAL-X24.md (seal brief)",
+    "BLOCKB-SEAL-REVIEW-X24.md (gpt-6-astra, max effort, REWORK)",
+    "SF-JS-X24-OUT.md (single seal fix round)",
+    "BLOCKB-JOB-PLAN.md (history rule I1 and its addendum)",
+    "block B integration run M1: test history guard 13/14 (7 flagged lines), I1 scan 596 unmatched occurrences",
+    "Conductor brief of the lot-5 micro-reseal (JS side, 2026-10-19): after the lot-5 reseal, rebind the reviewed records, regenerate and reseal X24, and confirm 0 unmatched occurrences"
+  ],
+  "baseCommit": "600fc6c27239a925525b2761b004ebca4b739b8e",
+  "guard": {
+    "path": "tests/test-history-guard.test.mjs",
+    "bytes": 33480,
+    "sha256": "d03c4554265e05008598756104c0fca122b831ad7b8937ba28f3378108d39f9c",
+    "unchanged": true,
+    "closedAllowance": [
+      "07be09e",
+      "45aa690"
+    ],
+    "findingsBefore": [
+      "tests/x24-externalization-seal.test.mjs:32",
+      "tests/x24-externalization-seal.test.mjs:67",
+      "tests/x24-externalization-seal.test.mjs:83",
+      "tests/profile-externalization.probe.mjs:30",
+      "tests/profile-externalization.probe.mjs:45",
+      "tests/profile-externalization.probe.mjs:62",
+      "tests/profile-externalization.probe.mjs:177"
+    ],
+    "correction": "No Git helper with an (args, options) signature and no object computed from the ledger is read: the seal test imports no process module; the probe calls git through the rest-parameter wrapper with closed inline options for the index listing (ls-files) only."
+  },
+  "previousSeal": {
+    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+    "bytes": 29137,
+    "sha256": "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c"
+  },
+  "intermediateSeal": {
+    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+    "bytes": 30273,
+    "sha256": "39d766b4ba9783efb159e9d1838a5317ab6c624f1b15d1cec1008b0fe54c4125",
+    "note": "seal of this round before the lot-5 relink (I1: 29 unmatched occurrences of class (a)); superseded by the relink"
+  },
+  "newSeal": {
+    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+    "bytes": 30273,
+    "sha256": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f"
+  },
+  "supersedesFiles": [
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/README.md",
+      "old": {
+        "bytes": 52524,
+        "sha256": "9b4c430cb9c8a875a5372cc65bfde272a2f45a14924452b5f123ea5c5ebe49db"
+      },
+      "new": {
+        "bytes": 72020,
+        "sha256": "89c706093ac55c0181ae14276cbb99fd7849781638dcafbfe37c2280ae1b577f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+      "old": {
+        "bytes": 1620,
+        "sha256": "440d2be7e8d9fd017549828cba0701491225458d75899d98a87d13aac94432c9"
+      },
+      "new": {
+        "bytes": 1620,
+        "sha256": "4e67734cf59c17b71112c4b8f6a03ed04e3f0b5eb2097d0d6f6500e6bd449c1f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+      "old": {
+        "bytes": 1509,
+        "sha256": "47774d0c676f2970224ccbdf4f180215845c705a2f73163c373e881720d92d93"
+      },
+      "new": {
+        "bytes": 1509,
+        "sha256": "d3d7068bb1fd17b3b56b1742323889b5adcb19fb11a15b64b968901e0718a15f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+      "old": {
+        "bytes": 3241,
+        "sha256": "d811bf0bece9c200e19d97c0d5b0d728c0e2982392cec5d658e1c5ed82e3cbde"
+      },
+      "new": {
+        "bytes": 3241,
+        "sha256": "6f1654b15c0f98174f5d506a32fd65f7ba1f5e0aa73b29dbc9a72b55ab89137e"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+      "old": {
+        "bytes": 1336,
+        "sha256": "957fee74ee5056a8ed8ed7dd4da0fc1e123da845f4d23698da8f655b228066fa"
+      },
+      "new": {
+        "bytes": 1336,
+        "sha256": "587b42c902e2daf8bad6e01fb2f8f96fabe2df24548c879f79bf10407185d606"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+      "old": {
+        "bytes": 1061,
+        "sha256": "e8328e85b02d62aa1cd548cc068f8696dd597beda378d9574fcddf9327396435"
+      },
+      "new": {
+        "bytes": 1239,
+        "sha256": "6048c397b07b879d9857d46b5afd06a14c0af6a7a06ce410d268f65bcac12ce9"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-001-probe-1-original.json",
+      "old": {
+        "bytes": 960,
+        "sha256": "eb9c9e4b52209dbf621fa2528d76ccefcae07f8e1fbb4f260d24a28d890d1eeb"
+      },
+      "new": {
+        "bytes": 960,
+        "sha256": "b6f594aaf4bae371448b1902b0867faba5d0ba27e085598ef1f897729023bfaf"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+      "old": {
+        "bytes": 1483,
+        "sha256": "6ed0b3f0b78befccac68846d634e40258770e6981c871a56559ff3b51d734756"
+      },
+      "new": {
+        "bytes": 1483,
+        "sha256": "5441693e9d8e9a0b17cfc135372ecce3e4a9784443a4ff80fbb8504fd97036b4"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+      "old": {
+        "bytes": 959,
+        "sha256": "879aad0169d94097ba0c3d25f7c423bcc689afda554c285fdde1b1488fb394d2"
+      },
+      "new": {
+        "bytes": 959,
+        "sha256": "567ac347069fb5d1ac34cf2e6fdca5606c6cf810974a8dfe9daf9d1eccd6b711"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/author-cases.mjs",
+      "old": {
+        "bytes": 89138,
+        "sha256": "aedf4fc6277d7da6c0cb033d519df468cfb8c01a807a3b4075325667b92c6c04"
+      },
+      "new": {
+        "bytes": 89231,
+        "sha256": "6c97bc93d771e715d83b254cc4dd66fb3abacde56f25fa84d491e8fe4dd4ebef"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/literals.mjs",
+      "old": {
+        "bytes": 4422,
+        "sha256": "8aade4b60c536b6b3d8ca12d09c796b03b197305a15ca5fdb9520d22f431efbb"
+      },
+      "new": {
+        "bytes": 8683,
+        "sha256": "42fa0761cac5ed3929df5171f0f8421ed03651a734c19e3019063ccef26f2873"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/scan.mjs",
+      "old": {
+        "bytes": 32356,
+        "sha256": "d9e84fab6bf0888c7e2004622b43a1c667c65ad4e0af7d021b57693a50d4b3f6"
+      },
+      "new": {
+        "bytes": 34731,
+        "sha256": "40b89ab416a0af6978b95448b090b5e60597650ebe2cb36e9b40a01bee8a8834"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+      "old": {
+        "bytes": 5600,
+        "sha256": "3f94d5697fc67a0f348f56761659dcce34aa46f42b2afefb4aab2a848b4431a6"
+      },
+      "new": {
+        "bytes": 6254,
+        "sha256": "d4020b140d7419b365d932069cb5ec1360e400811c703e56d3c26cc51d9989aa"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+      "old": {
+        "bytes": 3655792,
+        "sha256": "bc909c3fd9ace4902a85ac7667de4145634743bf3d6e1529387739e42ec26c67"
+      },
+      "new": {
+        "bytes": 3655792,
+        "sha256": "dbd1975d79f6f0ceb4da198bf204db173f6a18c89e22251ccd27a4b897fde098"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+      "old": {
+        "bytes": 48017,
+        "sha256": "912c5b4996f79ae5d8779a3b30df977c9b9a60752043898e133a28ddb7266fae"
+      },
+      "new": {
+        "bytes": 182741,
+        "sha256": "7f2e79a039c778a70fbe5a2d5f4dc83f7dcd4cf8030d5cb56e4322e0e32a02be"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "old": {
+        "bytes": 48080,
+        "sha256": "d4c2a4165db446045d07726335b7ad2959b6a993474a9d84f833b54c4827cc8e"
+      },
+      "new": {
+        "bytes": 48170,
+        "sha256": "bd1eda681bdac0021870dffe5e8b57c58622f87fffb866e5c87adc6381764be2"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/probe-expectations.json",
+      "old": {
+        "bytes": 16131,
+        "sha256": "5ca2d59cb1003f73fc5b180270a47395087bddc6c098fa8745d79e2127ee335f"
+      },
+      "new": {
+        "bytes": 18503,
+        "sha256": "1395c9546c2141e6c28758457b834716796b5447dc3e8ac3bb3069dd12a9eafe"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+      "old": {
+        "bytes": 29137,
+        "sha256": "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c"
+      },
+      "new": {
+        "bytes": 30273,
+        "sha256": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f"
+      }
+    },
+    {
+      "path": "tests/profile-externalization.probe.mjs",
+      "old": {
+        "bytes": 21399,
+        "sha256": "8cb22ba4c53ec3ecacffa6f0426e68cf3e8b5ddc034c5d00b9f8830511566b6f"
+      },
+      "new": {
+        "bytes": 20645,
+        "sha256": "a123de68df43d271307067d56349ed3de44ec93f5de4a795543ad1a2712ba0f4"
+      }
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "old": {
+        "bytes": 48021,
+        "sha256": "eff9eeeb3310a0a2bbbd946979c96c3a5e0b723756f6d3fd81762a1d0595e3f0"
+      },
+      "new": {
+        "bytes": 55732,
+        "sha256": "db9145800da95726921d3da45db1a5be5d44b096dfc0e82ea967d377e0cee0e4"
+      }
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/base-check.mjs",
+      "bytes": 8401,
+      "sha256": "46596a478ff4a9cf1632a7fd7213fad4bd47a1fea4f36572e7d44e40944cee53"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/literal-set.mjs",
+      "bytes": 3559,
+      "sha256": "893e48245008c9680b76fe661c78de122e3d915112a111609faf03dc8dfb629a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs",
+      "bytes": 4169,
+      "sha256": "af95acd155ab433a1c4578ae2a2cb39f12493eb45313d47c5fbabf6e96d23fa0"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/literal-set.json",
+      "bytes": 32745,
+      "sha256": "94bbb8eace69d546ce1fdd0792af4bfd6abb689f7c5a70a3b17f4c1b6024022c"
+    }
+  ],
+  "i1": {
+    "scan": "derive/reviewed.mjs over git ls-files: strict derive/scan.mjs, every occurrence paired with a ledger row of the same masked file, form, entry, literal, columns, line span and line SHA-256",
+    "before": {
+      "files": 2877,
+      "occurrences": 3972,
+      "paired": 3376,
+      "unmatched": 596,
+      "location": "files of the lot-3, lot-4 and lot-5 seals and their clause tables; none in an x24 file, none under src/ or dist/"
+    },
+    "after": {
+      "files": 2881,
+      "occurrences": 3972,
+      "paired": 3376,
+      "reviewed": 567,
+      "unmatched": 29
+    },
+    "classes": {
+      "a": 29,
+      "b": 567
+    },
+    "reviewedTokens": [
+      {
+        "id": "RV-01",
+        "entry": "LX-TH-3",
+        "literal": "fe6d3468cf5c74d8ec2a95b40f2e05338c37a4202f8fad692d2b64a9cf9b468a",
+        "class": "generic-word",
+        "count": 151,
+        "files": 48
+      },
+      {
+        "id": "RV-02",
+        "entry": "LX-TH-3",
+        "literal": "ef6691545d2c5523efed00424407cb261aeb0037d165ca5792f7f8bac3381362",
+        "class": "generic-word",
+        "count": 186,
+        "files": 101
+      },
+      {
+        "id": "RV-03",
+        "entry": "LX-TH-2",
+        "literal": "ca8c522af0a0dfc10c8747ed205c4a650df4ccb350adbd450bbce753f6385c51",
+        "class": "legacy-api-value",
+        "count": 86,
+        "files": 25
+      },
+      {
+        "id": "RV-04",
+        "entry": "LX-TH-4",
+        "literal": "6cdfd271da635d491e37a2b4a1044b306e6e9e039aeadee95bb355efadf8cb33",
+        "class": "generic-word",
+        "count": 53,
+        "files": 22
+      },
+      {
+        "id": "RV-05",
+        "entry": "LX-TH-1",
+        "literal": "ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033",
+        "class": "legacy-api-value",
+        "count": 51,
+        "files": 29
+      },
+      {
+        "id": "RV-06",
+        "entry": "LX-TH-1",
+        "literal": "7482e374b5bddc0a48ea3b3430de633b7938e3045e64aebca2574a50a53a5719",
+        "class": "generic-word",
+        "count": 4,
+        "files": 4
+      },
+      {
+        "id": "RV-07",
+        "entry": "LX-DS-4",
+        "literal": "e604f8c97caaadb4c15db94f28d54802722aeba64e375071e4d1eeb1a3cc68fa",
+        "class": "homograph",
+        "count": 13,
+        "files": 4
+      },
+      {
+        "id": "RV-08",
+        "entry": "LX-PL-1",
+        "literal": "75f02da68647be51e5a675b5fc5b9a521d589a09d50103ed5e227cccc3d02056",
+        "class": "generic-word",
+        "count": 11,
+        "files": 7
+      },
+      {
+        "id": "RV-09",
+        "entry": "LX-AT-2",
+        "literal": "3cc838aabc52939c80e95e5036de2835c01cad9569b33364be0744be9692cc58",
+        "class": "legacy-api-value",
+        "count": 7,
+        "files": 4
+      },
+      {
+        "id": "RV-10",
+        "entry": "LX-MT-4",
+        "literal": "8088da219c162b1c3733594fe2015156ee7b84042ea821ad552e9448e8cbbcdd",
+        "class": "generic-word",
+        "count": 3,
+        "files": 3
+      },
+      {
+        "id": "RV-11",
+        "entry": "LX-MK-5",
+        "literal": "c587ed01690ac075254788e77d8a5c068cf756579ef25db134984655add8d778",
+        "class": "homograph",
+        "count": 1,
+        "files": 1
+      },
+      {
+        "id": "RV-12",
+        "entry": "LX-MK-1",
+        "literal": "44328fb796413802ec7f238f64c1663ee88c2b91f00a408bd44b32c5ada8372c",
+        "class": "homograph",
+        "count": 1,
+        "files": 1
+      }
+    ],
+    "classA": [
+      {
+        "entry": "LX-TV-2",
+        "literal": "98cc55b3b63327804dc2ce99bde1bd014a599cd687820b5dfd56ee27a5816fb8",
+        "category": "reserved band and template label of the private profile (type-vocabulary family, DESIGN.md:834), case variant; no base row; 12 occurrences in the lot-5 fixtures of the Python twin at its lot-5 pin",
+        "owner": "lot-5 seals of both libraries (one reseal, applied identically): replace the label of the neutral UI profile by a neutral label of its notion, re-derive and reseal",
+        "occurrences": [
+          "tests/fixtures/lot5-ui/expectations/README.md:535:17",
+          "tests/fixtures/lot5-ui/expectations/author/lot5-profile.mjs:414:61",
+          "tests/fixtures/lot5-ui/expectations/cases/surfaces-001-palette-plain-en.json:14:498",
+          "tests/fixtures/lot5-ui/expectations/cases/surfaces-001-palette-plain-en.json:65:515",
+          "tests/fixtures/lot5-ui/expectations/cases/surfaces-002-palette-contrast-en.json:14:498",
+          "tests/fixtures/lot5-ui/expectations/cases/surfaces-002-palette-contrast-en.json:65:515",
+          "tests/fixtures/lot5-ui/expectations/cases/surfaces-004-palette-locale-fr-ca.json:14:498",
+          "tests/fixtures/lot5-ui/expectations/cases/surfaces-004-palette-locale-fr-ca.json:65:515",
+          "tests/fixtures/lot5-ui/expectations/fixtures/ui-neutral-profile.json:8005:20",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/descriptor-variant.profile.json:1:92334",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/duplicate-upstream.profile.json:1:92339",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/enum-duplicate-records.profile.json:1:92357",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/enum-duplicate-values.profile.json:1:92360",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/enum-empty-choices.profile.json:1:92224",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/field-parameter-missing.profile.json:1:92293",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/id-not-ordinary-input.profile.json:1:92712",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/missing-fallback-text.profile.json:1:92326",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/mutable-without-command.profile.json:1:92223",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/mutable-without-parameters.profile.json:1:92242",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/readonly-with-command.profile.json:1:92429",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/reference-empty-target-types.profile.json:1:92312",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/ui-icon-unknown-glyph.profile.json:1:92328",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/ui-label-unknown-message.profile.json:1:92322",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/ui-parameter-duplicate.profile.json:1:92361",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/ui-parameter-missing.profile.json:1:92296",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/ui-parameter-source-type.profile.json:1:92326",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/ui-parameter-unknown.profile.json:1:92360",
+          "tests/fixtures/lot5-ui/expectations/fixtures/variants/upstream-duplicate-within-entry.profile.json:1:92340"
+        ],
+        "resolved": "removed by the JS lot-5 integration micro-reseal (docs/design/receipts/block-b-lot5-reseal.json): 28 occurrences replaced by the neutral label \"Reserved band\", the profile, variant, envelope, case and manifest digests re-derived; the occurrences of the Python twin belong to its own lot-5 micro-reseal"
+      },
+      {
+        "entry": "LX-DS-2",
+        "literal": "37bb91b5340ccc62195bb5c612571bc4b7799d8217cd48b8face008142e2e07c",
+        "category": "private semantic descriptor file stem (descriptor family, DESIGN.md:853) in a forbidden-import witness string",
+        "owner": "lot-5 seal (JS): replace the file stem of the witness by a neutral file name in the same lot-5 reseal",
+        "occurrences": [
+          "tests/lot5-ui-expectations.test.mjs:132:74"
+        ],
+        "resolved": "removed by the JS lot-5 integration micro-reseal (docs/design/receipts/block-b-lot5-reseal.json): the witness names neutral-descriptors.json, the neutral descriptor of the profile-mechanism/1 contract set"
+      }
+    ],
+    "afterLot5Relink": {
+      "files": 2882,
+      "occurrences": 3943,
+      "paired": 3376,
+      "reviewed": 567,
+      "unmatched": 0,
+      "reboundFiles": 97,
+      "movedSpanFiles": 3
+    }
+  },
+  "verification": [
+    {
+      "command": "npm ci && npm run build",
+      "exitCode": 0,
+      "note": "prerequisites of the gate: the runtime twin test that the history guard runs imports the built package"
+    },
+    {
+      "command": "node --test --test-timeout=900000 tests/x24-externalization-seal.test.mjs tests/test-history-guard.test.mjs tests/brand-guard.test.mjs tests/profile-brand-guard.test.mjs tests/brand-baseline.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/path-guard.test.mjs tests/profile-case-policy-guard.test.mjs tests/history-attribution.test.mjs",
+      "exitCode": 0,
+      "tests": 72,
+      "passed": 72,
+      "failed": 0,
+      "x24SealSubtests": 12
+    },
+    {
+      "command": "node --test --test-timeout=600000 tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "tests": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/base-check.mjs --files files.lst --root <checkout of the base commit>",
+      "exitCode": 0,
+      "trackedFiles": 797,
+      "rows": 3381,
+      "literals": 189,
+      "baseBranchRows": 17,
+      "failures": 0
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/ledger.mjs --files files.lst --pack pack.json --root <base checkout> --pack-root <base checkout> --out ledger.json",
+      "exitCode": 0,
+      "note": "pack listing rebuilt from the sealed member digests, 203 of 203 members of the base build byte-identical; the written ledger differs from the fix-round ledger only by inputs.lexicon and inputs.helpers derive/scan.mjs"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/literal-set.mjs --files files.lst --root <base checkout>",
+      "exitCode": 0,
+      "note": "byte-identical to the sealed literal-set.json (189 records)"
+    },
+    {
+      "check": "hashed and text literal matching of derive/literals.mjs, texts recovered in memory from the base checkout",
+      "strings": 287144,
+      "syntheticContexts": 2457,
+      "differences": 0
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs --files tracked.lst",
+      "exitCode": 1,
+      "files": 2881,
+      "occurrences": 3972,
+      "paired": 3376,
+      "reviewed": 567,
+      "unmatched": 29,
+      "note": "the 29 unmatched occurrences are class (a), listed in i1.classA"
+    },
+    {
+      "check": "tests/profile-externalization.probe.mjs",
+      "note": "outside the campaign as before (it needs block B to land); syntax checked with node --check, not run"
+    }
+  ],
+  "lot5RelinkVerification": [
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs --files tracked.lst --write",
+      "exitCode": 0,
+      "note": "rebinds 97 lot-5 files (file SHA-256) and the spans of 3 records of the lot-5 README, whose lines moved; tokens, classes, file sets and counts unchanged; every other key of lexicon.json identical"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/ledger.mjs --files files.lst --pack pack.json --root <base checkout> --pack-root <base checkout> --out ledger.json",
+      "exitCode": 0,
+      "note": "byte-identical to the hand-derived ledger.json, which differs from the previous one by inputs.lexicon only (no base path is under an eligible prefix of the reviewed records); pack listing rebuilt from the sealed member digests, 203 of 203 members verified"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/author-cases.mjs && node tests/fixtures/x24-externalization/expectations/derive/clause-table.mjs && node tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+      "exitCode": 0,
+      "note": "cases L-001 to L-004, L-006, P-005 and P-006 and manifest.json differ from the intermediate seal by the digests of lexicon.json and ledger.json only; dimension-coverage.json and docs/design/block-b-x24-expectations.md unchanged"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs --files tracked.lst",
+      "exitCode": 0,
+      "files": 2882,
+      "occurrences": 3943,
+      "paired": 3376,
+      "reviewed": 567,
+      "unmatched": 0
+    },
+    {
+      "command": "node --test --test-timeout=900000 tests/lot5-ui-expectations.test.mjs tests/x24-externalization-seal.test.mjs tests/brand-guard.test.mjs tests/profile-brand-guard.test.mjs tests/brand-baseline.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/path-guard.test.mjs tests/profile-case-policy-guard.test.mjs tests/history-attribution.test.mjs",
+      "exitCode": 0,
+      "tests": 72,
+      "passed": 72,
+      "failed": 0,
+      "x24SealSubtests": 12
+    },
+    {
+      "command": "node --test --test-timeout=600000 --test-skip-pattern=\"runtime twins\" tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "note": "the runtime-twin subtest imports the built package and was not run: no implementation is run in this round"
+    }
+  ]
+}

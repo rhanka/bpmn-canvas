@@ -1,0 +1,350 @@
+{
+  "task": "C5",
+  "status": "exit-checks-blocked",
+  "demo": {
+    "source": "docs/demo/native.html",
+    "built": "site/native.html",
+    "scenario": "lot5-demo-001-acceptance-script",
+    "build": "node scripts/build-demo.mjs"
+  },
+  "sealedCases": {
+    "total": 333,
+    "headlessPassed": 329,
+    "stopped": 4,
+    "groups": {
+      "compile": {
+        "cases": 17,
+        "headlessPassed": 15,
+        "stopped": 2
+      },
+      "connect": {
+        "cases": 11,
+        "headlessPassed": 11,
+        "stopped": 0
+      },
+      "context": {
+        "cases": 7,
+        "headlessPassed": 7,
+        "stopped": 0
+      },
+      "delete": {
+        "cases": 11,
+        "headlessPassed": 11,
+        "stopped": 0
+      },
+      "demo": {
+        "cases": 1,
+        "headlessPassed": 1,
+        "stopped": 0
+      },
+      "fields": {
+        "cases": 63,
+        "headlessPassed": 63,
+        "stopped": 0
+      },
+      "gates": {
+        "cases": 4,
+        "headlessPassed": 4,
+        "stopped": 0
+      },
+      "history": {
+        "cases": 12,
+        "headlessPassed": 12,
+        "stopped": 0
+      },
+      "lifecycle": {
+        "cases": 3,
+        "headlessPassed": 3,
+        "stopped": 0
+      },
+      "navigation": {
+        "cases": 9,
+        "headlessPassed": 9,
+        "stopped": 0
+      },
+      "palette": {
+        "cases": 31,
+        "headlessPassed": 31,
+        "stopped": 0
+      },
+      "paste": {
+        "cases": 15,
+        "headlessPassed": 15,
+        "stopped": 0
+      },
+      "presentation": {
+        "cases": 6,
+        "headlessPassed": 6,
+        "stopped": 0
+      },
+      "py": {
+        "cases": 98,
+        "headlessPassed": 96,
+        "stopped": 2
+      },
+      "replace": {
+        "cases": 9,
+        "headlessPassed": 9,
+        "stopped": 0
+      },
+      "static": {
+        "cases": 6,
+        "headlessPassed": 6,
+        "stopped": 0
+      },
+      "surfaces": {
+        "cases": 14,
+        "headlessPassed": 14,
+        "stopped": 0
+      },
+      "theme": {
+        "cases": 1,
+        "headlessPassed": 1,
+        "stopped": 0
+      },
+      "twin": {
+        "cases": 1,
+        "headlessPassed": 1,
+        "stopped": 0
+      },
+      "views": {
+        "cases": 5,
+        "headlessPassed": 5,
+        "stopped": 0
+      },
+      "workshop": {
+        "cases": 9,
+        "headlessPassed": 9,
+        "stopped": 0
+      }
+    },
+    "browserWitnessesExecuted": false
+  },
+  "stoppedCases": [
+    {
+      "caseId": "lot5-compile-003-enum-duplicate-values",
+      "clause": "DESIGN §8.3 L657; CR-10",
+      "observed": "profile-type",
+      "expected": "profile-ui-parameters",
+      "reason": "Conflicts with the earlier sealed s2b-cr10-enum-values expectation."
+    },
+    {
+      "caseId": "lot5-compile-015-ui-parameter-source-type",
+      "clause": "DESIGN §8.3 L655; CR-10",
+      "observed": "profile-type",
+      "expected": "profile-ui-parameters",
+      "reason": "Conflicts with the unchanged J2 CR-10 typed-argument assertion on the same invalid binding."
+    },
+    {
+      "caseId": "lot5-py-compile-enum-duplicate-values",
+      "clause": "DESIGN §8.3 L657; CR-10",
+      "observed": "profile-type",
+      "expected": "profile-ui-parameters",
+      "reason": "Conflicts with the earlier sealed s2b-cr10-enum-values expectation."
+    },
+    {
+      "caseId": "lot5-py-compile-ui-parameter-source-type",
+      "clause": "DESIGN §8.3 L655; CR-10",
+      "observed": "profile-type",
+      "expected": "profile-ui-parameters",
+      "reason": "Conflicts with the unchanged J2 CR-10 typed-argument assertion on the same invalid binding."
+    }
+  ],
+  "stoppedFingerprintChecks": [
+    {
+      "test": "Block A microfix should retain predecessor checks and verify every targeted successor",
+      "file": "tests/block-a-phase2-integration.test.mjs",
+      "source": "src/profile/compiler-static.ts",
+      "expectedBytes": 24454,
+      "observedBytes": 25061,
+      "reason": "The frozen fingerprint predates the localized UI mapping and fallback-message checks. No pin was changed."
+    },
+    {
+      "test": "should supersede historical inventories with current byte lengths and digests",
+      "file": "tests/profile-s123-receipt.test.mjs",
+      "source": "src/profile/static-contracts.ts",
+      "expectedBytes": 23675,
+      "observedBytes": 24098,
+      "reason": "The frozen fingerprint predates typed reference-widget ID submission. No pin was changed."
+    }
+  ],
+  "sharedCompilerReview": {
+    "compilerStatic": "Retained eleven localized lines for duplicate upstream mappings and missing fallback texts.",
+    "staticContracts": "Retained only the reference-widget string-ID parameter allowance; earlier refusal codes remain intact.",
+    "existingTest": "tests/profile-compiler-j2.test.mjs is byte-identical to the branch base."
+  },
+  "testsFirst": [
+    {
+      "group": "resumed implementation",
+      "cases": 333,
+      "passed": 90,
+      "failed": 243,
+      "evidence": "Valid commands were refused because recipe declarations were used as UI parameter bindings; staged results were unwrapped incorrectly."
+    },
+    {
+      "group": "shared compiler hunks removed and rebuilt",
+      "cases": 39,
+      "passed": 17,
+      "failed": 22,
+      "evidence": "The admitted reference-field profile was refused, and UI mapping and fallback checks were missing. The retained hunks restore these checks without changing prior assertions."
+    },
+    {
+      "group": "DOM palette before wiring",
+      "passed": 0,
+      "failed": 1,
+      "evidence": "The compiled adapter exposed no palette entry; the failure was a DOM assertion, not a missing file or skipped case."
+    },
+    {
+      "group": "native workshop routing and download freshness",
+      "cases": 5,
+      "passed": 2,
+      "failed": 2,
+      "skipped": 1,
+      "evidence": "The workshop rendered its XML host for native props, and a view changed during preparation still emitted a download. Native routing and freshness checks fix both."
+    },
+    {
+      "group": "sealed pointer gestures before DOM handlers",
+      "cases": 9,
+      "passed": 3,
+      "failed": 5,
+      "skipped": 1,
+      "evidence": "Five sealed presentation cases failed through real DOM events: drag, resize, label move, bendpoint insertion, and cancellation. Immutable previews and one pointer-up commit make all five pass."
+    }
+  ],
+  "unsealed": {
+    "OPEN-PANEL": "Owner choice pending; one explicit expected skip. No dependency added.",
+    "OPEN-HOOK": "Headless intent comparisons do not establish browser pointer witnesses; browser launch was unavailable.",
+    "OPEN-EXTERNAL": "Creation remains refused with profile-open.",
+    "OPEN-RESERVED-N": "Edit-time support creation remains refused; bound support reuse is tested."
+  },
+  "browser": {
+    "attempted": [
+      "tests/aui.browser.test.mjs",
+      "tests/browser-dist.browser.test.mjs",
+      "tests/{LX-TH-2:ca8c522a}.browser.test.mjs",
+      "tests/core.browser.test.mjs",
+      "tests/demo.browser.test.mjs",
+      "tests/history.browser.test.mjs",
+      "tests/io-review-2.browser.test.mjs",
+      "tests/io-review-3.browser.test.mjs",
+      "tests/io-review-4.browser.test.mjs",
+      "tests/io.browser.test.mjs",
+      "tests/layout-boundary.browser.test.mjs",
+      "tests/layout-corpus.browser.test.mjs",
+      "tests/layout-on-load.browser.test.mjs",
+      "tests/{LX-TH-1:ba29297b}.browser.test.mjs",
+      "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+      "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+      "tests/palette.browser.test.mjs",
+      "tests/profile-native-demo.browser.test.mjs",
+      "tests/react.browser.test.mjs",
+      "tests/render-looks.browser.test.mjs",
+      "tests/ui.browser.test.mjs",
+      "tests/v02.browser.test.mjs",
+      "tests/watermark.browser.test.mjs",
+      "tests/workshop-export.browser.test.mjs",
+      "tests/workshop-served.browser.test.mjs",
+      "tests/workshop-structure.browser.test.mjs",
+      "tests/workshop.browser.test.mjs"
+    ],
+    "executed": 0,
+    "reason": "Chromium exits with code 46 at launch; every browser entry was attempted and terminated. DOM integration checks are not reported as browser passes."
+  },
+  "verification": {
+    "typecheck": "passed",
+    "build": "passed",
+    "demoBuild": "passed",
+    "goldenIndependence": {
+      "passed": 3,
+      "failed": 0,
+      "timeoutMs": 3600000,
+      "runAlone": true
+    },
+    "finalRuntimeCampaign": {
+      "cases": 3218,
+      "passed": 3215,
+      "failed": 2,
+      "skipped": 1,
+      "expectedSkip": "OPEN-PANEL",
+      "failureReasons": "The two stopped frozen source fingerprint checks listed above.",
+      "durationMs": 441402.331407,
+      "testTimeout": true,
+      "processesTerminated": true
+    },
+    "compatibilityTypecheck": "passed",
+    "nativeDom": {
+      "passed": 8,
+      "failed": 0,
+      "expectedSkip": "OPEN-PANEL",
+      "pointerCases": 5
+    },
+    "nativeWorkshop": {
+      "passed": 2,
+      "failed": 0
+    },
+    "finalGuards": {
+      "passed": 35,
+      "failed": 0
+    },
+    "builtDemoDomSmoke": {
+      "steps": 12,
+      "finalDrawing": "passed",
+      "browser": false
+    },
+    "sealedCampaign": {
+      "cases": 343,
+      "passed": 339,
+      "failed": 4,
+      "skipped": 0,
+      "lot5Cases": 333,
+      "otherChecks": 10,
+      "failureReasons": "The four stopped CR-10 refusal-code conflicts listed above."
+    }
+  },
+  "scope": {
+    "protectedExpectationsEdited": false,
+    "protectedDesignFileEdited": false,
+    "repositoryTemporaryDirectoryTouched": false,
+    "dependencyAdded": false,
+    "pushed": false
+  },
+  "commits": [
+    {
+      "hash": "661c955346e4adde00722ace74ae750a3f059273",
+      "message": "Validate UI mappings and bind native query contexts"
+    },
+    {
+      "hash": "4a77ed9d3038204156c354fdac24b5ef22d436e7",
+      "message": "Stage typed UI commands and reference queries"
+    },
+    {
+      "hash": "c6e1fd91d5125b009142c0a5b002db009b97e17f",
+      "message": "Commit native snapshots and single-step edit history"
+    },
+    {
+      "hash": "7fbdc7b2b60c0236495e020be8a0ad439fc0bff7",
+      "message": "Exercise sealed UI and twin command cases"
+    },
+    {
+      "hash": "b33bf17e677fc83ef3c6e318a292e57134a17199",
+      "message": "Expose native profile editing controls"
+    },
+    {
+      "hash": "55efadefd8bd019523435e1633c4d685dd3739c3",
+      "message": "Add the neutral native editing walkthrough"
+    },
+    {
+      "hash": "8a7a7e75b80855e8d1ffa352c7551f38a9d7dbc7",
+      "message": "Wire native workshop callbacks and reject stale downloads"
+    },
+    {
+      "hash": "0f59e30e1c526c87afebc09fb13b255505a94d4e",
+      "message": "Stage pointer edits from immutable previews"
+    }
+  ],
+  "handoff": {
+    "ownerRole": "seal and integration owners",
+    "scope": "Reconcile the four CR-10 code conflicts and refresh the two frozen source fingerprints through the seal workflow.",
+    "browser": "Run the browser witnesses in an environment where Chromium launches."
+  }
+}

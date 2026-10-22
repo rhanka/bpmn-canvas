@@ -1,0 +1,102 @@
+{
+  "caseId": "export.serialize.drawio-grid-fixture",
+  "operation": "serializePrepared",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "prepared",
+      "path": "lot4-layout-export/expectations/vendor/py/parity/artifacts/prepared-9a6db0df8505feb2.json",
+      "sha256": "9a6db0df8505feb257dde11a937d5a203a5d527cabe4542402e39b5cee83ce71"
+    },
+    {
+      "role": "writerOptions",
+      "json": {
+        "version": "fixture-1",
+        "encoding": "UTF-8",
+        "newline": "LF",
+        "indent": 0,
+        "compression": "none",
+        "attributeOrder": [],
+        "emptyElement": "short"
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "path": "lot4-layout-export/expectations/artifacts/export.serialize.drawio-grid-fixture.serialize-result.json",
+      "sha256": "4703655edcd0c003a4cffcec6a54bab4222c5f0f321f8c9c797136e79db28525"
+    },
+    {
+      "role": "unsealed",
+      "json": [
+        {
+          "pointer": "/payload/bytes",
+          "reason": "Python seal UNSEALED pointer: DESIGN R3.3 fixes no draw.io bytes (structural until engine goldens, OPEN-EXPORT-EVIDENCE); the bytes and digests are checked by drawio-structure/1 (projection, byte invariants, digest = SHA-256 of the bytes)."
+        },
+        {
+          "pointer": "/payload/digest",
+          "reason": "Python seal UNSEALED pointer: DESIGN R3.3 fixes no draw.io bytes (structural until engine goldens, OPEN-EXPORT-EVIDENCE); the bytes and digests are checked by drawio-structure/1 (projection, byte invariants, digest = SHA-256 of the bytes)."
+        },
+        {
+          "pointer": "/report/artifacts/0/digest",
+          "reason": "Python seal UNSEALED pointer: DESIGN R3.3 fixes no draw.io bytes (structural until engine goldens, OPEN-EXPORT-EVIDENCE); the bytes and digests are checked by drawio-structure/1 (projection, byte invariants, digest = SHA-256 of the bytes)."
+        }
+      ]
+    },
+    {
+      "role": "drawio-structure",
+      "json": {
+        "comparator": "drawio-structure/1",
+        "diagrams": [
+          {
+            "id": "e_10",
+            "name": "First sheet",
+            "cells": [
+              {
+                "id": "e_12",
+                "kind": "vertex",
+                "parent": "$layer",
+                "value": "First on first"
+              },
+              {
+                "id": "e_13",
+                "kind": "vertex",
+                "parent": "e_12",
+                "value": "Last on first"
+              }
+            ]
+          },
+          {
+            "id": "e_11",
+            "name": "Second sheet",
+            "cells": [
+              {
+                "id": "e_14",
+                "kind": "vertex",
+                "parent": "$layer",
+                "value": "Second view"
+              }
+            ]
+          }
+        ],
+        "byteInvariants": {
+          "encoding": "UTF-8",
+          "byteOrderMark": false,
+          "carriageReturn": false,
+          "compressed": false,
+          "pairedEmptyElements": false,
+          "digestIsSha256OfBytes": true
+        },
+        "deterministic": true
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1",
+    "drawio-structure/1",
+    "source-immutability/1"
+  ]
+}

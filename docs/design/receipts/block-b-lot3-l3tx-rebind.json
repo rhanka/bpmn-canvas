@@ -1,0 +1,4552 @@
+{
+  "format": "block-b-lot3-reseal/1",
+  "lot": "block B lot 3 (C/N, command authority and early history proof)",
+  "reviews": [
+    "block B review of squash 25a66ed (BLOCKER 1) and the code author's report of 2026-10-19: the 18 l3-tx scripts ran through a test double in src/ that stored placeholder presentations, emitted change events without a report, wrote the re-entrancy outcome without a nested call and refused one entry by its name; replayed on the real canvas, the C writes on created tasks came out at the exact coordinates of the staged tree. Spec-author rebind from DESIGN (decisions), the canvas behaviour taken as no source; reseal of the l3-tx cases only, pending review"
+  ],
+  "decisions": [
+    {
+      "id": "transaction-change-coordinates",
+      "question": "Coordinates of a C or N change entry of a transaction whose target element a command of the same transaction created.",
+      "decision": "A transaction is one operation with one Report/2 (inputRevision = baseRevision, outputRevision = the committed revision): a change entry has its source in the before-tree and its result in the committed tree. A target that a command or recipe of the same transaction created has no source location, so its source is {domain: none, pointer: null, targetId: null, provenance: generated} with no before value, and its result is the committed location with provenance generated; a target of the before-tree keeps exact coordinates, its before-tree pointer included when an earlier stage moved it. Observed findings keep the coordinates of the linted candidate and an unavailable result.",
+      "design": [
+        "L629 (immutable before-tree)",
+        "L632-L633 (one root transaction, one final report)",
+        "L739 (Report/2 header)",
+        "L751 (before from the immutable source, after from the final result)",
+        "L755 (immutable source pointers, result pointers in the final output, never intermediate arrays)",
+        "L764 (generated support entries)",
+        "L766 (a removal does not shift a source pointer; generated port)",
+        "L510 (findings resolved in the linted index)",
+        "L744-L746 (closed provenance values)"
+      ],
+      "harmonization": [
+        "B9 (a created element's source is the generated coordinate)",
+        "B12 (findings: result unavailable)",
+        "interpretation 1 of the lot-3 expectations README"
+      ],
+      "rejected": "Staged-tree coordinates (tree/exact source and exact result for the writes on a created task, as the canvas replay produced): the location does not exist in the document of inputRevision and the staged tree is an intermediate state, never published (L633, L637).",
+      "lot5": "The lot-5 seal has no change entry on a created target: its only change entries are six complete/set writes on Process elements of the input (exact on both sides, as here), and its findings on created tasks (for example lot5-context-001-append-task-programmatic) are observed entries at tree/exact source with an unavailable result, the convention these cases already use."
+    }
+  ],
+  "history": [
+    {
+      "ledger": "docs/design/receipts/block-b-lot3-unicode-literals-fix.json",
+      "seal": {
+        "sha256": "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376"
+      },
+      "previousSeal": {
+        "sha256": "3d98de1dcdc79134e85a85531ae406d0b9633901cfc641ba6668be69ff10d0d1"
+      }
+    },
+    {
+      "ledger": "docs/design/receipts/block-b-lot3-unicode-names-fix.json",
+      "seal": {
+        "sha256": "3d98de1dcdc79134e85a85531ae406d0b9633901cfc641ba6668be69ff10d0d1"
+      },
+      "previousSeal": {
+        "sha256": "1adc160ccd3c2567c5f45b1a1b92322a21f0dcccaf9676f3a7901b0642259934"
+      }
+    },
+    {
+      "ledger": "docs/design/receipts/block-b-lot3-parity-sync.json",
+      "seal": {
+        "sha256": "1adc160ccd3c2567c5f45b1a1b92322a21f0dcccaf9676f3a7901b0642259934"
+      },
+      "previousSeal": {
+        "sha256": "6b807ee2c219f614d0f434cb8568c8d15acc0cc425a11bfdaa5cf027d86e8b06"
+      }
+    },
+    {
+      "ledger": "docs/design/receipts/block-b-lot3-seal-fix.json",
+      "seal": {
+        "sha256": "6b807ee2c219f614d0f434cb8568c8d15acc0cc425a11bfdaa5cf027d86e8b06"
+      },
+      "previousSeal": {
+        "sha256": "986190925108a03e1996342638aaf9f3bcef9d37ddd6f3c6c5ae6246b0ab2904"
+      }
+    }
+  ],
+  "previous": {
+    "commit": "25a66edebc46ac2504b20cc970cf97eb82b0c170",
+    "seal": {
+      "bytes": 73624,
+      "sha256": "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376"
+    },
+    "files": [
+      {
+        "path": "docs/design/block-b-lot3-expectations.md",
+        "bytes": 28377,
+        "sha256": "8ca61ad03d839baf45b8388cb911088372d7e16c691f134dbd9d611c6888f7e9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/README.md",
+        "bytes": 131371,
+        "sha256": "f3fb416b656ffe69be0e8248888095b1dd5ef67de80558c60943756b4d25cfa0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+        "bytes": 398472,
+        "sha256": "94fa652b2eb11e4be4e2b5762312ab8882e20fa7f336c94ef45ab7f27cb431bc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/author/digests.json",
+        "bytes": 71738,
+        "sha256": "5654d8ff02f17845beaf887f29ef1e002d3d04bbced3b1a74b7d3d51a7518e0f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-apply-input-conflict.json",
+        "bytes": 4983,
+        "sha256": "3e1778560a0c43c0f89a8ed395d4b59c884c4a4089f9a4dc3bad988c23e8ce4f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-apply-stale-plan.json",
+        "bytes": 4798,
+        "sha256": "e934eb02a661bf5cc0c73e37fe482d60131bcc25611326624b829a79c3fac7ef"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-bind-supports-conflict.json",
+        "bytes": 7202,
+        "sha256": "e407821254cc1de0f9f370521124feeb88c338b6d274638f8da4fec62458f089"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-bind-supports-explicit-selection.json",
+        "bytes": 7964,
+        "sha256": "2cac33f8357c96a421d3383992ad0bc73657e336db936747d891fe34413ee196"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-bind-supports-gated.json",
+        "bytes": 6822,
+        "sha256": "796f8ef68a879f9f41b197e436a1abba5f88ea1d4502681683ad983a3b8d0003"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-descriptor-role-unknown.json",
+        "bytes": 5343,
+        "sha256": "28d97cd14c007fc1167ce6aca425e0d9596633ccebc469f14a555ec08a773e61"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-digest-mismatch-first.json",
+        "bytes": 6496,
+        "sha256": "a980d6b5c3e01dfa7dc5fd87434b83244bf1c61f9c878859e9faf41402ba4688"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-document-version.json",
+        "bytes": 4800,
+        "sha256": "bfbc01fabd4da19bcfc52d46c629cd75a396b11c13e9b35e131f9191bf2eeb59"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-empty-called-element.json",
+        "bytes": 6353,
+        "sha256": "466c528ca8b5cb52ccf60d1f47a5940eee0b9c34bc08e8fc5b9579939cb42056"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-extraction-authorized.json",
+        "bytes": 10194,
+        "sha256": "6fac73f0a47c6640f31ad8a87a5123f38103a2de868268d34ffda12100024fe4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-extraction-unauthorized.json",
+        "bytes": 5075,
+        "sha256": "6d7933167d9ced9a2c995b7e0201b24e60ed99d205a1ea3f3934014c35afdb1f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-gateway-direction-control.json",
+        "bytes": 8503,
+        "sha256": "f294dc680bba81701da9c17622ebc9dd8966ac74802faabd3139c56258d03867"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-invalid-mode.json",
+        "bytes": 4859,
+        "sha256": "8a6a2863033881e51acab66a77374a31ad0dfb84a868931f4eed319abaa90116"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-not-fixed.json",
+        "bytes": 5401,
+        "sha256": "e6ca424f82beffea45e8aeeedd483f2c179174ad435ca45f006959a9db5af2c3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-output-port-gated.json",
+        "bytes": 6453,
+        "sha256": "8f300714dfdfdc7b7d161f3f8fcc9c46faf873ea9612054b9deba603337e77cb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-output-port-qualification.json",
+        "bytes": 11938,
+        "sha256": "28aa1ffddecd1fa404379d1aa470c87812cb468bde9145e8c2a7f575ec393612"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-second-pass-refused.json",
+        "bytes": 5431,
+        "sha256": "60738b40de679ce8d02ddbbac8cf3347c47e4d957c5f26fbc127fe7e2133dcd9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-version-mismatch-first.json",
+        "bytes": 6422,
+        "sha256": "e64dab1acc11a2d93f086c990b1bdd577f2219f829395c679129ad89dcc3eea8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-c-wrong-type-reference.json",
+        "bytes": 5992,
+        "sha256": "c7d58592c6d92ad822afef5c6f80902df9912226b5e41856a938ad716e48186b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-compile-create-identity-mismatch.json",
+        "bytes": 618,
+        "sha256": "0cf7214863cde3ebf30519da05b8383b8e17cb123499f3154f6d7c332b4d095b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-compile-ensure-missing-binding-write.json",
+        "bytes": 610,
+        "sha256": "0b4a301996e86c50596f455bde7a4cf318db2746cff0e53d5805608fb7a1d4a1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-compile-ensure-non-support-type.json",
+        "bytes": 598,
+        "sha256": "a8eb0e54c20e9d7f5e9d532203a913d12811e7e8dea81d80eab5fa7f13ad03ad"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-compile-port-without-authority.json",
+        "bytes": 589,
+        "sha256": "ecd4e9d3a93c02ef8b3ecf473bb0381acfda676bba43328592b327e7ac942a0a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-compile-support-profile.json",
+        "bytes": 1285,
+        "sha256": "ff44e5873819ec1fa788e99d4313a7804dd82d91f56eeb662f841cb693323cd4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-compile-variants.json",
+        "bytes": 18138,
+        "sha256": "0c1cc86d3e087d2a1b566e0180d7800cf7b61f274d147e7c180f4be4e87c4509"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-after-explicit-selection.json",
+        "bytes": 17979,
+        "sha256": "ec341a2fb7a129d6f0ed24c305b4167cbadd8f2fd879bd468eb968fb06e05575"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-compat-before-integrity.json",
+        "bytes": 9163,
+        "sha256": "2c395db18fe1619224ef9c94280b86c36c0b09c8a92b18c57f4ef2b3f4b37979"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-dangling-reference.json",
+        "bytes": 5906,
+        "sha256": "75dd0c1f6f1d5331ee9d61413e4f788ea62cc06de20cb7627355a88460c394e9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-deleted-support-stays-absent.json",
+        "bytes": 11244,
+        "sha256": "070e7fdbdca4c191d02bd4bda643fb70372a31fbf670cf4989dc2a28d928ebec"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-ensure-conflicting-definition.json",
+        "bytes": 8334,
+        "sha256": "a9de675ad40690b70e626a8c4e1f89489605e04d3d58f223d9dbd9cd8fcd1a96"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-external-membership-edit.json",
+        "bytes": 12676,
+        "sha256": "75a695cebbaee9b6ef698481faf7d8ac5e79c70048782cfeb51af3c74b2530be"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-not-fixed.json",
+        "bytes": 8485,
+        "sha256": "e60bc0fa0d3a64da7c2f7d53d432ddd2fa13d6799d3385bcc405c4d9e17965c1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-place-grid-deleted-association.json",
+        "bytes": 11423,
+        "sha256": "a01c3b309d22acebaaf8dc9ca9a68f21e9875fee5c4782bd91b57379d50c1e43"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-place-grid-inserted-association.json",
+        "bytes": 12608,
+        "sha256": "e476b898da9faa441fd3b7c327e68d5f2a7ae129a91582476b9ac195b74e414b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-placement-intent-di-only.json",
+        "bytes": 10164,
+        "sha256": "20a8d9431f89d54c101e7b754c5f0193d120ffc82604c063f314dde0a7c83b1f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-placement-intent-unknown.json",
+        "bytes": 6727,
+        "sha256": "0425491059962313109a477dc48b73568b69f745e522473a8d803e62f6b46873"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-recreate-after-remap-edit.json",
+        "bytes": 8837,
+        "sha256": "759bb6217fb1cc178120e668a7a33ef21865bbc8a9e0596503273adb17c23ccf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-recreate-after-remap.json",
+        "bytes": 15168,
+        "sha256": "034726318fdb9093b299d2766c3f2a7ffee737b687c7b6b5c2daa96efa3e3dde"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-reference-region-edit.json",
+        "bytes": 8155,
+        "sha256": "ee1c97753511b83979c55a95374f47f298a832c34a3795a57bfc95e1c197d17b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-relation-direction-conflict.json",
+        "bytes": 8506,
+        "sha256": "58460ef88a89866e75a1e101d4a1749ef9df622967c5d182bc63df6fda05d855"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-reserved-lane-renamed.json",
+        "bytes": 16387,
+        "sha256": "bd9b7fa23697e667f2a9c1f6ef7dc21640b2d775fa8c419b9a19a809e4f4de28"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-second-pass-refused.json",
+        "bytes": 8515,
+        "sha256": "2684b430c49ab43cd9c7248424a5eb6ed08009972aad5ffa5fe143d27500db19"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-band-process-ref.json",
+        "bytes": 8936,
+        "sha256": "b9e97806896f900de365ea6065df59c64db0f0ec9b4c87e7d42f0fd25f41682f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-creation-gated.json",
+        "bytes": 4957,
+        "sha256": "a26a99a2d54e3ba606038ef96e277638f88b1e1d561db287ed63636ea5578d5d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-duplicate-role.json",
+        "bytes": 9158,
+        "sha256": "59c8b2a4b889ea01b5f2ab47baa9df39ca6165d0b2eacc2939cd1f348a462ec7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-imported-ids-edit.json",
+        "bytes": 11945,
+        "sha256": "1703d53162e816e8224f7772a9995657710c71dfc4ac04fcc7ab837d4c33f157"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-imported-ids.json",
+        "bytes": 12011,
+        "sha256": "5fcc9e389d4da58ad14af2524a04b855a02023079d257693e9389b3f7c260af5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-late-band-collision-edit.json",
+        "bytes": 5377,
+        "sha256": "112c82b955a0770b0c2846038c5c686aee09c8e06c31749cf4f69b3173692395"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-late-band-collision.json",
+        "bytes": 5443,
+        "sha256": "3e63d86e716b8ca692cf5583c4693722fefc78a65ba23143a270fe31aae22487"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-one-process.json",
+        "bytes": 25616,
+        "sha256": "224a3d4e1aeb17eb16a847dec7df6bebe2b2b6bb3408b35028e54a78bef67d1e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-refusal-after-five-ensures.json",
+        "bytes": 5048,
+        "sha256": "291277c5328284061f3d0bfd0ded3f4fed2b8b2cc5a23be1ba26d50f34ede2a6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-two-processes.json",
+        "bytes": 43582,
+        "sha256": "8aa8cebedf7d6f0fc28f4aaf6060f0b8165cd4bc061d366eeb2408cb390395db"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-n-support-wrong-parent.json",
+        "bytes": 8932,
+        "sha256": "8e38a428cdd193ee1f377c6373d3fa4c9c41afa1f5a3671a70451a5499aa3f17"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-actor-mismatch.json",
+        "bytes": 4027,
+        "sha256": "5468cd19fcff4b3c17d56daf97cd1c28742ff73985c0b96f96a067fbac54b637"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-add-note-containment.json",
+        "bytes": 4325,
+        "sha256": "d687204e5bc6d49981654172a4564a6c0335fc049ab8d8f296c969d8d411dc5a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-ambiguous-binding.json",
+        "bytes": 4041,
+        "sha256": "2c80f98221c82a89c72f17fd061b425cd4d5c39cb06e719262e3365e2c0d0799"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-append-remove-conflict.json",
+        "bytes": 6164,
+        "sha256": "11c88ea5d1024606769e2c47c7e9bb71911e83ce7a392f0e32579687a74705aa"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-create-aid-grid.json",
+        "bytes": 6069,
+        "sha256": "087b5c2e6f1ab9a0a5748669c5527ebad5cb8f83320fffbe157e3c9bb6ff4f51"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-create-aid-neutral.json",
+        "bytes": 4464,
+        "sha256": "e8b85fb04d0d4a4bd101e1676fcd7cc329906ae561118dad9fce4f42a56f1ce6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-create-id-collision.json",
+        "bytes": 5339,
+        "sha256": "87df05836b9d0160d35b55b0f6baaafd4a584fe3fdb5bff00812cf7230a24728"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-create-process-input.json",
+        "bytes": 7544,
+        "sha256": "35fe698d70f45cf65721d69272ff46a5014ecdfc64f807cf0eb6281e4c924630"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-create-task-grid.json",
+        "bytes": 6058,
+        "sha256": "8a515a8bfb47ff53c414bb00e9c7df11145ae4dbfdda62f1c9ec11e7b8ffd4f5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-create-task-neutral.json",
+        "bytes": 4425,
+        "sha256": "d4b4a4ab3d743a7fddcc105582146d14861383c5081558a90208be47bf2a9374"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-export-phase.json",
+        "bytes": 3948,
+        "sha256": "40e7e59ee613f675db27f4000bc733ecc5e6b3f48d0d15b0e7a0b79dbcde9674"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-invalid-authority.json",
+        "bytes": 4026,
+        "sha256": "2d90c3834285f7ca301bf688a43a3d6f350f76499ec7709feb17a66067a52933"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-lane-member-cn.json",
+        "bytes": 4903,
+        "sha256": "11b4d5abaab6cd6b02f991514178e59032f5ec5c533b99dcc1c7a359c586a550"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-lane-member-support.json",
+        "bytes": 4705,
+        "sha256": "3f73647eb2f86f278bf9339f01051e06cff7700da032ec3a247d1f2cd566441c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-link-wrong-target-type.json",
+        "bytes": 6027,
+        "sha256": "5a228a69f45cb443bc023f71565f03149687d8b34b6b9e0d1d54def55e002194"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-link.json",
+        "bytes": 5676,
+        "sha256": "54b835651437b5cb950c1e3daf93eb301e22beb65bccbd5233182f328fabc66a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-missing-parameter.json",
+        "bytes": 4014,
+        "sha256": "e766c9a8066209c75b4affc5c88554f45264e26cc31cf22e42531ec9b2ebd9d4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-optional-binding-missing.json",
+        "bytes": 3358,
+        "sha256": "c48e772bc26d8424363b8bba893272d71ec9167ad1e5acc1e2b2a806a78ed6cb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-recipe-not-compiled.json",
+        "bytes": 5514,
+        "sha256": "f8fcd94b4cc903b46e2ed06ea4cd1cfd3a34d80148908e1f01865f61162712ce"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-remove-empty-support.json",
+        "bytes": 7180,
+        "sha256": "ab5675f327feeb637a0b3120ca1d38492decd6c8c26c0d117c41cced2af2748a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-remove-referenced.json",
+        "bytes": 4598,
+        "sha256": "73808a2372cce4d3d8b01256fed66d2bb51a2d61100e23077dfa57e0535e49e0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-remove-without-intent.json",
+        "bytes": 7445,
+        "sha256": "afe7181250095cd31b3ae5e54a2d8823fea45cd8de5d48496c258c9ade15f705"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-reparent-annotation.json",
+        "bytes": 4426,
+        "sha256": "68ed479a0a2fbeedbdae52d5992e61f5127f565c9ca7c6d3f66dc98d16a6cfd9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-scalar-write-conflict.json",
+        "bytes": 5457,
+        "sha256": "ffcaf5fa7ad1b9edd1b18ffa66a2ff6981f39256079fa024cc228058515968e2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-undeclared-parameter.json",
+        "bytes": 4070,
+        "sha256": "1c1d2963341e3deb2e6ae60404fbb1387100541c283d9428490d1f29cee15a9f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-unknown-element-parameter.json",
+        "bytes": 4037,
+        "sha256": "9867531e8aed9f7bcb604fd639363fa09ad6021b32a2c05e260f21a624607103"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-unset-name.json",
+        "bytes": 4343,
+        "sha256": "3e5fbaf55ecfab41a07f2c337028fec7b9cb96095bfcdf72299f50c5d94f4104"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-plan-wrong-parameter-type.json",
+        "bytes": 4019,
+        "sha256": "9823992d743b6c187f46d2451c11ff36f1f3364dd83313f00da90357a4ebd359"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-propose-black-box-pool.json",
+        "bytes": 2721,
+        "sha256": "d44cb03bcfc85d67022abe5a3fdbdd4cb9b3fb55f5a9ddd6fd11362676f91e91"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-propose-recovery-partial-provenance.json",
+        "bytes": 3476,
+        "sha256": "cfd19136ac1b174a519e0a1433c04c6dc173c959a86b30278ebe7dd51fc353c0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-propose-recovery-with-provenance.json",
+        "bytes": 4588,
+        "sha256": "dc2a1aa949069c93614170b902c2ed529e988a97c97d54a14c081c3ddfe358da"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-propose-recovery-without-provenance.json",
+        "bytes": 3181,
+        "sha256": "164cfcd185581205302b6e68fcc11540db53ec6e60749da296fd5cf68604367c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-remap-gated.json",
+        "bytes": 8657,
+        "sha256": "200596ff11af9bd6799b31bbf7dcafb4e2ebe417181db3d3bc045a8d0a54b9f7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-remap-owner.json",
+        "bytes": 12835,
+        "sha256": "c52feb841349129fe79411481a4b105e0d1bf9663b17170b7366e11a378d2cee"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-remap-target-grammar.json",
+        "bytes": 7112,
+        "sha256": "824654ac02f0bfaf1bed3315e759759f812b4eb39da24f30b26d8bc300b60f65"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-remap-unknown-source.json",
+        "bytes": 7121,
+        "sha256": "c663ff5c62255d5d31b05ac4fedb22e0971c3921050bdc2e5d06b1515eeeac73"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/cn-sort-placements.json",
+        "bytes": 3265,
+        "sha256": "8884e7e3fe965d0a691db6e3010e3199ac33cd4d6c3c252b6d4ed93e83264351"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-bind-supports-conflict.json",
+        "bytes": 10288,
+        "sha256": "414915c8b001c54f07c52abc990ba78423f73e334610641b9436c5b61aa3b330"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-bind-supports-explicit-selection.json",
+        "bytes": 14759,
+        "sha256": "b14acd721788f92ae02639787215030018bd377af4cb407fd08901ffc6f111e9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-bind-supports-gated.json",
+        "bytes": 9884,
+        "sha256": "0525478d164512de636801c075d423cefda7d1ce1a0c70cdffc78531cdaa659d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-dangling-call.json",
+        "bytes": 7813,
+        "sha256": "4bb9d5b9aa140fd7ddfceecbd76f254572c7c4721e677d6ddd054a7d2963b6c5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-descriptor-role-unknown.json",
+        "bytes": 5857,
+        "sha256": "d93f3ab36895214dd18c92d77b5b079d99cd58aacee48c0ee4b7e592d68c6a30"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-digest-mismatch-first.json",
+        "bytes": 5581,
+        "sha256": "08d0d2aad46499a18b36587ce36c7b506794897874f95c97e1dae9447b47df65"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-document-version.json",
+        "bytes": 3936,
+        "sha256": "4820f885f7d0aac2128c1e731ae017e40d214e047232b0242c4996879183bbc4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-empty-process.json",
+        "bytes": 8285,
+        "sha256": "025fdcfb34528bc1a7275a2a9b55cd737ce25aecd485e93f03d07c805fe3a91c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-extraction-authorized.json",
+        "bytes": 15649,
+        "sha256": "9caa44f133afc4b8bc5d22ed1455d6a02851226c17597f4230043cac2bff421a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-extraction-unauthorized.json",
+        "bytes": 5179,
+        "sha256": "b74fec65cbe8c9e7860d44d2e2d8881aaf54e941420c97a430004908b31fbacf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-direction-control.json",
+        "bytes": 9971,
+        "sha256": "61b0670724e66d6944a15130b5d766cb1d5898116309279b1675ba12d4d15637"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-direction.json",
+        "bytes": 27743,
+        "sha256": "80d58adec503fd64c372946aa658a89c1c5f7165093f315ed4e17b27b0dac429"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-phase-start.json",
+        "bytes": 16637,
+        "sha256": "5f4c6a4a079287851230be197aab86f84c8c24d0e4d2edd571137d9ff275e0bd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-stale-topology.json",
+        "bytes": 26923,
+        "sha256": "761d7f0e0b9f9015e1a88c29cce83bd6ce9ccc7175f980a60fede9ef733f6e45"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-input-ports.json",
+        "bytes": 20025,
+        "sha256": "a8f35012410d575d9ca8defd31fd9b2bd2c3b2ada6425e61850b0082d5975d59"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-invalid-mode.json",
+        "bytes": 6109,
+        "sha256": "8387474785d39e860ef6ce611003199cfc28302ced5913e942e9db3507f32ded"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-isexecutable-grid.json",
+        "bytes": 8674,
+        "sha256": "b1e568ead738ec702dc26a5c62447e209f7b4786ea2dc4b6c3d9ec0b7728328d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-isexecutable-neutral.json",
+        "bytes": 8644,
+        "sha256": "57f93adbb5cbb078d8453a1b25d0e79026b133617cfd9982ad253b926c71c335"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-item-backing.json",
+        "bytes": 12622,
+        "sha256": "f604b6f06d3c4e194c7d1bfa38f6c8ad98cf5c6479a17c2e80442988f67d52ba"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-namespace-defaults.json",
+        "bytes": 9065,
+        "sha256": "1503f013c330eb5d3fc267ed098fa4e1403d39f3758d5d0f5f71672cd2976e13"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-output-port-gated.json",
+        "bytes": 6959,
+        "sha256": "a8c5450d8730c0c04cf8d5ab8a0b0d5742be3a82197e4a42d08f2457ead0c129"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-output-port-qualification.json",
+        "bytes": 12742,
+        "sha256": "e5ebfb2303c5ac37688d5bdec8f6a08194561602eb45c4f6ef74aa6aaa7b3188"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-preserve.json",
+        "bytes": 20080,
+        "sha256": "5314abac4fa2f264d1204824added97e59f9a2909ee06e65dd8ca8e5e44faf28"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-default.json",
+        "bytes": 14769,
+        "sha256": "b801442abc7e417e6be59f666cbbb9b7daa12026b69d67c2dd881fb89a35fa49"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-several-covered.json",
+        "bytes": 12586,
+        "sha256": "0b32ff41c7ad0ab66da46ec44a57f480d5a2ceca2275e6d2f3266f0c9a8754f4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-several-uncovered.json",
+        "bytes": 8534,
+        "sha256": "9f281504657a855d3198112da1406674d4525de3bc621f49b53e5727d3c636a4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-single-uncovered.json",
+        "bytes": 13023,
+        "sha256": "e60386a6a9f6caa417014607b4bdfb7254d14382307b4a35d01f246170839200"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-topology.json",
+        "bytes": 17633,
+        "sha256": "61bd35a6221e5e88e784ae127404e68d0ba5e86b387acaa7e392cd41b2e57f29"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-version-mismatch-first.json",
+        "bytes": 5588,
+        "sha256": "ef40e87abef40672560c5e4f477f9dc86d21911aae3090242598583e54c1d185"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-write-coalesce.json",
+        "bytes": 8332,
+        "sha256": "14420c31cb9a656a4a4fa2f774efe658e4ea40bbfaa456e226615c7b2639ab54"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-write-conflict.json",
+        "bytes": 5213,
+        "sha256": "89b246d0f6baa9d7cb8bcfcbda7e38c118afd3a4f8adbf477fd74739e29495da"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-ambiguous.json",
+        "bytes": 10900,
+        "sha256": "49f1630c2cae67b81a1bd66f73ef780b7e2bb7ac80e6ffd2531427f954ee4bc7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-conflict-empty.json",
+        "bytes": 10200,
+        "sha256": "7e074387926f238c3e3ba3a8eeb229952ada61e2da3412f44b381e38abbde6f1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-conflict.json",
+        "bytes": 10578,
+        "sha256": "1fafa30b9089484f1dc53e141f646b074e9469045461e324e4f5bbbcdf059f21"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-duplicate.json",
+        "bytes": 10540,
+        "sha256": "1493db4399aa45f18aa61bc689c35787727a0005bbb2da0cc9011070cdd1fa64"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-external-valid.json",
+        "bytes": 10715,
+        "sha256": "9f63dbe04818c5ef3a83109f1c3beae6938258bd3cd68d338dd8582c59d67489"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-internal.json",
+        "bytes": 9245,
+        "sha256": "c3e63e6cd35537f06d11b8a3673d9af018d2c6a631407c10e9ff421b72390e20"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-marker-invalid.json",
+        "bytes": 10140,
+        "sha256": "f1c6f1f21b453098d52b406945e010a4cc78ab3ce752f9e9cfeec452588b6447"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-source-doc-not-marker.json",
+        "bytes": 10112,
+        "sha256": "32f51ac2c2d903d2df7996514e17bec5819bd1e800f297d1f949969c9e55b345"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-dangling-accept.json",
+        "bytes": 9726,
+        "sha256": "15d06957eace1701b0e79a61cc1d9ac767c9dce73005762ac0283cc7af5148b7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-empty-accept.json",
+        "bytes": 9687,
+        "sha256": "f97e07764ee2364a01af9043f60e427158dc852fa18068b5709704e04d89291e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-empty-draft.json",
+        "bytes": 9683,
+        "sha256": "ceacd762fd66ccdaff519d0d14bf8a2d867d37e3e1421f4cd56f7d19c25ec4c9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-required-accept.json",
+        "bytes": 9621,
+        "sha256": "a7c441d9c6958c949eeb06be4556945bca5840508cf63b1e06e5501d49709222"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-required-draft.json",
+        "bytes": 9617,
+        "sha256": "38d3952e28077f9c03a90d875bc4069d87e71b5f8e9501ff52ab56141503307d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-type.json",
+        "bytes": 9976,
+        "sha256": "6e29f756faf4ab6f8d014d65e9ab67c68a573b9afd94659e6ab3365c02eb112a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-after-n.json",
+        "bytes": 33636,
+        "sha256": "a23db4fc8b7ca8b14fe01522905399bc5a8eef217fe69b704281f8c59e6fd494"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-gateways.json",
+        "bytes": 24918,
+        "sha256": "7b977e4d9ade7cad7c0f84d7dcedb841a485f439f2f058a2bf1dc07eef7423c3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-on-n-input.json",
+        "bytes": 26491,
+        "sha256": "ca484579a84c7b9effe5cd061644a6797086763a2324c80393e2eac215013b18"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-ports.json",
+        "bytes": 16996,
+        "sha256": "2bea9bf7961291d7459bdca438c864afa4539714fb1fb02707c8fef4447f82e8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-root-first.json",
+        "bytes": 10993,
+        "sha256": "447b32d7098d275cf2781b87bca143c604a0c3d123e1c3303f1631ccd739fbc6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-sets-default.json",
+        "bytes": 11735,
+        "sha256": "2271cd7706bed8b2bdf7057989581aae2207461d6b00f4f27d4683938ae1409d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-timers.json",
+        "bytes": 11941,
+        "sha256": "e3c1701b15682d4c01c24f345a769862f3d49d3cba2d2256ca560c8c12e4cfd3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-topology.json",
+        "bytes": 14853,
+        "sha256": "b1f662231ccd5ac0a5e0807dea2fa2081b1c3b00027e93f98c24966a0d75b8ba"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-direction-reversal.json",
+        "bytes": 31726,
+        "sha256": "b902b59a0ca61e181a854b465b7d2714310d86bab8572f52c68ebb9c4963f531"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-full.json",
+        "bytes": 37527,
+        "sha256": "833f3a816a36153eda0a76e99044808bf4745cf69acec50eec66646d7fb28bb1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-imported-supports.json",
+        "bytes": 25238,
+        "sha256": "a9298cb26d65a9b806a47b2bacd94eab0b8f97cfe974abbfb69d1cacea8b9623"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-two-processes.json",
+        "bytes": 30539,
+        "sha256": "b24db90b2a89c548f7fc6bda4a5f5bf78ce0378500ee2b40b564637a7ec59a73"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-unicode-names.json",
+        "bytes": 20983,
+        "sha256": "52e463a45e6c58c816f4695ee62a280f4446da56509986e450661aa1c938a26c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-collision-computed.json",
+        "bytes": 6103,
+        "sha256": "83f101b7b9caccb2668bb786360f773b84b31f434dbb7ea9188619c8b9123408"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-duplicate-source.json",
+        "bytes": 6187,
+        "sha256": "7a9ef88cf107d99a172b9165a7a0b763aa2ddc720990093055485f88bd6d447b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-identical-siblings.json",
+        "bytes": 16087,
+        "sha256": "ef9d60019432aa9d6b7b813ed44e779eb0e1920450548322a6d82b08b3c68f6e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-ordinal-missing-only.json",
+        "bytes": 16942,
+        "sha256": "0b5b2395b9a801128aba5511c4f0645c6f5ef7d51b588ff9e6dec8d0e0af4348"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-rename-stable.json",
+        "bytes": 10791,
+        "sha256": "50316254bd7d3572775ae93199a0c88f3459beadbdb7d683a1fb1e5471c5ba22"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-reorder-stable.json",
+        "bytes": 10765,
+        "sha256": "53db371e86ae1bfaaa7974dff3267dfdf0b4b9ecc4eefdb267c1b6ac970422aa"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-root-first.json",
+        "bytes": 20348,
+        "sha256": "e7e97ff9cac4f12cd1126f5ba423f47668800a83a72a06a05a4131d4fad36dc6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-stable-vectors.json",
+        "bytes": 1881,
+        "sha256": "7d8d0b6abb0b6f6758ed58e4cedc1ab366e0f0a5624bd648e925109cb008d867"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-timer-reorder.json",
+        "bytes": 11946,
+        "sha256": "581d9fd1198ed99b4c60bcdee7eb0744259f3541b31217ade143b41d7b620ee1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-timer-siblings.json",
+        "bytes": 18993,
+        "sha256": "880b56657d7bf34130b3a6fa83acf51ebff8bbc3d2b7843eff305ee50643bc38"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-two-owners.json",
+        "bytes": 15233,
+        "sha256": "52677741df37f24db1fc42da59d7b54ad021355d28d6c2f6ae715d02a64a9a47"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-unicode-names.json",
+        "bytes": 35641,
+        "sha256": "2000e3cff896f690a4d89cba7a83789f0eeb48e4cd10c38dc653ca8dca205660"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-projection-out-of-base.json",
+        "bytes": 19088,
+        "sha256": "eab297a19174d83da4f736defe1b678ce57ba6a10c6c55be2340a40ed37edffa"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-collision.json",
+        "bytes": 7606,
+        "sha256": "09c05e7c1ae24db25780328516ff3fd89da45e400bcdf8cf831aac967dd11d7d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-dangling.json",
+        "bytes": 12059,
+        "sha256": "ac828f729eb83b664e43b7acca7d9909f01a3a51a4dc16bfadc84e7e4c414338"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-duplicate-result.json",
+        "bytes": 7732,
+        "sha256": "9bcf1d408f6744ca8676e67a31aff207949f59691e6bca7e643893505c66c8e7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-nonsubset-id.json",
+        "bytes": 11944,
+        "sha256": "46a18f1e0ecbbd757dc85ccccf32a4801c5e74aa545804ac3cd3fe8205f6cd39"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-opaque-attested.json",
+        "bytes": 11416,
+        "sha256": "85fe933ed3adda30b4a829f99de8d0f3ffa4705db2ef44dc699541a7430173bf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-opaque.json",
+        "bytes": 7421,
+        "sha256": "879a6fc700b1a1303a8dc081748b1e5cc0eb85f4c4807911b3648bdc45919670"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-owner.json",
+        "bytes": 18889,
+        "sha256": "11295792ea773ac64989e3a436ed72c66c3ffa932275a45aea31bf0c3bef7060"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-qname.json",
+        "bytes": 13316,
+        "sha256": "db18d5b7c78c48c3110795d35367bd13e39a0a2aed9310dfd0d6862401cbc4f7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-swap.json",
+        "bytes": 15723,
+        "sha256": "15fc221badc641aeac03c1d2650a0c4353c77c286fa7a204a7365068f05ff1c4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-target-grammar.json",
+        "bytes": 7610,
+        "sha256": "cb54cc9b78856f06b7359224ddbef7628abebb5e2dac73f6e7cfb3144c7347ed"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-total-edit.json",
+        "bytes": 15859,
+        "sha256": "ffff4b5eb63f110a18b2cb077111667d1026b0e63221214a71535b1f47c29f3b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-total.json",
+        "bytes": 25543,
+        "sha256": "5a137646f38678e3ab98b0fdbf88c2b7ea5f05c8b3bee1477fc925459f373bbe"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-unapproved.json",
+        "bytes": 15881,
+        "sha256": "79b9b6f03c83876a7d114643c4c0ad87d22356c758ba8a91a8b7258e23a493dd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-unknown-source.json",
+        "bytes": 7625,
+        "sha256": "9e0f69ee426aae802ae4694eb6d87b325e765b8a03e4fd895dcbaa7ac565550c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-complete-links-accept.json",
+        "bytes": 16900,
+        "sha256": "3fe52100231f901f7a2514cd66dda8d16e1beb8c5139c713d02d1d287a30eed9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-endpoint-type-accept.json",
+        "bytes": 18242,
+        "sha256": "1a2b55675d315a0ec3656211dea3e283758b6af13f96b5368714bced5182b119"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-link-owner-accept.json",
+        "bytes": 18576,
+        "sha256": "15ea0281671a902d32b7287c704346f9dfd8dc3b897c2bcf3e14c99ec31ad292"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-link-owner-draft.json",
+        "bytes": 18574,
+        "sha256": "4257dced46bbf8e140a76611e016900c32aadf7828b28d7338becaf84e58f0c6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-missing-links-accept.json",
+        "bytes": 17012,
+        "sha256": "fd93b9228d976b3c0f07fc28254de7b5d057d5198b3065486b405dc6db2b863a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-missing-links-draft.json",
+        "bytes": 17005,
+        "sha256": "04561d62526da0dfe107f113ae68536632dd04d14c36efd68430c1f09e8a352a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-wrong-direction-accept.json",
+        "bytes": 18553,
+        "sha256": "7b11d51d3632423c4dcf60cec0f96f62625f4813a7cfa038409ff20dc28c581a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-wrong-direction-draft.json",
+        "bytes": 18550,
+        "sha256": "7a7a812c4152669594586a723b7f41b3cc45c2950b2cf85053f6b5103a98e17a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-full-js-py-js.json",
+        "bytes": 87656,
+        "sha256": "f8f3a2d5a207ad882401a6829099c16882ce12d17366d9324144f5cc67f58bdc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-full-py-js-py.json",
+        "bytes": 87668,
+        "sha256": "95ba923a5542a766fb96b8b687b87c4689c6229336d0f66ade9de740115bd7d1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-two-processes-js-py-js.json",
+        "bytes": 77939,
+        "sha256": "15be6eb0c7b8ce72c128c9fca0261aee33ace713b22ec210b5a11aa145571127"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-two-processes-py-js-py.json",
+        "bytes": 77951,
+        "sha256": "399a1b3c13d8502289c897ef70529377737ce1a80ac9cc9f43143f4edd6255fe"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-unicode-names-js-py-js.json",
+        "bytes": 52623,
+        "sha256": "96d62ec02302158132ce7e3702e0e1b32b140603e323e097dd2c9204460b9348"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-unicode-names-py-js-py.json",
+        "bytes": 52635,
+        "sha256": "cf411c55c4bd4cdcf5a2685c197d6be612d48bd5a0094edca647246025b390c1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-after-explicit-selection.json",
+        "bytes": 25096,
+        "sha256": "95b3b7d269851d42c322bff34bba79a47543621b9153c2c76ba115c60ab503b4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-after-owner-remap.json",
+        "bytes": 17736,
+        "sha256": "00b0a8a707f20a156ac1bd48403fe608eed85807a5b26220ab5788ed98fcbec7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-anchor-after-link-removal.json",
+        "bytes": 23788,
+        "sha256": "15198abeb152f572bf1d0034aa1dace1346877a865352d0e6f5d0d2bfa3d640b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-band-process-ref.json",
+        "bytes": 14830,
+        "sha256": "99f06f0bbecb346a7c72443ad815fb2e9d91cdb0ac7b1518d1a65f0a8dd60f3a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-duplicate-role.json",
+        "bytes": 15038,
+        "sha256": "03000b1fc071ed36468bda75d82111c79cd7c210baeef377022d3981e323c529"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-wrong-parent.json",
+        "bytes": 15126,
+        "sha256": "c3e4a9ba79762335d56d68f81f2a3287c2bd18591c7f4ef6c39153be00747a5b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-wrong-type.json",
+        "bytes": 14716,
+        "sha256": "c3356edafa90b81add28dbc4f914392341c0acc496e7316ce2f0239893b742e9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-black-box-pool-retained.json",
+        "bytes": 29197,
+        "sha256": "220e844bfe97b4786022aa1563bd3ec7ea899253d72576bc09934394ebaf3a2f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-business-lane-refusal-edit.json",
+        "bytes": 14798,
+        "sha256": "2bac4b68a2bab89eb1703c2ffe5d4b68c0cf6c5e43bd3e4ff82a14251ed6090d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-business-lane-refusal.json",
+        "bytes": 14912,
+        "sha256": "49754807680be0444640f8f15530aac9046c2de5f28dee59335e2b1fb9ba7aec"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-deleted-support-stays-absent.json",
+        "bytes": 17747,
+        "sha256": "30aa8bfd158e8cb57b211c19d8ebf8a18dc5d08de1fa079329de47c7efd6a9cf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-direction-reversal.json",
+        "bytes": 64342,
+        "sha256": "e8ae075d044291f761ae97900cbc984e89da67690a527ccaca1162c8ec0bc27c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-empty-process.json",
+        "bytes": 17925,
+        "sha256": "fa510a6252ba09adacb9fe0a3bcde51c047051068c2720d4117fc3d8edda8e1d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-ensure-conflicting-definition.json",
+        "bytes": 9087,
+        "sha256": "1db624263b6edf9cbb17c02ba1ded87ed9b86ee95ea88ed0422297b73fed5907"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-full-edit.json",
+        "bytes": 17613,
+        "sha256": "97c68cf54bd38d1b821e3c8c99c4f28b4dd1c7086799852da3405b264c504d54"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-full.json",
+        "bytes": 50483,
+        "sha256": "96253b055f093518b7403dc4245fa6dec9e4f2ccadb562647193b7eca8772ae4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-hash-shaped-occupant-edit.json",
+        "bytes": 9783,
+        "sha256": "374231d18b8881c2a5f961737d771ea1cbf54c6ad0d9e8f2f65adc1bcc2d4cda"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-hash-shaped-occupant.json",
+        "bytes": 9849,
+        "sha256": "4e20a7567a7647e250001a2954006811611c9b7bececb2e8bd8f6b2812c00372"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-imported-supports-edit.json",
+        "bytes": 14714,
+        "sha256": "3811ee0fb0968511c2176d5cc9bbd1286ec11ee26fe22e2036d8ffc3ee5144a0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-imported-supports.json",
+        "bytes": 27316,
+        "sha256": "8a82612d659348f691a052790918d9a7d055fad084453a368351e6be0bec6d9e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-incomplete-call-untouched.json",
+        "bytes": 23457,
+        "sha256": "3c44453ff23ddf9e8d722444d7a414d47975fd6d69f0e258cdcf97d6f25d6874"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-inserted-link.json",
+        "bytes": 51381,
+        "sha256": "d88711c7f041bd4c1511dfa5625cb9938ccb551d0d21a6dfb99b974202cc8493"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-internal-call-untouched.json",
+        "bytes": 31482,
+        "sha256": "5ef5050ac74fbdee86d2bac90e344b42331f5a68542812a82ce66d0c98e8addb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-legacy-marker-ignored.json",
+        "bytes": 24755,
+        "sha256": "8bbbb81cd81986d3b520af0707a43675c1fa577a3c54e3935e9a2ed0694fd580"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-not-fixed.json",
+        "bytes": 11596,
+        "sha256": "534529764512dbcb65e7427dae0a083539204b9072e65dca9b5bb5442513f77e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-grid-deleted-association.json",
+        "bytes": 13186,
+        "sha256": "4292d5d6594b06560448ec0ce7edc2a070155a9bf71762c56f1b5dab966ef3cf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-grid-inserted-association.json",
+        "bytes": 15719,
+        "sha256": "0f207da477bd3b2723569847613bb98b62cc8371ac289ebc3e6505e4481f09a4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-grid-shared-anchor.json",
+        "bytes": 14868,
+        "sha256": "f84cca15574a2ef5e5ae52d60a0fb3a74e31c48f48d2b706cab95b0d033b46b3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-neutral.json",
+        "bytes": 12114,
+        "sha256": "80ebe7a9d6f74afe770fd3fac4b025f8075aaab9d561718881698f07604db27d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-placement-intent-di-only.json",
+        "bytes": 37687,
+        "sha256": "dfc14b1276220501cd1ae689600b13d1394e0baf2e128cd8eb30c55a9a5a4f65"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-placement-intent-unknown.json",
+        "bytes": 22453,
+        "sha256": "17aaa49fbc20148e2802be1d508af4b97a1fc9bc75ead43573b2c2adf4ac77dd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-recreate-after-remap-edit.json",
+        "bytes": 11999,
+        "sha256": "d6540b0f09645756e6914b6ac35f3c02518bb16e96756f0aca1448f3df739974"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-recreate-after-remap.json",
+        "bytes": 25618,
+        "sha256": "ddeb900daeb6a4c492775fce52b155373a712ca7ce3503faf29f9aa8ff1b0c1f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-refusal-after-ensures.json",
+        "bytes": 17728,
+        "sha256": "a55ad8555ec3ed8b1a874d64bc15d89d18b639c7f5f5d4d521ac4eea99c4c5b9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-relation-direction-conflict.json",
+        "bytes": 11649,
+        "sha256": "be4baecd5f1e455c72c8abd4231237f490e5a4bc5e41b141a131d8117297eabc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-reserved-lane-renamed.json",
+        "bytes": 22127,
+        "sha256": "aa01a21fb1f33e659dfbebce388d5cf24b40002726e7958169b3e013b1ec5d3c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-roles-and-empty-support.json",
+        "bytes": 23025,
+        "sha256": "105166a5219981102f1f0291a4b3fcdd4fb3fae11cdf483bd48a1abae07727cc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-shared-item-anchor.json",
+        "bytes": 26113,
+        "sha256": "6153205d92c037a5071930f89db0dc38a941bdf1aef213a898bf6584ebde48f0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-two-processes.json",
+        "bytes": 45413,
+        "sha256": "ad9ce348be22062da6137a2884ce706f07cd2ade8b8ad48231c23cce09fd30eb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-unicode-names.json",
+        "bytes": 28457,
+        "sha256": "86f15f6337f7c8b8c9f328389911465f3f043b658d2464636d7dcb3b8e891145"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-cannot-reach-end-accept.json",
+        "bytes": 14251,
+        "sha256": "fa5056a8c852ec0b43130f495a976f0bf60078f6461766b5be8d98d013a139d5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-cross-container-flow-accept.json",
+        "bytes": 14438,
+        "sha256": "0341b9964ef0c423b1544eaac1d303d48b04cbf14ec8ce0d6e23b4ed552068da"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-disconnected-task-accept.json",
+        "bytes": 14130,
+        "sha256": "22c65431111213ebe60898b2d4038d938ac8a0eb3dada6bac025d4eb7e59e526"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-disconnected-task-draft.json",
+        "bytes": 14123,
+        "sha256": "20ce89edd91d0e97a122739a47ff75ecbf6cb70f43777fc3d54be68c958783c5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-gateway-without-incoming-accept.json",
+        "bytes": 13759,
+        "sha256": "08bff01ff57577855dced7031ae5b0cc37931c193b2e61a40551718bfca8e1df"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-incomplete-call-not-exempt-accept.json",
+        "bytes": 15490,
+        "sha256": "75fb1603f4ed093ea1521b58d07496d12f9a2dede62c60c49144f5f0bc809214"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-unlinked-external-not-exempt-accept.json",
+        "bytes": 14695,
+        "sha256": "a1fd5e2696e39763e353ccbc83c8b7054c5fc82d3b5dffd313fc88adbd8c9758"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-unreachable-component-accept.json",
+        "bytes": 14904,
+        "sha256": "c37dece95cb0c0f15c7c3b1bd8b6e33297ed687436d05afb1f76995950795c46"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-black-box-pool.json",
+        "bytes": 7861,
+        "sha256": "9a76be8e2a4c974f7de36e3fcc42acf14a4e6d69b9c12b636c8dc1e84312ca7e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-recovery-partial-provenance.json",
+        "bytes": 18865,
+        "sha256": "1bb06ae871e359bcc632ba7770d4e335d2e9a09ab2778c433d69246f1aa4323d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-recovery-with-provenance.json",
+        "bytes": 19977,
+        "sha256": "9299e0c77984b2f41a148efe3c5f5f88a6c7184d26d1acd835163a03858dfcad"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-recovery-without-provenance.json",
+        "bytes": 18570,
+        "sha256": "a7a77ffb2d9ba9aea636adea1274347995a8c3f3f29c80d89cbdb2d4ce703c4c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-sort-placements.json",
+        "bytes": 4050,
+        "sha256": "5fb82409fdf31514b45aff128b2b48ba0bc8270dfa6d1f1ab183794caede9462"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-downstream-branch-accept.json",
+        "bytes": 15751,
+        "sha256": "3b2cdb7bb61aceaa39611b6c649cb1c3fe258afcab75a4e464eff2be74eb0f83"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-no-branch-accept.json",
+        "bytes": 12686,
+        "sha256": "85052fedeab485c93e22830c5263eb835a3f7a2879a22a28c1834d499519ff1f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-no-branch-draft.json",
+        "bytes": 12682,
+        "sha256": "692292480594d7cd0453dea1c1c567a6d3fa026f3f1d129abe072d4fcc7deec1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-normalize-no-invention.json",
+        "bytes": 35904,
+        "sha256": "0c19f395a65011e0e3c9af74ba05a5fdfe94a84c67103526aa6bfe10d7fd0faa"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-parallel-only-accept.json",
+        "bytes": 16662,
+        "sha256": "5cf1101647d1bbd6fd283138305ee66a44e4cf791de4d156d888bf2bad8642c9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-single-trigger-accept.json",
+        "bytes": 10390,
+        "sha256": "bff4d4ee2b7c65d542148867e905c9394faf129f14574a1c09f251be0b1ae200"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-bare-recipe-refused.json",
+        "bytes": 24402,
+        "sha256": "160dbe5900bb1c40a61e9b5eb35fc0a1fe4e321b4f377ec61571895090053ea9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-batch-one-entry.json",
+        "bytes": 79360,
+        "sha256": "cb6686c352763a3924d7fc6ab08d84deeb0293feb5bc80111ad8db982689f14a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancel-pending.json",
+        "bytes": 21490,
+        "sha256": "f72440af2d6d07de203a458b25deedba5e8046dd9a8f84f3c7b1e1a6b0c9a377"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancelled.json",
+        "bytes": 21375,
+        "sha256": "b453b7e077f8dee9dfe89a2bfa8fd99b8fcca6db7dfc0a038bd2bf5ac5b0c4df"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-corrected-noop.json",
+        "bytes": 46162,
+        "sha256": "4323196c2219d9c21c190ebfeb296b5a2df3d3bd878689f6c8a061d6088336ed"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-delete-support-undo.json",
+        "bytes": 56874,
+        "sha256": "5d8361f1075caac5c98a8464d1dd2c753fd5474dc066a08ce209e98e3f880b82"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-di-only-move.json",
+        "bytes": 97846,
+        "sha256": "6c484a0fa9cd3ecba4a7b4b4057d41ee9ddd2646b03a17406c52209820c53259"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-no-leak.json",
+        "bytes": 40967,
+        "sha256": "bb81d3ad7b7de4f138306ae6d3c5889434e0129cf4bef9ec6abef7abc62057fe"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-pending.json",
+        "bytes": 14553,
+        "sha256": "3394d2aac8ebcf7a4d39781e73e03f08a38100b363ca63623e393673e7d07ddd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-empty-history.json",
+        "bytes": 17992,
+        "sha256": "6777bc969f6034619d94f26163df2a7651f47e7919d5dbd0f8cda1c79d022280"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-guard-recovery.json",
+        "bytes": 48944,
+        "sha256": "11460e7306d5eb42c469e3f90a8dd1c1351a20bb3c2c5f7b2340ebea4efca18f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-incremental-draft.json",
+        "bytes": 157965,
+        "sha256": "b6d947ff17000c1af7d6faeffe7e886cae8bb6fa2b2b92e3f39c4683200243ea"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-explicit-selection.json",
+        "bytes": 86134,
+        "sha256": "c46c00624fa92285344c7485d3eed6ba04aed4773acda30dbddd5b999e3f70a5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-selection-required.json",
+        "bytes": 30595,
+        "sha256": "1e330b9c4e336a6779b7a9d29adb4331fcd1f2ebb5dbe4a8974e7b8dcf7fbe54"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-reentrant-refused.json",
+        "bytes": 38460,
+        "sha256": "3383c1999a60c63e320415f9899aae5a94866840ff33c5cc0d1d567ab27643b9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-refusal-preserves.json",
+        "bytes": 47323,
+        "sha256": "81d471d5e0d338f55340027cdf3aae34ee571a331f05092417b34c4e0901a46f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-stale-revision.json",
+        "bytes": 53167,
+        "sha256": "956512d5654f82e7a1ddc4fdc1fcdc835c7bf5a94c51a791199f51c40acf4987"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-theme-history.json",
+        "bytes": 82475,
+        "sha256": "70d9c7929609ebab344e34e9950188925a857cb2f931ed4230dc2825a1e5aacb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "bytes": 28619,
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/index.json",
+        "bytes": 353196,
+        "sha256": "93a7e36ecb4321b2ebeaf476a4735bbfea9015beeaa3a78b3b898751e480c1a1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/manifest.json",
+        "bytes": 114774,
+        "sha256": "df4a45df51a1cf966f5be6a228793b1f43665a5102a9ccb1a1be0ed5e378dcb0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-abort.json",
+        "bytes": 122857,
+        "sha256": "81e58e0677a5fb12f0a604af860a1b6679eefd1666136478cd4be4ee5e101abf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-base.json",
+        "bytes": 24239,
+        "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-coalesce.json",
+        "bytes": 122957,
+        "sha256": "f0c6ffa74d57724d6ac5b68acb1708dbcd01abfd7f6ba5e5cbb105e7c32a295e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-conflict.json",
+        "bytes": 122960,
+        "sha256": "5efc67b14eea6ea6314121b6d07de627363407be4dd9c05c3e01ee0c33548c8f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+        "bytes": 13840,
+        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-dirconflict.json",
+        "bytes": 123370,
+        "sha256": "fa1f10fc05faeec48065a50ac6f73c5ca946c0e827775150ac465443d7b747fb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-ensureconflict.json",
+        "bytes": 123863,
+        "sha256": "dbda92973e30aa8d98b1d0bf3324f9bfde4fbc65717ec7c7eafbcf9f38e4ad1a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-extraction.json",
+        "bytes": 123171,
+        "sha256": "125bc7573f39468f177773bff8ec2c4beaa7c5f1b43f0275b4469ec9a13effd1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-flip.json",
+        "bytes": 123744,
+        "sha256": "325d9c7c615abf59e087e40ae2c996fb427d800581a33106d6404d4d66c94f31"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-outport.json",
+        "bytes": 123551,
+        "sha256": "7dce72d63cb8da783e03458e2c6cfb50850a83dc1a1ef71b31724d9ab167745d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-stale.json",
+        "bytes": 122018,
+        "sha256": "837b77de3298ff088262866cb35b3b2186da8b003ed7851a80d7554a25811aa0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn.json",
+        "bytes": 271558,
+        "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/MANIFEST.sha256",
+        "bytes": 43980,
+        "sha256": "0d3922f74fb71e19d305307a3153989dcdf4ba3685e8a6df06c28046cf15ad8e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+        "bytes": 17794,
+        "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+        "bytes": 9166,
+        "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/artifacts/support-base.json",
+        "bytes": 9388,
+        "sha256": "47b7487e06f5bf70ddd99e957c01d023662503f9d2cba3c7f97edf7ad84c0f80"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/artifacts/support-descriptors.json",
+        "bytes": 4136,
+        "sha256": "fb336396bc174f1a0d1453aee4ee3f235c74bfab923b5485ad6fe203201e5165"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-apply-input-conflict.json",
+        "bytes": 1982,
+        "sha256": "3a18ffda6e7bbfe02640c0056ea267129c90b43618cd2eb7e2c4538ff6d3f244"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-apply-stale-plan.json",
+        "bytes": 1826,
+        "sha256": "93bf006a890727b37c8fc87a6013bac3cb95260904d680b29a67c218876a9449"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-bind-supports-conflict.json",
+        "bytes": 3046,
+        "sha256": "b93bc52f7b739a6d9a1edf885cbf152fba235026ca13a6dfe1ad9b0bdc74ffcc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-bind-supports-explicit-selection.json",
+        "bytes": 4708,
+        "sha256": "ecc6866535548e79f00df8e37e628ed72edabed4f36ccf56c732c5186bf81e11"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-bind-supports-gated.json",
+        "bytes": 2906,
+        "sha256": "de9cb6d6d64e837e66a58b614eb896a85d3ab1fa958e77520b700a681d37c999"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-descriptor-role-unknown.json",
+        "bytes": 2524,
+        "sha256": "c20fcf085bb458a9cc792225a1f10e9df8673fc8afee831f9e9d6491ba05a4be"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-digest-mismatch-first.json",
+        "bytes": 2746,
+        "sha256": "7cb3b012ed4faa1a05c670f197db7530eb61f02a3417cb52140f9f9b044a169d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-document-version.json",
+        "bytes": 1625,
+        "sha256": "8012c9eab1f05c6f238649dbbebbbd31f3338a3e7e12314a3d825289bc8b7fdf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-empty-called-element.json",
+        "bytes": 4000,
+        "sha256": "010f355db4fbc16e4d1a0bc0ac042f8d072dac6d87d6111fd0a33d137c081df7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-extraction-authorized.json",
+        "bytes": 6304,
+        "sha256": "b85a964dc9a15d77f1a3159ff7e0e7558d9627206dfacd8346658795129c7c2d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-extraction-unauthorized.json",
+        "bytes": 2452,
+        "sha256": "796894529b9d97391c558c7373f56f46ee330cfb67c315456fb1ede98fee05cb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-gateway-direction-control.json",
+        "bytes": 4864,
+        "sha256": "3883d0ada612313eded6c5400450cf677d82ac45fb0068e27f8cc46fd53deb12"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-invalid-mode.json",
+        "bytes": 2412,
+        "sha256": "9bca965ec02b7b385273c4c416301ddc0485fe4150aa0a9d98ecb802c9d4a246"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-not-fixed.json",
+        "bytes": 2577,
+        "sha256": "34cab9538a1be7ccee3a5b38915045e5f6eb399df157f37b36d910cf8194e909"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-output-port-gated.json",
+        "bytes": 2763,
+        "sha256": "2d4236a059fefce560b9bcc1d072be62191b725671340c9cf87a592fd01bdc1a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-output-port-qualification.json",
+        "bytes": 6938,
+        "sha256": "c5cf08001c994c8df5aa5c4d28197aea68809c9c80a302e131e576f2dd687cb1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-second-pass-refused.json",
+        "bytes": 2603,
+        "sha256": "b906b7acd9fcd29d6192d2ad6ad20bac8ce0975a55bd0af30de49e8bc5e2c7ae"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-version-mismatch-first.json",
+        "bytes": 2705,
+        "sha256": "ae0b72bfff5dc71147f2d25d4328f8342455c12affe47bd001d87918e202d3e1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-c-wrong-type-reference.json",
+        "bytes": 2673,
+        "sha256": "52248b38ddc3e6068eac85b9ebea1b10c9df7ad4b3e057f7ee78aed9a8038fb8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-compile-create-identity-mismatch.json",
+        "bytes": 490,
+        "sha256": "29c0ea04bbcd27e69d12a980d7780445148745f1ef567b599b9c36ba5d5ddda4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-compile-ensure-missing-binding-write.json",
+        "bytes": 482,
+        "sha256": "e741482a798e91fafdc75acc259f2b55e447f4954cfdb136be1436d84bfaa513"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-compile-ensure-non-support-type.json",
+        "bytes": 470,
+        "sha256": "1d905c1d14d98ca4169e0f1984b08a03b5d41592f0be1641032aa9a29541dcba"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-compile-port-without-authority.json",
+        "bytes": 461,
+        "sha256": "ef205d7c5fcbe97334a9e8e8a1815f952d4407f7d03c4251936582914260ef11"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-compile-support-profile.json",
+        "bytes": 915,
+        "sha256": "395dcfa98b0d35dadc13d0690b358a89c6f1e895b391c9829b14e4509858e0a1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-compile-variants.json",
+        "bytes": 11185,
+        "sha256": "cdcea7d4cd15ebc10e790b345603606903cee9a91e8c891a5ad069d24fa50fc7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-after-explicit-selection.json",
+        "bytes": 10319,
+        "sha256": "461b79f09b313d394403eed8443095d712f12da552f86eb5d300a399973487b1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-compat-before-integrity.json",
+        "bytes": 3579,
+        "sha256": "7764ca39610a7e5ae0b5b09f259389e1b42d790881fb9eb2b59191a38fb897b3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-dangling-reference.json",
+        "bytes": 2650,
+        "sha256": "4032592cb2005362ba4f6a6144f921fabafe3106fedc5aea89e832869bb08299"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-deleted-support-stays-absent.json",
+        "bytes": 6797,
+        "sha256": "4aee9b5ea9d18c462cde885af403f94080621ed779a97da7e3c9b6e6ee5640bc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-ensure-conflicting-definition.json",
+        "bytes": 3281,
+        "sha256": "34836ced5f0820ae95d351bda4673fadcd7f3419c612d4f458e883dabf8e7815"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-external-membership-edit.json",
+        "bytes": 4095,
+        "sha256": "a26589fa9eb0ff0731e5cebc31f407f48e203aa511b5b6dbb5bb91d6b607b6ef"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-not-fixed.json",
+        "bytes": 3270,
+        "sha256": "0f57d358e95bfb0229f6b0c2067aae240354cb8c0c6851d1c32485c62fac4335"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-place-grid-deleted-association.json",
+        "bytes": 6514,
+        "sha256": "cbd9083e98e63304daa0937a18b6b4789f1bcbdcf6379c17e08c9ba45d93ce75"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-place-grid-inserted-association.json",
+        "bytes": 7039,
+        "sha256": "18c2e1706f90ee0319abfba8faacf160d3eae5bb17841f57275ecdd9e0c5b8e9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-placement-intent-di-only.json",
+        "bytes": 5913,
+        "sha256": "b74bc1895f88d02a3695f3af01b9949d71fdb381dcb28d8712750b50fee4a093"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-placement-intent-unknown.json",
+        "bytes": 2841,
+        "sha256": "6f96584436fdd74418277497169c394ff8ed8c835ce841c77a9b1cdd7dea0db2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-recreate-after-remap-edit.json",
+        "bytes": 3525,
+        "sha256": "191b0ee0ccb4421985763a8d5117333016abbe36421770d4c2664120df72c4c3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-recreate-after-remap.json",
+        "bytes": 8901,
+        "sha256": "583b98607d98ab3c03271d6c24ee2e6d7840904205f460ae58a419bafae8d1e5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-reference-region-edit.json",
+        "bytes": 3144,
+        "sha256": "bc8dc1a4f416d9a5ff2ad323bb8be6426d776d9cc2146a0e599647f07cc5e197"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-relation-direction-conflict.json",
+        "bytes": 3290,
+        "sha256": "114a611804bb934b9331e3b63ea7ac317e74ba6d7137c2fa8488e88d3a91595a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-reserved-lane-renamed.json",
+        "bytes": 8382,
+        "sha256": "617a3423e037f9d6afddc04ddeedc99cfa9b50c710d12cccb4591362eb1ebac0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-second-pass-refused.json",
+        "bytes": 3296,
+        "sha256": "2e22b736117a274aee724c61113577677a2ef8a85acd7882a73476e13638abc7"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-band-process-ref.json",
+        "bytes": 3508,
+        "sha256": "6259f8dea5b9551e3d79508cdeed6266281eccbde29b4aeaf61a81635b9d8968"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-creation-gated.json",
+        "bytes": 2436,
+        "sha256": "ecf7278252f96c65751aecad281e304b83117a905cbcd9faad1ee0b4fafa07e4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-duplicate-role.json",
+        "bytes": 3574,
+        "sha256": "e396bcd27de1cf9aaf53ab0955792b15e4f37f701d3e613e446cccb091a8ad46"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-imported-ids-edit.json",
+        "bytes": 6946,
+        "sha256": "35ca9d4838f03a382eb1a5c94f47c6c937855144c58321ed881224c520d807be"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-imported-ids.json",
+        "bytes": 6986,
+        "sha256": "c837a5444dc35997b677a1d073cc8c7cde4f5253ae65d690adfd433624210f9b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-late-band-collision-edit.json",
+        "bytes": 2577,
+        "sha256": "70775f7522145d9fb4f654a73ccc9bf95bec901a485c6984ee16a012f2f9a5df"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-late-band-collision.json",
+        "bytes": 2617,
+        "sha256": "8440d1f1a9765d42e419c65a8a57880deac759dc777e4a9941de07c7b376eef5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-one-process.json",
+        "bytes": 14675,
+        "sha256": "e1d70cc0085fd26ecf4c98e9ec71f0c956fa07f5cabf33c27bc18427b9eb6254"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-refusal-after-five-ensures.json",
+        "bytes": 2501,
+        "sha256": "b8261ad586d41eac8be6fefb91861250f4a0b091a59dc147454021021caa06b2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-two-processes.json",
+        "bytes": 24486,
+        "sha256": "527015b1131dc166aba7a677f48a617a503e1b958ec7659adf7738050cbc2c04"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-wrong-parent.json",
+        "bytes": 3493,
+        "sha256": "1ab4862b54573362389ca53fc272180d606b1f47bb821e093c83174f24c94f22"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-actor-mismatch.json",
+        "bytes": 1499,
+        "sha256": "862d6b15cf59a51bde742a2cae88b366165cdc38e1b74f96be5e07516ce5ba9b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-add-note-containment.json",
+        "bytes": 2347,
+        "sha256": "6c2e4dba2babab984cd4a146007bdfe92bc0973fe6b1b8acf098b7c1ccaf8918"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-ambiguous-binding.json",
+        "bytes": 1518,
+        "sha256": "9454b1d924ea4a2e346fbf6438785dd56aa156c072e897985c093e0c83381fcd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-append-remove-conflict.json",
+        "bytes": 2402,
+        "sha256": "584f8695b42e540dafb795ba026ee78011e8d9e00b0fc731e2abe4aa03e23e30"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-aid-grid.json",
+        "bytes": 3244,
+        "sha256": "80a9c4cce904fee13c03f358bfe13d4413dc5333c692d004db5ed904e57f74d4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-aid-neutral.json",
+        "bytes": 2500,
+        "sha256": "379ff38fe23d483f42c28574e496c41362ae660d78381e2c3914350a4803f234"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-id-collision.json",
+        "bytes": 2113,
+        "sha256": "6be51a5cd5408e9d481df64d84eeca68dd06a76300e2e92845a8a1ee7d9e4ebb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-process-input.json",
+        "bytes": 4323,
+        "sha256": "b012db29f9785cd2a134ce4bc87d9cdf179accecbfc294d5f688e65156170bfb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-task-grid.json",
+        "bytes": 3233,
+        "sha256": "14a20fcdc7e01251701c9cda733fd72dbb841b3219dec778711944c90300381e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-task-neutral.json",
+        "bytes": 2478,
+        "sha256": "1638d4da27ec4b74303986e14a993026ccf82b65a07d8ae67c304e64b0ec68e8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-export-phase.json",
+        "bytes": 1457,
+        "sha256": "bd1762caf70b6804a3fac3f1e51d0bac0d0c78b39d0d9f6b2cc17799c6a8563f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-invalid-authority.json",
+        "bytes": 1498,
+        "sha256": "db907428a7839c23833c664abac94bc6826d17f10e09e0fef464ded7294bee64"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-lane-member-cn.json",
+        "bytes": 2538,
+        "sha256": "d988625da5d3b769c46b767c7e634f61f851f07a2c1d285cbcef6a3c887ed484"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-lane-member-support.json",
+        "bytes": 2460,
+        "sha256": "8cb9c55594274af15a889234a4b157fabf07c6e29b117013c535c02b39881bfd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-link-wrong-target-type.json",
+        "bytes": 2562,
+        "sha256": "6196aa10b9432b5f226a0c2d4da5f2902943af93d76ca50d68059a3705b79ef5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-link.json",
+        "bytes": 3088,
+        "sha256": "38929fcfe4359eeec5b0f7b43d5efdd56d2bfcc9d783376c0265c789d14d4b89"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-missing-parameter.json",
+        "bytes": 1496,
+        "sha256": "8fab8fdf443bd908d995245d5bbf65d3a3fb02be2fc018fb2c91292de2b3e1e0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-optional-binding-missing.json",
+        "bytes": 1388,
+        "sha256": "bc45e17937b9e2b9dc3079fcf2df6ee01c393598d74f98ce9a12bfce4660e9d9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-recipe-not-compiled.json",
+        "bytes": 2135,
+        "sha256": "8dc9adb5e050000719b14f86eb3cca7ba29c4780366bbb32c5a30a18afe48f0d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-remove-empty-support.json",
+        "bytes": 4210,
+        "sha256": "cb946b9eba47f1023832d59a03bd2547d1bc05cbefecf2414decd3dc2785742d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-remove-referenced.json",
+        "bytes": 1621,
+        "sha256": "ef6d4338fb83012d77b2a1b5c430d34e1f088225bf463e91c80e04300bfb1c87"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-remove-without-intent.json",
+        "bytes": 2572,
+        "sha256": "cb40019ecab99c32f315d8b831bea6ec65dbbe24cc70b2b22a2e949a427a6d25"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-reparent-annotation.json",
+        "bytes": 2433,
+        "sha256": "7ac46f8e2e2c4005406bcb81f265fe4b6ce98bbd1a9069113f79e1b83415233b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-scalar-write-conflict.json",
+        "bytes": 2065,
+        "sha256": "905461ecb2e72ebc387a72851f5da77107a3eeb13b13f940c31a25cff19575e1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-undeclared-parameter.json",
+        "bytes": 1532,
+        "sha256": "532991857d6e4c67350879dd600fb76c2b66f5b0eab73cff688ea65ad3dadbf1"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-unknown-element-parameter.json",
+        "bytes": 1509,
+        "sha256": "da03034ddf6ecac77091947bd3323d47f9b1d00bb846796fbc9c262227281d86"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-unset-name.json",
+        "bytes": 2284,
+        "sha256": "fd04a3130afaeeb746ddbf6d55c31c663b028e5849d961715d836c210b53e6a3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-plan-wrong-parameter-type.json",
+        "bytes": 1491,
+        "sha256": "49bc912c39db019b46b08b72e27172f1ede4133e3e8e361c77e79a89321c828a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-propose-black-box-pool.json",
+        "bytes": 1586,
+        "sha256": "bc25e91dbe3f52a1d36c7bae384a23ea51d7990677597a26682874c70e953ebc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-propose-recovery-partial-provenance.json",
+        "bytes": 2125,
+        "sha256": "df3c054a54713d9795b68f31dfbab0c941c875c0d53b27ed60bd8d509bffb179"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-propose-recovery-with-provenance.json",
+        "bytes": 2905,
+        "sha256": "debf90fa3a9087483b7e6efcc281c3f531bf09116b1a4bd0f835460d9e08d6a2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-propose-recovery-without-provenance.json",
+        "bytes": 1931,
+        "sha256": "50547ae3b6fa762f4794e510ed086e5642354ddedadf7cc971d3b83b3f8007da"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-remap-gated.json",
+        "bytes": 3726,
+        "sha256": "a47a7da62767f568059cb253bfc37d89238825a651404cdbaee54c40aaee97e6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-remap-owner.json",
+        "bytes": 7528,
+        "sha256": "7c5f4ce8b9e647b9d8bef78a054970f5a92a6c3a93fe6cfeca19b36939c78212"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-remap-target-grammar.json",
+        "bytes": 3229,
+        "sha256": "b12de715981409cbbdcf2c2f6ef6118ca0bc9be33e2760459a22b05864aa5781"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-remap-unknown-source.json",
+        "bytes": 3238,
+        "sha256": "5162fa3c8f83f2fad6ce922d5136ad73c55ad2cc8afcba806798335c370edf65"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/cases/cn-sort-placements.json",
+        "bytes": 1824,
+        "sha256": "0145bc9b19388289eb8cd08bf8131754fdc7529414abf0f792bbbe5be621ac7c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/manifest.json",
+        "bytes": 52022,
+        "sha256": "2a195405f01458521ef951d5b7b14f554b62c9a20b87d83efdca69a6ff234f52"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-c-noauth.json",
+        "bytes": 93273,
+        "sha256": "d1ab644f8430b6d75abfd8e66707d0d64a01b80b691a4a07fa20d54df5c3559d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-c-second-pass.json",
+        "bytes": 94726,
+        "sha256": "6e1d39987793a562b6ac562b74af4560c930a029a9ceaea544a77385765505fc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-c-unfixed.json",
+        "bytes": 94012,
+        "sha256": "c3e04704b33992783a457d3f59e6ae76e27f26037b9cc8ab2338437e83c10279"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-c.json",
+        "bytes": 93052,
+        "sha256": "c1ab684d4e81f41e464aabe94b51b5be5ca25a1cdc765491dd7cf61ab05a57db"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-n-conflict.json",
+        "bytes": 101454,
+        "sha256": "6fa14a664d4f6aa2c3009cf39ecdeca05b1f92717394073e2226fe7980d64baf"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-n-ensure-conflict.json",
+        "bytes": 102128,
+        "sha256": "4031613de92a0b793ba4ba58cb14b130ecc5bb1a4aa955ba33e4712dd608f0f8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-n-relocate.json",
+        "bytes": 106393,
+        "sha256": "45944ccafc57b2f0d32419b1ee7db1d53abb3e1a1ca251027448cbfe34bcb7cc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-n-second-pass.json",
+        "bytes": 101800,
+        "sha256": "6b94b7f684c6ffb1b46ee3377ed5dbea57a3ee4339bc7c81dbf91d6df6d08547"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-n-unfixed.json",
+        "bytes": 101073,
+        "sha256": "1fc6b78c6c43cad4a19dca3cbd77fdc7c6710278b02f059f9be0be422c45de39"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/cn-n.json",
+        "bytes": 99656,
+        "sha256": "4ccd0c50ee390e85220a39263271703d4d8bef148507600c5e57d78db0455531"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/grid-extraction.json",
+        "bytes": 71972,
+        "sha256": "64daba77a7af88ae98d07e80452376af6057de9fb201c2981bcfa8ee3c7d62d5"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/neutral-containment-task.json",
+        "bytes": 63150,
+        "sha256": "1fb1508179a05d5150b2d977ed393c0aa6886dad805d9faee22eb24035063882"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/support-abort.json",
+        "bytes": 67035,
+        "sha256": "56e990eed9fc3e0275dd600c27ada54631777c66141e8a87fa72cf69f882c341"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/support-cmd.json",
+        "bytes": 67864,
+        "sha256": "8cd9c7b7fcfe91db70b2b0965735197b6acc4a665051ce01ec6dc1a59d5dec60"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/support-no-binding-write.json",
+        "bytes": 66813,
+        "sha256": "f899daacaca9f6e34ee1c9829cfd5619232030ac11788aca1e332c9e00029145"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/support-task-ensure.json",
+        "bytes": 66934,
+        "sha256": "4d068780912094b6484987e664b1ccdea928720f055a1d7404645def5653cf51"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/vendor/py/parity/profiles/support.json",
+        "bytes": 66926,
+        "sha256": "551682f445aede466a1a6e8bcdaa967465b432a11fa6c137578a997a5f7ff470"
+      },
+      {
+        "path": "tests/profile-lot3-golden-independence.test.mjs",
+        "bytes": 51213,
+        "sha256": "0f1a279285ba5b1753b1139809615189803da4684d0b183a263e524d58ec65f9"
+      }
+    ]
+  },
+  "current": {
+    "seal": {
+      "bytes": 73732,
+      "sha256": "7bd2d206277c123ad027481a42969f013cd91ddc4a2bfaab0e529fbc7120cb3c"
+    }
+  },
+  "valueChanges": [
+    {
+      "caseId": "l3-tx-incremental-draft",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/8/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/9/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 10,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/10/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 11,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/6/result/payload/presentation/layout",
+          "/8/result/payload/presentation/layout",
+          "/9/events/L1/0/report",
+          "/10/events/L1/0/report"
+        ],
+        "added": [
+          "/6/result/payload/presentation/layout/pages",
+          "/6/result/payload/presentation/layout/geometry",
+          "/8/result/payload/presentation/layout/pages",
+          "/8/result/payload/presentation/layout/geometry"
+        ]
+      },
+      "discriminates": {
+        "old": {
+          "sha256": "973a8e4211915425a48a2030c50a1f3d3dee4024d8563ee9e733878ff96844fb"
+        },
+        "new": {
+          "sha256": "4b42581178533c0773a6253ca6c89bb2b42dfe4397c0b45f8c175c3eba005519"
+        }
+      }
+    },
+    {
+      "caseId": "l3-tx-batch-one-entry",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/2/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 6,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 7,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/2/result/payload/presentation/layout",
+          "/4/result/payload/presentation/layout",
+          "/5/events/L1/0/report",
+          "/6/events/L1/0/report"
+        ],
+        "added": [
+          "/2/result/payload/presentation/layout/pages",
+          "/2/result/payload/presentation/layout/geometry",
+          "/4/result/payload/presentation/layout/pages",
+          "/4/result/payload/presentation/layout/geometry"
+        ]
+      },
+      "discriminates": {
+        "old": {
+          "sha256": "4228f2937d04e8adbfa09a1c791ee28f58d11715970d98a9f3b9b7483515df16"
+        },
+        "new": {
+          "sha256": "ea3af716e897ec9592d17a37b2837bc0d4b984c4b0795b2832b590dde104167a"
+        }
+      }
+    },
+    {
+      "caseId": "l3-tx-cancelled",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-cancel-pending",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-dispose-no-leak",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-dispose-pending",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-reentrant-refused",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "script",
+          "pointer": "/2/inject",
+          "basis": "DESIGN L635, L604, L632-L633, L735; harmonization B2, B3: a real nested applyCommands call during applying is refused transaction-reentrant with the closed Result/1",
+          "old": {
+            "phase": "applying",
+            "entry": "native-modeling-command",
+            "command": {
+              "name": "element.updateLabel",
+              "target": "Process_T",
+              "text": "Injected"
+            }
+          },
+          "new": {
+            "phase": "applying",
+            "action": "reenter",
+            "request": {
+              "baseRevision": "4c0dfb55a1d44babf7faee13e771be6a780138a55f1b566098dcc34a0aba16c5",
+              "expectedViewRevision": {
+                "$ref": {
+                  "step": 2,
+                  "pointer": "/result/payload/viewRevision"
+                }
+              },
+              "transactionId": "tx-nested",
+              "commands": [
+                {
+                  "command": "surface",
+                  "entry": "task-create",
+                  "context": {
+                    "owner": "Process_T",
+                    "key": "b",
+                    "value": "Second"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/2/injected",
+          "basis": "DESIGN L635, L604, L632-L633, L735; harmonization B2, B3: a real nested applyCommands call during applying is refused transaction-reentrant with the closed Result/1",
+          "old": {
+            "status": "refused",
+            "code": "transaction-reentrant"
+          },
+          "new": {
+            "status": "refused",
+            "operation": "applyCommands",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "4c0dfb55a1d44babf7faee13e771be6a780138a55f1b566098dcc34a0aba16c5",
+            "code": "transaction-reentrant",
+            "diagnostics": [],
+            "report": {
+              "reportVersion": "2",
+              "operation": "applyCommands",
+              "sourceIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "inputRevision": "4c0dfb55a1d44babf7faee13e771be6a780138a55f1b566098dcc34a0aba16c5",
+              "entries": [],
+              "rawStandardFindings": [],
+              "idMap": [],
+              "artifacts": []
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      },
+      "discriminates": {
+        "old": {
+          "sha256": "2fceb73d0e8b4c6c4ffe494163981859e3afd0fb93cdf7929cae1e43ab440cce"
+        },
+        "new": {
+          "sha256": "2d98c518675faca75723e8af4d6589ce9d830a38fda2ccc300786686084295dc"
+        }
+      }
+    },
+    {
+      "caseId": "l3-tx-guard-recovery",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "script",
+          "pointer": "/2/inject",
+          "basis": "DESIGN L604, L635, L735; harmonization B2: the applying hook proves the guard state by a nested call, then throws",
+          "old": {
+            "phase": "applying",
+            "action": "throw"
+          },
+          "new": {
+            "phase": "applying",
+            "action": "reenter-and-throw",
+            "request": {
+              "baseRevision": "4c0dfb55a1d44babf7faee13e771be6a780138a55f1b566098dcc34a0aba16c5",
+              "expectedViewRevision": {
+                "$ref": {
+                  "step": 2,
+                  "pointer": "/result/payload/viewRevision"
+                }
+              },
+              "transactionId": "tx-probe",
+              "commands": [
+                {
+                  "command": "surface",
+                  "entry": "task-create",
+                  "context": {
+                    "owner": "Process_T",
+                    "key": "b",
+                    "value": "Second"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/2/injected",
+          "basis": "DESIGN L604, L635, L735; harmonization B2: the applying hook proves the guard state by a nested call, then throws",
+          "old": "absent",
+          "new": {
+            "status": "refused",
+            "operation": "applyCommands",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "4c0dfb55a1d44babf7faee13e771be6a780138a55f1b566098dcc34a0aba16c5",
+            "code": "transaction-reentrant",
+            "diagnostics": [],
+            "report": {
+              "reportVersion": "2",
+              "operation": "applyCommands",
+              "sourceIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "inputRevision": "4c0dfb55a1d44babf7faee13e771be6a780138a55f1b566098dcc34a0aba16c5",
+              "entries": [],
+              "rawStandardFindings": [],
+              "idMap": [],
+              "artifacts": []
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      },
+      "discriminates": {
+        "old": {
+          "sha256": "7378e02e800384f3b8251b62c08d83f21b46ac47988677a1c05936871850bf44"
+        },
+        "new": {
+          "sha256": "85ffe60591fcbbfe5a662a8378ca92d7a63212a2fc5293cacc9f00bcb960c66c"
+        }
+      }
+    },
+    {
+      "caseId": "l3-tx-refusal-preserves",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-io-set-selection-required",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "script",
+          "pointer": "/4",
+          "basis": "DESIGN L547, L536, L172: single-set control, C appends the new input to the only InputSet",
+          "old": "absent",
+          "new": {
+            "step": 5,
+            "call": "setDefinitions",
+            "envelope": {
+              "documentVersion": "1",
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "tree": {
+                "$type": "bpmn:Definitions",
+                "id": "Definitions_tx",
+                "targetNamespace": "urn:neutral-cn:1",
+                "exporterVersion": "fixture-cn-1",
+                "rootElements": [
+                  {
+                    "$type": "bpmn:Process",
+                    "id": "Process_T",
+                    "name": "Draft",
+                    "isExecutable": false,
+                    "laneSets": [
+                      {
+                        "$type": "bpmn:LaneSet",
+                        "id": "LaneSet_T",
+                        "name": "Supports",
+                        "lanes": [
+                          {
+                            "$type": "bpmn:Lane",
+                            "id": "Lane_T_ext",
+                            "name": "Outside parties"
+                          }
+                        ]
+                      }
+                    ],
+                    "ioSpecification": {
+                      "$type": "bpmn:InputOutputSpecification",
+                      "dataInputs": [
+                        {
+                          "$type": "bpmn:DataInput",
+                          "id": "DataInput_a",
+                          "name": "A"
+                        },
+                        {
+                          "$type": "bpmn:DataInput",
+                          "id": "DataInput_b",
+                          "name": "B"
+                        }
+                      ],
+                      "dataOutputs": [],
+                      "inputSets": [
+                        {
+                          "$type": "bpmn:InputSet",
+                          "id": "InputSet_1",
+                          "dataInputRefs": [
+                            "DataInput_a",
+                            "DataInput_b"
+                          ]
+                        }
+                      ],
+                      "outputSets": [
+                        {
+                          "$type": "bpmn:OutputSet",
+                          "id": "OutputSet_1"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "$type": "bpmn:Collaboration",
+                    "id": "Collaboration_T",
+                    "name": "Pool collaboration",
+                    "participants": [
+                      {
+                        "$type": "bpmn:Participant",
+                        "id": "Participant_T",
+                        "name": "Draft pool",
+                        "processRef": "Process_T"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "bindings": [
+                {
+                  "ownerId": "Process_T",
+                  "role": "collaboration",
+                  "targetId": "Collaboration_T"
+                },
+                {
+                  "ownerId": "Process_T",
+                  "role": "external-lane",
+                  "targetId": "Lane_T_ext"
+                },
+                {
+                  "ownerId": "Process_T",
+                  "role": "lane-set",
+                  "targetId": "LaneSet_T"
+                },
+                {
+                  "ownerId": "Process_T",
+                  "role": "main-participant",
+                  "targetId": "Participant_T"
+                }
+              ],
+              "semanticRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a"
+            },
+            "options": {
+              "mode": "draft"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4",
+          "basis": "DESIGN L547, L536, L172: single-set control, C appends the new input to the only InputSet",
+          "old": "absent",
+          "new": {
+            "step": 5,
+            "result": {
+              "status": "ok",
+              "operation": "setDefinitions",
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "baseRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+              "revision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+              "report": "unsealed",
+              "payload": {
+                "envelope": {
+                  "documentVersion": "1",
+                  "profileIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "tree": {
+                    "$type": "bpmn:Definitions",
+                    "id": "Definitions_tx",
+                    "targetNamespace": "urn:neutral-cn:1",
+                    "exporterVersion": "fixture-cn-1",
+                    "rootElements": [
+                      {
+                        "$type": "bpmn:Process",
+                        "id": "Process_T",
+                        "name": "Draft",
+                        "isExecutable": false,
+                        "laneSets": [
+                          {
+                            "$type": "bpmn:LaneSet",
+                            "id": "LaneSet_T",
+                            "name": "Supports",
+                            "lanes": [
+                              {
+                                "$type": "bpmn:Lane",
+                                "id": "Lane_T_ext",
+                                "name": "Outside parties"
+                              }
+                            ]
+                          }
+                        ],
+                        "ioSpecification": {
+                          "$type": "bpmn:InputOutputSpecification",
+                          "dataInputs": [
+                            {
+                              "$type": "bpmn:DataInput",
+                              "id": "DataInput_a",
+                              "name": "A"
+                            },
+                            {
+                              "$type": "bpmn:DataInput",
+                              "id": "DataInput_b",
+                              "name": "B"
+                            }
+                          ],
+                          "dataOutputs": [],
+                          "inputSets": [
+                            {
+                              "$type": "bpmn:InputSet",
+                              "id": "InputSet_1",
+                              "dataInputRefs": [
+                                "DataInput_a",
+                                "DataInput_b"
+                              ]
+                            }
+                          ],
+                          "outputSets": [
+                            {
+                              "$type": "bpmn:OutputSet",
+                              "id": "OutputSet_1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "$type": "bpmn:Collaboration",
+                        "id": "Collaboration_T",
+                        "name": "Pool collaboration",
+                        "participants": [
+                          {
+                            "$type": "bpmn:Participant",
+                            "id": "Participant_T",
+                            "name": "Draft pool",
+                            "processRef": "Process_T"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "bindings": [
+                    {
+                      "ownerId": "Process_T",
+                      "role": "collaboration",
+                      "targetId": "Collaboration_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "external-lane",
+                      "targetId": "Lane_T_ext"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "lane-set",
+                      "targetId": "LaneSet_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "main-participant",
+                      "targetId": "Participant_T"
+                    }
+                  ],
+                  "semanticRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a"
+                },
+                "semanticRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+                "viewRevision": "unsealed"
+              }
+            },
+            "history": {
+              "past": 0,
+              "future": 0
+            },
+            "events": {
+              "L1": [
+                {
+                  "envelope": {
+                    "documentVersion": "1",
+                    "profileIdentity": {
+                      "mechanismVersion": "1",
+                      "schemaVersion": "1.0.0",
+                      "profile": "neutral-cn/1",
+                      "version": "1.1.0",
+                      "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                      "base": {
+                        "id": "neutral-cn-base/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                      },
+                      "descriptors": [
+                        {
+                          "id": "neutral-cn-descriptors/1",
+                          "version": "fixture-cn-1",
+                          "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                        }
+                      ]
+                    },
+                    "tree": {
+                      "$type": "bpmn:Definitions",
+                      "id": "Definitions_tx",
+                      "targetNamespace": "urn:neutral-cn:1",
+                      "exporterVersion": "fixture-cn-1",
+                      "rootElements": [
+                        {
+                          "$type": "bpmn:Process",
+                          "id": "Process_T",
+                          "name": "Draft",
+                          "isExecutable": false,
+                          "laneSets": [
+                            {
+                              "$type": "bpmn:LaneSet",
+                              "id": "LaneSet_T",
+                              "name": "Supports",
+                              "lanes": [
+                                {
+                                  "$type": "bpmn:Lane",
+                                  "id": "Lane_T_ext",
+                                  "name": "Outside parties"
+                                }
+                              ]
+                            }
+                          ],
+                          "ioSpecification": {
+                            "$type": "bpmn:InputOutputSpecification",
+                            "dataInputs": [
+                              {
+                                "$type": "bpmn:DataInput",
+                                "id": "DataInput_a",
+                                "name": "A"
+                              },
+                              {
+                                "$type": "bpmn:DataInput",
+                                "id": "DataInput_b",
+                                "name": "B"
+                              }
+                            ],
+                            "dataOutputs": [],
+                            "inputSets": [
+                              {
+                                "$type": "bpmn:InputSet",
+                                "id": "InputSet_1",
+                                "dataInputRefs": [
+                                  "DataInput_a",
+                                  "DataInput_b"
+                                ]
+                              }
+                            ],
+                            "outputSets": [
+                              {
+                                "$type": "bpmn:OutputSet",
+                                "id": "OutputSet_1"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "$type": "bpmn:Collaboration",
+                          "id": "Collaboration_T",
+                          "name": "Pool collaboration",
+                          "participants": [
+                            {
+                              "$type": "bpmn:Participant",
+                              "id": "Participant_T",
+                              "name": "Draft pool",
+                              "processRef": "Process_T"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "bindings": [
+                      {
+                        "ownerId": "Process_T",
+                        "role": "collaboration",
+                        "targetId": "Collaboration_T"
+                      },
+                      {
+                        "ownerId": "Process_T",
+                        "role": "external-lane",
+                        "targetId": "Lane_T_ext"
+                      },
+                      {
+                        "ownerId": "Process_T",
+                        "role": "lane-set",
+                        "targetId": "LaneSet_T"
+                      },
+                      {
+                        "ownerId": "Process_T",
+                        "role": "main-participant",
+                        "targetId": "Participant_T"
+                      }
+                    ],
+                    "semanticRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a"
+                  },
+                  "semanticRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+                  "viewRevision": {
+                    "$same": {
+                      "step": 5,
+                      "pointer": "/result/payload/viewRevision"
+                    }
+                  },
+                  "transactionId": "unsealed",
+                  "origin": "load",
+                  "report": {
+                    "$same": {
+                      "step": 5,
+                      "pointer": "/result/report"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "artifact": "script",
+          "pointer": "/5",
+          "basis": "DESIGN L547, L536, L172: single-set control, C appends the new input to the only InputSet",
+          "old": "absent",
+          "new": {
+            "step": 6,
+            "call": "applyCommands",
+            "request": {
+              "baseRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+              "expectedViewRevision": {
+                "$ref": {
+                  "step": 5,
+                  "pointer": "/result/payload/viewRevision"
+                }
+              },
+              "transactionId": "tx-input-single",
+              "commands": [
+                {
+                  "command": "surface",
+                  "entry": "input-create-unassigned",
+                  "context": {
+                    "owner": "Process_T",
+                    "key": "c",
+                    "value": "C"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5",
+          "basis": "DESIGN L547, L536, L172: single-set control, C appends the new input to the only InputSet",
+          "old": "absent",
+          "new": {
+            "step": 6,
+            "result": {
+              "status": "ok",
+              "operation": "applyCommands",
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "baseRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+              "revision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181",
+              "report": {
+                "reportVersion": "2",
+                "operation": "applyCommands",
+                "sourceIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "targetIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "inputRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+                "outputRevision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181",
+                "entries": [
+                  {
+                    "code": "complete/assignRef",
+                    "severity": "info",
+                    "classification": "repairable",
+                    "stage": "complete",
+                    "ruleId": "c-io-input-uncovered-single",
+                    "messageKey": "complete.assignRef",
+                    "disposition": "corrected",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/inputSets/0/dataInputRefs",
+                      "targetId": "InputSet_1",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/inputSets/0/dataInputRefs",
+                      "targetId": "InputSet_1",
+                      "provenance": "exact"
+                    },
+                    "property": "dataInputRefs",
+                    "beforePresent": true,
+                    "before": [
+                      "DataInput_a",
+                      "DataInput_b"
+                    ],
+                    "afterPresent": true,
+                    "after": [
+                      "DataInput_a",
+                      "DataInput_b",
+                      "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3"
+                    ]
+                  },
+                  {
+                    "code": "input-consumer-required",
+                    "severity": "warn",
+                    "classification": "readiness",
+                    "stage": "post-normalize",
+                    "ruleId": "input-consumer",
+                    "messageKey": "input-consumer-required",
+                    "disposition": "observed",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/dataInputs/0",
+                      "targetId": "DataInput_a",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "none",
+                      "pointer": null,
+                      "targetId": null,
+                      "provenance": "unavailable"
+                    },
+                    "beforePresent": false,
+                    "afterPresent": false
+                  },
+                  {
+                    "code": "input-consumer-required",
+                    "severity": "warn",
+                    "classification": "readiness",
+                    "stage": "post-normalize",
+                    "ruleId": "input-consumer",
+                    "messageKey": "input-consumer-required",
+                    "disposition": "observed",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/dataInputs/1",
+                      "targetId": "DataInput_b",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "none",
+                      "pointer": null,
+                      "targetId": null,
+                      "provenance": "unavailable"
+                    },
+                    "beforePresent": false,
+                    "afterPresent": false
+                  },
+                  {
+                    "code": "input-consumer-required",
+                    "severity": "warn",
+                    "classification": "readiness",
+                    "stage": "post-normalize",
+                    "ruleId": "input-consumer",
+                    "messageKey": "input-consumer-required",
+                    "disposition": "observed",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/dataInputs/2",
+                      "targetId": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "none",
+                      "pointer": null,
+                      "targetId": null,
+                      "provenance": "unavailable"
+                    },
+                    "beforePresent": false,
+                    "afterPresent": false
+                  },
+                  {
+                    "code": "input-supplier-required",
+                    "severity": "warn",
+                    "classification": "readiness",
+                    "stage": "post-normalize",
+                    "ruleId": "input-supplier",
+                    "messageKey": "input-supplier-required",
+                    "disposition": "observed",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/dataInputs/0",
+                      "targetId": "DataInput_a",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "none",
+                      "pointer": null,
+                      "targetId": null,
+                      "provenance": "unavailable"
+                    },
+                    "beforePresent": false,
+                    "afterPresent": false
+                  },
+                  {
+                    "code": "input-supplier-required",
+                    "severity": "warn",
+                    "classification": "readiness",
+                    "stage": "post-normalize",
+                    "ruleId": "input-supplier",
+                    "messageKey": "input-supplier-required",
+                    "disposition": "observed",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/dataInputs/1",
+                      "targetId": "DataInput_b",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "none",
+                      "pointer": null,
+                      "targetId": null,
+                      "provenance": "unavailable"
+                    },
+                    "beforePresent": false,
+                    "afterPresent": false
+                  },
+                  {
+                    "code": "input-supplier-required",
+                    "severity": "warn",
+                    "classification": "readiness",
+                    "stage": "post-normalize",
+                    "ruleId": "input-supplier",
+                    "messageKey": "input-supplier-required",
+                    "disposition": "observed",
+                    "source": {
+                      "domain": "tree",
+                      "pointer": "/rootElements/0/ioSpecification/dataInputs/2",
+                      "targetId": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3",
+                      "provenance": "exact"
+                    },
+                    "result": {
+                      "domain": "none",
+                      "pointer": null,
+                      "targetId": null,
+                      "provenance": "unavailable"
+                    },
+                    "beforePresent": false,
+                    "afterPresent": false
+                  }
+                ],
+                "rawStandardFindings": [],
+                "idMap": [],
+                "artifacts": []
+              },
+              "payload": {
+                "envelope": {
+                  "documentVersion": "1",
+                  "profileIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "tree": {
+                    "$type": "bpmn:Definitions",
+                    "id": "Definitions_tx",
+                    "targetNamespace": "urn:neutral-cn:1",
+                    "exporterVersion": "fixture-cn-1",
+                    "rootElements": [
+                      {
+                        "$type": "bpmn:Process",
+                        "id": "Process_T",
+                        "name": "Draft",
+                        "isExecutable": false,
+                        "laneSets": [
+                          {
+                            "$type": "bpmn:LaneSet",
+                            "id": "LaneSet_T",
+                            "name": "Supports",
+                            "lanes": [
+                              {
+                                "$type": "bpmn:Lane",
+                                "id": "Lane_T_ext",
+                                "name": "Outside parties"
+                              }
+                            ]
+                          }
+                        ],
+                        "ioSpecification": {
+                          "$type": "bpmn:InputOutputSpecification",
+                          "dataInputs": [
+                            {
+                              "$type": "bpmn:DataInput",
+                              "id": "DataInput_a",
+                              "name": "A"
+                            },
+                            {
+                              "$type": "bpmn:DataInput",
+                              "id": "DataInput_b",
+                              "name": "B"
+                            },
+                            {
+                              "$type": "bpmn:DataInput",
+                              "id": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3",
+                              "name": "C"
+                            }
+                          ],
+                          "dataOutputs": [],
+                          "inputSets": [
+                            {
+                              "$type": "bpmn:InputSet",
+                              "id": "InputSet_1",
+                              "dataInputRefs": [
+                                "DataInput_a",
+                                "DataInput_b",
+                                "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3"
+                              ]
+                            }
+                          ],
+                          "outputSets": [
+                            {
+                              "$type": "bpmn:OutputSet",
+                              "id": "OutputSet_1"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "$type": "bpmn:Collaboration",
+                        "id": "Collaboration_T",
+                        "name": "Pool collaboration",
+                        "participants": [
+                          {
+                            "$type": "bpmn:Participant",
+                            "id": "Participant_T",
+                            "name": "Draft pool",
+                            "processRef": "Process_T"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "bindings": [
+                    {
+                      "ownerId": "Process_T",
+                      "role": "collaboration",
+                      "targetId": "Collaboration_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "external-lane",
+                      "targetId": "Lane_T_ext"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "lane-set",
+                      "targetId": "LaneSet_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "main-participant",
+                      "targetId": "Participant_T"
+                    }
+                  ],
+                  "semanticRevision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181"
+                },
+                "semanticRevision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181",
+                "viewRevision": {
+                  "$differs": {
+                    "step": 5,
+                    "pointer": "/result/payload/viewRevision"
+                  }
+                },
+                "transactionId": "tx-input-single",
+                "changed": true
+              }
+            },
+            "history": {
+              "past": 1,
+              "future": 0
+            },
+            "events": {
+              "L1": [
+                {
+                  "envelope": {
+                    "documentVersion": "1",
+                    "profileIdentity": {
+                      "mechanismVersion": "1",
+                      "schemaVersion": "1.0.0",
+                      "profile": "neutral-cn/1",
+                      "version": "1.1.0",
+                      "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                      "base": {
+                        "id": "neutral-cn-base/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                      },
+                      "descriptors": [
+                        {
+                          "id": "neutral-cn-descriptors/1",
+                          "version": "fixture-cn-1",
+                          "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                        }
+                      ]
+                    },
+                    "tree": {
+                      "$type": "bpmn:Definitions",
+                      "id": "Definitions_tx",
+                      "targetNamespace": "urn:neutral-cn:1",
+                      "exporterVersion": "fixture-cn-1",
+                      "rootElements": [
+                        {
+                          "$type": "bpmn:Process",
+                          "id": "Process_T",
+                          "name": "Draft",
+                          "isExecutable": false,
+                          "laneSets": [
+                            {
+                              "$type": "bpmn:LaneSet",
+                              "id": "LaneSet_T",
+                              "name": "Supports",
+                              "lanes": [
+                                {
+                                  "$type": "bpmn:Lane",
+                                  "id": "Lane_T_ext",
+                                  "name": "Outside parties"
+                                }
+                              ]
+                            }
+                          ],
+                          "ioSpecification": {
+                            "$type": "bpmn:InputOutputSpecification",
+                            "dataInputs": [
+                              {
+                                "$type": "bpmn:DataInput",
+                                "id": "DataInput_a",
+                                "name": "A"
+                              },
+                              {
+                                "$type": "bpmn:DataInput",
+                                "id": "DataInput_b",
+                                "name": "B"
+                              },
+                              {
+                                "$type": "bpmn:DataInput",
+                                "id": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3",
+                                "name": "C"
+                              }
+                            ],
+                            "dataOutputs": [],
+                            "inputSets": [
+                              {
+                                "$type": "bpmn:InputSet",
+                                "id": "InputSet_1",
+                                "dataInputRefs": [
+                                  "DataInput_a",
+                                  "DataInput_b",
+                                  "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3"
+                                ]
+                              }
+                            ],
+                            "outputSets": [
+                              {
+                                "$type": "bpmn:OutputSet",
+                                "id": "OutputSet_1"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "$type": "bpmn:Collaboration",
+                          "id": "Collaboration_T",
+                          "name": "Pool collaboration",
+                          "participants": [
+                            {
+                              "$type": "bpmn:Participant",
+                              "id": "Participant_T",
+                              "name": "Draft pool",
+                              "processRef": "Process_T"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "bindings": [
+                      {
+                        "ownerId": "Process_T",
+                        "role": "collaboration",
+                        "targetId": "Collaboration_T"
+                      },
+                      {
+                        "ownerId": "Process_T",
+                        "role": "external-lane",
+                        "targetId": "Lane_T_ext"
+                      },
+                      {
+                        "ownerId": "Process_T",
+                        "role": "lane-set",
+                        "targetId": "LaneSet_T"
+                      },
+                      {
+                        "ownerId": "Process_T",
+                        "role": "main-participant",
+                        "targetId": "Participant_T"
+                      }
+                    ],
+                    "semanticRevision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181"
+                  },
+                  "semanticRevision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181",
+                  "viewRevision": {
+                    "$same": {
+                      "step": 6,
+                      "pointer": "/result/payload/viewRevision"
+                    }
+                  },
+                  "transactionId": "tx-input-single",
+                  "origin": "command",
+                  "report": {
+                    "reportVersion": "2",
+                    "operation": "applyCommands",
+                    "sourceIdentity": {
+                      "mechanismVersion": "1",
+                      "schemaVersion": "1.0.0",
+                      "profile": "neutral-cn/1",
+                      "version": "1.1.0",
+                      "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                      "base": {
+                        "id": "neutral-cn-base/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                      },
+                      "descriptors": [
+                        {
+                          "id": "neutral-cn-descriptors/1",
+                          "version": "fixture-cn-1",
+                          "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                        }
+                      ]
+                    },
+                    "targetIdentity": {
+                      "mechanismVersion": "1",
+                      "schemaVersion": "1.0.0",
+                      "profile": "neutral-cn/1",
+                      "version": "1.1.0",
+                      "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                      "base": {
+                        "id": "neutral-cn-base/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                      },
+                      "descriptors": [
+                        {
+                          "id": "neutral-cn-descriptors/1",
+                          "version": "fixture-cn-1",
+                          "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                        }
+                      ]
+                    },
+                    "inputRevision": "432b70c0ab99eb37e9750fa0cb63b6124029b4e53699c1a444fb9c6a532d6d5a",
+                    "outputRevision": "2893ca7de7be8cc8a79e56bc48d696a18fb123904ba4a89649fe59fbf6d69181",
+                    "entries": [
+                      {
+                        "code": "complete/assignRef",
+                        "severity": "info",
+                        "classification": "repairable",
+                        "stage": "complete",
+                        "ruleId": "c-io-input-uncovered-single",
+                        "messageKey": "complete.assignRef",
+                        "disposition": "corrected",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/inputSets/0/dataInputRefs",
+                          "targetId": "InputSet_1",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/inputSets/0/dataInputRefs",
+                          "targetId": "InputSet_1",
+                          "provenance": "exact"
+                        },
+                        "property": "dataInputRefs",
+                        "beforePresent": true,
+                        "before": [
+                          "DataInput_a",
+                          "DataInput_b"
+                        ],
+                        "afterPresent": true,
+                        "after": [
+                          "DataInput_a",
+                          "DataInput_b",
+                          "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3"
+                        ]
+                      },
+                      {
+                        "code": "input-consumer-required",
+                        "severity": "warn",
+                        "classification": "readiness",
+                        "stage": "post-normalize",
+                        "ruleId": "input-consumer",
+                        "messageKey": "input-consumer-required",
+                        "disposition": "observed",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/dataInputs/0",
+                          "targetId": "DataInput_a",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "none",
+                          "pointer": null,
+                          "targetId": null,
+                          "provenance": "unavailable"
+                        },
+                        "beforePresent": false,
+                        "afterPresent": false
+                      },
+                      {
+                        "code": "input-consumer-required",
+                        "severity": "warn",
+                        "classification": "readiness",
+                        "stage": "post-normalize",
+                        "ruleId": "input-consumer",
+                        "messageKey": "input-consumer-required",
+                        "disposition": "observed",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/dataInputs/1",
+                          "targetId": "DataInput_b",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "none",
+                          "pointer": null,
+                          "targetId": null,
+                          "provenance": "unavailable"
+                        },
+                        "beforePresent": false,
+                        "afterPresent": false
+                      },
+                      {
+                        "code": "input-consumer-required",
+                        "severity": "warn",
+                        "classification": "readiness",
+                        "stage": "post-normalize",
+                        "ruleId": "input-consumer",
+                        "messageKey": "input-consumer-required",
+                        "disposition": "observed",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/dataInputs/2",
+                          "targetId": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "none",
+                          "pointer": null,
+                          "targetId": null,
+                          "provenance": "unavailable"
+                        },
+                        "beforePresent": false,
+                        "afterPresent": false
+                      },
+                      {
+                        "code": "input-supplier-required",
+                        "severity": "warn",
+                        "classification": "readiness",
+                        "stage": "post-normalize",
+                        "ruleId": "input-supplier",
+                        "messageKey": "input-supplier-required",
+                        "disposition": "observed",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/dataInputs/0",
+                          "targetId": "DataInput_a",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "none",
+                          "pointer": null,
+                          "targetId": null,
+                          "provenance": "unavailable"
+                        },
+                        "beforePresent": false,
+                        "afterPresent": false
+                      },
+                      {
+                        "code": "input-supplier-required",
+                        "severity": "warn",
+                        "classification": "readiness",
+                        "stage": "post-normalize",
+                        "ruleId": "input-supplier",
+                        "messageKey": "input-supplier-required",
+                        "disposition": "observed",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/dataInputs/1",
+                          "targetId": "DataInput_b",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "none",
+                          "pointer": null,
+                          "targetId": null,
+                          "provenance": "unavailable"
+                        },
+                        "beforePresent": false,
+                        "afterPresent": false
+                      },
+                      {
+                        "code": "input-supplier-required",
+                        "severity": "warn",
+                        "classification": "readiness",
+                        "stage": "post-normalize",
+                        "ruleId": "input-supplier",
+                        "messageKey": "input-supplier-required",
+                        "disposition": "observed",
+                        "source": {
+                          "domain": "tree",
+                          "pointer": "/rootElements/0/ioSpecification/dataInputs/2",
+                          "targetId": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3",
+                          "provenance": "exact"
+                        },
+                        "result": {
+                          "domain": "none",
+                          "pointer": null,
+                          "targetId": null,
+                          "provenance": "unavailable"
+                        },
+                        "beforePresent": false,
+                        "afterPresent": false
+                      }
+                    ],
+                    "rawStandardFindings": [],
+                    "idMap": [],
+                    "artifacts": []
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": [
+          "/4/result/report",
+          "/4/result/payload/viewRevision",
+          "/4/events/L1/0/transactionId"
+        ]
+      },
+      "discriminates": {
+        "old": {
+          "sha256": "8f56e236d6dc8356df6f2f2ab84fb992105496263f707f45d6bcecd8bbd37ee3"
+        },
+        "new": {
+          "sha256": "cb4aee942c40fdbc2303cde01e673ccd750cb57c2741f8231144caddba2772d2"
+        }
+      }
+    },
+    {
+      "caseId": "l3-tx-io-set-explicit-selection",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/2/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 6,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 7,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/2/result/payload/presentation/layout",
+          "/4/result/payload/presentation/layout",
+          "/5/events/L1/0/report",
+          "/6/events/L1/0/report"
+        ],
+        "added": [
+          "/2/result/payload/presentation/layout/pages",
+          "/2/result/payload/presentation/layout/geometry",
+          "/4/result/payload/presentation/layout/pages",
+          "/4/result/payload/presentation/layout/geometry"
+        ]
+      }
+    },
+    {
+      "caseId": "l3-tx-di-only-move",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 6,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 7,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/5/events/L1/0/report",
+          "/6/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-corrected-noop",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/2/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/2/result/payload/presentation/layout"
+        ],
+        "added": [
+          "/2/result/payload/presentation/layout/pages",
+          "/2/result/payload/presentation/layout/geometry"
+        ]
+      }
+    },
+    {
+      "caseId": "l3-tx-theme-history",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/3/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 4,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 6,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 7,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/3/events/L1/0/report",
+          "/4/result/payload/presentation/layout",
+          "/5/events/L1/0/report",
+          "/6/events/L1/0/report"
+        ],
+        "added": [
+          "/4/result/payload/presentation/layout/pages",
+          "/4/result/payload/presentation/layout/geometry"
+        ]
+      }
+    },
+    {
+      "caseId": "l3-tx-delete-support-undo",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/3/result/payload/presentation/layout",
+          "basis": "DESIGN L610, L667: the layout of a Snapshot/1 presentation is a Layout/1 record",
+          "old": "unsealed",
+          "new": {
+            "layoutVersion": "1",
+            "pages": "unsealed",
+            "geometry": "unsealed"
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 5,
+              "pointer": "/result/report"
+            }
+          }
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 6,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report",
+          "/3/result/payload/presentation/layout",
+          "/4/events/L1/0/report",
+          "/5/events/L1/0/report"
+        ],
+        "added": [
+          "/3/result/payload/presentation/layout/pages",
+          "/3/result/payload/presentation/layout/geometry"
+        ]
+      }
+    },
+    {
+      "caseId": "l3-tx-stale-revision",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-empty-history",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    },
+    {
+      "caseId": "l3-tx-bare-recipe-refused",
+      "members": [
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/report",
+          "basis": "DESIGN L606, L633, L735: a change event carries the report of its own committed result",
+          "old": "unsealed",
+          "new": {
+            "$same": {
+              "step": 2,
+              "pointer": "/result/report"
+            }
+          }
+        }
+      ],
+      "unsealed": {
+        "removed": [
+          "/1/events/L1/0/report"
+        ],
+        "added": []
+      }
+    }
+  ],
+  "unsealedReasons": [
+    {
+      "key": "layout",
+      "old": "Layout geometry and occurrence keys of a canvas-computed layout are lot-4 outputs; restoring them is compared by relation.",
+      "new": "absent"
+    },
+    {
+      "key": "layoutGeometry",
+      "old": "absent",
+      "new": "Geometry and occurrence keys of a canvas-computed layout are lot-4 outputs (DESIGN L667, L723); restoring them is compared by relation."
+    },
+    {
+      "key": "layoutPages",
+      "old": "absent",
+      "new": "Pages of a canvas-computed layout are lot-4 outputs (DESIGN L667, L723); the record is Layout/1 (L610, L667), so its layoutVersion is compared."
+    },
+    {
+      "key": "report",
+      "old": "DESIGN L584-L599 and L641 define no report content for load, snapshot restore, theme, undo or redo results (source gap).",
+      "new": "DESIGN L584-L599 and L641 define no report content for load, snapshot restore, theme, undo or redo results (source gap); the change event of the step carries this same report (L606, L633) and is compared with it by relation."
+    }
+  ],
+  "supersedesFiles": [
+    {
+      "path": "docs/design/block-b-lot3-expectations.md",
+      "old": {
+        "bytes": 28377,
+        "sha256": "8ca61ad03d839baf45b8388cb911088372d7e16c691f134dbd9d611c6888f7e9"
+      },
+      "new": {
+        "bytes": 28557,
+        "sha256": "16e6338bead8707e16f462a3c31214efe53b1f235d748ba4a35f69bee481a719"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/README.md",
+      "old": {
+        "bytes": 131371,
+        "sha256": "f3fb416b656ffe69be0e8248888095b1dd5ef67de80558c60943756b4d25cfa0"
+      },
+      "new": {
+        "bytes": 138785,
+        "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+      "old": {
+        "bytes": 398472,
+        "sha256": "94fa652b2eb11e4be4e2b5762312ab8882e20fa7f336c94ef45ab7f27cb431bc"
+      },
+      "new": {
+        "bytes": 428097,
+        "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-bare-recipe-refused.json",
+      "old": {
+        "bytes": 24402,
+        "sha256": "160dbe5900bb1c40a61e9b5eb35fc0a1fe4e321b4f377ec61571895090053ea9"
+      },
+      "new": {
+        "bytes": 24402,
+        "sha256": "22f6559073130e719a4425756bd83241f971238f288ad37b747f311fdcf14dd7"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-batch-one-entry.json",
+      "old": {
+        "bytes": 79360,
+        "sha256": "cb6686c352763a3924d7fc6ab08d84deeb0293feb5bc80111ad8db982689f14a"
+      },
+      "new": {
+        "bytes": 80234,
+        "sha256": "22a3c76697ee6a6be4fe0fa7cd0ffd6611d446a445e1107f597f1f2c757adc35"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancel-pending.json",
+      "old": {
+        "bytes": 21490,
+        "sha256": "f72440af2d6d07de203a458b25deedba5e8046dd9a8f84f3c7b1e1a6b0c9a377"
+      },
+      "new": {
+        "bytes": 21490,
+        "sha256": "5fd1f787afaeb603d06fb20cdd5a9b99121238745bca3158784e891d24ff823d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancelled.json",
+      "old": {
+        "bytes": 21375,
+        "sha256": "b453b7e077f8dee9dfe89a2bfa8fd99b8fcca6db7dfc0a038bd2bf5ac5b0c4df"
+      },
+      "new": {
+        "bytes": 21375,
+        "sha256": "887551d553ff3c17ea47f1efcea889d8c8380044d66ae9a7999454d146a21242"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-corrected-noop.json",
+      "old": {
+        "bytes": 46162,
+        "sha256": "4323196c2219d9c21c190ebfeb296b5a2df3d3bd878689f6c8a061d6088336ed"
+      },
+      "new": {
+        "bytes": 46599,
+        "sha256": "bd86794c1cb9b4d62eaa1c0ce4a14494d79c037d6e78b41cbb301ff922d8898d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-delete-support-undo.json",
+      "old": {
+        "bytes": 56874,
+        "sha256": "5d8361f1075caac5c98a8464d1dd2c753fd5474dc066a08ce209e98e3f880b82"
+      },
+      "new": {
+        "bytes": 57311,
+        "sha256": "864296dfc43d531cde28e3266ef5193d67d504742a29e6d161a14f213e61ab23"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-di-only-move.json",
+      "old": {
+        "bytes": 97846,
+        "sha256": "6c484a0fa9cd3ecba4a7b4b4057d41ee9ddd2646b03a17406c52209820c53259"
+      },
+      "new": {
+        "bytes": 97846,
+        "sha256": "8335bab403182ddf174c831d0aa15e477ba4709a0c138bebe4f29e273a3482d6"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-no-leak.json",
+      "old": {
+        "bytes": 40967,
+        "sha256": "bb81d3ad7b7de4f138306ae6d3c5889434e0129cf4bef9ec6abef7abc62057fe"
+      },
+      "new": {
+        "bytes": 40967,
+        "sha256": "ba7513a8fda30950430f3ea59e5791f600b2d0ef0b99daf1712bd378d74bcc7c"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-pending.json",
+      "old": {
+        "bytes": 14553,
+        "sha256": "3394d2aac8ebcf7a4d39781e73e03f08a38100b363ca63623e393673e7d07ddd"
+      },
+      "new": {
+        "bytes": 14553,
+        "sha256": "02fb1391761799907faa047c97ae2fcea6375c3929ff6aceebdd8df000921ad6"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-empty-history.json",
+      "old": {
+        "bytes": 17992,
+        "sha256": "6777bc969f6034619d94f26163df2a7651f47e7919d5dbd0f8cda1c79d022280"
+      },
+      "new": {
+        "bytes": 17992,
+        "sha256": "119e4bc09b21fc03e2d84edac7934e6652125a772c0667d17edb53065d28bf57"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-guard-recovery.json",
+      "old": {
+        "bytes": 48944,
+        "sha256": "11460e7306d5eb42c469e3f90a8dd1c1351a20bb3c2c5f7b2340ebea4efca18f"
+      },
+      "new": {
+        "bytes": 51895,
+        "sha256": "ea365a58c06a6942e602e1da51b5703a28434c3c457708a344e4df2f6f048e79"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-incremental-draft.json",
+      "old": {
+        "bytes": 157965,
+        "sha256": "b6d947ff17000c1af7d6faeffe7e886cae8bb6fa2b2b92e3f39c4683200243ea"
+      },
+      "new": {
+        "bytes": 158840,
+        "sha256": "810f461261879b3381e99fa04d428d96399bbda6543caaeea3aede0d55536035"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-explicit-selection.json",
+      "old": {
+        "bytes": 86134,
+        "sha256": "c46c00624fa92285344c7485d3eed6ba04aed4773acda30dbddd5b999e3f70a5"
+      },
+      "new": {
+        "bytes": 87008,
+        "sha256": "58daca9de8b153976cdb79e359167d7166e2ccf8a83da934037dd98e0fe12437"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-selection-required.json",
+      "old": {
+        "bytes": 30595,
+        "sha256": "1e330b9c4e336a6779b7a9d29adb4331fcd1f2ebb5dbe4a8974e7b8dcf7fbe54"
+      },
+      "new": {
+        "bytes": 79553,
+        "sha256": "eee4960126c1b48dc01f8b69e8731ec445d97137a0568093a128218d2f7a9cee"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-reentrant-refused.json",
+      "old": {
+        "bytes": 38460,
+        "sha256": "3383c1999a60c63e320415f9899aae5a94866840ff33c5cc0d1d567ab27643b9"
+      },
+      "new": {
+        "bytes": 41116,
+        "sha256": "b6c159d640ea4fd1d64ef0705acefbc2393c9a18f5653432397ede59618e6150"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-refusal-preserves.json",
+      "old": {
+        "bytes": 47323,
+        "sha256": "81d471d5e0d338f55340027cdf3aae34ee571a331f05092417b34c4e0901a46f"
+      },
+      "new": {
+        "bytes": 47323,
+        "sha256": "790b231fd41f0763625b0bdfac62386cb46148f7af81a6366f18c526e23763f3"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-stale-revision.json",
+      "old": {
+        "bytes": 53167,
+        "sha256": "956512d5654f82e7a1ddc4fdc1fcdc835c7bf5a94c51a791199f51c40acf4987"
+      },
+      "new": {
+        "bytes": 53167,
+        "sha256": "06c0fbc366e66b824880f6859470b8d9749fa05962e323db45ef6c2df2ded393"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-theme-history.json",
+      "old": {
+        "bytes": 82475,
+        "sha256": "70d9c7929609ebab344e34e9950188925a857cb2f931ed4230dc2825a1e5aacb"
+      },
+      "new": {
+        "bytes": 82912,
+        "sha256": "95538b9fdb0ea2822c2690e74cd174aaa44be4bd51aa888419efb88f5673adb9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/index.json",
+      "old": {
+        "bytes": 353196,
+        "sha256": "93a7e36ecb4321b2ebeaf476a4735bbfea9015beeaa3a78b3b898751e480c1a1"
+      },
+      "new": {
+        "bytes": 355407,
+        "sha256": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/manifest.json",
+      "old": {
+        "bytes": 114774,
+        "sha256": "df4a45df51a1cf966f5be6a228793b1f43665a5102a9ccb1a1be0ed5e378dcb0"
+      },
+      "new": {
+        "bytes": 114774,
+        "sha256": "02cb12489ad2444902b7358e2dd49ea75c41877fe65d3f7201c02d2aa5fe3e7f"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/seal.json",
+      "old": {
+        "bytes": 73624,
+        "sha256": "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376"
+      },
+      "new": {
+        "bytes": 73732,
+        "sha256": "7bd2d206277c123ad027481a42969f013cd91ddc4a2bfaab0e529fbc7120cb3c"
+      }
+    },
+    {
+      "path": "tests/profile-lot3-golden-independence.test.mjs",
+      "old": {
+        "bytes": 51213,
+        "sha256": "0f1a279285ba5b1753b1139809615189803da4684d0b183a263e524d58ec65f9"
+      },
+      "new": {
+        "bytes": 60347,
+        "sha256": "1d35c7618a783a5b6d7c16dbb2504fabb3184ec4646e9879252608e94a2c3e52"
+      }
+    }
+  ],
+  "addedFiles": [],
+  "removedFiles": []
+}

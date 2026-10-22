@@ -1,0 +1,45 @@
+{
+  "caseId": "lot5-gates-001-panel-dependency-absent",
+  "comparatorIds": [
+    "lot5/package-surface"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "declared": [],
+        "importedByEntryPoints": []
+      },
+      "role": "package-surface"
+    }
+  ],
+  "expectedStatus": "ok",
+  "inputArtifacts": [
+    {
+      "json": {
+        "entryPoints": [
+          ".",
+          "./react",
+          "./browser",
+          "./browser/iife"
+        ],
+        "fields": [
+          "dependencies",
+          "peerDependencies",
+          "optionalDependencies"
+        ],
+        "manifest": "package.json",
+        "packages": [
+          "bpmn-js-properties-panel",
+          "@bpmn-io/properties-panel"
+        ]
+      },
+      "role": "package-query"
+    }
+  ],
+  "operation": "package.surface",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/ui-neutral-profile.json",
+    "sha256": "c495634b669e817af02545b040b1d767bb0ea098b4924a6247b984b53b6787a1"
+  }
+}

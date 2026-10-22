@@ -1,0 +1,1332 @@
+{
+ "format": "x24-literal-set/1",
+ "note": "Hashed literal set of the seal hygiene (README \"Literal-free seal\"): one record per distinct exact text of the ledger occurrences, derived by derive/literal-set.mjs from the base tree at each row's span and checked against the row's literal SHA-256. A record holds the SHA-256 and the length (UTF-16 units) of the text, the entry of its first ledger row, the word class of its first and last unit (W for [A-Za-z0-9_], N otherwise) and, from longMin units, a prefilter; no text, part or encoding of a text is written.",
+ "ledger": "ledger.json",
+ "longMin": 4,
+ "prefilter": {
+  "hash": "base-257 polynomial over UTF-16 units, modulo 2^32",
+  "bits": 16,
+  "appliesTo": "literals of 4 or more units; a shorter literal is matched at whole-token windows only"
+ },
+ "count": 189,
+ "literals": [
+  {
+   "sha256": "00a49091ef36ef3a38b25cc02e6c2e5fa892795d39d911781aa01169916c6931",
+   "length": 10,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 34302
+  },
+  {
+   "sha256": "021d861bc22326d0d7720e83c4afe86b100dca1be1216d02ec216c35c1976783",
+   "length": 7,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 43172
+  },
+  {
+   "sha256": "03bc67209b022b80f6103a24e74f81666200a6a5add2a3a16ba1ffcd522c3940",
+   "length": 17,
+   "entry": "LX-AT-1",
+   "edges": "WW",
+   "prefilter": 10691
+  },
+  {
+   "sha256": "05a4b681f1d1c5ce368961bf8bc1d255beffa78e43d6f2c205bd21fa171b465b",
+   "length": 10,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 19499
+  },
+  {
+   "sha256": "06c4dc227a7dfb2018e2aa5430702990f45834ec3ba987e5061a305f443a49fb",
+   "length": 17,
+   "entry": "LX-DS-2",
+   "edges": "WW",
+   "prefilter": 48122
+  },
+  {
+   "sha256": "0710666a63b361b1d9d40df1a79e9fcfaf10668c4aa323b9dad17afc5e8d6248",
+   "length": 21,
+   "entry": "LX-TH-6",
+   "edges": "WW",
+   "prefilter": 47686
+  },
+  {
+   "sha256": "073b72df4ae02e51bc825541eeb746630f55c8b1a5ccbde9ed40e83beabfdb14",
+   "length": 11,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 7794
+  },
+  {
+   "sha256": "0915c20b452abf69baab9f418430d7eb476424345bfab8ce31f66a8dc480cac8",
+   "length": 9,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 61367
+  },
+  {
+   "sha256": "0aa82ee885d157123cdc7ee611108d290187cf2eb091dcfce1cb168adc87bf9a",
+   "length": 16,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 6393
+  },
+  {
+   "sha256": "0b12f56d530a4b0ba458d71d3a694782c78551e6a525465a974bccb0c7528c20",
+   "length": 8,
+   "entry": "LX-TH-2",
+   "edges": "WW",
+   "prefilter": 53853
+  },
+  {
+   "sha256": "0b97d234f4aba6fa350f5314b6ca1bae9f519030f7d89d97ee06be04d0841e18",
+   "length": 14,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 17263
+  },
+  {
+   "sha256": "0cd059af63e25fd42f00a0bb7859077580b571b5b42d6ca16939e551502ec178",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 3685
+  },
+  {
+   "sha256": "0ec4cd4f9cc1d85f0d2a93c3440aa5f8702305ecdb26dd33bc789ba73301a0f0",
+   "length": 16,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 46979
+  },
+  {
+   "sha256": "0f47f8ba1f42e54c74911abf216c300a22cff0b9600a8dc7a0e551a24493ca1c",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 56468
+  },
+  {
+   "sha256": "12c8dbca24605334928db575f224842f5a40d3ed48c3d1f161c463920ed99f46",
+   "length": 8,
+   "entry": "LX-DS-1",
+   "edges": "WW",
+   "prefilter": 3115
+  },
+  {
+   "sha256": "14bc6fa4a2ba99729908cd4c19b9780d990f3044ce47bc207b0e1b966b12c762",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 10625
+  },
+  {
+   "sha256": "14e3b0b133ac6f176d7cb8a40c12ff851850080b72ee2b6c92c91eb18d10f12a",
+   "length": 13,
+   "entry": "LX-PR-2",
+   "edges": "WN",
+   "prefilter": 54729
+  },
+  {
+   "sha256": "150f7d5dc0e8fc9ee3f18f301cf81342f00b8c02649fbc77ccdf9e13618ebcef",
+   "length": 11,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 48194
+  },
+  {
+   "sha256": "1556faa984e52427f9c49796ebc0b0c3c3c37ccf283e0b0d0eac55b8399f27af",
+   "length": 8,
+   "entry": "LX-DS-1",
+   "edges": "WW",
+   "prefilter": 44043
+  },
+  {
+   "sha256": "16f36fa2e9ed14a230eb94fd5bc1f525dd942fbbe80c5be77452e22011f67f80",
+   "length": 14,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 1958
+  },
+  {
+   "sha256": "18bbaf82e0f3ededb3f082c1ce3069b96fa1feb151d847d982787d39193fe278",
+   "length": 106,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 42949
+  },
+  {
+   "sha256": "18e363f0e6b05f2b50da24f43bdaa8dff255254cee62501d13fae8b04234fd7c",
+   "length": 15,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 22803
+  },
+  {
+   "sha256": "1b4a9a23a5e6bc6a7ce8738e1ce3ed01d5a8a460c738b4a8c6864c94fd5590c0",
+   "length": 6,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 34518
+  },
+  {
+   "sha256": "1b82f18171ee7a4975410dc43411ae61aae3b4b7c26245d4aaf0e3453e81130f",
+   "length": 8,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 9282
+  },
+  {
+   "sha256": "1cd6466d9a7a4733797955391c997dc67af0e7f213116168a468db67b9103408",
+   "length": 2,
+   "entry": "LX-ES-1",
+   "edges": "WW"
+  },
+  {
+   "sha256": "1f640c71c34994832b9e9fa2bb775cb05b1a624641b444e0cca6de1ebe3c03be",
+   "length": 10,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 1567
+  },
+  {
+   "sha256": "217e38f025d81d08d6a38071c63a6bf16702020802e276c27860326c8889fe60",
+   "length": 19,
+   "entry": "LX-MK-3",
+   "edges": "WW",
+   "prefilter": 64702
+  },
+  {
+   "sha256": "22d1268d28f828bc59407a97f57f3f95e8dc1a1ebb1fe3034e1a4e7b68963716",
+   "length": 22,
+   "entry": "LX-TH-6",
+   "edges": "WW",
+   "prefilter": 29599
+  },
+  {
+   "sha256": "231ddc73eb585e02591813e346d1fcbd27482dcc811f8da39a6c34fa07b4cb94",
+   "length": 10,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 49312
+  },
+  {
+   "sha256": "232f794d8829de06f95adbf2faf32ed3f000f892f1cd333b749e6e51863999da",
+   "length": 16,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 35730
+  },
+  {
+   "sha256": "2339bf822e1d5bf842cca53bb48c094bba091f221a57d6f9029d619e04a9e768",
+   "length": 9,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 41665
+  },
+  {
+   "sha256": "23a42288414612362f6bd1a8b11eb5b2c5ccc7d96241e92219accee18cb5d28f",
+   "length": 13,
+   "entry": "LX-MK-2",
+   "edges": "NN",
+   "prefilter": 7459
+  },
+  {
+   "sha256": "28add8b1fda81cd84f66b63c1651051e9860781bfdafab953b8173610cf50d4f",
+   "length": 20,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 3314
+  },
+  {
+   "sha256": "2b7d2128dc15a11d0714fe5c845783fa347cb070e7ff4c5a974415160f220632",
+   "length": 10,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 38928
+  },
+  {
+   "sha256": "2b9c5d5d52d96c349d07d6c78ae2716b27c21619598545086f3d8aaab1c122c6",
+   "length": 9,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 49121
+  },
+  {
+   "sha256": "2d58c2c8d4cdffe668ba44c151d47bd8b078928cd67146509ad6a0155af901d1",
+   "length": 20,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 8965
+  },
+  {
+   "sha256": "2dd759fc22bb9d0e28384526e5bc8ec1abd942eb382623da9fa7d1fb0b2b1536",
+   "length": 14,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 36669
+  },
+  {
+   "sha256": "35e0ff6b0ce678961bc719f51929de33a9aa5ccc79d94320b196ff4fbcc37ef2",
+   "length": 8,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 19285
+  },
+  {
+   "sha256": "37bb91b5340ccc62195bb5c612571bc4b7799d8217cd48b8face008142e2e07c",
+   "length": 14,
+   "entry": "LX-DS-2",
+   "edges": "WW",
+   "prefilter": 19119
+  },
+  {
+   "sha256": "38765b445cdc4a8fdcc5419bfd36d629875a776c8b0a419c0f70d3d1fac30666",
+   "length": 15,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 21642
+  },
+  {
+   "sha256": "3889bf424ea3a4ed922356a4bfb673fc4ab925021b93c10af222f608f02aac3d",
+   "length": 15,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 30344
+  },
+  {
+   "sha256": "39240e2bb09473d95df6323785243674914b75c5f7fb30cee6cf0f5d4a800934",
+   "length": 15,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 42723
+  },
+  {
+   "sha256": "3a11be77dfabc55710d32e3bf6ac6159279880401ee4256556bf979ac048bd60",
+   "length": 8,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 63009
+  },
+  {
+   "sha256": "3b1a17d6b09571c8bab174c140b8ca86fb8b00e639f345ff8b351a5fc708b7b3",
+   "length": 5,
+   "entry": "LX-MT-5",
+   "edges": "NW",
+   "prefilter": 39131
+  },
+  {
+   "sha256": "3ba0b99b9bb82b85b92dbb1e5a8a928bf28b7f6932593547d4ad401f46396d3f",
+   "length": 14,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 62803
+  },
+  {
+   "sha256": "3be89aa76bf940c7e51b1333a9342414d0c079a122d15c32f88335efb6d46fd7",
+   "length": 24,
+   "entry": "LX-AT-1",
+   "edges": "WW",
+   "prefilter": 3261
+  },
+  {
+   "sha256": "3cc838aabc52939c80e95e5036de2835c01cad9569b33364be0744be9692cc58",
+   "length": 18,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 32329
+  },
+  {
+   "sha256": "3ce6ac132baed82b4fec3b2a45c8566eba38767f53cd093af486d05aad4ee526",
+   "length": 9,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 37536
+  },
+  {
+   "sha256": "3d0cf0f6b93372cde5f8da4f16e66740be82cd9e70354d35f6c712b87fe27055",
+   "length": 10,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 39406
+  },
+  {
+   "sha256": "3d8403ce9957075c6138d7b7c531654667b9c2771410e4c6e314c44674ec1791",
+   "length": 6,
+   "entry": "LX-TH-1",
+   "edges": "WW",
+   "prefilter": 16047
+  },
+  {
+   "sha256": "40a349a8eb2f3f53f5ef14d26394325bff72e096a4747c610b20f040497ae513",
+   "length": 11,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 54064
+  },
+  {
+   "sha256": "42428cc11693993f82bdc589410ca4c136695e006051e0e62a70c736310a7e8e",
+   "length": 14,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 55247
+  },
+  {
+   "sha256": "4410eda543a36d74ca9e013a4b8e7e6b9134ab5b6dd9a815b566913e4df1ca38",
+   "length": 11,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 7244
+  },
+  {
+   "sha256": "442915c41a8f48391bff10d5f65a3c1e52451940fee02a6698a802afcda99193",
+   "length": 11,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 57435
+  },
+  {
+   "sha256": "44768824fe10901e89c17b4621a05942b5fc3b6469b9e9e780e366472a2903bf",
+   "length": 9,
+   "entry": "LX-MT-1",
+   "edges": "WW",
+   "prefilter": 405
+  },
+  {
+   "sha256": "466bc66747c375aece64a7e00b7335f64265ea1339518c2c76db3b195d2b6a47",
+   "length": 10,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 23850
+  },
+  {
+   "sha256": "466c9efbaada9fcaa6efea730c6630946ff0476ae9e0ce3a2dd7e8013ed81ced",
+   "length": 14,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 11176
+  },
+  {
+   "sha256": "46cbe6ff2567bbddcbc3efccf10e3eff72509358ed4ca3b671b8bafd7ea3df60",
+   "length": 11,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 57689
+  },
+  {
+   "sha256": "48c95d370f0eae38ad2d9bf8368264da99f6a95b7b45d18ba8f14a932015ce13",
+   "length": 2,
+   "entry": "LX-ES-1",
+   "edges": "WW"
+  },
+  {
+   "sha256": "490acf82cfc2032e57ee6377219842ba64a6f78257111d817d94d659db38b0f2",
+   "length": 10,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 10019
+  },
+  {
+   "sha256": "494ca78f7374e46fb2de9ad9f2dbd4aaae89b50b2ca044177a1566a59e06627e",
+   "length": 6,
+   "entry": "LX-TH-4",
+   "edges": "WW",
+   "prefilter": 54651
+  },
+  {
+   "sha256": "494f15d2dc1e29c463466b475dce61be61318c06516edcf89f755216969b8bf5",
+   "length": 11,
+   "entry": "LX-MK-1",
+   "edges": "NN",
+   "prefilter": 1863
+  },
+  {
+   "sha256": "4b158d5bb52f2b517b0d83417151d14842f0a33edc3a5c77a8b415d45cf52a09",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 36485
+  },
+  {
+   "sha256": "4ce443ea107b7a53239f9816d53661c288d0f8929ef76762d5780829e45e411f",
+   "length": 9,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 5825
+  },
+  {
+   "sha256": "4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d",
+   "length": 9,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 37270
+  },
+  {
+   "sha256": "4dd57e9388f8e3471754560328134525104cec6bff11c85acff3c4800a21e22c",
+   "length": 7,
+   "entry": "LX-TH-2",
+   "edges": "WW",
+   "prefilter": 9480
+  },
+  {
+   "sha256": "5712f6751f7ab8e7d13fb1fe640efa30927f66543b8efe14b2e0d8a60c21820c",
+   "length": 10,
+   "entry": "LX-ES-2",
+   "edges": "WW",
+   "prefilter": 21217
+  },
+  {
+   "sha256": "597c1159ea4c1b646da854a7961b5ec011259094b95b70426229708d640beff1",
+   "length": 7,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 51961
+  },
+  {
+   "sha256": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+   "length": 20,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 18476
+  },
+  {
+   "sha256": "5ab160c6874c973412631b96a35a729550696a1be8e590097d31210505a0e1dc",
+   "length": 10,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 65013
+  },
+  {
+   "sha256": "5aec225213f9018550ff326de86a6a048482baee326db851ad8487852a9a726e",
+   "length": 11,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 34926
+  },
+  {
+   "sha256": "5cb6dbb5ab99cc38b9e5b00b92f7ac3d4d721101d5447d4269ebd8f394f387fa",
+   "length": 14,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 7201
+  },
+  {
+   "sha256": "5d41e9c2e5b62ccc50c97ac62346639e52e0ee19a6695591dacc1d896625d7be",
+   "length": 13,
+   "entry": "LX-MK-1",
+   "edges": "NN",
+   "prefilter": 40447
+  },
+  {
+   "sha256": "6132974d7ab114062212cd5540ffd797d199c49b2cfd10b096399c8f3d29222e",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 51649
+  },
+  {
+   "sha256": "63194f6a821b45846017bf0a64cbceca12ab37ae7e41ba868b0accfb25a06f4c",
+   "length": 6,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 11369
+  },
+  {
+   "sha256": "67e1c058a952f5deb0372bf0f44d0f88f4b15e5730a59cd7bf32dba9e92a9b70",
+   "length": 12,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 63396
+  },
+  {
+   "sha256": "681db0cc48bf00ed69bf137173442831cc98cbf881f855697acebd6125ee959c",
+   "length": 18,
+   "entry": "LX-DS-2",
+   "edges": "WW",
+   "prefilter": 39539
+  },
+  {
+   "sha256": "6821d85d856b9c2bd26387c7e0706a8eaa6c92f44a8d8dfb808c3bc8413c0a72",
+   "length": 9,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 15313
+  },
+  {
+   "sha256": "682f02e6f58fd2393ce161d3cc4f35028e95b1e29b80a7eac468bc08cc5d5fd9",
+   "length": 11,
+   "entry": "LX-MT-5",
+   "edges": "WW",
+   "prefilter": 17984
+  },
+  {
+   "sha256": "6a2cb47463bb3cdfa8c1c90496cc85f133d259d903f8f8fd1f88ebcdc42f2280",
+   "length": 12,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 16108
+  },
+  {
+   "sha256": "6c8160b19de22402c914def9c2483e2a090f290ee0d5dca8c6e6d24738683205",
+   "length": 14,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 10814
+  },
+  {
+   "sha256": "6cdfd271da635d491e37a2b4a1044b306e6e9e039aeadee95bb355efadf8cb33",
+   "length": 6,
+   "entry": "LX-TH-4",
+   "edges": "WW",
+   "prefilter": 30107
+  },
+  {
+   "sha256": "6f307b5dd064202f5106eaf817d9706b26ef767c278372af143e25cf97508e7b",
+   "length": 5,
+   "entry": "LX-NV-2",
+   "edges": "WN",
+   "prefilter": 22500
+  },
+  {
+   "sha256": "70849b597afe0683ee0c37bfb0ddbab4f2f1bdd5f68fe610d68615fd23379f16",
+   "length": 21,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 28574
+  },
+  {
+   "sha256": "714565942f8fcd07c427f45b5de7708b89feeea8a272cb5bb5167262d0de4dac",
+   "length": 7,
+   "entry": "LX-TH-2",
+   "edges": "WW",
+   "prefilter": 1480
+  },
+  {
+   "sha256": "724b15e4054efd5918730e9bbe4cce13d5e0f0d8f06aec25ee4ec77c1b080b83",
+   "length": 13,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 4095
+  },
+  {
+   "sha256": "7482e374b5bddc0a48ea3b3430de633b7938e3045e64aebca2574a50a53a5719",
+   "length": 6,
+   "entry": "LX-TH-1",
+   "edges": "WW",
+   "prefilter": 32591
+  },
+  {
+   "sha256": "7527d77de08e7435caceeb582a2fc8e315f9e40a53c6274128d7ec5e16fff546",
+   "length": 27,
+   "entry": "LX-AT-1",
+   "edges": "WW",
+   "prefilter": 28986
+  },
+  {
+   "sha256": "75f02da68647be51e5a675b5fc5b9a521d589a09d50103ed5e227cccc3d02056",
+   "length": 9,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 30868
+  },
+  {
+   "sha256": "76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45",
+   "length": 13,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 24926
+  },
+  {
+   "sha256": "79e33d92d27f0118e188e25869e65fe4fadda3ddfb08c773c5b326a29193f04c",
+   "length": 105,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 47759
+  },
+  {
+   "sha256": "7b95b04ff274fd1a762e8aff3b9689cb641b18d4f7e772096c5e1958e7ab0fb0",
+   "length": 5,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 58252
+  },
+  {
+   "sha256": "7cd5885327fd60e825d67d32f9d22b018227a208aa3c4819da15b36b5d5869d3",
+   "length": 6,
+   "entry": "LX-TH-4",
+   "edges": "WW",
+   "prefilter": 38107
+  },
+  {
+   "sha256": "8088da219c162b1c3733594fe2015156ee7b84042ea821ad552e9448e8cbbcdd",
+   "length": 3,
+   "entry": "LX-MT-4",
+   "edges": "WW"
+  },
+  {
+   "sha256": "812d87e4425b4b34a7550e1fc5e39c81a29d3488b98d4905b181c00605acb573",
+   "length": 9,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 21089
+  },
+  {
+   "sha256": "814b08a961fb7bc562f102f811df5f1c535f8d6d0208cb1706b90512f3fc05be",
+   "length": 9,
+   "entry": "LX-PL-1",
+   "edges": "WN",
+   "prefilter": 15826
+  },
+  {
+   "sha256": "814eb5e69f49f966514ae9efc98c5e845d865c5082b81baeb41e3bceec43206b",
+   "length": 7,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 18473
+  },
+  {
+   "sha256": "81824dff5440bcf86d438ea9bf43f737359037441d6ddc0b37193386561c0e6e",
+   "length": 7,
+   "entry": "LX-PV-1",
+   "edges": "WW",
+   "prefilter": 47578
+  },
+  {
+   "sha256": "81c88047bd528fcea1bbfe71f14e424776e3e6f4f80817e3705108cd462f6e57",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 41261
+  },
+  {
+   "sha256": "826ce6114813a8b2d256e9ebd0e096a1524afaef711b0cce224d4a96db3093e6",
+   "length": 16,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 19502
+  },
+  {
+   "sha256": "829bd0aa87229367be0100e50e9b9bf073c11b5f3343760a47dd93475d975882",
+   "length": 61,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 25404
+  },
+  {
+   "sha256": "8486f603e8503aef3c016ce9c48db3bb966b2a6b45805dd65c728e060947f4ed",
+   "length": 11,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 38014
+  },
+  {
+   "sha256": "85846bec9486158d68110be5cb1b5fc18b02c8d72a30611707d223b70ca67b11",
+   "length": 14,
+   "entry": "LX-TH-6",
+   "edges": "WW",
+   "prefilter": 63054
+  },
+  {
+   "sha256": "86a027a187b770173a76c82109dd6042619f49e0b5a4aeaf35c351928359dc52",
+   "length": 9,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 1479
+  },
+  {
+   "sha256": "8a276aac668a748b9af104a27e043a7f83cac33ec7155ac640bb06df12315b71",
+   "length": 7,
+   "entry": "LX-ES-2",
+   "edges": "WW",
+   "prefilter": 38627
+  },
+  {
+   "sha256": "8ac49af0523b40442951783671448b00974359a0159a519c639e4d4860d2b295",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 25421
+  },
+  {
+   "sha256": "8b00ab5820566467078bb0146e385defaa05b2fcd56c8529c8e58dd3ae80cfda",
+   "length": 10,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 58402
+  },
+  {
+   "sha256": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 55691
+  },
+  {
+   "sha256": "8c4aab9cd7ad4fdd7a426f9bbfdca7f3b82ee551a9d6d1099deeaf9f605ad6d0",
+   "length": 24,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 14977
+  },
+  {
+   "sha256": "8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2",
+   "length": 20,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 53558
+  },
+  {
+   "sha256": "8d17cf641a74fa774b1a687fe7a2a48cf14722d300bc53ec7a771232d66182fb",
+   "length": 12,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 29068
+  },
+  {
+   "sha256": "8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53",
+   "length": 15,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 37144
+  },
+  {
+   "sha256": "8f32a38982b4b557d1e6ae05df6e5e017972f9e9d5eaa7dc58fe2dc4c7229b40",
+   "length": 105,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 49526
+  },
+  {
+   "sha256": "9308f5f3d48b144d7ed999f4c6c4408159e25c59d024ffc0aa99940043c05dd0",
+   "length": 13,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 40952
+  },
+  {
+   "sha256": "93ee3c3cefa63efc0d2d4332687ae1b2b94e7ebd73819b937b1ff21b78f51dac",
+   "length": 9,
+   "entry": "LX-MT-1",
+   "edges": "WW",
+   "prefilter": 437
+  },
+  {
+   "sha256": "9a4493fa970f11c0fc57fe2d3ff2621d2b47fcccf7a8752e51907bf71939119c",
+   "length": 12,
+   "entry": "LX-DS-2",
+   "edges": "WW",
+   "prefilter": 13536
+  },
+  {
+   "sha256": "9a695e0ab84b80618defc4e3a69f512ea21c6d66be6addd2e705ac547da70bff",
+   "length": 9,
+   "entry": "LX-PR-2",
+   "edges": "WW",
+   "prefilter": 58683
+  },
+  {
+   "sha256": "9e653023115a4c9ae92cdd3e985cd0fa5dfe018244d1e877a5857a0b7c29414e",
+   "length": 12,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 8149
+  },
+  {
+   "sha256": "9f753460e21a744e1555c58d6d98e7363969a5814ead6b49ced1301b885f80b5",
+   "length": 11,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 56616
+  },
+  {
+   "sha256": "a21b37cc8a4272b7d757966530f8a45f196af84c217c0d140966e566cb20c5e9",
+   "length": 12,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 58560
+  },
+  {
+   "sha256": "a276f68aabf86264098e67d7c74c297a225b6ac86d596286239a6a94af9db829",
+   "length": 15,
+   "entry": "LX-NV-2",
+   "edges": "NN",
+   "prefilter": 4983
+  },
+  {
+   "sha256": "a2989525cfa4911da6f5a22adeacd88e6a8a7df3ed664d3e0b2a7fa64660d0e1",
+   "length": 5,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 8590
+  },
+  {
+   "sha256": "a3bf52119390d8128b0990ace70e3de2eea22f02c8c817372398edd8ed44a470",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 44954
+  },
+  {
+   "sha256": "a7657e6c3e376da87eaef332aa6ca20e9c62eec81a3b1b5dee048d2daa1af6a1",
+   "length": 109,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 31009
+  },
+  {
+   "sha256": "a79b5ce9bf847ae820f45578f2cb4719ead3d3bcba88aa3d4c0cf96c88c84b21",
+   "length": 23,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 23106
+  },
+  {
+   "sha256": "a864631bf1cf673733a804a46373e27a52345cd595f425b8f3f197a60943c3c0",
+   "length": 12,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 24268
+  },
+  {
+   "sha256": "a964f4a6f93b1fa79f1a445946ff3388676570c911cb2e49e5723a82a6bf9a35",
+   "length": 9,
+   "entry": "LX-MT-1",
+   "edges": "WW",
+   "prefilter": 32917
+  },
+  {
+   "sha256": "a96ff6bf6ea52737ffa4e9502f679f82ae3deaeaddb17d47d7ba70ec42acee50",
+   "length": 14,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 45650
+  },
+  {
+   "sha256": "ab5c2bf8a1fc90f26c8be2d729fb83115dd86e34b7341c83af35cbb942112332",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 15355
+  },
+  {
+   "sha256": "ac5b986e1e449d83d422e256bef9dd10179042d1088c611aa02bd7130483d7e7",
+   "length": 14,
+   "entry": "LX-MT-2",
+   "edges": "WW",
+   "prefilter": 47375
+  },
+  {
+   "sha256": "acf17464a49d1dcbdc6f63b8d17adc29047ed90c1ac680cffd1d55bf5a985143",
+   "length": 15,
+   "entry": "LX-MT-5",
+   "edges": "WW",
+   "prefilter": 49900
+  },
+  {
+   "sha256": "ae25d6481fc1741ffee4a95cd05de7b6375f7e1b0c63c006640b366094f2c4a9",
+   "length": 7,
+   "entry": "LX-TH-5",
+   "edges": "WW",
+   "prefilter": 56514
+  },
+  {
+   "sha256": "b002a634647c3350c37b15a376bae6867d9034e9aa36a06002e3e335229c91db",
+   "length": 7,
+   "entry": "LX-TH-5",
+   "edges": "WW",
+   "prefilter": 40162
+  },
+  {
+   "sha256": "b1d3e5ea0fceecb0455bd42bcb0d7f8b190b35d34ffca30183cc28d8830232a7",
+   "length": 7,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 60352
+  },
+  {
+   "sha256": "b20d93729e018c3e0713f5ca8f01099998124176cf32e5d605ff6edd568b569d",
+   "length": 8,
+   "entry": "LX-AT-1",
+   "edges": "WN",
+   "prefilter": 39194
+  },
+  {
+   "sha256": "b31336c4ca470c6a05e521fe2551d2f4f1b6e8eec85e80ff0b3adfcb1962b8c3",
+   "length": 13,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 7749
+  },
+  {
+   "sha256": "b3a3990ec21ff6a5df0bf4d61031a3beb211fbc3b3bbaf343a4a06a871191d53",
+   "length": 13,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 16880
+  },
+  {
+   "sha256": "b3c5c91627ba8885b5f89fd86d55e5909e9f43446cfbe77c44ae4008930fbf15",
+   "length": 5,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 61314
+  },
+  {
+   "sha256": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+   "length": 18,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 28034
+  },
+  {
+   "sha256": "b6b94a6f6069ade88b04e6cfc07f39a9bde6357e5ee4a817e4fb5e04cbeccf41",
+   "length": 6,
+   "entry": "LX-DS-5",
+   "edges": "NN",
+   "prefilter": 4354
+  },
+  {
+   "sha256": "b7b485ceab9458068939735501b564fc04d9804e5d38b80092e342e603dd9b73",
+   "length": 105,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 58011
+  },
+  {
+   "sha256": "b91165e0da6b5bf5fab7204e1246fde14232bef832a56fd14a4b3d14fab6455e",
+   "length": 8,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 33861
+  },
+  {
+   "sha256": "ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033",
+   "length": 6,
+   "entry": "LX-TH-1",
+   "edges": "WW",
+   "prefilter": 8047
+  },
+  {
+   "sha256": "ba9c40d05783dd592bdf89209317a5288b50e3f50926752fb7b9b798f8e83336",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 25171
+  },
+  {
+   "sha256": "bdf8c256f0b840a80610cb980a16039cd5a428e7e31d3d3d2769b9161129e1e5",
+   "length": 21,
+   "entry": "LX-DS-3",
+   "edges": "WW",
+   "prefilter": 26179
+  },
+  {
+   "sha256": "be4f2650d06aa5f6af22fdda893a422b729909001cc5965afef07535ce3840b0",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 15476
+  },
+  {
+   "sha256": "c0a686418666768b0fc273c590bf663bf98a10eec603a8fbb6dca1e71b248b96",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 41756
+  },
+  {
+   "sha256": "c1c275eeabe16a2e005cf3b1c7c71d778c520d00a8e009bb9281115a15587e0f",
+   "length": 5,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 62600
+  },
+  {
+   "sha256": "c559334153a5161048140eb213863e97e9d9eca33a81bc9b6cb68e4d3df4de38",
+   "length": 10,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 55542
+  },
+  {
+   "sha256": "c587ed01690ac075254788e77d8a5c068cf756579ef25db134984655add8d778",
+   "length": 10,
+   "entry": "LX-MK-5",
+   "edges": "NN",
+   "prefilter": 12529
+  },
+  {
+   "sha256": "c7267e9da883a4ada43af6c64016217c6479c77c72f89cd645c40a6af8a975fa",
+   "length": 11,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 50516
+  },
+  {
+   "sha256": "c9d246d90b80bb35db74ecc8d98acb202d9121e825086ec1c77cee3ba853bf9f",
+   "length": 8,
+   "entry": "LX-TH-2",
+   "edges": "WW",
+   "prefilter": 62013
+  },
+  {
+   "sha256": "c9ff9d7d29e892ae070c1d1c994458bff733dfad5f006865c3c7065193f789db",
+   "length": 3,
+   "entry": "LX-PR-1",
+   "edges": "WW"
+  },
+  {
+   "sha256": "ca8c522af0a0dfc10c8747ed205c4a650df4ccb350adbd450bbce753f6385c51",
+   "length": 7,
+   "entry": "LX-TH-2",
+   "edges": "WW",
+   "prefilter": 50664
+  },
+  {
+   "sha256": "cf8134ab1f8d8c8daf047109b6ebbf22bbe69e80af123a5d9a5a48ba800a11d8",
+   "length": 9,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 65222
+  },
+  {
+   "sha256": "cfbbd53c1a09d282307db17a1811be470cc1bced560ed14d648c971da1b68f47",
+   "length": 11,
+   "entry": "LX-MK-2",
+   "edges": "NN",
+   "prefilter": 25195
+  },
+  {
+   "sha256": "d410850fd5f4e0a3cbffa317eb15d8e3c8fe4bcdb7d77433d8618e0ddaca25cb",
+   "length": 6,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 29843
+  },
+  {
+   "sha256": "d410d55e642cb900a0afc654596ac897c5ad7401ffcbf133d1e9b68d53997159",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 14637
+  },
+  {
+   "sha256": "da3c754b798d38fb62714b8d5d95e477941af8476f106708927da47612e4d563",
+   "length": 16,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 36833
+  },
+  {
+   "sha256": "db268d4586b872d6b278d70f1af1489cd0a10a6ea38bc0af51d84e260cb660dd",
+   "length": 11,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 48218
+  },
+  {
+   "sha256": "db6cc48516b2ccaa5e17ffca710876fc0af0d9940b19ee8a3cdd6cebd31aa104",
+   "length": 8,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 5163
+  },
+  {
+   "sha256": "dbca668123efe23b182a0e042179b49aab7645c25d5eb2c84a1902c293639663",
+   "length": 11,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 17283
+  },
+  {
+   "sha256": "dc363b9d7a2b90ee4338b8471d74976990d23eb77f59a1788413689ea9de22de",
+   "length": 61,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 22284
+  },
+  {
+   "sha256": "dcc34bd03dda1a28fee37667962a4d848002f9b099c519b128347523dc17b70c",
+   "length": 10,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 34814
+  },
+  {
+   "sha256": "e1edd44d94cbb83349b5d4a45e59968e706873c708f2aa6b282d3f57d58eda56",
+   "length": 9,
+   "entry": "LX-ES-1",
+   "edges": "WW",
+   "prefilter": 10374
+  },
+  {
+   "sha256": "e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8",
+   "length": 14,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 58556
+  },
+  {
+   "sha256": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+   "length": 13,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 49767
+  },
+  {
+   "sha256": "e52e1d57122da276f479fa74ab692ccdefb04ca8c9ce88a42ea9626e5589cfd1",
+   "length": 8,
+   "entry": "LX-TV-1",
+   "edges": "WW",
+   "prefilter": 6751
+  },
+  {
+   "sha256": "e604f8c97caaadb4c15db94f28d54802722aeba64e375071e4d1eeb1a3cc68fa",
+   "length": 3,
+   "entry": "LX-DS-4",
+   "edges": "WW"
+  },
+  {
+   "sha256": "e816f4cd61c3f516d1ae341b10a2a35b692f16ccaa791554fa29291ea5cade06",
+   "length": 10,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 44810
+  },
+  {
+   "sha256": "e9d4f7a3e311ab6422b376b2da8aace5888cd4cfd5de8b28971cafbd93f756d9",
+   "length": 15,
+   "entry": "LX-NV-1",
+   "edges": "WW",
+   "prefilter": 22402
+  },
+  {
+   "sha256": "ebd27c1a49b39ad6dbefeeb373ce422636250c69db24dd3ae1ce25d1bca2beeb",
+   "length": 11,
+   "entry": "LX-DS-5",
+   "edges": "WW",
+   "prefilter": 2917
+  },
+  {
+   "sha256": "ec56a9463c53ab70bdae5ddd0bcbcd31bed143c74618da0a9814233af948f446",
+   "length": 9,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 65498
+  },
+  {
+   "sha256": "ef6691545d2c5523efed00424407cb261aeb0037d165ca5792f7f8bac3381362",
+   "length": 8,
+   "entry": "LX-TH-3",
+   "edges": "WW",
+   "prefilter": 64817
+  },
+  {
+   "sha256": "efb0f5d80c4a5d084f7d6c07bea8041dff0ebda4cc1df68871dc4faf897b14c0",
+   "length": 13,
+   "entry": "LX-PL-1",
+   "edges": "WW",
+   "prefilter": 12778
+  },
+  {
+   "sha256": "f054427aa311df804f5298e3911991f7464328ddb369fde645160a2c0e11203c",
+   "length": 4,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 48951
+  },
+  {
+   "sha256": "f1465ff75db2313c02a064ad7ed7bed37042df4eafaebaa49a3ad27a19049a46",
+   "length": 6,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 34533
+  },
+  {
+   "sha256": "f3902178f562e8df73808d57ce2ebcc7229b6982698d917ddfd47d1627c3e9e9",
+   "length": 10,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 55557
+  },
+  {
+   "sha256": "f39cc469dffc0623c9341314ac7ab8433bd266a06333399c474cae259ad57e82",
+   "length": 13,
+   "entry": "LX-DS-2",
+   "edges": "WW",
+   "prefilter": 9268
+  },
+  {
+   "sha256": "f3e153ade415c74960e4f61202b3610d38afb2d392d9699373a0a112a15c8525",
+   "length": 7,
+   "entry": "LX-PR-3",
+   "edges": "NW",
+   "prefilter": 1645
+  },
+  {
+   "sha256": "f3ea7ed376698b214396b44b3f94308805800f79bcc9b7ec1662556d959b5d7b",
+   "length": 9,
+   "entry": "LX-TH-6",
+   "edges": "WW",
+   "prefilter": 52931
+  },
+  {
+   "sha256": "f4d7464cc7210e33d1bc19853b0116fee5dc8b62c06750b837f490506497f0c6",
+   "length": 10,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 1307
+  },
+  {
+   "sha256": "f700933d6f82cc7edc59d32bd032448c2392a6b1ad26774cc540bd4c4bfde294",
+   "length": 109,
+   "entry": "LX-MT-3",
+   "edges": "NN",
+   "prefilter": 41761
+  },
+  {
+   "sha256": "f73b5ee5dc6f91f39bf308d295acf88db3f9a417692f0ecba96791ea407b22fe",
+   "length": 11,
+   "entry": "LX-AT-2",
+   "edges": "WW",
+   "prefilter": 17288
+  },
+  {
+   "sha256": "f856e40f2adfa8ea113432845d1443a4292d680027392a314c4b990aa96bfdd2",
+   "length": 12,
+   "entry": "LX-PR-1",
+   "edges": "WW",
+   "prefilter": 5562
+  },
+  {
+   "sha256": "f8c73b4d588f09659dcc93a3160a7f3647de726a45d5619a19f830177fe5c28c",
+   "length": 14,
+   "entry": "LX-NV-2",
+   "edges": "WN",
+   "prefilter": 23374
+  },
+  {
+   "sha256": "f93fb86de33b45e821899c8e8fe04d7deb0fcb5fda92e90fd88278efc0007762",
+   "length": 16,
+   "entry": "LX-MT-2",
+   "edges": "WW",
+   "prefilter": 25287
+  },
+  {
+   "sha256": "fdd0e3f0c5cb4fb9fc57e0c2c16f4456b558977b68a7630cad0d315c71a01b48",
+   "length": 13,
+   "entry": "LX-CA-1",
+   "edges": "WW",
+   "prefilter": 22096
+  },
+  {
+   "sha256": "fe6d3468cf5c74d8ec2a95b40f2e05338c37a4202f8fad692d2b64a9cf9b468a",
+   "length": 8,
+   "entry": "LX-TH-3",
+   "edges": "WW",
+   "prefilter": 56657
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+  "caseId": "lot5-compile-013-ui-parameter-duplicate",
+  "comparatorIds": [
+    "lot5/result"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "code": "profile-ui-parameters",
+        "diagnostics": [],
+        "status": "refused"
+      },
+      "role": "result"
+    }
+  ],
+  "expectedStatus": "refused:profile-ui-parameters",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/ui-neutral-registry.json",
+      "role": "registry",
+      "sha256": "1dc918ec35fd0c60a78006a9c4bacfe3fc32b32c6b2e796810e7256f27139406"
+    },
+    {
+      "json": {
+        "assets": [
+          "fixtures/ui-neutral-metrics.json"
+        ],
+        "base": "fixtures/ui-neutral-base.json",
+        "descriptors": [
+          "fixtures/ui-neutral-descriptors.json"
+        ],
+        "digestDomain": "raw"
+      },
+      "role": "compile-inputs"
+    }
+  ],
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/variants/ui-parameter-duplicate.profile.json",
+    "sha256": "a2a55825c756c53cc57f0ba4d0e755b7e11b394a209382fe460e9b94b0bef1f8"
+  }
+}

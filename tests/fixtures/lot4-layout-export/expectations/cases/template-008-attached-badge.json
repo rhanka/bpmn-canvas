@@ -1,0 +1,76 @@
+{
+  "caseId": "template-008-attached-badge",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "badge",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            30,
+            15
+          ],
+          "commands": [],
+          "template": "attached-badge",
+          "parameters": [
+            {
+              "name": "offsetX",
+              "value": 10000
+            },
+            {
+              "name": "offsetY",
+              "value": -20000
+            },
+            {
+              "name": "hideSource",
+              "value": false
+            },
+            {
+              "name": "markerShift",
+              "value": 3000
+            }
+          ]
+        },
+        "bounds": {
+          "x": 180000,
+          "y": 260000,
+          "width": 100000,
+          "height": 80000
+        },
+        "badgeSize": {
+          "width": 30000,
+          "height": 15000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "badge": {
+            "x": 190000,
+            "y": 320000,
+            "width": 30000,
+            "height": 15000
+          },
+          "markerShift": 3000,
+          "hideSource": false
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

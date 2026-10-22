@@ -1,0 +1,282 @@
+{
+  "caseId": "l3-n-ensure-conflicting-definition",
+  "operation": "normalize",
+  "phase": "normalize",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn-ensureconflict.json",
+    "sha256": "dbda92973e30aa8d98b1d0bf3324f9bfde4fbc65717ec7c7eafbcf9f38e4ad1a"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn-ensureconflict/1",
+          "version": "1.1.0",
+          "sha256": "2f0d302b5404cb731af9590d8c54e05406e9a505b7f0e65bf81c0a57b576a254",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_support",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "References",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_F",
+                  "name": "Start",
+                  "outgoing": [
+                    "Flow_F1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_F",
+                  "name": "Apply rules",
+                  "incoming": [
+                    "Flow_F1"
+                  ],
+                  "outgoing": [
+                    "Flow_F2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_F",
+                  "name": "End",
+                  "incoming": [
+                    "Flow_F2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_F1",
+                  "sourceRef": "Start_F",
+                  "targetRef": "Task_F"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_F2",
+                  "sourceRef": "Task_F",
+                  "targetRef": "End_F"
+                },
+                {
+                  "$type": "bpmn:DataStoreReference",
+                  "id": "DataStoreReference_F",
+                  "dataStoreRef": "DataStore_F"
+                }
+              ],
+              "artifacts": [
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Assoc_F",
+                  "sourceRef": "DataStoreReference_F",
+                  "targetRef": "Task_F",
+                  "associationDirection": "One"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:DataStore",
+              "id": "DataStore_F",
+              "name": "Rules"
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "034e171652996319fb9b0c737c4c02faa31a4f467de4a9d5fddb4359bbb95bed"
+      }
+    },
+    {
+      "role": "activation",
+      "json": "qualification"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "refused",
+        "operation": "normalize",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn-ensureconflict/1",
+          "version": "1.1.0",
+          "sha256": "2f0d302b5404cb731af9590d8c54e05406e9a505b7f0e65bf81c0a57b576a254",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "034e171652996319fb9b0c737c4c02faa31a4f467de4a9d5fddb4359bbb95bed",
+        "code": "profile-write-conflict",
+        "diagnostics": [],
+        "report": {
+          "reportVersion": "2",
+          "operation": "normalize",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn-ensureconflict/1",
+            "version": "1.1.0",
+            "sha256": "2f0d302b5404cb731af9590d8c54e05406e9a505b7f0e65bf81c0a57b576a254",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "034e171652996319fb9b0c737c4c02faa31a4f467de4a9d5fddb4359bbb95bed",
+          "entries": [],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn-ensureconflict/1",
+          "version": "1.1.0",
+          "sha256": "2f0d302b5404cb731af9590d8c54e05406e9a505b7f0e65bf81c0a57b576a254",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_support",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "References",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_F",
+                  "name": "Start",
+                  "outgoing": [
+                    "Flow_F1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_F",
+                  "name": "Apply rules",
+                  "incoming": [
+                    "Flow_F1"
+                  ],
+                  "outgoing": [
+                    "Flow_F2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_F",
+                  "name": "End",
+                  "incoming": [
+                    "Flow_F2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_F1",
+                  "sourceRef": "Start_F",
+                  "targetRef": "Task_F"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_F2",
+                  "sourceRef": "Task_F",
+                  "targetRef": "End_F"
+                },
+                {
+                  "$type": "bpmn:DataStoreReference",
+                  "id": "DataStoreReference_F",
+                  "dataStoreRef": "DataStore_F"
+                }
+              ],
+              "artifacts": [
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Assoc_F",
+                  "sourceRef": "DataStoreReference_F",
+                  "targetRef": "Task_F",
+                  "associationDirection": "One"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:DataStore",
+              "id": "DataStore_F",
+              "name": "Rules"
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "034e171652996319fb9b0c737c4c02faa31a4f467de4a9d5fddb4359bbb95bed"
+      }
+    }
+  ],
+  "expectedStatus": "refused:profile-write-conflict",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2"
+  ]
+}

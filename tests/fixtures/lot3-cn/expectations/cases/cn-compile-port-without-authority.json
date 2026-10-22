@@ -1,0 +1,24 @@
+{
+  "caseId": "cn-compile-port-without-authority",
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-c-noauth.json",
+    "sha256": "d1ab644f8430b6d75abfd8e66707d0d64a01b80b691a4a07fa20d54df5c3559d"
+  },
+  "inputArtifacts": [],
+  "expectedArtifacts": [
+    {
+      "role": "compile",
+      "json": {
+        "code": "profile-producer",
+        "diagnostics": [],
+        "status": "refused"
+      }
+    }
+  ],
+  "expectedStatus": "refused:profile-producer",
+  "comparatorIds": [
+    "compile/lot3"
+  ]
+}

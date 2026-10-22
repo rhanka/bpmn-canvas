@@ -1,0 +1,982 @@
+{
+ "format": "x24-expectations-seal/3",
+ "design": {
+  "path": "DESIGN.md",
+  "revision": "R3.3",
+  "sha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f"
+ },
+ "base": {
+  "commit": "05f737885bd44fddea84bf1b4d55ae5428704855",
+  "tree": "94f58f93ce56ce61e35976aa8d91d12a71f786b9",
+  "trackedFiles": 797
+ },
+ "authorities": [
+  "DESIGN.md R3.3 (sections 12, 12.1, 12.2, 13, 14.2, 14.3, 16)",
+  "Block B seal harmonization, section 3.4 (X24) and section 7 (hygiene residual HY-1)",
+  "Seal review of the X24 expectations (gpt-6-astra, max effort): REWORK, 2 BLOCKER, 4 MAJOR, 1 MINOR",
+  "Block B integration (conductor): test history guard (tests/test-history-guard.test.mjs, unchanged) and history rule I1 (zero-literal scan of the tree)",
+  "Lot-3 Unicode audit of the block B seals, section 5: the leading U+00A0 classification vector of DESIGN.md:152 (A-001, X-001) folded to U+0020 by the marker rename",
+  "Spec author ruling on the P-006 selector-branch conflict (DESIGN.md:729, 837, 859, 865-874): the reviewed key of src/profile/lot4-export.ts:834 is technical, sealed as the reviewed allowance RA-01",
+  "Lot-5 CR-10 seal round (ef9e781): three bound lot-5 files changed after the exact-path relink; the pending x24 rebind of their reviewed records",
+  "Spec author ruling on the I1 residual of src/react/workshop.tsx (DESIGN.md:859, 863, 874): the three unmatched occurrences are the base rows I-1427, I-1462 and I-1464, whose lines the block B commit dc183c2 edited; sealed as the relocated rows RL-01 to RL-03",
+  "Block B final spec pass after the fix round (review findings 17 and 20, DESIGN.md:874, 899, 927): reviewed records and RA-01 rebound to the bytes the fix round and the lot-3 and lot-4 reseals left (RA-01 now at src/profile/lot4-export.ts:867, same line bytes), three RV-08 lines reviewed again, eleven occurrences of two block B tests reviewed by exact path (RV-04 and the published API name RV-13), RL-01 to RL-03 retired after the restoration of their base lines"
+ ],
+ "precedence": "DESIGN R3.3 > harmonization > review",
+ "author": "Opus (claude-opus-5-5), spec author, owner exception",
+ "reviewer": "gpt-6-astra, max effort",
+ "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); pending targeted verification and conductor acceptance",
+ "previousSeals": [
+  {
+   "sha256": "d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5",
+   "round": "first seal",
+   "cases": 90,
+   "occurrenceRows": 2173,
+   "verdict": "REWORK"
+  },
+  {
+   "sha256": "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c",
+   "round": "single seal fix round",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated; the history guard flagged its Git object reads and the I1 scan reported unmatched occurrences of other block B seals"
+  },
+  {
+   "sha256": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f",
+   "round": "integration micro-reseal (history guard, I1, lot-5 relink)",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated; the lot-3 Unicode audit found the leading U+00A0 classification vector folded to U+0020"
+  },
+  {
+   "sha256": "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b",
+   "round": "Unicode literal restoration and exact-path relink",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated; the selector-branch rule of P-006 reported the reviewed key of src/profile/lot4-export.ts:834, which no sealed allowance covered, and the lot-5 CR-10 seal left three bound lot-5 files to rebind"
+  },
+  {
+   "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746",
+   "round": "P-006 reviewed selector-branch allowance and lot-5 CR-10 rebind",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated; the I1 scan still reported three base occurrences of src/react/workshop.tsx whose lines the block B commit dc183c2 edited (the residual of the exact-path relink)"
+  },
+  {
+   "sha256": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac",
+   "round": "I1 relocation of three base rows of src/react/workshop.tsx",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated into the block B squash; the fix round and the lot-3 transaction reseal changed bound files and the module of RA-01, restored the base lines of the relocated rows and added two block B tests with unreviewed occurrences"
+  }
+ ],
+ "authoringMethod": "Expected values read from the cited base lines and DESIGN clauses or computed by derive/arith.mjs, an independent re-implementation of the legacy formulas; no product module, codec, layout, renderer, exporter or command was executed and nothing was updated from actual output.",
+ "interpreterExecutedBeforeSeal": false,
+ "counts": {
+  "cases": 111,
+  "byGroup": {
+   "L": 6,
+   "S": 28,
+   "A": 29,
+   "R": 10,
+   "X": 31,
+   "P": 7
+  },
+  "occurrences": 3381,
+  "distributionMembers": 203,
+  "memberOccurrences": 2445,
+  "modules": 15
+ },
+ "unsealed": [
+  {
+   "id": "U-1",
+   "point": "Explicit legacy retarget of document and data links to an earlier activity of the flow",
+   "owner": "owner",
+   "open": "OPEN-MIGRATION",
+   "designDefault": "retarget removed, endpoints preserved, relation reported (R-001); retarget value refused at load (S-011)"
+  },
+  {
+   "id": "U-2",
+   "point": "Legacy business values of the private record",
+   "owner": "private integration",
+   "open": null,
+   "designDefault": "supplied explicitly as injected data; pinned by canonical SHA-256 only (legacy-values.json, L-005)"
+  },
+  {
+   "id": "U-3",
+   "point": "Width-alias table of the legacy record equivalent to the base ambient decomposition",
+   "owner": "private integration",
+   "open": null,
+   "designDefault": "explicit alias table, fallback width otherwise, no ambient decomposition (R-003)"
+  },
+  {
+   "id": "U-4",
+   "point": "Composite glyphs and templates of the legacy looks",
+   "owner": "conductor and render/export sessions",
+   "open": "OPEN-RENDER-PRIMITIVES",
+   "designDefault": "supported explicit glyphs only, unsupported composites disabled; geometry inputs, element kinds and module selection sealed, not rendered pixels"
+  },
+  {
+   "id": "U-5",
+   "point": "Native transaction adapter staging",
+   "owner": "canvas session and conductor",
+   "open": "OPEN-HOOK",
+   "designDefault": "not exercised; legacy follow and auto-layout changes sealed only"
+  },
+  {
+   "id": "U-6",
+   "point": "Optional properties panel",
+   "owner": "owner",
+   "open": "OPEN-PANEL",
+   "designDefault": "untouched; no case depends on it"
+  },
+  {
+   "id": "U-7",
+   "point": "Release pins keeping existing callers on their release",
+   "owner": "conductor",
+   "open": "OPEN-LEGACY (ratified, DESIGN section 16 item 5)",
+   "designDefault": "not a seal value; no business default in the new package"
+  }
+ ],
+ "root": "tests/fixtures/x24-externalization/expectations",
+ "executables": [
+  {
+   "file": "derive/comparators.mjs",
+   "sha256": "4cf181c64e548aeac3f6ecc92a46c135edb6b3cc876e0c819b22aa5879c36aac",
+   "role": "comparator semantics of every comparator id (COMPARATORS, compareCase)"
+  },
+  {
+   "file": "derive/canonical.mjs",
+   "sha256": "a5faa7421a912030075000d469cb73844decd93a786f8247a87abd0b1662a948",
+   "role": "canonical JSON and its SHA-256, imported by the comparators"
+  },
+  {
+   "file": "derive/scan.mjs",
+   "sha256": "40b89ab416a0af6978b95448b090b5e60597650ebe2cb36e9b40a01bee8a8834",
+   "role": "pinned lexicon scanner (path, raw, token and decoded forms; look selector branches)"
+  },
+  {
+   "file": "derive/literals.mjs",
+   "sha256": "42fa0761cac5ed3929df5171f0f8421ed03651a734c19e3019063ccef26f2873",
+   "role": "literal containment rules R2 to R4 of the seal hygiene"
+  },
+  {
+   "file": "derive/sourcemap.mjs",
+   "sha256": "270b77614135904b2e3b9cf52ea7c0ae207854313b1c3286cf953d9b79619bf6",
+   "role": "source map decoder of the distribution attribution"
+  },
+  {
+   "file": "../../../helpers/brand.mjs",
+   "sha256": "5469c034bbc39bf89c7758e0974a29c96205d149da06b816485f468be7bb9c87",
+   "role": "hash-only brand token helper imported by the scanner"
+  }
+ ],
+ "files": [
+  {
+   "path": "README.md",
+   "bytes": 101392,
+   "sha256": "3dc657569cbd6d253aac8ac499c869683cfbf5170d18af1a35e7fb27d59d0548"
+  },
+  {
+   "path": "cases/x24-A-001-classify.json",
+   "bytes": 4596,
+   "sha256": "f5db25e74d4b9d5ff848f7f5ab00abcd9a0961f680fb8472b89f4905cf7bb3dd"
+  },
+  {
+   "path": "cases/x24-A-002-kind-annotated.json",
+   "bytes": 3176,
+   "sha256": "82f29a2e676e2efb97d1ab861b9d3bb718b778cb10f3a193dd7c15cabaf020b7"
+  },
+  {
+   "path": "cases/x24-A-003-kind-recolor.json",
+   "bytes": 3262,
+   "sha256": "99fc6a7eac7a05725c31aacbe093f960e845d3a570319ec88c1995398703f52e"
+  },
+  {
+   "path": "cases/x24-A-004-kind-flat.json",
+   "bytes": 3328,
+   "sha256": "7ebf6490effa575221c2becb78a39dc57f685b5d645b21690d0b62235a78f9bf"
+  },
+  {
+   "path": "cases/x24-A-005-layout-input.json",
+   "bytes": 1469,
+   "sha256": "bcf7cb1a463aec41ff9bd3179d5b5f048117997105100829d2219f68d96a97be"
+  },
+  {
+   "path": "cases/x24-A-006-layout-size.json",
+   "bytes": 3863,
+   "sha256": "4a69cbd34244c548dc0e6ebfdfdf28840e64fe4f96bdd699351cc8a4310f8740"
+  },
+  {
+   "path": "cases/x24-A-007-metrics.json",
+   "bytes": 4168,
+   "sha256": "50d0a4b4a101ab40ea37954cb6f6f75843ca42f51fc5fa5bc0af3ebe17e0ca70"
+  },
+  {
+   "path": "cases/x24-A-008-render-badges.json",
+   "bytes": 1207,
+   "sha256": "71bf1d8ea5acde00268d0ddb1636764184e6c8043298dae7985426c2d2bb3d35"
+  },
+  {
+   "path": "cases/x24-A-009-render-attachment.json",
+   "bytes": 1694,
+   "sha256": "d6f39a2f9755cbc3d6b169974daf1d76a274373aa465358edfc4dec6efd11d4c"
+  },
+  {
+   "path": "cases/x24-A-010-transactions-follow.json",
+   "bytes": 1765,
+   "sha256": "9f02bb82749283a5edca41b9c2c756e00ae631c6221b1dba3c2f132cd79153f7"
+  },
+  {
+   "path": "cases/x24-A-011-tokens-annotated.json",
+   "bytes": 7305,
+   "sha256": "62561b1488f8ee064350db18dffb9f6639d73d29259873584d06a159609fae9f"
+  },
+  {
+   "path": "cases/x24-A-012-tokens-recolor.json",
+   "bytes": 7613,
+   "sha256": "b46fd57fa6d6588197c837671a093268a70684ff6fd800e51bb2e64a7b0ef35a"
+  },
+  {
+   "path": "cases/x24-A-013-theme-select.json",
+   "bytes": 7878,
+   "sha256": "26c986dc06bb65fe7512178a9b77a20045448f816614d4139db027da4375fe32"
+  },
+  {
+   "path": "cases/x24-A-014-palette.json",
+   "bytes": 2115,
+   "sha256": "3746e53d243930102207cff2ea5951c41099c6e6d585d073df186666b7bb5903"
+  },
+  {
+   "path": "cases/x24-A-015-navigation-legacy-default.json",
+   "bytes": 2843,
+   "sha256": "6f736c71356e60dc3a03fb8330ac7dd232ef85121b1d8e7b8d4b87d401e56b18"
+  },
+  {
+   "path": "cases/x24-A-016-navigation-legacy-rules.json",
+   "bytes": 16764,
+   "sha256": "065da6046f818fde07e1450ce38f6d560eadaa968c1bed4d91d09d82b171432e"
+  },
+  {
+   "path": "cases/x24-A-017-export-reference-page.json",
+   "bytes": 3797,
+   "sha256": "365879fd0c95f777236926cb566683819defc0e3f9d8e48fcc720dec20c87961"
+  },
+  {
+   "path": "cases/x24-A-018-export-sparx.json",
+   "bytes": 4679,
+   "sha256": "6ae7566520c7046a93fd896fd964221a004f854ff6edb87ae9ae7526cfcfe942"
+  },
+  {
+   "path": "cases/x24-A-019-export-drawio.json",
+   "bytes": 4972,
+   "sha256": "504e9bb784f01430ab96bbaef3f500f47923b88bb85a6f74898d6a406ab09222"
+  },
+  {
+   "path": "cases/x24-A-020-import-drawio.json",
+   "bytes": 1560,
+   "sha256": "215afe5476f9cb406573c71027b0fd74551985e75cef1c3ea350b31c46a6c81a"
+  },
+  {
+   "path": "cases/x24-A-021-export-free-annotation.json",
+   "bytes": 1021,
+   "sha256": "22f94ea465d9f436930ef8157f2b6042210b139eb69daff1e84bda921bb292a7"
+  },
+  {
+   "path": "cases/x24-A-022-transactions-autolayout.json",
+   "bytes": 1964,
+   "sha256": "e774f6ecc77f9acfb93b6b39336b6eddbcb4377a89bd6a9ffab5ad15792ecce4"
+  },
+  {
+   "path": "cases/x24-A-023-layout-process.json",
+   "bytes": 2717,
+   "sha256": "c0b871dade207b7bd10240a5391ed701bd7d6eece78bacac174c39710efab067"
+  },
+  {
+   "path": "cases/x24-A-024-export-facts.json",
+   "bytes": 9390,
+   "sha256": "c9c880cd004fad0449cec84a5e4530dff0d6dba9d9aee95b679d99ca98f9bfa0"
+  },
+  {
+   "path": "cases/x24-A-025-facts-descriptor-mismatch.json",
+   "bytes": 1039,
+   "sha256": "f4fd1fde8a7a09dc09f981b4cd32bc0a5be816b5b0bc0be1392a6ad53f7ab848"
+  },
+  {
+   "path": "cases/x24-A-026-static-surface.json",
+   "bytes": 7618,
+   "sha256": "1d7fd648d505ea3afb285a8c166702189034fa6162663ed5a615e1517bfbaa72"
+  },
+  {
+   "path": "cases/x24-A-027-preview-surface.json",
+   "bytes": 4207,
+   "sha256": "7f8d996eedfea6487f0fd1eaa0c99cec4bb15053bfdd64ee8d4cdd79d55221b5"
+  },
+  {
+   "path": "cases/x24-A-028-workshop-surface.json",
+   "bytes": 4383,
+   "sha256": "c26694002d5540aa4e0b7e0c9a2ee3cce6d5f798696f6f6183214944eec3ce58"
+  },
+  {
+   "path": "cases/x24-A-029-facts-unknown-version.json",
+   "bytes": 1039,
+   "sha256": "a0e9ef13821f118d0d2bea4df05196703a06826e39286ad23e98adf5938f821b"
+  },
+  {
+   "path": "cases/x24-L-001-occurrences.json",
+   "bytes": 1620,
+   "sha256": "474894f3ef96b0b8ad1235716b12506152c9d1bdce6dac119fd2ffb86b0f3775"
+  },
+  {
+   "path": "cases/x24-L-002-distribution-members.json",
+   "bytes": 1509,
+   "sha256": "6fea3a1697ed60c8c2e417afdc9bf3d39d31b34e270b0742c54fddba94a0389d"
+  },
+  {
+   "path": "cases/x24-L-003-modules.json",
+   "bytes": 3241,
+   "sha256": "0f30f350a4d5d7e9256b983ce9d06fc15ce97ca1678445150b555b631b09215b"
+  },
+  {
+   "path": "cases/x24-L-004-zero-unmatched.json",
+   "bytes": 1336,
+   "sha256": "8407426a924ce03199c89cbbcb30a2c6c8ef0ac95473862a15ef5f478551f7a5"
+  },
+  {
+   "path": "cases/x24-L-005-legacy-value-pins.json",
+   "bytes": 1766,
+   "sha256": "951627f986316b41fd91d42fb7a4ad4edb8a5bd52707a0a52edc5c4e636b35a1"
+  },
+  {
+   "path": "cases/x24-L-006-literal-free-seal.json",
+   "bytes": 1239,
+   "sha256": "1694f811cdc14b4131ebbf4e26d8eccd837aceddc2fcf385af2cbc0bf7b2eb1d"
+  },
+  {
+   "path": "cases/x24-P-001-probe-1-original.json",
+   "bytes": 960,
+   "sha256": "5b627d02c3e68c49e177819ceb77e6806f61a1eb7c028c35cee676142fdf29cd"
+  },
+  {
+   "path": "cases/x24-P-002-probe-1-no-policy.json",
+   "bytes": 4815,
+   "sha256": "bbc3e24bb75b0ae94eca804f7a5a415d4e50c0bb70a22c728be5cb0566ce2ba3"
+  },
+  {
+   "path": "cases/x24-P-003-probe-1-injected.json",
+   "bytes": 2753,
+   "sha256": "cb90a4f99f15efd4c91970a7430cc407f04382a30d5cefa1402f1bdaec4d8247"
+  },
+  {
+   "path": "cases/x24-P-004-probe-2-original.json",
+   "bytes": 577,
+   "sha256": "210c8ee8fe223446dba96d22b6aa4a88d48cc263c5586c37fc70846c1a00695a"
+  },
+  {
+   "path": "cases/x24-P-005-probe-2-ledger-rows.json",
+   "bytes": 1483,
+   "sha256": "0c6b56ec69b18ab7d4c1ca4b17649d5ad231613cd4957771004e4b7b6a9f0879"
+  },
+  {
+   "path": "cases/x24-P-006-probe-2-rescan.json",
+   "bytes": 959,
+   "sha256": "535385b532c11e038cce66feee65c051dd9f23d7a0dd2bdb9e2335e5a4244731"
+  },
+  {
+   "path": "cases/x24-P-007-probe-2-distribution.json",
+   "bytes": 909,
+   "sha256": "cce54bfc0e623f8d23721bd24f9ebef87461dcaae4eda93d277adf941ae96632"
+  },
+  {
+   "path": "cases/x24-R-001-nonactivity-host-preserved.json",
+   "bytes": 1478,
+   "sha256": "4f85da8dba11bf7215d7fe6921aa7d2eee02f81c2e6b1d2c576d10293ecbb84f"
+  },
+  {
+   "path": "cases/x24-R-002-navigation-called-element.json",
+   "bytes": 1935,
+   "sha256": "6d2204d3064ddcf45c0793b5984392977f621a1de2aedd968147a3c9d618afe3"
+  },
+  {
+   "path": "cases/x24-R-003-no-ambient-decomposition.json",
+   "bytes": 987,
+   "sha256": "bfc2f4b5fe04594820d693127fdf129ef3e24395f4d1915f8ab11d7b9d363012"
+  },
+  {
+   "path": "cases/x24-R-004-no-forced-descriptor.json",
+   "bytes": 1153,
+   "sha256": "9a99abac943b517d50ebe4b1a6c03ea55a1e05c62840dbd793a0106ed4775115"
+  },
+  {
+   "path": "cases/x24-R-005-no-built-in-look.json",
+   "bytes": 1390,
+   "sha256": "612d36c4d5f2a23125b3bda6a01d8e5d1bc68cbaa878d9501d7f7755bc4bf1a7"
+  },
+  {
+   "path": "cases/x24-R-006-io-set-selection.json",
+   "bytes": 791,
+   "sha256": "541171c5b0ab24eb64d524b2433f1ac66bdab0b26b59e6335c39f7f23fea00cf"
+  },
+  {
+   "path": "cases/x24-R-007-no-policy-recognises-nothing.json",
+   "bytes": 2585,
+   "sha256": "c3a4a99a7e3a3fdf0442f95608dc967aa6c0412d231a0d772363e21d3cc7e4b3"
+  },
+  {
+   "path": "cases/x24-R-008-browser-entry-defaults.json",
+   "bytes": 676,
+   "sha256": "715c45c4e73504319390f44f813fb9ed43fc9d4778afb707c62c53cf89178201"
+  },
+  {
+   "path": "cases/x24-R-009-facts-version-a.json",
+   "bytes": 1032,
+   "sha256": "37db670b8b6546c35031cc1bf73d7a2a0d246dd07839e41fe13e5abce58f83a0"
+  },
+  {
+   "path": "cases/x24-R-010-facts-version-b.json",
+   "bytes": 1036,
+   "sha256": "cfdbaafb8f1e71b01836408ad57ba2acb8f4bb25aae05a56632be81f869f5204"
+  },
+  {
+   "path": "cases/x24-S-001-valid-x24-neutral-a.json",
+   "bytes": 920,
+   "sha256": "4d43b130e0efd125c243db81a1716c39f30c1a02e6b88a78712161cd260752a4"
+  },
+  {
+   "path": "cases/x24-S-002-valid-x24-neutral-b.json",
+   "bytes": 920,
+   "sha256": "b6a5575ab1d3e1d1927fba69a8a879df6d29d493e3f783384f3b8850d4b289a2"
+  },
+  {
+   "path": "cases/x24-S-003-valid-x24-legacy-synthetic.json",
+   "bytes": 941,
+   "sha256": "61b7bd8fa7129c8eb410eb31ffb6a233f3ddce54e8bdc5c4e425003267c19ebc"
+  },
+  {
+   "path": "cases/x24-S-004-unknown-field.json",
+   "bytes": 7033,
+   "sha256": "df4f5d7d88fa32ba59aa874b18f8a8d40e04300ca079e8c5af2c98aae49e0323"
+  },
+  {
+   "path": "cases/x24-S-005-null-value.json",
+   "bytes": 7014,
+   "sha256": "c124ea393c9f99b844fa08be14547126a468ef7ed17f789567d30077074e5445"
+  },
+  {
+   "path": "cases/x24-S-006-empty-prefix.json",
+   "bytes": 7013,
+   "sha256": "d68f06bb6787e51653d13c5ad9c5fe8aa146e2ca5cc03152dc9709d345ceab18"
+  },
+  {
+   "path": "cases/x24-S-007-unknown-trim.json",
+   "bytes": 7018,
+   "sha256": "ccf597e19fb4799abe81c98b5f2ddb9315293d79e1ca15e694bdafe519bb95d7"
+  },
+  {
+   "path": "cases/x24-S-008-duplicate-role.json",
+   "bytes": 7025,
+   "sha256": "68411431e80397ae45d434794a7b204b9c4e6b34f638e271c8d9848a555622fd"
+  },
+  {
+   "path": "cases/x24-S-009-overlapping-prefix.json",
+   "bytes": 7136,
+   "sha256": "767c9b41914c0204223693a47bfa0694568a1436484b373f54370865fe7630ac"
+  },
+  {
+   "path": "cases/x24-S-010-short-width-table.json",
+   "bytes": 7018,
+   "sha256": "550d09a1a85c99a5893a79ae830a1857e5bb20c0113b73da267183774eb508eb"
+  },
+  {
+   "path": "cases/x24-S-011-legacy-retarget.json",
+   "bytes": 8495,
+   "sha256": "c4f3a978ffa2ab2057c1a126fda9bd583471a806112163bd52e5166e98203b5f"
+  },
+  {
+   "path": "cases/x24-S-012-empty-rules.json",
+   "bytes": 8478,
+   "sha256": "e90a3c7f61efebfffcd6cd5c358c4be1c91b1ef64fa2219281f8bec78d39369d"
+  },
+  {
+   "path": "cases/x24-S-013-missing-metrics.json",
+   "bytes": 5993,
+   "sha256": "af3fef1f6b46ca0a83e2435061e9e25e19350c7a9f86a7b606d3c31781d78ee1"
+  },
+  {
+   "path": "cases/x24-S-014-alias-target-outside-table.json",
+   "bytes": 7242,
+   "sha256": "84d755c7e8fbfc06c3258dd633c7312c9b7705546117a08cc56e5f76d25bf234"
+  },
+  {
+   "path": "cases/x24-S-015-alias-source-inside-table.json",
+   "bytes": 7228,
+   "sha256": "1cf990c472f4cfb9a8255eb13813669fbcc0bf63c1a1abcd8b8816278df74472"
+  },
+  {
+   "path": "cases/x24-S-016-duplicate-alias.json",
+   "bytes": 8505,
+   "sha256": "a0a6d8df453849336acb667799bbe5ef32fc7727f89842dc792a2b6d5ef1e93c"
+  },
+  {
+   "path": "cases/x24-S-017-duplicate-look.json",
+   "bytes": 8487,
+   "sha256": "d8a1a691305a2a05264683aa158bb5b07ba63587475c97555873bc9ea7e5dde5"
+  },
+  {
+   "path": "cases/x24-S-018-upstream-look-with-tokens.json",
+   "bytes": 9311,
+   "sha256": "9345814067158786a2c4bb797aa6716e699db15ce34e262a304c91694f110083"
+  },
+  {
+   "path": "cases/x24-S-019-duplicate-node-size.json",
+   "bytes": 7084,
+   "sha256": "a42472076a172c4ef769744ba72589460efedf2472d167a4dc7df624f461961e"
+  },
+  {
+   "path": "cases/x24-S-020-decode-unknown-kind.json",
+   "bytes": 7028,
+   "sha256": "7eae97ea30e9146650bb7177762c1eb7c4b00b65d0645a3ead6f1ccea96f7479"
+  },
+  {
+   "path": "cases/x24-S-021-lexical-number.json",
+   "bytes": 7027,
+   "sha256": "367944ba4453fc9cbbc557b229b6ce3c6e20a85e6681e577f0aceb2b4775402a"
+  },
+  {
+   "path": "cases/x24-S-022-lexical-duplicate-key.json",
+   "bytes": 7080,
+   "sha256": "2726c7da57ac0dd9741fe0c6ce8aa8b00727e106ad783edee6b4f9549d4c08cc"
+  },
+  {
+   "path": "cases/x24-S-023-lexical-lone-surrogate.json",
+   "bytes": 7033,
+   "sha256": "8d5c9f784369fdde23eeff1fa30ee0c4518843179747b43d8355e4951f4390dc"
+  },
+  {
+   "path": "cases/x24-S-024-overlapping-prefix-admitted.json",
+   "bytes": 7208,
+   "sha256": "1548bc0f6e25ac1dd7ef513c6d0eb255191c916c8a7e90de1b49336fadfb8b06"
+  },
+  {
+   "path": "cases/x24-S-025-overlapping-prefix-unambiguous.json",
+   "bytes": 7736,
+   "sha256": "fb8e4dfe947ef5c5fedc47aeceb4cd949103695510e13d337fe345add0ce3f2a"
+  },
+  {
+   "path": "cases/x24-S-026-unknown-node-slot.json",
+   "bytes": 7028,
+   "sha256": "4e64ed6af4459dbed9c751bedd57ad63a6b5ce1998281085ab278ff3a96fd919"
+  },
+  {
+   "path": "cases/x24-S-027-unknown-navigation-rule.json",
+   "bytes": 7225,
+   "sha256": "2caec8a2512551be189c58ea2e5247f555389947492514a9f98809000a3fc840"
+  },
+  {
+   "path": "cases/x24-S-028-missing-facts-property.json",
+   "bytes": 7015,
+   "sha256": "af707e7496a5393c7f010e2163159d9e4ef85f214cedc07624f4d8c2c2575a09"
+  },
+  {
+   "path": "cases/x24-X-001-classify.json",
+   "bytes": 8672,
+   "sha256": "10e23c553e0c82167b72801dcc83e9b908573a8ab1f76e9727a622c01be495a2"
+  },
+  {
+   "path": "cases/x24-X-002-kind-annotated.json",
+   "bytes": 4460,
+   "sha256": "7317fa4553dd05db2747d8f500869105746a62aa48c10b3518576b4393ee259b"
+  },
+  {
+   "path": "cases/x24-X-003-kind-recolor.json",
+   "bytes": 4769,
+   "sha256": "07a3482a9ae14825b6ce2734e796fadbbd34adec98e05ae565723e75cfa17d13"
+  },
+  {
+   "path": "cases/x24-X-004-kind-flat.json",
+   "bytes": 4809,
+   "sha256": "d6f2a2dbf0321744532896bc7def7582019b6fd93cd04cab68420d59d24b1242"
+  },
+  {
+   "path": "cases/x24-X-005-layout-input.json",
+   "bytes": 2478,
+   "sha256": "baafdb9870465eca852428f7e19e0327802bd644d4343aab12db57cd2db085f9"
+  },
+  {
+   "path": "cases/x24-X-006-layout-size.json",
+   "bytes": 6522,
+   "sha256": "020e53242f4ad98f915a84379c57b509e0b7e657040c9ca4e433ef31f89c329a"
+  },
+  {
+   "path": "cases/x24-X-007-metrics.json",
+   "bytes": 6671,
+   "sha256": "8afa1902a7eab6c3f7dd7300fe5cded81e9ce4b02c008a4d6f896db37a021fdc"
+  },
+  {
+   "path": "cases/x24-X-008-render-badges.json",
+   "bytes": 2065,
+   "sha256": "b99d7cd6a64d44d1c832662dc533ad72885657e54c750aae6a446449b36b51b7"
+  },
+  {
+   "path": "cases/x24-X-009-render-attachment.json",
+   "bytes": 2017,
+   "sha256": "f2be8de194fc6691b776a048bba58769ee886e8a39c40234fa6953f5f4a5fb0c"
+  },
+  {
+   "path": "cases/x24-X-010-transactions-follow.json",
+   "bytes": 2000,
+   "sha256": "00be9664352f86b856be2ea7d11af8665912f490868cfd3a5e61c01fc27ea746"
+  },
+  {
+   "path": "cases/x24-X-011-tokens.json",
+   "bytes": 21171,
+   "sha256": "3bee08005568f7217077176c15347806384055bbe3240e3461d19c982864d42d"
+  },
+  {
+   "path": "cases/x24-X-012-theme-select.json",
+   "bytes": 11260,
+   "sha256": "5d8a2a04d9ebeaf70ad52d467a2f80f40b70e18ab5568afcc55bca7f035a0f22"
+  },
+  {
+   "path": "cases/x24-X-013-palette.json",
+   "bytes": 2587,
+   "sha256": "126888e87b4336fd30e8d72a794ee6c26b75e9ad1b6b524313701d623a04ef88"
+  },
+  {
+   "path": "cases/x24-X-014-navigation.json",
+   "bytes": 2666,
+   "sha256": "22cd99043060af76aae850967cccc7e795baf60a4031f86ea076fa087722bb8b"
+  },
+  {
+   "path": "cases/x24-X-015-export-a-input.json",
+   "bytes": 12032,
+   "sha256": "849186b1d521acd568ff8f32b95e94dc106af0cf1db778c5a5ea5ff18a399426"
+  },
+  {
+   "path": "cases/x24-X-016-export-b-input.json",
+   "bytes": 12053,
+   "sha256": "df3e86e11b9a287b269c36079899000a5650924b014071a8a8b02ee54d82c787"
+  },
+  {
+   "path": "cases/x24-X-017-export-legacy-input.json",
+   "bytes": 1449,
+   "sha256": "188b5a0fdf7946830a51c85e208f12d534ba62c7dd3d291c27d80498056dea49"
+  },
+  {
+   "path": "cases/x24-X-018-import-neutral.json",
+   "bytes": 1721,
+   "sha256": "62dd400b6c4f622d4cc35efd10314b768f0ba0b2fbb24fd46a82179a7ad88667"
+  },
+  {
+   "path": "cases/x24-X-019-import-legacy-symbols.json",
+   "bytes": 1019,
+   "sha256": "4b94718936f7bc2ae35d849fa9fb2c9fdd5d7a7cfcbf0a2da22f3eb56a7d3ab8"
+  },
+  {
+   "path": "cases/x24-X-020-profile-recognition.json",
+   "bytes": 2407,
+   "sha256": "ab05b53949a7818ff545ec8ad2786bcf89762ba7eebe09f4341b990e6efb598d"
+  },
+  {
+   "path": "cases/x24-X-021-profile-render-label.json",
+   "bytes": 2062,
+   "sha256": "d8985e261932f549b4b35050e0418d01b5c5e7c9e6ae06d672b473ba15349924"
+  },
+  {
+   "path": "cases/x24-X-022-profile-create-text.json",
+   "bytes": 1413,
+   "sha256": "18074f8bd53eb2977ebb8530cc6906ff3f47237d6e3c1e170fa497d9541d4ec0"
+  },
+  {
+   "path": "cases/x24-X-023-profile-render-bindings.json",
+   "bytes": 2712,
+   "sha256": "eced0b895584cd92e4410262036a1c41f833cfc500c68e1bc553b22ea8b2f881"
+  },
+  {
+   "path": "cases/x24-X-024-transactions-autolayout.json",
+   "bytes": 2600,
+   "sha256": "3ccb3548fe57d5c71dcdfdafe3c703f40c3ba0feb0042e58d7cfd616054f6c31"
+  },
+  {
+   "path": "cases/x24-X-025-layout-process.json",
+   "bytes": 10546,
+   "sha256": "e29ef6af07e63af890c857bbbb71a44b4e2d7bef433f790b4be3d34301fd23ae"
+  },
+  {
+   "path": "cases/x24-X-026-export-facts.json",
+   "bytes": 9847,
+   "sha256": "68c9bf92a29d015a0c0aa6e0dcb2662ec60032b1f5469caf5e75515280bb581c"
+  },
+  {
+   "path": "cases/x24-X-027-import-b.json",
+   "bytes": 1713,
+   "sha256": "89ae7b12a7b0eb34fbb36217f34087e18ac1879776ff1467cdcfdcf659e58235"
+  },
+  {
+   "path": "cases/x24-X-028-static-surface.json",
+   "bytes": 12488,
+   "sha256": "c5b48eb018f3759b8de1e1a13978c88cf686d34a52fdf625906994eed0e8ab11"
+  },
+  {
+   "path": "cases/x24-X-029-preview-surface.json",
+   "bytes": 4780,
+   "sha256": "40fbc99c28d8d04ee052531750a8f6ea62193f0478e131b2d7c86bc223603a1d"
+  },
+  {
+   "path": "cases/x24-X-030-workshop-surface.json",
+   "bytes": 5415,
+   "sha256": "4c2895d83842044ae19cdb1c7c914142886d9562dd2320dee75a863ee618b9a4"
+  },
+  {
+   "path": "cases/x24-X-031-export-facts-b.json",
+   "bytes": 9848,
+   "sha256": "35df3f3bfa076f8d1b5f9f17245b82fd61889bb4b92d50e29a6f38089f2e7530"
+  },
+  {
+   "path": "classification-rules.json",
+   "bytes": 77142,
+   "sha256": "193cb1547d4ab8b319a1aa5cf9d5bbbb0bfd27d3429c89a17cad70a9b0172ec7"
+  },
+  {
+   "path": "comparators.json",
+   "bytes": 2999,
+   "sha256": "c38c0039c7e0a3a3e74022a0ef76ddf92e127565f34d3f2f299dc8a40f140873"
+  },
+  {
+   "path": "derive/arith.mjs",
+   "bytes": 57500,
+   "sha256": "791df7670d0366836ff4901ebde483ac2c80f4b9d6267abbd8c50b4032890566"
+  },
+  {
+   "path": "derive/author-cases.mjs",
+   "bytes": 89471,
+   "sha256": "ce35678dd5637850fb3f9df4d0d0e4d379755de0c7a0ea677f086404cd4057a7"
+  },
+  {
+   "path": "derive/base-check.mjs",
+   "bytes": 10198,
+   "sha256": "d76e5921bdc9359f893af9b9bde4d533a20fa95a7a0c71fe1774650741308e78"
+  },
+  {
+   "path": "derive/canonical.mjs",
+   "bytes": 918,
+   "sha256": "a5faa7421a912030075000d469cb73844decd93a786f8247a87abd0b1662a948"
+  },
+  {
+   "path": "derive/classify.mjs",
+   "bytes": 1217,
+   "sha256": "5d88f9eb4af186e24e321e35b6b58f2d750cdfe578ae88b8be310da28effef6c"
+  },
+  {
+   "path": "derive/clause-table.mjs",
+   "bytes": 4446,
+   "sha256": "ee4be1167e3b116b1cbe681d9e91768326d9c06ce2b480aa3228333b85b22217"
+  },
+  {
+   "path": "derive/comparators.mjs",
+   "bytes": 12267,
+   "sha256": "4cf181c64e548aeac3f6ecc92a46c135edb6b3cc876e0c819b22aa5879c36aac"
+  },
+  {
+   "path": "derive/inputs.mjs",
+   "bytes": 13730,
+   "sha256": "4a44d013f343064cc93ba983b6556bcb7bf59e6a936c9e60e1925cce9d52e24c"
+  },
+  {
+   "path": "derive/ledger.mjs",
+   "bytes": 16434,
+   "sha256": "90a3decfa592e2a0ab100076f38f74068ad14917801620676ee6f503a00b214c"
+  },
+  {
+   "path": "derive/legacy-values.mjs",
+   "bytes": 17526,
+   "sha256": "362446847e85ad229feb45f21c0bf9056baaaf2f40d762018f21ed261d8f70dd"
+  },
+  {
+   "path": "derive/literal-set.mjs",
+   "bytes": 3559,
+   "sha256": "893e48245008c9680b76fe661c78de122e3d915112a111609faf03dc8dfb629a"
+  },
+  {
+   "path": "derive/literals.mjs",
+   "bytes": 8683,
+   "sha256": "42fa0761cac5ed3929df5171f0f8421ed03651a734c19e3019063ccef26f2873"
+  },
+  {
+   "path": "derive/policies.mjs",
+   "bytes": 14927,
+   "sha256": "2c51f59657903cbb1dc93f8dd66854388ba57017b1e76b7237befaa0298a0077"
+  },
+  {
+   "path": "derive/reviewed.mjs",
+   "bytes": 4936,
+   "sha256": "308a570aacec0241a390a503e5e2f3d8358017d3d621aa94e91dcb1527e02e7f"
+  },
+  {
+   "path": "derive/scan.mjs",
+   "bytes": 34731,
+   "sha256": "40b89ab416a0af6978b95448b090b5e60597650ebe2cb36e9b40a01bee8a8834"
+  },
+  {
+   "path": "derive/scenes.mjs",
+   "bytes": 15085,
+   "sha256": "3496bdb31e8b2a4e91d2f77bc32af7d440be2118e3901fa4af631cde87ac6aa1"
+  },
+  {
+   "path": "derive/seal.mjs",
+   "bytes": 9621,
+   "sha256": "3097fa3364536519955e0f5f73d3cb46ec8d37f90f907389f5a78199b80db847"
+  },
+  {
+   "path": "derive/sourcemap.mjs",
+   "bytes": 2074,
+   "sha256": "270b77614135904b2e3b9cf52ea7c0ae207854313b1c3286cf953d9b79619bf6"
+  },
+  {
+   "path": "dimension-coverage.json",
+   "bytes": 182893,
+   "sha256": "6a3d239ec7b7dfa79ac7bcc4055ccc715b1405e9a81d7d2e9969b4d995d5e195"
+  },
+  {
+   "path": "inputs/decode-b.drawio",
+   "bytes": 977,
+   "sha256": "6cf723f2e5e6f02c72700b7ccfff8d633efb6208a2022a48b079fc1008ee301b"
+  },
+  {
+   "path": "inputs/decode-legacy.drawio",
+   "bytes": 1190,
+   "sha256": "808bdaa489cf9e76e21e39df08f706717637564998e77d623501d20550d14f0b"
+  },
+  {
+   "path": "inputs/decode-neutral.drawio",
+   "bytes": 1008,
+   "sha256": "12321516a7e907ce613e03d93b188b92efa60589aabda443ebb25178ae6ea554"
+  },
+  {
+   "path": "inputs/export-a.bpmn",
+   "bytes": 6380,
+   "sha256": "7c0888f6138e94674e8fe081a9073b88003b69462b3548e442ce485c0a33a73f"
+  },
+  {
+   "path": "inputs/export-b.bpmn",
+   "bytes": 6381,
+   "sha256": "73c9a0b9e818c76af1b6a339e2f58912c7e63de869a87ef6d8e419b0c5a87606"
+  },
+  {
+   "path": "inputs/export-facts-b.bpmn",
+   "bytes": 5136,
+   "sha256": "520a3fcd848fec29e6a61a75ae5df5d00890660bf49a87a0b85463799d1bd746"
+  },
+  {
+   "path": "inputs/export-facts-version-a.bpmn",
+   "bytes": 1872,
+   "sha256": "3a9812856cb86a04a902c0b30927189441f410e4352946769ced74af3d8d6176"
+  },
+  {
+   "path": "inputs/export-facts-version-b.bpmn",
+   "bytes": 1874,
+   "sha256": "0982882cf38363985ca4821b0760291a16f0b6318828f66bff1de4da83aca89b"
+  },
+  {
+   "path": "inputs/export-facts.bpmn",
+   "bytes": 5143,
+   "sha256": "ddf7b6ebce0a426d3adf59625ff3f4aa7af99cddf6fe16fba229265bbb3c7d10"
+  },
+  {
+   "path": "inputs/export-legacy.bpmn",
+   "bytes": 6382,
+   "sha256": "e55294836fe9b264f6fde94d7ef13d8cbf5545dc0dd7fb41a4a67f54fb3c51fe"
+  },
+  {
+   "path": "inputs/layout-input.bpmn",
+   "bytes": 2248,
+   "sha256": "c09cd68ff5bf3db234106f7d51e2da39d7e5f26984041fb0febeb24a3fbb4946"
+  },
+  {
+   "path": "inputs/layout-nonactivity.bpmn",
+   "bytes": 1067,
+   "sha256": "85eaac78b18221b8ba6c3204a1a736bf802e7b918448166955cb49915d185f7a"
+  },
+  {
+   "path": "inputs/layout-process.json",
+   "bytes": 3542,
+   "sha256": "91e233f1c12e14af64ffb44064c72530cff0225343d12e8539a0666224e30631"
+  },
+  {
+   "path": "inputs/surface.bpmn",
+   "bytes": 9251,
+   "sha256": "3514d83fce0e64e297232810443050f25a0689cc4e444c883642b7a49a788aa3"
+  },
+  {
+   "path": "inputs/x24-facts-descriptor-b.json",
+   "bytes": 958,
+   "sha256": "b9e8c5b4baee6919225eb30695518e4aead88ac63e10e6468e8267264267430f"
+  },
+  {
+   "path": "inputs/x24-facts-descriptor.json",
+   "bytes": 963,
+   "sha256": "dad1e898930b1d4e020c66484abc1a3dc299e3bd13383f7f20bea5246152fe86"
+  },
+  {
+   "path": "ledger.json",
+   "bytes": 3655792,
+   "sha256": "cc09d3097731650bd935328d7cd37ca036c5b85aad3ac5945c110bdf8edf8679"
+  },
+  {
+   "path": "legacy-values.json",
+   "bytes": 8768,
+   "sha256": "5169a58662f4d1e786e23fc04358d6c961e36cda4f59eea19fab47006c202a85"
+  },
+  {
+   "path": "lexicon.json",
+   "bytes": 193557,
+   "sha256": "8702c25694eba7045b01563533269f04984d0b3a5e3d14a90fde2150c06b3511"
+  },
+  {
+   "path": "literal-set.json",
+   "bytes": 32745,
+   "sha256": "94bbb8eace69d546ce1fdd0792af4bfd6abb689f7c5a70a3b17f4c1b6024022c"
+  },
+  {
+   "path": "manifest.json",
+   "bytes": 48170,
+   "sha256": "d694797995ff0b800ee54fdd85f509b72093a110769acac696c9b784602dacc5"
+  },
+  {
+   "path": "policy/business-policy-1.schema.json",
+   "bytes": 16377,
+   "sha256": "79ad6e0b5f3ab31209e6effadca7a5653b2838bc1d7da3b55a402571d8ec9094"
+  },
+  {
+   "path": "policy/policy-legacy-synthetic.json",
+   "bytes": 12523,
+   "sha256": "7e3162eaa47ea25df97fdb55cdcc4d96c36f1155634abfa2d07b23d5465aa65b"
+  },
+  {
+   "path": "policy/policy-neutral-a.json",
+   "bytes": 10351,
+   "sha256": "b3d4e0ab6dd3657d51ad700e28f6cce77ce1848175fed7f71284a27568013e28"
+  },
+  {
+   "path": "policy/policy-neutral-b.json",
+   "bytes": 10674,
+   "sha256": "f043e2bebdcc45e1227f71cc15666293092f531bc51f4bb0015a7a6bec578dae"
+  },
+  {
+   "path": "probe-expectations.json",
+   "bytes": 21513,
+   "sha256": "8fe906614c1461363f336bbb10893caea0b9cfe1092028e20a4a0e3ae27cec78"
+  }
+ ],
+ "external": [
+  {
+   "path": "tests/profile-externalization.probe.mjs",
+   "bytes": 23137,
+   "sha256": "9faf9e7a59bfea04036a0a59a31804066ae29461671fe5c4e8b0d1492eb1a51c"
+  },
+  {
+   "path": "docs/design/block-b-x24-expectations.md",
+   "bytes": 11019,
+   "sha256": "28ec958ea9673fa386053ff41707bee28b38dd3a8eccd727dae9e9420a972592"
+  }
+ ]
+}

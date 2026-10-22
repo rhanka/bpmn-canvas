@@ -1,0 +1,84 @@
+{
+  "caseId": "template-006-corner-fold-ratio",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "cf",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": [],
+          "template": "corner-fold",
+          "parameters": [
+            {
+              "name": "foldRatio",
+              "value": 0.1
+            },
+            {
+              "name": "headerRotation",
+              "value": 270
+            }
+          ]
+        },
+        "bounds": {
+          "x": 100000,
+          "y": 50000,
+          "width": 25,
+          "height": 40
+        },
+        "labelBounds": {
+          "x": 100000,
+          "y": 50000,
+          "width": 25,
+          "height": 11
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "fold": 2,
+          "foldPath": [
+            {
+              "x": 100023,
+              "y": 50000
+            },
+            {
+              "x": 100023,
+              "y": 50002
+            },
+            {
+              "x": 100025,
+              "y": 50002
+            }
+          ],
+          "labelRotation": {
+            "angle": 270,
+            "center": {
+              "x": 100012,
+              "y": 50006
+            }
+          }
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

@@ -28,6 +28,8 @@ import { tabDomId } from "./ui/contracts.js";
 import type { MenuItem } from "./ui/contracts.js";
 import { Menu } from "./ui/Menu.js";
 import { IconDownload, IconFit, IconFormat, IconLayout, IconRedo, IconUndo, IconUpload, IconZoomIn, IconZoomOut } from "./ui/icons.js";
+import { NativeProfileWorkshop } from "./native-workshop.js";
+import type { NativeProfileWorkshopProps } from "./native-workshop.js";
 
 export interface FormatOption {
   readonly id: string;
@@ -198,7 +200,11 @@ function defaultDownload(file: DiagramFile): void {
 
 const DEFAULT_FORMATS: readonly FormatOption[] = [{ id: "standard", label: "BPMN", profile: "standard" }];
 
-export function BpmnWorkshop(props: BpmnWorkshopProps): ReactElement {
+export function BpmnWorkshop(props: BpmnWorkshopProps | NativeProfileWorkshopProps): ReactElement {
+  return "businessProfile" in props ? <NativeProfileWorkshop {...props} /> : <XmlWorkshop {...props} />;
+}
+
+function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
   const labels: WorkshopLabels = { ...DEFAULT_LABELS, ...props.labels };
   const formats = props.formats && props.formats.length > 0 ? props.formats : DEFAULT_FORMATS;
   const [ownFormat, setOwnFormat] = useState<string>(props.format ?? formats[0]?.id ?? "standard");

@@ -59,13 +59,26 @@ export async function validateEnvelope(value: unknown, context: {
   validateBindingKeys(envelope.bindings);
   if (canonicalize(envelope.bindings) !== canonicalize(sortBindings(envelope.bindings))) failContract("support-binding-conflict");
   if (!context.storageValidator(envelope.tree)) failContract();
-  if (envelope.tree.$type !== "bpmn:Definitions" || typeof envelope.tree.targetNamespace !== "string" || !envelope.tree.targetNamespace ||
-    typeof envelope.tree.exporterVersion !== "string" || !envelope.tree.exporterVersion) failContract();
-  validateNativeReferences(envelope.tree, context.descriptors, context.idRefScalars);
+  // Requiredness of committed Definitions scalars follows the effective base
+  // (admitted descriptor scalars), never a library constant.
+  if (envelope.tree.$type !== "bpmn:Definitions") failContract();
+  const admittedScalars = Object.hasOwn(context.descriptors, "bpmn:Definitions")
+    ? context.descriptors["bpmn:Definitions"]!.scalars
+    : failContract("profile-type");
+  for (const field of ["targetNamespace", "exporterVersion"] as const) {
+    if (admittedScalars.includes(field)) {
+      const value = (envelope.tree as Record<string, unknown>)[field];
+      if (typeof value !== "string" || !value) failContract();
+    }
+  }
+  // Presentation-role members are extracted by the projection first: a tree
+  // carrying inline presentation mismatches its semantic projection (a bare
+  // refusal), before unknown-member admission names a profile code.
   const projection = projectSemanticTree(envelope.tree, context.descriptors, context.descriptorRoles ?? []);
   if (canonicalize(projection.tree) !== canonicalize(envelope.tree)) failContract();
+  validateNativeReferences(envelope.tree, context.descriptors, context.idRefScalars);
   validateSupportBindings(envelope.tree, envelope.bindings, context.descriptors, context.supportRoles);
-  if (await semanticRevision(envelope.tree, envelope.profileIdentity, envelope.bindings) !== envelope.semanticRevision) failContract("document-revision-mismatch");
+  if (await semanticRevision(envelope.tree, envelope.profileIdentity, envelope.bindings) !== envelope.semanticRevision) failContract("profile-schema");
   return cloneJson(envelope);
 }
 

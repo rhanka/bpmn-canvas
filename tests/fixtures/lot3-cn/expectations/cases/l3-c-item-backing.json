@@ -1,0 +1,359 @@
+{
+  "caseId": "l3-c-item-backing",
+  "operation": "complete",
+  "phase": "complete",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn.json",
+    "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_cn",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Items",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:DataObjectReference",
+                  "id": "DataObjectReference_New",
+                  "name": "Order form"
+                },
+                {
+                  "$type": "bpmn:DataObjectReference",
+                  "id": "DataObjectReference_Old",
+                  "name": "Archive copy",
+                  "dataObjectRef": "DataObject_Old"
+                },
+                {
+                  "$type": "bpmn:DataObject",
+                  "id": "DataObject_Old"
+                },
+                {
+                  "$type": "bpmn:DataStoreReference",
+                  "id": "DataStoreReference_Orphan",
+                  "name": "Ledger"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:DataStore",
+              "id": "DataStore_Ledger",
+              "name": "Ledger"
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "0bdc393df20da60f1bded73a403c3e4bb9a871179d84e09d3c46fe09cdb99f74"
+      }
+    },
+    {
+      "role": "mode",
+      "json": "retained"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "operation": "complete",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "0bdc393df20da60f1bded73a403c3e4bb9a871179d84e09d3c46fe09cdb99f74",
+        "revision": "a2e4a421faf304251adee590aa9ead30533b49a1cc5b017ad82e686f08234c9c",
+        "report": {
+          "reportVersion": "2",
+          "operation": "complete",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "targetIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "0bdc393df20da60f1bded73a403c3e4bb9a871179d84e09d3c46fe09cdb99f74",
+          "outputRevision": "a2e4a421faf304251adee590aa9ead30533b49a1cc5b017ad82e686f08234c9c",
+          "entries": [
+            {
+              "code": "complete/create",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "c-item-backing",
+              "messageKey": "complete.create",
+              "disposition": "corrected",
+              "source": {
+                "domain": "none",
+                "pointer": null,
+                "targetId": null,
+                "provenance": "generated"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/4",
+                "targetId": "g_0af55b7b484c062f5f636a22f1464dadcd73c13843a3d4e93554b2a8a025d28e",
+                "provenance": "generated"
+              },
+              "property": "flowElements",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": {
+                "$type": "bpmn:DataObject",
+                "id": "g_0af55b7b484c062f5f636a22f1464dadcd73c13843a3d4e93554b2a8a025d28e"
+              }
+            },
+            {
+              "code": "complete/assignRef",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "complete",
+              "ruleId": "c-item-backing",
+              "messageKey": "complete.assignRef",
+              "disposition": "corrected",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/dataObjectRef",
+                "targetId": "DataObjectReference_New",
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/flowElements/0/dataObjectRef",
+                "targetId": "DataObjectReference_New",
+                "provenance": "exact"
+              },
+              "property": "dataObjectRef",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": "g_0af55b7b484c062f5f636a22f1464dadcd73c13843a3d4e93554b2a8a025d28e"
+            }
+          ],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        },
+        "payload": {
+          "documentVersion": "1",
+          "profileIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "tree": {
+            "$type": "bpmn:Definitions",
+            "id": "Definitions_cn",
+            "targetNamespace": "urn:neutral-cn:1",
+            "exporterVersion": "fixture-cn-1",
+            "rootElements": [
+              {
+                "$type": "bpmn:Process",
+                "id": "Process_A",
+                "name": "Items",
+                "isExecutable": false,
+                "flowElements": [
+                  {
+                    "$type": "bpmn:DataObjectReference",
+                    "id": "DataObjectReference_New",
+                    "name": "Order form",
+                    "dataObjectRef": "g_0af55b7b484c062f5f636a22f1464dadcd73c13843a3d4e93554b2a8a025d28e"
+                  },
+                  {
+                    "$type": "bpmn:DataObjectReference",
+                    "id": "DataObjectReference_Old",
+                    "name": "Archive copy",
+                    "dataObjectRef": "DataObject_Old"
+                  },
+                  {
+                    "$type": "bpmn:DataObject",
+                    "id": "DataObject_Old"
+                  },
+                  {
+                    "$type": "bpmn:DataStoreReference",
+                    "id": "DataStoreReference_Orphan",
+                    "name": "Ledger"
+                  },
+                  {
+                    "$type": "bpmn:DataObject",
+                    "id": "g_0af55b7b484c062f5f636a22f1464dadcd73c13843a3d4e93554b2a8a025d28e"
+                  }
+                ]
+              },
+              {
+                "$type": "bpmn:DataStore",
+                "id": "DataStore_Ledger",
+                "name": "Ledger"
+              }
+            ]
+          },
+          "bindings": [],
+          "semanticRevision": "a2e4a421faf304251adee590aa9ead30533b49a1cc5b017ad82e686f08234c9c"
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_cn",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Items",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:DataObjectReference",
+                  "id": "DataObjectReference_New",
+                  "name": "Order form"
+                },
+                {
+                  "$type": "bpmn:DataObjectReference",
+                  "id": "DataObjectReference_Old",
+                  "name": "Archive copy",
+                  "dataObjectRef": "DataObject_Old"
+                },
+                {
+                  "$type": "bpmn:DataObject",
+                  "id": "DataObject_Old"
+                },
+                {
+                  "$type": "bpmn:DataStoreReference",
+                  "id": "DataStoreReference_Orphan",
+                  "name": "Ledger"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:DataStore",
+              "id": "DataStore_Ledger",
+              "name": "Ledger"
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "0bdc393df20da60f1bded73a403c3e4bb9a871179d84e09d3c46fe09cdb99f74"
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2"
+  ]
+}

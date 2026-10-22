@@ -1,0 +1,174 @@
+{
+  "caseId": "l3-c-version-mismatch-first",
+  "operation": "complete",
+  "phase": "complete",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn.json",
+    "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.0.0",
+          "sha256": "ef1473cc4371388afc2261e51a27d36c2a38dee772387dadc1aa11a95079dcea",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_cn",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Versions",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "name": "Untouched"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "e375470720d31ec6a3bec45977faea1e4903574296464a8e5c70cf7c05a7a043"
+      }
+    },
+    {
+      "role": "mode",
+      "json": "retained"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "refused",
+        "operation": "complete",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.0.0",
+          "sha256": "ef1473cc4371388afc2261e51a27d36c2a38dee772387dadc1aa11a95079dcea",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "e375470720d31ec6a3bec45977faea1e4903574296464a8e5c70cf7c05a7a043",
+        "code": "profile-source-unavailable",
+        "diagnostics": [],
+        "report": {
+          "reportVersion": "2",
+          "operation": "complete",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.0.0",
+            "sha256": "ef1473cc4371388afc2261e51a27d36c2a38dee772387dadc1aa11a95079dcea",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "e375470720d31ec6a3bec45977faea1e4903574296464a8e5c70cf7c05a7a043",
+          "entries": [],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.0.0",
+          "sha256": "ef1473cc4371388afc2261e51a27d36c2a38dee772387dadc1aa11a95079dcea",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_cn",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Versions",
+              "isExecutable": false,
+              "flowElements": [
+                {
+                  "$type": "bpmn:Task",
+                  "name": "Untouched"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "e375470720d31ec6a3bec45977faea1e4903574296464a8e5c70cf7c05a7a043"
+      }
+    }
+  ],
+  "expectedStatus": "refused:profile-source-unavailable",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2"
+  ]
+}

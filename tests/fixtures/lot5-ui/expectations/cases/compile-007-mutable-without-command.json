@@ -1,0 +1,43 @@
+{
+  "caseId": "lot5-compile-007-mutable-without-command",
+  "comparatorIds": [
+    "lot5/result"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "code": "profile-schema",
+        "diagnostics": [],
+        "status": "refused"
+      },
+      "role": "result"
+    }
+  ],
+  "expectedStatus": "refused:profile-schema",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/ui-neutral-registry.json",
+      "role": "registry",
+      "sha256": "1dc918ec35fd0c60a78006a9c4bacfe3fc32b32c6b2e796810e7256f27139406"
+    },
+    {
+      "json": {
+        "assets": [
+          "fixtures/ui-neutral-metrics.json"
+        ],
+        "base": "fixtures/ui-neutral-base.json",
+        "descriptors": [
+          "fixtures/ui-neutral-descriptors.json"
+        ],
+        "digestDomain": "raw"
+      },
+      "role": "compile-inputs"
+    }
+  ],
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/variants/mutable-without-command.profile.json",
+    "sha256": "fa312c948f982daa46162e6f8589551af11ad1d68ba621fde8e47be5d798ec63"
+  }
+}

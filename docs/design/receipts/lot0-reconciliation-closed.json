@@ -152,9 +152,33 @@
         "sha256": "9149394b9c0f61b0b0cfea37c6e8c8eb55cae5dd7a9d8f3d4af964e46eed6751"
       },
       "new": {
-        "bytes": 18158,
-        "sha256": "2e02e1a64c1369680e5dc0bea7361b9ebd232d35c3a2d24b9bd72eb517d02124"
-      }
+        "bytes": 18609,
+        "sha256": "5aca7a63c6f541093d155d81eaddef8e8b22464e501463419fa0cb79d4fa3136"
+      },
+      "g10Transitions": [
+        {
+          "old": {
+            "bytes": 18158,
+            "sha256": "2e02e1a64c1369680e5dc0bea7361b9ebd232d35c3a2d24b9bd72eb517d02124"
+          },
+          "new": {
+            "bytes": 18158,
+            "sha256": "42985e54081bbed8f725535ebe873f09c6f3a08aa14e9caf55bb861645ef30cf"
+          },
+          "reason": "block B final spec pass followed the s123 inventory pin move; predecessor recorded here under fix round 2 G10"
+        },
+        {
+          "old": {
+            "bytes": 18158,
+            "sha256": "42985e54081bbed8f725535ebe873f09c6f3a08aa14e9caf55bb861645ef30cf"
+          },
+          "new": {
+            "bytes": 18609,
+            "sha256": "5aca7a63c6f541093d155d81eaddef8e8b22464e501463419fa0cb79d4fa3136"
+          },
+          "reason": "fix round 2 G10 recorded the golden pin transition above; closure successor refreshed to the current golden bytes"
+        }
+      ]
     },
     {
       "path": "docs/design/receipts/lot0-s123-seal.json",

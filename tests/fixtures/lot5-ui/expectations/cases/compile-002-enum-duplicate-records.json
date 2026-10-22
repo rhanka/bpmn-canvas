@@ -1,0 +1,43 @@
+{
+  "caseId": "lot5-compile-002-enum-duplicate-records",
+  "comparatorIds": [
+    "lot5/result"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "code": "profile-schema",
+        "diagnostics": [],
+        "status": "refused"
+      },
+      "role": "result"
+    }
+  ],
+  "expectedStatus": "refused:profile-schema",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/ui-neutral-registry.json",
+      "role": "registry",
+      "sha256": "1dc918ec35fd0c60a78006a9c4bacfe3fc32b32c6b2e796810e7256f27139406"
+    },
+    {
+      "json": {
+        "assets": [
+          "fixtures/ui-neutral-metrics.json"
+        ],
+        "base": "fixtures/ui-neutral-base.json",
+        "descriptors": [
+          "fixtures/ui-neutral-descriptors.json"
+        ],
+        "digestDomain": "raw"
+      },
+      "role": "compile-inputs"
+    }
+  ],
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/variants/enum-duplicate-records.profile.json",
+    "sha256": "58c8d2153b0e5c9f38dbdeadcf403e685103a0d29e22c98da3fa06bb48f8c50a"
+  }
+}

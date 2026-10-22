@@ -1,0 +1,15 @@
+{
+ "format": "x24-comparators/2",
+ "note": "Comparator ids of the x24 cases. The executable semantics are derive/comparators.mjs (COMPARATORS, compareCase), pinned with the files it imports by SHA-256 in manifest.json#/executables and seal.json; this file only names them. Canonical JSON: object keys sorted by UTF-16 code units, no whitespace, ECMAScript number and string serialisation; zero tolerance (DESIGN.md:961). An observation is {status, artifacts} for one run, or {runs: {a, b}} for a substitution.",
+ "comparators": [
+  { "id": "x24-exact-json/1", "kind": "x24-executable", "note": "Exact status; exactly the expected artifact roles (none omitted, none extra); each artifact canonically equal to the expected one (array order significant, absent members absent)." },
+  { "id": "x24-refusal/1", "kind": "x24-executable", "note": "Exact refusal code; the refusal record (code, ids, stage, vector when listed) canonically equal; only the refusal and state artifacts present: no partial output." },
+  { "id": "x24-substitution/1", "kind": "x24-executable", "note": "Two runs (policy-a or profile-a, policy-b or profile-b) on the same inputs, each with one results artifact canonically equal to results-a and results-b; the set of RFC 6901 pointers at which the two observed results differ equals the differences artifact exactly." },
+  { "id": "x24-assertions/1", "kind": "x24-executable", "note": "Each assertion {pointer, op, value} holds on the subject artifact (ops: equals, keysEqual, nonEmptyArray, nonEmptyString, inSet, excludesPattern, noLexiconOccurrence, containsRowsOf, equalsPackMembers, matchesBytes; a pointer segment name[key=value] selects the unique member, * every member)." },
+  { "id": "x24-state/1", "kind": "x24-executable", "note": "The state artifact reports inputs unchanged: every input the operation received serialises to the same bytes after it, refusals included." },
+  { "id": "x24-ledger/1", "kind": "x24-executable", "note": "At the base commit, after npm ci and npm run build, the ledger recomputed by derive/ledger.mjs from git ls-tree of the base and the actual pack list has the SHA-256 of the sealed ledger.json, and the section summary equals." },
+  { "id": "x24-legacy-values/1", "kind": "x24-executable", "note": "Run by the private integration: each field of its legacy business-policy/1 record (the facts field with the SHA-256 of its descriptor package bytes) has the canonical SHA-256 of its pin." },
+  { "id": "x24-scan/1", "kind": "x24-executable", "note": "The counts reported by the post-migration rescan (probe-expectations.json#/rescan) satisfy the assertions." },
+  { "id": "x24-seal-literals/1", "kind": "x24-executable", "note": "The hygiene rules R1 to R4 of probe-expectations.json#/sealHygiene (relaxed scan of derive/scan.mjs, literal containment of derive/literals.mjs over the literal set recovered from the base blobs) report exactly the expected counts and exceptions over the seal scope (README \"Literal-free seal\")." }
+ ]
+}

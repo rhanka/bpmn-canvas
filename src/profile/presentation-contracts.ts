@@ -218,7 +218,7 @@ async function checkSnapshot(value: unknown, context: SnapshotContext): Promise<
   canonicalize(value); noNull(value); const r = record(value, ["snapshotVersion", "envelope", "presentation", "viewRevision"], [], "snapshot-schema"); choice(r.snapshotVersion, ["1"]);
   const envelope = await context.validateEnvelope(r.envelope); validateIdentity(envelope.profileIdentity);
   if (context.hostProfileIdentity && !equal(context.hostProfileIdentity, envelope.profileIdentity)) failContract("profile-metadata-conflict");
-  if (await semanticRevision(envelope.tree, envelope.profileIdentity, envelope.bindings) !== envelope.semanticRevision) failContract("document-revision-mismatch");
+  if (await semanticRevision(envelope.tree, envelope.profileIdentity, envelope.bindings) !== envelope.semanticRevision) failContract("profile-schema");
   if (!equal(await profileIdentity(context.profile), envelope.profileIdentity)) failContract("profile-metadata-conflict");
   const p = record(r.presentation, ["themeId", "overrides", "diStyles", "importedDi", "selection", "activePageId"], ["layout"], "snapshot-schema");
   const archive = record(p.importedDi, ["descriptorDigest", "diagrams", "sha256"], [], "snapshot-schema");

@@ -1,0 +1,51 @@
+{
+  "name": "X24Facts",
+  "prefix": "xf",
+  "uri": "urn:x24:facts:1",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "Facts",
+      "superClass": [
+        "Element"
+      ],
+      "properties": [
+        {
+          "name": "seq",
+          "type": "Integer",
+          "isAttr": true
+        },
+        {
+          "name": "lane",
+          "type": "bpmn:Lane",
+          "isAttr": true,
+          "isReference": true
+        },
+        {
+          "name": "way",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "caption",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "anchor",
+          "type": "bpmn:BaseElement",
+          "isAttr": true,
+          "isReference": true
+        },
+        {
+          "name": "opens",
+          "type": "bpmn:Process",
+          "isAttr": true,
+          "isReference": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "caseId": "prepare-003-lint-blocked",
+  "operation": "prepareExport",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot4-layout-export/expectations/artifacts/neutral-lot4-profile.json",
+    "sha256": "6b8f27c2ef5778cf29882fa8c7278b4945eb409105ebaf5ceb4e97c6c25b26c6"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "path": "lot4-layout-export/expectations/artifacts/main-unnamed.envelope.json",
+      "sha256": "5e3a949236cefd48d5c4be8fe380b891a8dc9af19e33b17d7e8ba0fdab2b9851"
+    },
+    {
+      "role": "options",
+      "json": {
+        "format": "drawio",
+        "themeId": "plain",
+        "overrides": {
+          "semantic": [],
+          "occurrence": []
+        },
+        "diStyles": {
+          "native": [],
+          "bioc": []
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "refused",
+        "operation": "prepareExport",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-lot4/1",
+          "version": "1.1.0",
+          "sha256": "c613f315687e00db306c0262c0fdf3b8a0a08b6920130fda58ce070e9958bd82",
+          "base": {
+            "id": "neutral-lot4-base/1",
+            "version": "lot4-2",
+            "sha256": "3599ac08a9ba1ce429f739f39ab6654d01ae57060ed612f8b14196bad817e7e8"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-lot4-descriptors/1",
+              "version": "lot4-2",
+              "sha256": "a2578b19578280b307d8140696cbf5a0b66cd0af6bf788e49e399e60f1d9390a"
+            }
+          ]
+        },
+        "baseRevision": "d8fbaaf8e126cc504f555e08414f9605b94ba3a7057052daf0e25241a476b97b",
+        "code": "task-name-missing-pre-normalize",
+        "diagnostics": [
+          {
+            "code": "task-name-missing-pre-normalize",
+            "severity": "error",
+            "classification": "readiness",
+            "stage": "pre-normalize",
+            "ruleId": "task-named-pre-normalize",
+            "messageKey": "invalid",
+            "disposition": "observed",
+            "source": {
+              "domain": "tree",
+              "pointer": "/rootElements/1/flowElements/4",
+              "targetId": "Task_Fix",
+              "provenance": "exact"
+            },
+            "result": {
+              "domain": "none",
+              "pointer": null,
+              "targetId": null,
+              "provenance": "unavailable"
+            },
+            "beforePresent": false,
+            "afterPresent": false
+          }
+        ],
+        "report": {
+          "reportVersion": "2",
+          "operation": "prepareExport",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-lot4/1",
+            "version": "1.1.0",
+            "sha256": "c613f315687e00db306c0262c0fdf3b8a0a08b6920130fda58ce070e9958bd82",
+            "base": {
+              "id": "neutral-lot4-base/1",
+              "version": "lot4-2",
+              "sha256": "3599ac08a9ba1ce429f739f39ab6654d01ae57060ed612f8b14196bad817e7e8"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-lot4-descriptors/1",
+                "version": "lot4-2",
+                "sha256": "a2578b19578280b307d8140696cbf5a0b66cd0af6bf788e49e399e60f1d9390a"
+              }
+            ]
+          },
+          "inputRevision": "d8fbaaf8e126cc504f555e08414f9605b94ba3a7057052daf0e25241a476b97b",
+          "entries": [
+            {
+              "code": "task-name-missing-pre-normalize",
+              "severity": "error",
+              "classification": "readiness",
+              "stage": "pre-normalize",
+              "ruleId": "task-named-pre-normalize",
+              "messageKey": "invalid",
+              "disposition": "observed",
+              "source": {
+                "domain": "tree",
+                "pointer": "/rootElements/1/flowElements/4",
+                "targetId": "Task_Fix",
+                "provenance": "exact"
+              },
+              "result": {
+                "domain": "none",
+                "pointer": null,
+                "targetId": null,
+                "provenance": "unavailable"
+              },
+              "beforePresent": false,
+              "afterPresent": false
+            }
+          ],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        }
+      }
+    }
+  ],
+  "expectedStatus": "refused:task-name-missing-pre-normalize",
+  "comparatorIds": [
+    "result-exact/1",
+    "profile-report/2",
+    "source-immutability/1"
+  ]
+}

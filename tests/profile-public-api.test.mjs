@@ -210,7 +210,7 @@ test("J1 #6 and J5 #5 should refuse incomplete lint coverage synchronously throu
 test("J5 #5 should return typed refusals without rejected promises or candidate payloads", async () => {
   const { api, compiled, envelope } = await setup();
   const cases = [
-    [compiled, { ...envelope, semanticRevision: "0".repeat(64) }, { phase: "post-normalize", readinessPolicy: "draft" }, "document-revision-mismatch"],
+    [compiled, { ...envelope, semanticRevision: "0".repeat(64) }, { phase: "post-normalize", readinessPolicy: "draft" }, "profile-schema"],
     [compiled, envelope, { phase: "post-normalize" }, "lint-config-incomplete"],
     [structuredClone(compiled), envelope, { phase: "post-normalize", readinessPolicy: "draft" }, "profile-context-unknown"],
   ];
