@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
+import { tmpdir } from "node:os";
 import { chromium } from "playwright-core";
 import { startServer } from "./p3/server.mjs";
 
@@ -24,10 +25,15 @@ test("README images are static SVG without script, from the shipped demo diagram
 test("the demo app: multi-tab workshop and a chat with a simulated assistant that drives the canvas", { timeout: 240000 }, async () => {
   execFileSync("node", ["scripts/build-demo.mjs"], { cwd: root, stdio: "pipe" });
   const server = await startServer(join(root, "site"));
-  const profile = mkdtempSync(join(root, "proofs-profile-"));
-  const ctx = await chromium.launchPersistentContext(profile, { executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined), headless: true, viewport: { width: 1400, height: 900 } });
+  const profile = mkdtempSync(join(tmpdir(), "b-"));
+  // Unix-domain sockets are limited to 107 chars and Chromium nests its IPC
+  // sockets under the profile dir: fail fast on a long TMPDIR instead of a
+  // cryptic launch failure.
+  if (profile.length > 70) throw new Error(`browser profile path too long for Chromium IPC sockets (${profile.length} chars > 70): set TMPDIR to a short path`);
+  let ctx;
   const errors = [];
   try {
+    ctx = await chromium.launchPersistentContext(profile, { executablePath: chromium.executablePath(), headless: true, viewport: { width: 1400, height: 900 } });
     const page = ctx.pages()[0] ?? (await ctx.newPage());
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
@@ -78,9 +84,12 @@ test("the demo app: multi-tab workshop and a chat with a simulated assistant tha
     const listed = await (await page.request.get(`${server.origin}/licenses/index.html`)).text();
     for (const f of readdirSync(join(root, "site/licenses")).filter((f) => f !== "index.html")) assert.ok(listed.includes(`href="${f}"`), `licenses/index.html lists ${f}`);
   } finally {
-    await ctx.close();
-    await server.close();
-    rmSync(profile, { recursive: true, force: true });
-    rmSync(join(root, "site"), { recursive: true, force: true });
+    try {
+      await ctx?.close();
+    } finally {
+      rmSync(profile, { recursive: true, force: true });
+      await server.close();
+      rmSync(join(root, "site"), { recursive: true, force: true });
+    }
   }
 });

@@ -3,7 +3,7 @@ import { cloneJson, failContract, pointerKey } from "./native-contracts.js";
 import { array, choice, compareText, digest, record, text, validateIdentity } from "./boundary.js";
 import type { ProfileIdentity } from "./envelope.js";
 
-export const resultOperations = ["complete", "normalize", "validate", "resolveTheme", "mapExport", "serializePrepared", "prepareExport", "getDefinitions", "getSnapshot", "setDefinitions", "applyCommands", "activateBusinessProfile", "setTheme", "restoreSnapshot", "undo", "redo", "exportPrepared"] as const;
+export const resultOperations = ["complete", "normalize", "validate", "layout", "resolveTheme", "mapExport", "serializePrepared", "prepareExport", "getDefinitions", "getSnapshot", "setDefinitions", "applyCommands", "activateBusinessProfile", "setTheme", "restoreSnapshot", "undo", "redo", "exportPrepared"] as const;
 export const reportStages = ["load", "import", "complete", "pre-normalize", "normalize", "post-normalize", "layout", "post-layout", "release", "render", "export"] as const;
 export const lossClasses = ["semantic-type", "relation-kind", "navigation", "appearance", "layout", "metadata", "unsupported-feature", "provenance-unavailable"] as const;
 export const capabilities = ["engine-byte-compatible", "structural", "unsupported"] as const;

@@ -1,0 +1,1906 @@
+{
+  "format": "lot3-digest-ledger/2",
+  "note": "Every stable-id/1 tuple, birth content signature, input revision, view tuple and transport digest computed by author-lot3.mjs, with the exact canonical strings hashed.",
+  "profiles": {
+    "main": {
+      "path": "lot3-cn/expectations/profile/neutral-cn.json",
+      "raw": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32",
+      "identity": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845"
+    },
+    "stale": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-stale.json",
+      "raw": "837b77de3298ff088262866cb35b3b2186da8b003ed7851a80d7554a25811aa0",
+      "identity": "8d08e85046c8a52fbbe22f19e4b6c6218f01acf244f19daaaf42822ac8ee34e6"
+    },
+    "conflict": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-conflict.json",
+      "raw": "5efc67b14eea6ea6314121b6d07de627363407be4dd9c05c3e01ee0c33548c8f",
+      "identity": "46e94ff56e6baca786e96f7b44adc029cf07d111523ea115c589efccec3b7a43"
+    },
+    "coalesce": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-coalesce.json",
+      "raw": "f0c6ffa74d57724d6ac5b68acb1708dbcd01abfd7f6ba5e5cbb105e7c32a295e",
+      "identity": "f4a5868ecf7e4f59799b7e46479a98784f3643f4b7553ebb674cb530ee6115a0"
+    },
+    "outport": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-outport.json",
+      "raw": "7dce72d63cb8da783e03458e2c6cfb50850a83dc1a1ef71b31724d9ab167745d",
+      "identity": "e9e1c302455da6075bff995f41eabf001d209109b2445d7bc7a404b1b762b44e"
+    },
+    "flip": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-flip.json",
+      "raw": "325d9c7c615abf59e087e40ae2c996fb427d800581a33106d6404d4d66c94f31",
+      "identity": "ffb7d285b4aaee577302e6e49c617c0ef4e90b994f65a38a5e4f6ee94aee6b8f"
+    },
+    "dirconflict": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-dirconflict.json",
+      "raw": "fa1f10fc05faeec48065a50ac6f73c5ca946c0e827775150ac465443d7b747fb",
+      "identity": "67762bf08f207b4bede6730a710cec139dc2e5c1a9d4a4a717c81a900087736d"
+    },
+    "ensureconflict": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-ensureconflict.json",
+      "raw": "dbda92973e30aa8d98b1d0bf3324f9bfde4fbc65717ec7c7eafbcf9f38e4ad1a",
+      "identity": "2f0d302b5404cb731af9590d8c54e05406e9a505b7f0e65bf81c0a57b576a254"
+    },
+    "extraction": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-extraction.json",
+      "raw": "125bc7573f39468f177773bff8ec2c4beaa7c5f1b43f0275b4469ec9a13effd1",
+      "identity": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697"
+    },
+    "abort": {
+      "path": "lot3-cn/expectations/profile/neutral-cn-abort.json",
+      "raw": "81e58e0677a5fb12f0a604af860a1b6679eefd1666136478cd4be4ee5e101abf",
+      "identity": "55cce6fc1e6595076280d99a57078465c741b6fd5d6402a22e295c2ad17c4168"
+    },
+    "neutral": {
+      "path": "profile-parity-corpus/profile-mechanism/1/neutral-profile.json",
+      "raw": "c1319045f538a9f4ef1f3f7500af4a3e0df059e04c7c42dd7e992477c9199650",
+      "identity": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40"
+    },
+    "grid": {
+      "path": "profile-parity-corpus/profile-mechanism/1/neutral-grid-profile.json",
+      "raw": "7247b5cd90c13fea2d42048a8ea6a5f3a36f64db67a771533adf10968c92cccd",
+      "identity": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058"
+    }
+  },
+  "view": {
+    "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+    "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+    "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+    "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+  },
+  "mainThemes": {
+    "plain": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+    "contrast": "ed909e09244bbf430e9a2db911238d4261062b380eefbe751ae40fb207183edb"
+  },
+  "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+  "stableIds": [
+    {
+      "label": "lot-0 collaboration",
+      "value": [
+        "profile-mechanism/1",
+        "Definitions_support",
+        "collaboration",
+        "Process_A"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Definitions_support\",\"collaboration\",\"Process_A\"]",
+      "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+    },
+    {
+      "label": "lot-0 band",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "reference-band",
+        "reference-band"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"reference-band\",\"reference-band\"]",
+      "id": "g_11a2781ef2229f47d2ae48d7b4cc3ad823a7f013eac7fa12d7cefd30f412d769"
+    },
+    {
+      "label": "lot-0 root",
+      "value": [
+        "profile-mechanism/1",
+        "document-root/1",
+        "definitions",
+        "root"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"document-root/1\",\"definitions\",\"root\"]",
+      "id": "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21"
+    },
+    {
+      "label": "lot-0 sibling 1",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"d1cede56a48b1de116daabc69e4f42dd056dfa4bcb35185144e89fc2fb0c82d1\",1]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"d1cede56a48b1de116daabc69e4f42dd056dfa4bcb35185144e89fc2fb0c82d1\\\",1]\"]",
+      "id": "g_bfe487754e6b93e1be16ec6b7e56193ed82cfa1401b6cfb87e6a2c57b6de3085"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        "clé-"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\"clé-\"]",
+      "id": "g_e372c0599d4f5be9d47fcbf52c59692f8d8f4ee1b0da768a91bc5d5b0db9f3f0"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        "clé-"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\"clé-\"]",
+      "id": "g_b040c3522dac749aa73b6263305714d861a51842c2b3d7c4e411eaa617781415"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        "clé-𐀀"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\"clé-𐀀\"]",
+      "id": "g_344bf647bb3ae35f1f2e8db3ef5fe16035887d0d70c3e874da7a4036611d67bd"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        " padded "
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\" padded \"]",
+      "id": "g_9531b9aa6fa3c4f9b62fe04a922a3b7cb14805318aec768350d82d1c6eb576c6"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        "padded"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\"padded\"]",
+      "id": "g_f773537ad4f07c732b0a5281da100d755df92e10646388c19995b1df30419e7b"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        "a b"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\"a b\"]",
+      "id": "g_a212ef2880a9404bc61fb323329cd23a4197fa53edab477e682634b25ceb0dc3"
+    },
+    {
+      "label": "vector Process_A/task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "task",
+        "a b"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"task\",\"a b\"]",
+      "id": "g_d49381818aa39bcfb7b993eaabd91aebe5926d19b9b0778648bcf38872123b5d"
+    },
+    {
+      "label": "missing Process Intake",
+      "value": [
+        "profile-mechanism/1",
+        "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+        "bpmn:Definitions.rootElements",
+        "[\"30189e66087901ee1288ead627c92ceb844666b13408a1754a2f8d6539708b9b\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21\",\"bpmn:Definitions.rootElements\",\"[\\\"30189e66087901ee1288ead627c92ceb844666b13408a1754a2f8d6539708b9b\\\",0]\"]",
+      "id": "g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5"
+    },
+    {
+      "label": "missing DataStore Archive",
+      "value": [
+        "profile-mechanism/1",
+        "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+        "bpmn:Definitions.rootElements",
+        "[\"0debdaefd9c5434e60fc484942c2677728d9f72f1af1182e19eefba0c61dc895\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21\",\"bpmn:Definitions.rootElements\",\"[\\\"0debdaefd9c5434e60fc484942c2677728d9f72f1af1182e19eefba0c61dc895\\\",0]\"]",
+      "id": "g_cef53c8286289e7c3cd3da194e726e94294834f3b70d08e6b3fb03894476ac3b"
+    },
+    {
+      "label": "missing Task Review",
+      "value": [
+        "profile-mechanism/1",
+        "g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5",
+        "bpmn:Process.flowElements",
+        "[\"ef7e4735a1593f49fae043dd8faec57dc93c37214546577e264514cdcacbefa1\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5\",\"bpmn:Process.flowElements\",\"[\\\"ef7e4735a1593f49fae043dd8faec57dc93c37214546577e264514cdcacbefa1\\\",0]\"]",
+      "id": "g_73b442945d7634cc178f791b9c7010d849120aa2c30fbe8672862027389ff949"
+    },
+    {
+      "label": "missing Task Approve",
+      "value": [
+        "profile-mechanism/1",
+        "g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5",
+        "bpmn:Process.flowElements",
+        "[\"2075edcdafe089fd8d46523df6686353b9e945f93b9476889f43964f3aef5ea6\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5\",\"bpmn:Process.flowElements\",\"[\\\"2075edcdafe089fd8d46523df6686353b9e945f93b9476889f43964f3aef5ea6\\\",0]\"]",
+      "id": "g_12d846a94219d0ede93f74d44e8a3a2a85d496611f608f772fe4b1a8d133f216"
+    },
+    {
+      "label": "missing TextAnnotation",
+      "value": [
+        "profile-mechanism/1",
+        "g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5",
+        "bpmn:Process.artifacts",
+        "[\"a9467c0e170af7ccf8d91881d53d19b7c4125dad72b20f50ae664a88e9aa40af\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_7015b6e175c66b90a7d755ea134ad1263fa4623f73c1fefa33a0fa1edba135c5\",\"bpmn:Process.artifacts\",\"[\\\"a9467c0e170af7ccf8d91881d53d19b7c4125dad72b20f50ae664a88e9aa40af\\\",0]\"]",
+      "id": "g_ec0bb7858db6a3a4ada8878a5e32d5d5e10831c6eb255efd37e8c8d975fac463"
+    },
+    {
+      "label": "identical sibling ordinal 0",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"d1cede56a48b1de116daabc69e4f42dd056dfa4bcb35185144e89fc2fb0c82d1\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"d1cede56a48b1de116daabc69e4f42dd056dfa4bcb35185144e89fc2fb0c82d1\\\",0]\"]",
+      "id": "g_86194e34f4b60bdd32455891cd64bfd11d52479237a2f0e3213e7ce9a3f1caf8"
+    },
+    {
+      "label": "missing sibling beside an ID-bearing twin, ordinal 0",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638\\\",0]\"]",
+      "id": "g_681e40aff517d4e2e7feed7c89482b57e0d2c065d639452ee85a5e5686de5756"
+    },
+    {
+      "label": "missing sibling beside an ID-bearing twin, ordinal 1",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638\",1]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638\\\",1]\"]",
+      "id": "g_b5c8aed8f1dfb5badfbd5ec7e19a6adb4c49cf01fa8547de4a740d66432bb61f"
+    },
+    {
+      "label": "same task under Process_B",
+      "value": [
+        "profile-mechanism/1",
+        "Process_B",
+        "bpmn:Process.flowElements",
+        "[\"7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_B\",\"bpmn:Process.flowElements\",\"[\\\"7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638\\\",0]\"]",
+      "id": "g_0e2f8e0cb14c00d1963e5943ad60eaebac464b405e0cd7c3f3b64e1ea7b230e4"
+    },
+    {
+      "label": "unicode name 0",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"d3b6c72038aa403a84c2710b452502cc938526e3ae84f368d7f6d4a65668e50e\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"d3b6c72038aa403a84c2710b452502cc938526e3ae84f368d7f6d4a65668e50e\\\",0]\"]",
+      "id": "g_b3d8ed1995a2bfd7c62ffdd5a8d45f66977d62c8e46f97169dd90f0716eecac1"
+    },
+    {
+      "label": "unicode name 1",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"9dee76338fc52c06cab84e7f4f60a5de004692be47e940d1883dc629426dc999\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"9dee76338fc52c06cab84e7f4f60a5de004692be47e940d1883dc629426dc999\\\",0]\"]",
+      "id": "g_8d38ebd5a3885362decaa35b06f183529ed8623a27173b0a969eb76f155e4866"
+    },
+    {
+      "label": "unicode name 2",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"0896d00b6811029f87119473c6753e297bd38d1d3ba57a1d278e269980569e0e\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"0896d00b6811029f87119473c6753e297bd38d1d3ba57a1d278e269980569e0e\\\",0]\"]",
+      "id": "g_50038ab77fd03a910c223ad2757d0fa1d407af07802f273843e7d4f47a1b6047"
+    },
+    {
+      "label": "unicode name 3",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"921907f37bddfb4e0345e8ec10f04e1b5d0f72e2cff04dc6951b6e1ea89db69b\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"921907f37bddfb4e0345e8ec10f04e1b5d0f72e2cff04dc6951b6e1ea89db69b\\\",0]\"]",
+      "id": "g_c4e7f15efef846d4d0469979ea86782ec0fcf1e21022805c147f379b0d527c4d"
+    },
+    {
+      "label": "unicode name 4",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"a5814b146dbb2fc7bc5e11a9e7f694a1c6acb91482c6b1d4cd1dacb91033c46d\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"a5814b146dbb2fc7bc5e11a9e7f694a1c6acb91482c6b1d4cd1dacb91033c46d\\\",0]\"]",
+      "id": "g_89cfdc34a8f07664251dfa85118baa8f9507c299c1fff54152ae3bd0b9bbeac1"
+    },
+    {
+      "label": "unicode name 5",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"0a8fd49f201856c5dd332a749a6273909c9a564da78c73678c91274d5dcc02eb\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"0a8fd49f201856c5dd332a749a6273909c9a564da78c73678c91274d5dcc02eb\\\",0]\"]",
+      "id": "g_b0443dab3c6a6cac0035077e957d4bb307cc158ccedc8911d03a28b171ba95db"
+    },
+    {
+      "label": "unicode name 6",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"a75c0b72e2dcf0d8a1ea452731b22c9c0a5a9a9c1aeae67ce1c2f845ede23920\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"a75c0b72e2dcf0d8a1ea452731b22c9c0a5a9a9c1aeae67ce1c2f845ede23920\\\",0]\"]",
+      "id": "g_c04e7052d81480913fcbbd5c3efec0982b1f8051fc149d9daf1472c965d2ad30"
+    },
+    {
+      "label": "unicode name 7",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"ec14863138cc6da3a469fa064064befcd5124d6122289cc7433fdbed58608077\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"ec14863138cc6da3a469fa064064befcd5124d6122289cc7433fdbed58608077\\\",0]\"]",
+      "id": "g_6f94e3d2838019fa005fc6beb7760e550c287c5c4c36f38bffa061a583011319"
+    },
+    {
+      "label": "timer sibling ordinal 0",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"109d749b670dd905e4327cc15a5e306a977cc538881ce51be27d3d7a03670936\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"109d749b670dd905e4327cc15a5e306a977cc538881ce51be27d3d7a03670936\\\",0]\"]",
+      "id": "g_2a25789c442f7b798099302bff8c1f0db7751f0e149aaca605390ce3b6e9dbc3"
+    },
+    {
+      "label": "timer sibling ordinal 1",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"109d749b670dd905e4327cc15a5e306a977cc538881ce51be27d3d7a03670936\",1]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"109d749b670dd905e4327cc15a5e306a977cc538881ce51be27d3d7a03670936\\\",1]\"]",
+      "id": "g_4e1df87bc2e291be39d2fef868acd901ca01eff2818a75e6387a20088d620aee"
+    },
+    {
+      "label": "timer definition under sibling 0",
+      "value": [
+        "profile-mechanism/1",
+        "g_2a25789c442f7b798099302bff8c1f0db7751f0e149aaca605390ce3b6e9dbc3",
+        "bpmn:IntermediateCatchEvent.eventDefinitions",
+        "[\"1a27b4151265925d3f5f8117a4192995c3c35f415a955f60b2dee25ecc0dfe79\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_2a25789c442f7b798099302bff8c1f0db7751f0e149aaca605390ce3b6e9dbc3\",\"bpmn:IntermediateCatchEvent.eventDefinitions\",\"[\\\"1a27b4151265925d3f5f8117a4192995c3c35f415a955f60b2dee25ecc0dfe79\\\",0]\"]",
+      "id": "g_aec42b92937f4dc9978e2a81d31a3078fd670a2e61f6ca47aff714e7d196ae61"
+    },
+    {
+      "label": "timer definition under sibling 1",
+      "value": [
+        "profile-mechanism/1",
+        "g_4e1df87bc2e291be39d2fef868acd901ca01eff2818a75e6387a20088d620aee",
+        "bpmn:IntermediateCatchEvent.eventDefinitions",
+        "[\"1a27b4151265925d3f5f8117a4192995c3c35f415a955f60b2dee25ecc0dfe79\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_4e1df87bc2e291be39d2fef868acd901ca01eff2818a75e6387a20088d620aee\",\"bpmn:IntermediateCatchEvent.eventDefinitions\",\"[\\\"1a27b4151265925d3f5f8117a4192995c3c35f415a955f60b2dee25ecc0dfe79\\\",0]\"]",
+      "id": "g_2798b7ebf0f766766b17cefd7be221fc3f6326864b43a43ad86cf186c3339eee"
+    },
+    {
+      "label": "computed ID already occupied",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "bpmn:Process.flowElements",
+        "[\"9cbac3cbfedc056ad18ceb749a4ea46e619d77b0e06e7c1b83938019ab75f423\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"bpmn:Process.flowElements\",\"[\\\"9cbac3cbfedc056ad18ceb749a4ea46e619d77b0e06e7c1b83938019ab75f423\\\",0]\"]",
+      "id": "g_c141f81fef9d5e88762d3812ae02ef010296c422073439f92d765d5f35ad9b15"
+    },
+    {
+      "label": "backing DataObject",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "item-backing",
+        "DataObjectReference_New"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"item-backing\",\"DataObjectReference_New\"]",
+      "id": "g_0af55b7b484c062f5f636a22f1464dadcd73c13843a3d4e93554b2a8a025d28e"
+    },
+    {
+      "label": "input port for DIA_1",
+      "value": [
+        "profile-mechanism/1",
+        "Task_Check",
+        "input-port",
+        "DIA_1"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Task_Check\",\"input-port\",\"DIA_1\"]",
+      "id": "g_4ae59048139fb607fb6cf4b201bce596dd93a525cf9f9f56815a1b4126547f0d"
+    },
+    {
+      "label": "input port for DIA_2",
+      "value": [
+        "profile-mechanism/1",
+        "Task_Check",
+        "input-port",
+        "DIA_2"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Task_Check\",\"input-port\",\"DIA_2\"]",
+      "id": "g_beea19b1c80fc61caad736af2264141bba7fe5977c65c109ca5718449bfedaaa"
+    },
+    {
+      "label": "default input set, explicit Definitions owner",
+      "value": [
+        "profile-mechanism/1",
+        "Definitions_cn",
+        "input-set",
+        "Process_A"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Definitions_cn\",\"input-set\",\"Process_A\"]",
+      "id": "g_ddb361c61b95b2994c88f73b79898023d3fe265b88adb22594397ffbca15ff1e"
+    },
+    {
+      "label": "default output set, explicit Definitions owner",
+      "value": [
+        "profile-mechanism/1",
+        "Definitions_cn",
+        "output-set",
+        "Process_A"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Definitions_cn\",\"output-set\",\"Process_A\"]",
+      "id": "g_351f808dd1d3e22ed2d237668754b3850378502adb5fdbe289d9a2c9da0bee04"
+    },
+    {
+      "label": "extracted Process",
+      "value": [
+        "profile-mechanism/1",
+        "g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21",
+        "bpmn:Definitions.rootElements",
+        "[\"c84674cc2d8c82da608efaaa1e52948454ce19bcd4aa245d94f73ec20e87d7ec\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_ef5c144fe3bd7d1e6005468ef00b592d7bd71807c23675349a8c7d6fb228ba21\",\"bpmn:Definitions.rootElements\",\"[\\\"c84674cc2d8c82da608efaaa1e52948454ce19bcd4aa245d94f73ec20e87d7ec\\\",0]\"]",
+      "id": "g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4"
+    },
+    {
+      "label": "extracted Task",
+      "value": [
+        "profile-mechanism/1",
+        "g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4",
+        "bpmn:Process.flowElements",
+        "[\"9a55168a0837622b6a787e9c913bb29332481f3bf3cf5979ce4bac9644321eb3\",0]"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"g_7f10058009c2f51781b4be347f6c84f8e301ad164deb3a8dbe7eae8dac8da1c4\",\"bpmn:Process.flowElements\",\"[\\\"9a55168a0837622b6a787e9c913bb29332481f3bf3cf5979ce4bac9644321eb3\\\",0]\"]",
+      "id": "g_aedf85ab3e3666cd67a78e330332e77f1604763fb010523797eb1217fd02cb64"
+    },
+    {
+      "label": "output port for DOA_Out",
+      "value": [
+        "profile-mechanism/1",
+        "Task_Make",
+        "output-port",
+        "DOA_Out"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Task_Make\",\"output-port\",\"DOA_Out\"]",
+      "id": "g_839d134fd0e128807c3ae1efc66ad2c88cf162320041eb18cda1952b4b9a64f7"
+    },
+    {
+      "label": "main participant for Process_A",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "main-participant",
+        "main-participant"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"main-participant\",\"main-participant\"]",
+      "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+    },
+    {
+      "label": "lane set for Process_A",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "lane-set",
+        "lane-set"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"lane-set\",\"lane-set\"]",
+      "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+    },
+    {
+      "label": "external lane for Process_A",
+      "value": [
+        "profile-mechanism/1",
+        "Process_A",
+        "external-lane",
+        "external-lane"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_A\",\"external-lane\",\"external-lane\"]",
+      "id": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290"
+    },
+    {
+      "label": "collaboration for Process_B",
+      "value": [
+        "profile-mechanism/1",
+        "Definitions_support",
+        "collaboration",
+        "Process_B"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Definitions_support\",\"collaboration\",\"Process_B\"]",
+      "id": "g_6b0f13cc869f184a746a02965ff6936a000cf348128a6a873735170750b253f3"
+    },
+    {
+      "label": "main participant for Process_B",
+      "value": [
+        "profile-mechanism/1",
+        "Process_B",
+        "main-participant",
+        "main-participant"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_B\",\"main-participant\",\"main-participant\"]",
+      "id": "g_e99f77afbfc8da2f4159f6a2286a391c0174ccb7986fa005e96e528dee87f02c"
+    },
+    {
+      "label": "lane set for Process_B",
+      "value": [
+        "profile-mechanism/1",
+        "Process_B",
+        "lane-set",
+        "lane-set"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_B\",\"lane-set\",\"lane-set\"]",
+      "id": "g_d8b1d86b2049838573e594dbb0f949eb227c31498fe5c3e280157f79c728f330"
+    },
+    {
+      "label": "external lane for Process_B",
+      "value": [
+        "profile-mechanism/1",
+        "Process_B",
+        "external-lane",
+        "external-lane"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_B\",\"external-lane\",\"external-lane\"]",
+      "id": "g_5c5dca8ca578550554d3a814fed46fb30654b397cc704946b75b3296bf16bec9"
+    },
+    {
+      "label": "reference band for Process_B",
+      "value": [
+        "profile-mechanism/1",
+        "Process_B",
+        "reference-band",
+        "reference-band"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_B\",\"reference-band\",\"reference-band\"]",
+      "id": "g_97539653e0b042bd9245f86632626ccadfa7ab83a1ae4ffa6b123335c45fd400"
+    },
+    {
+      "label": "collaboration for Process_Sub",
+      "value": [
+        "profile-mechanism/1",
+        "Definitions_support",
+        "collaboration",
+        "Process_Sub"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Definitions_support\",\"collaboration\",\"Process_Sub\"]",
+      "id": "g_ee4aa44088d5648c266d99c5cfbf9695b75fb38f6c9964b4a033f9d76fe23ab3"
+    },
+    {
+      "label": "main participant for Process_Sub",
+      "value": [
+        "profile-mechanism/1",
+        "Process_Sub",
+        "main-participant",
+        "main-participant"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_Sub\",\"main-participant\",\"main-participant\"]",
+      "id": "g_80731ff6d57aec30a02f738d2fc49c632d1608d2f7173950f86befc27fa56728"
+    },
+    {
+      "label": "lane set for Process_Sub",
+      "value": [
+        "profile-mechanism/1",
+        "Process_Sub",
+        "lane-set",
+        "lane-set"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_Sub\",\"lane-set\",\"lane-set\"]",
+      "id": "g_5bc307ec8460ffab2dddb1038adce543b8805755ce0dc30832721b068a9510c7"
+    },
+    {
+      "label": "external lane for Process_Sub",
+      "value": [
+        "profile-mechanism/1",
+        "Process_Sub",
+        "external-lane",
+        "external-lane"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_Sub\",\"external-lane\",\"external-lane\"]",
+      "id": "g_1c12773c0039bba3ea1f43ee5edb43c06d01df8a416c3de81e8580b530b28fa6"
+    },
+    {
+      "label": "reference band for Process_Sub",
+      "value": [
+        "profile-mechanism/1",
+        "Process_Sub",
+        "reference-band",
+        "reference-band"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_Sub\",\"reference-band\",\"reference-band\"]",
+      "id": "g_a0c64ddac29bf10a03f177784ba80295f2cd4201ff2be04426c9998dfd22d3a3"
+    },
+    {
+      "label": "collaboration for Process_E",
+      "value": [
+        "profile-mechanism/1",
+        "Definitions_support",
+        "collaboration",
+        "Process_E"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Definitions_support\",\"collaboration\",\"Process_E\"]",
+      "id": "g_4fb92ce8b5ead74a4772f6eb644324a30afc601cd4c92fe3aa5b3669473fa1f5"
+    },
+    {
+      "label": "main participant for Process_E",
+      "value": [
+        "profile-mechanism/1",
+        "Process_E",
+        "main-participant",
+        "main-participant"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_E\",\"main-participant\",\"main-participant\"]",
+      "id": "g_bd70988c8481b569cd8038b159aaa8b77dbb992197dcab488c835991f76f2275"
+    },
+    {
+      "label": "lane set for Process_E",
+      "value": [
+        "profile-mechanism/1",
+        "Process_E",
+        "lane-set",
+        "lane-set"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_E\",\"lane-set\",\"lane-set\"]",
+      "id": "g_dadbfa1b96a7d40d8ebaddc7e17ddc7655ff3051619ee0ad08ae63caa4694663"
+    },
+    {
+      "label": "external lane for Process_E",
+      "value": [
+        "profile-mechanism/1",
+        "Process_E",
+        "external-lane",
+        "external-lane"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_E\",\"external-lane\",\"external-lane\"]",
+      "id": "g_641d55a86bcef3a168e3c007f3b72ec822242f181cd118738caf0bfa15ba619f"
+    },
+    {
+      "label": "reference band for Process_E",
+      "value": [
+        "profile-mechanism/1",
+        "Process_E",
+        "reference-band",
+        "reference-band"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_E\",\"reference-band\",\"reference-band\"]",
+      "id": "g_b70a4ed2169983fafdb06a9c668658ff36a3de433a0a0556f0e7e39decc8d0e5"
+    },
+    {
+      "label": "external lane recreated under the current owner Process_R",
+      "value": [
+        "profile-mechanism/1",
+        "Process_R",
+        "external-lane",
+        "external-lane"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_R\",\"external-lane\",\"external-lane\"]",
+      "id": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c"
+    },
+    {
+      "label": "draft start",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "start",
+        "start"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"start\",\"start\"]",
+      "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858"
+    },
+    {
+      "label": "draft task",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "task",
+        "review"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"task\",\"review\"]",
+      "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+    },
+    {
+      "label": "draft flow 1",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "flow",
+        "start-review"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"flow\",\"start-review\"]",
+      "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+    },
+    {
+      "label": "draft end",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "end",
+        "done"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"end\",\"done\"]",
+      "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+    },
+    {
+      "label": "draft flow 2",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "flow",
+        "review-done"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"flow\",\"review-done\"]",
+      "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+    },
+    {
+      "label": "batch task a",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "task",
+        "a"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"task\",\"a\"]",
+      "id": "g_70182e5de7de6481eb845b873f527321ed27a9763b7eed69e430c0ca1ac03906"
+    },
+    {
+      "label": "batch task b",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "task",
+        "b"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"task\",\"b\"]",
+      "id": "g_853c1859d369c352329295fc33210c0f5f68b1f5a62d4aac091165bdf832a68f"
+    },
+    {
+      "label": "process input c",
+      "value": [
+        "profile-mechanism/1",
+        "Process_T",
+        "process-input",
+        "c"
+      ],
+      "canonical": "[\"profile-mechanism/1\",\"Process_T\",\"process-input\",\"c\"]",
+      "id": "g_d16ffd56f21db4545df96718e917e285d50bb27f5e1ddde2f721ab97dc68f8b3"
+    }
+  ],
+  "contentSignatures": [
+    {
+      "label": "lot-0 sibling",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Same",
+        "documentation": [
+          {
+            "$type": "bpmn:Documentation",
+            "text": "Evidence",
+            "textFormat": "text/plain"
+          }
+        ]
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"documentation\":[{\"$type\":\"bpmn:Documentation\",\"text\":\"Evidence\",\"textFormat\":\"text/plain\"}],\"name\":\"Same\"}",
+      "sha256": "d1cede56a48b1de116daabc69e4f42dd056dfa4bcb35185144e89fc2fb0c82d1"
+    },
+    {
+      "label": "missing Process Intake",
+      "value": {
+        "$type": "bpmn:Process",
+        "name": "Intake",
+        "flowElements": [
+          {
+            "$type": "bpmn:Task",
+            "name": "Review"
+          },
+          {
+            "$type": "bpmn:Task",
+            "name": "Approve"
+          }
+        ],
+        "artifacts": [
+          {
+            "$type": "bpmn:TextAnnotation",
+            "text": "Check twice"
+          }
+        ]
+      },
+      "canonical": "{\"$type\":\"bpmn:Process\",\"artifacts\":[{\"$type\":\"bpmn:TextAnnotation\",\"text\":\"Check twice\"}],\"flowElements\":[{\"$type\":\"bpmn:Task\",\"name\":\"Review\"},{\"$type\":\"bpmn:Task\",\"name\":\"Approve\"}],\"name\":\"Intake\"}",
+      "sha256": "30189e66087901ee1288ead627c92ceb844666b13408a1754a2f8d6539708b9b"
+    },
+    {
+      "label": "missing DataStore Archive",
+      "value": {
+        "$type": "bpmn:DataStore",
+        "name": "Archive"
+      },
+      "canonical": "{\"$type\":\"bpmn:DataStore\",\"name\":\"Archive\"}",
+      "sha256": "0debdaefd9c5434e60fc484942c2677728d9f72f1af1182e19eefba0c61dc895"
+    },
+    {
+      "label": "missing Task Review",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Review"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Review\"}",
+      "sha256": "ef7e4735a1593f49fae043dd8faec57dc93c37214546577e264514cdcacbefa1"
+    },
+    {
+      "label": "missing Task Approve",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Approve"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Approve\"}",
+      "sha256": "2075edcdafe089fd8d46523df6686353b9e945f93b9476889f43964f3aef5ea6"
+    },
+    {
+      "label": "missing TextAnnotation",
+      "value": {
+        "$type": "bpmn:TextAnnotation",
+        "text": "Check twice"
+      },
+      "canonical": "{\"$type\":\"bpmn:TextAnnotation\",\"text\":\"Check twice\"}",
+      "sha256": "a9467c0e170af7ccf8d91881d53d19b7c4125dad72b20f50ae664a88e9aa40af"
+    },
+    {
+      "label": "missing sibling beside an ID-bearing twin, ordinal 0",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Same"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Same\"}",
+      "sha256": "7c1dab2c77c00310d6b1766158cbc7b84c378b0b2f9ae1585d6f517a6af20638"
+    },
+    {
+      "label": "unicode name 0",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion 𐀀"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion 𐀀\"}",
+      "sha256": "d3b6c72038aa403a84c2710b452502cc938526e3ae84f368d7f6d4a65668e50e"
+    },
+    {
+      "label": "unicode name 1",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion "
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion \"}",
+      "sha256": "9dee76338fc52c06cab84e7f4f60a5de004692be47e940d1883dc629426dc999"
+    },
+    {
+      "label": "unicode name 2",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion "
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion \"}",
+      "sha256": "0896d00b6811029f87119473c6753e297bd38d1d3ba57a1d278e269980569e0e"
+    },
+    {
+      "label": "unicode name 3",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion "
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion \"}",
+      "sha256": "921907f37bddfb4e0345e8ec10f04e1b5d0f72e2cff04dc6951b6e1ea89db69b"
+    },
+    {
+      "label": "unicode name 4",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Ligne suivante"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Ligne suivante\"}",
+      "sha256": "a5814b146dbb2fc7bc5e11a9e7f694a1c6acb91482c6b1d4cd1dacb91033c46d"
+    },
+    {
+      "label": "unicode name 5",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion\"}",
+      "sha256": "0a8fd49f201856c5dd332a749a6273909c9a564da78c73678c91274d5dcc02eb"
+    },
+    {
+      "label": "unicode name 6",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion é"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion é\"}",
+      "sha256": "a75c0b72e2dcf0d8a1ea452731b22c9c0a5a9a9c1aeae67ce1c2f845ede23920"
+    },
+    {
+      "label": "unicode name 7",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Gestion é"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Gestion é\"}",
+      "sha256": "ec14863138cc6da3a469fa064064befcd5124d6122289cc7433fdbed58608077"
+    },
+    {
+      "label": "timer sibling ordinal 0",
+      "value": {
+        "$type": "bpmn:IntermediateCatchEvent",
+        "name": "Wait",
+        "eventDefinitions": [
+          {
+            "$type": "bpmn:TimerEventDefinition",
+            "timeDuration": {
+              "$type": "bpmn:FormalExpression",
+              "body": "PT1H"
+            }
+          }
+        ]
+      },
+      "canonical": "{\"$type\":\"bpmn:IntermediateCatchEvent\",\"eventDefinitions\":[{\"$type\":\"bpmn:TimerEventDefinition\",\"timeDuration\":{\"$type\":\"bpmn:FormalExpression\",\"body\":\"PT1H\"}}],\"name\":\"Wait\"}",
+      "sha256": "109d749b670dd905e4327cc15a5e306a977cc538881ce51be27d3d7a03670936"
+    },
+    {
+      "label": "timer definition under sibling 0",
+      "value": {
+        "$type": "bpmn:TimerEventDefinition",
+        "timeDuration": {
+          "$type": "bpmn:FormalExpression",
+          "body": "PT1H"
+        }
+      },
+      "canonical": "{\"$type\":\"bpmn:TimerEventDefinition\",\"timeDuration\":{\"$type\":\"bpmn:FormalExpression\",\"body\":\"PT1H\"}}",
+      "sha256": "1a27b4151265925d3f5f8117a4192995c3c35f415a955f60b2dee25ecc0dfe79"
+    },
+    {
+      "label": "computed ID already occupied",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Fresh"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Fresh\"}",
+      "sha256": "9cbac3cbfedc056ad18ceb749a4ea46e619d77b0e06e7c1b83938019ab75f423"
+    },
+    {
+      "label": "extracted Process",
+      "value": {
+        "$type": "bpmn:Process",
+        "name": "Extracted",
+        "flowElements": [
+          {
+            "$type": "bpmn:Task",
+            "name": "Draft task"
+          }
+        ]
+      },
+      "canonical": "{\"$type\":\"bpmn:Process\",\"flowElements\":[{\"$type\":\"bpmn:Task\",\"name\":\"Draft task\"}],\"name\":\"Extracted\"}",
+      "sha256": "c84674cc2d8c82da608efaaa1e52948454ce19bcd4aa245d94f73ec20e87d7ec"
+    },
+    {
+      "label": "extracted Task",
+      "value": {
+        "$type": "bpmn:Task",
+        "name": "Draft task"
+      },
+      "canonical": "{\"$type\":\"bpmn:Task\",\"name\":\"Draft task\"}",
+      "sha256": "9a55168a0837622b6a787e9c913bb29332481f3bf3cf5979ce4bac9644321eb3"
+    }
+  ],
+  "revisions": [
+    {
+      "caseId": "l3-id-root-first",
+      "role": "envelope",
+      "semanticRevision": "62bc6045aaa6e94c29a868a478832749c1aecdf29acfbbb1fd1cb613cb91a6c4"
+    },
+    {
+      "caseId": "l3-id-identical-siblings",
+      "role": "envelope",
+      "semanticRevision": "f3a55540e7349cc6ad343b9dd43569ceec40598b877607fba9bb2e2904934818"
+    },
+    {
+      "caseId": "l3-id-reorder-stable",
+      "role": "envelope",
+      "semanticRevision": "7ab394a231d4eb6cef6bf2107b8dd5004fb4a89fbfe8395e0250041734d2cdec"
+    },
+    {
+      "caseId": "l3-id-rename-stable",
+      "role": "envelope",
+      "semanticRevision": "59a8d1fd5df12db883f7c9928195a83a4b1afc3ce625a56fe94a039ac46cc2cf"
+    },
+    {
+      "caseId": "l3-id-ordinal-missing-only",
+      "role": "envelope",
+      "semanticRevision": "0c5580d21e4dd58896aa024eb657966401b3a8554257b3ca3cedd3809447911b"
+    },
+    {
+      "caseId": "l3-id-two-owners",
+      "role": "envelope",
+      "semanticRevision": "eb3982fdeac0d2cafd99a7aed7a8405adec3f3161beb2d1dc930b62c0b231187"
+    },
+    {
+      "caseId": "l3-id-unicode-names",
+      "role": "envelope",
+      "semanticRevision": "48d128acd473586844a81f7ae923f75381768a094378a6820bad23f510a0c06d"
+    },
+    {
+      "caseId": "l3-id-timer-siblings",
+      "role": "envelope",
+      "semanticRevision": "95263fc07e4d4b0f3fc446872539fce23a066f59eda191cdfa2ed70eaaa27d5a"
+    },
+    {
+      "caseId": "l3-id-timer-reorder",
+      "role": "envelope",
+      "semanticRevision": "95231e87f428f7411e833fe57727098b682e31e3ef15e6e50aa8bd0349f40ffe"
+    },
+    {
+      "caseId": "l3-id-collision-computed",
+      "role": "envelope",
+      "semanticRevision": "c0ac10986eaf5a6cc4e553f0920e1851003908e7cf823f754e2db63320a31ece"
+    },
+    {
+      "caseId": "l3-id-duplicate-source",
+      "role": "envelope",
+      "semanticRevision": "551310a8bfc5ccd5ce9b6adbdd6b78d8b84933b6a623a0767244bec27ab2ea88"
+    },
+    {
+      "caseId": "l3-c-isexecutable-neutral",
+      "role": "envelope",
+      "semanticRevision": "5d4da7ff25af3677da44468c6e2c0c959714e4c7885502e77833fcdc751d3de6"
+    },
+    {
+      "caseId": "l3-c-isexecutable-grid",
+      "role": "envelope",
+      "semanticRevision": "e1fb92c6b99b980e1b7ab7747dadb6f72886d406ac5aee3b67833db841e50f02"
+    },
+    {
+      "caseId": "l3-c-gateway-direction-control",
+      "role": "envelope",
+      "semanticRevision": "5b75a11183bac37b4078174180fe49e96d7ea19e1c03eecf1e21966c95d6540f"
+    },
+    {
+      "caseId": "l3-c-empty-process",
+      "role": "envelope",
+      "semanticRevision": "ee5ee1cfa310cbccb1c84d9909f3712f7bd1f11f9a4039d4a923a08acca8f319"
+    },
+    {
+      "caseId": "l3-c-topology",
+      "role": "envelope",
+      "semanticRevision": "9f0c4d9ff3940d93744e1689b5850a3887a5c9e953cb2e6fbc130f8e87f40616"
+    },
+    {
+      "caseId": "l3-c-gateway-direction",
+      "role": "envelope",
+      "semanticRevision": "cf54d3061f51dd7657b6024da49f276bf1919a1c0d8049aaa9303dd9c3f9d496"
+    },
+    {
+      "caseId": "l3-c-gateway-stale-topology",
+      "role": "envelope",
+      "semanticRevision": "0a247a213394db2d0931ddf67dee8892810ca0f3e8ece8ed1a55a25f6d0fe562"
+    },
+    {
+      "caseId": "l3-c-gateway-phase-start",
+      "role": "envelope",
+      "semanticRevision": "588f880ff9dbbce25e633c190891ce677d64b3ceb8120531ef06c1a45c45099c"
+    },
+    {
+      "caseId": "l3-c-item-backing",
+      "role": "envelope",
+      "semanticRevision": "0bdc393df20da60f1bded73a403c3e4bb9a871179d84e09d3c46fe09cdb99f74"
+    },
+    {
+      "caseId": "l3-c-input-ports",
+      "role": "envelope",
+      "semanticRevision": "0d6431bde950bc047715c0760266466560881e117a892fc9c5a6af31076a3351"
+    },
+    {
+      "caseId": "l3-c-sets-default",
+      "role": "envelope",
+      "semanticRevision": "10526e4940a815b0fc13bac71e3e4aabb2c59327dfdb7abee419187477778040"
+    },
+    {
+      "caseId": "l3-c-sets-single-uncovered",
+      "role": "envelope",
+      "semanticRevision": "c6c336145cab67785ac24fa39b071226f65ac4872417aa0c161837531a054b95"
+    },
+    {
+      "caseId": "l3-c-sets-several-uncovered",
+      "role": "envelope",
+      "semanticRevision": "18cc1a6d877192187fc6765818a02ffcf6f3bd19823c5b9d63a36c35d914c09a"
+    },
+    {
+      "caseId": "l3-c-sets-several-covered",
+      "role": "envelope",
+      "semanticRevision": "0ea1200a7d51e79089062aedf5a14e631321cc073b9d3097669fcb08dab1ebc9"
+    },
+    {
+      "caseId": "l3-c-preserve",
+      "role": "envelope",
+      "semanticRevision": "c6c05f1bcae3bd29a1ef5726154b8513817b9e85aa53ad7d538d6b3bf63203f2"
+    },
+    {
+      "caseId": "l3-c-write-conflict",
+      "role": "envelope",
+      "semanticRevision": "733aa9c3a37d4b4e55b287d6a7cd6ce54cbcde5923a63d203b74ad9fcf9d7ea2"
+    },
+    {
+      "caseId": "l3-c-write-coalesce",
+      "role": "envelope",
+      "semanticRevision": "1ed6ca94144d80dc8d5ceb84160334be581606fb4a7981651314347041753757"
+    },
+    {
+      "caseId": "l3-c-namespace-defaults",
+      "role": "envelope",
+      "semanticRevision": "c3911ebd9ec99d3c4cc5f74796c5099f36c18e46cf3df5ab21f3b98afbcbc1d4"
+    },
+    {
+      "caseId": "l3-c-dangling-call",
+      "role": "envelope",
+      "semanticRevision": "8fec43cb55b20f568cf8ec002ff167e55c1223bff3f871f45cbdf5ce0a1ef1ea"
+    },
+    {
+      "caseId": "l3-c-version-mismatch-first",
+      "role": "envelope",
+      "semanticRevision": "e375470720d31ec6a3bec45977faea1e4903574296464a8e5c70cf7c05a7a043"
+    },
+    {
+      "caseId": "l3-c-digest-mismatch-first",
+      "role": "envelope",
+      "semanticRevision": "c0d44e5783d03bb724028f5ac923e9f12f4252a8db09d73834e5c8a6f9e3d02f"
+    },
+    {
+      "caseId": "l3-c-document-version",
+      "role": "envelope",
+      "semanticRevision": "69fd15d4f71d03d94500e5c17daba2be737233a541bb374fab5bebe44789201c"
+    },
+    {
+      "caseId": "l3-c-descriptor-role-unknown",
+      "role": "envelope",
+      "semanticRevision": "9d812683c70a21571f092763798d22174211ea0428b006b441c9257ffeef8320"
+    },
+    {
+      "caseId": "l3-c-invalid-mode",
+      "role": "envelope",
+      "semanticRevision": "62bc6045aaa6e94c29a868a478832749c1aecdf29acfbbb1fd1cb613cb91a6c4"
+    },
+    {
+      "caseId": "l3-c-extraction-authorized",
+      "role": "envelope",
+      "semanticRevision": "eaa043bccfe84ba94db604e22bfb39d5bde5dadb02de2f0df50b775b7cc36d73"
+    },
+    {
+      "caseId": "l3-c-extraction-unauthorized",
+      "role": "envelope",
+      "semanticRevision": "8e9ba000d2d4697f1de38741bfe4e4352a3390a5fe2f10a7afb0821e5a644e0b"
+    },
+    {
+      "caseId": "l3-c-output-port-gated",
+      "role": "envelope",
+      "semanticRevision": "b608ca614545a4e59fcd1c1b95347482d9646efcd113b4d74e84de2e2e9d83c6"
+    },
+    {
+      "caseId": "l3-c-output-port-qualification",
+      "role": "envelope",
+      "semanticRevision": "b608ca614545a4e59fcd1c1b95347482d9646efcd113b4d74e84de2e2e9d83c6"
+    },
+    {
+      "caseId": "l3-n-full",
+      "role": "envelope",
+      "semanticRevision": "2e64c2b937418eefa474455bf5595e2e3aa87718d68ccb891f1b860a635f4e77"
+    },
+    {
+      "caseId": "l3-n-full-edit",
+      "role": "envelope",
+      "semanticRevision": "2e64c2b937418eefa474455bf5595e2e3aa87718d68ccb891f1b860a635f4e77"
+    },
+    {
+      "caseId": "l3-n-inserted-link",
+      "role": "envelope",
+      "semanticRevision": "cb3b80aca48889381aeb145f89b8c53aacd051ac1ceb5dbdaff4738063a2931e"
+    },
+    {
+      "caseId": "l3-n-two-processes",
+      "role": "envelope",
+      "semanticRevision": "10b1829b56fda87358f6e3bbd836e82f4ce8250fb1df72da30670ca61d518c13"
+    },
+    {
+      "caseId": "l3-n-imported-supports",
+      "role": "envelope",
+      "semanticRevision": "ed5b932993f5e4fd8b94ed3b66d6e9768474832729164f5d8948fe1d5cd4a97c"
+    },
+    {
+      "caseId": "l3-n-imported-supports-edit",
+      "role": "envelope",
+      "semanticRevision": "ed5b932993f5e4fd8b94ed3b66d6e9768474832729164f5d8948fe1d5cd4a97c"
+    },
+    {
+      "caseId": "l3-n-business-lane-refusal",
+      "role": "envelope",
+      "semanticRevision": "6c0c9e09dfe15098115b76bd34f565828086430e54c46633e8700fc029cb34d6"
+    },
+    {
+      "caseId": "l3-n-business-lane-refusal-edit",
+      "role": "envelope",
+      "semanticRevision": "6c0c9e09dfe15098115b76bd34f565828086430e54c46633e8700fc029cb34d6"
+    },
+    {
+      "caseId": "l3-n-binding-duplicate-role",
+      "role": "envelope",
+      "semanticRevision": "fd947b8b0f6a36f4112d4443b5905998b785d3197153b1e1de4e48c87990db30"
+    },
+    {
+      "caseId": "l3-n-binding-wrong-parent",
+      "role": "envelope",
+      "semanticRevision": "a907c10ccc130b80a5395ab475d440140e205aaff5f76f473fa9e63b56d21e0d"
+    },
+    {
+      "caseId": "l3-n-binding-band-process-ref",
+      "role": "envelope",
+      "semanticRevision": "72bbf3370ad76aa6160ebf637ebae9322d82c8591f1fd9decfc48a433b93eaa0"
+    },
+    {
+      "caseId": "l3-n-binding-wrong-type",
+      "role": "envelope",
+      "semanticRevision": "bf23d9f97251dda8cc4392c3c292c9b40731616d434f3ad058538d6856fbd08d"
+    },
+    {
+      "caseId": "l3-n-black-box-pool-retained",
+      "role": "envelope",
+      "semanticRevision": "51bf1008606ed5e2bb1923e5068e16b9e93ae8a69e9e9469145fca0a708fb46f"
+    },
+    {
+      "caseId": "l3-n-hash-shaped-occupant",
+      "role": "envelope",
+      "semanticRevision": "0f8f1bfd9d2e4ce623017c9b7347ff538d7f1e4baca39eb38a96d617c1f35b8c"
+    },
+    {
+      "caseId": "l3-n-hash-shaped-occupant-edit",
+      "role": "envelope",
+      "semanticRevision": "0f8f1bfd9d2e4ce623017c9b7347ff538d7f1e4baca39eb38a96d617c1f35b8c"
+    },
+    {
+      "caseId": "l3-n-incomplete-call-untouched",
+      "role": "envelope",
+      "semanticRevision": "e5301f3b14c415a168961f6f5b3e024049cb6fbb4cb652be62cad944ad56c36b"
+    },
+    {
+      "caseId": "l3-n-internal-call-untouched",
+      "role": "envelope",
+      "semanticRevision": "944087ba4d599760a95f1a42cf5b9edb421a6c2b282e40a68e8f2615e75d6194"
+    },
+    {
+      "caseId": "l3-n-legacy-marker-ignored",
+      "role": "envelope",
+      "semanticRevision": "0a4f3857319e2f35b0a3fc0df3f0f928f8aa4962db50f815ede39c324a99388f"
+    },
+    {
+      "caseId": "l3-n-empty-process",
+      "role": "envelope",
+      "semanticRevision": "075d2813e84e9bdfc7756249678713c010572d4607a134d52df192c8b62d1d76"
+    },
+    {
+      "caseId": "l3-n-roles-and-empty-support",
+      "role": "envelope",
+      "semanticRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd"
+    },
+    {
+      "caseId": "l3-n-reserved-lane-renamed",
+      "role": "envelope",
+      "semanticRevision": "128ee0ff1b6383429dd3c47caa3c7bcc2828f43e2cb9170aa343a943a813a82d"
+    },
+    {
+      "caseId": "l3-n-shared-item-anchor",
+      "role": "envelope",
+      "semanticRevision": "24454c695da7027e1dd86137491e4bbab7eaecc88477fb157a70c9787b803932"
+    },
+    {
+      "caseId": "l3-n-anchor-after-link-removal",
+      "role": "envelope",
+      "semanticRevision": "36894ce4ec2d2acd4bb64a8dd1566d16edc25829d2e86d8c2623b0054abe209f"
+    },
+    {
+      "caseId": "l3-n-direction-reversal",
+      "role": "envelope",
+      "semanticRevision": "5d9e4059961ef556267bc114369cdb74ae3b48ec11ca248c3107742fdf791eb1"
+    },
+    {
+      "caseId": "l3-n-unicode-names",
+      "role": "envelope",
+      "semanticRevision": "ab2a056d9d354219d21d6fc02d2c5853f767953bda678a2fb98e54c81ccb4282"
+    },
+    {
+      "caseId": "l3-n-deleted-support-stays-absent",
+      "role": "envelope",
+      "semanticRevision": "3413308b27f18c2fc695ba9fe0b03480456f810e7924b2d1afb2113ac63ebd74"
+    },
+    {
+      "caseId": "l3-n-after-owner-remap",
+      "role": "envelope",
+      "semanticRevision": "f6a4f9524336420b4c5d7a3db02756d101d9ccaf2bc983a964dd80f927e4bc59"
+    },
+    {
+      "caseId": "l3-n-recreate-after-remap",
+      "role": "envelope",
+      "semanticRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9"
+    },
+    {
+      "caseId": "l3-n-recreate-after-remap-edit",
+      "role": "envelope",
+      "semanticRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9"
+    },
+    {
+      "caseId": "l3-n-placement-intent-di-only",
+      "role": "envelope",
+      "semanticRevision": "25910d0e93af6a6056b0bf0c020fed2f9836d08da4976d9389609bc2a22fe4c6"
+    },
+    {
+      "caseId": "l3-n-placement-intent-unknown",
+      "role": "envelope",
+      "semanticRevision": "25910d0e93af6a6056b0bf0c020fed2f9836d08da4976d9389609bc2a22fe4c6"
+    },
+    {
+      "caseId": "l3-n-not-fixed",
+      "role": "envelope",
+      "semanticRevision": "16dfb600f4ddcee763b03136fe7298aaadac9b64a83b49d2b950f8b6d211836c"
+    },
+    {
+      "caseId": "l3-n-relation-direction-conflict",
+      "role": "envelope",
+      "semanticRevision": "f3844ba5f047bd2447916a3e11b5335603f0a9dbc41c4f8d79136597fba340a9"
+    },
+    {
+      "caseId": "l3-n-ensure-conflicting-definition",
+      "role": "envelope",
+      "semanticRevision": "034e171652996319fb9b0c737c4c02faa31a4f467de4a9d5fddb4359bbb95bed"
+    },
+    {
+      "caseId": "l3-n-refusal-after-ensures",
+      "role": "envelope",
+      "semanticRevision": "cd2e152d50cec50892633804991e8eecd39f907994d0cfd97f16f676a1fa42d2"
+    },
+    {
+      "caseId": "l3-n-place-neutral",
+      "role": "envelope",
+      "semanticRevision": "eca8f043f7a6036cd88147237ec7a315b6f2d6a63fd77b20947d152f41bd31b7"
+    },
+    {
+      "caseId": "l3-n-place-grid-shared-anchor",
+      "role": "envelope",
+      "semanticRevision": "bef0449fda384dca248a02ecbf04fc4f5ac078f80edaabb813eec69c428b0ce4"
+    },
+    {
+      "caseId": "l3-n-place-grid-inserted-association",
+      "role": "envelope",
+      "semanticRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a"
+    },
+    {
+      "caseId": "l3-n-place-grid-deleted-association",
+      "role": "envelope",
+      "semanticRevision": "ee046efcb70286136fb5e2b6e5db3dd996266d249429955e014125bd36c6edae"
+    },
+    {
+      "caseId": "l3-propose-recovery-with-provenance",
+      "role": "envelope",
+      "semanticRevision": "bacc088352e0c2129a62a7d64a919af7d29529d4fed2883da7ba23750c631e5d"
+    },
+    {
+      "caseId": "l3-propose-recovery-without-provenance",
+      "role": "envelope",
+      "semanticRevision": "bacc088352e0c2129a62a7d64a919af7d29529d4fed2883da7ba23750c631e5d"
+    },
+    {
+      "caseId": "l3-propose-recovery-partial-provenance",
+      "role": "envelope",
+      "semanticRevision": "bacc088352e0c2129a62a7d64a919af7d29529d4fed2883da7ba23750c631e5d"
+    },
+    {
+      "caseId": "l3-propose-black-box-pool",
+      "role": "envelope",
+      "semanticRevision": "a02a70b623721a07320821b82412af354f797a8e745026bc95cf7d1cb779eb5e"
+    },
+    {
+      "caseId": "l3-bind-supports-explicit-selection",
+      "role": "envelope",
+      "semanticRevision": "a02a70b623721a07320821b82412af354f797a8e745026bc95cf7d1cb779eb5e"
+    },
+    {
+      "caseId": "l3-bind-supports-gated",
+      "role": "envelope",
+      "semanticRevision": "a02a70b623721a07320821b82412af354f797a8e745026bc95cf7d1cb779eb5e"
+    },
+    {
+      "caseId": "l3-bind-supports-conflict",
+      "role": "envelope",
+      "semanticRevision": "7d68649df6a5fbab438aeb0ee36b6e756e9eb4d15d1f9b26c46d56a7f6b4a235"
+    },
+    {
+      "caseId": "l3-n-after-explicit-selection",
+      "role": "envelope",
+      "semanticRevision": "7d68649df6a5fbab438aeb0ee36b6e756e9eb4d15d1f9b26c46d56a7f6b4a235"
+    },
+    {
+      "caseId": "l3-fp-n-full",
+      "role": "envelope",
+      "semanticRevision": "25910d0e93af6a6056b0bf0c020fed2f9836d08da4976d9389609bc2a22fe4c6"
+    },
+    {
+      "caseId": "l3-fp-n-two-processes",
+      "role": "envelope",
+      "semanticRevision": "5e669743a16c3c79c59dde5eb68472f7f75d35514d87e0aab19d7f7f7cc69599"
+    },
+    {
+      "caseId": "l3-fp-n-imported-supports",
+      "role": "envelope",
+      "semanticRevision": "3e8d6f2351a2c6e89c35f5275c153de25a1b0da14b34250cfe895b431054298c"
+    },
+    {
+      "caseId": "l3-fp-n-direction-reversal",
+      "role": "envelope",
+      "semanticRevision": "aabcac52edaba346b7092f075cbe19e5c7141c84a5804bc7e1d1cb50838edb98"
+    },
+    {
+      "caseId": "l3-fp-n-unicode-names",
+      "role": "envelope",
+      "semanticRevision": "21a99561ee89e3791a4efafdac1b164f643e3bab28d57b1f169937adc1b7819c"
+    },
+    {
+      "caseId": "l3-fp-c-root-first",
+      "role": "envelope",
+      "semanticRevision": "d40bbb9328f19a082b0ff0e11325bf4199d279c19d89182b196dfa4dcde67cb1"
+    },
+    {
+      "caseId": "l3-fp-c-topology",
+      "role": "envelope",
+      "semanticRevision": "37018433ae047ecd959d470da26974cc9d7d9ebbf55ba99b378c9b64238ca9c9"
+    },
+    {
+      "caseId": "l3-fp-c-gateways",
+      "role": "envelope",
+      "semanticRevision": "b7751bdc249b1057b0cc8a6e1420a6dd430083893c29fc4dd1a6f1f6c1f71967"
+    },
+    {
+      "caseId": "l3-fp-c-ports",
+      "role": "envelope",
+      "semanticRevision": "aa85d2dc5bbc12da41158d6822d33efa3ea54dd57dd987ac603384d1415c7ac4"
+    },
+    {
+      "caseId": "l3-fp-c-sets-default",
+      "role": "envelope",
+      "semanticRevision": "2020a28df25bb980a9bd6c096c954a08b9479797561cd0ef79663e4089bc9bd6"
+    },
+    {
+      "caseId": "l3-fp-c-timers",
+      "role": "envelope",
+      "semanticRevision": "9ba474a4478112fd4fbc76a73fee35c020014828c96578c25d01b64dc60589d6"
+    },
+    {
+      "caseId": "l3-fp-c-on-n-input",
+      "role": "envelope",
+      "semanticRevision": "2e64c2b937418eefa474455bf5595e2e3aa87718d68ccb891f1b860a635f4e77"
+    },
+    {
+      "caseId": "l3-fp-c-after-n",
+      "role": "envelope",
+      "semanticRevision": "25910d0e93af6a6056b0bf0c020fed2f9836d08da4976d9389609bc2a22fe4c6"
+    },
+    {
+      "caseId": "l3-mix-n-full-js-py-js",
+      "role": "envelope",
+      "semanticRevision": "2e64c2b937418eefa474455bf5595e2e3aa87718d68ccb891f1b860a635f4e77"
+    },
+    {
+      "caseId": "l3-mix-n-full-py-js-py",
+      "role": "envelope",
+      "semanticRevision": "2e64c2b937418eefa474455bf5595e2e3aa87718d68ccb891f1b860a635f4e77"
+    },
+    {
+      "caseId": "l3-mix-n-two-processes-js-py-js",
+      "role": "envelope",
+      "semanticRevision": "10b1829b56fda87358f6e3bbd836e82f4ce8250fb1df72da30670ca61d518c13"
+    },
+    {
+      "caseId": "l3-mix-n-two-processes-py-js-py",
+      "role": "envelope",
+      "semanticRevision": "10b1829b56fda87358f6e3bbd836e82f4ce8250fb1df72da30670ca61d518c13"
+    },
+    {
+      "caseId": "l3-mix-n-unicode-names-js-py-js",
+      "role": "envelope",
+      "semanticRevision": "ab2a056d9d354219d21d6fc02d2c5853f767953bda678a2fb98e54c81ccb4282"
+    },
+    {
+      "caseId": "l3-mix-n-unicode-names-py-js-py",
+      "role": "envelope",
+      "semanticRevision": "ab2a056d9d354219d21d6fc02d2c5853f767953bda678a2fb98e54c81ccb4282"
+    },
+    {
+      "caseId": "l3-call-external-valid",
+      "role": "envelope",
+      "semanticRevision": "8e2cf5232d052c2a1c64d0b63c7e66bdd2996f24c02485ec9f5a3541a0ad76a5"
+    },
+    {
+      "caseId": "l3-call-internal",
+      "role": "envelope",
+      "semanticRevision": "f76ae3a6eee4efe2da58c501fe5d0c7de316ac9cfc0522bc6783f19c710f5f08"
+    },
+    {
+      "caseId": "l3-call-ambiguous",
+      "role": "envelope",
+      "semanticRevision": "d9debab9435b589b82c1a83bb3a0bd5349f078523571f39d2a28b31d1b18cb76"
+    },
+    {
+      "caseId": "l3-call-duplicate",
+      "role": "envelope",
+      "semanticRevision": "12f1830c7b79389fec23f0015b188227d4f6dc3e2fe5831ec5fedfb8c6b4faf8"
+    },
+    {
+      "caseId": "l3-call-marker-invalid",
+      "role": "envelope",
+      "semanticRevision": "b0d59858d0b291c30584cef3640f5187b5d35bd51d38d7c5f3662c02ddc5a4c4"
+    },
+    {
+      "caseId": "l3-call-conflict",
+      "role": "envelope",
+      "semanticRevision": "3bb1772deb1501add0d3323fd142de004950387eec19706fd5e3a777f3bac7d6"
+    },
+    {
+      "caseId": "l3-call-conflict-empty",
+      "role": "envelope",
+      "semanticRevision": "f75c6c6a608684bd65d6653f5ac9ad2ee159dafb52b2f9d166ccc398f7e51fe8"
+    },
+    {
+      "caseId": "l3-call-target-empty-draft",
+      "role": "envelope",
+      "semanticRevision": "361b8225f778510a98f6703046290bec428f1486f580aac803e19bf813c6b100"
+    },
+    {
+      "caseId": "l3-call-target-empty-accept",
+      "role": "envelope",
+      "semanticRevision": "361b8225f778510a98f6703046290bec428f1486f580aac803e19bf813c6b100"
+    },
+    {
+      "caseId": "l3-call-target-type",
+      "role": "envelope",
+      "semanticRevision": "70a24f3328e8241a137900d80f6fb37b35c36c985468873ed0a04bb6620c3208"
+    },
+    {
+      "caseId": "l3-call-target-required-draft",
+      "role": "envelope",
+      "semanticRevision": "4ea6b77a1dbc37f86a8d0bfdc11b6ef7d24abc9a29b19207b477b9d57ec82807"
+    },
+    {
+      "caseId": "l3-call-target-required-accept",
+      "role": "envelope",
+      "semanticRevision": "4ea6b77a1dbc37f86a8d0bfdc11b6ef7d24abc9a29b19207b477b9d57ec82807"
+    },
+    {
+      "caseId": "l3-call-source-doc-not-marker",
+      "role": "envelope",
+      "semanticRevision": "ccbbc9fa791c775e4b399a6157a8867a12541719c406b8f915a389deaf96addb"
+    },
+    {
+      "caseId": "l3-call-target-dangling-accept",
+      "role": "envelope",
+      "semanticRevision": "3e7c5c26d2cae60b85be3b76fd395bccb39f6c7b2981cbe8d81614a05f6356e2"
+    },
+    {
+      "caseId": "l3-path-disconnected-task-accept",
+      "role": "envelope",
+      "semanticRevision": "e8b8a9081ed754ebbab8645ed6bb23a0b392c7fc4b9afeb2b8d0b475c41cebae"
+    },
+    {
+      "caseId": "l3-path-disconnected-task-draft",
+      "role": "envelope",
+      "semanticRevision": "e8b8a9081ed754ebbab8645ed6bb23a0b392c7fc4b9afeb2b8d0b475c41cebae"
+    },
+    {
+      "caseId": "l3-path-gateway-without-incoming-accept",
+      "role": "envelope",
+      "semanticRevision": "8192025b038a8925526d5bce79fa1c68dd0853015983ecc6c9ca25cda6a0ddda"
+    },
+    {
+      "caseId": "l3-path-unreachable-component-accept",
+      "role": "envelope",
+      "semanticRevision": "f1cf209a3474f418784186844078bd98d7bdd17aa46ccf345b944c7166bc637d"
+    },
+    {
+      "caseId": "l3-path-cannot-reach-end-accept",
+      "role": "envelope",
+      "semanticRevision": "d55b15057726022e78d2503b4660d03d994b764912a2b7053a32b06731028dfe"
+    },
+    {
+      "caseId": "l3-path-incomplete-call-not-exempt-accept",
+      "role": "envelope",
+      "semanticRevision": "0f1d395195b8735243f82f3072d9d1967a05ba92158870347bbf4a0ddac3f21a"
+    },
+    {
+      "caseId": "l3-path-unlinked-external-not-exempt-accept",
+      "role": "envelope",
+      "semanticRevision": "08b8114c67f18bd832b3e6651ac3a64db49df16399b911551103637512ae55d8"
+    },
+    {
+      "caseId": "l3-path-cross-container-flow-accept",
+      "role": "envelope",
+      "semanticRevision": "37018433ae047ecd959d470da26974cc9d7d9ebbf55ba99b378c9b64238ca9c9"
+    },
+    {
+      "caseId": "l3-trig-single-trigger-accept",
+      "role": "envelope",
+      "semanticRevision": "fc8172b525505e6894cc8c808bfa6ad8be2b70e1cb7f492e0038b34481ce0a1a"
+    },
+    {
+      "caseId": "l3-trig-downstream-branch-accept",
+      "role": "envelope",
+      "semanticRevision": "b6517785f38c92525873856dfb41dd542ca8413e982935baa534fd3e290a4079"
+    },
+    {
+      "caseId": "l3-trig-no-branch-accept",
+      "role": "envelope",
+      "semanticRevision": "dac25dc086ab4edc54e89f78c2d26285d1ca977bc3496f2c2153eec05927ec44"
+    },
+    {
+      "caseId": "l3-trig-no-branch-draft",
+      "role": "envelope",
+      "semanticRevision": "dac25dc086ab4edc54e89f78c2d26285d1ca977bc3496f2c2153eec05927ec44"
+    },
+    {
+      "caseId": "l3-trig-parallel-only-accept",
+      "role": "envelope",
+      "semanticRevision": "cda462cc12ac30ffe655216036cd4e0f8d6b8b301c5e139fe04e62cdc840cf1f"
+    },
+    {
+      "caseId": "l3-trig-normalize-no-invention",
+      "role": "envelope",
+      "semanticRevision": "2544ce57c0914493d30f2b6b736687151d259a2648df2c47eee1712c6145bda2"
+    },
+    {
+      "caseId": "l3-io-complete-links-accept",
+      "role": "envelope",
+      "semanticRevision": "8952919048dffa61150bcf7e685b6fab64681959d7da2d2c33059769faa257ce"
+    },
+    {
+      "caseId": "l3-io-missing-links-accept",
+      "role": "envelope",
+      "semanticRevision": "df9fbb8f5eb47dd0b7912487b1001b14a6c6cb06187ec45186579f438eed91c5"
+    },
+    {
+      "caseId": "l3-io-missing-links-draft",
+      "role": "envelope",
+      "semanticRevision": "df9fbb8f5eb47dd0b7912487b1001b14a6c6cb06187ec45186579f438eed91c5"
+    },
+    {
+      "caseId": "l3-io-wrong-direction-accept",
+      "role": "envelope",
+      "semanticRevision": "4eb625a407918f78752a6393f8332d232bd831a70032e117394e061629061a23"
+    },
+    {
+      "caseId": "l3-io-wrong-direction-draft",
+      "role": "envelope",
+      "semanticRevision": "4eb625a407918f78752a6393f8332d232bd831a70032e117394e061629061a23"
+    },
+    {
+      "caseId": "l3-io-endpoint-type-accept",
+      "role": "envelope",
+      "semanticRevision": "258bece90b549c69087eb510fe7ad7d671ae1e07db7a2ac2d8df998fd5bd558c"
+    },
+    {
+      "caseId": "l3-io-link-owner-accept",
+      "role": "envelope",
+      "semanticRevision": "1c0fa53eeaeae9af9b9d730ff2e797ffd67ca62663db37bcebd8949877ab1430"
+    },
+    {
+      "caseId": "l3-io-link-owner-draft",
+      "role": "envelope",
+      "semanticRevision": "1c0fa53eeaeae9af9b9d730ff2e797ffd67ca62663db37bcebd8949877ab1430"
+    },
+    {
+      "caseId": "l3-imp-remap-total",
+      "role": "envelope",
+      "semanticRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c"
+    },
+    {
+      "caseId": "l3-imp-remap-total-edit",
+      "role": "envelope",
+      "semanticRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c"
+    },
+    {
+      "caseId": "l3-imp-remap-unapproved",
+      "role": "envelope",
+      "semanticRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c"
+    },
+    {
+      "caseId": "l3-imp-remap-swap",
+      "role": "envelope",
+      "semanticRevision": "3972c15729732f546c7fd38ff36e06b364fec5aa70a0fc43c2adfb651a69da75"
+    },
+    {
+      "caseId": "l3-imp-remap-collision",
+      "role": "envelope",
+      "semanticRevision": "2611539bec870d7b7711881d052087b2c4a6a16b5ac4e26c57c9ddfab5dd441e"
+    },
+    {
+      "caseId": "l3-imp-remap-duplicate-result",
+      "role": "envelope",
+      "semanticRevision": "2611539bec870d7b7711881d052087b2c4a6a16b5ac4e26c57c9ddfab5dd441e"
+    },
+    {
+      "caseId": "l3-imp-remap-unknown-source",
+      "role": "envelope",
+      "semanticRevision": "2611539bec870d7b7711881d052087b2c4a6a16b5ac4e26c57c9ddfab5dd441e"
+    },
+    {
+      "caseId": "l3-imp-remap-target-grammar",
+      "role": "envelope",
+      "semanticRevision": "2611539bec870d7b7711881d052087b2c4a6a16b5ac4e26c57c9ddfab5dd441e"
+    },
+    {
+      "caseId": "l3-imp-remap-opaque",
+      "role": "envelope",
+      "semanticRevision": "93471b8358e6ed4ae65ccf67d1fe111566ddcf6d9d34a3469229d6e917e7eada"
+    },
+    {
+      "caseId": "l3-imp-remap-opaque-attested",
+      "role": "envelope",
+      "semanticRevision": "93471b8358e6ed4ae65ccf67d1fe111566ddcf6d9d34a3469229d6e917e7eada"
+    },
+    {
+      "caseId": "l3-imp-remap-dangling",
+      "role": "envelope",
+      "semanticRevision": "65c1e74246987fd3717535394517d6d1167ff5ed51af01c9a3309e48d49275c0"
+    },
+    {
+      "caseId": "l3-imp-remap-nonsubset-id",
+      "role": "envelope",
+      "semanticRevision": "436e93efd67c48d79eb3a4f5adae4006e5d8cdd4774b7171c03fb02742b6cca4"
+    },
+    {
+      "caseId": "l3-imp-remap-qname",
+      "role": "envelope",
+      "semanticRevision": "19b562d9baa2c0d8cd65fc828eceaee2abe1455c67287399a09982354f94cc07"
+    },
+    {
+      "caseId": "l3-imp-remap-owner",
+      "role": "envelope",
+      "semanticRevision": "3413308b27f18c2fc695ba9fe0b03480456f810e7924b2d1afb2113ac63ebd74"
+    }
+  ],
+  "transport": [
+    {
+      "scenario": "full",
+      "sha256": "9f2c347ca6b89a086cc5df8b894e6814e3e1253188fd4bced0f8c2e9f3b4c906",
+      "bytes": 4749
+    },
+    {
+      "scenario": "two-processes",
+      "sha256": "37bb0b3036a87e45a3f8aa65f5a0e400cf128a2d960bc206700685ddb6f44882",
+      "bytes": 4069
+    },
+    {
+      "scenario": "unicode-names",
+      "sha256": "2f85a8727915c6a6d8a2456cdae6bba1525562e3f1677cf42c954d2d5e934761",
+      "bytes": 2586
+    }
+  ],
+  "views": [
+    {
+      "tuple": {
+        "semanticRevision": "851037164c3008d87d820ba45c9ee7ef81e234ae756faebaa20c2a6c74063c05",
+        "layoutDigest": "d5debc5019c19cf636de6b8c5bd1ca019ee4c24494b14f1d5197279839efeaad",
+        "themeId": "plain",
+        "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+        "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+        "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+        "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+      },
+      "value": "d6956d94acb83b907919df9dfb6965fcd7a7cce38fdf2f1e6969255d2d4668b4"
+    },
+    {
+      "tuple": {
+        "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+        "layoutDigest": "9a5644ca780ded6896448656d6cfcef42dbb842859b929167da78a0ba4afbc76",
+        "themeId": "plain",
+        "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+        "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+        "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+        "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+      },
+      "value": "fb9d0a5ba9a6875044aeb2933a39cb23df1afae43cca4c52893b542fde344479"
+    },
+    {
+      "tuple": {
+        "semanticRevision": "8177432538e322f2b13ba440e67099f947c13e3dcd392788353b3e39ee011f93",
+        "layoutDigest": "b12b07ea05ac25f5671a3d32ad9c170f82469ca3a29fab85952c2380b9ec8c2c",
+        "themeId": "plain",
+        "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+        "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+        "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+        "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+      },
+      "value": "f0b863e92c82076cd6e790c31fe12297f301c7fc9bb79f20fbccde676bdcc01e"
+    },
+    {
+      "tuple": {
+        "semanticRevision": "8177432538e322f2b13ba440e67099f947c13e3dcd392788353b3e39ee011f93",
+        "layoutDigest": "b12b07ea05ac25f5671a3d32ad9c170f82469ca3a29fab85952c2380b9ec8c2c",
+        "themeId": "contrast",
+        "themeDigest": "ed909e09244bbf430e9a2db911238d4261062b380eefbe751ae40fb207183edb",
+        "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+        "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+        "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+      },
+      "value": "d18f0d5ca0835f7ed1c12ddef752749aebd841a3165fa234bb3459a71820fd5e"
+    },
+    {
+      "tuple": {
+        "semanticRevision": "3d447837e689c3777e4328f9936901cc0cd103e4042f51b2320e513e3692d0fa",
+        "layoutDigest": "6612b545b41aafaf7b53353c88caa2aa9792ca3ac5d83690e818868823df4468",
+        "themeId": "plain",
+        "themeDigest": "74b97e29ea96d07df5c44eb917733c2c870b7d1eb39b1969e0d05c3ce7a0741f",
+        "overridesDigest": "e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c",
+        "diStylesDigest": "b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4",
+        "metricsDigest": "4f02aa1a16d22d03bebaac92939210302637ba59a8a47504690986b40483d051"
+      },
+      "value": "ef1eddf618811eb37a8eb89d42cea290508b67c4a583deef2115cf0582015e50"
+    }
+  ]
+}

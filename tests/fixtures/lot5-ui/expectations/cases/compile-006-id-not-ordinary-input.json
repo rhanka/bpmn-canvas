@@ -1,0 +1,43 @@
+{
+  "caseId": "lot5-compile-006-id-not-ordinary-input",
+  "comparatorIds": [
+    "lot5/result"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "code": "profile-producer",
+        "diagnostics": [],
+        "status": "refused"
+      },
+      "role": "result"
+    }
+  ],
+  "expectedStatus": "refused:profile-producer",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/ui-neutral-registry.json",
+      "role": "registry",
+      "sha256": "1dc918ec35fd0c60a78006a9c4bacfe3fc32b32c6b2e796810e7256f27139406"
+    },
+    {
+      "json": {
+        "assets": [
+          "fixtures/ui-neutral-metrics.json"
+        ],
+        "base": "fixtures/ui-neutral-base.json",
+        "descriptors": [
+          "fixtures/ui-neutral-descriptors.json"
+        ],
+        "digestDomain": "raw"
+      },
+      "role": "compile-inputs"
+    }
+  ],
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/variants/id-not-ordinary-input.profile.json",
+    "sha256": "08f5d65786e1c498640a3675c600bc9af2283f5fcd5f0e20859306408d7b4b8c"
+  }
+}

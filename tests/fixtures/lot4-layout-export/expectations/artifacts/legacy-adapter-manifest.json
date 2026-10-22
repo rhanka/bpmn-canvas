@@ -1,0 +1,199 @@
+{
+  "format": "legacy-adapter-manifest/1",
+  "revision": 2,
+  "reviewedAgainst": "block A public sources at 5ba04e0 (io index, reference-model, reference-drawio and reference-sparx modules; react workshop export; assistant-ui) and the Python twin library (bpmn_io) at commit 1254d9a",
+  "closedLossClasses": [
+    "semantic-type",
+    "relation-kind",
+    "navigation",
+    "appearance",
+    "layout",
+    "metadata",
+    "unsupported-feature",
+    "provenance-unavailable"
+  ],
+  "closedFallback": {
+    "code": "legacy-unmapped",
+    "messageKey": "legacy.unmapped",
+    "classification": "integrity",
+    "severity": "error",
+    "disposition": "refused",
+    "coordinates": "unavailable",
+    "legacyCode": "exact string code when present, otherwise omitted"
+  },
+  "adapters": [
+    {
+      "id": "js-legacy-export",
+      "entry": "io export(definitions, format): byte-or-throw legacy export for bpmn, drawio and sparx",
+      "producerShape": "IoError(code, message, ids)",
+      "mapped": [
+        {
+          "legacyCode": "unknown-format",
+          "code": "export-format-unsupported",
+          "messageKey": "export.format-unsupported",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": false
+        },
+        {
+          "legacyCode": "unsupported-format",
+          "code": "export-format-unsupported",
+          "messageKey": "export.format-unsupported",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": false
+        },
+        {
+          "legacyCode": "invalid-reference",
+          "code": "reference-dangling",
+          "messageKey": "reference-dangling",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": false
+        },
+        {
+          "legacyCode": "missing-endpoint",
+          "code": "reference-dangling",
+          "messageKey": "reference-dangling",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": true
+        },
+        {
+          "legacyCode": "duplicate-id",
+          "code": "id-collision",
+          "messageKey": "id-collision",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": true
+        }
+      ],
+      "fallbackInventory": [
+        "element-without-di",
+        "free-annotation",
+        "invalid-geometry",
+        "invalid-semantics",
+        "missing-di",
+        "missing-semantics",
+        "multiple-participants",
+        "nested-subprocess",
+        "no-pages",
+        "not-bpmn",
+        "orphan-application",
+        "unknown-semantics-version",
+        "unsupported-element",
+        "unsupported-model",
+        "unsupported-structure"
+      ],
+      "notices": [],
+      "codeless": "closed fallback without legacyCode"
+    },
+    {
+      "id": "js-workshop-export",
+      "entry": "workshop download: initializeCodecs, parseDefinitions, then js-legacy-export; cancellation stays operation-cancelled",
+      "producerShape": "IoError(code, message, ids)",
+      "mapped": [
+        {
+          "legacyCode": "unknown-format",
+          "code": "export-format-unsupported",
+          "messageKey": "export.format-unsupported",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": false
+        },
+        {
+          "legacyCode": "unsupported-format",
+          "code": "export-format-unsupported",
+          "messageKey": "export.format-unsupported",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": false
+        },
+        {
+          "legacyCode": "invalid-reference",
+          "code": "reference-dangling",
+          "messageKey": "reference-dangling",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": false
+        },
+        {
+          "legacyCode": "missing-endpoint",
+          "code": "reference-dangling",
+          "messageKey": "reference-dangling",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": true
+        },
+        {
+          "legacyCode": "duplicate-id",
+          "code": "id-collision",
+          "messageKey": "id-collision",
+          "classification": "integrity",
+          "severity": "error",
+          "disposition": "refused",
+          "perId": true,
+          "emitted": true
+        }
+      ],
+      "fallbackInventory": [
+        "dtd",
+        "element-without-di",
+        "free-annotation",
+        "invalid-configuration",
+        "invalid-geometry",
+        "invalid-semantics",
+        "invalid-xml",
+        "missing-di",
+        "missing-semantics",
+        "multiple-participants",
+        "nested-subprocess",
+        "no-pages",
+        "not-bpmn",
+        "orphan-application",
+        "unknown-semantics-version",
+        "unsupported-element",
+        "unsupported-model",
+        "unsupported-structure"
+      ],
+      "notices": [],
+      "codeless": "closed fallback without legacyCode"
+    },
+    {
+      "id": "assistant-ui-export",
+      "entry": "no legacy export entry point at block A head (render only)",
+      "producerShape": "none",
+      "mapped": [],
+      "fallbackInventory": [],
+      "notices": [],
+      "codeless": "closed fallback without legacyCode"
+    },
+    {
+      "id": "python-twin-legacy-export",
+      "entry": "no legacy export entry point in the Python twin library at 1254d9a (no draw.io/Sparx writer, no IoError or fidelity-notice producer)",
+      "producerShape": "none",
+      "mapped": [],
+      "fallbackInventory": [],
+      "notices": [],
+      "codeless": "closed fallback without legacyCode"
+    }
+  ]
+}

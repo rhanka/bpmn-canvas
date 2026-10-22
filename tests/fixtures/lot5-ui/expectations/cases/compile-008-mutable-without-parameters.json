@@ -1,0 +1,43 @@
+{
+  "caseId": "lot5-compile-008-mutable-without-parameters",
+  "comparatorIds": [
+    "lot5/result"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "code": "profile-schema",
+        "diagnostics": [],
+        "status": "refused"
+      },
+      "role": "result"
+    }
+  ],
+  "expectedStatus": "refused:profile-schema",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/ui-neutral-registry.json",
+      "role": "registry",
+      "sha256": "1dc918ec35fd0c60a78006a9c4bacfe3fc32b32c6b2e796810e7256f27139406"
+    },
+    {
+      "json": {
+        "assets": [
+          "fixtures/ui-neutral-metrics.json"
+        ],
+        "base": "fixtures/ui-neutral-base.json",
+        "descriptors": [
+          "fixtures/ui-neutral-descriptors.json"
+        ],
+        "digestDomain": "raw"
+      },
+      "role": "compile-inputs"
+    }
+  ],
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/variants/mutable-without-parameters.profile.json",
+    "sha256": "0defc9345dd1bc9390610a882899110dd33c7e6a4e7530512c0b3c1d15f7b171"
+  }
+}

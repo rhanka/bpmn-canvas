@@ -4,6 +4,7 @@ import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, write
 import { bundledPackages, licensesDocument } from "./licenses.mjs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
+import { buildNativeDemo } from "./build-native-demo.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const site = join(root, "site");
@@ -29,7 +30,8 @@ const result = await build({
 cpSync(join(root, "dist/assets"), join(site, "assets"), { recursive: true });
 cpSync(join(root, "docs/demo/index.html"), join(site, "index.html"));
 // The page bundles third-party code: the license text of every bundled package travels with it.
-const packages = bundledPackages(root, Object.keys(result.metafile.inputs));
+const nativeResult = await buildNativeDemo(root, site);
+const packages = bundledPackages(root, Object.keys({ ...result.metafile.inputs, ...nativeResult.metafile.inputs }));
 cpSync(join(root, "LICENSE"), join(site, "LICENSE.txt"));
 cpSync(join(root, "THIRD_PARTY_NOTICES.md"), join(site, "THIRD_PARTY_NOTICES.md"));
 cpSync(join(root, "licenses"), join(site, "licenses"), { recursive: true });

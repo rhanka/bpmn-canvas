@@ -1,0 +1,717 @@
+{
+  "caseId": "l3-n-recreate-after-remap",
+  "operation": "normalize",
+  "phase": "normalize",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn.json",
+    "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_support",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_R",
+              "name": "Partners",
+              "isExecutable": false,
+              "laneSets": [
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61",
+                  "name": "lane-set",
+                  "lanes": []
+                }
+              ],
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_L",
+                  "name": "Request",
+                  "outgoing": [
+                    "Flow_L1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_L",
+                  "name": "Answer",
+                  "incoming": [
+                    "Flow_L1"
+                  ],
+                  "outgoing": [
+                    "Flow_L2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_L",
+                  "name": "Answered",
+                  "incoming": [
+                    "Flow_L2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_L1",
+                  "sourceRef": "Start_L",
+                  "targetRef": "Task_L"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_L2",
+                  "sourceRef": "Task_L",
+                  "targetRef": "End_L"
+                },
+                {
+                  "$type": "bpmn:CallActivity",
+                  "id": "Call_New",
+                  "name": "New partner",
+                  "incoming": [],
+                  "outgoing": [],
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "external",
+                      "textFormat": "text/x-neutral-call-kind"
+                    }
+                  ]
+                }
+              ],
+              "artifacts": [
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Assoc_New",
+                  "sourceRef": "Call_New",
+                  "targetRef": "Start_L",
+                  "associationDirection": "One"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:Collaboration",
+              "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1",
+              "name": "collaboration",
+              "participants": [
+                {
+                  "$type": "bpmn:Participant",
+                  "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999",
+                  "name": "main-participant",
+                  "processRef": "Process_R"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [
+          {
+            "ownerId": "Process_R",
+            "role": "collaboration",
+            "targetId": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+          },
+          {
+            "ownerId": "Process_R",
+            "role": "lane-set",
+            "targetId": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+          },
+          {
+            "ownerId": "Process_R",
+            "role": "main-participant",
+            "targetId": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+          }
+        ],
+        "semanticRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9"
+      }
+    },
+    {
+      "role": "activation",
+      "json": "qualification"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "operation": "normalize",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9",
+        "revision": "01717a9972485e417b40f53a4be40fdaeea111d5d5cae19746aa1c42d2893d6e",
+        "report": {
+          "reportVersion": "2",
+          "operation": "normalize",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "targetIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9",
+          "outputRevision": "01717a9972485e417b40f53a4be40fdaeea111d5d5cae19746aa1c42d2893d6e",
+          "entries": [
+            {
+              "code": "normalize/ensure",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "normalize",
+              "ruleId": "n-external-lane",
+              "messageKey": "normalize.ensure",
+              "disposition": "corrected",
+              "source": {
+                "domain": "none",
+                "pointer": null,
+                "targetId": null,
+                "provenance": "generated"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/laneSets/0/lanes/0",
+                "targetId": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                "provenance": "generated"
+              },
+              "property": "lanes",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": {
+                "$type": "bpmn:Lane",
+                "id": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                "name": "external-lane",
+                "flowNodeRef": [
+                  "Call_New"
+                ]
+              }
+            },
+            {
+              "code": "normalize/assignRef",
+              "severity": "info",
+              "classification": "repairable",
+              "stage": "normalize",
+              "ruleId": "n-external-membership",
+              "messageKey": "normalize.assignRef",
+              "disposition": "corrected",
+              "source": {
+                "domain": "none",
+                "pointer": null,
+                "targetId": null,
+                "provenance": "generated"
+              },
+              "result": {
+                "domain": "tree",
+                "pointer": "/rootElements/0/laneSets/0/lanes/0/flowNodeRef",
+                "targetId": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                "provenance": "generated"
+              },
+              "property": "flowNodeRef",
+              "beforePresent": false,
+              "afterPresent": true,
+              "after": [
+                "Call_New"
+              ]
+            }
+          ],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        },
+        "payload": {
+          "envelope": {
+            "documentVersion": "1",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "tree": {
+              "$type": "bpmn:Definitions",
+              "id": "Definitions_support",
+              "targetNamespace": "urn:neutral-cn:1",
+              "exporterVersion": "fixture-cn-1",
+              "rootElements": [
+                {
+                  "$type": "bpmn:Process",
+                  "id": "Process_R",
+                  "name": "Partners",
+                  "isExecutable": false,
+                  "laneSets": [
+                    {
+                      "$type": "bpmn:LaneSet",
+                      "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61",
+                      "name": "lane-set",
+                      "lanes": [
+                        {
+                          "$type": "bpmn:Lane",
+                          "id": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                          "name": "external-lane",
+                          "flowNodeRef": [
+                            "Call_New"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "flowElements": [
+                    {
+                      "$type": "bpmn:StartEvent",
+                      "id": "Start_L",
+                      "name": "Request",
+                      "outgoing": [
+                        "Flow_L1"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Task",
+                      "id": "Task_L",
+                      "name": "Answer",
+                      "incoming": [
+                        "Flow_L1"
+                      ],
+                      "outgoing": [
+                        "Flow_L2"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:EndEvent",
+                      "id": "End_L",
+                      "name": "Answered",
+                      "incoming": [
+                        "Flow_L2"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:SequenceFlow",
+                      "id": "Flow_L1",
+                      "sourceRef": "Start_L",
+                      "targetRef": "Task_L"
+                    },
+                    {
+                      "$type": "bpmn:SequenceFlow",
+                      "id": "Flow_L2",
+                      "sourceRef": "Task_L",
+                      "targetRef": "End_L"
+                    },
+                    {
+                      "$type": "bpmn:CallActivity",
+                      "id": "Call_New",
+                      "name": "New partner",
+                      "incoming": [],
+                      "outgoing": [],
+                      "documentation": [
+                        {
+                          "$type": "bpmn:Documentation",
+                          "text": "external",
+                          "textFormat": "text/x-neutral-call-kind"
+                        }
+                      ]
+                    }
+                  ],
+                  "artifacts": [
+                    {
+                      "$type": "bpmn:Association",
+                      "id": "Assoc_New",
+                      "sourceRef": "Call_New",
+                      "targetRef": "Start_L",
+                      "associationDirection": "One"
+                    }
+                  ]
+                },
+                {
+                  "$type": "bpmn:Collaboration",
+                  "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1",
+                  "name": "collaboration",
+                  "participants": [
+                    {
+                      "$type": "bpmn:Participant",
+                      "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999",
+                      "name": "main-participant",
+                      "processRef": "Process_R"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "ownerId": "Process_R",
+                "role": "collaboration",
+                "targetId": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+              },
+              {
+                "ownerId": "Process_R",
+                "role": "external-lane",
+                "targetId": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c"
+              },
+              {
+                "ownerId": "Process_R",
+                "role": "lane-set",
+                "targetId": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+              },
+              {
+                "ownerId": "Process_R",
+                "role": "main-participant",
+                "targetId": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+              }
+            ],
+            "semanticRevision": "01717a9972485e417b40f53a4be40fdaeea111d5d5cae19746aa1c42d2893d6e"
+          },
+          "placements": [
+            {
+              "elementId": "Call_New",
+              "ownerProcessId": "Process_R",
+              "regionKey": "external",
+              "relatedAssociationIds": [
+                "Assoc_New"
+              ]
+            }
+          ],
+          "report": {
+            "reportVersion": "2",
+            "operation": "normalize",
+            "sourceIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "targetIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "inputRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9",
+            "outputRevision": "01717a9972485e417b40f53a4be40fdaeea111d5d5cae19746aa1c42d2893d6e",
+            "entries": [
+              {
+                "code": "normalize/ensure",
+                "severity": "info",
+                "classification": "repairable",
+                "stage": "normalize",
+                "ruleId": "n-external-lane",
+                "messageKey": "normalize.ensure",
+                "disposition": "corrected",
+                "source": {
+                  "domain": "none",
+                  "pointer": null,
+                  "targetId": null,
+                  "provenance": "generated"
+                },
+                "result": {
+                  "domain": "tree",
+                  "pointer": "/rootElements/0/laneSets/0/lanes/0",
+                  "targetId": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                  "provenance": "generated"
+                },
+                "property": "lanes",
+                "beforePresent": false,
+                "afterPresent": true,
+                "after": {
+                  "$type": "bpmn:Lane",
+                  "id": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                  "name": "external-lane",
+                  "flowNodeRef": [
+                    "Call_New"
+                  ]
+                }
+              },
+              {
+                "code": "normalize/assignRef",
+                "severity": "info",
+                "classification": "repairable",
+                "stage": "normalize",
+                "ruleId": "n-external-membership",
+                "messageKey": "normalize.assignRef",
+                "disposition": "corrected",
+                "source": {
+                  "domain": "none",
+                  "pointer": null,
+                  "targetId": null,
+                  "provenance": "generated"
+                },
+                "result": {
+                  "domain": "tree",
+                  "pointer": "/rootElements/0/laneSets/0/lanes/0/flowNodeRef",
+                  "targetId": "g_d39acca21e637046356a554a017722203c7691b9f7ac3c9ece7045830e1f042c",
+                  "provenance": "generated"
+                },
+                "property": "flowNodeRef",
+                "beforePresent": false,
+                "afterPresent": true,
+                "after": [
+                  "Call_New"
+                ]
+              }
+            ],
+            "rawStandardFindings": [],
+            "idMap": [],
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_support",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_R",
+              "name": "Partners",
+              "isExecutable": false,
+              "laneSets": [
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61",
+                  "name": "lane-set",
+                  "lanes": []
+                }
+              ],
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_L",
+                  "name": "Request",
+                  "outgoing": [
+                    "Flow_L1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_L",
+                  "name": "Answer",
+                  "incoming": [
+                    "Flow_L1"
+                  ],
+                  "outgoing": [
+                    "Flow_L2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_L",
+                  "name": "Answered",
+                  "incoming": [
+                    "Flow_L2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_L1",
+                  "sourceRef": "Start_L",
+                  "targetRef": "Task_L"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_L2",
+                  "sourceRef": "Task_L",
+                  "targetRef": "End_L"
+                },
+                {
+                  "$type": "bpmn:CallActivity",
+                  "id": "Call_New",
+                  "name": "New partner",
+                  "incoming": [],
+                  "outgoing": [],
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "external",
+                      "textFormat": "text/x-neutral-call-kind"
+                    }
+                  ]
+                }
+              ],
+              "artifacts": [
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Assoc_New",
+                  "sourceRef": "Call_New",
+                  "targetRef": "Start_L",
+                  "associationDirection": "One"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:Collaboration",
+              "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1",
+              "name": "collaboration",
+              "participants": [
+                {
+                  "$type": "bpmn:Participant",
+                  "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999",
+                  "name": "main-participant",
+                  "processRef": "Process_R"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [
+          {
+            "ownerId": "Process_R",
+            "role": "collaboration",
+            "targetId": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+          },
+          {
+            "ownerId": "Process_R",
+            "role": "lane-set",
+            "targetId": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+          },
+          {
+            "ownerId": "Process_R",
+            "role": "main-participant",
+            "targetId": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+          }
+        ],
+        "semanticRevision": "824a282f480374ba568111e40f54dd2654d446b0fb0145801fc4cf8a49610cb9"
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2",
+    "placements-order/lot3"
+  ]
+}

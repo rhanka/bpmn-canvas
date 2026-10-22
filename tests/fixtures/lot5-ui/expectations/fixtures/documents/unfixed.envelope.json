@@ -1,0 +1,251 @@
+{
+  "documentVersion": "1",
+  "profileIdentity": {
+    "mechanismVersion": "1",
+    "schemaVersion": "1.0.0",
+    "profile": "ui-neutral/1",
+    "version": "1.1.0",
+    "sha256": "217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e",
+    "base": {
+      "id": "ui-neutral-base/1",
+      "version": "lot5-2",
+      "sha256": "eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb"
+    },
+    "descriptors": [
+      {
+        "id": "ui-neutral-descriptors/1",
+        "version": "lot5-2",
+        "sha256": "59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032"
+      }
+    ]
+  },
+  "tree": {
+    "$type": "bpmn:Definitions",
+    "id": "Defs_ui",
+    "targetNamespace": "urn:example:lot5-ui",
+    "exporterVersion": "ui-neutral-base/1",
+    "rootElements": [
+      {
+        "$type": "bpmn:Process",
+        "id": "Proc_main",
+        "name": "Order handling",
+        "flowElements": [
+          {
+            "$type": "bpmn:StartEvent",
+            "id": "Start_1",
+            "name": "Order received"
+          },
+          {
+            "$type": "bpmn:Task",
+            "id": "Task_A",
+            "name": "Check order"
+          },
+          {
+            "$type": "bpmn:UserTask",
+            "id": "Task_B",
+            "name": "Approve order"
+          },
+          {
+            "$type": "bpmn:EndEvent",
+            "id": "End_1",
+            "name": "Order closed"
+          },
+          {
+            "$type": "bpmn:SequenceFlow",
+            "id": "Flow_1",
+            "sourceRef": "Start_1",
+            "targetRef": "Task_A"
+          },
+          {
+            "$type": "bpmn:SequenceFlow",
+            "id": "Flow_2",
+            "sourceRef": "Task_A",
+            "targetRef": "Task_B",
+            "name": "Fit straße"
+          },
+          {
+            "$type": "bpmn:SequenceFlow",
+            "id": "Flow_3",
+            "sourceRef": "Task_B",
+            "targetRef": "End_1"
+          },
+          {
+            "$type": "bpmn:DataStoreReference",
+            "id": "Ref_1",
+            "dataStoreRef": "Store_1"
+          },
+          {
+            "$type": "bpmn:DataObjectReference",
+            "id": "Item_1",
+            "name": "Order form",
+            "dataObjectRef": "Obj_1"
+          },
+          {
+            "$type": "bpmn:DataObject",
+            "id": "Obj_1"
+          },
+          {
+            "$type": "bpmn:CallActivity",
+            "id": "Call_1",
+            "name": "Run review",
+            "calledElement": "Proc-review",
+            "documentation": [
+              {
+                "$type": "bpmn:Documentation",
+                "text": "Source: review procedure, step 4"
+              }
+            ]
+          },
+          {
+            "$type": "bpmn:CallActivity",
+            "id": "Call_2",
+            "name": "Révision cycle",
+            "calledElement": "ProcArchive"
+          },
+          {
+            "$type": "bpmn:Task",
+            "id": "Task_X",
+            "name": "Standalone check"
+          },
+          {
+            "$type": "bpmn:DataStoreReference",
+            "id": "Ref_2",
+            "dataStoreRef": "Store_2"
+          },
+          {
+            "$type": "bpmn:CallActivity",
+            "id": "Call_3",
+            "name": "Draft call"
+          },
+          {
+            "$type": "bpmn:UserTask",
+            "id": "Task_Y",
+            "name": "Standalone approval"
+          },
+          {
+            "$type": "bpmn:CallActivity",
+            "id": "Call_4",
+            "name": "[Locked] Archive run",
+            "calledElement": "ProcArchive"
+          },
+          {
+            "$type": "bpmn:CallActivity",
+            "id": "Call_5",
+            "name": "[Hidden] Legacy run",
+            "calledElement": "Proc-review"
+          }
+        ],
+        "artifacts": [
+          {
+            "$type": "bpmn:TextAnnotation",
+            "id": "Note_1",
+            "text": "[Aid] spreadsheet"
+          },
+          {
+            "$type": "bpmn:Association",
+            "id": "Link_1",
+            "sourceRef": "Ref_1",
+            "targetRef": "Task_A",
+            "associationDirection": "One"
+          },
+          {
+            "$type": "bpmn:Association",
+            "id": "AidLink_1",
+            "sourceRef": "Note_1",
+            "targetRef": "Task_B",
+            "associationDirection": "None"
+          },
+          {
+            "$type": "bpmn:TextAnnotation",
+            "id": "Note_2",
+            "text": "[Aid]calculator",
+            "documentation": [
+              {
+                "$type": "bpmn:Documentation",
+                "text": "Source: tool inventory, sheet 2"
+              }
+            ]
+          },
+          {
+            "$type": "bpmn:TextAnnotation",
+            "id": "Note_3",
+            "text": " [Aid] ledger"
+          },
+          {
+            "$type": "bpmn:TextAnnotation",
+            "id": "Note_4",
+            "text": "Check totals"
+          }
+        ],
+        "ioSpecification": {
+          "$type": "bpmn:InputOutputSpecification",
+          "dataInputs": [
+            {
+              "$type": "bpmn:DataInput",
+              "id": "Input_1",
+              "name": "Customer request"
+            }
+          ],
+          "inputSets": [
+            {
+              "$type": "bpmn:InputSet",
+              "id": "Set_A",
+              "name": "Standard",
+              "dataInputRefs": [
+                "Input_1"
+              ]
+            },
+            {
+              "$type": "bpmn:InputSet",
+              "id": "Set_B",
+              "name": "Express"
+            }
+          ]
+        }
+      },
+      {
+        "$type": "bpmn:Process",
+        "id": "Proc-review",
+        "name": "Révision cycle",
+        "isExecutable": false,
+        "flowElements": [
+          {
+            "$type": "bpmn:StartEvent",
+            "id": "Start_r",
+            "name": "Review requested"
+          },
+          {
+            "$type": "bpmn:Task",
+            "id": "Task_R",
+            "name": "Review case"
+          }
+        ]
+      },
+      {
+        "$type": "bpmn:Process",
+        "id": "ProcArchive",
+        "name": "Archive records 𐀀",
+        "isExecutable": false,
+        "flowElements": [
+          {
+            "$type": "bpmn:StartEvent",
+            "id": "Start_x",
+            "name": "Archive requested"
+          }
+        ]
+      },
+      {
+        "$type": "bpmn:DataStore",
+        "id": "Store_1",
+        "name": "Policy handbook"
+      },
+      {
+        "$type": "bpmn:DataStore",
+        "id": "Store_2",
+        "name": "Tariff sheet"
+      }
+    ]
+  },
+  "bindings": [],
+  "semanticRevision": "fdd53a8c0153fd7e29a16de9bd3dff8c0d72689a1673c1d66aea82c9f1a8bcb0"
+}

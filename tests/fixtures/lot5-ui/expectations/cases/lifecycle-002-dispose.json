@@ -1,0 +1,77 @@
+{
+  "caseId": "lot5-lifecycle-002-dispose",
+  "commandArtifact": {
+    "json": {
+      "sequenceVersion": "1",
+      "steps": [
+        {
+          "action": "dispose",
+          "step": 1
+        },
+        {
+          "action": "getDefinitions",
+          "step": 2
+        },
+        {
+          "action": "applyCommands",
+          "request": {"baseRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","commands":[{"command":"surface","context":{"key":"k-lifecycle-2","owner":"Proc_main","value":""},"entry":"task-create"}],"expectedViewRevision":"097d7205eaf7fd73c5ef93e83b261f82ebfc66656bfed674655908f529c43254","transactionId":"tx-lifecycle-2"},
+          "step": 3
+        },
+        {
+          "action": "undo",
+          "request": {"expectedRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","expectedViewRevision":"097d7205eaf7fd73c5ef93e83b261f82ebfc66656bfed674655908f529c43254"},
+          "step": 4
+        },
+        {
+          "action": "dispose",
+          "step": 5
+        }
+      ]
+    },
+    "role": "sequence"
+  },
+  "comparatorIds": [
+    "lot5/sequence"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": [
+        {
+          "events": [],
+          "result": {"diagnostics":[],"payload":{"disposed":true},"status":"ok"}
+        },
+        {
+          "events": [],
+          "result": {"code":"canvas-disposed","diagnostics":[],"operation":"getDefinitions","report":{"artifacts":[],"entries":[],"idMap":[],"operation":"getDefinitions","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},"status":"refused"}
+        },
+        {
+          "events": [],
+          "result": {"code":"canvas-disposed","diagnostics":[],"operation":"applyCommands","report":{"artifacts":[],"entries":[],"idMap":[],"operation":"applyCommands","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},"status":"refused"}
+        },
+        {
+          "events": [],
+          "result": {"code":"canvas-disposed","diagnostics":[],"operation":"undo","report":{"artifacts":[],"entries":[],"idMap":[],"operation":"undo","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},"status":"refused"}
+        },
+        {
+          "events": [],
+          "result": {"code":"canvas-disposed","diagnostics":[],"status":"refused"}
+        }
+      ],
+      "role": "sequence"
+    }
+  ],
+  "expectedStatus": "ok",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/documents/basic.snapshot.json",
+      "role": "snapshot",
+      "sha256": "e72fb51afb484918ca2c3aef4eff2a84502cbbd3c6e7aafd1a2f9baa8c8e7ce9"
+    }
+  ],
+  "operation": "canvas.sequence",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/ui-neutral-profile.json",
+    "sha256": "c495634b669e817af02545b040b1d767bb0ea098b4924a6247b984b53b6787a1"
+  }
+}

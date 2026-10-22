@@ -5,13 +5,13 @@ import type { SchemaValidator } from "./contracts.js";
 import { profileIdentity } from "./envelope.js";
 import type { CompleteProfileDocument, ProfileIdentity } from "./envelope.js";
 import { checkActionPhase, checkStaticRule, requiredWrites, verifyResourcePins } from "./static-contracts.js";
-import { MISSING, cloneJson, descriptorIndex, failContract, freezeJson, nativeIndex, pointerKey, typeMatches, validateNativeReferences } from "./native-contracts.js";
+import { MISSING, cloneJson, descriptorIndex, failContract, freezeJson, listDanglingReferences, nativeIndex, pointerKey, typeMatches, validateNativeReferences } from "./native-contracts.js";
 import type { DescriptorIndex, NativeNode, SupportBinding } from "./native-contracts.js";
 import { applyUnicodeCase } from "./unicode-case.js";
 import type { UnicodeCaseTable } from "./unicode-case.js";
 import type { PureResult } from "./results.js";
 import { admitCompilerAuthority, checkCompilerSchema, checkRuleTable, snapshotCompilerInputs } from "./compiler-authority.js";
-import type { CompilerInputs, CompilerAuthority } from "./compiler-authority.js";
+import type { AuthorityField, CompilerInputs, CompilerAuthority } from "./compiler-authority.js";
 import { checkWholeProfile } from "./compiler-static.js";
 
 const VALUE_OPS = ["literal", "read", "id", "ids", "param", "concat", "stripPrefix", "case", "outputId"] as const;
@@ -46,6 +46,16 @@ const admittedProfiles = new WeakMap<ValidatedProfile, CompilerAuthority>();
 
 export function admittedIdRefScalars(validated: ValidatedProfile): readonly string[] {
   return (admittedProfiles.get(validated) ?? failContract("profile-identity-mismatch")).idRefScalars;
+}
+
+/** Effective-base producer table for runtime actor checks. Entries are frozen. */
+export function admittedAuthorityFields(validated: ValidatedProfile): readonly AuthorityField[] {
+  return [...((admittedProfiles.get(validated) ?? failContract("profile-identity-mismatch")).fields as readonly AuthorityField[])];
+}
+
+/** Effective-base admitted type names for import projection. */
+export function admittedBaseTypes(validated: ValidatedProfile): readonly string[] {
+  return [...((admittedProfiles.get(validated) ?? failContract("profile-identity-mismatch")).types as readonly string[])];
 }
 
 /** Strict lexical parse, then schema validation, then identity and resource
@@ -300,7 +310,21 @@ function checkActionStructure(step: unknown, phase: string, capabilities: Set<st
       return;
     }
     case "ensure": {
-      text("as"); text("type"); text("parent"); text("property"); text("owner"); text("role"); text("ownerId");
+      text("as"); text("type"); text("parent"); text("property"); text("owner"); text("role");
+      // Only support objects allocate through ensure; anything else needs an
+      // explicit producer, refused here.
+      if (!["bpmn:Collaboration", "bpmn:Participant", "bpmn:LaneSet", "bpmn:Lane"].includes(subject.type as string)) {
+        failContract("profile-producer");
+      }
+      if (typeof subject.slot !== "string" || !subject.slot) failContract("profile-create-identity");
+      checkStepsValue(subject.ownerId, "ensure.ownerId");
+      checkStepsValue(subject.key, "ensure.key");
+      if (!Array.isArray(subject.fields)) failContract("profile-schema");
+      for (const field of subject.fields) {
+        const entry = record(field);
+        if (typeof entry.name !== "string" || !entry.name) failContract("profile-schema");
+        checkStepsValue(entry.value, "ensure.fields");
+      }
       return;
     }
     case "set": case "unset": {
@@ -348,12 +372,12 @@ function checkActionStructure(step: unknown, phase: string, capabilities: Set<st
     }
     case "loss": {
       text("target");
-      choice(subject.class, LOSS_CLASSES);
+      choice(subject.code, LOSS_CLASSES);
       return;
     }
     case "remove": {
       text("target");
-      if (!Array.isArray(subject.dependents)) failContract("profile-schema");
+      checkSelectorStructure(record(subject.dependents), "remove.dependents", capabilities);
       choice(subject.policy, ["refuseIfReferenced", "includeDeclared"]);
       return;
     }
@@ -587,14 +611,80 @@ export interface EvalContext {
   readonly idRefScalars?: readonly string[];
   readonly unicodeCase?: UnicodeCaseTable;
   readonly limits?: { readonly maxAstDepth?: number; readonly maxSelected?: number; readonly maxEvaluations?: number };
+  /** Reference admission for this evaluation. Direct calls admit strictly
+   * (reference-dangling refuses before evaluation); stage lint passes
+   * leniently over trees whose dangling references are reported, not refused. */
+  readonly admission?: "strict" | "lenient";
 }
 interface EvalState { depth: number; evaluations: number; notions: string[]; index: ReturnType<typeof nativeIndex> }
 
-const DEFAULT_MAX_AST_DEPTH = 256;
-const DEFAULT_MAX_SELECTED = 100_000;
+/** Per-tree evaluation index cache. Sibling plans read the immutable
+ * phase-start snapshot, so one index build serves every evaluation of a pass
+ * (otherwise per-candidate indexing makes C/N quadratic). Trees mutated
+ * in place must call invalidateEvalIndex. Keyed by tree and descriptor set;
+ * idRefScalars travel with the registry descriptors in every stage flow. */
+const indexCache = new WeakMap<NativeNode, WeakMap<object, {
+  readonly strict?: ReturnType<typeof nativeIndex>; readonly lenient?: ReturnType<typeof nativeIndex> }>>();
+
+/** Drop a cached evaluation index after in-place tree mutation. */
+export function invalidateEvalIndex(tree: NativeNode): void {
+  indexCache.delete(tree);
+}
+
+/** Host input admission: node and byte caps return resource-limit. */
+export function checkHostInputLimits(tree: NativeNode): void {
+  let nodes = 0;
+  const stack: unknown[] = [tree];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (Array.isArray(current)) {
+      for (let i = current.length - 1; i >= 0; i--) stack.push(current[i]);
+      continue;
+    }
+    if (!current || typeof current !== "object") continue;
+    if (typeof (current as NativeNode).$type === "string") {
+      nodes += 1;
+      if (nodes > HOST_RESOURCE_LIMITS.maxInputNodes) return failContract("resource-limit");
+    }
+    for (const value of Object.values(current)) stack.push(value);
+  }
+  if (new TextEncoder().encode(canonicalize(tree)).length > HOST_RESOURCE_LIMITS.maxInputBytes) {
+    return failContract("resource-limit");
+  }
+}
+
+/** Explicit host resource limits (DESIGN §2.5). Exceeding a limit returns
+ * resource-limit with no partial result. Values are pinned: the cost suite
+ * asserts them alongside the 800-element budget. */
+export const HOST_RESOURCE_LIMITS = Object.freeze({
+  maxInputNodes: 10_000,
+  maxInputBytes: 8_000_000,
+  maxAstDepth: 256,
+  maxSelected: 100_000,
+  maxEvaluations: 1_000_000,
+});
+
+const DEFAULT_MAX_AST_DEPTH = HOST_RESOURCE_LIMITS.maxAstDepth;
+const DEFAULT_MAX_SELECTED = HOST_RESOURCE_LIMITS.maxSelected;
 
 function evalState(context: EvalContext): EvalState {
-  return { depth: 0, evaluations: 0, notions: [], index: validateNativeReferences(context.tree, context.descriptors, context.idRefScalars) };
+  // Strict admission refuses a dangling tree before evaluation; the lenient
+  // index keeps member and identity checks but leaves dangling values to the
+  // traversals that actually resolve them, so selections over trees with
+  // unrelated dangling references stay decidable.
+  const mode = context.admission === "lenient" ? "lenient" : "strict";
+  let byDescriptors = indexCache.get(context.tree);
+  if (!byDescriptors) {
+    byDescriptors = new WeakMap();
+    indexCache.set(context.tree, byDescriptors);
+  }
+  const cached = byDescriptors.get(context.descriptors)?.[mode];
+  if (cached !== undefined) return { depth: 0, evaluations: 0, notions: [], index: cached };
+  const index = mode === "lenient"
+    ? listDanglingReferences(context.tree, context.descriptors, context.idRefScalars).index
+    : validateNativeReferences(context.tree, context.descriptors, context.idRefScalars);
+  byDescriptors.set(context.descriptors, { ...byDescriptors.get(context.descriptors), [mode]: index });
+  return { depth: 0, evaluations: 0, notions: [], index };
 }
 
 function singleHandle(context: EvalContext, name: unknown): EvalHandle {
@@ -653,6 +743,17 @@ function guardEvaluation(state: EvalState, context: EvalContext): void {
   if (++state.evaluations > (context.limits?.maxEvaluations ?? 1_000_000)) failContract("resource-limit");
 }
 
+// A descriptor reference property, or a base-declared ID-valued scalar
+// reference. Reference traversal requires one of the two (DESIGN L119);
+// a scalar or unknown property is profile-selector-property, never an
+// empty selection.
+function isReferenceProperty(descriptors: DescriptorIndex, idRefScalars: readonly string[] | undefined, field: string): boolean {
+  for (const [typeName, type] of Object.entries(descriptors)) {
+    if (Object.hasOwn(type.references, field)) return true;
+    if (type.scalars.includes(field) && (idRefScalars ?? []).includes(`${typeName}.${field}`)) return true;
+  }
+  return false;
+}
 function doSelect(selector: unknown, context: EvalContext, state: EvalState): EvalHandle[] {
   guardDepth(state, context);
   try { return selectAtDepth(selector, context, state); } finally { state.depth -= 1; }
@@ -700,12 +801,21 @@ function selectAtDepth(selector: unknown, context: EvalContext, state: EvalState
     }
     case "reference": {
       if (typeof subject.property !== "string" || !subject.property) failContract("profile-selector-property");
+      const field = (subject.property as string).replace(/~1/g, "/").replace(/~0/g, "~");
+      // Heterogeneous candidates lacking this optional reference are skipped
+      // per handle below; the property itself must still be a reference.
+      if (!isReferenceProperty(context.descriptors, context.idRefScalars, field)) failContract("profile-selector-property");
       for (const handle of starts) {
         const type = context.descriptors[handle.node.$type] ?? failContract("profile-type");
-        const field = (subject.property as string).replace(/~1/g, "/").replace(/~0/g, "~");
         const isReference = Object.hasOwn(type.references, field);
         const isScalarRef = type.scalars.includes(field) && (context.idRefScalars ?? []).includes(`${handle.node.$type}.${field}`);
-        if (!isReference && !isScalarRef) failContract("profile-selector-property");
+        // A declared scalar without this type's ID-reference qualification
+        // is profile-selector-property, never a skipped selection; only
+        // candidates with no such declared property are skipped.
+        if (!isReference && !isScalarRef) {
+          if (type.scalars.includes(field)) failContract("profile-selector-property");
+          continue;
+        }
         const raw = (handle.node as Record<string, unknown>)[field];
         if (raw === undefined) continue;
         const ids = Array.isArray(raw) ? raw : [raw];
@@ -725,6 +835,7 @@ function selectAtDepth(selector: unknown, context: EvalContext, state: EvalState
     case "inverseReference": {
       if (typeof subject.property !== "string" || !subject.property) failContract("profile-selector-property");
       const field = (subject.property as string).replace(/~1/g, "/").replace(/~0/g, "~");
+      if (!isReferenceProperty(context.descriptors, context.idRefScalars, field)) failContract("profile-selector-property");
       const wanted = new Set(starts.filter(handle => typeof handle.node.id === "string").map(handle => handle.node.id as string));
       for (const entry of state.index.entries) {
         const type = context.descriptors[entry.node.$type] ?? failContract("profile-type");
@@ -746,10 +857,11 @@ function selectAtDepth(selector: unknown, context: EvalContext, state: EvalState
   return ordered;
 }
 
-/** Selector evaluation over the immutable phase-start snapshot. */
+/** Selector evaluation over the immutable phase-start snapshot. Evaluation is
+ * pure, so the boundary converts any internal throw to refused; bindings are
+ * not reserialized per call (they alias the admission-checked snapshot). */
 export function selectHandles(selector: unknown, context: EvalContext): PureResult<readonly EvalHandle[]> {
   try {
-    canonicalize(context.bindings);
     return ok(doSelect(selector, context, evalState(context)));
   } catch (error) {
     return refused(refusalCode(error));
@@ -789,11 +901,13 @@ function valueAtDepth(value: unknown, context: EvalContext, state: EvalState, lo
     case "read": {
       const handle = singleHandle(context, subject.binding);
       if (typeof subject.path !== "string") failContract("profile-type");
-      return readValue(handle, subject.path as string, context.descriptors);
+      return readValue(handle, subject.path as string, context.descriptors, context.admission === "lenient");
     }
     case "id": {
       const handle = singleHandle(context, subject.binding);
-      if (typeof handle.node.id !== "string") failContract("profile-type");
+      // A missing ID is an evaluation error outside C identity allocation
+      // (DESIGN §2.2). Count/equal guards decide on MISSING from read, never id.
+      if (typeof handle.node.id !== "string") return failContract("profile-type");
       return handle.node.id;
     }
     case "ids": {
@@ -842,21 +956,40 @@ function valueAtDepth(value: unknown, context: EvalContext, state: EvalState, lo
   return failContract("profile-schema");
 }
 
-function readValue(handle: EvalHandle, path: string, descriptors: DescriptorIndex): unknown {
+function readValue(handle: EvalHandle, path: string, descriptors: DescriptorIndex, lenient: boolean): unknown {
   if (!/^(?:\/(?:[^~/]|~[01])*)+$/.test(path)) failContract("profile-type");
   const parts = path.slice(1).split("/").map(part => part.replace(/~1/g, "/").replace(/~0/g, "~"));
-  let current = handle.node;
+  // Total raw-member read: a member absent on this node yields MISSING inside
+  // stage evaluation, so predicates over heterogeneous candidates stay
+  // decidable instead of refusing. A direct read of a field no descriptor
+  // declares is a contract error, not a missing value.
+  let current: unknown = handle.node;
   for (const [position, field] of parts.entries()) {
-    const descriptor = descriptors[current.$type] ?? failContract("profile-type");
-    if (!descriptor.scalars.includes(field) && !Object.hasOwn(descriptor.references, field) && !Object.hasOwn(descriptor.containment, field)) {
-      failContract("profile-type");
+    if (!current || typeof current !== "object" || Array.isArray(current)) return MISSING;
+    if (position < parts.length - 1) {
+      // Intermediate segments traverse known single containment only; array
+      // indexing belongs to revision-bound command inputs, never recognition
+      // recipes (DESIGN §2.2). Typed record reads keep their plain walk.
+      if (/^(0|[1-9][0-9]*)$/.test(field)) return failContract("profile-type");
+      const intermediate = current as NativeNode;
+      if (typeof intermediate.$type === "string" && descriptors[intermediate.$type] !== undefined &&
+        Array.isArray((intermediate as Record<string, unknown>)[field])) {
+        return failContract("profile-type");
+      }
     }
-    if (!Object.hasOwn(current, field)) return MISSING;
+    if (!Object.hasOwn(current, field)) {
+      if (lenient) return MISSING;
+      const node = current as { readonly $type?: unknown };
+      const type = typeof node.$type === "string" ? descriptors[node.$type] : undefined;
+      const declared = field === "$type" || field === "id" || (type !== undefined &&
+        (type.scalars.includes(field) || Object.hasOwn(type.containment, field) || Object.hasOwn(type.references, field)));
+      if (!declared) failContract("profile-type");
+      return MISSING;
+    }
     const next = (current as Record<string, unknown>)[field];
-    if (next === null) failContract("profile-type");
+    if (next === undefined) return MISSING;
     if (position === parts.length - 1) return cloneJson(next);
-    if (!Object.hasOwn(descriptor.containment, field) || !next || typeof next !== "object" || Array.isArray(next)) failContract("profile-type");
-    current = next as NativeNode;
+    current = next;
   }
   return MISSING;
 }
@@ -894,7 +1027,12 @@ function predicateAtDepth(predicate: unknown, context: EvalContext, state: EvalS
       if (subject.mode !== "exact" && subject.mode !== "assignable") failContract("profile-schema");
       return typeMatches(handle.node.$type, subject.type, subject.mode, context.descriptors);
     }
-    case "present": return doValue(subject.value, context, state, "predicate") !== MISSING;
+    case "present": {
+      // False only for MISSING (DESIGN §2.2). An absent member already reads
+      // as MISSING, so inapplicable reads stay decidable without swallowing
+      // evaluation errors.
+      return doValue(subject.value, context, state, "predicate") !== MISSING;
+    }
     case "equal": {
       const left = doValue(subject.left, context, state, "predicate");
       const right = doValue(subject.right, context, state, "predicate");
@@ -928,8 +1066,19 @@ function predicateAtDepth(predicate: unknown, context: EvalContext, state: EvalS
       const target = one(subject.binding);
       const owner = one(subject.owner);
       if (typeof subject.role !== "string" || !subject.role) failContract("profile-schema");
-      if (!target || !owner) return false;
-      if (typeof target.node.id !== "string" || typeof owner.node.id !== "string") return false;
+      if (!target) return false;
+      if (typeof target.node.id !== "string") return false;
+      // bindingOwner is the unique owner from a verified support binding
+      // targeting this candidate, or MISSING. Ambiguous ownership refuses
+      // before recognition (DESIGN §2.2): the shortcut never picks a winner.
+      if (!owner) {
+        if (subject.owner !== "bindingOwner") return false;
+        const owners = new Set((context.supportBindings ?? []).filter(binding =>
+          binding.targetId === target.node.id && binding.role === subject.role).map(binding => binding.ownerId));
+        if (owners.size > 1) return failContract("support-binding-conflict");
+        return owners.size === 1;
+      }
+      if (typeof owner.node.id !== "string") return false;
       return (context.supportBindings ?? []).some(binding =>
         binding.ownerId === owner.node.id && binding.role === subject.role && binding.targetId === target.node.id);
     }
@@ -942,7 +1091,15 @@ function predicateAtDepth(predicate: unknown, context: EvalContext, state: EvalS
       if (state.notions.includes(subject.notion as string)) failContract("profile-cycle");
       state.notions.push(subject.notion as string);
       try {
-        return doPredicate(notion.recognition, { ...context, bindings: { ...context.bindings, self: handle } }, state);
+        try {
+          return doPredicate(notion.recognition, { ...context, bindings: { ...context.bindings, self: handle } }, state);
+        } catch (error) {
+          // A refused element recognition is a non-match: the single
+          // recognition boundary shared by lint, UI and export. Errors
+          // raised outside a notion recognition still propagate.
+          if (error instanceof ProfileContractError) return false;
+          throw error;
+        }
       } finally {
         state.notions.pop();
       }
@@ -992,7 +1149,6 @@ function predicateAtDepth(predicate: unknown, context: EvalContext, state: EvalS
 /** Predicate evaluation against the immutable snapshot. Errors are errors, never false. */
 export function evaluatePredicate(predicate: unknown, context: EvalContext): PureResult<boolean> {
   try {
-    canonicalize(context.bindings);
     const result = doPredicate(predicate, context, evalState(context));
     if (typeof result !== "boolean") failContract("profile-type");
     return ok(result);
@@ -1004,7 +1160,6 @@ export function evaluatePredicate(predicate: unknown, context: EvalContext): Pur
 /** Value evaluation. Missing reads surface the internal MISSING sentinel. */
 export function evaluateValue(value: unknown, context: EvalContext, location: string): PureResult<unknown> {
   try {
-    canonicalize(context.bindings);
     return ok(doValue(value, context, evalState(context), location));
   } catch (error) {
     return refused(refusalCode(error));

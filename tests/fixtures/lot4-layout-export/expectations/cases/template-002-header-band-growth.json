@@ -1,0 +1,64 @@
+{
+  "caseId": "template-002-header-band-growth",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "hb",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": [],
+          "template": "header-band",
+          "parameters": [
+            {
+              "name": "headerHeight",
+              "value": 12000
+            }
+          ]
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 100000,
+          "height": 240000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "header": {
+            "x": 0,
+            "y": 0,
+            "width": 100000,
+            "height": 12000
+          },
+          "body": {
+            "x": 0,
+            "y": 12000,
+            "width": 100000,
+            "height": 228000
+          }
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

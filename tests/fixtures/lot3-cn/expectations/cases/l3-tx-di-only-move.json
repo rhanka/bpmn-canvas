@@ -1,0 +1,2327 @@
+{
+  "caseId": "l3-tx-di-only-move",
+  "operation": "transaction-script",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn.json",
+    "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+  },
+  "inputArtifacts": [
+    {
+      "role": "session",
+      "json": {
+        "profile": {
+          "path": "lot3-cn/expectations/profile/neutral-cn.json",
+          "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+        },
+        "descriptors": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+          "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+        },
+        "metrics": {
+          "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+          "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+        },
+        "mode": "business-profile",
+        "readiness": "draft",
+        "theme": "plain"
+      }
+    }
+  ],
+  "commandArtifact": {
+    "role": "script",
+    "json": {
+      "format": "lot3-transaction-script/2",
+      "steps": [
+        {
+          "step": 1,
+          "call": "onChange",
+          "listener": "L1"
+        },
+        {
+          "step": 2,
+          "call": "restoreSnapshot",
+          "snapshot": {
+            "snapshotVersion": "1",
+            "envelope": {
+              "documentVersion": "1",
+              "profileIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "tree": {
+                "$type": "bpmn:Definitions",
+                "id": "Definitions_tx",
+                "targetNamespace": "urn:neutral-cn:1",
+                "exporterVersion": "fixture-cn-1",
+                "rootElements": [
+                  {
+                    "$type": "bpmn:Process",
+                    "id": "Process_T",
+                    "name": "Draft",
+                    "isExecutable": false,
+                    "flowElements": [
+                      {
+                        "$type": "bpmn:StartEvent",
+                        "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                        "name": "Request received",
+                        "outgoing": [
+                          "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:Task",
+                        "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                        "name": "Review request",
+                        "incoming": [
+                          "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                        ],
+                        "outgoing": [
+                          "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:SequenceFlow",
+                        "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                        "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                        "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                      },
+                      {
+                        "$type": "bpmn:EndEvent",
+                        "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                        "name": "Request closed",
+                        "incoming": [
+                          "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:SequenceFlow",
+                        "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                        "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                        "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                      }
+                    ]
+                  },
+                  {
+                    "$type": "bpmn:Collaboration",
+                    "id": "Collaboration_T",
+                    "name": "Pool collaboration",
+                    "participants": [
+                      {
+                        "$type": "bpmn:Participant",
+                        "id": "Participant_T",
+                        "name": "Draft pool",
+                        "processRef": "Process_T"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "bindings": [
+                {
+                  "ownerId": "Process_T",
+                  "role": "collaboration",
+                  "targetId": "Collaboration_T"
+                },
+                {
+                  "ownerId": "Process_T",
+                  "role": "main-participant",
+                  "targetId": "Participant_T"
+                }
+              ],
+              "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+            },
+            "presentation": {
+              "layout": {
+                "layoutVersion": "1",
+                "pages": [
+                  {
+                    "pageId": "page_T",
+                    "name": "Draft",
+                    "order": 0,
+                    "semanticRootId": "Collaboration_T",
+                    "bounds": {
+                      "x": 0,
+                      "y": 0,
+                      "width": 600000,
+                      "height": 240000
+                    }
+                  }
+                ],
+                "geometry": [
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "end",
+                    "semanticId": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                    "role": "content",
+                    "bounds": {
+                      "x": 400000,
+                      "y": 92000,
+                      "width": 36000,
+                      "height": 36000
+                    }
+                  },
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "flow-1",
+                    "semanticId": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                    "role": "connection",
+                    "bounds": {
+                      "x": 136000,
+                      "y": 110000,
+                      "width": 64000,
+                      "height": 0
+                    },
+                    "sourceOccurrence": {
+                      "pageId": "page_T",
+                      "occurrenceKey": "start"
+                    },
+                    "targetOccurrence": {
+                      "pageId": "page_T",
+                      "occurrenceKey": "task"
+                    },
+                    "waypoints": [
+                      {
+                        "x": 136000,
+                        "y": 110000
+                      },
+                      {
+                        "x": 200000,
+                        "y": 110000
+                      }
+                    ]
+                  },
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "flow-2",
+                    "semanticId": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                    "role": "connection",
+                    "bounds": {
+                      "x": 300000,
+                      "y": 110000,
+                      "width": 100000,
+                      "height": 0
+                    },
+                    "sourceOccurrence": {
+                      "pageId": "page_T",
+                      "occurrenceKey": "task"
+                    },
+                    "targetOccurrence": {
+                      "pageId": "page_T",
+                      "occurrenceKey": "end"
+                    },
+                    "waypoints": [
+                      {
+                        "x": 300000,
+                        "y": 110000
+                      },
+                      {
+                        "x": 400000,
+                        "y": 110000
+                      }
+                    ]
+                  },
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "pool",
+                    "semanticId": "Participant_T",
+                    "role": "content",
+                    "bounds": {
+                      "x": 50000,
+                      "y": 30000,
+                      "width": 500000,
+                      "height": 160000
+                    }
+                  },
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "start",
+                    "semanticId": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                    "role": "content",
+                    "bounds": {
+                      "x": 100000,
+                      "y": 92000,
+                      "width": 36000,
+                      "height": 36000
+                    }
+                  },
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "task",
+                    "semanticId": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                    "role": "content",
+                    "bounds": {
+                      "x": 200000,
+                      "y": 70000,
+                      "width": 100000,
+                      "height": 80000
+                    }
+                  }
+                ]
+              },
+              "themeId": "plain",
+              "overrides": {
+                "semantic": [],
+                "occurrence": []
+              },
+              "diStyles": {
+                "native": [],
+                "bioc": []
+              },
+              "importedDi": {
+                "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+                "diagrams": [],
+                "sha256": "7a30edb9b6b46876012e8dbec94e08dd93aae72621198d66f31434f10ec5cd5a"
+              },
+              "selection": [
+                {
+                  "pageId": "page_T",
+                  "occurrenceKey": "task"
+                }
+              ],
+              "activePageId": "page_T"
+            },
+            "viewRevision": "fb9d0a5ba9a6875044aeb2933a39cb23df1afae43cca4c52893b542fde344479"
+          },
+          "options": {}
+        },
+        {
+          "step": 3,
+          "call": "getSnapshot"
+        },
+        {
+          "step": 4,
+          "call": "stageGesture",
+          "request": {
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "expectedViewRevision": {
+              "$ref": {
+                "step": 3,
+                "pointer": "/result/payload/viewRevision"
+              }
+            },
+            "transactionId": "tx-move",
+            "gesture": {
+              "kind": "move",
+              "pageId": "page_T",
+              "occurrenceKey": "task",
+              "delta": {
+                "x": 40000,
+                "y": 0
+              }
+            }
+          }
+        },
+        {
+          "step": 5,
+          "call": "getSnapshot"
+        },
+        {
+          "step": 6,
+          "call": "undo",
+          "options": {
+            "expectedRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "expectedViewRevision": {
+              "$ref": {
+                "step": 5,
+                "pointer": "/result/payload/viewRevision"
+              }
+            }
+          }
+        },
+        {
+          "step": 7,
+          "call": "redo",
+          "options": {
+            "expectedRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "expectedViewRevision": {
+              "$ref": {
+                "step": 6,
+                "pointer": "/result/payload/viewRevision"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "expectedArtifacts": [
+    {
+      "role": "trace",
+      "json": [
+        {
+          "step": 1,
+          "result": {
+            "status": "ok",
+            "payload": {
+              "subscriptionId": "unsealed"
+            },
+            "diagnostics": []
+          },
+          "events": {
+            "L1": []
+          }
+        },
+        {
+          "step": 2,
+          "result": {
+            "status": "ok",
+            "operation": "restoreSnapshot",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "revision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "report": "unsealed",
+            "payload": {
+              "envelope": {
+                "documentVersion": "1",
+                "profileIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "tree": {
+                  "$type": "bpmn:Definitions",
+                  "id": "Definitions_tx",
+                  "targetNamespace": "urn:neutral-cn:1",
+                  "exporterVersion": "fixture-cn-1",
+                  "rootElements": [
+                    {
+                      "$type": "bpmn:Process",
+                      "id": "Process_T",
+                      "name": "Draft",
+                      "isExecutable": false,
+                      "flowElements": [
+                        {
+                          "$type": "bpmn:StartEvent",
+                          "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "name": "Request received",
+                          "outgoing": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:Task",
+                          "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "name": "Review request",
+                          "incoming": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ],
+                          "outgoing": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                          "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                        },
+                        {
+                          "$type": "bpmn:EndEvent",
+                          "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                          "name": "Request closed",
+                          "incoming": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                          "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Collaboration",
+                      "id": "Collaboration_T",
+                      "name": "Pool collaboration",
+                      "participants": [
+                        {
+                          "$type": "bpmn:Participant",
+                          "id": "Participant_T",
+                          "name": "Draft pool",
+                          "processRef": "Process_T"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "bindings": [
+                  {
+                    "ownerId": "Process_T",
+                    "role": "collaboration",
+                    "targetId": "Collaboration_T"
+                  },
+                  {
+                    "ownerId": "Process_T",
+                    "role": "main-participant",
+                    "targetId": "Participant_T"
+                  }
+                ],
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+              },
+              "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "viewRevision": "fb9d0a5ba9a6875044aeb2933a39cb23df1afae43cca4c52893b542fde344479",
+              "historyEpoch": "unsealed"
+            }
+          },
+          "history": {
+            "past": 0,
+            "future": 0
+          },
+          "events": {
+            "L1": [
+              {
+                "envelope": {
+                  "documentVersion": "1",
+                  "profileIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "tree": {
+                    "$type": "bpmn:Definitions",
+                    "id": "Definitions_tx",
+                    "targetNamespace": "urn:neutral-cn:1",
+                    "exporterVersion": "fixture-cn-1",
+                    "rootElements": [
+                      {
+                        "$type": "bpmn:Process",
+                        "id": "Process_T",
+                        "name": "Draft",
+                        "isExecutable": false,
+                        "flowElements": [
+                          {
+                            "$type": "bpmn:StartEvent",
+                            "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "name": "Request received",
+                            "outgoing": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:Task",
+                            "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "name": "Review request",
+                            "incoming": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ],
+                            "outgoing": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                            "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                          },
+                          {
+                            "$type": "bpmn:EndEvent",
+                            "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                            "name": "Request closed",
+                            "incoming": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                            "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:Collaboration",
+                        "id": "Collaboration_T",
+                        "name": "Pool collaboration",
+                        "participants": [
+                          {
+                            "$type": "bpmn:Participant",
+                            "id": "Participant_T",
+                            "name": "Draft pool",
+                            "processRef": "Process_T"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "bindings": [
+                    {
+                      "ownerId": "Process_T",
+                      "role": "collaboration",
+                      "targetId": "Collaboration_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "main-participant",
+                      "targetId": "Participant_T"
+                    }
+                  ],
+                  "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+                },
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+                "viewRevision": "fb9d0a5ba9a6875044aeb2933a39cb23df1afae43cca4c52893b542fde344479",
+                "transactionId": "unsealed",
+                "origin": "snapshot",
+                "report": {
+                  "$same": {
+                    "step": 2,
+                    "pointer": "/result/report"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "result": {
+            "status": "ok",
+            "operation": "getSnapshot",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "revision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "report": {
+              "reportVersion": "2",
+              "operation": "getSnapshot",
+              "sourceIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "targetIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "inputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "outputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "entries": [],
+              "rawStandardFindings": [],
+              "idMap": [],
+              "artifacts": []
+            },
+            "payload": {
+              "snapshotVersion": "1",
+              "envelope": {
+                "documentVersion": "1",
+                "profileIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "tree": {
+                  "$type": "bpmn:Definitions",
+                  "id": "Definitions_tx",
+                  "targetNamespace": "urn:neutral-cn:1",
+                  "exporterVersion": "fixture-cn-1",
+                  "rootElements": [
+                    {
+                      "$type": "bpmn:Process",
+                      "id": "Process_T",
+                      "name": "Draft",
+                      "isExecutable": false,
+                      "flowElements": [
+                        {
+                          "$type": "bpmn:StartEvent",
+                          "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "name": "Request received",
+                          "outgoing": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:Task",
+                          "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "name": "Review request",
+                          "incoming": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ],
+                          "outgoing": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                          "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                        },
+                        {
+                          "$type": "bpmn:EndEvent",
+                          "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                          "name": "Request closed",
+                          "incoming": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                          "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Collaboration",
+                      "id": "Collaboration_T",
+                      "name": "Pool collaboration",
+                      "participants": [
+                        {
+                          "$type": "bpmn:Participant",
+                          "id": "Participant_T",
+                          "name": "Draft pool",
+                          "processRef": "Process_T"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "bindings": [
+                  {
+                    "ownerId": "Process_T",
+                    "role": "collaboration",
+                    "targetId": "Collaboration_T"
+                  },
+                  {
+                    "ownerId": "Process_T",
+                    "role": "main-participant",
+                    "targetId": "Participant_T"
+                  }
+                ],
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+              },
+              "presentation": {
+                "layout": {
+                  "layoutVersion": "1",
+                  "pages": [
+                    {
+                      "pageId": "page_T",
+                      "name": "Draft",
+                      "order": 0,
+                      "semanticRootId": "Collaboration_T",
+                      "bounds": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 600000,
+                        "height": 240000
+                      }
+                    }
+                  ],
+                  "geometry": [
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "end",
+                      "semanticId": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                      "role": "content",
+                      "bounds": {
+                        "x": 400000,
+                        "y": 92000,
+                        "width": 36000,
+                        "height": 36000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "flow-1",
+                      "semanticId": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                      "role": "connection",
+                      "bounds": {
+                        "x": 136000,
+                        "y": 110000,
+                        "width": 64000,
+                        "height": 0
+                      },
+                      "sourceOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "start"
+                      },
+                      "targetOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "task"
+                      },
+                      "waypoints": [
+                        {
+                          "x": 136000,
+                          "y": 110000
+                        },
+                        {
+                          "x": 200000,
+                          "y": 110000
+                        }
+                      ]
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "flow-2",
+                      "semanticId": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                      "role": "connection",
+                      "bounds": {
+                        "x": 300000,
+                        "y": 110000,
+                        "width": 100000,
+                        "height": 0
+                      },
+                      "sourceOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "task"
+                      },
+                      "targetOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "end"
+                      },
+                      "waypoints": [
+                        {
+                          "x": 300000,
+                          "y": 110000
+                        },
+                        {
+                          "x": 400000,
+                          "y": 110000
+                        }
+                      ]
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "pool",
+                      "semanticId": "Participant_T",
+                      "role": "content",
+                      "bounds": {
+                        "x": 50000,
+                        "y": 30000,
+                        "width": 500000,
+                        "height": 160000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "start",
+                      "semanticId": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                      "role": "content",
+                      "bounds": {
+                        "x": 100000,
+                        "y": 92000,
+                        "width": 36000,
+                        "height": 36000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "task",
+                      "semanticId": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                      "role": "content",
+                      "bounds": {
+                        "x": 200000,
+                        "y": 70000,
+                        "width": 100000,
+                        "height": 80000
+                      }
+                    }
+                  ]
+                },
+                "themeId": "plain",
+                "overrides": {
+                  "semantic": [],
+                  "occurrence": []
+                },
+                "diStyles": {
+                  "native": [],
+                  "bioc": []
+                },
+                "importedDi": {
+                  "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+                  "diagrams": [],
+                  "sha256": "7a30edb9b6b46876012e8dbec94e08dd93aae72621198d66f31434f10ec5cd5a"
+                },
+                "selection": [
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "task"
+                  }
+                ],
+                "activePageId": "page_T"
+              },
+              "viewRevision": "fb9d0a5ba9a6875044aeb2933a39cb23df1afae43cca4c52893b542fde344479"
+            }
+          },
+          "events": {
+            "L1": []
+          }
+        },
+        {
+          "step": 4,
+          "result": {
+            "status": "ok",
+            "operation": "applyCommands",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "revision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "report": {
+              "reportVersion": "2",
+              "operation": "applyCommands",
+              "sourceIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "targetIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "inputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "outputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "entries": [],
+              "rawStandardFindings": [],
+              "idMap": [],
+              "artifacts": []
+            },
+            "payload": {
+              "envelope": {
+                "documentVersion": "1",
+                "profileIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "tree": {
+                  "$type": "bpmn:Definitions",
+                  "id": "Definitions_tx",
+                  "targetNamespace": "urn:neutral-cn:1",
+                  "exporterVersion": "fixture-cn-1",
+                  "rootElements": [
+                    {
+                      "$type": "bpmn:Process",
+                      "id": "Process_T",
+                      "name": "Draft",
+                      "isExecutable": false,
+                      "flowElements": [
+                        {
+                          "$type": "bpmn:StartEvent",
+                          "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "name": "Request received",
+                          "outgoing": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:Task",
+                          "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "name": "Review request",
+                          "incoming": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ],
+                          "outgoing": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                          "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                        },
+                        {
+                          "$type": "bpmn:EndEvent",
+                          "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                          "name": "Request closed",
+                          "incoming": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                          "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Collaboration",
+                      "id": "Collaboration_T",
+                      "name": "Pool collaboration",
+                      "participants": [
+                        {
+                          "$type": "bpmn:Participant",
+                          "id": "Participant_T",
+                          "name": "Draft pool",
+                          "processRef": "Process_T"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "bindings": [
+                  {
+                    "ownerId": "Process_T",
+                    "role": "collaboration",
+                    "targetId": "Collaboration_T"
+                  },
+                  {
+                    "ownerId": "Process_T",
+                    "role": "main-participant",
+                    "targetId": "Participant_T"
+                  }
+                ],
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+              },
+              "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "viewRevision": {
+                "$differs": {
+                  "step": 3,
+                  "pointer": "/result/payload/viewRevision"
+                }
+              },
+              "transactionId": "tx-move",
+              "changed": true
+            }
+          },
+          "history": {
+            "past": 1,
+            "future": 0
+          },
+          "events": {
+            "L1": [
+              {
+                "envelope": {
+                  "documentVersion": "1",
+                  "profileIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "tree": {
+                    "$type": "bpmn:Definitions",
+                    "id": "Definitions_tx",
+                    "targetNamespace": "urn:neutral-cn:1",
+                    "exporterVersion": "fixture-cn-1",
+                    "rootElements": [
+                      {
+                        "$type": "bpmn:Process",
+                        "id": "Process_T",
+                        "name": "Draft",
+                        "isExecutable": false,
+                        "flowElements": [
+                          {
+                            "$type": "bpmn:StartEvent",
+                            "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "name": "Request received",
+                            "outgoing": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:Task",
+                            "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "name": "Review request",
+                            "incoming": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ],
+                            "outgoing": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                            "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                          },
+                          {
+                            "$type": "bpmn:EndEvent",
+                            "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                            "name": "Request closed",
+                            "incoming": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                            "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:Collaboration",
+                        "id": "Collaboration_T",
+                        "name": "Pool collaboration",
+                        "participants": [
+                          {
+                            "$type": "bpmn:Participant",
+                            "id": "Participant_T",
+                            "name": "Draft pool",
+                            "processRef": "Process_T"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "bindings": [
+                    {
+                      "ownerId": "Process_T",
+                      "role": "collaboration",
+                      "targetId": "Collaboration_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "main-participant",
+                      "targetId": "Participant_T"
+                    }
+                  ],
+                  "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+                },
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+                "viewRevision": {
+                  "$same": {
+                    "step": 4,
+                    "pointer": "/result/payload/viewRevision"
+                  }
+                },
+                "transactionId": "tx-move",
+                "origin": "command",
+                "report": {
+                  "reportVersion": "2",
+                  "operation": "applyCommands",
+                  "sourceIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "targetIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "inputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+                  "outputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+                  "entries": [],
+                  "rawStandardFindings": [],
+                  "idMap": [],
+                  "artifacts": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "result": {
+            "status": "ok",
+            "operation": "getSnapshot",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "revision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "report": {
+              "reportVersion": "2",
+              "operation": "getSnapshot",
+              "sourceIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "targetIdentity": {
+                "mechanismVersion": "1",
+                "schemaVersion": "1.0.0",
+                "profile": "neutral-cn/1",
+                "version": "1.1.0",
+                "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                "base": {
+                  "id": "neutral-cn-base/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                },
+                "descriptors": [
+                  {
+                    "id": "neutral-cn-descriptors/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                  }
+                ]
+              },
+              "inputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "outputRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+              "entries": [],
+              "rawStandardFindings": [],
+              "idMap": [],
+              "artifacts": []
+            },
+            "payload": {
+              "snapshotVersion": "1",
+              "envelope": {
+                "documentVersion": "1",
+                "profileIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "tree": {
+                  "$type": "bpmn:Definitions",
+                  "id": "Definitions_tx",
+                  "targetNamespace": "urn:neutral-cn:1",
+                  "exporterVersion": "fixture-cn-1",
+                  "rootElements": [
+                    {
+                      "$type": "bpmn:Process",
+                      "id": "Process_T",
+                      "name": "Draft",
+                      "isExecutable": false,
+                      "flowElements": [
+                        {
+                          "$type": "bpmn:StartEvent",
+                          "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "name": "Request received",
+                          "outgoing": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:Task",
+                          "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "name": "Review request",
+                          "incoming": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ],
+                          "outgoing": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                          "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                        },
+                        {
+                          "$type": "bpmn:EndEvent",
+                          "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                          "name": "Request closed",
+                          "incoming": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                          "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Collaboration",
+                      "id": "Collaboration_T",
+                      "name": "Pool collaboration",
+                      "participants": [
+                        {
+                          "$type": "bpmn:Participant",
+                          "id": "Participant_T",
+                          "name": "Draft pool",
+                          "processRef": "Process_T"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "bindings": [
+                  {
+                    "ownerId": "Process_T",
+                    "role": "collaboration",
+                    "targetId": "Collaboration_T"
+                  },
+                  {
+                    "ownerId": "Process_T",
+                    "role": "main-participant",
+                    "targetId": "Participant_T"
+                  }
+                ],
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+              },
+              "presentation": {
+                "layout": {
+                  "layoutVersion": "1",
+                  "pages": [
+                    {
+                      "pageId": "page_T",
+                      "name": "Draft",
+                      "order": 0,
+                      "semanticRootId": "Collaboration_T",
+                      "bounds": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 600000,
+                        "height": 240000
+                      }
+                    }
+                  ],
+                  "geometry": [
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "end",
+                      "semanticId": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                      "role": "content",
+                      "bounds": {
+                        "x": 400000,
+                        "y": 92000,
+                        "width": 36000,
+                        "height": 36000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "flow-1",
+                      "semanticId": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                      "role": "connection",
+                      "bounds": {
+                        "x": 136000,
+                        "y": 110000,
+                        "width": 64000,
+                        "height": 0
+                      },
+                      "sourceOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "start"
+                      },
+                      "targetOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "task"
+                      },
+                      "waypoints": [
+                        {
+                          "x": 136000,
+                          "y": 110000
+                        },
+                        {
+                          "x": 200000,
+                          "y": 110000
+                        }
+                      ]
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "flow-2",
+                      "semanticId": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                      "role": "connection",
+                      "bounds": {
+                        "x": 300000,
+                        "y": 110000,
+                        "width": 100000,
+                        "height": 0
+                      },
+                      "sourceOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "task"
+                      },
+                      "targetOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "end"
+                      },
+                      "waypoints": [
+                        {
+                          "x": 300000,
+                          "y": 110000
+                        },
+                        {
+                          "x": 400000,
+                          "y": 110000
+                        }
+                      ]
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "pool",
+                      "semanticId": "Participant_T",
+                      "role": "content",
+                      "bounds": {
+                        "x": 50000,
+                        "y": 30000,
+                        "width": 500000,
+                        "height": 160000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "start",
+                      "semanticId": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                      "role": "content",
+                      "bounds": {
+                        "x": 100000,
+                        "y": 92000,
+                        "width": 36000,
+                        "height": 36000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "task",
+                      "semanticId": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                      "role": "content",
+                      "bounds": {
+                        "x": 240000,
+                        "y": 70000,
+                        "width": 100000,
+                        "height": 80000
+                      }
+                    }
+                  ]
+                },
+                "themeId": "plain",
+                "overrides": {
+                  "semantic": [],
+                  "occurrence": []
+                },
+                "diStyles": {
+                  "native": [],
+                  "bioc": []
+                },
+                "importedDi": {
+                  "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+                  "diagrams": [],
+                  "sha256": "7a30edb9b6b46876012e8dbec94e08dd93aae72621198d66f31434f10ec5cd5a"
+                },
+                "selection": [
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "task"
+                  }
+                ],
+                "activePageId": "page_T"
+              },
+              "viewRevision": {
+                "$same": {
+                  "step": 4,
+                  "pointer": "/result/payload/viewRevision"
+                }
+              }
+            }
+          },
+          "events": {
+            "L1": []
+          }
+        },
+        {
+          "step": 6,
+          "result": {
+            "status": "ok",
+            "operation": "undo",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "revision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "report": "unsealed",
+            "payload": {
+              "snapshotVersion": "1",
+              "envelope": {
+                "documentVersion": "1",
+                "profileIdentity": {
+                  "mechanismVersion": "1",
+                  "schemaVersion": "1.0.0",
+                  "profile": "neutral-cn/1",
+                  "version": "1.1.0",
+                  "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                  "base": {
+                    "id": "neutral-cn-base/1",
+                    "version": "fixture-cn-1",
+                    "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                  },
+                  "descriptors": [
+                    {
+                      "id": "neutral-cn-descriptors/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                    }
+                  ]
+                },
+                "tree": {
+                  "$type": "bpmn:Definitions",
+                  "id": "Definitions_tx",
+                  "targetNamespace": "urn:neutral-cn:1",
+                  "exporterVersion": "fixture-cn-1",
+                  "rootElements": [
+                    {
+                      "$type": "bpmn:Process",
+                      "id": "Process_T",
+                      "name": "Draft",
+                      "isExecutable": false,
+                      "flowElements": [
+                        {
+                          "$type": "bpmn:StartEvent",
+                          "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "name": "Request received",
+                          "outgoing": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:Task",
+                          "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "name": "Review request",
+                          "incoming": [
+                            "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                          ],
+                          "outgoing": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                          "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                          "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                        },
+                        {
+                          "$type": "bpmn:EndEvent",
+                          "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                          "name": "Request closed",
+                          "incoming": [
+                            "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:SequenceFlow",
+                          "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                          "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                          "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Collaboration",
+                      "id": "Collaboration_T",
+                      "name": "Pool collaboration",
+                      "participants": [
+                        {
+                          "$type": "bpmn:Participant",
+                          "id": "Participant_T",
+                          "name": "Draft pool",
+                          "processRef": "Process_T"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "bindings": [
+                  {
+                    "ownerId": "Process_T",
+                    "role": "collaboration",
+                    "targetId": "Collaboration_T"
+                  },
+                  {
+                    "ownerId": "Process_T",
+                    "role": "main-participant",
+                    "targetId": "Participant_T"
+                  }
+                ],
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+              },
+              "presentation": {
+                "layout": {
+                  "layoutVersion": "1",
+                  "pages": [
+                    {
+                      "pageId": "page_T",
+                      "name": "Draft",
+                      "order": 0,
+                      "semanticRootId": "Collaboration_T",
+                      "bounds": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 600000,
+                        "height": 240000
+                      }
+                    }
+                  ],
+                  "geometry": [
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "end",
+                      "semanticId": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                      "role": "content",
+                      "bounds": {
+                        "x": 400000,
+                        "y": 92000,
+                        "width": 36000,
+                        "height": 36000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "flow-1",
+                      "semanticId": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                      "role": "connection",
+                      "bounds": {
+                        "x": 136000,
+                        "y": 110000,
+                        "width": 64000,
+                        "height": 0
+                      },
+                      "sourceOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "start"
+                      },
+                      "targetOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "task"
+                      },
+                      "waypoints": [
+                        {
+                          "x": 136000,
+                          "y": 110000
+                        },
+                        {
+                          "x": 200000,
+                          "y": 110000
+                        }
+                      ]
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "flow-2",
+                      "semanticId": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                      "role": "connection",
+                      "bounds": {
+                        "x": 300000,
+                        "y": 110000,
+                        "width": 100000,
+                        "height": 0
+                      },
+                      "sourceOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "task"
+                      },
+                      "targetOccurrence": {
+                        "pageId": "page_T",
+                        "occurrenceKey": "end"
+                      },
+                      "waypoints": [
+                        {
+                          "x": 300000,
+                          "y": 110000
+                        },
+                        {
+                          "x": 400000,
+                          "y": 110000
+                        }
+                      ]
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "pool",
+                      "semanticId": "Participant_T",
+                      "role": "content",
+                      "bounds": {
+                        "x": 50000,
+                        "y": 30000,
+                        "width": 500000,
+                        "height": 160000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "start",
+                      "semanticId": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                      "role": "content",
+                      "bounds": {
+                        "x": 100000,
+                        "y": 92000,
+                        "width": 36000,
+                        "height": 36000
+                      }
+                    },
+                    {
+                      "pageId": "page_T",
+                      "occurrenceKey": "task",
+                      "semanticId": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                      "role": "content",
+                      "bounds": {
+                        "x": 200000,
+                        "y": 70000,
+                        "width": 100000,
+                        "height": 80000
+                      }
+                    }
+                  ]
+                },
+                "themeId": "plain",
+                "overrides": {
+                  "semantic": [],
+                  "occurrence": []
+                },
+                "diStyles": {
+                  "native": [],
+                  "bioc": []
+                },
+                "importedDi": {
+                  "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+                  "diagrams": [],
+                  "sha256": "7a30edb9b6b46876012e8dbec94e08dd93aae72621198d66f31434f10ec5cd5a"
+                },
+                "selection": [
+                  {
+                    "pageId": "page_T",
+                    "occurrenceKey": "task"
+                  }
+                ],
+                "activePageId": "page_T"
+              },
+              "viewRevision": "fb9d0a5ba9a6875044aeb2933a39cb23df1afae43cca4c52893b542fde344479"
+            }
+          },
+          "history": {
+            "past": 0,
+            "future": 1
+          },
+          "events": {
+            "L1": [
+              {
+                "envelope": {
+                  "documentVersion": "1",
+                  "profileIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "tree": {
+                    "$type": "bpmn:Definitions",
+                    "id": "Definitions_tx",
+                    "targetNamespace": "urn:neutral-cn:1",
+                    "exporterVersion": "fixture-cn-1",
+                    "rootElements": [
+                      {
+                        "$type": "bpmn:Process",
+                        "id": "Process_T",
+                        "name": "Draft",
+                        "isExecutable": false,
+                        "flowElements": [
+                          {
+                            "$type": "bpmn:StartEvent",
+                            "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "name": "Request received",
+                            "outgoing": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:Task",
+                            "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "name": "Review request",
+                            "incoming": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ],
+                            "outgoing": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                            "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                          },
+                          {
+                            "$type": "bpmn:EndEvent",
+                            "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                            "name": "Request closed",
+                            "incoming": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                            "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:Collaboration",
+                        "id": "Collaboration_T",
+                        "name": "Pool collaboration",
+                        "participants": [
+                          {
+                            "$type": "bpmn:Participant",
+                            "id": "Participant_T",
+                            "name": "Draft pool",
+                            "processRef": "Process_T"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "bindings": [
+                    {
+                      "ownerId": "Process_T",
+                      "role": "collaboration",
+                      "targetId": "Collaboration_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "main-participant",
+                      "targetId": "Participant_T"
+                    }
+                  ],
+                  "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+                },
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+                "viewRevision": {
+                  "$same": {
+                    "step": 6,
+                    "pointer": "/result/payload/viewRevision"
+                  }
+                },
+                "transactionId": "unsealed",
+                "origin": "undo",
+                "report": {
+                  "$same": {
+                    "step": 6,
+                    "pointer": "/result/report"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "step": 7,
+          "result": {
+            "status": "ok",
+            "operation": "redo",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "baseRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "revision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+            "report": "unsealed",
+            "payload": {
+              "$same": {
+                "step": 5,
+                "pointer": "/result/payload"
+              }
+            }
+          },
+          "history": {
+            "past": 1,
+            "future": 0
+          },
+          "events": {
+            "L1": [
+              {
+                "envelope": {
+                  "documentVersion": "1",
+                  "profileIdentity": {
+                    "mechanismVersion": "1",
+                    "schemaVersion": "1.0.0",
+                    "profile": "neutral-cn/1",
+                    "version": "1.1.0",
+                    "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+                    "base": {
+                      "id": "neutral-cn-base/1",
+                      "version": "fixture-cn-1",
+                      "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+                    },
+                    "descriptors": [
+                      {
+                        "id": "neutral-cn-descriptors/1",
+                        "version": "fixture-cn-1",
+                        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                      }
+                    ]
+                  },
+                  "tree": {
+                    "$type": "bpmn:Definitions",
+                    "id": "Definitions_tx",
+                    "targetNamespace": "urn:neutral-cn:1",
+                    "exporterVersion": "fixture-cn-1",
+                    "rootElements": [
+                      {
+                        "$type": "bpmn:Process",
+                        "id": "Process_T",
+                        "name": "Draft",
+                        "isExecutable": false,
+                        "flowElements": [
+                          {
+                            "$type": "bpmn:StartEvent",
+                            "id": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "name": "Request received",
+                            "outgoing": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:Task",
+                            "id": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "name": "Review request",
+                            "incoming": [
+                              "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb"
+                            ],
+                            "outgoing": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_9a859c3c4645636e789b4c09ea1afbbe28085e2efa565e2a326333f1f71afbcb",
+                            "sourceRef": "g_262d6a2ae1719befd5d49889212c31ac3ff797c71f9171edd1535d4f4ec5c858",
+                            "targetRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1"
+                          },
+                          {
+                            "$type": "bpmn:EndEvent",
+                            "id": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3",
+                            "name": "Request closed",
+                            "incoming": [
+                              "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069"
+                            ]
+                          },
+                          {
+                            "$type": "bpmn:SequenceFlow",
+                            "id": "g_6799acb6f1e3e3b98e0f4727564fc67046a6e320278b0147fe75178f40f64069",
+                            "sourceRef": "g_67606c655c2f6feab8f83ad937afcded97982272771e80e9fc7c36bc2c58e0e1",
+                            "targetRef": "g_d47ce7a7a9df44ebd3fad128bea6d0b374a1768360c5214ba8d2845a41d6c3d3"
+                          }
+                        ]
+                      },
+                      {
+                        "$type": "bpmn:Collaboration",
+                        "id": "Collaboration_T",
+                        "name": "Pool collaboration",
+                        "participants": [
+                          {
+                            "$type": "bpmn:Participant",
+                            "id": "Participant_T",
+                            "name": "Draft pool",
+                            "processRef": "Process_T"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "bindings": [
+                    {
+                      "ownerId": "Process_T",
+                      "role": "collaboration",
+                      "targetId": "Collaboration_T"
+                    },
+                    {
+                      "ownerId": "Process_T",
+                      "role": "main-participant",
+                      "targetId": "Participant_T"
+                    }
+                  ],
+                  "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f"
+                },
+                "semanticRevision": "d7775934a1e201f9023c8c5506533eb01f8670840bbb6df6f6062b756990659f",
+                "viewRevision": {
+                  "$same": {
+                    "step": 7,
+                    "pointer": "/result/payload/viewRevision"
+                  }
+                },
+                "transactionId": "unsealed",
+                "origin": "redo",
+                "report": {
+                  "$same": {
+                    "step": 7,
+                    "pointer": "/result/report"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "role": "unsealed",
+      "json": [
+        {
+          "artifact": "trace",
+          "pointer": "/0/result/payload/subscriptionId",
+          "reason": "Subscription IDs are session-local and excluded from parity (DESIGN L606)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/1/result/report",
+          "reason": "DESIGN L584-L599 and L641 define no report content for load, snapshot restore, theme, undo or redo results (source gap); the change event of the step carries this same report (L606, L633) and is compared with it by relation."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/1/result/payload/historyEpoch",
+          "reason": "History epochs are host counters excluded from parity (DESIGN L268, L594)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/1/events/L1/0/transactionId",
+          "reason": "DESIGN L606 names transactionId in every change event but defines no value for load, snapshot, theme, undo or redo origins (source gap)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout/geometry/1/bounds",
+          "reason": "Edge routing after a move is not pinned by DESIGN (L723 has no routing rule; harmonization K5, erratum E-11)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout/geometry/1/waypoints",
+          "reason": "Edge routing after a move is not pinned by DESIGN (L723 has no routing rule; harmonization K5, erratum E-11)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout/geometry/2/bounds",
+          "reason": "Edge routing after a move is not pinned by DESIGN (L723 has no routing rule; harmonization K5, erratum E-11)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/4/result/payload/presentation/layout/geometry/2/waypoints",
+          "reason": "Edge routing after a move is not pinned by DESIGN (L723 has no routing rule; harmonization K5, erratum E-11)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/result/report",
+          "reason": "DESIGN L584-L599 and L641 define no report content for load, snapshot restore, theme, undo or redo results (source gap); the change event of the step carries this same report (L606, L633) and is compared with it by relation."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/5/events/L1/0/transactionId",
+          "reason": "DESIGN L606 names transactionId in every change event but defines no value for load, snapshot, theme, undo or redo origins (source gap)."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/result/report",
+          "reason": "DESIGN L584-L599 and L641 define no report content for load, snapshot restore, theme, undo or redo results (source gap); the change event of the step carries this same report (L606, L633) and is compared with it by relation."
+        },
+        {
+          "artifact": "trace",
+          "pointer": "/6/events/L1/0/transactionId",
+          "reason": "DESIGN L606 names transactionId in every change event but defines no value for load, snapshot, theme, undo or redo origins (source gap)."
+        }
+      ]
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "transaction-trace/lot3",
+    "profile-c14n/2"
+  ]
+}

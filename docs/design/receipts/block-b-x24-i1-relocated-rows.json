@@ -1,0 +1,1802 @@
+{
+  "format": "block-b-x24-i1-relocated-rows/1",
+  "date": "2026-10-19",
+  "round": "X24 I1 residual: the integration zero-literal scan (history rule I1, the stopped case x24-L-004-zero-unmatched of the final mechanical pass) reports three unmatched occurrences of src/react/workshop.tsx at 110:39, 326:30 and 326:94. Located by span and classified by digest, each is a business literal of the base that the ledger already holds: the rows I-1427, I-1462 and I-1464 (entry LX-NV-1, rules R-144 and R-147, dispositions legacy-api, inject and inject). The block B commit dc183c2, after main, renamed the identifier of other rows of their base lines, so that their line SHA-256 (and the columns of I-1464) no longer match the pairing key. The round adds no row and reviews nothing: lexicon.json#/relocated (format x24-scan-lexicon/4) relocates the three base rows to the lines the edit left, and the I1 scan (derive/reviewed.mjs), the probe rescan (P-006 pairing, probe-expectations.json#/probe2/trackedRescan), derive/base-check.mjs and the seal test read the records. Cases, manifest and seal are re-derived and resealed. In valueChanges, an old value null means that the pointer was absent.",
+  "inputs": [
+    "Conductor brief of the X24 I1 residual (2026-10-19): the I1 zero-unmatched check x24-L-004-zero-unmatched reports 3 unmatched occurrences in src/react/workshop.tsx at 110:39, 326:30 and 326:94, present on main 63a9258 and read as missed by the ledger. Classify each by its span without its text: (a) a business literal present in the base, added to the ledger as base occurrences with I-number, position, category, consumer, SHA-256 and the disposition of the DESIGN section 12 rules, the probe and expectations extended as for the other ledger rows; or (b) a generic-word collision, a reviewed record bound to the exact file SHA-256 and span with a per-token justification. Explain the miss and whether other base occurrences were missed the same way (scope as a count). Reseal with old and new values, rescan to 0 unmatched; no source edit, no literal written.",
+    "docs/design/receipts/block-b-final-x24-rebind.json and docs/design/receipts/block-b-final-mechanical-pass.json: the stopped case with its three positions (entry LX-NV-1, literal SHA-256 prefixes b53d4d24 twice and 5a434281); the source identical to the starting commit; no source, matcher, allowance or assertion changed"
+  ],
+  "design": {
+    "revision": "DESIGN.md R3.3",
+    "sha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+    "lines": {
+      "859": "last row of the inventory (L825-859): workshop name or section based navigation is removed, no name heuristic",
+      "874": "exceptions are exact, reviewed and narrowly anchored; no wildcard exemption for a private policy; an unmatched lexicon hit or an unreviewed dynamic classification fails the gate"
+    },
+    "cited": "DESIGN.md:623 and 859 are the design references of the three rows; DESIGN.md:863 is the inventory clause of the cases L-001, L-004 and P-005; DESIGN.md:874 is the gate the I1 scan applies"
+  },
+  "classification": [
+    {
+      "occurrence": {
+        "file": "src/react/workshop.tsx",
+        "line": 110,
+        "column": 39,
+        "endLine": 110,
+        "endColumn": 57,
+        "form": "raw",
+        "entry": "LX-NV-1",
+        "family": "navigation",
+        "literal": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+        "key": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+        "lineSha256": "0e1784004f7491d8eaab3d5665592258f353750b9991b36eeac8050bb43e5e97"
+      },
+      "class": "a",
+      "verdict": "business literal of the base, already inventoried as I-1427; relocated as RL-01",
+      "baseRow": {
+        "id": "I-1427",
+        "line": 108,
+        "column": 39,
+        "endLine": 108,
+        "endColumn": 57,
+        "lineSha256": "ee7245359033a260b72d762ea6dbfea50bfdebcc338ee7df683cfadfda94312b",
+        "rule": "R-144",
+        "category": "navigation",
+        "consumer": "workshop",
+        "targetRef": "T-NAV",
+        "disposition": "legacy-api",
+        "designRefs": [
+          "DESIGN.md:623",
+          "DESIGN.md:859"
+        ]
+      },
+      "firstSealLineGroup": "I-0984"
+    },
+    {
+      "occurrence": {
+        "file": "src/react/workshop.tsx",
+        "line": 326,
+        "column": 30,
+        "endLine": 326,
+        "endColumn": 48,
+        "form": "raw",
+        "entry": "LX-NV-1",
+        "family": "navigation",
+        "literal": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+        "key": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+        "lineSha256": "81c4970bced6c4dbd94fc2b4fe8b8dd19f19308138fb86fdd5f7dabca34ca3a9"
+      },
+      "class": "a",
+      "verdict": "business literal of the base, already inventoried as I-1462; relocated as RL-02",
+      "baseRow": {
+        "id": "I-1462",
+        "line": 320,
+        "column": 30,
+        "endLine": 320,
+        "endColumn": 48,
+        "lineSha256": "59c443fc754ce580bef1b796019f4be8e9469ebbcfbd0fcea0c945ad1bfb5cc2",
+        "rule": "R-147",
+        "category": "navigation",
+        "consumer": "workshop",
+        "targetRef": "T-NAV",
+        "disposition": "inject",
+        "designRefs": [
+          "DESIGN.md:623",
+          "DESIGN.md:859"
+        ]
+      },
+      "firstSealLineGroup": "I-1010"
+    },
+    {
+      "occurrence": {
+        "file": "src/react/workshop.tsx",
+        "line": 326,
+        "column": 94,
+        "endLine": 326,
+        "endColumn": 114,
+        "form": "raw",
+        "entry": "LX-NV-1",
+        "family": "navigation",
+        "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+        "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+        "lineSha256": "81c4970bced6c4dbd94fc2b4fe8b8dd19f19308138fb86fdd5f7dabca34ca3a9"
+      },
+      "class": "a",
+      "verdict": "business literal of the base, already inventoried as I-1464; relocated as RL-03",
+      "baseRow": {
+        "id": "I-1464",
+        "line": 320,
+        "column": 95,
+        "endLine": 320,
+        "endColumn": 115,
+        "lineSha256": "59c443fc754ce580bef1b796019f4be8e9469ebbcfbd0fcea0c945ad1bfb5cc2",
+        "rule": "R-147",
+        "category": "navigation",
+        "consumer": "workshop",
+        "targetRef": "T-NAV",
+        "disposition": "inject",
+        "designRefs": [
+          "DESIGN.md:623",
+          "DESIGN.md:859"
+        ]
+      },
+      "firstSealLineGroup": "I-1010"
+    }
+  ],
+  "cause": {
+    "ledgerMissed": false,
+    "summary": "The ledger did not miss the three occurrences. They are base rows; the I1 pairing key binds a row to the SHA-256 of its base line and to its columns, and a block B edit after main changed their lines without touching their spans.",
+    "base": "src/react/workshop.tsx has the git blob dfd6dbd7dafea8785a64e22e2c759f7c2a3db8d4 (file SHA-256 5613239bd8ea1f87aec713745f3e9961b4a82b8946382b4af72d2acf18ec9072) at the base commit 05f737885bd44fddea84bf1b4d55ae5428704855 and on main 63a9258; the three occurrences are there at the base spans of their rows",
+    "firstSeal": "No X24 seal missed them. The first seal (41704c6, line groups) holds the base lines 108 and 320 of src/react/workshop.tsx as the line groups I-0984 (rule R-144, legacy-api) and I-1010 (rule R-147, inject), with the same literal SHA-256 values and line SHA-256 values; since the fix round the ledger has one row per match: I-1427, I-1462 and I-1464. The I1 history rule came with the integration micro-reseal; the three occurrences became unmatched only when dc183c2 reached the block B branch; the exact-path relink (450627b) recorded them as base rows whose lines dc183c2 changed and left them unmatched (a business literal is never reviewed); the CR-10 rebind, the final rebind and the final mechanical pass kept them as the stopped case.",
+    "edit": {
+      "commit": "dc183c2769151aac708adb056df521a616a368fb",
+      "position": "on the block B branch, after main 63a9258 and before 8a7a7e7",
+      "renamedLiteral": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+      "renamedRows": [
+        "I-0026",
+        "I-1428",
+        "I-1430",
+        "I-1463",
+        "I-1682"
+      ],
+      "editedBaseLines": {
+        "src/react/workshop.tsx": [
+          108,
+          120,
+          320
+        ]
+      },
+      "replacement": {
+        "sha256": "72b2c8bca7c4020fd224019c9330ca07f77bd07f488a7fe6122219dfc5bbc884",
+        "length": 12,
+        "lexiconOccurrences": 0
+      },
+      "effect": "base line 108 carries I-1427 and the renamed I-1428; base line 320 carries I-1462, the renamed I-1463 and I-1464; base line 120 carries only the renamed I-1430. The renamed literal had these five base rows only (README.md, src/react/workshop.tsx three times, tests/browser/page-workshop.mjs), and dc183c2 removed all its occurrences (1, 3 and 1 before, 0 after). The new name is one unit shorter, so the columns of I-1464, after it, move by -1."
+    },
+    "later": {
+      "commit": "8a7a7e75b80855e8d1ffa352c7551f38a9d7dbc7",
+      "effect": "inserted lines above: the dc183c2 lines 108 and 320 are the lines 110 and 326 at 62e482b, byte-identical"
+    },
+    "pairingKey": "derive/reviewed.mjs and the probe rescan pair an occurrence with a ledger row of the same masked file, form, entry, literal, column, endColumn, line span and line SHA-256, the SHA-256 being that of the base line",
+    "rule": "single rule: the pairing key of the I1 scan and of the probe rescan, not a scan rule of the ledger; no base occurrence is missing from the ledger"
+  },
+  "scope": {
+    "head": "62e482bcdf28deee8b12259ded30a3ae34b9d96e",
+    "baseFiles": 797,
+    "baseFilesChangedAfterBase": 37,
+    "baseFilesDeleted": 2,
+    "changedBaseFilesWithRows": 13,
+    "rowsInChangedBaseFiles": 233,
+    "rowsPairedInChangedBaseFiles": 222,
+    "rowsWithLiteralGone": 8,
+    "rowsWithLineGone": 3,
+    "rowsInDeletedFiles": 2,
+    "unmatchedAtHead": 3,
+    "mainTree": {
+      "commit": "63a9258b8391b535c0ce81bbd10426136c6595d4",
+      "files": 798,
+      "occurrences": 3379,
+      "paired": 3379,
+      "unmatched": 0
+    },
+    "note": "The 8 rows whose literal is gone are the five rows of the renamed literal and the three rows of the two base probe lines that this seal rewrote literal-free (I-2931 to I-2933); the 2 rows of deleted files are history records of a removed squash note. No occurrence of the tracked tree other than the three is unpaired, and the ledger misses no occurrence of the base tree (derive/base-check.mjs) or of main (I1 pairing of main)."
+  },
+  "relocated": {
+    "pointer": "tests/fixtures/x24-externalization/expectations/lexicon.json#/relocated",
+    "rows": [
+      {
+        "id": "RL-01",
+        "row": "I-1427",
+        "at": "110:39-110:57",
+        "lineSha256": "0e1784004f7491d8eaab3d5665592258f353750b9991b36eeac8050bb43e5e97",
+        "replaced": [
+          "I-1428"
+        ],
+        "disposition": "legacy-api"
+      },
+      {
+        "id": "RL-02",
+        "row": "I-1462",
+        "at": "326:30-326:48",
+        "lineSha256": "81c4970bced6c4dbd94fc2b4fe8b8dd19f19308138fb86fdd5f7dabca34ca3a9",
+        "replaced": [
+          "I-1463"
+        ],
+        "disposition": "inject"
+      },
+      {
+        "id": "RL-03",
+        "row": "I-1464",
+        "at": "326:94-326:114",
+        "lineSha256": "81c4970bced6c4dbd94fc2b4fe8b8dd19f19308138fb86fdd5f7dabca34ca3a9",
+        "replaced": [
+          "I-1463"
+        ],
+        "disposition": "inject"
+      }
+    ],
+    "semantics": "A relocated row adds a second pairing key to its base row: the masked file, form, entry, literal and line span of the row with the record's columns and post-base line SHA-256; a row pairs with one occurrence at most through all its keys; the line number is not part of the key; a change of the post-base line voids the key and the occurrence is reported again. A relocation is not a review: the row keeps its rule, disposition and post-migration obligations, and derive/reviewed.mjs --write never rewrites the records.",
+    "rejected": [
+      "(b) reviewed records: the three tokens are business literals of the navigation family (rows of rules R-144 and R-147), not generic words; a business literal is never reviewed (README design decision 18)",
+      "new ledger rows at the post-base positions: they would count each base occurrence twice, break the normative base recomputation of ledger.json and derive/base-check.mjs, and fall outside the line lists of rules R-144 and R-147",
+      "a looser pairing rule (any unpaired row of the same file, entry and literal): it would pair any business literal moved inside a file without a reviewer check; the base text needed to check a line edit is not available to the I1 scan"
+    ]
+  },
+  "consumers": {
+    "i1": "derive/reviewed.mjs pairs through the base key, then through a relocation key; its summary adds relocated (3958 occurrences: 3368 paired, 3 relocated, 587 reviewed, 0 unmatched at 62e482b)",
+    "probe": "tests/profile-externalization.probe.mjs (P-006 pairing): the same two keys and the one-pairing rule; the five P-006 assertions, the scope format and the appended-row rules are unchanged. After the migration the relocated occurrences pair with their base rows: I-1462 and I-1464 (status injected) must be absent, I-1427 is retained as an opaque legacy key (status retained-legacy-api, present once) or removed",
+    "baseCheck": "derive/base-check.mjs (6): each record whose post-base line the current tree holds is the base line of its row with the replaced spans substituted, and its span holds the row's literal; otherwise it is counted void",
+    "sealTest": "a new test checks each record against its base row (fields, span length, replaced rows, column shift, key of an edited line) and, wherever the current file holds its line, against the occurrence and the replacement at their columns; at the verified bytes the record's own line must hold"
+  },
+  "history": [
+    {
+      "receipt": "docs/design/receipts/block-b-x24-history-guard.json",
+      "bytes": 24207,
+      "sha256": "2809c9addd728d098fabe0986a4014634a64fe752d17c31c301a2fbebcd0f5ad",
+      "seal": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f",
+      "previousSeal": "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c"
+    },
+    {
+      "receipt": "docs/design/receipts/block-b-x24-unicode-literals-fix.json",
+      "bytes": 88309,
+      "sha256": "565d0b7d60c25711f1528da7b81c56e9dc365a5da5a1ef40c806c6ea34888908",
+      "seal": "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b",
+      "previousSeal": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f"
+    },
+    {
+      "receipt": "docs/design/receipts/block-b-x24-p006-selector-allowance.json",
+      "bytes": 88201,
+      "sha256": "d5b2439211013acab846dc113fe5714d9e87145c5f87625c4fb603ed607508bc",
+      "seal": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746",
+      "previousSeal": "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b"
+    }
+  ],
+  "previousSeal": {
+    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+    "bytes": 31693,
+    "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+  },
+  "newSeal": {
+    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+    "bytes": 32446,
+    "sha256": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac"
+  },
+  "unchangedValues": "every ledger row and the ledger except inputs.lexicon; every lexicon entry, matcher, hash and reviewed record (12 tokens, 183 files, 587 spans); literal-set.json, classification-rules.json, legacy-values.json, comparators.json, dimension-coverage.json, the policies, inputs and the clause table; the scanner and every pinned executable (comparators.mjs, canonical.mjs, scan.mjs, literals.mjs, sourcemap.mjs, the brand helper); the selector-branch allowances and the zero-list rules; the case semantics (the eight changed cases change by digests only) and the other 103 cases",
+  "testConstants": [
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "name": "SEAL_SHA256",
+      "old": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746",
+      "new": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac"
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "name": "PREVIOUS_SEAL_SHA256",
+      "old": "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b",
+      "new": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "name": "SEAL_CHAIN",
+      "old": [
+        "d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5",
+        "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c",
+        "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f",
+        "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b"
+      ],
+      "new": [
+        "d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5",
+        "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c",
+        "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f",
+        "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b",
+        "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+      ]
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "name": "RECEIPT",
+      "old": "docs/design/receipts/block-b-x24-p006-selector-allowance.json",
+      "new": "docs/design/receipts/block-b-x24-i1-relocated-rows.json"
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "name": "ALLOWANCE_RECEIPT",
+      "old": null,
+      "new": "docs/design/receipts/block-b-x24-p006-selector-allowance.json"
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "name": "checks",
+      "old": "lexicon format x24-scan-lexicon/3; receipt chain of three receipts",
+      "new": "lexicon format x24-scan-lexicon/4; relocated-row test (records against their base rows and the current file); receipt chain of four receipts; the new receipt in the hygiene scope"
+    }
+  ],
+  "pythonTwin": "nothing to re-vendor: X24 is canvas-only (block B seal harmonization, section 3.4); the Python twin was not inspected (work limited to this worktree)",
+  "verification": [
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs --files tracked.lst",
+      "exitCode": 1,
+      "files": 2936,
+      "occurrences": 3958,
+      "paired": 3368,
+      "reviewed": 587,
+      "unmatched": 3,
+      "note": "at 62e482b before this round (tracked.lst from git ls-files -z): unmatched src/react/workshop.tsx:110:39 raw LX-NV-1 b53d4d24, src/react/workshop.tsx:326:30 raw LX-NV-1 b53d4d24 and src/react/workshop.tsx:326:94 raw LX-NV-1 5a434281"
+    },
+    {
+      "check": "classification of the three spans (standalone Node script of the spec author in an ignored scratch directory of this worktree; derive/scan.mjs with the sealed lexicon; the base file from git show 63a9258:src/react/workshop.tsx, whose blob is the base blob; digests, positions and lengths printed only)",
+      "result": "each occurrence has the entry, form, literal SHA-256, key and span length of one unpaired base row of the file: 110:39 is I-1427, 326:30 is I-1462, 326:94 is I-1464; each post-base line is the base line of that row with the span of one other row of the renamed literal (I-1428, I-1463) replaced by a 12-unit identifier (SHA-256 72b2c8bc); the span of the row is untouched; column shifts 0, 0 and -1"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/base-check.mjs --files files.lst --root <base tree>",
+      "exitCode": 0,
+      "trackedFiles": 797,
+      "rows": 3381,
+      "literals": 189,
+      "baseBranchRows": 17,
+      "failures": 0,
+      "note": "before the edits of this round; files.lst from git ls-tree -r --name-only -z 05f737885bd44fddea84bf1b4d55ae5428704855 and the base tree from git archive of that commit, both in the ignored scratch directory: the ledger is the inventory of the base, the three rows included"
+    },
+    {
+      "check": "I1 pairing of main 63a9258 (the pairing of derive/reviewed.mjs over a git archive extraction of main, standalone script)",
+      "result": "798 files, 3379 occurrences, 3379 paired, 0 unmatched; between the base commit and main 17 base files changed and 2 were deleted, src/react/workshop.tsx not among them"
+    },
+    {
+      "check": "scope at 62e482b (the same pairing over the tracked tree, by base file state)",
+      "result": "37 base files changed after the base and 2 deleted; the 13 changed files that carry rows hold 233 rows: 222 pair, 8 lost their literal (I-0026, I-1428, I-1430, I-1463, I-1682, I-2931, I-2932, I-2933) and 3 lost their line (I-1427, I-1462, I-1464); 2 rows in deleted files (I-0001, I-0002); 3 unmatched occurrences, each with a base-row candidate"
+    },
+    {
+      "check": "first-seal ledger (41704c6, line groups; read from the branch history by the spec author, outside the test campaign)",
+      "result": "base line 108 of src/react/workshop.tsx is the line group I-0984 (literal SHA-256 prefixes b53d4d24 and e40ce9d3, line SHA-256 prefix ee724535, rule R-144, legacy-api) and base line 320 the line group I-1010 (5a434281, b53d4d24 and e40ce9d3, line prefix 59c443fc, rule R-147, inject)"
+    },
+    {
+      "check": "edit checks (standalone script; dc183c2 and its parent read with git show into the ignored scratch directory)",
+      "result": "the renamed literal has 5 base rows; dc183c2 takes its occurrences from 1 to 0 in README.md, from 3 to 0 in src/react/workshop.tsx and from 1 to 0 in tests/browser/page-workshop.mjs; src/profile/planning.ts, the fourth edited file, is no base path; the dc183c2 lines 108 and 320 are the lines 110 and 326 at 62e482b, byte-identical (8a7a7e7 inserted lines above); no lexicon occurrence overlaps a replacement span"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs --files tracked.lst",
+      "exitCode": 0,
+      "files": 2936,
+      "occurrences": 3958,
+      "paired": 3368,
+      "relocated": 3,
+      "reviewed": 587,
+      "unmatched": 0,
+      "note": "after the relocation; byToken unchanged (RV-01 153, RV-02 186, RV-03 86, RV-04 53, RV-05 51, RV-06 4, RV-07 13, RV-08 11, RV-09 7, RV-10 21, RV-11 1, RV-12 1)"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/base-check.mjs --files files.lst --root <base tree>",
+      "exitCode": 0,
+      "trackedFiles": 797,
+      "rows": 3381,
+      "literals": 189,
+      "baseBranchRows": 17,
+      "relocated": {
+        "rows": 3,
+        "verified": 3,
+        "void": 0
+      },
+      "failures": 0,
+      "note": "after the relocation, from the repository root of the working tree"
+    },
+    {
+      "check": "mutation checks (lexicon.json mutated in place from a backup, restored and its digest checked after each run)",
+      "result": "the relocated-row test of the seal test fails for a column left unshifted, another line digest, a weaker disposition, a wrong replacement digest, a replaced row inside the span and the line digest of another record; derive/reviewed.mjs reports 3 unmatched without the relocated rows and 1 with an unshifted column; derive/base-check.mjs fails RL-03 (span) for an unshifted column and RL-01 (replacement) for a wrong replacement digest"
+    },
+    {
+      "check": "logic check of the P-006 pairing block of the probe (standalone script: the block cut unchanged out of the sealed probe text and run on the tracked tree with a synthetic scope of the base rows; no product module, no dist import)",
+      "result": "40 lines; the 3371 reported occurrences pair with 3371 rows, none twice, I-1427, I-1462 and I-1464 once each, 0 unmatched; without the relocated rows the three occurrences are unmatched"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/policies.mjs && node tests/fixtures/x24-externalization/expectations/derive/inputs.mjs",
+      "exitCode": 0,
+      "note": "policies, descriptors and inputs byte-identical"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/author-cases.mjs",
+      "exitCode": 0,
+      "note": "111 cases, no uncovered field; only the cases L-001 to L-004, L-006, P-001, P-005 and P-006 and manifest.json change, each case by the digests of lexicon.json, ledger.json and probe-expectations.json only; dimension-coverage.json byte-identical"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/clause-table.mjs",
+      "exitCode": 0,
+      "note": "docs/design/block-b-x24-expectations.md byte-identical (74 clause rows)"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+      "exitCode": 0,
+      "output": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac"
+    },
+    {
+      "check": "derive/ledger.mjs normative recomputation",
+      "note": "not run: it needs the base built in a checkout (npm ci and npm run build of the base commit); no base-dependent input changed (ledger rows, literal set, classification rules and base branch rows are those that derive/base-check.mjs recomputes above), and ledger.json changes only by inputs.lexicon (hand edit of that digest, byte length unchanged)"
+    },
+    {
+      "command": "node --test --test-timeout=900000 tests/x24-externalization-seal.test.mjs",
+      "exitCode": 1,
+      "tests": 14,
+      "passed": 12,
+      "failed": 2,
+      "note": "before this receipt existed: the hygiene test and the receipt-chain test failed on the missing receipt file only; the relocated-row test passed"
+    },
+    {
+      "command": "npm ci && npm run build",
+      "exitCode": 0,
+      "note": "the runtime twin test of tests/test-history-guard.test.mjs and tests/profile-case-policy.test.mjs import the built package (dist/)"
+    },
+    {
+      "command": "node --test --test-timeout=900000 tests/test-history-guard.test.mjs",
+      "exitCode": 0,
+      "tests": 14,
+      "passed": 14,
+      "failed": 0,
+      "note": "the guard is unchanged; the seal test, the probe and the derivation helpers of this round read no Git object"
+    },
+    {
+      "command": "node --test --test-timeout=900000 tests/x24-externalization-seal.test.mjs tests/test-history-guard.test.mjs tests/brand-guard.test.mjs tests/profile-brand-guard.test.mjs tests/brand-baseline.test.mjs tests/brand-legacy-gates.test.mjs tests/brand-release-gate.test.mjs tests/path-guard.test.mjs tests/profile-case-policy-guard.test.mjs tests/profile-case-policy.test.mjs tests/history-attribution.test.mjs",
+      "exitCode": 0,
+      "tests": 82,
+      "passed": 82,
+      "failed": 0,
+      "x24SealSubtests": 14,
+      "historyGuardSubtests": 14,
+      "note": "final run, on the working tree with this receipt: the 81 tests of the previous round and the relocated-row test"
+    },
+    {
+      "command": "node tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs --files tracked.lst",
+      "exitCode": 0,
+      "files": 2937,
+      "occurrences": 3958,
+      "paired": 3368,
+      "relocated": 3,
+      "reviewed": 587,
+      "unmatched": 0,
+      "note": "final I1 rescan, tracked.lst from git ls-files -z with this receipt added to the index"
+    }
+  ],
+  "previousSealFiles": [
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/README.md",
+      "bytes": 87063,
+      "sha256": "d8dfd3b475b72d6aafecea378c3e98a3c553652313b4fa01a5ac2d13183ab37f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-001-classify.json",
+      "bytes": 4596,
+      "sha256": "f5db25e74d4b9d5ff848f7f5ab00abcd9a0961f680fb8472b89f4905cf7bb3dd"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-002-kind-annotated.json",
+      "bytes": 3176,
+      "sha256": "82f29a2e676e2efb97d1ab861b9d3bb718b778cb10f3a193dd7c15cabaf020b7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-003-kind-recolor.json",
+      "bytes": 3262,
+      "sha256": "99fc6a7eac7a05725c31aacbe093f960e845d3a570319ec88c1995398703f52e"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-004-kind-flat.json",
+      "bytes": 3328,
+      "sha256": "7ebf6490effa575221c2becb78a39dc57f685b5d645b21690d0b62235a78f9bf"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-005-layout-input.json",
+      "bytes": 1469,
+      "sha256": "bcf7cb1a463aec41ff9bd3179d5b5f048117997105100829d2219f68d96a97be"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-006-layout-size.json",
+      "bytes": 3863,
+      "sha256": "4a69cbd34244c548dc0e6ebfdfdf28840e64fe4f96bdd699351cc8a4310f8740"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-007-metrics.json",
+      "bytes": 4168,
+      "sha256": "50d0a4b4a101ab40ea37954cb6f6f75843ca42f51fc5fa5bc0af3ebe17e0ca70"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-008-render-badges.json",
+      "bytes": 1207,
+      "sha256": "71bf1d8ea5acde00268d0ddb1636764184e6c8043298dae7985426c2d2bb3d35"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-009-render-attachment.json",
+      "bytes": 1694,
+      "sha256": "d6f39a2f9755cbc3d6b169974daf1d76a274373aa465358edfc4dec6efd11d4c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-010-transactions-follow.json",
+      "bytes": 1765,
+      "sha256": "9f02bb82749283a5edca41b9c2c756e00ae631c6221b1dba3c2f132cd79153f7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-011-tokens-annotated.json",
+      "bytes": 7305,
+      "sha256": "62561b1488f8ee064350db18dffb9f6639d73d29259873584d06a159609fae9f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-012-tokens-recolor.json",
+      "bytes": 7613,
+      "sha256": "b46fd57fa6d6588197c837671a093268a70684ff6fd800e51bb2e64a7b0ef35a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-013-theme-select.json",
+      "bytes": 7878,
+      "sha256": "26c986dc06bb65fe7512178a9b77a20045448f816614d4139db027da4375fe32"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-014-palette.json",
+      "bytes": 2115,
+      "sha256": "3746e53d243930102207cff2ea5951c41099c6e6d585d073df186666b7bb5903"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-015-navigation-legacy-default.json",
+      "bytes": 2843,
+      "sha256": "6f736c71356e60dc3a03fb8330ac7dd232ef85121b1d8e7b8d4b87d401e56b18"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-016-navigation-legacy-rules.json",
+      "bytes": 16764,
+      "sha256": "065da6046f818fde07e1450ce38f6d560eadaa968c1bed4d91d09d82b171432e"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-017-export-reference-page.json",
+      "bytes": 3797,
+      "sha256": "365879fd0c95f777236926cb566683819defc0e3f9d8e48fcc720dec20c87961"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-018-export-sparx.json",
+      "bytes": 4679,
+      "sha256": "6ae7566520c7046a93fd896fd964221a004f854ff6edb87ae9ae7526cfcfe942"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-019-export-drawio.json",
+      "bytes": 4972,
+      "sha256": "504e9bb784f01430ab96bbaef3f500f47923b88bb85a6f74898d6a406ab09222"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-020-import-drawio.json",
+      "bytes": 1560,
+      "sha256": "215afe5476f9cb406573c71027b0fd74551985e75cef1c3ea350b31c46a6c81a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-021-export-free-annotation.json",
+      "bytes": 1021,
+      "sha256": "22f94ea465d9f436930ef8157f2b6042210b139eb69daff1e84bda921bb292a7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-022-transactions-autolayout.json",
+      "bytes": 1964,
+      "sha256": "e774f6ecc77f9acfb93b6b39336b6eddbcb4377a89bd6a9ffab5ad15792ecce4"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-023-layout-process.json",
+      "bytes": 2717,
+      "sha256": "c0b871dade207b7bd10240a5391ed701bd7d6eece78bacac174c39710efab067"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-024-export-facts.json",
+      "bytes": 9390,
+      "sha256": "c9c880cd004fad0449cec84a5e4530dff0d6dba9d9aee95b679d99ca98f9bfa0"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-025-facts-descriptor-mismatch.json",
+      "bytes": 1039,
+      "sha256": "f4fd1fde8a7a09dc09f981b4cd32bc0a5be816b5b0bc0be1392a6ad53f7ab848"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-026-static-surface.json",
+      "bytes": 7618,
+      "sha256": "1d7fd648d505ea3afb285a8c166702189034fa6162663ed5a615e1517bfbaa72"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-027-preview-surface.json",
+      "bytes": 4207,
+      "sha256": "7f8d996eedfea6487f0fd1eaa0c99cec4bb15053bfdd64ee8d4cdd79d55221b5"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-028-workshop-surface.json",
+      "bytes": 4383,
+      "sha256": "c26694002d5540aa4e0b7e0c9a2ee3cce6d5f798696f6f6183214944eec3ce58"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-029-facts-unknown-version.json",
+      "bytes": 1039,
+      "sha256": "a0e9ef13821f118d0d2bea4df05196703a06826e39286ad23e98adf5938f821b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+      "bytes": 1620,
+      "sha256": "53846345f37c93e4a80971a781b9bf62b1c639ee289e65e0e6a484cf99aef796"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+      "bytes": 1509,
+      "sha256": "6c807dfe7b96708d506cff5f8847d4ba647b1e720e9f04aa831a2fd9b3458d78"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+      "bytes": 3241,
+      "sha256": "a994b493bef5889fb38a3649b423ce7b17b39f6a00fb20a8bc6a009ba87f04df"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+      "bytes": 1336,
+      "sha256": "a7b866313f27185d8a49c5dde99a304b001cb37ced821d861d843c7b5fc990f4"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-005-legacy-value-pins.json",
+      "bytes": 1766,
+      "sha256": "951627f986316b41fd91d42fb7a4ad4edb8a5bd52707a0a52edc5c4e636b35a1"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+      "bytes": 1239,
+      "sha256": "35732ad7b7245dc1f139cea6f597a4e2ef37f8f1aeae94fbf9fd9280d38d1b6a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-001-probe-1-original.json",
+      "bytes": 960,
+      "sha256": "d88a6d950076e792a71f3a771134d4d933e79f5904e704f752c71d1545bcd553"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-002-probe-1-no-policy.json",
+      "bytes": 4815,
+      "sha256": "bbc3e24bb75b0ae94eca804f7a5a415d4e50c0bb70a22c728be5cb0566ce2ba3"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-003-probe-1-injected.json",
+      "bytes": 2753,
+      "sha256": "cb90a4f99f15efd4c91970a7430cc407f04382a30d5cefa1402f1bdaec4d8247"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-004-probe-2-original.json",
+      "bytes": 577,
+      "sha256": "210c8ee8fe223446dba96d22b6aa4a88d48cc263c5586c37fc70846c1a00695a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+      "bytes": 1483,
+      "sha256": "a48a56c717c80118d54e9cb0e2965b3601732ec6c99127300545c3a7f7158709"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+      "bytes": 959,
+      "sha256": "f96841f7198c0f808c47e06fd969fad72462c4f8a3425b73ed1a893052ec82d0"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-007-probe-2-distribution.json",
+      "bytes": 909,
+      "sha256": "cce54bfc0e623f8d23721bd24f9ebef87461dcaae4eda93d277adf941ae96632"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-001-nonactivity-host-preserved.json",
+      "bytes": 1478,
+      "sha256": "4f85da8dba11bf7215d7fe6921aa7d2eee02f81c2e6b1d2c576d10293ecbb84f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-002-navigation-called-element.json",
+      "bytes": 1935,
+      "sha256": "6d2204d3064ddcf45c0793b5984392977f621a1de2aedd968147a3c9d618afe3"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-003-no-ambient-decomposition.json",
+      "bytes": 987,
+      "sha256": "bfc2f4b5fe04594820d693127fdf129ef3e24395f4d1915f8ab11d7b9d363012"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-004-no-forced-descriptor.json",
+      "bytes": 1153,
+      "sha256": "9a99abac943b517d50ebe4b1a6c03ea55a1e05c62840dbd793a0106ed4775115"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-005-no-built-in-look.json",
+      "bytes": 1390,
+      "sha256": "612d36c4d5f2a23125b3bda6a01d8e5d1bc68cbaa878d9501d7f7755bc4bf1a7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-006-io-set-selection.json",
+      "bytes": 791,
+      "sha256": "541171c5b0ab24eb64d524b2433f1ac66bdab0b26b59e6335c39f7f23fea00cf"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-007-no-policy-recognises-nothing.json",
+      "bytes": 2585,
+      "sha256": "c3a4a99a7e3a3fdf0442f95608dc967aa6c0412d231a0d772363e21d3cc7e4b3"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-008-browser-entry-defaults.json",
+      "bytes": 676,
+      "sha256": "715c45c4e73504319390f44f813fb9ed43fc9d4778afb707c62c53cf89178201"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-009-facts-version-a.json",
+      "bytes": 1032,
+      "sha256": "37db670b8b6546c35031cc1bf73d7a2a0d246dd07839e41fe13e5abce58f83a0"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-010-facts-version-b.json",
+      "bytes": 1036,
+      "sha256": "cfdbaafb8f1e71b01836408ad57ba2acb8f4bb25aae05a56632be81f869f5204"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-001-valid-x24-neutral-a.json",
+      "bytes": 920,
+      "sha256": "4d43b130e0efd125c243db81a1716c39f30c1a02e6b88a78712161cd260752a4"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-002-valid-x24-neutral-b.json",
+      "bytes": 920,
+      "sha256": "b6a5575ab1d3e1d1927fba69a8a879df6d29d493e3f783384f3b8850d4b289a2"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-003-valid-x24-legacy-synthetic.json",
+      "bytes": 941,
+      "sha256": "61b7bd8fa7129c8eb410eb31ffb6a233f3ddce54e8bdc5c4e425003267c19ebc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-004-unknown-field.json",
+      "bytes": 7033,
+      "sha256": "df4f5d7d88fa32ba59aa874b18f8a8d40e04300ca079e8c5af2c98aae49e0323"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-005-null-value.json",
+      "bytes": 7014,
+      "sha256": "c124ea393c9f99b844fa08be14547126a468ef7ed17f789567d30077074e5445"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-006-empty-prefix.json",
+      "bytes": 7013,
+      "sha256": "d68f06bb6787e51653d13c5ad9c5fe8aa146e2ca5cc03152dc9709d345ceab18"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-007-unknown-trim.json",
+      "bytes": 7018,
+      "sha256": "ccf597e19fb4799abe81c98b5f2ddb9315293d79e1ca15e694bdafe519bb95d7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-008-duplicate-role.json",
+      "bytes": 7025,
+      "sha256": "68411431e80397ae45d434794a7b204b9c4e6b34f638e271c8d9848a555622fd"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-009-overlapping-prefix.json",
+      "bytes": 7136,
+      "sha256": "767c9b41914c0204223693a47bfa0694568a1436484b373f54370865fe7630ac"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-010-short-width-table.json",
+      "bytes": 7018,
+      "sha256": "550d09a1a85c99a5893a79ae830a1857e5bb20c0113b73da267183774eb508eb"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-011-legacy-retarget.json",
+      "bytes": 8495,
+      "sha256": "c4f3a978ffa2ab2057c1a126fda9bd583471a806112163bd52e5166e98203b5f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-012-empty-rules.json",
+      "bytes": 8478,
+      "sha256": "e90a3c7f61efebfffcd6cd5c358c4be1c91b1ef64fa2219281f8bec78d39369d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-013-missing-metrics.json",
+      "bytes": 5993,
+      "sha256": "af3fef1f6b46ca0a83e2435061e9e25e19350c7a9f86a7b606d3c31781d78ee1"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-014-alias-target-outside-table.json",
+      "bytes": 7242,
+      "sha256": "84d755c7e8fbfc06c3258dd633c7312c9b7705546117a08cc56e5f76d25bf234"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-015-alias-source-inside-table.json",
+      "bytes": 7228,
+      "sha256": "1cf990c472f4cfb9a8255eb13813669fbcc0bf63c1a1abcd8b8816278df74472"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-016-duplicate-alias.json",
+      "bytes": 8505,
+      "sha256": "a0a6d8df453849336acb667799bbe5ef32fc7727f89842dc792a2b6d5ef1e93c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-017-duplicate-look.json",
+      "bytes": 8487,
+      "sha256": "d8a1a691305a2a05264683aa158bb5b07ba63587475c97555873bc9ea7e5dde5"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-018-upstream-look-with-tokens.json",
+      "bytes": 9311,
+      "sha256": "9345814067158786a2c4bb797aa6716e699db15ce34e262a304c91694f110083"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-019-duplicate-node-size.json",
+      "bytes": 7084,
+      "sha256": "a42472076a172c4ef769744ba72589460efedf2472d167a4dc7df624f461961e"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-020-decode-unknown-kind.json",
+      "bytes": 7028,
+      "sha256": "7eae97ea30e9146650bb7177762c1eb7c4b00b65d0645a3ead6f1ccea96f7479"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-021-lexical-number.json",
+      "bytes": 7027,
+      "sha256": "367944ba4453fc9cbbc557b229b6ce3c6e20a85e6681e577f0aceb2b4775402a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-022-lexical-duplicate-key.json",
+      "bytes": 7080,
+      "sha256": "2726c7da57ac0dd9741fe0c6ce8aa8b00727e106ad783edee6b4f9549d4c08cc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-023-lexical-lone-surrogate.json",
+      "bytes": 7033,
+      "sha256": "8d5c9f784369fdde23eeff1fa30ee0c4518843179747b43d8355e4951f4390dc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-024-overlapping-prefix-admitted.json",
+      "bytes": 7208,
+      "sha256": "1548bc0f6e25ac1dd7ef513c6d0eb255191c916c8a7e90de1b49336fadfb8b06"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-025-overlapping-prefix-unambiguous.json",
+      "bytes": 7736,
+      "sha256": "fb8e4dfe947ef5c5fedc47aeceb4cd949103695510e13d337fe345add0ce3f2a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-026-unknown-node-slot.json",
+      "bytes": 7028,
+      "sha256": "4e64ed6af4459dbed9c751bedd57ad63a6b5ce1998281085ab278ff3a96fd919"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-027-unknown-navigation-rule.json",
+      "bytes": 7225,
+      "sha256": "2caec8a2512551be189c58ea2e5247f555389947492514a9f98809000a3fc840"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-028-missing-facts-property.json",
+      "bytes": 7015,
+      "sha256": "af707e7496a5393c7f010e2163159d9e4ef85f214cedc07624f4d8c2c2575a09"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-001-classify.json",
+      "bytes": 8672,
+      "sha256": "10e23c553e0c82167b72801dcc83e9b908573a8ab1f76e9727a622c01be495a2"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-002-kind-annotated.json",
+      "bytes": 4460,
+      "sha256": "7317fa4553dd05db2747d8f500869105746a62aa48c10b3518576b4393ee259b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-003-kind-recolor.json",
+      "bytes": 4769,
+      "sha256": "07a3482a9ae14825b6ce2734e796fadbbd34adec98e05ae565723e75cfa17d13"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-004-kind-flat.json",
+      "bytes": 4809,
+      "sha256": "d6f2a2dbf0321744532896bc7def7582019b6fd93cd04cab68420d59d24b1242"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-005-layout-input.json",
+      "bytes": 2478,
+      "sha256": "baafdb9870465eca852428f7e19e0327802bd644d4343aab12db57cd2db085f9"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-006-layout-size.json",
+      "bytes": 6522,
+      "sha256": "020e53242f4ad98f915a84379c57b509e0b7e657040c9ca4e433ef31f89c329a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-007-metrics.json",
+      "bytes": 6671,
+      "sha256": "8afa1902a7eab6c3f7dd7300fe5cded81e9ce4b02c008a4d6f896db37a021fdc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-008-render-badges.json",
+      "bytes": 2065,
+      "sha256": "b99d7cd6a64d44d1c832662dc533ad72885657e54c750aae6a446449b36b51b7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-009-render-attachment.json",
+      "bytes": 2017,
+      "sha256": "f2be8de194fc6691b776a048bba58769ee886e8a39c40234fa6953f5f4a5fb0c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-010-transactions-follow.json",
+      "bytes": 2000,
+      "sha256": "00be9664352f86b856be2ea7d11af8665912f490868cfd3a5e61c01fc27ea746"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-011-tokens.json",
+      "bytes": 21171,
+      "sha256": "3bee08005568f7217077176c15347806384055bbe3240e3461d19c982864d42d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-012-theme-select.json",
+      "bytes": 11260,
+      "sha256": "5d8a2a04d9ebeaf70ad52d467a2f80f40b70e18ab5568afcc55bca7f035a0f22"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-013-palette.json",
+      "bytes": 2587,
+      "sha256": "126888e87b4336fd30e8d72a794ee6c26b75e9ad1b6b524313701d623a04ef88"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-014-navigation.json",
+      "bytes": 2666,
+      "sha256": "22cd99043060af76aae850967cccc7e795baf60a4031f86ea076fa087722bb8b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-015-export-a-input.json",
+      "bytes": 12032,
+      "sha256": "849186b1d521acd568ff8f32b95e94dc106af0cf1db778c5a5ea5ff18a399426"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-016-export-b-input.json",
+      "bytes": 12053,
+      "sha256": "df3e86e11b9a287b269c36079899000a5650924b014071a8a8b02ee54d82c787"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-017-export-legacy-input.json",
+      "bytes": 1449,
+      "sha256": "188b5a0fdf7946830a51c85e208f12d534ba62c7dd3d291c27d80498056dea49"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-018-import-neutral.json",
+      "bytes": 1721,
+      "sha256": "62dd400b6c4f622d4cc35efd10314b768f0ba0b2fbb24fd46a82179a7ad88667"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-019-import-legacy-symbols.json",
+      "bytes": 1019,
+      "sha256": "4b94718936f7bc2ae35d849fa9fb2c9fdd5d7a7cfcbf0a2da22f3eb56a7d3ab8"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-020-profile-recognition.json",
+      "bytes": 2407,
+      "sha256": "ab05b53949a7818ff545ec8ad2786bcf89762ba7eebe09f4341b990e6efb598d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-021-profile-render-label.json",
+      "bytes": 2062,
+      "sha256": "d8985e261932f549b4b35050e0418d01b5c5e7c9e6ae06d672b473ba15349924"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-022-profile-create-text.json",
+      "bytes": 1413,
+      "sha256": "18074f8bd53eb2977ebb8530cc6906ff3f47237d6e3c1e170fa497d9541d4ec0"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-023-profile-render-bindings.json",
+      "bytes": 2712,
+      "sha256": "eced0b895584cd92e4410262036a1c41f833cfc500c68e1bc553b22ea8b2f881"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-024-transactions-autolayout.json",
+      "bytes": 2600,
+      "sha256": "3ccb3548fe57d5c71dcdfdafe3c703f40c3ba0feb0042e58d7cfd616054f6c31"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-025-layout-process.json",
+      "bytes": 10546,
+      "sha256": "e29ef6af07e63af890c857bbbb71a44b4e2d7bef433f790b4be3d34301fd23ae"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-026-export-facts.json",
+      "bytes": 9847,
+      "sha256": "68c9bf92a29d015a0c0aa6e0dcb2662ec60032b1f5469caf5e75515280bb581c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-027-import-b.json",
+      "bytes": 1713,
+      "sha256": "89ae7b12a7b0eb34fbb36217f34087e18ac1879776ff1467cdcfdcf659e58235"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-028-static-surface.json",
+      "bytes": 12488,
+      "sha256": "c5b48eb018f3759b8de1e1a13978c88cf686d34a52fdf625906994eed0e8ab11"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-029-preview-surface.json",
+      "bytes": 4780,
+      "sha256": "40fbc99c28d8d04ee052531750a8f6ea62193f0478e131b2d7c86bc223603a1d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-030-workshop-surface.json",
+      "bytes": 5415,
+      "sha256": "4c2895d83842044ae19cdb1c7c914142886d9562dd2320dee75a863ee618b9a4"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-031-export-facts-b.json",
+      "bytes": 9848,
+      "sha256": "35df3f3bfa076f8d1b5f9f17245b82fd61889bb4b92d50e29a6f38089f2e7530"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/classification-rules.json",
+      "bytes": 77142,
+      "sha256": "193cb1547d4ab8b319a1aa5cf9d5bbbb0bfd27d3429c89a17cad70a9b0172ec7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/comparators.json",
+      "bytes": 2999,
+      "sha256": "c38c0039c7e0a3a3e74022a0ef76ddf92e127565f34d3f2f299dc8a40f140873"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/arith.mjs",
+      "bytes": 57500,
+      "sha256": "791df7670d0366836ff4901ebde483ac2c80f4b9d6267abbd8c50b4032890566"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/author-cases.mjs",
+      "bytes": 89471,
+      "sha256": "ce35678dd5637850fb3f9df4d0d0e4d379755de0c7a0ea677f086404cd4057a7"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/base-check.mjs",
+      "bytes": 8401,
+      "sha256": "46596a478ff4a9cf1632a7fd7213fad4bd47a1fea4f36572e7d44e40944cee53"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/canonical.mjs",
+      "bytes": 918,
+      "sha256": "a5faa7421a912030075000d469cb73844decd93a786f8247a87abd0b1662a948"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/classify.mjs",
+      "bytes": 1217,
+      "sha256": "5d88f9eb4af186e24e321e35b6b58f2d750cdfe578ae88b8be310da28effef6c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/clause-table.mjs",
+      "bytes": 4446,
+      "sha256": "ee4be1167e3b116b1cbe681d9e91768326d9c06ce2b480aa3228333b85b22217"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/comparators.mjs",
+      "bytes": 12267,
+      "sha256": "4cf181c64e548aeac3f6ecc92a46c135edb6b3cc876e0c819b22aa5879c36aac"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/inputs.mjs",
+      "bytes": 13730,
+      "sha256": "4a44d013f343064cc93ba983b6556bcb7bf59e6a936c9e60e1925cce9d52e24c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/ledger.mjs",
+      "bytes": 16434,
+      "sha256": "90a3decfa592e2a0ab100076f38f74068ad14917801620676ee6f503a00b214c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/legacy-values.mjs",
+      "bytes": 17526,
+      "sha256": "362446847e85ad229feb45f21c0bf9056baaaf2f40d762018f21ed261d8f70dd"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/literal-set.mjs",
+      "bytes": 3559,
+      "sha256": "893e48245008c9680b76fe661c78de122e3d915112a111609faf03dc8dfb629a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/literals.mjs",
+      "bytes": 8683,
+      "sha256": "42fa0761cac5ed3929df5171f0f8421ed03651a734c19e3019063ccef26f2873"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/policies.mjs",
+      "bytes": 14927,
+      "sha256": "2c51f59657903cbb1dc93f8dd66854388ba57017b1e76b7237befaa0298a0077"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs",
+      "bytes": 4169,
+      "sha256": "af95acd155ab433a1c4578ae2a2cb39f12493eb45313d47c5fbabf6e96d23fa0"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/scan.mjs",
+      "bytes": 34731,
+      "sha256": "40b89ab416a0af6978b95448b090b5e60597650ebe2cb36e9b40a01bee8a8834"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/scenes.mjs",
+      "bytes": 15085,
+      "sha256": "3496bdb31e8b2a4e91d2f77bc32af7d440be2118e3901fa4af631cde87ac6aa1"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+      "bytes": 7765,
+      "sha256": "a8d043cd3f52c995af6be61be9486aa2dedd5489ae14e2be48196bd089d686f6"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/sourcemap.mjs",
+      "bytes": 2074,
+      "sha256": "270b77614135904b2e3b9cf52ea7c0ae207854313b1c3286cf953d9b79619bf6"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/dimension-coverage.json",
+      "bytes": 182893,
+      "sha256": "6a3d239ec7b7dfa79ac7bcc4055ccc715b1405e9a81d7d2e9969b4d995d5e195"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/decode-b.drawio",
+      "bytes": 977,
+      "sha256": "6cf723f2e5e6f02c72700b7ccfff8d633efb6208a2022a48b079fc1008ee301b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/decode-legacy.drawio",
+      "bytes": 1190,
+      "sha256": "808bdaa489cf9e76e21e39df08f706717637564998e77d623501d20550d14f0b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/decode-neutral.drawio",
+      "bytes": 1008,
+      "sha256": "12321516a7e907ce613e03d93b188b92efa60589aabda443ebb25178ae6ea554"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-a.bpmn",
+      "bytes": 6380,
+      "sha256": "7c0888f6138e94674e8fe081a9073b88003b69462b3548e442ce485c0a33a73f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-b.bpmn",
+      "bytes": 6381,
+      "sha256": "73c9a0b9e818c76af1b6a339e2f58912c7e63de869a87ef6d8e419b0c5a87606"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts-b.bpmn",
+      "bytes": 5136,
+      "sha256": "520a3fcd848fec29e6a61a75ae5df5d00890660bf49a87a0b85463799d1bd746"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts-version-a.bpmn",
+      "bytes": 1872,
+      "sha256": "3a9812856cb86a04a902c0b30927189441f410e4352946769ced74af3d8d6176"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts-version-b.bpmn",
+      "bytes": 1874,
+      "sha256": "0982882cf38363985ca4821b0760291a16f0b6318828f66bff1de4da83aca89b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts.bpmn",
+      "bytes": 5143,
+      "sha256": "ddf7b6ebce0a426d3adf59625ff3f4aa7af99cddf6fe16fba229265bbb3c7d10"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/export-legacy.bpmn",
+      "bytes": 6382,
+      "sha256": "e55294836fe9b264f6fde94d7ef13d8cbf5545dc0dd7fb41a4a67f54fb3c51fe"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/layout-input.bpmn",
+      "bytes": 2248,
+      "sha256": "c09cd68ff5bf3db234106f7d51e2da39d7e5f26984041fb0febeb24a3fbb4946"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/layout-nonactivity.bpmn",
+      "bytes": 1067,
+      "sha256": "85eaac78b18221b8ba6c3204a1a736bf802e7b918448166955cb49915d185f7a"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/layout-process.json",
+      "bytes": 3542,
+      "sha256": "91e233f1c12e14af64ffb44064c72530cff0225343d12e8539a0666224e30631"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/surface.bpmn",
+      "bytes": 9251,
+      "sha256": "3514d83fce0e64e297232810443050f25a0689cc4e444c883642b7a49a788aa3"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/x24-facts-descriptor-b.json",
+      "bytes": 958,
+      "sha256": "b9e8c5b4baee6919225eb30695518e4aead88ac63e10e6468e8267264267430f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/inputs/x24-facts-descriptor.json",
+      "bytes": 963,
+      "sha256": "dad1e898930b1d4e020c66484abc1a3dc299e3bd13383f7f20bea5246152fe86"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+      "bytes": 3655792,
+      "sha256": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/legacy-values.json",
+      "bytes": 8768,
+      "sha256": "5169a58662f4d1e786e23fc04358d6c961e36cda4f59eea19fab47006c202a85"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+      "bytes": 187745,
+      "sha256": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/literal-set.json",
+      "bytes": 32745,
+      "sha256": "94bbb8eace69d546ce1fdd0792af4bfd6abb689f7c5a70a3b17f4c1b6024022c"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "bytes": 48170,
+      "sha256": "40828ef93b792313804021881be66cf863b031fbdaeb4c4f547bb2332ddd3c3d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/policy/business-policy-1.schema.json",
+      "bytes": 16377,
+      "sha256": "79ad6e0b5f3ab31209e6effadca7a5653b2838bc1d7da3b55a402571d8ec9094"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+      "bytes": 12523,
+      "sha256": "7e3162eaa47ea25df97fdb55cdcc4d96c36f1155634abfa2d07b23d5465aa65b"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/policy/policy-neutral-a.json",
+      "bytes": 10351,
+      "sha256": "b3d4e0ab6dd3657d51ad700e28f6cce77ce1848175fed7f71284a27568013e28"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/policy/policy-neutral-b.json",
+      "bytes": 10674,
+      "sha256": "f043e2bebdcc45e1227f71cc15666293092f531bc51f4bb0015a7a6bec578dae"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/probe-expectations.json",
+      "bytes": 21207,
+      "sha256": "2100de60c5dc3ac4d5d3868d7118e2ca768e279b22c72c7eab7dbc64f46a6b63"
+    },
+    {
+      "path": "tests/profile-externalization.probe.mjs",
+      "bytes": 22605,
+      "sha256": "79eeaa49d79e40b7016e95fcdcc280496f259810eb9a2413bc0dea2af380d232"
+    },
+    {
+      "path": "docs/design/block-b-x24-expectations.md",
+      "bytes": 11019,
+      "sha256": "28ec958ea9673fa386053ff41707bee28b38dd3a8eccd727dae9e9420a972592"
+    }
+  ],
+  "supersedesFiles": [
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/README.md",
+      "old": {
+        "bytes": 87063,
+        "sha256": "d8dfd3b475b72d6aafecea378c3e98a3c553652313b4fa01a5ac2d13183ab37f"
+      },
+      "new": {
+        "bytes": 93564,
+        "sha256": "f7fd636576b024390b482834e9dfed1cd2ce0aaef3fa365359a63c0b4653cbeb"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+      "old": {
+        "bytes": 1620,
+        "sha256": "53846345f37c93e4a80971a781b9bf62b1c639ee289e65e0e6a484cf99aef796"
+      },
+      "new": {
+        "bytes": 1620,
+        "sha256": "f50b1b200ebed251e2daca13ea994849a0b3361ddacbc8f3bf598e270dbbfa51"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+      "old": {
+        "bytes": 1509,
+        "sha256": "6c807dfe7b96708d506cff5f8847d4ba647b1e720e9f04aa831a2fd9b3458d78"
+      },
+      "new": {
+        "bytes": 1509,
+        "sha256": "d36bf2cace90f510a9ec9cefa715078b91c02f9840a2209ad808aaa3b1a4fb1e"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+      "old": {
+        "bytes": 3241,
+        "sha256": "a994b493bef5889fb38a3649b423ce7b17b39f6a00fb20a8bc6a009ba87f04df"
+      },
+      "new": {
+        "bytes": 3241,
+        "sha256": "1ae99719197ae0db2f6e2db8732e0fbafa21af9a22f0be82b8bb8e7a8f5e07b6"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+      "old": {
+        "bytes": 1336,
+        "sha256": "a7b866313f27185d8a49c5dde99a304b001cb37ced821d861d843c7b5fc990f4"
+      },
+      "new": {
+        "bytes": 1336,
+        "sha256": "09943faa031b23346d9b1cb93da6f762eb3a29ede024a611cc00dbfef91583a8"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+      "old": {
+        "bytes": 1239,
+        "sha256": "35732ad7b7245dc1f139cea6f597a4e2ef37f8f1aeae94fbf9fd9280d38d1b6a"
+      },
+      "new": {
+        "bytes": 1239,
+        "sha256": "78eeb435f03d8bd0ac5ed8b0aabf17d46dc27a428bb151642b4d4a0093a5d9ad"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-001-probe-1-original.json",
+      "old": {
+        "bytes": 960,
+        "sha256": "d88a6d950076e792a71f3a771134d4d933e79f5904e704f752c71d1545bcd553"
+      },
+      "new": {
+        "bytes": 960,
+        "sha256": "eb48a0e9dd92e2496ab5981aeb276c5ac221ce9efadf80202c1ab6546c558a4d"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+      "old": {
+        "bytes": 1483,
+        "sha256": "a48a56c717c80118d54e9cb0e2965b3601732ec6c99127300545c3a7f7158709"
+      },
+      "new": {
+        "bytes": 1483,
+        "sha256": "e9abccb8634e2aa059febb13b622fb3320c6fb9d61943c8920071b15044b653f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+      "old": {
+        "bytes": 959,
+        "sha256": "f96841f7198c0f808c47e06fd969fad72462c4f8a3425b73ed1a893052ec82d0"
+      },
+      "new": {
+        "bytes": 959,
+        "sha256": "70ec35704b52e1194fb8609ea7831394bdef4cabda9856cd603981abf3d3603e"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/base-check.mjs",
+      "old": {
+        "bytes": 8401,
+        "sha256": "46596a478ff4a9cf1632a7fd7213fad4bd47a1fea4f36572e7d44e40944cee53"
+      },
+      "new": {
+        "bytes": 10198,
+        "sha256": "d76e5921bdc9359f893af9b9bde4d533a20fa95a7a0c71fe1774650741308e78"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs",
+      "old": {
+        "bytes": 4169,
+        "sha256": "af95acd155ab433a1c4578ae2a2cb39f12493eb45313d47c5fbabf6e96d23fa0"
+      },
+      "new": {
+        "bytes": 4936,
+        "sha256": "308a570aacec0241a390a503e5e2f3d8358017d3d621aa94e91dcb1527e02e7f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+      "old": {
+        "bytes": 7765,
+        "sha256": "a8d043cd3f52c995af6be61be9486aa2dedd5489ae14e2be48196bd089d686f6"
+      },
+      "new": {
+        "bytes": 8554,
+        "sha256": "a00a523dca37f43f3a58714a18e43fdbde65dbcb369eef3996d30705a8971958"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+      "old": {
+        "bytes": 3655792,
+        "sha256": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029"
+      },
+      "new": {
+        "bytes": 3655792,
+        "sha256": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+      "old": {
+        "bytes": 187745,
+        "sha256": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d"
+      },
+      "new": {
+        "bytes": 193081,
+        "sha256": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "old": {
+        "bytes": 48170,
+        "sha256": "40828ef93b792313804021881be66cf863b031fbdaeb4c4f547bb2332ddd3c3d"
+      },
+      "new": {
+        "bytes": 48170,
+        "sha256": "e5fd7626132142442c2812130391bd21b1c11d2803ff45139fc9a1eb42c1648a"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/probe-expectations.json",
+      "old": {
+        "bytes": 21207,
+        "sha256": "2100de60c5dc3ac4d5d3868d7118e2ca768e279b22c72c7eab7dbc64f46a6b63"
+      },
+      "new": {
+        "bytes": 21513,
+        "sha256": "f19d62b4ab3540a55cd4131b65b2d91e1c1fdfa77930dfd6f7b3ec2a018dbe1f"
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+      "old": {
+        "bytes": 31693,
+        "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+      },
+      "new": {
+        "bytes": 32446,
+        "sha256": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac"
+      }
+    },
+    {
+      "path": "tests/profile-externalization.probe.mjs",
+      "old": {
+        "bytes": 22605,
+        "sha256": "79eeaa49d79e40b7016e95fcdcc280496f259810eb9a2413bc0dea2af380d232"
+      },
+      "new": {
+        "bytes": 23137,
+        "sha256": "9faf9e7a59bfea04036a0a59a31804066ae29461671fe5c4e8b0d1492eb1a51c"
+      }
+    },
+    {
+      "path": "tests/x24-externalization-seal.test.mjs",
+      "old": {
+        "bytes": 66417,
+        "sha256": "63ced57d6923df6840552b85daeeb6041142b1ca7cfb81b89ea0353a5fc28fa7"
+      },
+      "new": {
+        "bytes": 72020,
+        "sha256": "cca31777dbed934406c65e95fb0775d5b885f5d4b7fe5afd3e076e809b3a45ef"
+      }
+    }
+  ],
+  "addedFiles": [],
+  "valueChanges": [
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+      "pointer": "/expectedArtifacts/1/sha256",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+      "pointer": "/expectedArtifacts/1/sha256",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+      "pointer": "/expectedArtifacts/1/sha256",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+      "pointer": "/expectedArtifacts/1/sha256",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+      "pointer": "/inputArtifacts/1/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+      "pointer": "/inputArtifacts/3/sha256",
+      "old": "2100de60c5dc3ac4d5d3868d7118e2ca768e279b22c72c7eab7dbc64f46a6b63",
+      "new": "f19d62b4ab3540a55cd4131b65b2d91e1c1fdfa77930dfd6f7b3ec2a018dbe1f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-001-probe-1-original.json",
+      "pointer": "/inputArtifacts/1/sha256",
+      "old": "2100de60c5dc3ac4d5d3868d7118e2ca768e279b22c72c7eab7dbc64f46a6b63",
+      "new": "f19d62b4ab3540a55cd4131b65b2d91e1c1fdfa77930dfd6f7b3ec2a018dbe1f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+      "pointer": "/expectedArtifacts/0/json/1/value",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+      "pointer": "/inputArtifacts/1/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+      "pointer": "/inputArtifacts/2/sha256",
+      "old": "2100de60c5dc3ac4d5d3868d7118e2ca768e279b22c72c7eab7dbc64f46a6b63",
+      "new": "f19d62b4ab3540a55cd4131b65b2d91e1c1fdfa77930dfd6f7b3ec2a018dbe1f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+      "pointer": "/inputs/lexicon/sha256",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+      "pointer": "/format",
+      "old": "x24-scan-lexicon/3",
+      "new": "x24-scan-lexicon/4"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+      "pointer": "/note",
+      "old": "Business-policy scan lexicon of the finding #24 occurrence ledger (DESIGN.md:863, 872, 874). No entry writes a scanned literal: every literal is matched through the SHA-256 of its normalised key (matchers regex with hashes, window, brand); a regex matcher without hashes is a structural pattern that names no literal. derive/scan.mjs is the normative implementation. Forms: path (the repository-relative path, line 0), raw (each line), token (JavaScript and JSON constant strings with escapes decoded, adjacent constant fragments joined across + on any number of lines and constant template substitutions folded), decoded (markup character references, CSS escapes and percent escapes, also inside JavaScript constants). Matches of one entry are leftmost-longest and never overlap; every match is one occurrence. reviewed (format /3): occurrences of block B sealed expectation files that were reviewed token by token as generic words, published legacy API values or homographs; in strict mode the scanner does not report an occurrence bound by a reviewed record to its exact file (path SHA-256 and file SHA-256) and span; no entry, matcher or hash is removed.",
+      "new": "Business-policy scan lexicon of the finding #24 occurrence ledger (DESIGN.md:863, 872, 874). No entry writes a scanned literal: every literal is matched through the SHA-256 of its normalised key (matchers regex with hashes, window, brand); a regex matcher without hashes is a structural pattern that names no literal. derive/scan.mjs is the normative implementation. Forms: path (the repository-relative path, line 0), raw (each line), token (JavaScript and JSON constant strings with escapes decoded, adjacent constant fragments joined across + on any number of lines and constant template substitutions folded), decoded (markup character references, CSS escapes and percent escapes, also inside JavaScript constants). Matches of one entry are leftmost-longest and never overlap; every match is one occurrence. reviewed (format /3): occurrences of block B sealed expectation files that were reviewed token by token as generic words, published legacy API values or homographs; in strict mode the scanner does not report an occurrence bound by a reviewed record to its exact file (path SHA-256 and file SHA-256) and span; no entry, matcher or hash is removed. relocated (format /4): base ledger rows whose source line a block B edit changed after the base without touching their span, each with the post-base columns and line SHA-256 of the same occurrence (README \"Reviewed occurrences\", \"Relocated base rows\"); the integration scan and the probe rescan pair an occurrence with its base row through them, the scanner does not read them, and a relocated row keeps its rule and disposition."
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+      "pointer": "/relocated",
+      "old": null,
+      "new": {
+        "note": "Relocated base rows of the integration zero-literal scan (README \"Reviewed occurrences\", \"Relocated base rows\"). A record continues one base ledger row (row) whose source line a block B edit changed after the base without touching the row's span: line, column, endLine and endColumn give the post-base position of the same occurrence and lineSha256 the SHA-256 of the post-base line; file, form, entry, family, literal, key and the span length are the row's, and rule, category, consumer, targetRef and disposition repeat its classification. edit names the block B commit and every base row of the same base line whose span the edit replaced, with the post-base columns and the SHA-256 of the replacement: the post-base line is the base line with those spans substituted, and the row's columns move by the length change of the replacements before it. The integration scan (derive/reviewed.mjs) and the probe rescan (probe-expectations.json#/probe2/trackedRescan) pair an occurrence with the base row through the record's key (masked file, form, entry, literal, column, endColumn, line span and lineSha256) exactly as through the row's base key, and a row pairs with one occurrence at most through all its keys; the line number is not part of the key. A relocation is not a review: the row keeps its rule, disposition and post-migration obligations, a business literal is never reviewed, and any change of the post-base line voids the key. verifiedAt names the tree and the file bytes at which the record was verified; derive/base-check.mjs checks each record against the base line of its row and the seal test against the base row and the current file.",
+        "rows": [
+          {
+            "id": "RL-01",
+            "row": "I-1427",
+            "file": "src/react/workshop.tsx",
+            "line": 110,
+            "column": 39,
+            "endLine": 110,
+            "endColumn": 57,
+            "form": "raw",
+            "entry": "LX-NV-1",
+            "family": "navigation",
+            "literal": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+            "key": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+            "lineSha256": "0e1784004f7491d8eaab3d5665592258f353750b9991b36eeac8050bb43e5e97",
+            "rule": "R-144",
+            "category": "navigation",
+            "consumer": "workshop",
+            "targetRef": "T-NAV",
+            "disposition": "legacy-api",
+            "edit": {
+              "commit": "dc183c2769151aac708adb056df521a616a368fb",
+              "replaced": [
+                {
+                  "row": "I-1428",
+                  "column": 62,
+                  "endColumn": 74,
+                  "sha256": "72b2c8bca7c4020fd224019c9330ca07f77bd07f488a7fe6122219dfc5bbc884"
+                }
+              ]
+            },
+            "verifiedAt": {
+              "commit": "62e482bcdf28deee8b12259ded30a3ae34b9d96e",
+              "fileSha256": "e3688a753bc11938da31c13e618faa417fb1207b6e1df15855a4dd568ee2d7eb"
+            }
+          },
+          {
+            "id": "RL-02",
+            "row": "I-1462",
+            "file": "src/react/workshop.tsx",
+            "line": 326,
+            "column": 30,
+            "endLine": 326,
+            "endColumn": 48,
+            "form": "raw",
+            "entry": "LX-NV-1",
+            "family": "navigation",
+            "literal": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+            "key": "b53d4d24c992e14758e03a07e1d82aafc2c6e796f2f20c260e5ad409022908a4",
+            "lineSha256": "81c4970bced6c4dbd94fc2b4fe8b8dd19f19308138fb86fdd5f7dabca34ca3a9",
+            "rule": "R-147",
+            "category": "navigation",
+            "consumer": "workshop",
+            "targetRef": "T-NAV",
+            "disposition": "inject",
+            "edit": {
+              "commit": "dc183c2769151aac708adb056df521a616a368fb",
+              "replaced": [
+                {
+                  "row": "I-1463",
+                  "column": 78,
+                  "endColumn": 90,
+                  "sha256": "72b2c8bca7c4020fd224019c9330ca07f77bd07f488a7fe6122219dfc5bbc884"
+                }
+              ]
+            },
+            "verifiedAt": {
+              "commit": "62e482bcdf28deee8b12259ded30a3ae34b9d96e",
+              "fileSha256": "e3688a753bc11938da31c13e618faa417fb1207b6e1df15855a4dd568ee2d7eb"
+            }
+          },
+          {
+            "id": "RL-03",
+            "row": "I-1464",
+            "file": "src/react/workshop.tsx",
+            "line": 326,
+            "column": 94,
+            "endLine": 326,
+            "endColumn": 114,
+            "form": "raw",
+            "entry": "LX-NV-1",
+            "family": "navigation",
+            "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+            "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+            "lineSha256": "81c4970bced6c4dbd94fc2b4fe8b8dd19f19308138fb86fdd5f7dabca34ca3a9",
+            "rule": "R-147",
+            "category": "navigation",
+            "consumer": "workshop",
+            "targetRef": "T-NAV",
+            "disposition": "inject",
+            "edit": {
+              "commit": "dc183c2769151aac708adb056df521a616a368fb",
+              "replaced": [
+                {
+                  "row": "I-1463",
+                  "column": 78,
+                  "endColumn": 90,
+                  "sha256": "72b2c8bca7c4020fd224019c9330ca07f77bd07f488a7fe6122219dfc5bbc884"
+                }
+              ]
+            },
+            "verifiedAt": {
+              "commit": "62e482bcdf28deee8b12259ded30a3ae34b9d96e",
+              "fileSha256": "e3688a753bc11938da31c13e618faa417fb1207b6e1df15855a4dd568ee2d7eb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-L-001-occurrences.json",
+      "old": "53846345f37c93e4a80971a781b9bf62b1c639ee289e65e0e6a484cf99aef796",
+      "new": "f50b1b200ebed251e2daca13ea994849a0b3361ddacbc8f3bf598e270dbbfa51"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-L-002-distribution-members.json",
+      "old": "6c807dfe7b96708d506cff5f8847d4ba647b1e720e9f04aa831a2fd9b3458d78",
+      "new": "d36bf2cace90f510a9ec9cefa715078b91c02f9840a2209ad808aaa3b1a4fb1e"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-L-003-modules.json",
+      "old": "a994b493bef5889fb38a3649b423ce7b17b39f6a00fb20a8bc6a009ba87f04df",
+      "new": "1ae99719197ae0db2f6e2db8732e0fbafa21af9a22f0be82b8bb8e7a8f5e07b6"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-L-004-zero-unmatched.json",
+      "old": "a7b866313f27185d8a49c5dde99a304b001cb37ced821d861d843c7b5fc990f4",
+      "new": "09943faa031b23346d9b1cb93da6f762eb3a29ede024a611cc00dbfef91583a8"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-L-006-literal-free-seal.json",
+      "old": "35732ad7b7245dc1f139cea6f597a4e2ef37f8f1aeae94fbf9fd9280d38d1b6a",
+      "new": "78eeb435f03d8bd0ac5ed8b0aabf17d46dc27a428bb151642b4d4a0093a5d9ad"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-P-001-probe-1-original.json",
+      "old": "d88a6d950076e792a71f3a771134d4d933e79f5904e704f752c71d1545bcd553",
+      "new": "eb48a0e9dd92e2496ab5981aeb276c5ac221ce9efadf80202c1ab6546c558a4d"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-P-005-probe-2-ledger-rows.json",
+      "old": "a48a56c717c80118d54e9cb0e2965b3601732ec6c99127300545c3a7f7158709",
+      "new": "e9abccb8634e2aa059febb13b622fb3320c6fb9d61943c8920071b15044b653f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/cases~1x24-P-006-probe-2-rescan.json",
+      "old": "f96841f7198c0f808c47e06fd969fad72462c4f8a3425b73ed1a893052ec82d0",
+      "new": "70ec35704b52e1194fb8609ea7831394bdef4cabda9856cd603981abf3d3603e"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/ledger.json",
+      "old": "87816e8002309325934b7b7338476e1e7ba9fb38a19a90842a4d86dc36378029",
+      "new": "f58535a690dc79436419dfe69fb515db09e801dd37044539da492e18b98921fc"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/lexicon.json",
+      "old": "4a3e5ee239193a324d01c14fa5ac436fd779da73e338196cf8f98b4896e7ad5d",
+      "new": "69380ce0ba09091e7c65161c347686abad2c05091141626b08860cd09dcdc62f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+      "pointer": "/files/probe-expectations.json",
+      "old": "2100de60c5dc3ac4d5d3868d7118e2ca768e279b22c72c7eab7dbc64f46a6b63",
+      "new": "f19d62b4ab3540a55cd4131b65b2d91e1c1fdfa77930dfd6f7b3ec2a018dbe1f"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/probe-expectations.json",
+      "pointer": "/probe2/trackedRescan",
+      "old": "Every occurrence of a tracked file (git ls-files) found by derive/scan.mjs (strict mode, sealed lexicon) is a scope row: a base row with the same masked file, form, entry, literal, column, endColumn and line span (endLine - line) whose lineSha256 equals the SHA-256 of the occurrence's start line (identical keys pair in source order), otherwise an appended row with the occurrence's exact fields (file, line, column, endLine, endColumn, form, entry, family, literal, key, lineSha256). No path is excluded: the x24 sealed files are literal-free (sealHygiene), and the strict scan does not report a reviewed occurrence, an occurrence that lexicon.json#/reviewed binds to its exact file (path and file SHA-256) and span in an eligible block B sealed expectation file (README \"Reviewed occurrences\").",
+      "new": "Every occurrence of a tracked file (git ls-files) found by derive/scan.mjs (strict mode, sealed lexicon) is a scope row: a base row with the same masked file, form, entry, literal, column, endColumn and line span (endLine - line) whose lineSha256 equals the SHA-256 of the occurrence's start line (identical keys pair in source order), or else a base row relocated by lexicon.json#/relocated whose record has these values (the record's column, endColumn and lineSha256: the same occurrence on the line a block B edit left before the migration; README \"Relocated base rows\"), a base row pairing with one occurrence at most through its keys, otherwise an appended row with the occurrence's exact fields (file, line, column, endLine, endColumn, form, entry, family, literal, key, lineSha256). No path is excluded: the x24 sealed files are literal-free (sealHygiene), and the strict scan does not report a reviewed occurrence, an occurrence that lexicon.json#/reviewed binds to its exact file (path and file SHA-256) and span in an eligible block B sealed expectation file (README \"Reviewed occurrences\")."
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+      "pointer": "/authorities/7",
+      "old": null,
+      "new": "Spec author ruling on the I1 residual of src/react/workshop.tsx (DESIGN.md:859, 863, 874): the three unmatched occurrences are the base rows I-1427, I-1462 and I-1464, whose lines the block B commit dc183c2 edited; sealed as the relocated rows RL-01 to RL-03"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+      "pointer": "/reviewStatus",
+      "old": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; pending conductor acceptance",
+      "new": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; pending conductor acceptance"
+    },
+    {
+      "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+      "pointer": "/previousSeals/4",
+      "old": null,
+      "new": {
+        "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746",
+        "round": "P-006 reviewed selector-branch allowance and lot-5 CR-10 rebind",
+        "cases": 111,
+        "occurrenceRows": 3381,
+        "verdict": "integrated; the I1 scan still reported three base occurrences of src/react/workshop.tsx whose lines the block B commit dc183c2 edited (the residual of the exact-path relink)"
+      }
+    }
+  ]
+}

@@ -1,0 +1,654 @@
+{
+  "caseId": "l3-n-roles-and-empty-support",
+  "operation": "normalize",
+  "phase": "normalize",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn.json",
+    "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_support",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Roles",
+              "isExecutable": false,
+              "laneSets": [
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "LaneSet_Business",
+                  "name": "Roles",
+                  "lanes": [
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "Lane_Ops",
+                      "name": "Operations (renamed)",
+                      "flowNodeRef": [
+                        "Task_2"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "Lane_Sales",
+                      "name": "Sales",
+                      "flowNodeRef": [
+                        "Task_1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61",
+                  "name": "lane-set",
+                  "lanes": [
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290",
+                      "name": "external-lane"
+                    }
+                  ]
+                }
+              ],
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_R",
+                  "name": "Start",
+                  "outgoing": [
+                    "Flow_R1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_1",
+                  "name": "Sell",
+                  "incoming": [
+                    "Flow_R1"
+                  ],
+                  "outgoing": [
+                    "Flow_R2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_2",
+                  "name": "Ship",
+                  "incoming": [
+                    "Flow_R2"
+                  ],
+                  "outgoing": [
+                    "Flow_R3"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_R",
+                  "name": "End",
+                  "incoming": [
+                    "Flow_R3"
+                  ]
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_R1",
+                  "sourceRef": "Start_R",
+                  "targetRef": "Task_1"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_R2",
+                  "sourceRef": "Task_1",
+                  "targetRef": "Task_2"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_R3",
+                  "sourceRef": "Task_2",
+                  "targetRef": "End_R"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:Collaboration",
+              "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1",
+              "name": "collaboration",
+              "participants": [
+                {
+                  "$type": "bpmn:Participant",
+                  "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999",
+                  "name": "main-participant",
+                  "processRef": "Process_A"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [
+          {
+            "ownerId": "Process_A",
+            "role": "collaboration",
+            "targetId": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+          },
+          {
+            "ownerId": "Process_A",
+            "role": "external-lane",
+            "targetId": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290"
+          },
+          {
+            "ownerId": "Process_A",
+            "role": "lane-set",
+            "targetId": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+          },
+          {
+            "ownerId": "Process_A",
+            "role": "main-participant",
+            "targetId": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+          }
+        ],
+        "semanticRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd"
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "operation": "normalize",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd",
+        "revision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd",
+        "report": {
+          "reportVersion": "2",
+          "operation": "normalize",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "targetIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd",
+          "outputRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd",
+          "entries": [],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        },
+        "payload": {
+          "envelope": {
+            "documentVersion": "1",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "tree": {
+              "$type": "bpmn:Definitions",
+              "id": "Definitions_support",
+              "targetNamespace": "urn:neutral-cn:1",
+              "exporterVersion": "fixture-cn-1",
+              "rootElements": [
+                {
+                  "$type": "bpmn:Process",
+                  "id": "Process_A",
+                  "name": "Roles",
+                  "isExecutable": false,
+                  "laneSets": [
+                    {
+                      "$type": "bpmn:LaneSet",
+                      "id": "LaneSet_Business",
+                      "name": "Roles",
+                      "lanes": [
+                        {
+                          "$type": "bpmn:Lane",
+                          "id": "Lane_Ops",
+                          "name": "Operations (renamed)",
+                          "flowNodeRef": [
+                            "Task_2"
+                          ]
+                        },
+                        {
+                          "$type": "bpmn:Lane",
+                          "id": "Lane_Sales",
+                          "name": "Sales",
+                          "flowNodeRef": [
+                            "Task_1"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:LaneSet",
+                      "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61",
+                      "name": "lane-set",
+                      "lanes": [
+                        {
+                          "$type": "bpmn:Lane",
+                          "id": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290",
+                          "name": "external-lane"
+                        }
+                      ]
+                    }
+                  ],
+                  "flowElements": [
+                    {
+                      "$type": "bpmn:StartEvent",
+                      "id": "Start_R",
+                      "name": "Start",
+                      "outgoing": [
+                        "Flow_R1"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Task",
+                      "id": "Task_1",
+                      "name": "Sell",
+                      "incoming": [
+                        "Flow_R1"
+                      ],
+                      "outgoing": [
+                        "Flow_R2"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Task",
+                      "id": "Task_2",
+                      "name": "Ship",
+                      "incoming": [
+                        "Flow_R2"
+                      ],
+                      "outgoing": [
+                        "Flow_R3"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:EndEvent",
+                      "id": "End_R",
+                      "name": "End",
+                      "incoming": [
+                        "Flow_R3"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:SequenceFlow",
+                      "id": "Flow_R1",
+                      "sourceRef": "Start_R",
+                      "targetRef": "Task_1"
+                    },
+                    {
+                      "$type": "bpmn:SequenceFlow",
+                      "id": "Flow_R2",
+                      "sourceRef": "Task_1",
+                      "targetRef": "Task_2"
+                    },
+                    {
+                      "$type": "bpmn:SequenceFlow",
+                      "id": "Flow_R3",
+                      "sourceRef": "Task_2",
+                      "targetRef": "End_R"
+                    }
+                  ]
+                },
+                {
+                  "$type": "bpmn:Collaboration",
+                  "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1",
+                  "name": "collaboration",
+                  "participants": [
+                    {
+                      "$type": "bpmn:Participant",
+                      "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999",
+                      "name": "main-participant",
+                      "processRef": "Process_A"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bindings": [
+              {
+                "ownerId": "Process_A",
+                "role": "collaboration",
+                "targetId": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+              },
+              {
+                "ownerId": "Process_A",
+                "role": "external-lane",
+                "targetId": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290"
+              },
+              {
+                "ownerId": "Process_A",
+                "role": "lane-set",
+                "targetId": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+              },
+              {
+                "ownerId": "Process_A",
+                "role": "main-participant",
+                "targetId": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+              }
+            ],
+            "semanticRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd"
+          },
+          "placements": [],
+          "report": {
+            "reportVersion": "2",
+            "operation": "normalize",
+            "sourceIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "targetIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-cn/1",
+              "version": "1.1.0",
+              "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+              "base": {
+                "id": "neutral-cn-base/1",
+                "version": "fixture-cn-1",
+                "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-cn-descriptors/1",
+                  "version": "fixture-cn-1",
+                  "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+                }
+              ]
+            },
+            "inputRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd",
+            "outputRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd",
+            "entries": [],
+            "rawStandardFindings": [],
+            "idMap": [],
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_support",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_A",
+              "name": "Roles",
+              "isExecutable": false,
+              "laneSets": [
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "LaneSet_Business",
+                  "name": "Roles",
+                  "lanes": [
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "Lane_Ops",
+                      "name": "Operations (renamed)",
+                      "flowNodeRef": [
+                        "Task_2"
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "Lane_Sales",
+                      "name": "Sales",
+                      "flowNodeRef": [
+                        "Task_1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61",
+                  "name": "lane-set",
+                  "lanes": [
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290",
+                      "name": "external-lane"
+                    }
+                  ]
+                }
+              ],
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_R",
+                  "name": "Start",
+                  "outgoing": [
+                    "Flow_R1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_1",
+                  "name": "Sell",
+                  "incoming": [
+                    "Flow_R1"
+                  ],
+                  "outgoing": [
+                    "Flow_R2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_2",
+                  "name": "Ship",
+                  "incoming": [
+                    "Flow_R2"
+                  ],
+                  "outgoing": [
+                    "Flow_R3"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_R",
+                  "name": "End",
+                  "incoming": [
+                    "Flow_R3"
+                  ]
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_R1",
+                  "sourceRef": "Start_R",
+                  "targetRef": "Task_1"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_R2",
+                  "sourceRef": "Task_1",
+                  "targetRef": "Task_2"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_R3",
+                  "sourceRef": "Task_2",
+                  "targetRef": "End_R"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:Collaboration",
+              "id": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1",
+              "name": "collaboration",
+              "participants": [
+                {
+                  "$type": "bpmn:Participant",
+                  "id": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999",
+                  "name": "main-participant",
+                  "processRef": "Process_A"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [
+          {
+            "ownerId": "Process_A",
+            "role": "collaboration",
+            "targetId": "g_0a8caa16444f4c61e14ffc4d7b77eb0dd75f8764840be0d3d7b8be550c0923d1"
+          },
+          {
+            "ownerId": "Process_A",
+            "role": "external-lane",
+            "targetId": "g_8cb2e97ecadbe556df0703469682d8f1c8075b06201b899f4932bc1395e57290"
+          },
+          {
+            "ownerId": "Process_A",
+            "role": "lane-set",
+            "targetId": "g_0e429a95d39ce4ebf9262cdc14703da079bba8bb5361313c0f516e10f6380b61"
+          },
+          {
+            "ownerId": "Process_A",
+            "role": "main-participant",
+            "targetId": "g_63c1320e77563613dfeb040257a357d372f10c6410201070f434944e2a26a999"
+          }
+        ],
+        "semanticRevision": "45cb59254a2c964db93818ad8471e7b55f2b248a954100d57bb0d28007cccdbd"
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2",
+    "placements-order/lot3"
+  ]
+}

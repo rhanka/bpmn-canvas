@@ -186,8 +186,8 @@
     },
     {
       "path": "docs/design/receipts/block-a-phase1-reseal.json",
-      "bytes": 49671,
-      "sha256": "b5129a2ce6e1001875515cdcc5763940875983881afe8101549db84c1b5c552f"
+      "bytes": 49673,
+      "sha256": "97367d5a5a6591ff35e873412c951ef707f7431cc2a47f990c471480701caa08"
     },
     {
       "path": "docs/design/receipts/j2-reseal.json",
@@ -440,6 +440,56 @@
       "current": {
         "bytes": 9717,
         "sha256": "0266b06637e2b8b0a880062d4c2bcaf4949b96d6a61be385d9297142e3e5d469"
+      }
+    },
+    {
+      "path": "src/profile/static-contracts.ts",
+      "predecessors": [
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 23675,
+          "sha256": "8c2ed416a29ee93e9bcd583ec86b0b1fbc308def1b134c7be7c2fab310df7376"
+        }
+      ],
+      "current": {
+        "bytes": 24098,
+        "sha256": "b624c2060af1036158573fca0675003a5e98add3b331e2c15e6fa7ff2b7e7bb0"
+      },
+      "integrationRebind": {
+        "old": {
+          "bytes": 23675,
+          "sha256": "8c2ed416a29ee93e9bcd583ec86b0b1fbc308def1b134c7be7c2fab310df7376"
+        },
+        "new": {
+          "bytes": 24098,
+          "sha256": "b624c2060af1036158573fca0675003a5e98add3b331e2c15e6fa7ff2b7e7bb0"
+        },
+        "reason": "lot 5 typed reference widget value, conductor ruling 2026-10-19"
+      }
+    },
+    {
+      "path": "src/profile/native-contracts.ts",
+      "predecessors": [
+        {
+          "commit": "5ba04e01a6639223b4f6132f2d42abe783d83236",
+          "bytes": 22270,
+          "sha256": "27b4a0b36855115f37ac970e6f2694b1d9e82e595fa434e1d09d0f8eca064720"
+        }
+      ],
+      "current": {
+        "bytes": 22396,
+        "sha256": "47948e77b6fd59b2f3cf4d5bf92630f160add37ad0c4e74f4694a489cbbda976"
+      },
+      "integrationRebind": {
+        "old": {
+          "bytes": 22270,
+          "sha256": "27b4a0b36855115f37ac970e6f2694b1d9e82e595fa434e1d09d0f8eca064720"
+        },
+        "new": {
+          "bytes": 22396,
+          "sha256": "47948e77b6fd59b2f3cf4d5bf92630f160add37ad0c4e74f4694a489cbbda976"
+        },
+        "reason": "block B fix integration, conductor authorization"
       }
     }
   ]

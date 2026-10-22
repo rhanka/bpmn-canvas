@@ -1,0 +1,163 @@
+{
+  "caseId": "l3-sort-placements",
+  "operation": "sortPlacements",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "placements",
+      "json": [
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "anchorAssociationId": "Assoc_2",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2"
+          ]
+        },
+        {
+          "elementId": "Item_C",
+          "ownerProcessId": "Process_B",
+          "regionKey": "external",
+          "relatedAssociationIds": [
+            "Assoc_9"
+          ]
+        },
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2"
+          ]
+        },
+        {
+          "elementId": "Item_D",
+          "ownerProcessId": "Process_A",
+          "regionKey": "-region",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "anchorAssociationId": "Assoc_1",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2",
+            "Assoc_3"
+          ]
+        },
+        {
+          "elementId": "Item_A",
+          "ownerProcessId": "Process_A",
+          "regionKey": "reference-band",
+          "anchorAssociationId": "Assoc_1",
+          "relatedAssociationIds": [
+            "Assoc_1"
+          ]
+        },
+        {
+          "elementId": "Item_D",
+          "ownerProcessId": "Process_A",
+          "regionKey": "𐀀-region",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "anchorAssociationId": "Assoc_1",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2"
+          ]
+        }
+      ]
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "value",
+      "json": [
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2"
+          ]
+        },
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "anchorAssociationId": "Assoc_1",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2"
+          ]
+        },
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "anchorAssociationId": "Assoc_1",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2",
+            "Assoc_3"
+          ]
+        },
+        {
+          "elementId": "Item_B",
+          "ownerProcessId": "Process_A",
+          "regionKey": "item",
+          "anchorAssociationId": "Assoc_2",
+          "relatedAssociationIds": [
+            "Assoc_1",
+            "Assoc_2"
+          ]
+        },
+        {
+          "elementId": "Item_A",
+          "ownerProcessId": "Process_A",
+          "regionKey": "reference-band",
+          "anchorAssociationId": "Assoc_1",
+          "relatedAssociationIds": [
+            "Assoc_1"
+          ]
+        },
+        {
+          "elementId": "Item_D",
+          "ownerProcessId": "Process_A",
+          "regionKey": "𐀀-region",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "Item_D",
+          "ownerProcessId": "Process_A",
+          "regionKey": "-region",
+          "relatedAssociationIds": []
+        },
+        {
+          "elementId": "Item_C",
+          "ownerProcessId": "Process_B",
+          "regionKey": "external",
+          "relatedAssociationIds": [
+            "Assoc_9"
+          ]
+        }
+      ]
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "placements-order/lot3",
+    "profile-c14n/2"
+  ]
+}

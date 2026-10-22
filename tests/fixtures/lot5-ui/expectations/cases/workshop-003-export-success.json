@@ -1,0 +1,95 @@
+{
+  "caseId": "lot5-workshop-003-export-success",
+  "comparatorIds": [
+    "lot5/download",
+    "lot5/snapshot",
+    "lot5/events"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "callbacks": [
+          {"bytes":{"$equals":{"member":"download","pointer":"/serialized/payload/bytes"}},"capability":"structural","digest":{"$equals":{"member":"download","pointer":"/serialized/payload/digest"}},"format":"drawio","idMap":{"$equals":{"member":"download","pointer":"/prepared/payload/idMap"}},"profileIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},"report":{"$equals":{"member":"download","pointer":"/prepared/payload/report"}},"semanticRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","viewRevision":{"$equals":{"member":"download","pointer":"/prepared/payload/viewRevision"}}}
+        ],
+        "prepared": {
+          "baseRevision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+          "operation": "prepareExport",
+          "payload": {"capability":"structural","format":"drawio","idMap":{"$rule":"export-idmap","covers":["Start_1","Task_A","Task_B","End_1"],"never":[]},"ir":{"$rule":"ir-names","allowed":[" [Aid] ledger","Approve order","Archive requested","Check order","Check totals","Customer request","Draft call","Order closed","Order form","Order received","Review case","Review requested","Run review","Révision cycle","Standalone approval","Standalone check","[Aid]calculator","[Hidden] Legacy run","[Locked] Archive run","spreadsheet"],"required":["Check order","Approve order"],"stale":[]},"profileIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},"renderBinding":{"descriptorDigest":"93b334bc67d76f4b26eb3d501871cc2dadcafab09c484d2d2b0f7a0d01a1a6e6","diStylesDigest":"b9807dcc0243e9a28c1ca1e15b1b7858f334dd92bb76270ba1a8a097062599e4","layoutDigest":{"$unsealed":"export-adapter","type":"string"},"metricsDigest":"ed4cb922cc7617c770171efb9057cccb8d95a63a6f713d1edc7e8f2801ace211","overridesDigest":"e5d14358eed3eebbde859d54222bab9b9054c681496ba84ac751e77adc932b8c","payloadDigest":{"$unsealed":"export-adapter","type":"string"},"profileDigest":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","semanticRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","themeDigest":"7cd96cb14de2c879a528cc57c0a03e77a98a9c16f4d975537606ff67e8452959","themeId":"plain"},"report":{"$equals":{"member":"download","pointer":"/prepared/report"}},"semanticRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","viewRevision":{"$rule":"view-revision-binding","binding":{"member":"download","pointer":"/prepared/payload/renderBinding"}}},
+          "profileIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},
+          "report": {"artifacts":[{"capability":"structural","digest":{"$rule":"ir-digest","ir":{"member":"download","pointer":"/prepared/payload/ir"}},"entryIndexes":[],"format":"drawio"}],"entries":[],"idMap":{"$equals":{"member":"download","pointer":"/prepared/payload/idMap"}},"inputRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","operation":"prepareExport","outputRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},"targetIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},
+          "revision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+          "status": "ok"
+        },
+        "serialized": {
+          "baseRevision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+          "operation": "exportPrepared",
+          "payload": {"bytes":{"$unsealed":"export-adapter","type":"bytes"},"capability":"structural","digest":{"$rule":"bytes-sha256","bytes":{"member":"download","pointer":"/serialized/payload/bytes"}},"format":"drawio","idMap":{"$equals":{"member":"download","pointer":"/prepared/payload/idMap"}}},
+          "profileIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},
+          "report": {"artifacts":{"$unsealed":"export-adapter","type":"array"},"entries":[],"idMap":[],"inputRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","operation":"exportPrepared","outputRevision":"2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},"targetIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},
+          "revision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+          "status": "ok"
+        }
+      },
+      "role": "download"
+    },
+    {
+      "json": {
+        "baseRevision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+        "operation": "getSnapshot",
+        "payload": {
+          "$equals": {"input":"snapshot","pointer":""}
+        },
+        "profileIdentity": {
+          "base": {"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},
+          "descriptors": [{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],
+          "mechanismVersion": "1",
+          "profile": "ui-neutral/1",
+          "schemaVersion": "1.0.0",
+          "sha256": "217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e",
+          "version": "1.1.0"
+        },
+        "report": {
+          "artifacts": [],
+          "entries": [],
+          "idMap": [],
+          "inputRevision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+          "operation": "getSnapshot",
+          "outputRevision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+          "rawStandardFindings": [],
+          "reportVersion": "2",
+          "sourceIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},
+          "targetIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}
+        },
+        "revision": "2490a79ad7a859f6916138c6d8e8ca05875364e452062500c1b80a03acad40e1",
+        "status": "ok"
+      },
+      "role": "snapshot"
+    },
+    {
+      "json": [],
+      "role": "events"
+    }
+  ],
+  "expectedStatus": "ok",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/documents/basic.snapshot.json",
+      "role": "snapshot",
+      "sha256": "e72fb51afb484918ca2c3aef4eff2a84502cbbd3c6e7aafd1a2f9baa8c8e7ce9"
+    },
+    {
+      "json": {
+        "formatId": "drawing",
+        "label": "Drawing",
+        "themeId": "plain"
+      },
+      "role": "format-option"
+    }
+  ],
+  "operation": "workshop.export",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/ui-neutral-profile.json",
+    "sha256": "c495634b669e817af02545b040b1d767bb0ea098b4924a6247b984b53b6787a1"
+  }
+}

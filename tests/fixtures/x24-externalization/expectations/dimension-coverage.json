@@ -1,0 +1,8530 @@
+{
+ "format": "x24-dimension-coverage/1",
+ "note": "For every leaf field of the three sealed data sets: the single-field mutation applied and the consumer cases whose expected outputs change under it (README \"Dimension coverage\"); exempt fields name their reason.",
+ "coverage": {
+  "L": {
+   "/policyVersion": {
+    "exempt": "record version constant (schema const)"
+   },
+   "/id": {
+    "exempt": "record identity, part of the admission digest only (S group)"
+   },
+   "/classification/annotationRoles/0/role": {
+    "mutation": "application",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-002-kind-annotated",
+     "x24-A-003-kind-recolor",
+     "x24-A-004-kind-flat",
+     "x24-A-005-layout-input",
+     "x24-A-009-render-attachment",
+     "x24-A-010-transactions-follow",
+     "x24-A-014-palette",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-020-import-drawio",
+     "x24-A-022-transactions-autolayout",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-R-001-nonactivity-host-preserved",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/0/prefix": {
+    "mutation": "[Binder]z",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-002-kind-annotated",
+     "x24-A-003-kind-recolor",
+     "x24-A-004-kind-flat",
+     "x24-A-005-layout-input",
+     "x24-A-014-palette",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-020-import-drawio",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-R-001-nonactivity-host-preserved",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/0/trim": {
+    "mutation": "none",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-002-kind-annotated",
+     "x24-A-003-kind-recolor",
+     "x24-A-004-kind-flat"
+    ]
+   },
+   "/classification/annotationRoles/0/labelCase": {
+    "mutation": "upper",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-005-layout-input",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-R-001-nonactivity-host-preserved",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/role": {
+    "mutation": "document",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-002-kind-annotated",
+     "x24-A-003-kind-recolor",
+     "x24-A-005-layout-input",
+     "x24-A-009-render-attachment",
+     "x24-A-010-transactions-follow",
+     "x24-A-014-palette",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-020-import-drawio",
+     "x24-A-022-transactions-autolayout",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/prefix": {
+    "mutation": "[Gadget]z",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-002-kind-annotated",
+     "x24-A-003-kind-recolor",
+     "x24-A-005-layout-input",
+     "x24-A-009-render-attachment",
+     "x24-A-010-transactions-follow",
+     "x24-A-014-palette",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-020-import-drawio",
+     "x24-A-022-transactions-autolayout",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/trim": {
+    "mutation": "none",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-002-kind-annotated",
+     "x24-A-003-kind-recolor"
+    ]
+   },
+   "/classification/annotationRoles/1/labelCase": {
+    "mutation": "upper",
+    "cases": [
+     "x24-A-001-classify",
+     "x24-A-005-layout-input",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/insertSeparator": {
+    "mutation": "!",
+    "cases": [
+     "x24-A-014-palette",
+     "x24-A-018-export-sparx",
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/attachment/applicationHost/type": {
+    "mutation": "bpmn:Task",
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-009-render-attachment",
+     "x24-A-010-transactions-follow",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/attachment/applicationHost/mode": {
+    "mutation": "exact",
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-009-render-attachment",
+     "x24-A-010-transactions-follow",
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/attachment/nonActivityHost": {
+    "exempt": "schema constant (preserve-report)"
+   },
+   "/metrics/id": {
+    "exempt": "metrics resource identity, metadata"
+   },
+   "/metrics/unit": {
+    "exempt": "schema constant"
+   },
+   "/metrics/firstCodePoint": {
+    "exempt": "schema constant"
+   },
+   "/metrics/regular/0": {
+    "mutation": 480,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/1": {
+    "mutation": 482,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/2": {
+    "mutation": 483,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/3": {
+    "mutation": 484,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/4": {
+    "mutation": 485,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/5": {
+    "mutation": 486,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/6": {
+    "mutation": 488,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/7": {
+    "mutation": 489,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/8": {
+    "mutation": 490,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/9": {
+    "mutation": 491,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/10": {
+    "mutation": 492,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/11": {
+    "mutation": 494,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/12": {
+    "mutation": 495,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/13": {
+    "mutation": 496,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/14": {
+    "mutation": 497,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/15": {
+    "mutation": 498,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/16": {
+    "mutation": 500,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/17": {
+    "mutation": 501,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/18": {
+    "mutation": 502,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/19": {
+    "mutation": 503,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/20": {
+    "mutation": 504,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/21": {
+    "mutation": 506,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/22": {
+    "mutation": 507,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/23": {
+    "mutation": 508,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/24": {
+    "mutation": 509,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/25": {
+    "mutation": 510,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/26": {
+    "mutation": 512,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/27": {
+    "mutation": 513,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/28": {
+    "mutation": 514,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/29": {
+    "mutation": 515,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/30": {
+    "mutation": 516,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/31": {
+    "mutation": 518,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/32": {
+    "mutation": 519,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/33": {
+    "mutation": 520,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process",
+     "x24-R-003-no-ambient-decomposition"
+    ]
+   },
+   "/metrics/regular/34": {
+    "mutation": 521,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/35": {
+    "mutation": 522,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/36": {
+    "mutation": 524,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/37": {
+    "mutation": 525,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/38": {
+    "mutation": 526,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/39": {
+    "mutation": 527,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/40": {
+    "mutation": 528,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/41": {
+    "mutation": 530,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/42": {
+    "mutation": 531,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/43": {
+    "mutation": 532,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/44": {
+    "mutation": 533,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/45": {
+    "mutation": 534,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/46": {
+    "mutation": 536,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/47": {
+    "mutation": 537,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/48": {
+    "mutation": 538,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/49": {
+    "mutation": 539,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/50": {
+    "mutation": 540,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/51": {
+    "mutation": 542,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/52": {
+    "mutation": 543,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/53": {
+    "mutation": 544,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/54": {
+    "mutation": 545,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/55": {
+    "mutation": 546,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/56": {
+    "mutation": 548,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/57": {
+    "mutation": 549,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/58": {
+    "mutation": 550,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/59": {
+    "mutation": 551,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/60": {
+    "mutation": 552,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/61": {
+    "mutation": 554,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/62": {
+    "mutation": 555,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/63": {
+    "mutation": 556,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/64": {
+    "mutation": 557,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/65": {
+    "mutation": 558,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/66": {
+    "mutation": 560,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/67": {
+    "mutation": 561,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/68": {
+    "mutation": 562,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/69": {
+    "mutation": 563,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/70": {
+    "mutation": 564,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/71": {
+    "mutation": 566,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/72": {
+    "mutation": 567,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/73": {
+    "mutation": 568,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/74": {
+    "mutation": 569,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/75": {
+    "mutation": 570,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/76": {
+    "mutation": 572,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/77": {
+    "mutation": 573,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/78": {
+    "mutation": 574,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/79": {
+    "mutation": 575,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/80": {
+    "mutation": 576,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/81": {
+    "mutation": 578,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/82": {
+    "mutation": 579,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/83": {
+    "mutation": 580,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/84": {
+    "mutation": 581,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/85": {
+    "mutation": 582,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/86": {
+    "mutation": 584,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/87": {
+    "mutation": 585,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/88": {
+    "mutation": 586,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/89": {
+    "mutation": 587,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/regular/90": {
+    "mutation": 588,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/91": {
+    "mutation": 590,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/92": {
+    "mutation": 591,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/93": {
+    "mutation": 592,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/regular/94": {
+    "mutation": 593,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/0": {
+    "mutation": 600,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/1": {
+    "mutation": 602,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/2": {
+    "mutation": 603,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/3": {
+    "mutation": 604,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/4": {
+    "mutation": 605,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/5": {
+    "mutation": 606,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/6": {
+    "mutation": 608,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/7": {
+    "mutation": 609,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/8": {
+    "mutation": 610,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/9": {
+    "mutation": 611,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/10": {
+    "mutation": 612,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/11": {
+    "mutation": 614,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/12": {
+    "mutation": 615,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/13": {
+    "mutation": 616,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/14": {
+    "mutation": 617,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/15": {
+    "mutation": 618,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/16": {
+    "mutation": 620,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/17": {
+    "mutation": 621,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/18": {
+    "mutation": 622,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/19": {
+    "mutation": 623,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/20": {
+    "mutation": 624,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/21": {
+    "mutation": 626,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/22": {
+    "mutation": 627,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/23": {
+    "mutation": 628,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/24": {
+    "mutation": 629,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/25": {
+    "mutation": 630,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/26": {
+    "mutation": 632,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/27": {
+    "mutation": 633,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/28": {
+    "mutation": 634,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/29": {
+    "mutation": 635,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/30": {
+    "mutation": 636,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/31": {
+    "mutation": 638,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/32": {
+    "mutation": 639,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/33": {
+    "mutation": 640,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/34": {
+    "mutation": 641,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/35": {
+    "mutation": 642,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/36": {
+    "mutation": 644,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/37": {
+    "mutation": 645,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/38": {
+    "mutation": 646,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/39": {
+    "mutation": 647,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/40": {
+    "mutation": 648,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/41": {
+    "mutation": 650,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/42": {
+    "mutation": 651,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/43": {
+    "mutation": 652,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/44": {
+    "mutation": 653,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/45": {
+    "mutation": 654,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/46": {
+    "mutation": 656,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/47": {
+    "mutation": 657,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/48": {
+    "mutation": 658,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/49": {
+    "mutation": 659,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/50": {
+    "mutation": 660,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/51": {
+    "mutation": 662,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/52": {
+    "mutation": 663,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/53": {
+    "mutation": 664,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/54": {
+    "mutation": 665,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/55": {
+    "mutation": 666,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/56": {
+    "mutation": 668,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/57": {
+    "mutation": 669,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/58": {
+    "mutation": 670,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/59": {
+    "mutation": 671,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/60": {
+    "mutation": 672,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/61": {
+    "mutation": 674,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/62": {
+    "mutation": 675,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/63": {
+    "mutation": 676,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/64": {
+    "mutation": 677,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/65": {
+    "mutation": 678,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/66": {
+    "mutation": 680,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/67": {
+    "mutation": 681,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/68": {
+    "mutation": 682,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/69": {
+    "mutation": 683,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/70": {
+    "mutation": 684,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/71": {
+    "mutation": 686,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/72": {
+    "mutation": 687,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/73": {
+    "mutation": 688,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/74": {
+    "mutation": 689,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/75": {
+    "mutation": 690,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/76": {
+    "mutation": 692,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/77": {
+    "mutation": 693,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/78": {
+    "mutation": 694,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/79": {
+    "mutation": 695,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/80": {
+    "mutation": 696,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/81": {
+    "mutation": 698,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/82": {
+    "mutation": 699,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/83": {
+    "mutation": 700,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/84": {
+    "mutation": 701,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/85": {
+    "mutation": 702,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/86": {
+    "mutation": 704,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/87": {
+    "mutation": 705,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/88": {
+    "mutation": 706,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/89": {
+    "mutation": 707,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/bold/90": {
+    "mutation": 708,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/91": {
+    "mutation": 710,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/92": {
+    "mutation": 711,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/93": {
+    "mutation": 712,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/bold/94": {
+    "mutation": 713,
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/fallback": {
+    "mutation": 1199,
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-R-003-no-ambient-decomposition"
+    ]
+   },
+   "/metrics/lineHeight": {
+    "mutation": 1.25,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/metrics/aliases/0/from": {
+    "mutation": "Î",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/0/to": {
+    "mutation": "J",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/1/from": {
+    "mutation": "È",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/1/to": {
+    "mutation": "D",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/2/from": {
+    "mutation": "ê",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/2/to": {
+    "mutation": "f",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/3/from": {
+    "mutation": "Æ",
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-R-003-no-ambient-decomposition"
+    ]
+   },
+   "/metrics/aliases/3/to": {
+    "mutation": "B",
+    "cases": [
+     "x24-A-007-metrics",
+     "x24-R-003-no-ambient-decomposition"
+    ]
+   },
+   "/metrics/aliases/4/from": {
+    "mutation": "≡",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/aliases/4/to": {
+    "mutation": ">",
+    "cases": [
+     "x24-A-007-metrics"
+    ]
+   },
+   "/metrics/license": {
+    "exempt": "notice metadata carried with the data"
+   },
+   "/metrics/attribution": {
+    "exempt": "notice metadata carried with the data"
+   },
+   "/navigation/mode": {
+    "mutation": "called-element",
+    "cases": [
+     "x24-A-015-navigation-legacy-default",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/alias": {
+    "mutation": "look-plainz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/renderer": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/looks/0/flat": {
+    "exempt": "ignored by the upstream renderer (flat drawing applies to recolour looks)"
+   },
+   "/presentation/looks/0/palette": {
+    "mutation": "annotated",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/paletteFloor": {
+    "mutation": 68,
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/0": {
+    "mutation": ".bjs-drilldownz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/1": {
+    "mutation": "[data-marker='sub-process']z",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/2": {
+    "mutation": "[data-marker='x24-icon']z",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/3": {
+    "mutation": ".x24-annotated-markerz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/alias": {
+    "mutation": "look-annotatedz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/renderer": {
+    "mutation": "recolor",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/flat": {
+    "exempt": "ignored by the annotated renderer (flat drawing applies to recolour looks)"
+   },
+   "/presentation/looks/1/palette": {
+    "mutation": "upstream",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/paletteFloor": {
+    "mutation": 135,
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/markerSelectors/0": {
+    "mutation": ".bjs-drilldownz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/markerSelectors/1": {
+    "mutation": "[data-marker='sub-process']z",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/markerSelectors/2": {
+    "mutation": "[data-marker='x24-icon']z",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/markerSelectors/3": {
+    "mutation": ".x24-annotated-markerz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/fontFamily": {
+    "mutation": "monospacez",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/fontSize": {
+    "mutation": 15,
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/strokeWidth": {
+    "mutation": 2,
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/stroke": {
+    "mutation": "#010101z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/fill": {
+    "mutation": "#040404z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/text": {
+    "mutation": "#070707z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/labelText": {
+    "mutation": "#0a0a0az",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/headerText": {
+    "mutation": "#0d0d0dz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/flow": {
+    "mutation": "#101010z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/link": {
+    "mutation": "#131313z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLink": {
+    "mutation": "#161616z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLinkDash": {
+    "mutation": "5 5z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataLinkArrow": {
+    "mutation": true,
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskLine": {
+    "mutation": "#191919z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskFill": {
+    "mutation": "#1c1c1cz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskFillEnd": {
+    "mutation": "#1f1f1fz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/eventLine": {
+    "mutation": "#222222z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/eventFill": {
+    "mutation": "#252525z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/gatewayLine": {
+    "mutation": "#282828z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/gatewayFill": {
+    "mutation": "#2b2b2bz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/poolLine": {
+    "mutation": "#2e2e2ez",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/poolFill": {
+    "mutation": "#313131z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneLine": {
+    "mutation": "#343434z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneFill": {
+    "mutation": "#373737z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneHeaderFill": {
+    "mutation": "#3a3a3az",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/externalLine": {
+    "mutation": "#3d3d3dz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/externalFill": {
+    "mutation": "#404040z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLine": {
+    "mutation": "#434343z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/docFill": {
+    "mutation": "#464646z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataLine": {
+    "mutation": "#494949z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataFill": {
+    "mutation": "#4c4c4cz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/appLine": {
+    "mutation": "#4f4f4fz",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/tokens/appFill": {
+    "mutation": "#525252z",
+    "cases": [
+     "x24-A-011-tokens-annotated",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/alias": {
+    "mutation": "look-recolorz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/renderer": {
+    "mutation": "annotated",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/flat": {
+    "mutation": true,
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/looks/2/palette": {
+    "mutation": "annotated",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/paletteFloor": {
+    "mutation": 68,
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/markerSelectors/0": {
+    "mutation": ".bjs-drilldownz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/markerSelectors/1": {
+    "mutation": "[data-marker='sub-process']z",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/markerSelectors/2": {
+    "mutation": "[data-marker='x24-icon']z",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/markerSelectors/3": {
+    "mutation": ".x24-annotated-markerz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/fontFamily": {
+    "mutation": "monospacez",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/fontSize": {
+    "mutation": 15,
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/strokeWidth": {
+    "mutation": 2,
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/stroke": {
+    "mutation": "#515151z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/fill": {
+    "mutation": "#545454z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/text": {
+    "mutation": "#575757z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/labelText": {
+    "exempt": "replaced by the text colour unless named (recolour rule)"
+   },
+   "/presentation/looks/2/tokens/headerText": {
+    "mutation": "#5d5d5dz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/flow": {
+    "mutation": "#606060z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/link": {
+    "mutation": "#636363z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/docLink": {
+    "mutation": "#666666z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/docLinkDash": {
+    "mutation": "5 5z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/dataLinkArrow": {
+    "mutation": false,
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/taskLine": {
+    "mutation": "#696969z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/taskFill": {
+    "mutation": "#6c6c6cz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/taskFillEnd": {
+    "mutation": "#6f6f6fz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/eventLine": {
+    "mutation": "#727272z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/eventFill": {
+    "mutation": "#757575z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/gatewayLine": {
+    "mutation": "#787878z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/gatewayFill": {
+    "mutation": "#7b7b7bz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/poolLine": {
+    "mutation": "#7e7e7ez",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/poolFill": {
+    "mutation": "#818181z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/laneLine": {
+    "mutation": "#848484z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/laneFill": {
+    "mutation": "#878787z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/laneHeaderFill": {
+    "mutation": "#8a8a8az",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/externalLine": {
+    "mutation": "#8d8d8dz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/externalFill": {
+    "mutation": "#909090z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/docLine": {
+    "mutation": "#939393z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/docFill": {
+    "mutation": "#969696z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/dataLine": {
+    "mutation": "#999999z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/dataFill": {
+    "mutation": "#9c9c9cz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/appLine": {
+    "mutation": "#9f9f9fz",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/looks/2/tokens/appFill": {
+    "mutation": "#a2a2a2z",
+    "cases": [
+     "x24-A-012-tokens-recolor",
+     "x24-A-013-theme-select",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/legacyOptions/flatDrawing": {
+    "mutation": "drawing-flatz",
+    "cases": [
+     "x24-A-013-theme-select",
+     "x24-A-026-static-surface",
+     "x24-A-028-workshop-surface"
+    ]
+   },
+   "/presentation/legacyOptions/annotatedPalette": {
+    "mutation": "palette-annotatedz",
+    "cases": [
+     "x24-A-013-theme-select"
+    ]
+   },
+   "/presentation/layout/poolHeader": {
+    "mutation": 38,
+    "cases": [
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/laneHeader": {
+    "mutation": 35,
+    "cases": [
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/minLaneHeight": {
+    "mutation": 228,
+    "cases": [
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/channel": {
+    "mutation": 30,
+    "cases": [
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/fontSize": {
+    "mutation": 15,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/labelFontSize": {
+    "mutation": 14,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/0/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/0/width": {
+    "mutation": 142,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/0/height": {
+    "mutation": 94,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/1/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/1/width": {
+    "mutation": 142,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/1/height": {
+    "mutation": 94,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/2/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/2/width": {
+    "mutation": 128,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/2/height": {
+    "mutation": 72,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/3/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/3/width": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/3/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/4/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/4/width": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/4/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/5/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/5/width": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/5/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/6/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/6/width": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/6/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/7/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/7/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/7/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/8/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/8/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/8/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/9/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/9/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/9/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/10/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/10/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-A-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/10/height": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/11/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/11/width": {
+    "exempt": "not read by the legacy layout: document nodes are sized from presentation.layout.document (src/internal/swimlaneLayout.ts:150)"
+   },
+   "/presentation/layout/nodeSizes/11/height": {
+    "exempt": "not read by the legacy layout: document nodes are sized from presentation.layout.document (src/internal/swimlaneLayout.ts:150)"
+   },
+   "/presentation/layout/labelMaxWidth/event": {
+    "mutation": 142,
+    "cases": [
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/labelMaxWidth/item": {
+    "mutation": 118,
+    "cases": [
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/appBadge/minWidth": {
+    "mutation": 94,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/height": {
+    "mutation": 34,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/overlap": {
+    "mutation": 11,
+    "cases": [
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/chrome": {
+    "mutation": 35,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/appBadge/margin": {
+    "mutation": 11,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges"
+    ]
+   },
+   "/presentation/layout/appBadge/gap": {
+    "mutation": 6,
+    "cases": [
+     "x24-A-008-render-badges",
+     "x24-A-022-transactions-autolayout"
+    ]
+   },
+   "/presentation/layout/appBadge/font": {
+    "mutation": 15,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/linkInset": {
+    "mutation": 23,
+    "cases": [
+     "x24-A-022-transactions-autolayout"
+    ]
+   },
+   "/presentation/layout/document/width": {
+    "mutation": 142,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/document/minHeight": {
+    "mutation": 58,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-023-layout-process"
+    ]
+   },
+   "/presentation/layout/document/band": {
+    "mutation": 17,
+    "cases": [
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/textTop": {
+    "mutation": 23,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/waveTop": {
+    "mutation": 0.8,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/padX": {
+    "mutation": 6,
+    "cases": [
+     "x24-A-008-render-badges",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/padBottom": {
+    "mutation": 4,
+    "cases": [
+     "x24-A-006-layout-size",
+     "x24-A-008-render-badges",
+     "x24-A-023-layout-process",
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/laneHeaderWidth": {
+    "mutation": 47,
+    "cases": [
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/layout/poolStrip": {
+    "mutation": 35,
+    "cases": [
+     "x24-A-026-static-surface",
+     "x24-A-027-preview-surface"
+    ]
+   },
+   "/presentation/exportStyles/drawio/pool": {
+    "mutation": "x24l=pool;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/lane": {
+    "mutation": "x24l=lane;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/start": {
+    "mutation": "x24l=start;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/end": {
+    "mutation": "x24l=end;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/task": {
+    "mutation": "x24l=task;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/subprocess": {
+    "mutation": "x24l=subprocess;z",
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/drawio/gatewayBase": {
+    "mutation": "x24l=gateway;gw=z",
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/drawio/external": {
+    "mutation": "x24l=call;z",
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/drawio/application": {
+    "mutation": "x24l=badge;z",
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/drawio/document": {
+    "mutation": "x24l=sheet;z",
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/drawio/item": {
+    "mutation": "x24l=item;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/edgeHead": {
+    "mutation": "x24l=edge;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/flowTail": {
+    "mutation": "x24l=flow;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/linkTail": {
+    "mutation": "x24l=link;z",
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/event": {
+    "mutation": "x24l=event;z",
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/drawio/poolHeaderWidth": {
+    "mutation": 47,
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/dx": {
+    "mutation": 59,
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/dy": {
+    "mutation": 2,
+    "cases": [
+     "x24-A-019-export-drawio",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/appBand": {
+    "mutation": 11,
+    "cases": [
+     "x24-A-019-export-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/associationIdSuffix": {
+    "mutation": "_gadgetz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/0/value": {
+    "mutation": "x24.legacy.symbolz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/1/key": {
+    "mutation": "symbolTypez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/1/value": {
+    "mutation": "callz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/kind": {
+    "mutation": "textAnnotation",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/0/value": {
+    "mutation": "x24.legacy.symbolz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/1/key": {
+    "mutation": "symbolTypez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/1/value": {
+    "mutation": "toolz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/kind": {
+    "mutation": "callActivity",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/2/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/2/match/0/value": {
+    "mutation": "x24.legacy.sheetz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/2/kind": {
+    "mutation": "callActivity",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/match/0/key": {
+    "mutation": "symbolTypez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/match/0/value": {
+    "mutation": "toolz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/role": {
+    "mutation": "document",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/match/0/value": {
+    "mutation": "x24.legacy.sheetz",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/role": {
+    "mutation": "application",
+    "cases": [
+     "x24-A-020-import-drawio"
+    ]
+   },
+   "/presentation/palette/entries/0/id": {
+    "mutation": "legacy.startz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/title": {
+    "mutation": "Startz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/bpmnType": {
+    "mutation": "bpmn:StartEventz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/group": {
+    "mutation": "flows",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/icon": {
+    "mutation": "bpmn-icon-start-event-nonez",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/id": {
+    "mutation": "legacy.subprocessz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/title": {
+    "mutation": "Sub-process (collapsed)z",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/bpmnType": {
+    "mutation": "bpmn:SubProcessz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/icon": {
+    "mutation": "bpmn-icon-subprocess-collapsedz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/collapsed": {
+    "mutation": false,
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/id": {
+    "mutation": "legacy.data-inputz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/title": {
+    "mutation": "Task inputz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/bpmnType": {
+    "mutation": "bpmn:DataObjectReferencez",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/icon": {
+    "mutation": "bpmn-icon-data-objectz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/initialName": {
+    "mutation": "Inputz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/id": {
+    "mutation": "legacy.documentz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/title": {
+    "mutation": "Document referencez",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/bpmnType": {
+    "mutation": "bpmn:TextAnnotationz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/icon": {
+    "mutation": "bpmn-icon-text-annotationz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/initialRole": {
+    "mutation": "application",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/4/id": {
+    "mutation": "legacy.applicationz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/4/title": {
+    "mutation": "Applicationz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/4/bpmnType": {
+    "mutation": "bpmn:TextAnnotationz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/4/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/4/icon": {
+    "mutation": "bpmn-icon-text-annotationz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/4/initialRole": {
+    "mutation": "document",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/5/id": {
+    "mutation": "legacy.sequence-flowz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/5/title": {
+    "mutation": "Sequence flowz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/5/bpmnType": {
+    "exempt": "a connect-tool entry creates no element, so its type is not read"
+   },
+   "/presentation/palette/entries/5/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/5/icon": {
+    "mutation": "bpmn-icon-connection-multiz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/presentation/palette/entries/5/tool": {
+    "mutation": "connectz",
+    "cases": [
+     "x24-A-014-palette"
+    ]
+   },
+   "/exportFacts/descriptorId": {
+    "mutation": "x24-facts/1z",
+    "cases": [
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-021-export-free-annotation",
+     "x24-A-024-export-facts",
+     "x24-A-025-facts-descriptor-mismatch",
+     "x24-A-029-facts-unknown-version"
+    ]
+   },
+   "/exportFacts/extensionType": {
+    "mutation": "xf:Factsz",
+    "cases": [
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-021-export-free-annotation",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/exportFacts/namespaceFamily": {
+    "mutation": "urn:x24:facts:z",
+    "cases": [
+     "x24-A-029-facts-unknown-version"
+    ]
+   },
+   "/exportFacts/properties/order": {
+    "mutation": "seqz",
+    "cases": [
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/exportFacts/properties/direction": {
+    "mutation": "wayz",
+    "cases": [
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/exportFacts/properties/label": {
+    "mutation": "captionz",
+    "cases": [
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/exportFacts/properties/lane": {
+    "mutation": "lanez",
+    "cases": [
+     "x24-A-017-export-reference-page",
+     "x24-A-018-export-sparx",
+     "x24-A-019-export-drawio",
+     "x24-A-021-export-free-annotation",
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/exportFacts/properties/primary": {
+    "mutation": "anchorz",
+    "cases": [
+     "x24-A-024-export-facts"
+    ]
+   },
+   "/exportFacts/properties/process": {
+    "mutation": "opensz",
+    "cases": [
+     "x24-A-024-export-facts"
+    ]
+   }
+  },
+  "A": {
+   "/policyVersion": {
+    "exempt": "record version constant (schema const)"
+   },
+   "/id": {
+    "exempt": "record identity, part of the admission digest only (S group)"
+   },
+   "/classification/annotationRoles/0/role": {
+    "mutation": "document",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat",
+     "x24-X-005-layout-input",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-013-palette",
+     "x24-X-015-export-a-input",
+     "x24-X-018-import-neutral",
+     "x24-X-024-transactions-autolayout",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/0/prefix": {
+    "mutation": "[Aid]z",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-005-layout-input",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-013-palette",
+     "x24-X-015-export-a-input",
+     "x24-X-018-import-neutral",
+     "x24-X-024-transactions-autolayout",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/0/trim": {
+    "mutation": "ecma262-2024-start",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor"
+    ]
+   },
+   "/classification/annotationRoles/0/labelCase": {
+    "mutation": "upper",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-005-layout-input",
+     "x24-X-015-export-a-input",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/role": {
+    "mutation": "application",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat",
+     "x24-X-005-layout-input",
+     "x24-X-013-palette",
+     "x24-X-015-export-a-input",
+     "x24-X-018-import-neutral",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/prefix": {
+    "mutation": "[Folio]z",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat",
+     "x24-X-005-layout-input",
+     "x24-X-013-palette",
+     "x24-X-015-export-a-input",
+     "x24-X-018-import-neutral",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/trim": {
+    "mutation": "ecma262-2024-start",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat"
+    ]
+   },
+   "/classification/annotationRoles/1/labelCase": {
+    "mutation": "upper",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-005-layout-input",
+     "x24-X-015-export-a-input",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/insertSeparator": {
+    "mutation": "!",
+    "cases": [
+     "x24-X-013-palette",
+     "x24-X-015-export-a-input",
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/attachment/applicationHost/type": {
+    "mutation": "bpmn:Task",
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/attachment/applicationHost/mode": {
+    "mutation": "exact",
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-015-export-a-input",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/attachment/nonActivityHost": {
+    "exempt": "schema constant (preserve-report)"
+   },
+   "/metrics/id": {
+    "exempt": "metrics resource identity, metadata"
+   },
+   "/metrics/unit": {
+    "exempt": "schema constant"
+   },
+   "/metrics/firstCodePoint": {
+    "exempt": "schema constant"
+   },
+   "/metrics/regular/0": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/1": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/2": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/3": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/4": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/5": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/6": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/7": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/8": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/9": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/10": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/11": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/12": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/13": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/14": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/15": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/16": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/17": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/18": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/19": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/20": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/21": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/22": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/23": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/24": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/25": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/26": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/27": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/28": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/29": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/30": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/31": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/32": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/33": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/34": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/35": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/36": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/37": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/38": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/39": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/40": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/41": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/42": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/43": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/44": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/45": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/46": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/47": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/48": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/49": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/50": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/51": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/52": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/53": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/54": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/55": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/56": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/57": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/58": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/59": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/60": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/61": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/62": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/63": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/64": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/65": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/66": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/67": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/68": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/69": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/70": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/71": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/72": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/73": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/74": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/75": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/76": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/77": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/78": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/79": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/80": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/81": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/82": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/83": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/84": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/85": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/86": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/87": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/88": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/89": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/90": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/91": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/92": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/93": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/94": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/0": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/1": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/2": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/3": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/4": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/5": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/6": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/7": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/8": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/9": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/10": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/11": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/12": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/13": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/14": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/15": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/16": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/17": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/18": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/19": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/20": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/21": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/22": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/23": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/24": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/25": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/26": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/27": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/28": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/29": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/30": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/31": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/32": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/33": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/34": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/35": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/36": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/37": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/38": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/39": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/40": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/41": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/42": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/43": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/44": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/45": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/46": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/47": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/48": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/49": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/50": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/51": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/52": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/53": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/54": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/55": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/56": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/57": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/58": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/59": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/60": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/61": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/62": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/63": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/64": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/65": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/66": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/67": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/68": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/69": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/70": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/71": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/72": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/73": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/74": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/75": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/76": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/77": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/78": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/79": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/80": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/81": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/82": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/83": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/84": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/85": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/86": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/87": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/88": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/89": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/90": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/91": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/92": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/93": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/94": {
+    "mutation": 720,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/fallback": {
+    "mutation": 600,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/lineHeight": {
+    "mutation": 1.3,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/license": {
+    "exempt": "notice metadata carried with the data"
+   },
+   "/metrics/attribution": {
+    "exempt": "notice metadata carried with the data"
+   },
+   "/navigation/mode": {
+    "mutation": "legacy-default",
+    "cases": [
+     "x24-R-002-navigation-called-element",
+     "x24-X-014-navigation",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/alias": {
+    "mutation": "alpha-lookz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/renderer": {
+    "mutation": "recolor",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/flat": {
+    "exempt": "ignored by the annotated renderer (flat drawing applies to recolour looks)"
+   },
+   "/presentation/looks/0/palette": {
+    "mutation": "upstream",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/paletteFloor": {
+    "mutation": 125,
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/0": {
+    "mutation": ".x24-alpha-markerz",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/fontFamily": {
+    "mutation": "sans-serifz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/fontSize": {
+    "mutation": 14,
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/strokeWidth": {
+    "mutation": 2,
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/stroke": {
+    "mutation": "#212121z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/fill": {
+    "mutation": "#242424z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/text": {
+    "mutation": "#272727z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/labelText": {
+    "mutation": "#2a2a2az",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/headerText": {
+    "mutation": "#2d2d2dz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/flow": {
+    "mutation": "#303030z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/link": {
+    "mutation": "#333333z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/docLink": {
+    "mutation": "#363636z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/docLinkDash": {
+    "mutation": "4 2z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/dataLinkArrow": {
+    "mutation": false,
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/taskLine": {
+    "mutation": "#393939z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/taskFill": {
+    "mutation": "#3c3c3cz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/taskFillEnd": {
+    "mutation": "#3f3f3fz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/eventLine": {
+    "mutation": "#424242z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/eventFill": {
+    "mutation": "#454545z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/gatewayLine": {
+    "mutation": "#484848z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/gatewayFill": {
+    "mutation": "#4b4b4bz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/poolLine": {
+    "mutation": "#4e4e4ez",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/poolFill": {
+    "mutation": "#515151z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/laneLine": {
+    "mutation": "#545454z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/laneFill": {
+    "mutation": "#575757z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/laneHeaderFill": {
+    "mutation": "#5a5a5az",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/externalLine": {
+    "mutation": "#5d5d5dz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/externalFill": {
+    "mutation": "#606060z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/docLine": {
+    "mutation": "#636363z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/docFill": {
+    "mutation": "#666666z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/dataLine": {
+    "mutation": "#696969z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/dataFill": {
+    "mutation": "#6c6c6cz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/appLine": {
+    "mutation": "#6f6f6fz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/appFill": {
+    "mutation": "#727272z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/1/alias": {
+    "mutation": "delta-lookz",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface"
+    ]
+   },
+   "/presentation/looks/1/renderer": {
+    "mutation": "annotated",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface"
+    ]
+   },
+   "/presentation/looks/1/flat": {
+    "mutation": true,
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface"
+    ]
+   },
+   "/presentation/looks/1/palette": {
+    "mutation": "upstream",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/paletteFloor": {
+    "mutation": 106,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/markerSelectors/0": {
+    "mutation": ".x24-delta-markerz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/fontFamily": {
+    "mutation": "cursivez",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/fontSize": {
+    "mutation": 12,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/strokeWidth": {
+    "mutation": 4,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/stroke": {
+    "mutation": "#303030z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/fill": {
+    "mutation": "#333333z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/text": {
+    "mutation": "#363636z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/labelText": {
+    "exempt": "replaced by the text colour unless named (recolour rule)"
+   },
+   "/presentation/looks/1/tokens/headerText": {
+    "mutation": "#3c3c3cz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/flow": {
+    "mutation": "#3f3f3fz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/link": {
+    "mutation": "#424242z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLink": {
+    "mutation": "#454545z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLinkDash": {
+    "mutation": "3 1z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataLinkArrow": {
+    "mutation": false,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskLine": {
+    "mutation": "#484848z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskFill": {
+    "mutation": "#4b4b4bz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskFillEnd": {
+    "mutation": "#4e4e4ez",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/eventLine": {
+    "mutation": "#515151z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/eventFill": {
+    "mutation": "#545454z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/gatewayLine": {
+    "mutation": "#575757z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/gatewayFill": {
+    "mutation": "#5a5a5az",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/poolLine": {
+    "mutation": "#5d5d5dz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/poolFill": {
+    "mutation": "#606060z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneLine": {
+    "mutation": "#636363z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneFill": {
+    "mutation": "#666666z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneHeaderFill": {
+    "mutation": "#696969z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/externalLine": {
+    "mutation": "#6c6c6cz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/externalFill": {
+    "mutation": "#6f6f6fz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLine": {
+    "mutation": "#727272z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docFill": {
+    "mutation": "#757575z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataLine": {
+    "mutation": "#787878z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataFill": {
+    "mutation": "#7b7b7bz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/appLine": {
+    "mutation": "#7e7e7ez",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/appFill": {
+    "mutation": "#818181z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/legacyOptions/flatDrawing": {
+    "mutation": "flat-az",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface"
+    ]
+   },
+   "/presentation/legacyOptions/annotatedPalette": {
+    "mutation": "palette-az",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/layout/poolHeader": {
+    "mutation": 29,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/laneHeader": {
+    "mutation": 27,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/minLaneHeight": {
+    "mutation": 192,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/channel": {
+    "mutation": 24,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/fontSize": {
+    "mutation": 12,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/labelFontSize": {
+    "mutation": 11,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/0/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/0/width": {
+    "mutation": 120,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/0/height": {
+    "mutation": 84,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/1/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/1/width": {
+    "mutation": 125,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/1/height": {
+    "mutation": 87,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/2/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/2/width": {
+    "mutation": 116,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/2/height": {
+    "mutation": 68,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/3/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/3/width": {
+    "mutation": 44,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/3/height": {
+    "mutation": 44,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/4/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/4/width": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/4/height": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/5/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/5/width": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/5/height": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/6/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/6/width": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/6/height": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/7/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/7/width": {
+    "mutation": 39,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/7/height": {
+    "mutation": 48,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/8/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/8/width": {
+    "mutation": 39,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/8/height": {
+    "mutation": 48,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/9/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/9/width": {
+    "mutation": 36,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/9/height": {
+    "mutation": 51,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/10/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/10/width": {
+    "mutation": 36,
+    "cases": [
+     "x24-X-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/10/height": {
+    "mutation": 51,
+    "cases": [
+     "x24-X-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/11/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/11/width": {
+    "exempt": "not read by the legacy layout: document nodes are sized from presentation.layout.document (src/internal/swimlaneLayout.ts:150)"
+   },
+   "/presentation/layout/nodeSizes/11/height": {
+    "exempt": "not read by the legacy layout: document nodes are sized from presentation.layout.document (src/internal/swimlaneLayout.ts:150)"
+   },
+   "/presentation/layout/labelMaxWidth/event": {
+    "mutation": 120,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/labelMaxWidth/item": {
+    "mutation": 96,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/appBadge/minWidth": {
+    "mutation": 84,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/height": {
+    "mutation": 29,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/overlap": {
+    "mutation": 10,
+    "cases": [
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/chrome": {
+    "mutation": 24,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/appBadge/margin": {
+    "mutation": 8,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges"
+    ]
+   },
+   "/presentation/layout/appBadge/gap": {
+    "mutation": 4,
+    "cases": [
+     "x24-X-008-render-badges",
+     "x24-X-024-transactions-autolayout"
+    ]
+   },
+   "/presentation/layout/appBadge/font": {
+    "mutation": 12,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/linkInset": {
+    "mutation": 20,
+    "cases": [
+     "x24-X-024-transactions-autolayout"
+    ]
+   },
+   "/presentation/layout/document/width": {
+    "mutation": 120,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/document/minHeight": {
+    "mutation": 48,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/document/band": {
+    "mutation": 12,
+    "cases": [
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/textTop": {
+    "mutation": 20,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/waveTop": {
+    "mutation": 0.85,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/padX": {
+    "mutation": 5,
+    "cases": [
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/padBottom": {
+    "mutation": 3,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/laneHeaderWidth": {
+    "mutation": 39,
+    "cases": [
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/poolStrip": {
+    "mutation": 29,
+    "cases": [
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/exportStyles/drawio/pool": {
+    "mutation": "x24a=pool;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/lane": {
+    "mutation": "x24a=lane;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/start": {
+    "mutation": "x24a=start;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/end": {
+    "mutation": "x24a=end;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/task": {
+    "mutation": "x24a=task;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/subprocess": {
+    "mutation": "x24a=subprocess;z",
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/gatewayBase": {
+    "mutation": "x24a=gateway;gw=z",
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/external": {
+    "mutation": "x24a=call;z",
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/application": {
+    "mutation": "x24a=badge;z",
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/document": {
+    "mutation": "x24a=sheet;z",
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/item": {
+    "mutation": "x24a=item;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/edgeHead": {
+    "mutation": "x24a=edge;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/flowTail": {
+    "mutation": "x24a=flow;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/linkTail": {
+    "mutation": "x24a=link;z",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/event": {
+    "mutation": "x24a=event;z",
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/poolHeaderWidth": {
+    "mutation": 39,
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/dx": {
+    "mutation": 48,
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/dy": {
+    "mutation": 12,
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/presentation/exportStyles/drawio/appBand": {
+    "mutation": 10,
+    "cases": [
+     "x24-X-015-export-a-input"
+    ]
+   },
+   "/presentation/exportStyles/decode/associationIdSuffix": {
+    "mutation": "_aid-linkz",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/0/value": {
+    "mutation": "mxgraph.flowchart.documentz",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/kind": {
+    "mutation": "callActivity",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/0/value": {
+    "mutation": "mxgraph.flowchart.cardz",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/kind": {
+    "mutation": "callActivity",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/match/0/value": {
+    "mutation": "mxgraph.flowchart.documentz",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/role": {
+    "mutation": "application",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/match/0/value": {
+    "mutation": "mxgraph.flowchart.cardz",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/role": {
+    "mutation": "document",
+    "cases": [
+     "x24-X-018-import-neutral"
+    ]
+   },
+   "/presentation/palette/entries/0/id": {
+    "mutation": "alpha.taskz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/title": {
+    "mutation": "Taskz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/bpmnType": {
+    "mutation": "bpmn:Taskz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/icon": {
+    "mutation": "bpmn-icon-taskz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/id": {
+    "mutation": "alpha.aidz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/title": {
+    "mutation": "Aidz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/bpmnType": {
+    "mutation": "bpmn:TextAnnotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/icon": {
+    "mutation": "bpmn-icon-text-annotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/initialRole": {
+    "mutation": "document",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/id": {
+    "mutation": "alpha.folioz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/title": {
+    "mutation": "Folioz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/bpmnType": {
+    "mutation": "bpmn:TextAnnotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/icon": {
+    "mutation": "bpmn-icon-text-annotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/initialRole": {
+    "mutation": "application",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/exportFacts/descriptorId": {
+    "mutation": "x24-facts/1z",
+    "cases": [
+     "x24-R-009-facts-version-a",
+     "x24-X-015-export-a-input",
+     "x24-X-016-export-b-input",
+     "x24-X-017-export-legacy-input",
+     "x24-X-026-export-facts",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/extensionType": {
+    "mutation": "xf:Factsz",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-017-export-legacy-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/exportFacts/namespaceFamily": {
+    "mutation": "urn:x24:facts:z",
+    "cases": [
+     "x24-R-009-facts-version-a"
+    ]
+   },
+   "/exportFacts/properties/order": {
+    "mutation": "seqz",
+    "cases": [
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/exportFacts/properties/direction": {
+    "mutation": "wayz",
+    "cases": [
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/exportFacts/properties/label": {
+    "mutation": "captionz",
+    "cases": [
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/exportFacts/properties/lane": {
+    "mutation": "lanez",
+    "cases": [
+     "x24-X-015-export-a-input",
+     "x24-X-017-export-legacy-input",
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/exportFacts/properties/primary": {
+    "mutation": "anchorz",
+    "cases": [
+     "x24-X-026-export-facts"
+    ]
+   },
+   "/exportFacts/properties/process": {
+    "mutation": "opensz",
+    "cases": [
+     "x24-X-026-export-facts"
+    ]
+   }
+  },
+  "B": {
+   "/policyVersion": {
+    "exempt": "record version constant (schema const)"
+   },
+   "/id": {
+    "exempt": "record identity, part of the admission digest only (S group)"
+   },
+   "/classification/annotationRoles/0/role": {
+    "mutation": "document",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat",
+     "x24-X-005-layout-input",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-013-palette",
+     "x24-X-016-export-b-input",
+     "x24-X-024-transactions-autolayout",
+     "x24-X-027-import-b",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/0/prefix": {
+    "mutation": "[Note]z",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-005-layout-input",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-013-palette",
+     "x24-X-016-export-b-input",
+     "x24-X-024-transactions-autolayout",
+     "x24-X-027-import-b",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/0/trim": {
+    "mutation": "none",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor"
+    ]
+   },
+   "/classification/annotationRoles/0/labelCase": {
+    "mutation": "none",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-005-layout-input",
+     "x24-X-016-export-b-input",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/role": {
+    "mutation": "application",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat",
+     "x24-X-005-layout-input",
+     "x24-X-013-palette",
+     "x24-X-016-export-b-input",
+     "x24-X-027-import-b",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/prefix": {
+    "mutation": "[Leaf]z",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat",
+     "x24-X-005-layout-input",
+     "x24-X-013-palette",
+     "x24-X-016-export-b-input",
+     "x24-X-027-import-b",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/annotationRoles/1/trim": {
+    "mutation": "ecma262-2024-start",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-002-kind-annotated",
+     "x24-X-003-kind-recolor",
+     "x24-X-004-kind-flat"
+    ]
+   },
+   "/classification/annotationRoles/1/labelCase": {
+    "mutation": "none",
+    "cases": [
+     "x24-X-001-classify",
+     "x24-X-005-layout-input",
+     "x24-X-016-export-b-input",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface",
+     "x24-P-003-probe-1-injected"
+    ]
+   },
+   "/classification/insertSeparator": {
+    "mutation": ": z",
+    "cases": [
+     "x24-X-013-palette",
+     "x24-X-016-export-b-input",
+     "x24-X-027-import-b"
+    ]
+   },
+   "/attachment/applicationHost/type": {
+    "mutation": "bpmn:SubProcess",
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-016-export-b-input",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/attachment/applicationHost/mode": {
+    "mutation": "assignable",
+    "cases": [
+     "x24-X-009-render-attachment",
+     "x24-X-010-transactions-follow",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/attachment/nonActivityHost": {
+    "exempt": "schema constant (preserve-report)"
+   },
+   "/metrics/id": {
+    "exempt": "metrics resource identity, metadata"
+   },
+   "/metrics/unit": {
+    "exempt": "schema constant"
+   },
+   "/metrics/firstCodePoint": {
+    "exempt": "schema constant"
+   },
+   "/metrics/regular/0": {
+    "mutation": 672,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/1": {
+    "mutation": 676,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/2": {
+    "mutation": 680,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/3": {
+    "mutation": 683,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/4": {
+    "mutation": 687,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/5": {
+    "mutation": 690,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/6": {
+    "mutation": 694,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/7": {
+    "mutation": 698,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/8": {
+    "mutation": 701,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/9": {
+    "mutation": 705,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/10": {
+    "mutation": 708,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/11": {
+    "mutation": 712,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/12": {
+    "mutation": 716,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/13": {
+    "mutation": 719,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/14": {
+    "mutation": 723,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/15": {
+    "mutation": 726,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/16": {
+    "mutation": 730,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/17": {
+    "mutation": 734,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/18": {
+    "mutation": 737,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/19": {
+    "mutation": 741,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/20": {
+    "mutation": 744,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/21": {
+    "mutation": 748,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/22": {
+    "mutation": 752,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/23": {
+    "mutation": 755,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/24": {
+    "mutation": 759,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/25": {
+    "mutation": 762,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/26": {
+    "mutation": 766,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/27": {
+    "mutation": 770,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/28": {
+    "mutation": 773,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/29": {
+    "mutation": 777,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/30": {
+    "mutation": 780,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/31": {
+    "mutation": 784,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/32": {
+    "mutation": 788,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/33": {
+    "mutation": 791,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/34": {
+    "mutation": 795,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/35": {
+    "mutation": 798,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/36": {
+    "mutation": 802,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/37": {
+    "mutation": 806,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/38": {
+    "mutation": 809,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/39": {
+    "mutation": 813,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/40": {
+    "mutation": 816,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/41": {
+    "mutation": 820,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/42": {
+    "mutation": 824,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/43": {
+    "mutation": 827,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/44": {
+    "mutation": 831,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/45": {
+    "mutation": 834,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/46": {
+    "mutation": 838,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/47": {
+    "mutation": 842,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/48": {
+    "mutation": 845,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/49": {
+    "mutation": 849,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/50": {
+    "mutation": 852,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/51": {
+    "mutation": 856,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/52": {
+    "mutation": 860,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/53": {
+    "mutation": 863,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/54": {
+    "mutation": 867,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/55": {
+    "mutation": 870,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/56": {
+    "mutation": 874,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/57": {
+    "mutation": 878,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/58": {
+    "mutation": 881,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/59": {
+    "mutation": 885,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/60": {
+    "mutation": 888,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/61": {
+    "mutation": 892,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/62": {
+    "mutation": 896,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/63": {
+    "mutation": 899,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/64": {
+    "mutation": 903,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/65": {
+    "mutation": 906,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/66": {
+    "mutation": 910,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/67": {
+    "mutation": 914,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/68": {
+    "mutation": 917,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/69": {
+    "mutation": 921,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/70": {
+    "mutation": 924,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/71": {
+    "mutation": 928,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/72": {
+    "mutation": 932,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/73": {
+    "mutation": 935,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/74": {
+    "mutation": 939,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/75": {
+    "mutation": 942,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/76": {
+    "mutation": 946,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/77": {
+    "mutation": 950,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/78": {
+    "mutation": 953,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/79": {
+    "mutation": 957,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/80": {
+    "mutation": 960,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/81": {
+    "mutation": 964,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/82": {
+    "mutation": 968,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/83": {
+    "mutation": 971,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/84": {
+    "mutation": 975,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/85": {
+    "mutation": 978,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/86": {
+    "mutation": 982,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/87": {
+    "mutation": 986,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/88": {
+    "mutation": 989,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/89": {
+    "mutation": 993,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/regular/90": {
+    "mutation": 996,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/91": {
+    "mutation": 1000,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/92": {
+    "mutation": 1004,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/93": {
+    "mutation": 1007,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/regular/94": {
+    "mutation": 1011,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/0": {
+    "mutation": 768,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/1": {
+    "mutation": 772,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/2": {
+    "mutation": 776,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/3": {
+    "mutation": 779,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/4": {
+    "mutation": 783,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/5": {
+    "mutation": 786,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/6": {
+    "mutation": 790,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/7": {
+    "mutation": 794,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/8": {
+    "mutation": 797,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/9": {
+    "mutation": 801,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/10": {
+    "mutation": 804,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/11": {
+    "mutation": 808,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/12": {
+    "mutation": 812,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/13": {
+    "mutation": 815,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/14": {
+    "mutation": 819,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/15": {
+    "mutation": 822,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/16": {
+    "mutation": 826,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/17": {
+    "mutation": 830,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/18": {
+    "mutation": 833,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/19": {
+    "mutation": 837,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/20": {
+    "mutation": 840,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/21": {
+    "mutation": 844,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/22": {
+    "mutation": 848,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/23": {
+    "mutation": 851,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/24": {
+    "mutation": 855,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/25": {
+    "mutation": 858,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/26": {
+    "mutation": 862,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/27": {
+    "mutation": 866,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/28": {
+    "mutation": 869,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/29": {
+    "mutation": 873,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/30": {
+    "mutation": 876,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/31": {
+    "mutation": 880,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/32": {
+    "mutation": 884,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/33": {
+    "mutation": 887,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/metrics/bold/34": {
+    "mutation": 891,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/35": {
+    "mutation": 894,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/metrics/bold/36": {
+    "mutation": 898,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/37": {
+    "mutation": 902,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/metrics/bold/38": {
+    "mutation": 905,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/39": {
+    "mutation": 909,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/40": {
+    "mutation": 912,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/41": {
+    "mutation": 916,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/42": {
+    "mutation": 920,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/43": {
+    "mutation": 923,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/metrics/bold/44": {
+    "mutation": 927,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/45": {
+    "mutation": 930,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/46": {
+    "mutation": 934,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/47": {
+    "mutation": 938,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/48": {
+    "mutation": 941,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/49": {
+    "mutation": 945,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/50": {
+    "mutation": 948,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/metrics/bold/51": {
+    "mutation": 952,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/52": {
+    "mutation": 956,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/metrics/bold/53": {
+    "mutation": 959,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/54": {
+    "mutation": 963,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/55": {
+    "mutation": 966,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/56": {
+    "mutation": 970,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/57": {
+    "mutation": 974,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/58": {
+    "mutation": 977,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/59": {
+    "mutation": 981,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/60": {
+    "mutation": 984,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/61": {
+    "mutation": 988,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/62": {
+    "mutation": 992,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/63": {
+    "mutation": 995,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/64": {
+    "mutation": 999,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/65": {
+    "mutation": 1002,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/66": {
+    "mutation": 1006,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/67": {
+    "mutation": 1010,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/68": {
+    "mutation": 1013,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/69": {
+    "mutation": 1017,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/70": {
+    "mutation": 1020,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/71": {
+    "mutation": 1024,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/72": {
+    "mutation": 1028,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/73": {
+    "mutation": 1031,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/74": {
+    "mutation": 1035,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/75": {
+    "mutation": 1038,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/76": {
+    "mutation": 1042,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/77": {
+    "mutation": 1046,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/78": {
+    "mutation": 1049,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/79": {
+    "mutation": 1053,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/80": {
+    "mutation": 1056,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/81": {
+    "mutation": 1060,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/82": {
+    "mutation": 1064,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/83": {
+    "mutation": 1067,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/84": {
+    "mutation": 1071,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/85": {
+    "mutation": 1074,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/86": {
+    "mutation": 1078,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/87": {
+    "mutation": 1082,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/88": {
+    "mutation": 1085,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/89": {
+    "mutation": 1089,
+    "cases": [
+     "x24-X-007-metrics",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/bold/90": {
+    "mutation": 1092,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/91": {
+    "mutation": 1096,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/92": {
+    "mutation": 1100,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/93": {
+    "mutation": 1103,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/bold/94": {
+    "mutation": 1107,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/fallback": {
+    "mutation": 768,
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/lineHeight": {
+    "mutation": 1.55,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/metrics/aliases/0/from": {
+    "mutation": "Ê",
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/aliases/0/to": {
+    "mutation": "F",
+    "cases": [
+     "x24-X-007-metrics"
+    ]
+   },
+   "/metrics/license": {
+    "exempt": "notice metadata carried with the data"
+   },
+   "/metrics/attribution": {
+    "exempt": "notice metadata carried with the data"
+   },
+   "/navigation/mode": {
+    "mutation": "called-element",
+    "cases": [
+     "x24-X-014-navigation",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/navigation/rules/0": {
+    "mutation": "name-overlap",
+    "cases": [
+     "x24-X-014-navigation",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/navigation/rules/1": {
+    "mutation": "name-equal",
+    "cases": [
+     "x24-X-014-navigation",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/alias": {
+    "mutation": "beta-lookz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/renderer": {
+    "mutation": "annotated",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/flat": {
+    "mutation": true,
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/palette": {
+    "mutation": "annotated",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/paletteFloor": {
+    "mutation": 72,
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/0": {
+    "mutation": ".x24-beta-markerz",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/markerSelectors/1": {
+    "mutation": "[data-marker='x24-beta']z",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-030-workshop-surface"
+    ]
+   },
+   "/presentation/looks/0/tokens/fontFamily": {
+    "mutation": "serifz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/fontSize": {
+    "mutation": 16,
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/strokeWidth": {
+    "mutation": 3,
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/stroke": {
+    "mutation": "#606060z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/fill": {
+    "mutation": "#636363z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/text": {
+    "mutation": "#666666z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/labelText": {
+    "exempt": "replaced by the text colour unless named (recolour rule)"
+   },
+   "/presentation/looks/0/tokens/headerText": {
+    "mutation": "#6c6c6cz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/flow": {
+    "mutation": "#6f6f6fz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/link": {
+    "mutation": "#727272z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/docLink": {
+    "mutation": "#757575z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/docLinkDash": {
+    "mutation": "6 3z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/dataLinkArrow": {
+    "mutation": true,
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/taskLine": {
+    "mutation": "#787878z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/taskFill": {
+    "mutation": "#7b7b7bz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/taskFillEnd": {
+    "mutation": "#7e7e7ez",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/eventLine": {
+    "mutation": "#818181z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/eventFill": {
+    "mutation": "#848484z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/gatewayLine": {
+    "mutation": "#878787z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/gatewayFill": {
+    "mutation": "#8a8a8az",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/poolLine": {
+    "mutation": "#8d8d8dz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/poolFill": {
+    "mutation": "#909090z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/laneLine": {
+    "mutation": "#939393z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/laneFill": {
+    "mutation": "#969696z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/laneHeaderFill": {
+    "mutation": "#999999z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/externalLine": {
+    "mutation": "#9c9c9cz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/externalFill": {
+    "mutation": "#9f9f9fz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/docLine": {
+    "mutation": "#a2a2a2z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/docFill": {
+    "mutation": "#a5a5a5z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/dataLine": {
+    "mutation": "#a8a8a8z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/dataFill": {
+    "mutation": "#abababz",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/appLine": {
+    "mutation": "#aeaeaez",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/0/tokens/appFill": {
+    "mutation": "#b1b1b1z",
+    "cases": [
+     "x24-X-011-tokens",
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/alias": {
+    "mutation": "gamma-lookz",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/looks/1/renderer": {
+    "mutation": "recolor",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/looks/1/flat": {
+    "exempt": "ignored by the annotated renderer (flat drawing applies to recolour looks)"
+   },
+   "/presentation/looks/1/palette": {
+    "mutation": "upstream",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/paletteFloor": {
+    "mutation": 116,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/markerSelectors/0": {
+    "mutation": ".x24-gamma-markerz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/fontFamily": {
+    "mutation": "fantasyz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/fontSize": {
+    "mutation": 15,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/strokeWidth": {
+    "mutation": 2,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/stroke": {
+    "mutation": "#424242z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/fill": {
+    "mutation": "#454545z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/text": {
+    "mutation": "#484848z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/labelText": {
+    "mutation": "#4b4b4bz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/headerText": {
+    "mutation": "#4e4e4ez",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/flow": {
+    "mutation": "#515151z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/link": {
+    "mutation": "#545454z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLink": {
+    "mutation": "#575757z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLinkDash": {
+    "mutation": "2 2z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataLinkArrow": {
+    "mutation": true,
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskLine": {
+    "mutation": "#5a5a5az",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskFill": {
+    "mutation": "#5d5d5dz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/taskFillEnd": {
+    "mutation": "#606060z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/eventLine": {
+    "mutation": "#636363z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/eventFill": {
+    "mutation": "#666666z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/gatewayLine": {
+    "mutation": "#696969z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/gatewayFill": {
+    "mutation": "#6c6c6cz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/poolLine": {
+    "mutation": "#6f6f6fz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/poolFill": {
+    "mutation": "#727272z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneLine": {
+    "mutation": "#757575z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneFill": {
+    "mutation": "#787878z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/laneHeaderFill": {
+    "mutation": "#7b7b7bz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/externalLine": {
+    "mutation": "#7e7e7ez",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/externalFill": {
+    "mutation": "#818181z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docLine": {
+    "mutation": "#848484z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/docFill": {
+    "mutation": "#878787z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataLine": {
+    "mutation": "#8a8a8az",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/dataFill": {
+    "mutation": "#8d8d8dz",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/appLine": {
+    "mutation": "#909090z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/looks/1/tokens/appFill": {
+    "mutation": "#939393z",
+    "cases": [
+     "x24-X-012-theme-select"
+    ]
+   },
+   "/presentation/legacyOptions/flatDrawing": {
+    "mutation": "flat-bz",
+    "cases": [
+     "x24-X-012-theme-select",
+     "x24-X-028-static-surface"
+    ]
+   },
+   "/presentation/layout/poolHeader": {
+    "mutation": 34,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/laneHeader": {
+    "mutation": 32,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/minLaneHeight": {
+    "mutation": 216,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/channel": {
+    "mutation": 27,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/fontSize": {
+    "mutation": 14,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/labelFontSize": {
+    "mutation": 12,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/0/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/0/width": {
+    "mutation": 132,
+    "cases": [
+     "x24-X-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/0/height": {
+    "mutation": 92,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/1/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/1/width": {
+    "mutation": 135,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/1/height": {
+    "mutation": 89,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/2/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/2/width": {
+    "mutation": 123,
+    "cases": [
+     "x24-X-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/2/height": {
+    "mutation": 70,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/3/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/3/width": {
+    "mutation": 48,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/3/height": {
+    "mutation": 48,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/4/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/4/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/4/height": {
+    "mutation": 46,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/5/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/5/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/5/height": {
+    "mutation": 46,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/6/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/6/width": {
+    "mutation": 46,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/6/height": {
+    "mutation": 46,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/7/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/7/width": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/7/height": {
+    "mutation": 53,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/8/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/8/width": {
+    "mutation": 41,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/8/height": {
+    "mutation": 53,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/9/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/9/width": {
+    "mutation": 44,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/9/height": {
+    "mutation": 56,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/nodeSizes/10/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/10/width": {
+    "mutation": 44,
+    "cases": [
+     "x24-X-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/10/height": {
+    "mutation": 56,
+    "cases": [
+     "x24-X-006-layout-size"
+    ]
+   },
+   "/presentation/layout/nodeSizes/11/kind": {
+    "exempt": "identity key of a list member (its value is the lookup key of the record)"
+   },
+   "/presentation/layout/nodeSizes/11/width": {
+    "exempt": "not read by the legacy layout: document nodes are sized from presentation.layout.document (src/internal/swimlaneLayout.ts:150)"
+   },
+   "/presentation/layout/nodeSizes/11/height": {
+    "exempt": "not read by the legacy layout: document nodes are sized from presentation.layout.document (src/internal/swimlaneLayout.ts:150)"
+   },
+   "/presentation/layout/labelMaxWidth/event": {
+    "mutation": 132,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/labelMaxWidth/item": {
+    "mutation": 108,
+    "cases": [
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/appBadge/minWidth": {
+    "mutation": 89,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/height": {
+    "mutation": 32,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/overlap": {
+    "mutation": 9,
+    "cases": [
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/chrome": {
+    "mutation": 29,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/margin": {
+    "mutation": 10,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges"
+    ]
+   },
+   "/presentation/layout/appBadge/gap": {
+    "mutation": 8,
+    "cases": [
+     "x24-X-008-render-badges",
+     "x24-X-024-transactions-autolayout"
+    ]
+   },
+   "/presentation/layout/appBadge/font": {
+    "mutation": 14,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/appBadge/linkInset": {
+    "mutation": 17,
+    "cases": [
+     "x24-X-024-transactions-autolayout"
+    ]
+   },
+   "/presentation/layout/document/width": {
+    "mutation": 128,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/document/minHeight": {
+    "mutation": 72,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-025-layout-process"
+    ]
+   },
+   "/presentation/layout/document/band": {
+    "mutation": 15,
+    "cases": [
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/textTop": {
+    "mutation": 22,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-025-layout-process",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/waveTop": {
+    "mutation": 0.75,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/padX": {
+    "mutation": 9,
+    "cases": [
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/document/padBottom": {
+    "mutation": 6,
+    "cases": [
+     "x24-X-006-layout-size",
+     "x24-X-008-render-badges",
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/laneHeaderWidth": {
+    "mutation": 44,
+    "cases": [
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/layout/poolStrip": {
+    "mutation": 33,
+    "cases": [
+     "x24-X-028-static-surface",
+     "x24-X-029-preview-surface"
+    ]
+   },
+   "/presentation/exportStyles/drawio/pool": {
+    "mutation": "x24b=pool;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/lane": {
+    "mutation": "x24b=lane;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/start": {
+    "mutation": "x24b=start;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/end": {
+    "mutation": "x24b=end;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/task": {
+    "mutation": "x24b=task;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/subprocess": {
+    "mutation": "x24b=subprocess;z",
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/gatewayBase": {
+    "mutation": "x24b=gateway;gw=z",
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/external": {
+    "mutation": "x24b=call;z",
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/application": {
+    "mutation": "x24b=badge;z",
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/document": {
+    "mutation": "x24b=sheet;z",
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/item": {
+    "mutation": "x24b=item;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/edgeHead": {
+    "mutation": "x24b=edge;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/flowTail": {
+    "mutation": "x24b=flow;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/linkTail": {
+    "mutation": "x24b=link;z",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/event": {
+    "mutation": "x24b=event;z",
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/drawio/poolHeaderWidth": {
+    "mutation": 44,
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/dx": {
+    "mutation": 53,
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/dy": {
+    "mutation": 8,
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/presentation/exportStyles/drawio/appBand": {
+    "mutation": 9,
+    "cases": [
+     "x24-X-016-export-b-input"
+    ]
+   },
+   "/presentation/exportStyles/decode/associationIdSuffix": {
+    "mutation": "-note-linkz",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/match/0/value": {
+    "mutation": "x24.leafz",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/0/kind": {
+    "mutation": "callActivity",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/match/0/value": {
+    "mutation": "x24.notez",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/kinds/1/kind": {
+    "mutation": "callActivity",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/match/0/value": {
+    "mutation": "x24.leafz",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/0/role": {
+    "mutation": "application",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/match/0/key": {
+    "mutation": "shapez",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/match/0/value": {
+    "mutation": "x24.notez",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/exportStyles/decode/roles/1/role": {
+    "mutation": "document",
+    "cases": [
+     "x24-X-027-import-b"
+    ]
+   },
+   "/presentation/palette/entries/0/id": {
+    "mutation": "beta.notez",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/title": {
+    "mutation": "Notez",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/bpmnType": {
+    "mutation": "bpmn:TextAnnotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/icon": {
+    "mutation": "bpmn-icon-text-annotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/0/initialRole": {
+    "mutation": "document",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/id": {
+    "mutation": "beta.leafz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/title": {
+    "mutation": "Leafz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/bpmnType": {
+    "mutation": "bpmn:TextAnnotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/icon": {
+    "mutation": "bpmn-icon-text-annotationz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/1/initialRole": {
+    "mutation": "application",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/id": {
+    "mutation": "beta.gatewayz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/title": {
+    "mutation": "Gatewayz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/bpmnType": {
+    "mutation": "bpmn:ExclusiveGatewayz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/2/icon": {
+    "mutation": "bpmn-icon-gateway-nonez",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/id": {
+    "mutation": "beta.flowz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/title": {
+    "mutation": "Flowz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/bpmnType": {
+    "exempt": "a connect-tool entry creates no element, so its type is not read"
+   },
+   "/presentation/palette/entries/3/group": {
+    "mutation": "events",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/icon": {
+    "mutation": "bpmn-icon-connection-multiz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/presentation/palette/entries/3/tool": {
+    "mutation": "connectz",
+    "cases": [
+     "x24-X-013-palette"
+    ]
+   },
+   "/exportFacts/descriptorId": {
+    "mutation": "x24-facts-b/1z",
+    "cases": [
+     "x24-R-010-facts-version-b",
+     "x24-X-015-export-a-input",
+     "x24-X-016-export-b-input",
+     "x24-X-017-export-legacy-input",
+     "x24-X-026-export-facts",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/extensionType": {
+    "mutation": "yf:Factsz",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/namespaceFamily": {
+    "mutation": "urn:x24:facts-b:z",
+    "cases": [
+     "x24-R-010-facts-version-b"
+    ]
+   },
+   "/exportFacts/properties/order": {
+    "mutation": "posz",
+    "cases": [
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/properties/direction": {
+    "mutation": "dirz",
+    "cases": [
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/properties/label": {
+    "mutation": "tagz",
+    "cases": [
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/properties/lane": {
+    "mutation": "rowz",
+    "cases": [
+     "x24-X-016-export-b-input",
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/properties/primary": {
+    "mutation": "leadz",
+    "cases": [
+     "x24-X-031-export-facts-b"
+    ]
+   },
+   "/exportFacts/properties/process": {
+    "mutation": "goesz",
+    "cases": [
+     "x24-X-031-export-facts-b"
+    ]
+   }
+  }
+ }
+}

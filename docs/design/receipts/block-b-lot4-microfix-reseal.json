@@ -1,0 +1,193 @@
+{
+  "format": "block-b-lot4-reseal/1",
+  "date": "2026-10-19",
+  "round": "Micro-fix reseal of one lot 4 case (JS): layout-011-geometry-theme-gated selects the geometry-theme theme its derivation names",
+  "inputs": [
+    "Code author report: the four layout-011 inputs equalled those of layout-001 (same envelope, placements and profile, base geometry SHA-256 070b165f3bfe02f92255ef1bd260f00220818b1a3fafd5c1cf7e8f6b83b7fab6, themeId plain), which expects ok, while layout-011 expects refused:profile-open and its derivation names wide-own",
+    "DESIGN R3.3 section 9.4 L721, section 13 L928 (OPEN-DI / OPEN-LOOK), section 16 L1150 (item 6); BLOCKB-HARMONIZATION.md row H5 (profile-open while the geometry:theme policy is not approved)"
+  ],
+  "precedence": "DESIGN R3.3 text > harmonization decision",
+  "predecessorLedger": {
+    "path": "docs/design/receipts/block-b-lot4-parity-sync.json",
+    "bytes": 25305,
+    "sha256": "11a44c6e67892a77608e58c204811375af89283860a119f01bce3a4c15db9559"
+  },
+  "predecessor": {
+    "commit": "a7e284d",
+    "seal": {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "bytes": 178983,
+      "sha256": "043028b6cdd820497bbbe36546c19a90fedad7207322b43f1ad8f67da9d86678"
+    },
+    "caseCount": 391,
+    "sealedFiles": 984
+  },
+  "successor": {
+    "seal": {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "bytes": 178983,
+      "sha256": "681b15c01b955c67de4e9e06b21b9b9f5ec87a4dc0ea13c6bac68595ad257beb"
+    },
+    "caseCount": 391,
+    "vendoredCases": 194,
+    "sealedFiles": 984
+  },
+  "valueChanges": {
+    "layout-011-geometry-theme-gated": {
+      "defect": "The derivation helper layoutCase defaulted the sealed themeId input to plain, while the expected refusal was derived for the main-wide-own layout under wide-own; no implementation could satisfy layout-001 and layout-011 together.",
+      "decision": "DESIGN keeps the refusal: L721 refuses unless the explicit geometry:theme policy is approved, L928 and L1150 keep shared geometry across themes by default. The case input now selects wide-own, the only theme of the sealed profile that declares geometry theme.",
+      "inputs": [
+        {
+          "role": "themeId",
+          "old": "plain",
+          "new": "wide-own"
+        }
+      ],
+      "unchangedInputs": [
+        "envelope",
+        "placements",
+        "base-geometry"
+      ],
+      "expectedStatus": {
+        "old": "refused:profile-open",
+        "new": "refused:profile-open"
+      },
+      "expectedResult": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/artifacts/layout-011-geometry-theme-gated.result.json",
+        "bytes": 1655,
+        "sha256": "099e0c49b8b66016e2f90774b835c50147b77d9d7e13187ddbf0ed5bfb2926f4",
+        "changed": false
+      },
+      "caseFile": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/cases/layout-011-geometry-theme-gated.json",
+        "old": {
+          "bytes": 1389,
+          "sha256": "1d54213a2d9fa6f5c8dc9d3fd9225c856cb8d24499ecefca21bee0134399cb8f"
+        },
+        "new": {
+          "bytes": 1392,
+          "sha256": "9e314a98e79a6c1dba68bc29e6070b477402a4c371521312aa8d68728b540d8f"
+        }
+      },
+      "derivation": {
+        "old": "wide-own declares geometry theme; per-theme geometry is not approved (OPEN-DI/OPEN-LOOK, owner default shared geometry): the layout primitive refuses profile-open (harmonization H5).",
+        "new": "The case selects themeId wide-own, which declares geometry theme (fallback plain, region.external-lane.padding 12000); per-theme geometry is not approved (OPEN-DI/OPEN-LOOK, owner default shared geometry): the layout primitive refuses profile-open (harmonization H5). Envelope, placements and base geometry bytes equal those of layout-001, so the theme selection alone turns its ok result into this refusal. Full refusal record: echoed identity and revision, empty diagnostics and report entries."
+      },
+      "wrongImplementation": {
+        "old": "Laying out with the wide-own padding as if the geometry:theme policy were approved.",
+        "new": "Ignoring the themeId selection (laying out with plain returns the layout-001 result), laying out with the wide-own padding 12000 as if the geometry:theme policy were approved, or refusing theme-geometry-conflict by comparing wide-own with its fallback plain (a single-theme layout checks no other theme)."
+      }
+    }
+  },
+  "untouched": "layout-001-main keeps its case file, inputs and result artifact; no other case, artifact, clause or DESIGN excerpt changes.",
+  "method": "Targeted reseal. The derivation source passes themeId wide-own to layout-011; the case file, its index entry, its generated README row and its manifest digest were edited in place, and seal.json was updated for the five changed sealed files. A replay of the authored part of the derivation tool (197 cases and their artifacts, no vendor step) reproduces every authored case file, artifact, index entry, README row and manifest digest of the sealed tree byte for byte. The complete tool run stops before writing anything in derive/lot4-vendor.mjs (export.compile.all-fields-valid: compile record): the twin records re-vendored in ab13e69 carry {status: ok, diagnostics: []}, outside its compile-record rule; that gap predates this round and is left unchanged. No loader, compiler, evaluator, layout or exporter of the implementation was run or imported.",
+  "testChange": "tests/profile-lot4-seal.test.mjs: the ledger chain test reads the parity-sync ledger as history (successor = PS seal) and binds this ledger to the current bytes; the relations test checks that layout-011 differs from layout-001 only by the selected theme, wide-own with geometry theme against plain with geometry shared. Test count unchanged (20).",
+  "twin": {
+    "status": "The twin (Python) seal vendors the old layout-011 bytes; this round does not edit the twin.",
+    "vendoredCopy": {
+      "path": "tests/profile_render/expected/vendor/js/cases/layout-011-geometry-theme-gated.json",
+      "origin": "vendored from this JS seal",
+      "sha256": "1d54213a2d9fa6f5c8dc9d3fd9225c856cb8d24499ecefca21bee0134399cb8f"
+    },
+    "harnessRecord": {
+      "path": "tests/profile_render/expected/layout-011-geometry-theme-gated.json",
+      "origin": "derived from the vendored JS case (author spec-seal); input themeId plain"
+    },
+    "twinOriginatedSibling": {
+      "caseId": "render.layout.io-geometry-theme-gated",
+      "path": "tests/profile_render/expected/render.layout.io-geometry-theme-gated.json",
+      "note": "computeLayout under a profile whose selected theme plain is patched to geometry theme: consistent with H5; not vendored into this seal"
+    },
+    "twinHeads": [
+      "75415cc",
+      "c85646d"
+    ],
+    "followUp": "Twin re-vendor of the layout-011 case file (new SHA-256 9e314a98e79a6c1dba68bc29e6070b477402a4c371521312aa8d68728b540d8f) and regeneration of its harness record."
+  },
+  "sealedTreeDelta": {
+    "added": 0,
+    "removed": [],
+    "changed": 5,
+    "unchanged": 979,
+    "note": "Changed sealed files: README.md, cases/layout-011-geometry-theme-gated.json, derive/lot4-cases-layout.mjs, index.json, manifest.json; seal.json is excluded from its own inventory."
+  },
+  "supersedesFiles": [
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/README.md",
+      "old": {
+        "bytes": 122923,
+        "sha256": "8ed7ba4b687ef15b0ead55d70aaaaa56dabc3922b580704d4e93a68469a7a449"
+      },
+      "new": {
+        "bytes": 123144,
+        "sha256": "38f0c28cfc799195fdfdec8a022ec28d7ab8df439d5e8692828f6efb7dc47821"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/cases/layout-011-geometry-theme-gated.json",
+      "old": {
+        "bytes": 1389,
+        "sha256": "1d54213a2d9fa6f5c8dc9d3fd9225c856cb8d24499ecefca21bee0134399cb8f"
+      },
+      "new": {
+        "bytes": 1392,
+        "sha256": "9e314a98e79a6c1dba68bc29e6070b477402a4c371521312aa8d68728b540d8f"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/derive/lot4-cases-layout.mjs",
+      "old": {
+        "bytes": 38016,
+        "sha256": "1e0bf9d76dce5ee5eeec9b28a8c9902b70e201a8675f03c165f971f734145ec3"
+      },
+      "new": {
+        "bytes": 38572,
+        "sha256": "fd6d4ec03d27917c6bd035eb13656e7938d5577f72f2d0ae3be6a29e1b55f342"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+      "old": {
+        "bytes": 559760,
+        "sha256": "ce7f747f2980ad948725df46873016eb80cb6014e171e035144b3adb0cd666db"
+      },
+      "new": {
+        "bytes": 560295,
+        "sha256": "203789f768ee1253516816a9ed7f86df53f0849e7c0ac118a3663b8f81b65e92"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/manifest.json",
+      "old": {
+        "bytes": 285112,
+        "sha256": "42f2a5124c3da06f2f6f0056193ba56d04f14a83ea0dd1b75feda9215a3b8749"
+      },
+      "new": {
+        "bytes": 285112,
+        "sha256": "ac3dce5b4fce1810d48437406703d9b28d8bffff556ede42bded9e1a9522eb23"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "old": {
+        "bytes": 178983,
+        "sha256": "043028b6cdd820497bbbe36546c19a90fedad7207322b43f1ad8f67da9d86678"
+      },
+      "new": {
+        "bytes": 178983,
+        "sha256": "681b15c01b955c67de4e9e06b21b9b9f5ec87a4dc0ea13c6bac68595ad257beb"
+      }
+    },
+    {
+      "path": "tests/profile-lot4-seal.test.mjs",
+      "old": {
+        "bytes": 45391,
+        "sha256": "1a91e17a29b913864a089674745762aee3aa909d6ebfa811126a214525410d32"
+      },
+      "new": {
+        "bytes": 47439,
+        "sha256": "2831f4533820ce63a9fa852233f0ccf5d81749a5454ad6fd9addad59b3ef121c"
+      }
+    }
+  ]
+}

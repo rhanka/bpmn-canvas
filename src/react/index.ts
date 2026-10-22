@@ -99,3 +99,4 @@ export { BpmnWorkshop, defaultResolveTarget, navigationResolver } from "./worksh
 export type { BpmnWorkshopProps, DownloadContext, FormatOption, NavigationRule, WorkshopHandle, WorkshopNotice } from "./workshop.js";
 export { DEFAULT_LABELS } from "./labels.js";
 export type { WorkshopLabels } from "./labels.js";
+export type { NativeProfileWorkshopProps, NativeFormatOption, NativeDownloadFile } from "./native-workshop.js";

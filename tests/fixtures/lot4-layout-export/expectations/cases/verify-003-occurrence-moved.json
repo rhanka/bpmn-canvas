@@ -1,0 +1,59 @@
+{
+  "caseId": "verify-003-occurrence-moved",
+  "operation": "verifyRenderData",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot4-layout-export/expectations/artifacts/neutral-lot4-profile.json",
+    "sha256": "6b8f27c2ef5778cf29882fa8c7278b4945eb409105ebaf5ceb4e97c6c25b26c6"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "path": "lot4-layout-export/expectations/artifacts/main.envelope.json",
+      "sha256": "407e44da330ed1d26bd6e151411ae9415dd3771b6915f84b553c10120d81c61f"
+    },
+    {
+      "role": "layout",
+      "path": "lot4-layout-export/expectations/artifacts/main.layout.json",
+      "sha256": "377e069bbaf287e4addb152628c4a4537bca331059eaae7002106a0036d5b9d1"
+    },
+    {
+      "role": "render",
+      "path": "lot4-layout-export/expectations/artifacts/verify-003-occurrence-moved.render.json",
+      "sha256": "ab47b6d96cef4d45641c9711d2ac8ea796b4b67d02649088b253dfd18004abd3"
+    },
+    {
+      "role": "themeId",
+      "json": "plain"
+    },
+    {
+      "role": "overrides",
+      "json": {
+        "semantic": [],
+        "occurrence": []
+      }
+    },
+    {
+      "role": "diStyles",
+      "json": {
+        "native": [],
+        "bioc": []
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "refused",
+        "code": "render-stale",
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "refused:render-stale",
+  "comparatorIds": [
+    "result-exact/1",
+    "source-immutability/1"
+  ]
+}

@@ -17,12 +17,23 @@
     {
       "path": "src/profile/compiler-static.ts",
       "old": {
-        "bytes": 23059,
-        "sha256": "eaa2a42525198cadd8352522d41091cf73f3abeb3a42de43ac777e9967fd742b"
-      },
-      "current": {
         "bytes": 23051,
         "sha256": "4d30917043d2c2eb8872822af608b8d7599de93d0f09f4f08fa66e43ad4aa008"
+      },
+      "current": {
+        "bytes": 25061,
+        "sha256": "545df345071a38708011bb133bfd1a2f1521a23f15bd0582a196671ecc1d4d78"
+      },
+      "integrationRebind": {
+        "old": {
+          "bytes": 24454,
+          "sha256": "a9f7dcb5b723fb09282b3ce5975d350b17a6a7880832ac3777698551b058af66"
+        },
+        "new": {
+          "bytes": 25061,
+          "sha256": "545df345071a38708011bb133bfd1a2f1521a23f15bd0582a196671ecc1d4d78"
+        },
+        "reason": "lot 5 fallback validation and upstream mapping, conductor ruling 2026-10-19"
       }
     },
     {
@@ -43,8 +54,19 @@
         "sha256": "425b8dc384a734ff34392880675a231326a3c55842654dcfddfff24a0f68909d"
       },
       "current": {
-        "bytes": 2754,
-        "sha256": "4d087edd62c3303319f2fdea6d74ef6bf301f1418b5923e1236fbb9ca53dede2"
+        "bytes": 3047,
+        "sha256": "5cff00aa4daebb07b2c349f47a1e6c778511811816290ed53c76a281e0e7ffb5"
+      },
+      "integrationRebind": {
+        "old": {
+          "bytes": 2853,
+          "sha256": "7840460487619e7c0b4bab175106a8612cd760d43070154df2b5a973a0af3126"
+        },
+        "new": {
+          "bytes": 3047,
+          "sha256": "5cff00aa4daebb07b2c349f47a1e6c778511811816290ed53c76a281e0e7ffb5"
+        },
+        "reason": "block B fix integration, conductor authorization"
       }
     },
     {
@@ -54,8 +76,19 @@
         "sha256": "6ea0beda91bf9663bf107720fe263359201c740d73f0a87a3c71b18a3e2d8b00"
       },
       "current": {
-        "bytes": 7357,
-        "sha256": "5e687b72160108af010dd480bf425c9727fca11dc1be9367c283d3862ae81b2e"
+        "bytes": 9968,
+        "sha256": "d5bded917e79b475dcc6a4c7cede920cd3d141ef60075ba89a48a43bda8f1311"
+      },
+      "integrationRebind": {
+        "old": {
+          "bytes": 9905,
+          "sha256": "8b0634a685cb24a5c11040dd24b68248141d218d8b1affea8f2b709f0ca506eb"
+        },
+        "new": {
+          "bytes": 9968,
+          "sha256": "d5bded917e79b475dcc6a4c7cede920cd3d141ef60075ba89a48a43bda8f1311"
+        },
+        "reason": "block B fix integration, conductor authorization"
       }
     },
     {
@@ -131,8 +164,8 @@
         "sha256": "0266b06637e2b8b0a880062d4c2bcaf4949b96d6a61be385d9297142e3e5d469"
       },
       "current": {
-        "bytes": 13504,
-        "sha256": "7b9924cf40e10cc65577bc595c946e7df35309e2ed97b425ff4902448cdcb765"
+        "bytes": 13492,
+        "sha256": "d44b958fa5b82b749fe6b9a49edc669c0a79ade358b0b62e45f8daa9d056a4ba"
       }
     }
   ]

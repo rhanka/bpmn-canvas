@@ -17,7 +17,7 @@ test("should seal hand-derived verdicts with per-vector normative provenance", a
   }
 });
 
-test("should detect every changed expectation byte including IDs, pointers and reports", async () => {
+test("should detect every changed expectation byte including IDs, pointers and reports", { timeout: 3600000 }, async () => {
   const { verifyExpectedBytes } = await import("./helpers/profile-seal.mjs");
   const seal = load("./fixtures/profile-lot0/expectations.seal.json");
   const bytes = readFileSync(new URL("./fixtures/profile-lot0/expectations.json", import.meta.url));

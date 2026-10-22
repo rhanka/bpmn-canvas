@@ -1,0 +1,64 @@
+{
+  "caseId": "template-013-grid-stripe-header-band",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "aid",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": [],
+          "template": "header-band",
+          "parameters": [
+            {
+              "name": "headerHeight",
+              "value": 12
+            }
+          ]
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 500016,
+          "height": 100000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "header": {
+            "x": 0,
+            "y": 0,
+            "width": 500016,
+            "height": 12
+          },
+          "body": {
+            "x": 0,
+            "y": 12,
+            "width": 500016,
+            "height": 99988
+          }
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

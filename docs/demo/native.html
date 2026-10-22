@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Native editing walkthrough · 23 October 2026</title>
+  <style>
+    body { margin: 0 auto; max-width: 1200px; padding: 32px; font: 16px/1.5 system-ui,sans-serif; color: #172033; background: #f5f7fa; }
+    h1 { margin-bottom: 8px; } button,select,input,a.download { font: inherit; padding: 8px 12px; margin: 4px; }
+    button { cursor: pointer; border: 1px solid #64748b; border-radius: 6px; background: white; }
+    button:focus-visible,a:focus-visible { outline: 3px solid #2563eb; } button:disabled { opacity: .5; cursor: default; }
+    #canvas { background: white; border: 1px solid #cbd5e1; border-radius: 12px; margin: 24px 0; }
+    .native-profile-canvas { padding: 12px; } .native-profile-canvas aside { display: flex; flex-wrap: wrap; gap: 4px; }
+    .native-profile-canvas svg { max-height: 480px; } menu { padding: 0; }
+    progress { width: 100%; height: 12px; } #status { min-height: 28px; } #details { white-space: pre-wrap; overflow-wrap: anywhere; }
+    li[aria-current="step"] { color: #1d4ed8; font-weight: 650; }
+  </style>
+</head>
+<body>
+  <p><a href="index.html">Demo home</a></p>
+  <h1>Native editing walkthrough</h1>
+  <p>23 October 2026 · A neutral model, one committed action per step.</p>
+  <p>Create a task, change its type, connect it, update properties, undo, redo, and export the final drawing. A type change allocates a new ID and reports the replacement before any connection is made.</p>
+  <button id="next" disabled>Run next step</button><button id="reset" disabled>Reset</button>
+  <a id="download" class="download" hidden>Download final drawing</a>
+  <progress id="progress" value="0" max="12" aria-label="Completed steps"></progress>
+  <p id="status" role="status">Loading neutral inputs…</p>
+  <div id="canvas"></div>
+  <details open><summary>Walkthrough steps</summary><ol id="steps"></ol></details>
+  <details><summary>Committed result</summary><pre id="details"></pre></details>
+  <p>No property-panel dependency is included. Field changes in the walkthrough use the typed command API.</p>
+  <footer><a href="LICENSE.txt">License</a> · <a href="licenses/">Component licenses</a></footer>
+  <script type="module" src="page/native.js"></script>
+</body>
+</html>

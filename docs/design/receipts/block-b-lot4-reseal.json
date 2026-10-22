@@ -1,0 +1,118 @@
+{
+  "format": "block-b-lot4-reseal/1",
+  "date": "2026-10-18",
+  "round": "SF: single seal fix round of the block B lot 4 seal (JS)",
+  "inputs": [
+    "BLOCKB-SEAL-REVIEW-L4.md (gpt-6-astra, max effort, REWORK)",
+    "BLOCKB-HARMONIZATION.md section 4.1 lot 4 (F-JS-L4-01..15) and every decision-matrix row touching lot 4"
+  ],
+  "precedence": "DESIGN R3.3 text > harmonization decision > astra finding",
+  "predecessor": {
+    "commit": "eb5bffd",
+    "seal": {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "bytes": 46422,
+      "sha256": "0376599bfa11d2cd2c629472e5fa42420109a5d6ccc2254761d49a7777d1c15c"
+    },
+    "caseCount": 153,
+    "sealedFiles": 268
+  },
+  "successor": {
+    "seal": {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "bytes": 72985,
+      "sha256": "f953942a2a86387120737c9f8d263e082e3ff94ec60036695c236abbbef4ae43"
+    },
+    "caseCount": 197,
+    "sealedFiles": 415
+  },
+  "sealedTreeDelta": {
+    "added": 149,
+    "removed": [
+      "artifacts/multi-striped.render.json",
+      "artifacts/repeated-striped.render.json"
+    ],
+    "changed": 231,
+    "unchanged": 35,
+    "note": "Per-file byte pins of both trees are the predecessor and successor seal.json files."
+  },
+  "supersedesFiles": [
+    {
+      "path": "docs/design/block-b-lot4-expectations.md",
+      "old": {
+        "bytes": 13535,
+        "sha256": "e60a65407d95cf121b4bf6d431533637f3e15c9434c9701d021604040fd4c61c"
+      },
+      "new": {
+        "bytes": 17758,
+        "sha256": "443cfddc8539ef1e21586e85d162c6bd96194150115829401bc131d5ee98e84b"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/README.md",
+      "old": {
+        "bytes": 45501,
+        "sha256": "162e1e13b9de1c144dc5f3a7b994ca58f18a892c88d074bf3f6fc58a7b7e3e8b"
+      },
+      "new": {
+        "bytes": 68042,
+        "sha256": "5709e03e153e3ffa6165473896db8aae5f4a4dd322b1e4d6ac8112e80c8bbada"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/design-excerpts.json",
+      "old": {
+        "bytes": 12782,
+        "sha256": "098f9cf916887244358309323902f8cf71a06bbb6e05df734db4a9d54e20519e"
+      },
+      "new": {
+        "bytes": 14072,
+        "sha256": "d2a1721f8be4273d1c98893dc554181795b15578d7fd3de427bd1e3846265d68"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+      "old": {
+        "bytes": 108080,
+        "sha256": "e8da353ccc0da1b2018774e6b78524f97e16f465e519cf8193ca517b0277371c"
+      },
+      "new": {
+        "bytes": 149162,
+        "sha256": "ef0c0e70219794aa8e0708b875cd369fee64b3b1803f5edc20c4aaf76e272c35"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/manifest.json",
+      "old": {
+        "bytes": 43469,
+        "sha256": "003ff83c35956135887e7fbd6b0682e192e519631c41e35b7ba22df948c7ede0"
+      },
+      "new": {
+        "bytes": 69555,
+        "sha256": "29348b375217707637b3c587335b504612135f791119b2c5dc39011c73392a51"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "old": {
+        "bytes": 46422,
+        "sha256": "0376599bfa11d2cd2c629472e5fa42420109a5d6ccc2254761d49a7777d1c15c"
+      },
+      "new": {
+        "bytes": 72985,
+        "sha256": "f953942a2a86387120737c9f8d263e082e3ff94ec60036695c236abbbef4ae43"
+      }
+    },
+    {
+      "path": "tests/profile-lot4-seal.test.mjs",
+      "old": {
+        "bytes": 10738,
+        "sha256": "f296e4ad62866668ea97eebfcb7a4ccc00be72cf065e6696d540326ba653968f"
+      },
+      "new": {
+        "bytes": 35007,
+        "sha256": "3e51fda76b2e1cbdab632530d4100fd0b6534b12022080078128933823ca7d4a"
+      }
+    }
+  ]
+}

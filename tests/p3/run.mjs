@@ -1,12 +1,11 @@
-// P3: the 10 acceptance criteria on the PACKED tarball, in a real Chrome.
-//   Official run : CDP_URL=http://127.0.0.1:9222 node tests/p3/run.mjs
-//   Dev run      : node tests/p3/run.mjs            (headless Chromium, throw-away profile)
-// With CDP_URL it opens ONE tab in the existing browser, closes only that tab, and never
-// launches or closes the browser. A criterion that cannot run is reported as failed.
+// P3: the 10 acceptance criteria on the PACKED tarball, in bundled headless Chromium.
+// Run: node tests/p3/run.mjs (fresh OS-temporary profile).
+// A criterion that cannot run is reported as failed.
 import { chromium } from "playwright-core";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { prepare } from "./prepare.mjs";
 import { startServer } from "./server.mjs";
@@ -15,7 +14,6 @@ const repo = fileURLToPath(new URL("../../", import.meta.url));
 const proofs = process.env.P3_PROOFS ? join(repo, process.env.P3_PROOFS) : join(repo, "proofs/p3");
 const shots = join(proofs, "shots");
 mkdirSync(shots, { recursive: true });
-const CDP_URL = process.env.CDP_URL;
 const ONLY = process.env.P3_ONLY?.split(",");
 const sha = (b) => createHash("sha256").update(b).digest("hex");
 
@@ -38,28 +36,23 @@ const evidence = {
   package: { tarball: prep.tarName, sha256: prep.tarSha, files: prep.packFiles.length, installedVersion: prep.installedVersion },
   build: { distSha256: prep.distHash },
   server: { origin: server.origin, port: server.port, bind: "127.0.0.1", command: "node tests/p3/run.mjs (startServer in tests/p3/server.mjs; stopped at the end of the run)" },
-  commands: { official: "CDP_URL=http://127.0.0.1:9222 node tests/p3/run.mjs", prepare: prep.log },
+  commands: { official: "node tests/p3/run.mjs", prepare: prep.log },
   browser: {},
   criteria: [],
 };
 
-let context, browser, page, profile;
+const profile = mkdtempSync(join(tmpdir(), "b-"));
+// Unix-domain sockets are limited to 107 chars and Chromium nests its IPC
+// sockets under the profile dir: fail fast on a long TMPDIR instead of a
+// cryptic launch failure.
+if (profile.length > 70) throw new Error(`browser profile path too long for Chromium IPC sockets (${profile.length} chars > 70): set TMPDIR to a short path`);
+let context;
 const consoleLines = [];
 try {
-  if (CDP_URL) {
-    browser = await chromium.connectOverCDP(CDP_URL);
-    context = browser.contexts()[0];
-    evidence.browser.mode = "cdp";
-    evidence.browser.cdpUrl = CDP_URL;
-    evidence.browser.pagesBefore = context.pages().length;
-    page = await context.newPage();
-  } else {
-    profile = mkdtempSync(join(repo, "proofs-profile-"));
-    context = await chromium.launchPersistentContext(profile, { downloadsPath: join(profile, "dl"), acceptDownloads: true, executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined), headless: true, args: ["--no-first-run", "--no-default-browser-check"] });
-    evidence.browser.mode = "headless-dev";
-    page = context.pages()[0] ?? (await context.newPage());
-  }
-  evidence.browser.version = (context.browser() ?? browser).version();
+  context = await chromium.launchPersistentContext(profile, { downloadsPath: join(profile, "dl"), acceptDownloads: true, executablePath: chromium.executablePath(), headless: true, args: ["--no-first-run", "--no-default-browser-check"] });
+  evidence.browser.mode = "headless-dev";
+  const page = context.pages()[0] ?? (await context.newPage());
+  evidence.browser.version = context.browser().version();
   const cdp = await context.newCDPSession(page);
   evidence.browser.targetId = (await cdp.send("Target.getTargetInfo")).targetInfo.targetId;
   await page.setViewportSize({ width: 1280, height: 1000 });
@@ -455,18 +448,15 @@ try {
   evidence.server.notFound = server.requests.filter((q) => q.status === 404);
   evidence.allCriteriaPass = evidence.criteria.length > 0 && evidence.criteria.every((c) => c.pass);
 } finally {
-  if (CDP_URL) {
-    await page?.close();
-    evidence.browser.pagesAfter = context?.pages().length;
-  } else {
+  try {
     await context?.close();
+  } finally {
+    rmSync(profile, { recursive: true, force: true });
+    await server.close();
+    evidence.server.stopped = true;
+    writeFileSync(join(proofs, "p3-evidence.json"), JSON.stringify(evidence, null, 2) + "\n");
+    writeFileSync(join(proofs, "console.log"), consoleLines.join("\n") + "\n");
   }
-  if (profile) rmSync(profile, { recursive: true, force: true });
-  await server.close();
-  evidence.server.stopped = true;
-  writeFileSync(join(proofs, "p3-evidence.json"), JSON.stringify(evidence, null, 2) + "\n");
-  writeFileSync(join(proofs, "console.log"), consoleLines.join("\n") + "\n");
 }
 console.log(`\nP3 criteria: ${evidence.criteria.filter((c) => c.pass).length}/${evidence.criteria.length} pass; tarball ${evidence.package.sha256.slice(0, 12)}; target ${evidence.browser.targetId}`);
-// Exit explicitly: a CDP connection keeps Node alive, and this never closes the browser.
 process.exit(evidence.allCriteriaPass ? 0 : 1);

@@ -1,0 +1,64 @@
+{
+  "caseId": "template-004-header-band-zero",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "hb",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": [],
+          "template": "header-band",
+          "parameters": [
+            {
+              "name": "headerHeight",
+              "value": 0
+            }
+          ]
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 100000,
+          "height": 80000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "header": {
+            "x": 0,
+            "y": 0,
+            "width": 100000,
+            "height": 0
+          },
+          "body": {
+            "x": 0,
+            "y": 0,
+            "width": 100000,
+            "height": 80000
+          }
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

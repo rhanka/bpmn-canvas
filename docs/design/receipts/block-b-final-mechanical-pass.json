@@ -1,0 +1,220 @@
+{
+  "format": "block-b-final-mechanical-pass/1",
+  "candidate": "01eb004",
+  "itemCommits": [
+    "f4e5f91",
+    "550f8d4"
+  ],
+  "sourcePins": [
+    {
+      "path": "src/profile/compiler-static.ts",
+      "old": {
+        "bytes": 24454,
+        "sha256": "a9f7dcb5b723fb09282b3ce5975d350b17a6a7880832ac3777698551b058af66"
+      },
+      "new": {
+        "bytes": 25061,
+        "sha256": "545df345071a38708011bb133bfd1a2f1521a23f15bd0582a196671ecc1d4d78"
+      },
+      "reason": "lot 5 fallback validation and upstream mapping, conductor ruling 2026-10-19"
+    },
+    {
+      "path": "src/profile/static-contracts.ts",
+      "contractExtension": true,
+      "old": {
+        "bytes": 23675,
+        "sha256": "8c2ed416a29ee93e9bcd583ec86b0b1fbc308def1b134c7be7c2fab310df7376"
+      },
+      "new": {
+        "bytes": 24098,
+        "sha256": "b624c2060af1036158573fca0675003a5e98add3b331e2c15e6fa7ff2b7e7bb0"
+      },
+      "reason": "lot 5 typed reference widget value, conductor ruling 2026-10-19"
+    }
+  ],
+  "testsFirst": {
+    "red": {
+      "tests": 6,
+      "pass": 4,
+      "fail": 2,
+      "skipped": 0,
+      "reason": "Only the two stated source fingerprint checks failed."
+    },
+    "green": {
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "skipped": 0
+    },
+    "assertionsChanged": 0
+  },
+  "checks": {
+    "typecheck": {
+      "status": 0
+    },
+    "build": {
+      "status": 0
+    },
+    "historyGuard": {
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "byteIdenticalToMain": true
+    },
+    "hygiene": {
+      "files": 7,
+      "tests": 36,
+      "pass": 36,
+      "fail": 0,
+      "skipped": 0,
+      "includes": [
+        "brand",
+        "path",
+        "case-policy",
+        "attribution",
+        "history"
+      ]
+    },
+    "sealCoverage": "Every non-browser test file was included in the campaign or the separate independence command.",
+    "x24Baseline": {
+      "tests": 13,
+      "pass": 13,
+      "fail": 0
+    },
+    "campaign": {
+      "mode": "campaign",
+      "files": 102,
+      "status": 0,
+      "signal": null,
+      "elapsedSeconds": 470,
+      "truncated": false,
+      "counts": {
+        "tests": 3553,
+        "suites": 0,
+        "pass": 3552,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 1,
+        "todo": 0,
+        "duration_ms": 470100.630986
+      }
+    },
+    "independence": {
+      "mode": "independence",
+      "files": 1,
+      "status": 0,
+      "signal": null,
+      "elapsedSeconds": 1247,
+      "truncated": false,
+      "counts": {
+        "tests": 3,
+        "suites": 0,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 1246560.408128
+      }
+    },
+    "independenceMutationChecks": 934149,
+    "nonBrowserTotals": {
+      "files": 103,
+      "tests": 3556,
+      "suites": 0,
+      "pass": 3555,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0
+    },
+    "zeroLiteralScan": {
+      "files": 2936,
+      "occurrences": 3958,
+      "paired": 3368,
+      "reviewed": 587,
+      "unmatched": 3,
+      "byToken": {
+        "RV-01": 153,
+        "RV-02": 186,
+        "RV-03": 86,
+        "RV-04": 53,
+        "RV-05": 51,
+        "RV-06": 4,
+        "RV-07": 13,
+        "RV-08": 11,
+        "RV-09": 7,
+        "RV-10": 21,
+        "RV-11": 1,
+        "RV-12": 1
+      }
+    }
+  },
+  "x24": {
+    "reviewedTokens": 12,
+    "boundFiles": 183,
+    "boundRecords": 255,
+    "reviewedSpans": 587,
+    "allowances": 1,
+    "staleBindings": 0,
+    "changedSpanBytes": 0,
+    "changedSealedFiles": 0,
+    "oldSeal": {
+      "bytes": 31693,
+      "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+    },
+    "newSeal": {
+      "bytes": 31693,
+      "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+    }
+  },
+  "excluded": {
+    "browserFiles": 27,
+    "browserFilesExecuted": 0,
+    "probeFiles": 1,
+    "probeFilesExecuted": 0
+  },
+  "stoppedCases": [
+    {
+      "caseId": "x24-L-004-zero-unmatched",
+      "clause": "I1 zero-literal scan of the tracked tree",
+      "expected": 0,
+      "observed": 3,
+      "positions": [
+        "unmatched src/react/workshop.tsx:110:39 raw LX-NV-1 b53d4d24",
+        "unmatched src/react/workshop.tsx:326:30 raw LX-NV-1 b53d4d24",
+        "unmatched src/react/workshop.tsx:326:94 raw LX-NV-1 5a434281"
+      ],
+      "source": "src/react/workshop.tsx",
+      "identicalToStartingCommit": true,
+      "action": "Stopped this case. No source, matcher, allowance or assertion was changed."
+    },
+    {
+      "caseId": "OPEN-PANEL",
+      "clause": "Lot 5 optional property panel; owner selection before enabling",
+      "source": "tests/profile-lot5-dom.test.mjs:70",
+      "expected": "Owner selection before enabling",
+      "observed": "UNSEALED; one skipped case",
+      "action": "Stopped this case. The existing skip and assertion were preserved."
+    }
+  ],
+  "scope": {
+    "sourceFilesEdited": 0,
+    "expectedValueChanges": 0,
+    "sealDecisionChanges": 0,
+    "comparatorChanges": 0,
+    "assertionChanges": 0,
+    "protectedWorktreeChanges": 0,
+    "protectedDesignFileChanges": 0,
+    "attributionTrailersAdded": 0,
+    "pushed": false
+  },
+  "acceptance": {
+    "requiredTestFailures": 0,
+    "observedTestFailures": 0,
+    "requiredUnmatched": 0,
+    "observedUnmatched": 3,
+    "accepted": false,
+    "reason": "The stopped zero-unmatched case requires a source decision outside this mechanical pass."
+  }
+}

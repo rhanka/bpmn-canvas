@@ -1,0 +1,144 @@
+{
+  "caseId": "lot5-gates-003-reserved-n-creation",
+  "commandArtifact": {
+    "json": {
+      "baseRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+      "commands": [
+        {
+          "command": "surface",
+          "context": {"target":"Task_b1","value":"Intake review"},
+          "entry": "rename-direct"
+        }
+      ],
+      "expectedViewRevision": "e3c4b7165d972f51a8cc14c97be98846110056f2e3ca689fa4024274920541d6",
+      "transactionId": "tx-gates-reserved"
+    },
+    "role": "transaction"
+  },
+  "comparatorIds": [
+    "lot5/result",
+    "lot5/snapshot",
+    "lot5/events",
+    "lot5/history",
+    "lot5/twin"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "baseRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+        "code": "profile-open",
+        "diagnostics": [
+          {"afterPresent":false,"beforePresent":false,"classification":"readiness","code":"activity-name-missing-pre-normalize","disposition":"observed","messageKey":"rule.activity-name","result":{"domain":"none","pointer":null,"provenance":"unavailable","targetId":null},"ruleId":"activity-named-pre-normalize","severity":"warn","source":{"domain":"tree","pointer":"/rootElements/0/flowElements/2","provenance":"exact","targetId":"Task_b2"},"stage":"pre-normalize"}
+        ],
+        "operation": "applyCommands",
+        "profileIdentity": {
+          "base": {"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},
+          "descriptors": [{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],
+          "mechanismVersion": "1",
+          "profile": "ui-neutral/1",
+          "schemaVersion": "1.0.0",
+          "sha256": "217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e",
+          "version": "1.1.0"
+        },
+        "report": {
+          "artifacts": [],
+          "entries": [{"afterPresent":false,"beforePresent":false,"classification":"readiness","code":"activity-name-missing-pre-normalize","disposition":"observed","messageKey":"rule.activity-name","result":{"domain":"none","pointer":null,"provenance":"unavailable","targetId":null},"ruleId":"activity-named-pre-normalize","severity":"warn","source":{"domain":"tree","pointer":"/rootElements/0/flowElements/2","provenance":"exact","targetId":"Task_b2"},"stage":"pre-normalize"}],
+          "idMap": [],
+          "inputRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+          "operation": "applyCommands",
+          "rawStandardFindings": [],
+          "reportVersion": "2",
+          "sourceIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}
+        },
+        "status": "refused"
+      },
+      "role": "result"
+    },
+    {
+      "json": {
+        "baseRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+        "operation": "getSnapshot",
+        "payload": {
+          "$equals": {"input":"snapshot","pointer":""}
+        },
+        "profileIdentity": {
+          "base": {"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},
+          "descriptors": [{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],
+          "mechanismVersion": "1",
+          "profile": "ui-neutral/1",
+          "schemaVersion": "1.0.0",
+          "sha256": "217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e",
+          "version": "1.1.0"
+        },
+        "report": {
+          "artifacts": [],
+          "entries": [],
+          "idMap": [],
+          "inputRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+          "operation": "getSnapshot",
+          "outputRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+          "rawStandardFindings": [],
+          "reportVersion": "2",
+          "sourceIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},
+          "targetIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}
+        },
+        "revision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+        "status": "ok"
+      },
+      "role": "snapshot"
+    },
+    {
+      "json": [],
+      "role": "events"
+    },
+    {
+      "json": {
+        "probe": {
+          "baseRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+          "code": "operation-error",
+          "diagnostics": [],
+          "operation": "undo",
+          "profileIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},
+          "report": {"artifacts":[],"entries":[],"idMap":[],"inputRevision":"3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535","operation":"undo","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},
+          "status": "refused"
+        },
+        "probeEvents": [],
+        "rootTransactions": 0
+      },
+      "role": "history"
+    },
+    {
+      "json": {
+        "events": [],
+        "history": {
+          "probe": {"baseRevision":"3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535","code":"operation-error","diagnostics":[],"operation":"undo","profileIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},"report":{"artifacts":[],"entries":[],"idMap":[],"inputRevision":"3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535","operation":"undo","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},"status":"refused"},
+          "probeEvents": []
+        },
+        "result": {
+          "baseRevision": "3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535",
+          "code": "profile-open",
+          "diagnostics": [{"afterPresent":false,"beforePresent":false,"classification":"readiness","code":"activity-name-missing-pre-normalize","disposition":"observed","messageKey":"rule.activity-name","result":{"domain":"none","pointer":null,"provenance":"unavailable","targetId":null},"ruleId":"activity-named-pre-normalize","severity":"warn","source":{"domain":"tree","pointer":"/rootElements/0/flowElements/2","provenance":"exact","targetId":"Task_b2"},"stage":"pre-normalize"}],
+          "operation": "applyCommands",
+          "profileIdentity": {"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"},
+          "report": {"artifacts":[],"entries":[{"afterPresent":false,"beforePresent":false,"classification":"readiness","code":"activity-name-missing-pre-normalize","disposition":"observed","messageKey":"rule.activity-name","result":{"domain":"none","pointer":null,"provenance":"unavailable","targetId":null},"ruleId":"activity-named-pre-normalize","severity":"warn","source":{"domain":"tree","pointer":"/rootElements/0/flowElements/2","provenance":"exact","targetId":"Task_b2"},"stage":"pre-normalize"}],"idMap":[],"inputRevision":"3c5eccbb9053a296841ceb9f2ee9e38b85a18ec8e3635f65d8eb313f3db39535","operation":"applyCommands","rawStandardFindings":[],"reportVersion":"2","sourceIdentity":{"base":{"id":"ui-neutral-base/1","sha256":"eabe8ae63be94d2ecfd8873651d9aa24089b438726b048be72f9f4e00be9adbb","version":"lot5-2"},"descriptors":[{"id":"ui-neutral-descriptors/1","sha256":"59f956064d24508d071e0a2f4cddb91a6f764bbb82b751234def3e63ffde4032","version":"lot5-2"}],"mechanismVersion":"1","profile":"ui-neutral/1","schemaVersion":"1.0.0","sha256":"217aed39fa21ede481945f0cf5b899e5424725ead193136b201a8051e2d3986e","version":"1.1.0"}},
+          "status": "refused"
+        }
+      },
+      "role": "twin"
+    }
+  ],
+  "expectedStatus": "refused:profile-open",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/documents/banded.snapshot.json",
+      "role": "snapshot",
+      "sha256": "0f56b8f7b331db0bc3be6474e278a94e6e698aa6c959f34226911eb5e578abdd"
+    }
+  ],
+  "operation": "applyCommands",
+  "phase": "edit",
+  "profileArtifact": {
+    "path": "fixtures/ui-neutral-profile.json",
+    "sha256": "c495634b669e817af02545b040b1d767bb0ea098b4924a6247b984b53b6787a1"
+  }
+}

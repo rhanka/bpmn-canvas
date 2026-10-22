@@ -10,6 +10,7 @@ import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSyn
 import { existsSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
+import { tmpdir } from "node:os";
 import { chromium } from "playwright-core";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -107,17 +108,22 @@ test("browser build from a CDN path: ESM and IIFE, with and without strict CSP",
   const appPort = await listen(app, "127.0.0.1");
   const appOrigin = `http://127.0.0.1:${appPort}`;
 
-  const profile = mkdtempSync(join(root, "proofs-profile-"));
-  const ctx = await chromium.launchPersistentContext(profile, {
-    executablePath: process.env.CHROMIUM ?? (existsSync("/snap/bin/chromium") ? "/snap/bin/chromium" : undefined),
-    headless: true,
-    viewport: { width: 1280, height: 900 },
-    args: ["--no-first-run", "--no-default-browser-check"],
-  });
   const evidenceDir = join(root, "proofs/browser-dist");
   mkdirSync(evidenceDir, { recursive: true });
   const evidence = { note: "srcdoc pages: GE A2UI IFrameSrcdoc shape (IIFE inlined, CSP connect-src 'none'); -badbase, -nolink and srcdoc without assetBase are expected failures that must show a visible diagnostic", package: `${pkg.name}@${pkg.version}`, cdnBase, appBase: appOrigin + appBase, sri, runs: {} };
+  const profile = mkdtempSync(join(tmpdir(), "b-"));
+  // Unix-domain sockets are limited to 107 chars and Chromium nests its IPC
+  // sockets under the profile dir: fail fast on a long TMPDIR instead of a
+  // cryptic launch failure.
+  if (profile.length > 70) throw new Error(`browser profile path too long for Chromium IPC sockets (${profile.length} chars > 70): set TMPDIR to a short path`);
+  let ctx;
   try {
+    ctx = await chromium.launchPersistentContext(profile, {
+      executablePath: chromium.executablePath(),
+      headless: true,
+      viewport: { width: 1280, height: 900 },
+      args: ["--no-first-run", "--no-default-browser-check"],
+    });
     const BROKEN = { "esm-badbase": "asset-load-failed", "esm-nolink": "styles-missing", srcdoc: "asset-load-failed" };
     for (const name of ["esm", "iife", "esm-csp", "iife-csp", "esm-csp-external", "srcdoc-assetbase", "srcdoc", "esm-badbase", "esm-nolink"]) {
       await t.test(name, async () => {
@@ -200,11 +206,14 @@ test("browser build from a CDN path: ESM and IIFE, with and without strict CSP",
       });
     }
   } finally {
-    writeFileSync(join(evidenceDir, "evidence.json"), JSON.stringify(evidence, null, 2) + "\n");
-    await ctx.close();
-    cdn.close();
-    app.close();
-    rmSync(profile, { recursive: true, force: true });
-    rmSync(scratch, { recursive: true, force: true });
+    try {
+      await ctx?.close();
+    } finally {
+      rmSync(profile, { recursive: true, force: true });
+      cdn.close();
+      app.close();
+      rmSync(scratch, { recursive: true, force: true });
+      writeFileSync(join(evidenceDir, "evidence.json"), JSON.stringify(evidence, null, 2) + "\n");
+    }
   }
 });
