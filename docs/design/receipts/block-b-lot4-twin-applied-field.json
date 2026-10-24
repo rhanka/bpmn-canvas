@@ -1,0 +1,235 @@
+{
+  "format": "block-b-lot4-reseal/1",
+  "date": "2026-10-20",
+  "round": "Twin-applied field reseal of lot 4 (JS), block B final spec pass: the twin-applied PS-35 mark of four vendored compile successes becomes the structured index field twinApplied, which the seal test reads instead of matching a derivation text",
+  "inputs": [
+    "Block B review of the squash 25a66ed, MINOR finding 20: the twin-applied detection of tests/profile-lot4-seal.test.mjs (the UNSEALED pointer rule of the vendored-case test and the guard test) matched a sentence of the derivation text; a rewording would fail noisily, not silently, but the mark had no structured form",
+    "Conductor ruling 2026-10-19 (PS-35 double application): the twin records of the four compile successes already carry the decided form {status: ok, diagnostics: []} with the UNSEALED /payload pointer; the sealed value is the twin record, not re-applied",
+    "Final spec pass instruction: a structured field in each affected index entry (twinApplied: [\"PS-35\"]); the assertion and the guard read the field; expected values unchanged"
+  ],
+  "precedence": "DESIGN R3.3 text > parity-sync decision PS-35 and its conductor ruling > review finding",
+  "predecessorLedger": {
+    "path": "docs/design/receipts/block-b-lot4-unicode-key-fix.json",
+    "bytes": 13711,
+    "sha256": "c657518915949945195c5a1e5a567cacb97d9c5fce5544d939a82134de5256ac"
+  },
+  "predecessor": {
+    "commit": "25a66ed",
+    "seal": {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "bytes": 178983,
+      "sha256": "189c40c34242c238cfe247f027613b318aa4b62f0a852c16f1773615ddb336c4"
+    },
+    "caseCount": 391,
+    "sealedFiles": 984
+  },
+  "successor": {
+    "seal": {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "bytes": 178983,
+      "sha256": "538ad9c207c13e2d2dee665717a2efed49f171cd6daedc3f09aa7654d332e35b"
+    },
+    "caseCount": 391,
+    "vendoredCases": 194,
+    "sealedFiles": 984
+  },
+  "valueChanges": {
+    "export.compile.all-fields-valid": {
+      "index": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+        "pointer": "/cases/197/twinApplied",
+        "old": "absent",
+        "new": [
+          "PS-35"
+        ]
+      },
+      "decisions": [
+        "PS-35"
+      ],
+      "caseFile": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/cases/export.compile.all-fields-valid.json",
+        "bytes": 855,
+        "sha256": "4a5b930f2c3af358e87d597824101f0adfc6c270296a2063349be687496a62f6",
+        "unchanged": true
+      },
+      "twinCaseFile": {
+        "path": "tests/profile_render/expected/parity/cases/export.compile.all-fields-valid.json",
+        "sha256": "4ead5c3c457838a8ca71956b067a87b1f0b270431f7201d8cd955ceb89b3eb2e"
+      },
+      "expectedValues": "unchanged: the case file, its result record and its UNSEALED list (the twin pointers, /payload once) keep their bytes"
+    },
+    "export.compile.digest-zero-origin": {
+      "index": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+        "pointer": "/cases/199/twinApplied",
+        "old": "absent",
+        "new": [
+          "PS-35"
+        ]
+      },
+      "decisions": [
+        "PS-35"
+      ],
+      "caseFile": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/cases/export.compile.digest-zero-origin.json",
+        "bytes": 857,
+        "sha256": "2b952cef68b35633b481c7c61fb814ab38549cafe8131abe041efb51605b61d9",
+        "unchanged": true
+      },
+      "twinCaseFile": {
+        "path": "tests/profile_render/expected/parity/cases/export.compile.digest-zero-origin.json",
+        "sha256": "b588be3850ed3bafe1f3918b8a23e86056e74f59763e515ae1ccb5f5bf26b5da"
+      },
+      "expectedValues": "unchanged: the case file, its result record and its UNSEALED list (the twin pointers, /payload once) keep their bytes"
+    },
+    "render.compile.grid-profile": {
+      "index": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+        "pointer": "/cases/268/twinApplied",
+        "old": "absent",
+        "new": [
+          "PS-35"
+        ]
+      },
+      "decisions": [
+        "PS-35"
+      ],
+      "caseFile": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/cases/render.compile.grid-profile.json",
+        "bytes": 851,
+        "sha256": "3a55cc1457f9f47ad2ca96d151684ee366e10a54003f55cb390e8523e08fca9e",
+        "unchanged": true
+      },
+      "twinCaseFile": {
+        "path": "tests/profile_render/expected/parity/cases/render.compile.grid-profile.json",
+        "sha256": "bbcbe4a7c0b2bc4889d52337195955ecd9193fe32cc3fe38376a8cbe5c961008"
+      },
+      "expectedValues": "unchanged: the case file, its result record and its UNSEALED list (the twin pointers, /payload once) keep their bytes"
+    },
+    "render.compile.path-valid": {
+      "index": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+        "pointer": "/cases/271/twinApplied",
+        "old": "absent",
+        "new": [
+          "PS-35"
+        ]
+      },
+      "decisions": [
+        "PS-35"
+      ],
+      "caseFile": {
+        "path": "tests/fixtures/lot4-layout-export/expectations/cases/render.compile.path-valid.json",
+        "bytes": 849,
+        "sha256": "148183edd41b86ce53c70d6bf5fb768e4c872a3dc34e11e4afcb831f9b35e3c3",
+        "unchanged": true
+      },
+      "twinCaseFile": {
+        "path": "tests/profile_render/expected/parity/cases/render.compile.path-valid.json",
+        "sha256": "57e5aba1ff59d4ec2b709f4ec73b6a1ab808b55277c0fb6b977e0d1f23e353c2"
+      },
+      "expectedValues": "unchanged: the case file, its result record and its UNSEALED list (the twin pointers, /payload once) keep their bytes"
+    }
+  },
+  "untouched": "Every case file, artifact and vendored file, manifest.json, design-excerpts.json, the docs clause table (docs/design/block-b-lot4-expectations.md) and every other index entry keep their bytes. The derivation texts of the four entries are unchanged: they still state the ruling in prose, and no test reads them for the mark.",
+  "method": "Two edits of the standalone derivation tool: lot4-vendor.mjs records PS-35 in twinApplied on the branch that keeps the twin compile record unchanged (status ok and empty diagnostics already present), and the index writer of lot4-context.mjs emits the field after decisions. The tool (node tests/fixtures/lot4-layout-export/expectations/derive/lot4-derive.mjs <DESIGN.md R3.3>) was first run on the unchanged tree and reproduced every sealed byte (no file changed), then run after the two edits: the only generated changes are the four index entries and seal.json. No loader, compiler, evaluator, layout or exporter of the implementation was run or imported.",
+  "testChange": "tests/profile-lot4-seal.test.mjs: the UNSEALED pointer rule of the vendored-case test and the twin-applied guard read entry.twinApplied; the guard also checks that the field is a non-empty list of distinct decisions, each PS-35 and listed in decisions, only on vendored spec-seal entries, that the marked set is the four compile successes, that each twin record carries /payload and that the sealed UNSEALED list is the twin list (without the mark it would name /payload twice). The ledger chain test reads the Unicode key ledger as history (successor = KF seal) and binds this ledger to the current bytes; the brand and path test also scans this ledger. Test count unchanged (21).",
+  "twin": {
+    "status": "The twin (Python) seal vendors the lot 4 JS manifest and seal under profile_export and profile_render; manifest.json is unchanged by this round, seal.json changes. index.json is not recorded as vendored by the twin (Unicode key ledger, twin.vendoredCopies). The twin was not inspected (not available in this worktree).",
+    "vendoredCopies": [
+      {
+        "path": "tests/profile_export/expected/vendor/js/seal.json",
+        "origin": "vendored from this JS seal",
+        "old": "189c40c34242c238cfe247f027613b318aa4b62f0a852c16f1773615ddb336c4",
+        "new": "538ad9c207c13e2d2dee665717a2efed49f171cd6daedc3f09aa7654d332e35b"
+      },
+      {
+        "path": "tests/profile_render/expected/vendor/js/seal.json",
+        "origin": "vendored from this JS seal",
+        "old": "189c40c34242c238cfe247f027613b318aa4b62f0a852c16f1773615ddb336c4",
+        "new": "538ad9c207c13e2d2dee665717a2efed49f171cd6daedc3f09aa7654d332e35b"
+      }
+    ],
+    "dependentPins": [
+      "tests/profile_render/expected/derive_helper.py: JS_SEAL_SHA256",
+      "tests/profile_export/expected/MANIFEST.sha256 and tests/profile_render/expected/MANIFEST.sha256: the vendored seal.json",
+      "every harness record derived from a vendored JS lot 4 case that cites the JS seal SHA-256 in its derivation text"
+    ],
+    "followUp": "Twin re-vendor of the lot 4 JS seal.json under profile_export and profile_render, then regeneration of the pins that cite the JS seal SHA-256. No case, artifact or manifest byte to re-vendor."
+  },
+  "sealedTreeDelta": {
+    "added": 0,
+    "removed": [],
+    "changed": 4,
+    "unchanged": 980,
+    "note": "Changed sealed files: README.md, derive/lot4-context.mjs, derive/lot4-vendor.mjs, index.json; seal.json is excluded from its own inventory."
+  },
+  "supersedesFiles": [
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/README.md",
+      "old": {
+        "bytes": 123245,
+        "sha256": "d40db0769fa65c3c0d5195210b99425dbbd13901648782416de44854ccc63fd2"
+      },
+      "new": {
+        "bytes": 124115,
+        "sha256": "f9f3185029ace335269859aaa743d5220cb34fcde4932316b163f65f1647ee51"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/derive/lot4-context.mjs",
+      "old": {
+        "bytes": 6812,
+        "sha256": "03d0686e36bbda240d8420d2792be098f368e96086a9cf10a8e1ab69852c2f76"
+      },
+      "new": {
+        "bytes": 6870,
+        "sha256": "0b1861e90b6fba2fb8a9b41cc8a74923d8c7c366f1cfc0f3d6929a47d476d0ed"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/derive/lot4-vendor.mjs",
+      "old": {
+        "bytes": 15866,
+        "sha256": "a6182fc95b55997575d8830f358ca818e70fdf0fc99462a409edb9e0790bdd05"
+      },
+      "new": {
+        "bytes": 16185,
+        "sha256": "76660c59003121c54b5bdc755ea3fa0c97446feff30146d9bdda161eacfcbd86"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/index.json",
+      "old": {
+        "bytes": 560501,
+        "sha256": "f714a1d71cb7ec9ee099a3fa03d4373a4a9402ec898975c53b20e10d71f0272d"
+      },
+      "new": {
+        "bytes": 560693,
+        "sha256": "02e31ac0429bf82b97f54389a352713633ffa11231b5e65fec781cd809e3c741"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot4-layout-export/expectations/seal.json",
+      "old": {
+        "bytes": 178983,
+        "sha256": "189c40c34242c238cfe247f027613b318aa4b62f0a852c16f1773615ddb336c4"
+      },
+      "new": {
+        "bytes": 178983,
+        "sha256": "538ad9c207c13e2d2dee665717a2efed49f171cd6daedc3f09aa7654d332e35b"
+      }
+    },
+    {
+      "path": "tests/profile-lot4-seal.test.mjs",
+      "old": {
+        "bytes": 51652,
+        "sha256": "54345782a2030cb46ea8729827835b3a3bae9ecf9f39ee1e3c0d0fd375d426a3"
+      },
+      "new": {
+        "bytes": 53721,
+        "sha256": "2c2e5eb8f0364fa5965f9d89eed3496136d04749cb4ffb6ac715a00e76d44530"
+      }
+    }
+  ]
+}

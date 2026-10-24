@@ -1,0 +1,43 @@
+{
+  "caseId": "lot5-workshop-005-preview-tool",
+  "comparatorIds": [
+    "lot5/static-surface"
+  ],
+  "expectedArtifacts": [
+    {
+      "json": {
+        "callbacks": [],
+        "renderedPages": [
+          {"name":"Order handling","order":0,"pageId":"page-main","semanticRootId":"Proc_main"},
+          {"name":"Order detail","order":1,"pageId":"page-detail","semanticRootId":"Proc_main"},
+          {"name":"Review B","order":2,"pageId":"page-review-b","semanticRootId":"Proc-review"},
+          {"name":"Review A","order":3,"pageId":"page-review-a","semanticRootId":"Proc-review"}
+        ]
+      },
+      "role": "static-surface"
+    }
+  ],
+  "expectedStatus": "ok",
+  "inputArtifacts": [
+    {
+      "path": "fixtures/documents/views.snapshot.json",
+      "role": "snapshot",
+      "sha256": "836a1887424e92eb1c9e071ab742a5ce22a899c7b7267ad7fae54aabb5bf3a37"
+    },
+    {
+      "json": {
+        "compiledProfile": "fixtures/ui-neutral-profile.json",
+        "descriptorContext": "fixtures/ui-neutral-descriptors.json",
+        "envelope": "input snapshot envelope",
+        "inputKind": "native"
+      },
+      "role": "preview-props"
+    }
+  ],
+  "operation": "workshop.preview",
+  "phase": null,
+  "profileArtifact": {
+    "path": "fixtures/ui-neutral-profile.json",
+    "sha256": "c495634b669e817af02545b040b1d767bb0ea098b4924a6247b984b53b6787a1"
+  }
+}

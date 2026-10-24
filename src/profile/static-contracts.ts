@@ -186,6 +186,82 @@ const exportFields: Readonly<Record<string, { readonly required: readonly string
   label: { required: ["id", "text"], optional: [] }, metadata: { required: ["name", "value"], optional: [] }
 };
 
+// Lot-4 template parameter signatures shared by the compile-time CR-09
+// glyph check and the runtime templateGeometry seam. Non-template glyphs
+// pass through; anything else that is not exactly the declared parameter
+// set with well-typed values refuses profile-glyph-shape.
+export function checkTemplateGlyphSignature(glyph: unknown): void {
+  const g = glyph as { kind?: unknown; template?: unknown; parameters?: unknown };
+  if (!g || g.kind !== "template") return;
+  const parameters = g.parameters;
+  if (!Array.isArray(parameters)) failContract("profile-glyph-shape");
+  const params = parameters as { readonly name?: unknown; readonly value?: unknown }[];
+  const names = params.map(p => p.name);
+  if (names.some(name => typeof name !== "string") || new Set(names).size !== names.length) failContract("profile-glyph-shape");
+  const values = new Map(params.map(p => [p.name as string, p.value]));
+  const exact = (expected: readonly string[]): void => {
+    if (names.length !== expected.length || expected.some(name => !values.has(name))) failContract("profile-glyph-shape");
+  };
+  const ticks = (value: unknown, signed: boolean): void => {
+    if (typeof value !== "number" || !Number.isSafeInteger(value) || (!signed && value < 0)) failContract("profile-glyph-shape");
+  };
+  switch (g.template) {
+    case "header-band":
+      exact(["headerHeight"]);
+      ticks(values.get("headerHeight"), false);
+      return;
+    case "corner-fold": {
+      exact(["foldRatio", "headerRotation"]);
+      const foldRatio = values.get("foldRatio");
+      if (typeof foldRatio !== "number" || !Number.isFinite(foldRatio) || foldRatio < 0 || foldRatio > 0.5) failContract("profile-glyph-shape");
+      const headerRotation = values.get("headerRotation");
+      if (headerRotation !== 0 && headerRotation !== 90 && headerRotation !== 270) failContract("profile-glyph-shape");
+      return;
+    }
+    case "band-stripe":
+      exact(["stripeWidth"]);
+      ticks(values.get("stripeWidth"), false);
+      return;
+    case "attached-badge":
+      exact(["offsetX", "offsetY", "hideSource", "markerShift"]);
+      ticks(values.get("offsetX"), true);
+      ticks(values.get("offsetY"), true);
+      ticks(values.get("markerShift"), true);
+      if (typeof values.get("hideSource") !== "boolean") failContract("profile-glyph-shape");
+      return;
+    default: failContract("profile-glyph-shape");
+  }
+}
+
+const renderTokenColor = /^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/;
+
+// Lot-4 pinned render-token signature shared by compile-time theme and
+// binding token checks. Symbolic font and dash vocabularies stay injected
+// at runtime; at compile time any string is well-typed.
+export function checkRenderTokenSignature(name: string, value: unknown): void {
+  switch (name) {
+    case "fill": case "stroke": case "textColor":
+      if (typeof value !== "string" || !renderTokenColor.test(value)) failContract("profile-type");
+      return;
+    case "fontFamily": case "dash":
+      if (typeof value !== "string") failContract("profile-type");
+      return;
+    case "fontSize": case "strokeWidth":
+      if (typeof value !== "number" || !Number.isFinite(value) || value < 0 || Math.abs(value) > Number.MAX_SAFE_INTEGER) failContract("profile-type");
+      return;
+    case "fontWeight":
+      if (value !== "normal" && value !== "bold") failContract("profile-type");
+      return;
+    case "arrow":
+      if (value !== "none" && value !== "open" && value !== "filled" && value !== "hollow-triangle") failContract("profile-type");
+      return;
+    default: {
+      if (!/^region\.([^.]+)\.(headerWidth|padding|gap|minHeight)$/.test(name)
+        || typeof value !== "number" || !Number.isSafeInteger(value)) failContract("profile-type");
+    }
+  }
+}
+
 export function checkStaticRule(ruleId: string, input: Ast, suppliedContext: Context): void {
   // Clone with the strict JSON encoder before reading any data properties.
   const subject = cloneJson(input), context = cloneJson(suppliedContext);
@@ -259,6 +335,7 @@ export function checkStaticRule(ruleId: string, input: Ast, suppliedContext: Con
         if (!["native", "path", "template"].includes(g.kind) || !Array.isArray(g.viewBox) || g.viewBox.length !== 4 ||
           g.viewBox.some((n: unknown) => typeof n !== "number" || !Number.isFinite(n)) || g.viewBox[2] <= 0 || g.viewBox[3] <= 0 ||
           (g.kind === "native" && (typeof g.nativeType !== "string" || g.commands?.length !== 0))) failContract("profile-glyph-shape");
+        checkTemplateGlyphSignature(g);
       }
       if (subject.tokens) {
         const seen = new Set<string>();
@@ -279,7 +356,16 @@ export function checkStaticRule(ruleId: string, input: Ast, suppliedContext: Con
         const params = subject.parameters ?? [], declared = context.recipe.parameters;
         if (new Set(params.map((p: Ast) => p.name)).size !== params.length || params.some((p: Ast) => !declared.some((d: Ast) => d.name === p.name)) ||
           declared.some((d: Ast) => d.required && !params.some((p: Ast) => p.name === d.name))) failContract("profile-ui-parameters");
-        for (const p of params) if (context.sourceTypes && context.sourceTypes[p.source] !== declared.find((d: Ast) => d.name === p.name).type) failContract("profile-type");
+        for (const p of params) {
+          if (!context.sourceTypes) continue;
+          const declaredType = declared.find((d: Ast) => d.name === p.name).type;
+          const given = context.sourceTypes[p.source];
+          if (given === declaredType) continue;
+          // Reference widgets submit IDs as typed string values, so a value
+          // source carrying an element ID satisfies a string parameter.
+          if (subject.widget === "reference" && p.source === "value" && given === "element" && declaredType === "string") continue;
+          failContract("profile-type");
+        }
       }
       return;
     }

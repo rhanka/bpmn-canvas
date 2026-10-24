@@ -1,0 +1,874 @@
+{
+  "format": "lot5-vendor-py/1",
+  "note": "Vendored Python lot-5 parity cases (block-B parity sync, BLOCKB-PARITY-SYNC sections 2.1, 2.2 and 3.3, rows PS-H25 and PS-35). seal: the owning seal (commit, manifests, the three runtime-specific cases it keeps, section 5). files: raw SHA-256 of every file vendored under vendor/py/ (paths relative to the Python pathBase) as the Python MANIFEST.sha256 lists it. lot0: the lot-0 contract files the vendored files name by Python repository path, with their byte-identical copy in this repository and its raw SHA-256. cases: per vendored harness case, author, clause and derivation transcribed verbatim and the raw SHA-256 of the harness record and of its parity record. Nothing here is computed; author/lot5-group-vendor-py.mjs checks every digest.",
+  "seal": {
+    "side": "Python lot-5 seal (resealed after the parity sync)",
+    "commit": "1c2df3166480fe62a233fe91c3ae19bf8839cd2a",
+    "pathBase": "tests/profile_commands/expected/",
+    "manifest": {
+      "path": "tests/profile_commands/expected/MANIFEST.sha256",
+      "sha256": "6a3cef2eb7233f4cc706d3fb5acde1badc87c41450e2fdf9f47080001bdc8993"
+    },
+    "parityManifest": {
+      "path": "tests/profile_commands/expected/parity/manifest.json",
+      "sha256": "888465b9bc1734944c331c9ce077b7b8570e71a9991d1e57555b4aba9c8ce181",
+      "corpusVersion": "lot5-py-1"
+    },
+    "runtimeSpecific": [
+      "tx-cancelled",
+      "tx-dispose-during-transaction",
+      "tx-reentrant-refused"
+    ],
+    "presync": {
+      "note": "Pre-sync Python seal (commit 2fd688a18add1bc70b56a5fae8cd48b42d3bf9ae, MANIFEST.sha256 36772702c08add76e8dbb1a9d30635758f2c5f6be9e4e526696dc15dbda50547): every vendored file is byte-identical except the two parity records below, which the owning seal resealed by decision PS-35; each resealed record equals its pre-sync record plus PS-35 (identity record unchanged, moved to the compiled-identity artifact; outcome {status, payload UNSEALED, diagnostics: []}).",
+      "parity/lot5-py-compile-grid-l5-ok.json": "586c8d59ba313399c3bb963184b5812f4945d45635ded2b310b189c4f9b6cd5b",
+      "parity/lot5-py-compile-neutral-l5-ok.json": "d7df3b02c7908d193d99d0af16351b5677d44d62be2db605e95d218c162fcd3e"
+    }
+  },
+  "files": {
+    "artifacts/neutral-base.lot5.json": "d4792e70fc82169cf7043baa0de4d83b06230c8f4142a1566af8176edcf87768",
+    "artifacts/neutral-descriptors.lot5.json": "022a9bceb4171bfb1dc1102d5d5eb446594cf9bef3791139ce333139353bc067",
+    "artifacts/profiles/compile-enum-duplicate-records.json": "478fb47e1ab9a0c127c79651c034cbe83151ce15ca0afe73254e8d86c22e9dcd",
+    "artifacts/profiles/compile-enum-duplicate-values.json": "d17b19e7db902fe97df858e024f89787e58c2dbe6fea78cd99bb8026e10fa08d",
+    "artifacts/profiles/compile-enum-empty-choices.json": "be9cddc32a75d0fba9b956399d006b2123e1b8c9e2e680008b2fe3d870214069",
+    "artifacts/profiles/compile-field-parameter-missing.json": "02678f525a71ae4bc86324397313cef3b9cd551c78e998800e65bf8c990f2722",
+    "artifacts/profiles/compile-id-not-ordinary-input.json": "c64ba27299c79a10bf83cd4d8f0718fdf52a0486c691f66afa5803a72f8ed6a6",
+    "artifacts/profiles/compile-message-missing-fallback.json": "4cc60c09f9b779334ee70d939bd034f93f96c24a45d3c20267e7ae53702179d6",
+    "artifacts/profiles/compile-mutable-without-command.json": "b52445b0c434801ff2990372002636ef60091e56e8a10e0c85cc2d8e7a34df6d",
+    "artifacts/profiles/compile-mutable-without-parameters.json": "8b0c5a4a54fc979174966e79a88a522b9f29c84a1093683dbd1115656fec69d7",
+    "artifacts/profiles/compile-readonly-with-command.json": "7eb8de80aabc4be6f494ebc6e52246e501c36aacbc5da19ebb795e1c8724893e",
+    "artifacts/profiles/compile-reference-empty-target-types.json": "d9f81307974660bab421ff0ac6980a78de51086281874d9bfb8f5d0081f29344",
+    "artifacts/profiles/compile-ui-icon-unknown-glyph.json": "326aa3721dfbdb11e281055cc61f4a6d09aeab861609305ca907bf7932fa36b5",
+    "artifacts/profiles/compile-ui-label-unknown-message.json": "7c3c4bb492c89ce46f4259848dd47ae80f74cea4eab93e8bc9403f5cd5124cc1",
+    "artifacts/profiles/compile-ui-parameter-duplicate.json": "c50f93d80a4478a925b0c07f4bb36a4737d59eaa3902fe8d084b4fbbcf37072c",
+    "artifacts/profiles/compile-ui-parameter-missing.json": "d06d2cfea4ec3dff1856ce345b3febc1ba8da7c979e2a6ee866854b6993ed9ea",
+    "artifacts/profiles/compile-ui-parameter-source-type.json": "88719cfe3fb5ebeb44f5612d5c28bba26581d0e951f23dce02a1a56247b5d573",
+    "artifacts/profiles/compile-ui-parameter-unknown.json": "899f6912aa645fd2a688b199c5d27ca1101e902bb27c30edf6df6dbea2e6fdd7",
+    "artifacts/profiles/compile-upstream-duplicate-across-entries.json": "92a160ce956745f9384e70b154c48344349f3a6e71d56686cdad1a1e290a0168",
+    "artifacts/profiles/compile-upstream-duplicate-within-entry.json": "af75fc5c8070b5e42aeb5d7d99fe8b32c9ca000cf34023b9f88fb38bed5ad447",
+    "artifacts/profiles/grid-lot5.json": "34e7e05b196f76b220c7447cfe2eda40f50311fdf7debc88512ea2e3676727a6",
+    "artifacts/profiles/neutral-lot5-gate.json": "2ecd79f1342f99339e44c57630fa8d4f068aeb058f70048c5464417f5f2569d9",
+    "artifacts/profiles/neutral-lot5-guard.json": "1ea5cf611aa8a58c5191784b17394ad4d6a6833b73e85b80f47f7d359973b486",
+    "artifacts/profiles/neutral-lot5-post-error.json": "d9a3a10014a9ffeee1e1df07c2a03d03aff116c58862720e017944bf23b49610",
+    "artifacts/profiles/neutral-lot5-vendored-lint.json": "27afdf96cc197544c9daf701ce8b2aab009212620b1a285568a1f66fd8a419e5",
+    "artifacts/profiles/neutral-lot5.json": "e9368b586c77cefd2e7cdde875317d8b434e348ba8672d675ae020cb8fcb60ce",
+    "fixture-base.json": "c01d9d53fcf2c2618503a9a6d4058264e9a2917b1b2946613cac7337ca755c8b",
+    "fixture-descriptors.json": "df6ad04de0b7bb9c31e0667dfa686c4871fd077016e861a2fa5ceb8922040f18",
+    "fixture-profile-grid.json": "f29c3134808cecd3baa1e97cf6f9c3284108d87a7589d482df9572a3aaf8e631",
+    "fixture-profile-neutral-lint.json": "66da97228e05ab3aadc56d22a189278306ba4dede028ba3e12cc1026fdc62bac",
+    "fixture-profile-neutral.json": "a54b003cf1d4d4c06a1caaf182203d032243307db8fe1f810e73c4ba5b7be1ee",
+    "parity/lot5-py-compile-enum-duplicate-records.json": "2d34ad37b976a21994206b967a677cb367f74a5fd41df6b79756f09a4144a5db",
+    "parity/lot5-py-compile-enum-duplicate-values.json": "df1bbee2fd95f0cb503705d07221d4819a2e9998b3b49ca1baaba8814279aabf",
+    "parity/lot5-py-compile-enum-empty-choices.json": "ddaa944c321566d8d2a9f617f79ab419963d981ec5a76beec7920f62ccea235d",
+    "parity/lot5-py-compile-field-parameter-missing.json": "4faad6cad072072c0b78f6bf8c81f9ec96f9d865f2fd9ee03cd6f4da5ebe93ab",
+    "parity/lot5-py-compile-grid-l5-ok.json": "8e1db276c3fe837b54293fcbd212631722f9fabc7fa3b9153a40a8ad4acc41de",
+    "parity/lot5-py-compile-id-not-ordinary-input.json": "4c6029f25cc45881c4e328c1bbc49bd65fb7bfc36dd04c3e2f9ff77a684d6283",
+    "parity/lot5-py-compile-message-missing-fallback.json": "04840748fcbf7e6193c843708016a5627275950264e9af10af4ef0252466ae8c",
+    "parity/lot5-py-compile-mutable-without-command.json": "708e7696132055a0a98f78b060185575a3e6b52bc7617b370ce411772f9de379",
+    "parity/lot5-py-compile-mutable-without-parameters.json": "10574c679ba7364eabadb7075361a9d43334f2ee6666124810c368760a6d9c28",
+    "parity/lot5-py-compile-neutral-l5-ok.json": "a4b401bdb30fa7a98c16d3be97b3b56a0e8d45c688be17a03c444e9c63de4b13",
+    "parity/lot5-py-compile-readonly-with-command.json": "0ff3c33dc651ea64d4bca61fad2fa7cb90c1202431452e17b1bfa064adda57c1",
+    "parity/lot5-py-compile-reference-empty-target-types.json": "a254b36c126fd5c44542d35c04611aa125a320d92c6962cef1caebd7d7c6ec13",
+    "parity/lot5-py-compile-ui-icon-unknown-glyph.json": "2914abcf5b178cb28ae5ed366280dff6b5a8458eff6275d58b4473ed937abd56",
+    "parity/lot5-py-compile-ui-label-unknown-message.json": "3be312a9df3325131c90326ff27220b7da388371b30ecbf2d3d787b47ae63c79",
+    "parity/lot5-py-compile-ui-parameter-duplicate.json": "eac2d9422d2f6c5c32b3e4325941f0134d5ae98c70b67e3838a3323bee481509",
+    "parity/lot5-py-compile-ui-parameter-missing.json": "de18ed1a907a648cbf7f5306f68f81846322a899004a256db6975e64b5fdd41d",
+    "parity/lot5-py-compile-ui-parameter-source-type.json": "ba9456a29d5836eb891856be4044e8f31c57d9bf18a1ea13d95a59b5027b6f5d",
+    "parity/lot5-py-compile-ui-parameter-unknown.json": "4334c27b0151a7172a067c212c5dc6e6dcead805b6c758af9f2b9dd016ba8f9b",
+    "parity/lot5-py-compile-upstream-duplicate-across-entries.json": "084f043e1b630f99d5e4b022b4bac04e1cfcc82cc7ce39b31b9247ae439d2dbf",
+    "parity/lot5-py-compile-upstream-duplicate-within-entry.json": "08f41107bf0f5446bc40906e24c97ea82fea3ee878f158f6bb503884167859f4",
+    "parity/lot5-py-copy-fragment-preorder.json": "95c1f84ac5d0ff2d6652ac49deab6fc5e293cf2cd5ec3b90665c5469bc1eaad6",
+    "parity/lot5-py-copy-fragment-read-only.json": "ca30d7a27377f46938990bc531bf2b1722de0e42dd60c8bf270467be67fdc8fa",
+    "parity/lot5-py-copy-unknown-id.json": "0a5fe33a3dd87e8368fdb34f8e5f1493e170582da7702d4d0670e354cde91a98",
+    "parity/lot5-py-create-append-task.json": "0f13b384cb4c17c98a581a3bd2d21ea3a6920fbde5ec2c874f93274ce00340f1",
+    "parity/lot5-py-create-reference-then-connect.json": "ee57980560ac0a3fbf9c30adeb801975ef365ce0a638e5b118ffd526d80b3a59",
+    "parity/lot5-py-create-task-palette-grid.json": "52e2974648fe9fb4cd7cf8da770fb7a0c8e3df9fffed75e8ecb9c55e27e53c1c",
+    "parity/lot5-py-create-task-palette-neutral.json": "388e790fa9bc3ea00c2d59df2c557d8c0c32201c38b168c7f6870f72436170dd",
+    "parity/lot5-py-delete-includes-dependents.json": "f93d1e4fb148a38012c4c6ef8902706909dbf2906757ee80b424bc089c87839b",
+    "parity/lot5-py-delete-refuses-dependents.json": "822938fe3012f4368fa4ef1ec298bbc9ef3c8d6fb5f2c05e7307ea53a3257925",
+    "parity/lot5-py-delete-unreferenced.json": "b7800a3cbac6c0b082e6b47294b216d2aa0cf4dfaa17ebfd8c68678b6101d2da",
+    "parity/lot5-py-field-clear-optional-reference.json": "8200a795aba25bbe1ee493587415e180df27a8e63462df3e10f2281070f9dca0",
+    "parity/lot5-py-field-display-edit-grid.json": "9c53f4aa749f044956b35db1fdc270aee8ba7004a18ec37c18da35b04aa7dc11",
+    "parity/lot5-py-field-display-prefix-exact.json": "b5aca49e38ac2eb46fab7a6694db2d35167dafbe99ea857fd57c18f6612d3ae7",
+    "parity/lot5-py-field-edit-restores-marker.json": "525520f3c817778a615c5b22a4505de4f982288c96f89b395f5ec7a7dcad0506",
+    "parity/lot5-py-field-empty-string-explicit.json": "9493f2d0447ee04ff59fa90c6431a9ffacc29d8e82639ed468e053754eb73cdf",
+    "parity/lot5-py-field-enum-validation.json": "dc43c2f6a45edf0b73d647828172f182c492d3f48721a11571bcdb948e4d038a",
+    "parity/lot5-py-field-listing-widgets.json": "80837cb5d88dab6d6abfeb495611ca218f489db2395fa4f0af62b769da93cad3",
+    "parity/lot5-py-field-not-editable.json": "0f7793acd50ba670725064c3cd4936230cae46550684c3c79486480057fb52f8",
+    "parity/lot5-py-field-reference-submits-ids.json": "ca0c76e51dec5d7b7bf25e77bf3da50fe4579c5d499c18a30ac88099d4e45baa",
+    "parity/lot5-py-field-unknown.json": "1cfe1ed4af3a3cd4a359ae42b09e9c7e29d8a97689c2729e0fd8b4bd7e27b127",
+    "parity/lot5-py-field-value-omitted-or-coerced.json": "78aaa82a82bcc912fdcf12d4e7cb8891eba9067cf4f7149d0ea7d0d95367b864",
+    "parity/lot5-py-field-visible-predicate.json": "26480fe7d16f7fd89061ea0d3dcbe16f615b571ab65c649c2e5b6238b42f1265",
+    "parity/lot5-py-gate-external-creation.json": "c74e723dab5aca5f20508ffba5eb111d4cdbf0e03a39ff266e7e4da6fdf8691b",
+    "parity/lot5-py-gate-reserved-n-creation.json": "2c5868a1f0053e7c416c201229b067c1f36d2f4702cfa9e30f452d22cb7317bc",
+    "parity/lot5-py-gate-reserved-n-reuse.json": "7543a1b9918599bcd6aa607a1f77583ed9ffc7e4d9777636b57c821c41f8a4f9",
+    "parity/lot5-py-history-batch-one-step.json": "f549acb0c18306c09672a91720c5077359a776e8db4f75900923354cce7d5d84",
+    "parity/lot5-py-history-change-events.json": "629ea36dce3f3ebaaa309d34f767148c2ac4a669ec1ee328c4bdba41e460423f",
+    "parity/lot5-py-history-load-epoch.json": "9e08b17e226aeb9b25b6f5134ce066312ba553bb600101881299733e05325c1c",
+    "parity/lot5-py-history-noop-no-entry.json": "65e802ee005fb9674ab35c390351fe4b6cd88cd9a94cd5daf2e477a8d34f6e57",
+    "parity/lot5-py-history-refusal-preserves-state.json": "24c2a16f67580b31740a139090ac6167482f38efcce7672e012aa52289a17e8e",
+    "parity/lot5-py-history-restore-bindings-presentation.json": "4038d4d18294a54b5c48881e72d458f7927fb960ef1f0d18cb4b0d046f75144f",
+    "parity/lot5-py-history-stale-revisions.json": "acd54ee090496a2a5177788cf57224194baa482456eca90c02f4d265a0b9cf3e",
+    "parity/lot5-py-history-undo-redo-guards.json": "31d44b0b1bfaee3649aaf5fea5cc164cec4ed635946324329089439637e05f0f",
+    "parity/lot5-py-history-undo-redo-roundtrip.json": "8df7244a14ba47f265964706eb3bda475b742f7636bc3e637f706de4eebc57a6",
+    "parity/lot5-py-io-set-explicit-selection.json": "a78a04ae6f9a65e9f57718eb395ce122ccf947286da47e3829f9f78dc6505582",
+    "parity/lot5-py-io-set-selection-required.json": "fbd5b8d7ecdbb0bf8824d36d40b2aa6a2e3953ac48474fd2f0338fa709f6da03",
+    "parity/lot5-py-l10n-resolution-order.json": "d4f9affd13948fe0835ad2f6aab9e5b9bb96f00ff6115aa12f979b2aa69e9935",
+    "parity/lot5-py-lifecycle-activation-descriptor-mismatch.json": "ac19dde43878d9f7795eb697b3bcbc9f2bab13f696116d1f3f318acead487096",
+    "parity/lot5-py-lifecycle-dispose.json": "f51363829e9577cb218ec5d805addb09d5b4c66ccf1646d12ae7c5146a81c3f3",
+    "parity/lot5-py-lifecycle-not-loaded.json": "c4975691ddca0f1a407c332e9f06339e1fbda31a75babf7ee4fc1d87b4e40ef5",
+    "parity/lot5-py-lint-draft-integrity-refused.json": "87786834debe67a7951e6596f04c4a50a7e20d6cf806abf7d73cffad0362f4df",
+    "parity/lot5-py-lint-draft-warnings-commit.json": "1accb7a7b6f543b2cfe7d06020fff23d828c78319ccd24191014dc2fafcaee7e",
+    "parity/lot5-py-lint-noop-correction-report.json": "26865f7413c889ebc2a861fcafbffc3a46ee9f9cfd70192cebdee9547bac890c",
+    "parity/lot5-py-lint-post-normalize-error-blocks.json": "93fee018ae6ed1a56d2f1f75544a49ae1a3397eeadf51e0dd9e2ef8b9c92f1e6",
+    "parity/lot5-py-paste-batch-one-step.json": "dd3f3f0c5ca2cd73c715ca13174d7b336c55e45cbe7eda96b1bc7aee5ad5dbe8",
+    "parity/lot5-py-paste-dangling-external-refused.json": "8e749e5e782abbef0c19f97fe90cc56e8ff1464a1c29c33782ab590c244d19f6",
+    "parity/lot5-py-paste-key-collision.json": "b361cc1c6356b928b9c1605ee4b604c3541b0b50f2fb5c581d4bafdf43cbe0ba",
+    "parity/lot5-py-paste-normalize-refused.json": "ea7d46168e35ce6467690d7a5a3287467c50e0e83f674fe4543726526d64954c",
+    "parity/lot5-py-paste-remap-preserves-external.json": "b7617e9c5b33af5c70236005c8e9dac79566e963707599db987399f924d25305",
+    "parity/lot5-py-pick-field-states.json": "526b110785a6428f397e24af2a6f6c3e83322685582dc38f02ac884e6944dd05",
+    "parity/lot5-py-pick-filter-sort.json": "36309cf548a9b0644ea6fba1be4296a43b1aa36baa858da240bde5bafd696261",
+    "parity/lot5-py-pick-paging-bounds.json": "dabf51382877df9d5a4a1c2acc7b560bbb04d14dffd042f00897fd803364f3ad",
+    "parity/lot5-py-pick-paging.json": "1759e0d454dcf37005e40b2a11ba8514558be368a6b265a6016e68c8ad32b3b7",
+    "parity/lot5-py-pick-query-case-sensitive.json": "4e7a808552cb2144f85670b5da84c500fe13ddeec1642bbe5722c8e0a1438598",
+    "parity/lot5-py-pick-query-no-normalization.json": "2d74c2bd5e72be4ec6b7a4b8e0ff314c8d03a54df0b2f88a5bfd98cb5fe539bf",
+    "parity/lot5-py-pick-reference-ownership.json": "7bedc13423a91cce2d6f6a82028d517ab3edb5f3dd20bf63e26a78cc7458b0ce",
+    "parity/lot5-py-replace-dependency-refused.json": "9758fe01870aae1ac94b397eb6d63ae19ba570443f1974191f59d92f6203ca89",
+    "parity/lot5-py-replace-preserves-id.json": "5410cc68ed2c910ea0e1ffe2bbacdc934b2ffd76bf7a2b1bfae1cef4b7cdd4e3",
+    "parity/lot5-py-replace-replacement-map.json": "caed8cbf4e743cafd049272ffb1a1c4ada562d45107a9bf5c09d4f9d83ceed17",
+    "parity/lot5-py-surface-append-when.json": "df9f4eedb1efd2c1a76c3732f712583d720ab79bb667020fcc6822477430f8bc",
+    "parity/lot5-py-surface-connect-when.json": "ae63ec73f95a5803f220701e20f291aa924dee54d3ce49014a060402dbdd83d7",
+    "parity/lot5-py-surface-context-when.json": "25b7df8e728c2e059be11c9be027f30274ff00da6a19ea6626867cce43a831b0",
+    "parity/lot5-py-surface-delete-when.json": "1ee27e65498e2ba7c49eed530e796e100480f9a6a2446e4f67f9f8222b27094e",
+    "parity/lot5-py-surface-direct-edit-when.json": "99ea8093e6ad5b5db60e282b5b53fc2a536c4799c04ca8ad771b6c40f933a25b",
+    "parity/lot5-py-surface-gesture-parameters.json": "0af37f6e36f71b1839aecfafa3b0597cc8bd4d1c71f6963e6283492c406c5626",
+    "parity/lot5-py-surface-handles-and-values.json": "86deb4cb037c0f9eea2566a14cf09e816f25482a8a3959c044b726415704a6aa",
+    "parity/lot5-py-surface-palette-entries-grid.json": "33e0e2928a63b9d3a45c518ec5585b3df398a1502cf934693b4c494da2572195",
+    "parity/lot5-py-surface-palette-entries-localized.json": "efdf4ebc1b4dbd3e93125615f7ad014454da764b0581477114d88aef916f4dc8",
+    "parity/lot5-py-surface-palette-entries-order.json": "3d3231cfe66bf3dddb8e55d3caa346c480cc8b8d5636d5e22d08481f4df96f62",
+    "parity/lot5-py-surface-palette-when.json": "a72228b32798cd7cd03b7b46a5b4e0b722e88e761b2220e7c66c1f0760d023a7",
+    "parity/lot5-py-surface-paste-when.json": "37240a0c6acdeedcd3382867fd4ee7c28e74b278b245769ac1b02a4037ae9ccb",
+    "parity/lot5-py-surface-raw-recipe-command.json": "ec9ca001474f8e849e8b7a0c42330ec62ca68fc4e39ff4df706b2987ef4b8a55",
+    "parity/lot5-py-surface-replace-when.json": "a0c91d3f77ee16a04d450d6e549997ebbde1efa74954e70b650854f123acf8d8",
+    "parity/lot5-py-surface-unknown-entry.json": "68ea91adfff56f05e2b046e0cadfc1824529400a45265b9f4c9e631a54f10cf1",
+    "parity/lot5-py-surface-unlisted-upstream.json": "b838222e3ba877409bc5863c2db7324e39d73683952cab4c1e80cd41db1b73e0",
+    "parity/lot5-py-surface-upstream-mapped.json": "1b1725d2bfae185cf37600e8aa65c89a85eba66950f6ab7d0d9a8d1e57440ced",
+    "parity/lot5-py-twin-grid-fixture-commands.json": "7e6c798b733a3ed5c3185a12a677ab385e90124ad2294b4dcf7da3d54cce5fd5",
+    "parity/lot5-py-twin-neutral-fixture-commands.json": "b1297af763f02fbefb123d1ea21b2383212002759b0a3bf099c1c7e090146c1e"
+  },
+  "lot0": {
+    "contracts/profile-mechanism/1/neutral-base.json": {
+      "copy": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/neutral-base.json",
+      "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9",
+      "use": "input.source of fixture-base.json"
+    },
+    "contracts/profile-mechanism/1/neutral-descriptors.json": {
+      "copy": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/neutral-descriptors.json",
+      "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2",
+      "use": "input.source of fixture-descriptors.json; bridge.descriptorPackages[0].file of lot5-py-lifecycle-activation-descriptor-mismatch"
+    },
+    "contracts/profile-mechanism/1/neutral-grid-profile.json": {
+      "copy": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/neutral-grid-profile.json",
+      "sha256": "7247b5cd90c13fea2d42048a8ea6a5f3a36f64db67a771533adf10968c92cccd",
+      "use": "input.source of fixture-profile-grid.json"
+    },
+    "contracts/profile-mechanism/1/neutral-metrics.json": {
+      "copy": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+      "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0",
+      "use": "resource neutral-metrics (metrics asset) of every vendored profile"
+    },
+    "contracts/profile-mechanism/1/neutral-profile.json": {
+      "copy": "tests/fixtures/profile-parity-corpus/profile-mechanism/1/neutral-profile.json",
+      "sha256": "c1319045f538a9f4ef1f3f7500af4a3e0df059e04c7c42dd7e992477c9199650",
+      "use": "input.source of fixture-profile-neutral.json and fixture-profile-neutral-lint.json"
+    }
+  },
+  "cases": {
+    "compile-enum-duplicate-records": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 unique choices; schema field choices uniqueItems",
+      "derivation": "Two identical choice records violate the pinned schema uniqueItems keyword, so load refuses profile-schema before compilation. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "e4ce37f85fa6c13a3016be6786ee30baf2dba5937107144f59a63d54ed677cb1",
+      "paritySha256": "2d34ad37b976a21994206b967a677cb367f74a5fd41df6b79756f09a4144a5db"
+    },
+    "compile-enum-duplicate-values": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 unique JSON values even when choice names differ",
+      "derivation": "Two choices with different names share the JSON value One; schema uniqueItems accepts the distinct records and the compiler refuses profile-ui-parameters (the code used by the executable design checker for the same negative). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "3e2cc4911dbb23cd902ae75ff94c63213f6ed904fe54e958c80b5723329324a0",
+      "paritySha256": "df1bbee2fd95f0cb503705d07221d4819a2e9998b3b49ca1baaba8814279aabf"
+    },
+    "compile-enum-empty-choices": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 enum fields require nonempty unique choices; schema field allOf enum->choices minItems 1",
+      "derivation": "The link direction enum field (notion index 6) gets an empty choices array; the pinned schema conditional rejects it before compilation, so load refuses profile-schema. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "d8bbf0f9b7d9d42d197fd5ec7f093e3ccaaef20d29b4b20d9438c8c112af78e5",
+      "paritySha256": "ddaa944c321566d8d2a9f617f79ab419963d981ec5a76beec7920f62ccea235d"
+    },
+    "compile-field-parameter-missing": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 mutable fields require a complete parameter map; §2.4.1 L195",
+      "derivation": "The task name field keeps its rename command but loses the value->name binding; rename's required name parameter is unsupplied, so compilation refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "25f8172245b320ce040eddd99e2821e4d01d59c9720fb85540b174405d39a0e1",
+      "paritySha256": "4faad6cad072072c0b78f6bf8c81f9ec96f9d865f2fd9ee03cd6f4da5ebe93ab"
+    },
+    "compile-grid-l5-ok": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10; §8.3 L655; §10.1 L737",
+      "derivation": "The composed grid fixture compiles: its three UI entries and two fields bind every required parameter exactly once and every label and validation message has text for policies.localeFallback (en). Parity sync PS-35 (DESIGN §10.1 L737: PureResult success is exactly {status, payload, diagnostics}): the outcome is {status ok, payload, empty diagnostics} whose payload, the CompiledProfile (no wire shape), is unsealed as compiled-profile; the compiled profile identity of the committed profile bytes is sealed separately as expected.compiledIdentity (parity role compiled-identity). The identity values are unchanged.",
+      "harnessSha256": "ec6a24799e125e4e6e164fac945fef7f2d3b0a25dd09b0bb4c753c58a8e509a1",
+      "paritySha256": "8e1db276c3fe837b54293fcbd212631722f9fabc7fa3b9153a40a8ad4acc41de"
+    },
+    "compile-id-not-ordinary-input": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 IDs/ports/hashes are not ordinary inputs; §2.4 L165 set cannot modify existing IDs; §2.4.1 L206",
+      "derivation": "A recipe that sets /id on its target is added; an existing ID is never writable, so compilation refuses profile-producer (the code of the executable design checker for an id mutation). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "5fb4f35ed29c09beaf8ac60bb61c7ec7017fe1a5c6cf3eeeab16fabfc20683cf",
+      "paritySha256": "4c6029f25cc45881c4e328c1bbc49bd65fb7bfc36dd04c3e2f9ff77a684d6283"
+    },
+    "compile-message-missing-fallback": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 missing fallback text is a compiler error",
+      "derivation": "A message with only an fr text is added while policies.localeFallback is en; the DESIGN names no code, so the lot-5 binding uses the CR-05 missing-symbol code profile-symbol (DESIGN L190). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "8364ad9285f2720460daa6572d4f3cd5050a7b067ce7ec077809388af4da8ed9",
+      "paritySha256": "04840748fcbf7e6193c843708016a5627275950264e9af10af4ef0252466ae8c"
+    },
+    "compile-mutable-without-command": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 mutable fields require a valid recipe; schema else->required command,parameters",
+      "derivation": "The mutable task name field loses its command; the schema requires command and parameters for a non-readonly field whose mutable predicate is not literally false, so load refuses profile-schema. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "9c8440a53143c954b242dbec017ff4f0f0c1185fd14d08474adb08932e185ff3",
+      "paritySha256": "708e7696132055a0a98f78b060185575a3e6b52bc7617b370ce411772f9de379"
+    },
+    "compile-mutable-without-parameters": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 mutable fields require a complete parameter map; schema else->required parameters",
+      "derivation": "The mutable task name field loses its parameters array; the schema refuses profile-schema. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "b89474fe7ec43dfdb55c32384b89c0d544fc7a46b1104f496308d45653887def",
+      "paritySha256": "10574c679ba7364eabadb7075361a9d43334f2ee6666124810c368760a6d9c28"
+    },
+    "compile-neutral-l5-ok": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10; §8.3 L655 and L659 widget and parameter rules; §10.1 L737",
+      "derivation": "The composed neutral fixture satisfies CR-10: every UI entry and field binds each required recipe parameter exactly once with a type-compatible source (owner/target/source->element, value->string, key->string), the enum field has three distinct values, reference fields have targetTypes, the readonly field omits command and the immutable reference field (mutable op false) may omit command. Parity sync PS-35 (DESIGN §10.1 L737: PureResult success is exactly {status, payload, diagnostics}): the outcome is {status ok, payload, empty diagnostics} whose payload, the CompiledProfile (no wire shape), is unsealed as compiled-profile; the compiled identity, equal to the fixture identity, is sealed separately as expected.compiledIdentity (parity role compiled-identity). The identity values are unchanged.",
+      "harnessSha256": "7e30597fb62810beabb005efc2b8ba641b84946505ed6ff21147eb7f197d50e6",
+      "paritySha256": "a4b401bdb30fa7a98c16d3be97b3b56a0e8d45c688be17a03c444e9c63de4b13"
+    },
+    "compile-readonly-with-command": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 and L659 readonly fields omit command; schema readonly->not required command",
+      "derivation": "The readonly note text field (notion index 2) receives command rename; the schema conditional refuses profile-schema. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "9d39ee262dbe1dbce90a9ebd5c203cca4c7f5aecb9be923669ee2fb2a057fcfa",
+      "paritySha256": "0ff3c33dc651ea64d4bca61fad2fa7cb90c1202431452e17b1bfa064adda57c1"
+    },
+    "compile-reference-empty-target-types": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 reference fields require nonempty admitted targetTypes; schema reference->targetTypes minItems 1",
+      "derivation": "The reference store field (notion index 3) gets targetTypes []; the schema conditional refuses profile-schema. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "f6e6ff5aaf774050201056a4263a9aacb860172f98f55b9334a2f3175118fdf0",
+      "paritySha256": "a254b36c126fd5c44542d35c04611aa125a320d92c6962cef1caebd7d7c6ec13"
+    },
+    "compile-ui-icon-unknown-glyph": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 UI entries have icon {theme,glyph}; §2.4.1 L190 CR-05 referenced glyphs exist",
+      "derivation": "task-create names glyph missing-glyph, absent from theme plain, so compilation refuses profile-symbol. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "1d173eb588b9f66ab64285d65c93c33447e4bac5d77dc29aeb48c7422d1236e3",
+      "paritySha256": "2914abcf5b178cb28ae5ed366280dff6b5a8458eff6275d58b4473ed937abd56"
+    },
+    "compile-ui-label-unknown-message": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L190 CR-05 every referenced message exists",
+      "derivation": "task-create refers to an undefined message label.unknown, so compilation refuses profile-symbol. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "ad6cf3d5040e3d473f644960548a00f72685d65b74a4eba94f660eaccfe31618",
+      "paritySha256": "3be312a9df3325131c90326ff27220b7da388371b30ecbf2d3d787b47ae63c79"
+    },
+    "compile-ui-parameter-duplicate": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 exactly once; §8.3 L655 duplicate required parameters",
+      "derivation": "task-create binds key twice; a parameter supplied twice refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "e7b125a650fd6d88b4520e95336c734cb1e8f24e881bf9d209d360db95aa87ab",
+      "paritySha256": "eac2d9422d2f6c5c32b3e4325941f0134d5ae98c70b67e3838a3323bee481509"
+    },
+    "compile-ui-parameter-missing": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 every required recipe parameter supplied exactly once; §8.3 L655",
+      "derivation": "The value->name binding of task-create is removed; required create-task parameter name is no longer supplied, so compilation refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "544b472556fdeee9b21cc8d5e33b422326d0574f4f63fca153349d616b26e4d6",
+      "paritySha256": "de18ed1a907a648cbf7f5306f68f81846322a899004a256db6975e64b5fdd41d"
+    },
+    "compile-ui-parameter-source-type": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 typed bindings; §8.3 L655 owner/target/source are native handles, value is the typed field value",
+      "derivation": "The element parameter owner of task-create is bound from source value (a scalar), so the binding is ill-typed and compilation refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "a160b68fcfc9c84fa93581ed69b10b9fe3afe77d826f49ae3a35aca7bdbb5926",
+      "paritySha256": "ba9456a29d5836eb891856be4044e8f31c57d9bf18a1ea13d95a59b5027b6f5d"
+    },
+    "compile-ui-parameter-unknown": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 typed gesture/field bindings; §8.3 L655 no ambient parameter",
+      "derivation": "task-create binds a name extra that create-task does not declare; an undeclared parameter binding refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "f051e6ed852269a4c5be7dd19d336ca5c7a84b808106df204ee3da13462f8be8",
+      "paritySha256": "4334c27b0151a7172a067c212c5dc6e6dcead805b6c758af9f2b9dd016ba8f9b"
+    },
+    "compile-upstream-duplicate-across-entries": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 each upstream ID maps to exactly one enabled surface recipe; duplicate mappings are a compile error",
+      "derivation": "UI entry Zeta-task (index 2) is changed to list create.task, already listed by task-create. One upstream ID then maps to two entries; the DESIGN names no code, so the lot-5 binding uses the CR-05 namespace-uniqueness code profile-symbol (DESIGN L190). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "407d38c72a8ccbd3eeb655876d8d4aa1b65b7c9f4343489e2b1e1f869e626837",
+      "paritySha256": "084f043e1b630f99d5e4b022b4bac04e1cfcc82cc7ce39b31b9247ae439d2dbf"
+    },
+    "compile-upstream-duplicate-within-entry": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 duplicate mappings are a compile error",
+      "derivation": "task-create lists create.task twice; the same upstream ID maps twice, which is a duplicate mapping (schema upstreamEntries has no uniqueItems, so the compiler refuses with profile-symbol). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "370d4b751221c3438de1607e4eb5a66cb23751d96ad2641fa578447dbb97b2d8",
+      "paritySha256": "08f41107bf0f5446bc40906e24c97ea82fea3ee878f158f6bb503884167859f4"
+    },
+    "copy-fragment-preorder": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 copy returns a validated native fragment; harmonization B20 source document pre-order",
+      "derivation": "Process_1 holds artifacts [Note_Z, Note_A] and flowElements [Task_1]. copy of [Note_A, Task_1, Note_Z] returns the elements in source document pre-order, not in UTF-16 ID order: the pre-order walks the canonical (profile-c14n/2) document, an element before its descendants, members in UTF-16 key order (artifacts before flowElements) and arrays by index, so the fragment is [Note_Z, Note_A, Task_1]. copy of [Task_1, Process_1] drops Task_1, which is contained in the requested Process_1, and returns the Process_1 subtree with property rootElements.",
+      "harnessSha256": "04579f8151c7640ddd318515dfe7a52e339b37676bee3f240274054468156db0",
+      "paritySha256": "95c1f84ac5d0ff2d6652ac49deab6fc5e293cf2cd5ec3b90665c5469bc1eaad6"
+    },
+    "copy-fragment-read-only": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 copy is read-only and returns PureResult<validated native fragment>; §10.1 L737",
+      "derivation": "copy of [Link_1, Aid_1, Aid_1] returns one fragment whose elements are deduplicated and in source document pre-order (Aid_1 at artifacts index 0 before Link_1 at index 1; harmonization B20), each a deep copy with its containment property; the snapshot is unchanged and no history entry exists.",
+      "harnessSha256": "b3c0d8be3da4c62231fa85a458b059bd990064bb62819db9d79bbf213b3afc84",
+      "paritySha256": "ca30d7a27377f46938990bc531bf2b1722de0e42dd60c8bf270467be67fdc8fa"
+    },
+    "copy-unknown-id": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 validated native fragment; §2.2 L132 dangling references",
+      "derivation": "copy of a missing ID refuses reference-dangling; a stale baseRevision refuses operation-error (lot-5 stale binding, harmonization C10).",
+      "harnessSha256": "ad8f5a79512ff3e0aa4e4ad4c3fdb6b9f922f416f7ed966a413b3df6b4b5bdb1",
+      "paritySha256": "0a5fe33a3dd87e8368fdb34f8e5f1493e170582da7702d4d0670e354cde91a98"
+    },
+    "create-append-task": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 append surface; §2.4 L163 create and L166 assignRef",
+      "derivation": "task-append from Task_1 (key a1, value Next) creates bpmn:Task stable-id/1(Process_1, task, a1) named Next and a bpmn:Association stable-id/1(Process_1, append-link, a1) from Task_1 to the new task with direction One, both appended to their containment arrays. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "018009f6d7aa8d9c46ec83d4a75fea75be40d8fb2bd2238e455a821cbea5496b",
+      "paritySha256": "0f13b384cb4c17c98a581a3bd2d21ea3a6920fbde5ec2c874f93274ce00340f1"
+    },
+    "create-reference-then-connect": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 reference creation creates DataStore + DataStoreReference; connecting it to a Task creates Association, overriding the upstream DataInputAssociation default; §4.4 L408 store name",
+      "derivation": "store-create (value Ledger) creates a root bpmn:DataStore named Ledger with stable-id/1(Definitions_1, store, s1) and an unnamed bpmn:DataStoreReference in Process_1 with stable-id/1(Process_1, reference, s1) whose dataStoreRef is assigned natively. The upstream connect gesture from that reference to Task_1 resolves to reference-link and appends one bpmn:Association (link recipe, direction None) to Process_1.artifacts; no DataInputAssociation or port is created on Task_1. Both reports are empty of entries (no C write, named task, standard rules off).",
+      "harnessSha256": "83ee9eeb8a0801e85738bf05dc57e567e1daed4b26a3b81cb3e843a0cde60776",
+      "paritySha256": "ee57980560ac0a3fbf9c30adeb801975ef365ce0a638e5b118ffd526d80b3a59"
+    },
+    "create-task-palette-grid": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649; §7.1 L538 the neutral profiles differ; §3.2 L284 IDs independent of theme and type",
+      "derivation": "The grid task-create creates a bpmn:ServiceTask with the same stable-id/1(Process_1, task, k1) as the neutral case; C applies the grid default and sets isExecutable from false to true (one complete/set entry, before false, after true), the opposite of the neutral profile.",
+      "harnessSha256": "e72d5c9961292f71ac31761bc7c2db28255edc71d944280d3d8f93d5ef74c1b4",
+      "paritySha256": "52e2974648fe9fb4cd7cf8da770fb7a0c8e3df9fffed75e8ecb9c55e27e53c1c"
+    },
+    "create-task-palette-neutral": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 typed recipes; §2.4 L163 create; §3.2 L276-L282 stable-id/1; §8.2 L631 C on the staged state; §10.1 L739 Report/2",
+      "derivation": "Palette task-create (I3 surface command) with owner Process_1, key k1 and value Draft runs create-task on the stage: one bpmn:Task with ID stable-id/1(Process_1, task, k1) and name Draft is appended to Process_1.flowElements. C (complete, mode retained, activation edit) then runs the neutral complete-process recipe on the stage and resets isExecutable from true to false: one Report/2 entry complete/set (info, repairable, corrected, ruleId complete-process, source and result at /rootElements/0/isExecutable, before true, after false; harmonization B8/B9). Both draft lint stages find nothing (names nonempty, standard rules off); N only places tasks. The payload echoes transactionId and changed=true; the report header carries source/target identity and input/output revisions (harmonization B4).",
+      "harnessSha256": "2c8d4336e51ebb4b457e49ee3da42472d1f37ad62ddf364a764e508acf5b6843",
+      "paritySha256": "388e790fa9bc3ea00c2d59df2c557d8c0c32201c38b168c7f6870f72436170dd"
+    },
+    "delete-includes-dependents": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 explicitly include all dependent edges; no orphan shell remains; §2.4 L171 includeDeclared",
+      "derivation": "aid-delete removes Aid_1 together with its declared dependents: Link_1 (Aid_1 as source) and Link_2 (Aid_1 as target). Note_1 and Link_3, which do not touch Aid_1, survive unchanged. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "b650c0c5b3db8453611176b55909d9d03121c0ab76e0fedc5a18b7ede2b3b3f7",
+      "paritySha256": "f93d1e4fb148a38012c4c6ef8902706909dbf2906757ee80b424bc089c87839b"
+    },
+    "delete-refuses-dependents": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 a cut/delete refuses or explicitly includes all dependent edges; §2.4 L171 refuseIfReferenced",
+      "derivation": "task-delete on Task_1 (target of Link_1) with refuseIfReferenced refuses reference-dangling (lot-5 code binding); no orphan edge can appear and nothing changes. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "475ef3d295786cca19b4d020aca73734292af30e46964ce9869d5de1ae43b57b",
+      "paritySha256": "822938fe3012f4368fa4ef1ec298bbc9ef3c8d6fb5f2c05e7307ea53a3257925"
+    },
+    "delete-unreferenced": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653; §2.4 L171 remove",
+      "derivation": "task-delete on the unreferenced Task_2 removes it; every other element keeps its ID and position. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "d3df3e755d0ad00105d0795b0daf3fdd9efb92504969620052893dc9874a4d14",
+      "paritySha256": "b7800a3cbac6c0b082e6b47294b216d2aa0cf4dfaa17ebfd8c68678b6101d2da"
+    },
+    "field-clear-optional-reference": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 clearing an optional reference is an explicit remove-reference command, never null; §2.4 L166 explicit optional removal",
+      "derivation": "The context entry store-clear runs clear-store (assignRef mode remove of the current store) on Ref_1: the single-valued dataStoreRef property is absent afterwards (not null, not empty) and both reference fields read present false, without display and value.",
+      "harnessSha256": "5d6ea482fec11475001965367b0a33d150c749e468af1afd1cb44e73a4210a50",
+      "paritySha256": "8200a795aba25bbe1ee493587415e180df27a8e63462df3e10f2281070f9dca0"
+    },
+    "field-display-edit-grid": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 field display is a Value expression independent of its storage path; §2.2 L116 Unicode 15.0.0 full case mapping",
+      "derivation": "The grid aid body field displays case-upper(stripPrefix(text, [Note] plus space)): stored [Note] straße displays STRASSE (full mapping expands ß) while value stays the stored text. Editing the body with neu stores [Note] neu and displays NEU; the stored text never receives the display casing.",
+      "harnessSha256": "f890bef6ebc0e391195857b7bc95e190537dcf7964afc725d7b6c7976f658848",
+      "paritySha256": "9c53f4aa749f044956b35db1fdc270aee8ba7004a18ec37c18da35b04aa7dc11"
+    },
+    "field-display-prefix-exact": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.2 L115 stripPrefix removes exactly one matching prefix, otherwise returns the value unchanged; §8.3 L655",
+      "derivation": "[Aid]helper is recognized as aid (recognition prefix [Aid]) but the display prefix is [Aid] with a space; it does not match, so the display is the unchanged stored text, equal to value.",
+      "harnessSha256": "2cc22d4267c2965bf3f5f199bdaebd4e23a3abdeda358ca05d1764e6f977c327",
+      "paritySha256": "b5aca49e38ac2eb46fab7a6694db2d35167dafbe99ea857fd57c18f6612d3ae7"
+    },
+    "field-edit-restores-marker": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 the command preserves/inserts the declared marker without touching source evidence; L655 the edit recipe restores the exact configured marker once",
+      "derivation": "The body field of Aid_1 (I3 field command, notion aid) is submitted with updated; its edit-aid recipe stores [Aid] updated (marker once). The display afterwards is updated and value [Aid] updated; Link_1 and the other elements are unchanged.",
+      "harnessSha256": "f6963d6a1174b3f0f3a441dc76f4cf4a03b647bd90edd88c40bc9b8900020eb9",
+      "paritySha256": "525520f3c817778a615c5b22a4505de4f982288c96f89b395f5ec7a7dcad0506"
+    },
+    "field-empty-string-explicit": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 empty text is an explicit empty string, not omission",
+      "derivation": "Submitting the task name field with the empty string stores name equal to the empty string (the property is present, not removed); both draft subrules then observe Task_1 (warn, readiness, source /rootElements/0/flowElements/0) without blocking, and the field reads present with display and value empty.",
+      "harnessSha256": "a8ec7a60e18fb433b64ca6d743daffb1f5990d81a8fe0eab37e94d55b904c4ff",
+      "paritySha256": "9493f2d0447ee04ff59fa90c6431a9ffacc29d8e82639ed468e053754eb73cdf"
+    },
+    "field-enum-validation": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 field input is validated on change for feedback and again atomically on submit; L655 enum choices",
+      "derivation": "check_field reports Sideways (not a choice value) and one (a choice name, not its value) invalid with the code the submit returns, profile-type, and the field validation message key; the submit of Sideways is refused. One is valid on change and on submit, and sets associationDirection to One. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "f0aa86fb9dd173810a67cd7eff3f68922e5f25fb50e4869f6ab767107b0955a0",
+      "paritySha256": "dc43c2f6a45edf0b73d647828172f182c492d3f48721a11571bcdb948e4d038a"
+    },
+    "field-listing-widgets": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 property descriptors (path, widget, labels, visibility/mutability, validation message, target types); L655 display; L659 readonly",
+      "derivation": "Fields of the recognized notion of each target: task name (text); aid body (multiline, display stripPrefix removes [Aid] plus space once while value is the stored text); the plain note text (readonly, never mutable); reference store and store-view (reference widgets display the stored ID; store-view has mutable false) while store-hint is hidden because Ref_1 has no name; link direction (enum with its choices). Every listed field carries value, the raw stored value, iff present (harmonization B18). Service_1 and Store_1 have no fields.",
+      "harnessSha256": "5c6f64c75de3809d305eca4e812a94ccc11baf8c415ee2ede0d9973f4418a8d2",
+      "paritySha256": "80837cb5d88dab6d6abfeb495611ca218f489db2395fa4f0af62b769da93cad3"
+    },
+    "field-not-editable": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 visibility/mutability predicates; L659 readonly fields omit commands; §8.3 L649 authorization enforced programmatically",
+      "derivation": "store-view (mutable false), store-hint (hidden: Ref_1 has no name), the readonly note text and the aid body of Aid_2 (mutable predicate false for [Aid] locked) are not editable: check_field reports profile-producer and each submit refuses profile-producer (harmonization C7). The aid body lists mutable false; nothing changes.",
+      "harnessSha256": "97472d9134d917bba6594d4705bd539fa1a8448419eb75dbf7cd6b1631b143bb",
+      "paritySha256": "0f7793acd50ba670725064c3cd4936230cae46550684c3c79486480057fb52f8"
+    },
+    "field-reference-submits-ids": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 reference widgets submit IDs, not labels; L657 submitted ID is revalidated at command commit",
+      "derivation": "The store field of Ref_1 accepts the ID Store_2. Submitting the label Ledger is not an ID of any element (reference-dangling) and submitting Task_1 is not an admitted target type (profile-type); both refuse and the accepted assignment stays. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "7b248d8acae3656f5cb43c914e5fab14502ff1215469a43e49b6749596c1948d",
+      "paritySha256": "ca0c76e51dec5d7b7bf25e77bf3da50fe4579c5d499c18a30ac88099d4e45baa"
+    },
+    "field-unknown": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L190 CR-05 symbols; §8.3 L655 owner/target/source are validated native handles",
+      "derivation": "Field commands name their notion (harmonization I3). The field nope is not declared by notion task and the notion nope does not exist: both refuse profile-symbol. The aid field body exists but Task_1 is not recognized as aid: the target handle has the wrong recognized notion, profile-type (lot-5 binding). A missing target refuses reference-dangling.",
+      "harnessSha256": "711be1834e1acd8fb344e96cd8693cbcd1db15b17301d3e334f33b2ebb7a287f",
+      "paritySha256": "1cfe1ed4af3a3cd4a359ae42b09e9c7e29d8a97689c2729e0fd8b4bd7e27b127"
+    },
+    "field-value-omitted-or-coerced": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 empty text is not omission; no implicit scalar coercion or locale-dependent conversion; never null",
+      "derivation": "A field command whose context lacks value lacks the bound value source (profile-ui-parameters). The values null, 5 and true are not coerced to the string parameter and refuse profile-type. Nothing changes.",
+      "harnessSha256": "337068907dd67ae72cc7466cad0bfc16126dd0bc650bc38b37aff98716a2e2b9",
+      "paritySha256": "78aaa82a82bcc912fdcf12d4e7cb8891eba9067cf4f7149d0ea7d0d95367b864"
+    },
+    "field-visible-predicate": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 visibility predicates",
+      "derivation": "With a local name override on Ref_1 the store-hint field becomes visible (present(read /name)) and editable; submitting Branch renames the reference without touching its store. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "1f7c392a7bbbcbc82da1af38b8ba64050905c42455c8a6795db4363fb9a912c4",
+      "paritySha256": "26480fe7d16f7fd89061ea0d3dcbe16f615b571ab65c649c2e5b6238b42f1265"
+    },
+    "gate-external-creation": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 external creation is disabled while OPEN-EXTERNAL remains open; §4.1 L364; §13 L910; §16 L1140 item 2",
+      "derivation": "The generic library has no external-call branch; the fixture gates its external entry with a refuse step (code profile-open, harmonization H4). The command refuses profile-open atomically and creates nothing.",
+      "harnessSha256": "ffa69a230c4f5839cde2517acfd2d89594b3e3d6fda2c30cb92241aecdd6f54a",
+      "paritySha256": "c74e723dab5aca5f20508ffba5eb111d4cdbf0e03a39ff266e7e4da6fdf8691b"
+    },
+    "gate-reserved-n-creation": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §7.2 L554 OPEN-RESERVED-N: affected N editing disabled with profile-open; §13 L917; §16 L1160 item 11 technical gate pending",
+      "derivation": "The fixture profile plus the vendored support recipe ensure-supports: aid-create on Process_A (no supports) stages a valid edit, but N, which apply_commands always runs with activation edit (harmonization H1, H2), would create five support objects and bindings. Support creation by an edit stays disabled while the OPEN-RESERVED-N technical gate is open, so N refuses profile-open, the code passes through and nothing is created; the pre-normalize stage found nothing, so the report is entry-free.",
+      "harnessSha256": "ffe456ddd533fc9dba0ddf14345bd6571c3e93fb936723f27ebf1f154c52b00c",
+      "paritySha256": "2c5868a1f0053e7c416c201229b067c1f36d2f4702cfa9e30f452d22cb7317bc"
+    },
+    "gate-reserved-n-reuse": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §7.2 L552 N may reuse profile-declared supports; §5.2 L440 N reuses any correctly bound existing support",
+      "derivation": "With the five imported supports already bound (vendored support case imported support IDs survive), N reuses them and persists no new support or binding (reuse is never gated), so the same aid-create edit commits; bindings are unchanged and the report has no entry.",
+      "harnessSha256": "231ced9b0594f2c28941ac615462b6eea2fe16e09e8605fc9954dd0293bc9eb5",
+      "paritySha256": "7543a1b9918599bcd6aa607a1f77583ed9ffc7e4d9777636b57c821c41f8a4f9"
+    },
+    "history-batch-one-step": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L632 one reversible semantic+binding+DI delta and exactly one root transaction; L641",
+      "derivation": "One batch of three commands (task-create k2, rename Task_1 to B, aid-create a2) is accepted as one transaction: a single undo restores the initial snapshot and a single redo restores the after-state. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "dc564473947bb2fdc9ae5fa468f09b1a0948a089caa5388eee6d7b98d49f4b77",
+      "paritySha256": "f549acb0c18306c09672a91720c5077359a776e8db4f75900923354cce7d5d84"
+    },
+    "history-change-events": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L633 one public onChange after commit; refusal emits only a diagnostic; L641 each undo/redo emits one committed callback; §8.1 L606 change event",
+      "derivation": "A listener registered after activation receives exactly three events: the accepted batch (origin command, tx-1), its undo (origin undo) and its redo (origin redo), the latter two carrying the transactionId of the history step; each event carries the report of its operation result. The refused batch and the no-op batch emit no event.",
+      "harnessSha256": "871aa4500b133c218329ceba8de8bc7bbacea73922bf4256ba6e8f2aeecae7fc",
+      "paritySha256": "629ea36dce3f3ebaaa309d34f767148c2ac4a669ec1ee328c4bdba41e460423f"
+    },
+    "history-load-epoch": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L643 imports use a separate atomic load epoch; §8.1 L584 setDefinitions",
+      "derivation": "After one accepted batch, set_definitions loads the initial document again: the load starts a new epoch, so undo has nothing to undo (operation-error) and the loaded envelope is current. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "8fb1702e413e8940e9adc9c8aceca51847785a55801d41fb0abc5b463a25072b",
+      "paritySha256": "9e08b17e226aeb9b25b6f5134ce066312ba553bb600101881299733e05325c1c"
+    },
+    "history-noop-no-entry": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L641 a change with no final semantic or visual difference is a no-op with no history entry",
+      "derivation": "Renaming Task_1 to A twice: the second batch and an empty batch succeed with changed=false and the unchanged revision, envelope and snapshot (baseRevision = revision, report inputRevision = outputRevision); they add no history step, so one undo returns to the initial state and a second undo has nothing to undo.",
+      "harnessSha256": "66a47fba064d682cfb211742937e87f03c4759dc961e9291780ef0e34996b5c5",
+      "paritySha256": "65e802ee005fb9674ab35c390351fe4b6cd88cd9a94cd5daf2e477a8d34f6e57"
+    },
+    "history-refusal-preserves-state": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L633 refusal discards the stage, preserves tree/IDs/history/selection and emits only a diagnostic outcome",
+      "derivation": "After one accepted batch, a batch whose first command renames Task_1 to Z on the stage and whose second command names an unknown entry is refused profile-symbol after the stage was modified: the stage is discarded, the refusal echoes the committed revision with an entry-free report (no lint stage ran), the snapshot stays byte-identical and no history step is added: one undo returns to the initial snapshot and redo returns to the accepted state.",
+      "harnessSha256": "72a317bc35cadf469f1b98a5a176dbb2a53203beebf213e1a201fa5e3625dd69",
+      "paritySha256": "24c2a16f67580b31740a139090ac6167482f38efcce7672e012aa52289a17e8e"
+    },
+    "history-restore-bindings-presentation": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L632 one reversible semantic+binding+DI delta; L641 undo/redo restore the normalized states; §7.2 L565 explicit dependency-checked deletion of an empty support, undo restores the actual deleted object/ID; §8.1.1 L610 archived importedDi",
+      "derivation": "The vendored support case with imported support IDs (Process_A, its lane set with the empty external lane, the Collaboration with main participant and reference band, five bindings) is loaded with an archived importedDi record showing the two participants (descriptorDigest = H of the lot-5 descriptor pins sorted by id, sha256 = H({descriptorDigest, diagrams})). lane-delete (delete surface, explicit deletion intent) removes the empty external lane: its containment array lanes becomes the empty array (kept, harmonization F1) and the binding targeting it is removed with it, leaving four bindings; the report has no entry. Undo restores a snapshot byte-identical to the one before the batch, including the five bindings, the lane with its original ID and the presentation with the archived importedDi; redo restores the after-state byte-identically.",
+      "harnessSha256": "6c920d2b034479dc7e6e50e829c276fa1d5b1bf0b37ce8512835da5ab5275103",
+      "paritySha256": "4038d4d18294a54b5c48881e72d458f7927fb960ef1f0d18cb4b0d046f75144f"
+    },
+    "history-stale-revisions": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L629 reject stale revision requests before staging; §3.1 L268 baseRevision",
+      "derivation": "A stale baseRevision and a stale expectedViewRevision both refuse before staging; with a stale revision an otherwise invalid command still reports the stale refusal (revision checks precede command checks). The DESIGN names no code; the lot-5 binding keeps the existing bridge code operation-error (harmonization C10), echoing the committed revision, not the stale argument. The document stays editable.",
+      "harnessSha256": "ccbef460b10ffa829f9f79bcd4ca4835a4bc43ffe67492bc8807f37c4f58d2e3",
+      "paritySha256": "acd54ee090496a2a5177788cf57224194baa482456eca90c02f4d265a0b9cf3e"
+    },
+    "history-undo-redo-guards": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.1 L595-L596 undo/redo({expectedRevision,expectedViewRevision}); §8.2 L629 stale requests",
+      "derivation": "undo and redo with a stale expectedRevision or expectedViewRevision refuse operation-error and keep the history cursor: the following guarded undo and redo still succeed. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "0c959d6218e874e880ed69920e4a190b83ea28c9bf8fcaf7424f909beeac1343",
+      "paritySha256": "31d44b0b1bfaee3649aaf5fea5cc164cec4ed635946324329089439637e05f0f"
+    },
+    "history-undo-redo-roundtrip": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L641 undo restores the normalized before-state, redo the normalized after-state, without recomputing IDs or truncating redo; §8.1 L595-L596",
+      "derivation": "Two accepted batches give two history steps. Undo, undo restore snapshots byte-identical (profile-c14n/2, presentation and viewRevision included) to the states after the first batch and the initial state; each undo result has baseRevision = the revision before the restoration and revision = the restored one, with an entry-free report (no recipe, C, N or lint runs). A third undo refuses operation-error (nothing to undo, harmonization C10). Redo, redo restore the two after-states, the redo stack is not truncated by undo, and a third redo refuses operation-error.",
+      "harnessSha256": "1e86edee2cdd456d84aac6fad03afbf949caf10a083bf873409d4ebdd28e847e",
+      "paritySha256": "8df7244a14ba47f265964706eb3bda475b742f7636bc3e637f706de4eebc57a6"
+    },
+    "io-set-explicit-selection": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 set selection; §7.1 L547 explicit selection command; §8.3 L653 C/N once for the batch",
+      "derivation": "One batch creates the same DataInput and then selects Set_2 explicitly (input-select-set, source = the new ID). C runs once after the whole batch, finds no uncovered input and accepts: the input is appended to dataInputs and to Set_2.dataInputRefs only; Set_1 keeps its membership. A per-command C would have refused the intermediate state.",
+      "harnessSha256": "a3d35cc403816e15a0a050c03b9badb0f314cc956e6a5178b726e3719d1d5067",
+      "paritySha256": "a78a04ae6f9a65e9f57718eb395ce122ccf947286da47e3829f9f78dc6505582"
+    },
+    "io-set-selection-required": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 the updater asks for set selection when several valid sets exist; §7.1 L547 refuse io-set-selection-required, never update the first set silently",
+      "derivation": "input-create adds DataInput stable-id/1(Process_1, input, in-2) covered by no InputSet while Process_1 has two InputSets. The fixture complete recipe complete-io-selection refuses io-set-selection-required during C on the stage; the code passes through unchanged, no lint stage ran (diagnostics = report.entries = []), the whole batch is discarded, the tree is unchanged and no history entry exists.",
+      "harnessSha256": "3aaf975e88d375bd4691ef10157cd5759e7a4d3279440c5fe3ccd3cb225163ef",
+      "paritySha256": "fbd5b8d7ecdbb0bf8824d36d40b2aa6a2e3953ac48474fd2f0338fa709f6da03"
+    },
+    "l10n-resolution-order": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 localization uses exact requested locale, then policies.localeFallback, then the stable message key",
+      "derivation": "label.store has en and fr texts: fr is exact; de, fr-CA (no BCP 47 truncation) and FR (case-sensitive) fall back to en; label.aid has only en; label.note de is exact; a key that is not a profile message (a library diagnostic key) resolves to the key itself. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "06cae5306370f32daaf7a443e4ae4f39f96d4080e9762206f70790925dd73d3d",
+      "paritySha256": "d4f9affd13948fe0835ad2f6aab9e5b9bb96f00ff6115aa12f979b2aa69e9935"
+    },
+    "lifecycle-activation-descriptor-mismatch": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.1 L617 unknown descriptor packages or differing descriptor digests refuse native activation with descriptor-mismatch",
+      "derivation": "The bridge is created with the vendored neutral descriptor package (version fixture-2) while the fixture profile pins the lot-5 descriptor package. Loading the envelope succeeds, activation refuses descriptor-mismatch (echoing the loaded identity and revision, harmonization B3) and the loaded envelope stays current and unchanged.",
+      "harnessSha256": "fea7399b0c139c0641530ea25e2c3e64e46523e7bcb7e00c2a2c7ad3cdfec147",
+      "paritySha256": "ac19dde43878d9f7795eb697b3bcbc9f2bab13f696116d1f3f318acead487096"
+    },
+    "lifecycle-dispose": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.1 L599 dispose() -> PureResult<{disposed:true}>; L604 disposed-state calls return canvas-disposed",
+      "derivation": "dispose returns ok with payload disposed=true; afterwards every getter, command, history call, query and a second dispose refuse canvas-disposed, without echoed identity or revision.",
+      "harnessSha256": "2816cd645864632affa73db8accacd2f863b30b42c768736b9f7612f39e34455",
+      "paritySha256": "f51363829e9577cb218ec5d805addb09d5b4c66ccf1646d12ae7c5146a81c3f3"
+    },
+    "lifecycle-not-loaded": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 L737 before an envelope exists, getters return a Result refusal with document-not-loaded and omitted identity/revisions; §8.1 L589",
+      "derivation": "A bridge without a loaded document refuses getters, activation, commands and queries with document-not-loaded; Result refusals omit profileIdentity and baseRevision (and the report omits sourceIdentity and inputRevision).",
+      "harnessSha256": "18bdb4cf1d97a06932e657e16169302bc0191ecbb5cf533392a9f4aefc91f461",
+      "paritySha256": "c4975691ddca0f1a407c332e9f06339e1fbda31a75babf7ee4fc1d87b4e40ef5"
+    },
+    "lint-draft-integrity-refused": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §6.2 L474 edit runs C -> pre-normalize -> N -> post-normalize under draft; L481 a draft policy does not downgrade integrity, post-N unresolved errors block; §8.2 L631 postcheck; L633 refusal",
+      "derivation": "Profile fixture-profile-neutral-lint keeps the vendored validation records. The palette batch of the former create-task-palette-neutral witness (Process_1 holding only Task_1, task-create key k1 value Draft) stages a second unconnected bpmn:Task. C writes nothing; the pre-normalize draft stage evaluates the upstream rules on the C output (bpmnlint 11.15.0 sources: a bpmn:Task without incoming and outgoing sequence flows is reported by no-disconnected, no-implicit-start and no-implicit-end; a Process without StartEvent and EndEvent by start-event-required and end-event-required; label-required and every other recommended rule find nothing; the profile subrule finds no unnamed task). Policy rows: the three connectivity rules error/integrity, the two event rules warn/readiness. An integrity error is never downgraded in draft and is not repairable, so the batch refuses at pre-normalize, before N, with the code of the first unresolved error entry in profile-report/2 order: ruleIds sort end-event-required < no-disconnected < no-implicit-end < no-implicit-start < start-event-required and the Task_1 pointer precedes the new task pointer, so the code is bpmnlint/no-disconnected (harmonization J1, C19). The refusal is atomic: report and diagnostics carry the eight pre-normalize entries (observed, source = the stage element pointer, result unavailable), the tree, IDs and history are unchanged. rawStandardFindings is unsealed (raw upstream transport).",
+      "harnessSha256": "1195c198ea229909c6218f4c0d55aba92ba1e4656e4124710eeb766a3de8b895",
+      "paritySha256": "87786834debe67a7951e6596f04c4a50a7e20d6cf806abf7d73cffad0362f4df"
+    },
+    "lint-draft-warnings-commit": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §6.2 L474 edit / draft validation; §16 L1144 item 3 DRAFT: incomplete in-memory work with visible warnings; §10.1 L739 Report/2 entries",
+      "derivation": "Same vendored validation. Process_1 has no flow node; aid-create (key w1, body note) adds one TextAnnotation. C writes nothing; each draft stage reports start-event-required and end-event-required on Process_1 (warn/readiness; no connectivity rule applies without flow nodes, a TextAnnotation is not checked by label-required); N writes nothing. Warnings never block a draft edit, so the batch commits with the four observed entries in profile-report/2 order (stage pre-normalize before post-normalize, then ruleId). rawStandardFindings is unsealed (raw upstream transport).",
+      "harnessSha256": "007af3ae3ae533f7ae4546b458ae6d8e13836f637a714016cef4a64265cab0b6",
+      "paritySha256": "1accb7a7b6f543b2cfe7d06020fff23d828c78319ccd24191014dc2fafcaee7e"
+    },
+    "lint-noop-correction-report": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L641 a no-op has a correction notice and no history entry; §10.1 L739 Report/2",
+      "derivation": "Task_1 already has the empty name. Renaming it to the empty string again stages no difference: the full pipeline still runs C, both draft lint stages and N, the result is changed=false with the unchanged revision, and its report carries the two observed task-named entries of Task_1 (the correction notice) while no history entry and no change event are produced.",
+      "harnessSha256": "e77e480ed6ba8fa0dc54b644bb95931a2967c2c5dd8b9bd1f2df9438fa922073",
+      "paritySha256": "26865f7413c889ebc2a861fcafbffc3a46ee9f9cfd70192cebdee9547bac890c"
+    },
+    "lint-post-normalize-error-blocks": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §6.2 L481 post-N unresolved errors block; L474 draft policy at each lint stage; §10.1 L735 report records attempted candidate diagnostics",
+      "derivation": "The quiet fixture with one changed policy row: profile:task-named in the post-normalize draft record becomes error/integrity while profile:task-named-pre-normalize stays warn/readiness. task-create with key kp and the empty value stages an unnamed bpmn:Task: the pre-normalize stage observes it with a warning (no block), N writes nothing, the post-normalize stage reports task-named as an unresolved error, so the batch refuses with the rule's own code task-name-missing (first unresolved error entry in profile-report/2 order, harmonization C19). Report and diagnostics hold both stage entries; nothing is committed.",
+      "harnessSha256": "4660d756b99e8fb52fe7fe83524d087ca4ba1d3c705f3869cd7d51317a9e7688",
+      "paritySha256": "93fee018ae6ed1a56d2f1f75544a49ae1a3397eeadf51e0dd9e2ef8b9c92f1e6"
+    },
+    "paste-batch-one-step": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 paste runs C/N once for the batch; §8.2 L631-L632 one normalization of the staged state and one reversible delta; L641 undo",
+      "derivation": "The fixture profile plus the normalize recipe guard-duplicate-aid (N refuses any TextAnnotation other than Aid_1 whose text is [Aid] helper). One batch pastes [Aid_1] with key p4 and edits the body field of the remapped ID to copied: the state after the paste alone would make N refuse (see paste-normalize-refused), the final staged state does not, and C and N run once after the whole batch, so the batch commits. Later commands of the batch see the staged paste. The result is one history step; undo restores the initial snapshot.",
+      "harnessSha256": "cb2f7bc80996875648880d0f65660c7cb31557ad77142fdf20e6689be4846f58",
+      "paritySha256": "dd3f3f0c5ca2cd73c715ca13174d7b336c55e45cbe7eda96b1bc7aee5ad5dbe8"
+    },
+    "paste-dangling-external-refused": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 external references preserved only when valid; §2.2 L132 dangling references cannot silently count as absent",
+      "derivation": "Link_1 is copied, then aid-delete removes Aid_1 and Link_1 (artifacts becomes the empty array, kept per harmonization F1). Pasting the fragment would keep an external sourceRef to the deleted Aid_1, so the paste refuses reference-dangling and the tree stays as after the delete.",
+      "harnessSha256": "fc6a5cce83941ff098400e5b3d0bd0914b185a90b05ab0523a82c6f13bbdf45e",
+      "paritySha256": "8e749e5e782abbef0c19f97fe90cc56e8ff1464a1c29c33782ab590c244d19f6"
+    },
+    "paste-key-collision": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 key is the stable transaction-scoped insertion key; §3.2 L288 a computed collision is id-collision, never suffix",
+      "derivation": "Pasting [Aid_1] twice with key p1 computes the same stable ID twice: the second paste refuses id-collision without suffixing. The same fragment pasted with key p3 gets a distinct ID. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "f274af9d628706ec5b6dba6c2312802447c4dafa119fdd2ea9f267a1da209c6d",
+      "paritySha256": "b361cc1c6356b928b9c1605ee4b604c3541b0b50f2fb5c581d4bafdf43cbe0ba"
+    },
+    "paste-normalize-refused": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.2 L631 N on the staged state; L633 refusal preserves tree/IDs/history and emits only a diagnostic; §10.1 L735 report records attempted candidate diagnostics",
+      "derivation": "Same guarded profile; Process_1 also holds Task_3 with an empty name. Pasting [Aid_1] with key p5 alone stages a second [Aid] helper annotation: C accepts, the pre-normalize draft stage observes task-named-pre-normalize on Task_3 (warn, does not block), then N refuses fixture-duplicate-aid (the refuse code passes through unchanged). The refusal echoes the committed identity and revision; its report and diagnostics hold exactly the entries of the lint stage executed before the refusal (harmonization B2), never a change entry; the tree is unchanged. The same paste followed in one batch by an edit of the pasted body to changed commits, with both draft stages reporting Task_3.",
+      "harnessSha256": "d4a4f6d754b8d52ef1f3583015fc9bbafed0aceb5a3f6ebb5b2d8d2d7abd6154",
+      "paritySha256": "ea7d46168e35ce6467690d7a5a3287467c50e0e83f674fe4543726526d64954c"
+    },
+    "paste-remap-preserves-external": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L653 a paste remaps copied IDs/references as an explicit creation operation and preserves external references only when valid; §3.2 L276",
+      "derivation": "The fragment [Aid_1, Link_1] is pasted into Process_1 with key p1 (I3 surface command carrying the fragment). Each copied ID X becomes stable-id/1(Process_1, paste, JCS([p1, X])) (harmonization D6); Link_1's internal sourceRef is remapped to the new annotation, its external targetRef Task_2 exists and is preserved. Both copies are appended to artifacts in fragment order.",
+      "harnessSha256": "62964dad361dab1797f4a25c8b5493930c868ce5a20d5c51e0982938a269668f",
+      "paritySha256": "b7617e9c5b33af5c70236005c8e9dac79566e963707599db987399f924d25305"
+    },
+    "pick-field-states": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 filtered by field visibility/mutability; §10.1 L737 PureResult read query",
+      "derivation": "store-view is visible but not mutable, so no candidate is offered; the text field name of Task_1 is not a reference widget (profile-type); an unknown field refuses profile-symbol; a missing target refuses reference-dangling; a stale baseRevision refuses operation-error. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers. Unicode-integrity reseal (spec-seal): Store_9 carries again the decomposed name Cafe + U+0301 (UTF-8 43 61 66 65 CC 81) of the first seal, which the seal fix round had normalized to the precomposed U+00E9; every query keeps its candidate set, and the Store_9 names and labels and every revision follow, H({tree, profileIdentity, bindings}) = 13df756c1123190511223eed736588463baa6623cddb37e4f0204f8db9269095.",
+      "harnessSha256": "bdfd5b2e1fefd7a560440c76ef52e67dc75a37c68df15757c81c530029bd0870",
+      "paritySha256": "526b110785a6428f397e24af2a6f6c3e83322685582dc38f02ac884e6944dd05"
+    },
+    "pick-filter-sort": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 candidates {id,type,label} sorted by UTF-16 ID, filtered by targetTypes",
+      "derivation": "The store field admits bpmn:DataStore only: Task_1 (named Archive task) and Ref_1 are excluded. The seven stores sort by UTF-16 code units: Store-x (0x2D) < Store.y (0x2E) < Store_10 < Store_9 (digit order, not natural order) < Store_B < Store_b < store_a (uppercase S before lowercase s). A store without name has label equal to the empty string. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers. Unicode-integrity reseal (spec-seal): Store_9 carries again the decomposed name Cafe + U+0301 (UTF-8 43 61 66 65 CC 81) of the first seal, which the seal fix round had normalized to the precomposed U+00E9; every query keeps its candidate set, and the Store_9 names and labels and every revision follow, H({tree, profileIdentity, bindings}) = 13df756c1123190511223eed736588463baa6623cddb37e4f0204f8db9269095.",
+      "harnessSha256": "aea483bebec329d8718fdc6c6803ad3a5b5f2f95a5a8aa71d10921cb161b0f0a",
+      "paritySha256": "36309cf548a9b0644ea6fba1be4296a43b1aa36baa858da240bde5bafd696261"
+    },
+    "pick-paging": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 paging integers are safe and bounded",
+      "derivation": "offset 2 limit 3 returns the third to fifth candidates of the sorted list; offset 6 returns the last one; offset 7 and offset 100 return none; limit 0 returns none. Paging never changes the order. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers. Unicode-integrity reseal (spec-seal): Store_9 carries again the decomposed name Cafe + U+0301 (UTF-8 43 61 66 65 CC 81) of the first seal, which the seal fix round had normalized to the precomposed U+00E9; every query keeps its candidate set, and the Store_9 names and labels and every revision follow, H({tree, profileIdentity, bindings}) = 13df756c1123190511223eed736588463baa6623cddb37e4f0204f8db9269095.",
+      "harnessSha256": "7a79c046bf8277ed50bc38084aaf51153c0adcaee8ec13c48bbac8347ae6cfa2",
+      "paritySha256": "1759e0d454dcf37005e40b2a11ba8514558be368a6b265a6016e68c8ad32b3b7"
+    },
+    "pick-paging-bounds": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 paging integers are safe and bounded; §2.1 L50 safe integers",
+      "derivation": "A negative offset or limit, an unsafe limit 2^53, a Boolean offset and a fractional offset are not safe nonnegative integers; the DESIGN names no code, the lot-5 binding refuses profile-bounds (CR-04 bounds; harmonization B19). Unicode-integrity reseal (spec-seal): Store_9 carries again the decomposed name Cafe + U+0301 (UTF-8 43 61 66 65 CC 81) of the first seal, which the seal fix round had normalized to the precomposed U+00E9; every query keeps its candidate set, and the Store_9 names and labels and every revision follow, H({tree, profileIdentity, bindings}) = 13df756c1123190511223eed736588463baa6623cddb37e4f0204f8db9269095.",
+      "harnessSha256": "8a799010214e4154b3e4259b73c617d7d1c128a194f11c0b2f733ac85b25d68b",
+      "paritySha256": "dabf51382877df9d5a4a1c2acc7b560bbb04d14dffd042f00897fd803364f3ad"
+    },
+    "pick-query-case-sensitive": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 query is a literal Unicode substring of the display label, case-sensitive",
+      "derivation": "rchive matches Archive, archive box and the astral label (not ARCHIVE); A matches Archive and ARCHIVE only; archive matches archive box only; ARCHIVE matches only Store_B. Results keep UTF-16 ID order. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers. Unicode-integrity reseal (spec-seal): Store_9 carries again the decomposed name Cafe + U+0301 (UTF-8 43 61 66 65 CC 81) of the first seal, which the seal fix round had normalized to the precomposed U+00E9; every query keeps its candidate set, and the Store_9 names and labels and every revision follow, H({tree, profileIdentity, bindings}) = 13df756c1123190511223eed736588463baa6623cddb37e4f0204f8db9269095.",
+      "harnessSha256": "49dc15972a8631672c9ac65fa5b953c1a118119ad2281be22b2c989b53d8e018",
+      "paritySha256": "4e7a808552cb2144f85670b5da84c500fe13ddeec1642bbe5722c8e0a1438598"
+    },
+    "pick-query-no-normalization": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 literal substring with no normalization",
+      "derivation": "Precomposed Café (U+00E9) matches only Store_10; the decomposed sequence e + U+0301 matches only Store_9; Cafe matches only Store_9 (its prefix), not the precomposed label; the astral U+1D49C matches only Store-x. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers. Unicode-integrity audit (spec-seal): the integration reseal of this case is confirmed by hand derivation (profile-c14n/2 and SHA-256, nothing obtained from an implementation): Store_9 and the second query carry the decomposed UTF-8 bytes 43 61 66 65 CC 81 and 65 CC 81 of the first seal, which the seal fix round had normalized to the precomposed C3 A9 form, and every revision is H({tree, profileIdentity, bindings}) = 13df756c1123190511223eed736588463baa6623cddb37e4f0204f8db9269095.",
+      "harnessSha256": "ca95842723b2e7bd0cb895ed28868e9df7696c294266f21bf31ff53ca10f26d9",
+      "paritySha256": "2d74c2bd5e72be4ec6b7a4b8e0ff314c8d03a54df0b2f88a5bfd98cb5fe539bf"
+    },
+    "pick-reference-ownership": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L657 filtered by effective reference ownership; submitted ID revalidated at commit",
+      "derivation": "The inputs field of Set_A2 offers only the DataInputs of its own Process_A (In_A1, In_A2 in ID order); In_B1 of Process_B is never offered, even for the query First that it also matches (harmonization B19 ownership rule). Submitting In_B1 anyway is refused profile-type at commit; submitting In_A1 appends it to Set_A2.dataInputRefs.",
+      "harnessSha256": "3f2ab192426280cd66996b7725c7a7b58c4502628ec6d467daeac41c3f447ffb",
+      "paritySha256": "7bedc13423a91cce2d6f6a82028d517ab3edb5f3dd20bf63e26a78cc7458b0ce"
+    },
+    "replace-dependency-refused": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 conversion with dependency checks; §2.4 L171 remove refuses if the closure exceeds the declared set",
+      "derivation": "Task_1 is the targetRef of Link_1; the conversion's remove action uses refuseIfReferenced with no declared dependents, so the whole batch refuses. The DESIGN names no code; the lot-5 binding uses reference-dangling (the refused result would leave Link_1 dangling, DESIGN L132; harmonization C12).",
+      "harnessSha256": "db8894f288a0836b1d28468a600c45a67392ab5b9dc2023a324025b32d30382f",
+      "paritySha256": "9758fe01870aae1ac94b397eb6d63ae19ba570443f1974191f59d92f6203ca89"
+    },
+    "replace-preserves-id": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 replace is an explicit semantic conversion; preserve IDs where native identity can remain valid",
+      "derivation": "note-to-aid converts Note_1 within the same native type (convert recipe sets text to [Aid] + text): the ID Note_1 survives, the report idMap is empty and the element is now recognized as aid, whose body field displays the stripped text while value is the stored text (harmonization B18).",
+      "harnessSha256": "c233a877be7c2a08fa239f2dad643ebd56a27c739947c0fa75f1322649459d90",
+      "paritySha256": "5410cc68ed2c910ea0e1ffe2bbacdc934b2ffd76bf7a2b1bfae1cef4b7cdd4e3"
+    },
+    "replace-replacement-map": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L651 otherwise report an approved replacement map; §10.1 L753 idMap",
+      "derivation": "task-to-service converts Task_2 to another native type: the convert recipe creates bpmn:ServiceTask stable-id/1(Process_1, service, r1) carrying name Fixed (appended) and removes Task_2 (unreferenced; the replace surface passes explicit deletion intent). The ID cannot survive a type change in the recipe grammar, so the result reports the replacement map in report.idMap with domain migration (harmonization D7); the report has no entry.",
+      "harnessSha256": "2bd872a348f231c8d7e15b704c5af3b5cd2a5b0ac9b4e73c0bcb215e848518cb",
+      "paritySha256": "caed8cbf4e743cafd049272ffb1a1c4ada562d45107a9bf5c09d4f9d83ceed17"
+    },
+    "surface-append-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 the same ui.when for listing and authorization, enforced when called programmatically",
+      "derivation": "task-append (self = source) is listed when appending from Task_1 and hidden from Service_1; the call from Service_1 is refused although an Association may start at a ServiceTask. The DESIGN names no code for an unauthorized surface call; the lot-5 binding uses profile-producer (L649: an invisible menu is not the security/producer boundary; harmonization C7). The refusal echoes the committed identity and revision, carries no lint entry (no stage ran: diagnostics = report.entries = []) and the tree, IDs and history are unchanged.",
+      "harnessSha256": "cea8b966aa2c14cd923df97d7fbad98c280d0374360053d7a7e2f0c4a2f6bc87",
+      "paritySha256": "df9f4eedb1efd2c1a76c3732f712583d720ab79bb667020fcc6822477430f8bc"
+    },
+    "surface-connect-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 the same ui.when for listing and authorization, enforced when called programmatically",
+      "derivation": "reference-link (self = source, typeIs bpmn:DataStoreReference) is listed from Ref_1 and hidden from Aid_1; the call from Aid_1 is refused although Association.sourceRef admits a TextAnnotation. The DESIGN names no code for an unauthorized surface call; the lot-5 binding uses profile-producer (L649: an invisible menu is not the security/producer boundary; harmonization C7). The refusal echoes the committed identity and revision, carries no lint entry (no stage ran: diagnostics = report.entries = []) and the tree, IDs and history are unchanged.",
+      "harnessSha256": "a6731dc9facf69cd1d9703251663ddea70893c21db099f8fe4fb72338c883165",
+      "paritySha256": "ae63ec73f95a5803f220701e20f291aa924dee54d3ce49014a060402dbdd83d7"
+    },
+    "surface-context-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 the same ui.when for listing and authorization, enforced when called programmatically",
+      "derivation": "task-note (when typeIs bpmn:Task exact, self = target) is listed for Task_1 and hidden for Service_1; the call on Service_1 is refused although add-note could add Documentation to a ServiceTask. The DESIGN names no code for an unauthorized surface call; the lot-5 binding uses profile-producer (L649: an invisible menu is not the security/producer boundary; harmonization C7). The refusal echoes the committed identity and revision, carries no lint entry (no stage ran: diagnostics = report.entries = []) and the tree, IDs and history are unchanged.",
+      "harnessSha256": "6d3273967c49b3edc79dda268d935a6ddefc08e1c57c32f3c3af4ee841c1d123",
+      "paritySha256": "25b7df8e728c2e059be11c9be027f30274ff00da6a19ea6626867cce43a831b0"
+    },
+    "surface-delete-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 the same ui.when for listing and authorization, enforced when called programmatically",
+      "derivation": "aid-delete is listed for Aid_1 and hidden for the plain Note_1; task-delete is listed for Task_2 (lane-delete needs a bpmn:Lane subject). The aid-delete call on Note_1 is refused although its remove action would succeed. The DESIGN names no code for an unauthorized surface call; the lot-5 binding uses profile-producer (L649: an invisible menu is not the security/producer boundary; harmonization C7). The refusal echoes the committed identity and revision, carries no lint entry (no stage ran: diagnostics = report.entries = []) and the tree, IDs and history are unchanged.",
+      "harnessSha256": "dbb3dc2442ceef347afea2fd512eb1e7b3830765a98c080406b416be4a75f007",
+      "paritySha256": "1ee27e65498e2ba7c49eed530e796e100480f9a6a2446e4f67f9f8222b27094e"
+    },
+    "surface-direct-edit-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 direct edit evaluates the same ui.when; §8.3 L657 keyboard and direct edit share the canonical surface",
+      "derivation": "task-label (typeIs bpmn:Task and name != Fixed) is listed for Task_1 and hidden for Task_2 (named Fixed). The call on Task_2 is refused profile-producer with no change; the authorized call on Task_1 renames it to Checked (one accepted batch). The accepted report has no entry: C writes nothing (isExecutable already false), every bpmn:Task keeps a nonempty name so neither draft subrule finds anything, and the 26 standard rules are off.",
+      "harnessSha256": "09ce32cb6f186142e07e64a4e859dc2a67e510deee10ab1959df8d7792700dfd",
+      "paritySha256": "99ea8093e6ad5b5db60e282b5b53fc2a536c4799c04ca8ad771b6c40f933a25b"
+    },
+    "surface-gesture-parameters": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 missing or duplicate required parameters refuse profile-ui-parameters; no parameter comes from a label or ambient variable",
+      "derivation": "A palette command must carry exactly its subject (owner) and the sources bound by task-create (owner, key, value) in context. Missing owner, value or key, an extra target handle, a fragment on a non-paste entry, an unknown command member, an unknown context member and a missing context each refuse profile-ui-parameters without change (I3 closed records). An explicit empty value is supplied, not omitted: the last command creates a task named with the empty string, and both draft subrules report it (task-named-pre-normalize at stage pre-normalize, task-named at stage post-normalize, warn/readiness, observed, source at the new task pointer /rootElements/0/flowElements/1, result unavailable); warnings do not block a draft edit.",
+      "harnessSha256": "081be375c24180ced38b86e291eec587cd5e7e6891e946781698b9119ca12c55",
+      "paritySha256": "0af37f6e36f71b1839aecfafa3b0597cc8bd4d1c71f6963e6283492c406c5626"
+    },
+    "surface-handles-and-values": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L655 owner/target/source are validated native handles; L659 no implicit scalar coercion; §2.2 L132 dangling references are integrity errors",
+      "derivation": "Owner Process_9 does not exist (reference-dangling). The string parameter name receives a number, a Boolean and null; none is coerced or treated as absent, each refuses profile-type. The tree is unchanged. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "1e3c720caf62c7d685b3dacbfdcd5520d249b2205ddf0f664be6197ad8fca97a",
+      "paritySha256": "86deb4cb037c0f9eea2566a14cf09e816f25482a8a3959c044b726415704a6aa"
+    },
+    "surface-palette-entries-grid": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 entries sort by order then ID; §7.1 L538 two neutral profiles",
+      "derivation": "The grid fixture lists task-create (order 0) before aid-create (order 1) in its single basic group. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "0752de70c414358a52fab25ab92c5f534f7e217c092c768df923f9e59ed18976",
+      "paritySha256": "33e0e2928a63b9d3a45c518ec5585b3df398a1502cf934693b4c494da2572195"
+    },
+    "surface-palette-entries-localized": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 localization: exact requested locale, then policies.localeFallback, then the stable key",
+      "derivation": "Same palette in locale fr: label.store and label.input have fr texts (exact), label, label.aid and label.note fall back to en. In locale fr-CA no text matches exactly (no BCP 47 truncation) so every label uses en; FR (case differs) also falls back to en. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "16ae6cc2c5f28091d9f706c782973f61b9fb4868b03fde3b323d89c68f16728c",
+      "paritySha256": "efdf4ebc1b4dbd3e93125615f7ad014454da764b0581477114d88aef916f4dc8"
+    },
+    "surface-palette-entries-order": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 groups follow first appearance, then entries sort by order and ID; §8.3 L649 hidden entries",
+      "derivation": "Palette entries for owner Process_1: groups keep first-appearance order tools, basic, data (not alphabetical); inside basic the three order-0 entries sort by UTF-16 ID (Zeta-task < aid-create < task-create, uppercase first); inside data numeric order puts 9 before 10 before 20 (not ID or string order); hidden-task (when false) is not listed. PureResult diagnostics are empty.",
+      "harnessSha256": "11969c754146eef6221e14b83738db06d3e857570b5b30a0fe441479e2af0417",
+      "paritySha256": "3d3231cfe66bf3dddb8e55d3caa346c480cc8b8d5636d5e22d08481f4df96f62"
+    },
+    "surface-palette-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 the same ui.when for listing and authorization, enforced when called programmatically",
+      "derivation": "hidden-task (when false) is absent from the palette listing; a programmatic call is refused although its create-task recipe would succeed. The DESIGN names no code for an unauthorized surface call; the lot-5 binding uses profile-producer (L649: an invisible menu is not the security/producer boundary; harmonization C7). The refusal echoes the committed identity and revision, carries no lint entry (no stage ran: diagnostics = report.entries = []) and the tree, IDs and history are unchanged.",
+      "harnessSha256": "aa79cbe57cd90be03f026ee50808fbbcc0609038a41946ef394f67eaeebfe255",
+      "paritySha256": "a72228b32798cd7cd03b7b46a5b4e0b722e88e761b2220e7c66c1f0760d023a7"
+    },
+    "surface-paste-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 paste evaluates the same ui.when; §8.3 L657 copy grants no authorization to paste",
+      "derivation": "paste-here is listed for owner Process_1 and paste-locked (when false) is not. A fragment copied from Note_1 does not authorize the hidden paste-locked entry: the call is refused profile-producer and nothing changes. Seal fix round: every step result is sealed in full, the closed Result/1 with its Report/2 header, entries, echo and diagnostics or the PureResult with empty diagnostics; commands use the I3 records and lot-4 or session members are excluded only through declared unsealed markers.",
+      "harnessSha256": "63a4023d9da066d251bd5d815f0627b8222c5418ecd98a89bd3302a94b7db7a8",
+      "paritySha256": "37240a0c6acdeedcd3382867fd4ee7c28e74b278b245769ac1b02a4037ae9ccb"
+    },
+    "surface-raw-recipe-command": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 every surface invokes typed recipes through ui.when; §8.2 L635 unadapted mutation commands are disabled",
+      "derivation": "A bare {recipe, parameters} record has no command discriminator and a record with command recipe names no accepted command kind; both bypass every UI entry and field authorization, so the bridge treats them as unadapted entries and refuses transaction-entry-unsupported (harmonization C8, I3).",
+      "harnessSha256": "9175ad1a25fd0bcc7824eef149e2bf6bd5a019125e372ed6b1c4015d0aa0c527",
+      "paritySha256": "ec9ca001474f8e849e8b7a0c42330ec62ca68fc4e39ff4df706b2987ef4b8a55"
+    },
+    "surface-replace-when": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L649 the same ui.when for listing and authorization, enforced when called programmatically",
+      "derivation": "note-to-aid is listed for the plain Note_1 and hidden for Aid_1 (already marked); task-to-service is listed for Task_1. The note-to-aid call on Aid_1 is refused although its convert recipe would prefix the text again. The DESIGN names no code for an unauthorized surface call; the lot-5 binding uses profile-producer (L649: an invisible menu is not the security/producer boundary; harmonization C7). The refusal echoes the committed identity and revision, carries no lint entry (no stage ran: diagnostics = report.entries = []) and the tree, IDs and history are unchanged.",
+      "harnessSha256": "8e87ecf92ff660682171374e1fcbfa578f687c4d3b95711689338e918bddda03",
+      "paritySha256": "a0c91d3f77ee16a04d450d6e549997ebbde1efa74954e70b650854f123acf8d8"
+    },
+    "surface-unknown-entry": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 L190 CR-05 referenced symbols exist",
+      "derivation": "Entry no-such-entry is not a UI entry of the active profile; the lot-5 binding refuses profile-symbol (harmonization C9).",
+      "harnessSha256": "2ffd9769a0d320a20e5105d75f928016a07a41187859ff8d5fc0c3278fc598ab",
+      "paritySha256": "68ea91adfff56f05e2b046e0cadfc1824529400a45265b9f4c9e631a54f10cf1"
+    },
+    "surface-unlisted-upstream": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 unlisted upstream create/append/connect/replace entries are disabled; §8.2 L635 unadapted mutation commands are disabled",
+      "derivation": "create.exclusive-gateway is listed by no UI entry, so the headless upstream command is disabled; the lot-5 binding uses the DESIGN code for a disabled entry, transaction-entry-unsupported (L637; harmonization C8). Nothing changes.",
+      "harnessSha256": "6dc4af7f604a9f39b2bd63a1cac791ea022677a7c16e351e20910891ed118ff2",
+      "paritySha256": "b838222e3ba877409bc5863c2db7324e39d73683952cab4c1e80cd41db1b73e0"
+    },
+    "surface-upstream-mapped": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §8.3 L659 each upstream ID maps to exactly one enabled surface recipe",
+      "derivation": "The upstream palette ID create.task (I3 upstream command) resolves to task-create; the command yields exactly the result, tree and report of create-task-palette-neutral.",
+      "harnessSha256": "35e6f953199abc3e7a737c93eea416765e59a76807eabaf739c0d10afde487fa",
+      "paritySha256": "1b1725d2bfae185cf37600e8aa65c89a85eba66950f6ab7d0d9a8d1e57440ced"
+    },
+    "twin-grid-fixture-commands": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §14.2 L954 twin semantic command expectations; §7.1 L538 the neutral profiles differ",
+      "derivation": "The same two commands through the grid UI entries reproduce the vendored grid expected.completed tree: a ServiceTask target, the [Note] marker and isExecutable=true added by C (complete/set, before absent, after true); the draft entries equal the vendored grid lint expectations on the unnamed ServiceTask Task_A.",
+      "harnessSha256": "2a6ae8b47dd679a5493e1ae796b63ffc2666533eb14c06179681808a4aa0585a",
+      "paritySha256": "7e6c798b733a3ed5c3185a12a677ab385e90124ad2294b4dcf7da3d54cce5fd5"
+    },
+    "twin-neutral-fixture-commands": {
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §14.2 L954 twin semantic command expectations; §8.3 L649 typed recipes; §7.1 L538 C on the stage",
+      "derivation": "The two commands of the vendored neutral fixture (add-note on Task_B, create-aid with key new-note) are issued through their UI entries task-note and aid-create in one batch. The committed tree equals the vendored expected.completed tree byte for byte, including the isExecutable=false that C adds on the stage (one complete/set entry, before absent, after false). The draft entries equal the vendored lint expectations pre-normalize/draft and post-normalize/draft (task-name-missing-pre-normalize and task-name-missing on Task_A, warn, readiness, messageKey invalid), with source at Task_A's pointer /rootElements/0/flowElements/1.",
+      "harnessSha256": "7c2ee6b0c43bb7c6a2182bf55cb39ef3efdea27a0121d5cd1194a307d7c0e7d3",
+      "paritySha256": "b1297af763f02fbefb123d1ea21b2383212002759b0a3bf099c1c7e090146c1e"
+    }
+  }
+}

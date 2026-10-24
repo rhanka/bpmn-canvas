@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:x24:business-policy:1",
+  "title": "business-policy/1",
+  "$comment": "Injected business-policy record of the legacy adapter: every legacy consumer listed in the x24 ledger reads its business values from it. It is supplied explicitly by the caller and is never projected from a compiled profile: profile-path consumers evaluate the compiled profile itself. No consumer holds a default for any field. Absent optional sections mean: not supplied. Node kinds are the neutral slots of the legacy layout model (task, subprocess, call, gateway, start, end, event, object-in, object-out, port-in, port-out, document).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policyVersion", "id", "classification", "attachment", "metrics", "navigation"],
+  "properties": {
+    "policyVersion": { "const": "1" },
+    "id": { "type": "string", "minLength": 1 },
+    "classification": { "$ref": "#/$defs/classification" },
+    "attachment": { "$ref": "#/$defs/attachment" },
+    "metrics": { "$ref": "#/$defs/metrics" },
+    "navigation": { "$ref": "#/$defs/navigation" },
+    "presentation": { "$ref": "#/$defs/presentation" },
+    "exportFacts": { "$ref": "#/$defs/exportFacts" }
+  },
+  "$defs": {
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["annotationRoles", "insertSeparator"],
+      "properties": {
+        "annotationRoles": { "type": "array", "minItems": 0, "maxItems": 2, "items": { "$ref": "#/$defs/annotationRole" } },
+        "insertSeparator": { "type": "string" }
+      }
+    },
+    "annotationRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "prefix", "trim", "labelCase"],
+      "properties": {
+        "role": { "enum": ["document", "application"] },
+        "prefix": { "type": "string", "minLength": 1 },
+        "trim": { "enum": ["none", "ecma262-2024-start"] },
+        "labelCase": { "enum": ["none", "upper"] }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicationHost", "nonActivityHost"],
+      "properties": {
+        "applicationHost": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "mode"],
+          "properties": {
+            "type": { "enum": ["bpmn:Activity", "bpmn:Task", "bpmn:SubProcess", "bpmn:CallActivity"] },
+            "mode": { "enum": ["exact", "assignable"] }
+          }
+        },
+        "nonActivityHost": { "const": "preserve-report" }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "unit", "firstCodePoint", "regular", "bold", "fallback", "lineHeight", "aliases", "license", "attribution"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "unit": { "const": "per-mille-em" },
+        "firstCodePoint": { "const": 32 },
+        "regular": { "$ref": "#/$defs/widthTable" },
+        "bold": { "$ref": "#/$defs/widthTable" },
+        "fallback": { "type": "integer", "minimum": 0, "maximum": 4000 },
+        "lineHeight": { "type": "number", "exclusiveMinimum": 0, "maximum": 10 },
+        "aliases": { "type": "array", "minItems": 0, "items": { "$ref": "#/$defs/widthAlias" } },
+        "license": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 }
+      }
+    },
+    "widthTable": { "type": "array", "minItems": 95, "maxItems": 95, "items": { "type": "integer", "minimum": 0, "maximum": 4000 } },
+    "widthAlias": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "string", "minLength": 1, "maxLength": 2 },
+        "to": { "type": "string", "minLength": 1, "maxLength": 1 }
+      }
+    },
+    "navigation": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["mode"], "properties": { "mode": { "const": "called-element" } } },
+        { "type": "object", "additionalProperties": false, "required": ["mode"], "properties": { "mode": { "const": "legacy-default" } } },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "rules"],
+          "properties": {
+            "mode": { "const": "legacy-rules" },
+            "rules": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["called-element", "name-equal", "section-equal", "name-overlap"] } }
+          }
+        }
+      ]
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["looks", "layout", "exportStyles", "palette"],
+      "properties": {
+        "looks": { "type": "array", "minItems": 0, "items": { "$ref": "#/$defs/look" } },
+        "legacyOptions": { "$ref": "#/$defs/legacyOptions" },
+        "layout": { "$ref": "#/$defs/layout" },
+        "exportStyles": { "$ref": "#/$defs/exportStyles" },
+        "palette": { "$ref": "#/$defs/palette" }
+      }
+    },
+    "legacyOptions": {
+      "$comment": "Option values of the legacy look API, compared as opaque keys: options.drawing equal to flatDrawing draws flat; options.palette equal to annotatedPalette adds the annotated palette. An absent value selects nothing.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "flatDrawing": { "type": "string", "minLength": 1 },
+        "annotatedPalette": { "type": "string", "minLength": 1 }
+      }
+    },
+    "look": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alias", "renderer", "flat", "palette", "paletteFloor", "markerSelectors"],
+      "if": { "properties": { "renderer": { "const": "upstream" } } },
+      "then": { "not": { "required": ["tokens"] } },
+      "else": { "required": ["tokens"] },
+      "properties": {
+        "alias": { "type": "string", "minLength": 1 },
+        "renderer": { "enum": ["upstream", "recolor", "annotated"] },
+        "flat": { "type": "boolean" },
+        "palette": { "enum": ["upstream", "annotated"] },
+        "paletteFloor": { "type": "integer", "minimum": 0, "maximum": 4000 },
+        "markerSelectors": { "type": "array", "minItems": 0, "items": { "type": "string", "minLength": 1 } },
+        "tokens": { "$ref": "#/$defs/tokens" }
+      }
+    },
+    "color": { "type": "string", "minLength": 1 },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "labelText", "headerText", "flow", "link", "docLink", "docLinkDash", "dataLinkArrow", "taskLine", "taskFill", "taskFillEnd", "eventLine", "eventFill", "gatewayLine", "gatewayFill", "poolLine", "poolFill", "laneLine", "laneFill", "laneHeaderFill", "externalLine", "externalFill", "docLine", "docFill", "dataLine", "dataFill", "appLine", "appFill"],
+      "properties": {
+        "fontFamily": { "type": "string", "minLength": 1 },
+        "fontSize": { "type": "number", "exclusiveMinimum": 0 },
+        "strokeWidth": { "type": "number", "minimum": 0 },
+        "stroke": { "$ref": "#/$defs/color" },
+        "fill": { "$ref": "#/$defs/color" },
+        "text": { "$ref": "#/$defs/color" },
+        "labelText": { "$ref": "#/$defs/color" },
+        "headerText": { "$ref": "#/$defs/color" },
+        "flow": { "$ref": "#/$defs/color" },
+        "link": { "$ref": "#/$defs/color" },
+        "docLink": { "$ref": "#/$defs/color" },
+        "docLinkDash": { "type": "string", "minLength": 1 },
+        "dataLinkArrow": { "type": "boolean" },
+        "taskLine": { "$ref": "#/$defs/color" },
+        "taskFill": { "$ref": "#/$defs/color" },
+        "taskFillEnd": { "$ref": "#/$defs/color" },
+        "eventLine": { "$ref": "#/$defs/color" },
+        "eventFill": { "$ref": "#/$defs/color" },
+        "gatewayLine": { "$ref": "#/$defs/color" },
+        "gatewayFill": { "$ref": "#/$defs/color" },
+        "poolLine": { "$ref": "#/$defs/color" },
+        "poolFill": { "$ref": "#/$defs/color" },
+        "laneLine": { "$ref": "#/$defs/color" },
+        "laneFill": { "$ref": "#/$defs/color" },
+        "laneHeaderFill": { "$ref": "#/$defs/color" },
+        "externalLine": { "$ref": "#/$defs/color" },
+        "externalFill": { "$ref": "#/$defs/color" },
+        "docLine": { "$ref": "#/$defs/color" },
+        "docFill": { "$ref": "#/$defs/color" },
+        "dataLine": { "$ref": "#/$defs/color" },
+        "dataFill": { "$ref": "#/$defs/color" },
+        "appLine": { "$ref": "#/$defs/color" },
+        "appFill": { "$ref": "#/$defs/color" }
+      }
+    },
+    "size": { "type": "integer", "minimum": 0, "maximum": 100000 },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["poolHeader", "laneHeader", "minLaneHeight", "channel", "fontSize", "labelFontSize", "nodeSizes", "labelMaxWidth", "appBadge", "document", "laneHeaderWidth", "poolStrip"],
+      "properties": {
+        "poolHeader": { "$ref": "#/$defs/size" },
+        "laneHeader": { "$ref": "#/$defs/size" },
+        "minLaneHeight": { "$ref": "#/$defs/size" },
+        "channel": { "$ref": "#/$defs/size" },
+        "fontSize": { "type": "number", "exclusiveMinimum": 0 },
+        "labelFontSize": { "type": "number", "exclusiveMinimum": 0 },
+        "nodeSizes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "width", "height"],
+            "properties": {
+              "kind": { "enum": ["task", "subprocess", "call", "gateway", "start", "end", "event", "object-in", "object-out", "port-in", "port-out", "document"] },
+              "width": { "$ref": "#/$defs/size" },
+              "height": { "$ref": "#/$defs/size" }
+            }
+          }
+        },
+        "labelMaxWidth": { "type": "object", "additionalProperties": false, "required": ["event", "item"], "properties": { "event": { "$ref": "#/$defs/size" }, "item": { "$ref": "#/$defs/size" } } },
+        "appBadge": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minWidth", "height", "overlap", "chrome", "margin", "gap", "font", "linkInset"],
+          "properties": {
+            "minWidth": { "$ref": "#/$defs/size" },
+            "height": { "$ref": "#/$defs/size" },
+            "overlap": { "$ref": "#/$defs/size" },
+            "chrome": { "$ref": "#/$defs/size" },
+            "margin": { "$ref": "#/$defs/size" },
+            "gap": { "$ref": "#/$defs/size" },
+            "font": { "type": "number", "exclusiveMinimum": 0 },
+            "linkInset": { "$ref": "#/$defs/size" }
+          }
+        },
+        "document": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "minHeight", "band", "textTop", "waveTop", "padX", "padBottom"],
+          "properties": {
+            "width": { "$ref": "#/$defs/size" },
+            "minHeight": { "$ref": "#/$defs/size" },
+            "band": { "$ref": "#/$defs/size" },
+            "textTop": { "$ref": "#/$defs/size" },
+            "waveTop": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "padX": { "$ref": "#/$defs/size" },
+            "padBottom": { "$ref": "#/$defs/size" }
+          }
+        },
+        "laneHeaderWidth": { "$ref": "#/$defs/size" },
+        "poolStrip": { "$ref": "#/$defs/size" }
+      }
+    },
+    "exportStyles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drawio", "decode"],
+      "properties": {
+        "drawio": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pool", "lane", "start", "end", "task", "subprocess", "gatewayBase", "external", "application", "document", "item", "edgeHead", "flowTail", "linkTail", "event", "poolHeaderWidth", "dx", "dy", "appBand"],
+          "properties": {
+            "pool": { "type": "string" }, "lane": { "type": "string" }, "start": { "type": "string" }, "end": { "type": "string" },
+            "task": { "type": "string" }, "subprocess": { "type": "string" }, "gatewayBase": { "type": "string" }, "external": { "type": "string" },
+            "application": { "type": "string" }, "document": { "type": "string" }, "item": { "type": "string" }, "edgeHead": { "type": "string" },
+            "flowTail": { "type": "string" }, "linkTail": { "type": "string" }, "event": { "type": "string" },
+            "poolHeaderWidth": { "$ref": "#/$defs/size" }, "dx": { "type": "integer" }, "dy": { "type": "integer" }, "appBand": { "$ref": "#/$defs/size" }
+          }
+        },
+        "decode": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kinds", "roles", "associationIdSuffix"],
+          "properties": {
+            "associationIdSuffix": { "type": "string", "minLength": 1 },
+            "kinds": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["match", "kind"],
+                "properties": { "match": { "$ref": "#/$defs/styleMatch" }, "kind": { "enum": ["callActivity", "textAnnotation"] } }
+              }
+            },
+            "roles": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["match", "role"],
+                "properties": { "match": { "$ref": "#/$defs/styleMatch" }, "role": { "enum": ["document", "application"] } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "styleMatch": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "value"],
+        "properties": { "key": { "type": "string", "minLength": 1 }, "value": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entries"],
+      "properties": {
+        "entries": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "bpmnType", "group", "icon"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "title": { "type": "string", "minLength": 1 },
+              "bpmnType": { "type": "string", "minLength": 1 },
+              "group": { "enum": ["events", "activities", "gateways", "data", "annotations", "structure", "flows"] },
+              "icon": { "type": "string", "minLength": 1 },
+              "initialName": { "type": "string" },
+              "initialRole": { "enum": ["document", "application"] },
+              "collapsed": { "const": true },
+              "tool": { "const": "connect" }
+            }
+          }
+        }
+      }
+    },
+    "exportFacts": {
+      "$comment": "Facts of the injected descriptor package read by the legacy reference exporters: the package id, the facts extension type, the namespace family whose other versions are refused, and the facts property names.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["descriptorId", "extensionType", "namespaceFamily", "properties"],
+      "properties": {
+        "descriptorId": { "type": "string", "minLength": 1 },
+        "extensionType": { "type": "string", "minLength": 1 },
+        "namespaceFamily": { "type": "string", "minLength": 1 },
+        "properties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["order", "direction", "label", "lane", "primary", "process"],
+          "properties": {
+            "order": { "type": "string", "minLength": 1 },
+            "direction": { "type": "string", "minLength": 1 },
+            "label": { "type": "string", "minLength": 1 },
+            "lane": { "type": "string", "minLength": 1 },
+            "primary": { "type": "string", "minLength": 1 },
+            "process": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

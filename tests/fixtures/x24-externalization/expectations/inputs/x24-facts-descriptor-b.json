@@ -1,0 +1,51 @@
+{
+  "name": "X24FactsB",
+  "prefix": "yf",
+  "uri": "urn:x24:facts-b:1",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "Facts",
+      "superClass": [
+        "Element"
+      ],
+      "properties": [
+        {
+          "name": "pos",
+          "type": "Integer",
+          "isAttr": true
+        },
+        {
+          "name": "row",
+          "type": "bpmn:Lane",
+          "isAttr": true,
+          "isReference": true
+        },
+        {
+          "name": "dir",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "tag",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "lead",
+          "type": "bpmn:BaseElement",
+          "isAttr": true,
+          "isReference": true
+        },
+        {
+          "name": "goes",
+          "type": "bpmn:Process",
+          "isAttr": true,
+          "isReference": true
+        }
+      ]
+    }
+  ]
+}

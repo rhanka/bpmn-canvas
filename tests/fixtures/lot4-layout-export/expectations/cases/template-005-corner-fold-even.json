@@ -1,0 +1,84 @@
+{
+  "caseId": "template-005-corner-fold-even",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "cf",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": [],
+          "template": "corner-fold",
+          "parameters": [
+            {
+              "name": "foldRatio",
+              "value": 0.5
+            },
+            {
+              "name": "headerRotation",
+              "value": 0
+            }
+          ]
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1005,
+          "height": 2000
+        },
+        "labelBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1005,
+          "height": 2000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "fold": 502,
+          "foldPath": [
+            {
+              "x": 503,
+              "y": 0
+            },
+            {
+              "x": 503,
+              "y": 502
+            },
+            {
+              "x": 1005,
+              "y": 502
+            }
+          ],
+          "labelRotation": {
+            "angle": 0,
+            "center": {
+              "x": 502,
+              "y": 1000
+            }
+          }
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

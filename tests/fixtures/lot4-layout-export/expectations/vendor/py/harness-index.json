@@ -1,0 +1,2232 @@
+{
+  "format": "lot4-py-harness-index/1",
+  "commit": "c85646d1b87d674f278d10f480670331a0c91a99",
+  "note": "Verbatim author, clause, witness, derivation (and inputFrom) members of the Python harness records of the vendored cases; each record is pinned by its raw SHA-256, equal to its entry in the tree MANIFEST.sha256.",
+  "cases": [
+    {
+      "caseId": "export.compile.all-fields-valid",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.all-fields-valid.json",
+        "sha256": "406ac87ee73bd906f27841d142d9294728cb8829c51e85177f282e212bfec51d"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "every optional common field with its type compiles",
+      "derivation": "Node fields id, name, shape, fill, stroke, textColor, fontFamily (strings) and fontSize, strokeWidth (numbers); an added edge recipe with id, source, target, name, stroke, dash, arrow (strings) and strokeWidth (number): valid against export-ir/1."
+    },
+    {
+      "caseId": "export.compile.digest-nonzero-origin",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.digest-nonzero-origin.json",
+        "sha256": "4def1919d1a43a28284e3a1698216a7304f1367bd62f4bd4cab9c4685ae25f83"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "non-counter policies require counterOrigin zero",
+      "derivation": "idPolicy digest with counterOrigin 5: profile-type."
+    },
+    {
+      "caseId": "export.compile.digest-zero-origin",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.digest-zero-origin.json",
+        "sha256": "422ee20f996fb5507e31dbef03e247e96cfe4dbc13bb788dfce8c7ad11c1cc23"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "a non-counter policy with counterOrigin 0 compiles",
+      "derivation": "idPolicy digest with counterOrigin 0: valid."
+    },
+    {
+      "caseId": "export.compile.edge-fill",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.edge-fill.json",
+        "sha256": "003a78af9a7787c3d9d61398e71e33ea2c4b38a718137266c06c66a745a4f0cd"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "fill is a node field, not an edge field",
+      "derivation": "Added edge recipe with id, source, target and fill: profile-export-field."
+    },
+    {
+      "caseId": "export.compile.edge-missing-target",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.edge-missing-target.json",
+        "sha256": "47e872c2f7303294d3a532363f8e37164fe9e97c0efe15b53550d1239a19da03"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "edge requires id, source and target",
+      "derivation": "Added edge recipe emitting fields [id, source]: missing target, profile-export-field."
+    },
+    {
+      "caseId": "export.compile.label-missing-text",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.label-missing-text.json",
+        "sha256": "40871ee51079a19d509d99dafa328d2c1c8b9ff582c6424a1f9ac22fe26ed291"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "label requires id and text",
+      "derivation": "Added label recipe emitting [id] only: profile-export-field."
+    },
+    {
+      "caseId": "export.compile.metadata-missing-value",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.metadata-missing-value.json",
+        "sha256": "dc503675c6f44a4341de2d0293d3fb3a6be5885751cc5acc4dfe21850e60d8df"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "metadata requires name and value",
+      "derivation": "Added metadata recipe emitting [name] only: profile-export-field."
+    },
+    {
+      "caseId": "export.compile.native-nonzero-origin",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.native-nonzero-origin.json",
+        "sha256": "99df893ea9bfa76c22356192386d8d909eb32582206ad761ae64254c110cab3d"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "non-counter policies require counterOrigin zero",
+      "derivation": "idPolicy native with counterOrigin 1: profile-type."
+    },
+    {
+      "caseId": "export.compile.node-duplicate-field",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.node-duplicate-field.json",
+        "sha256": "02452e739c74eec5a031aaab48c3807a5f0a663318ba18e1aa3ed3cfe7f517da"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "duplicate fields refuse",
+      "derivation": "export-nodes lists name twice: profile-export-field."
+    },
+    {
+      "caseId": "export.compile.node-fill-number",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.node-fill-number.json",
+        "sha256": "230ff5203a71b4ca717c9b9cc2b4eaac4f98777b4dab64279df9f4cdcb3982e2"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "string fields need strings",
+      "derivation": "export-nodes adds fill literal 255 (number): wrong type, profile-export-field."
+    },
+    {
+      "caseId": "export.compile.node-font-size-string",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.node-font-size-string.json",
+        "sha256": "e48a06733b808612b776ed64d7ee862013b106af0d439e839ccf3dbf5c7c3a15"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "numeric fields need numbers",
+      "derivation": "export-nodes adds fontSize literal '12' (string): wrong type, profile-export-field."
+    },
+    {
+      "caseId": "export.compile.node-unknown-field",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.node-unknown-field.json",
+        "sha256": "80631c3f8db06664f80573680a194d4f731e13f421175e84cb7a5369bd450fb5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "fields outside the node vocabulary refuse",
+      "derivation": "export-nodes adds field source (edge vocabulary only): profile-export-field."
+    },
+    {
+      "caseId": "export.compile.page-missing-name",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.page-missing-name.json",
+        "sha256": "c3334f649a8acbb2c43c3e34cd226d58760a160bb281f5c7a1aaaf857385efc0"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "page requires string id and name",
+      "derivation": "export-pages emits page fields [id] only: missing name, profile-export-field."
+    },
+    {
+      "caseId": "export.compile.page-parent",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.page-parent.json",
+        "sha256": "c71c07209f558e310e69ea7b761826a1ad86c6730c6fc93b152c961fc9982546"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "a page emits at the artifact root and must omit parent",
+      "derivation": "export-pages emit carries parent outputId(self,page): CR-11 parent rule, profile-type."
+    },
+    {
+      "caseId": "export.compile.page-shape",
+      "harness": {
+        "path": "tests/profile_export/expected/export.compile.page-shape.json",
+        "sha256": "4550c4748d5680140043a80ef8953da470d6f28047a3a06143724339ffcfce80"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-11; §10.2 export-ir/1",
+      "witness": "page.shape cannot pass",
+      "derivation": "export-pages adds field shape: not in the page vocabulary, profile-export-field."
+    },
+    {
+      "caseId": "export.map.bind-ambiguous",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.bind-ambiguous.json",
+        "sha256": "c70320ec21011ac808d4771961f1db89596e7e2a2b263f3c6f89b2ec4d99b828"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4 bind; §10.2",
+      "witness": "a bind with cardinality one over several handles refuses profile-ambiguous-binding",
+      "derivation": "export-nodes binds any_task = every node occurrence of R with cardinality one; R has two node occurrences (s-task-a, s-task-b): more than one under a unique mode is profile-ambiguous-binding (DESIGN §2.4 bind), before any emission. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.capability-byte-claim",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.capability-byte-claim.json",
+        "sha256": "96aa7fa56f7037ebacd124da2532303df1119c58000a3c170e73a11c5071dde7"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2; §13 OPEN-EXPORT-EVIDENCE",
+      "witness": "no feature becomes byte-compatible by declaration alone",
+      "derivation": "The only capability record claims engine-byte-compatible; without qualified engine goldens the adapter ceiling is structural, so the artifact capability is worst(engine-byte-compatible, structural) = structural. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.capability-losses",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.capability-losses.json",
+        "sha256": "baf00f845d67eb4b7cc2c6fba58a7440ea1eca5a24d2e47c550ee80ec92f351a"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "capability predicates evaluate once per occurrence; declared losses map like the loss action",
+      "derivation": "Records: (emittedType == edge -> structural, [relation-kind]) and (true -> structural, [semantic-type]). e-flow matches both, the tasks the second; each declared class yields one export-loss entry with ruleId = export id drawing, source = the semantic element, result unavailable (harmonization B23); capability = worst(structural, structural) = structural; IR as export.map.counter-reuse. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.capability-none",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.capability-none.json",
+        "sha256": "75b919295cfba41e18973fb587df6247903120a82e7d29a7809d8e2cbf07739a"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "with no applicable capability record the artifact stays at the structural ceiling",
+      "derivation": "capabilities []: no record applies to any occurrence; capability = structural (OPEN-EXPORT-EVIDENCE default), no loss entry. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.capability-unsupported",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.capability-unsupported.json",
+        "sha256": "710eabe50f6d93c1b1170a42665a9e2d50ce5fe3327aabd4c9ea585c39d0eaad"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "an unsupported necessary occurrence refuses the entire artifact (no partially valid download)",
+      "derivation": "Record (occurrenceKey == s-task-b -> unsupported): the worst outcome is unsupported; typed refusal render-unsupported, no artifact (DESIGN §9.3 'unknown glyph capability returns render-unsupported', §10.1 'an unsupported necessary occurrence refuses the entire artifact'; §10.2 reserves export-format-unsupported for format-level codes; harmonization C16). The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.compat-digest-mismatch",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.compat-digest-mismatch.json",
+        "sha256": "9331baffc016c4949a44af2efdf682c54af7fd6ed6a4510184c61929ca8f66ed"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §3.3 compatibility decision; §10.2",
+      "witness": "compatibility rows apply before export",
+      "derivation": "Envelope identity = the unpatched neutral identity (same profile id and version, known different sha256) while the compiled profile is the patched one: profile-digest-mismatch before any freshness or emission step; the refusal echoes the envelope identity and revision. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.counter-reuse",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.counter-reuse.json",
+        "sha256": "7380c2ab2a00c64651adc892351e891a4d83a17fb26d50b074d9a50c85d2d785"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "repeated outputId requests reuse one ID; only requested keys are allocated",
+      "derivation": "Edge endpoints request (P1,s-task-a,node) and (P1,s-task-b,node) already requested by export-nodes: they reuse e_1/e_2. No label recipe: the (P1,e-flow,label) key is never requested and gets no number; the edge is e_3. No capability loss (losses []). R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.digest-policy",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.digest-policy.json",
+        "sha256": "359a6841127b674226d5b96a6341f108a3d9d52e4cb54cebcfb71eb81fbe789b"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "digest output IDs are e_ + full SHA-256 of JCS [pageId, occurrenceKey, domain]",
+      "derivation": "idPolicy digest: page e_ + H([P1,'',page]) = e_187e1e38119384c013e3d7d515eb29ed0380cc4c1c0be54f901340696002e5f7; nodes H([P1,s-task-a,node]) and H([P1,s-task-b,node]); edge H([P1,e-flow,edge]); the PageHandle uses the reserved empty key. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.edge-before-nodes",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.edge-before-nodes.json",
+        "sha256": "b7accd067bc1e1c40cd727d3fc33e2bd4deced0367e0f56d1e4494166660f269"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "nodes before edges: an edge endpoint emitted later refuses export-parent-order",
+      "derivation": "Recipes pages, edges, nodes: the edge e_3 names source e_1, which this call emits later (export-nodes): export-parent-order. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.feature-table-witnesses",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.feature-table-witnesses.json",
+        "sha256": "46109d8f51321e7bcf2e3970d3ae69b5bc5dd5f722521127f96618ee3166374b"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "the DESIGN §10.2 feature rows on one drawio artifact: DataStore + DataStoreReference, reference-band and main Participants, Process IO and data associations, Documentation markers, internal calledElement navigation, Terminate",
+      "derivation": "Extension profile with one native glyph and notion per feature type and drawio recipes: pages, every node occurrence, every edge occurrence (endpoints through sourceOccurrence/targetOccurrence), then one loss recipe per feature row. Each row is structural with an explicit typed loss through the loss action mapping: the store reference keeps its native dataStoreRef but discloses semantic-type (never remapped to a TextAnnotation); both participants (main and reference band, no processRef) map to page regions with semantic-type; Process IO objects carry semantic-type and the data association relation-kind; the Documentation text of Task_1 is not encoded, so metadata is reported with the exact ID-less source /rootElements/0/flowElements/0/documentation/0 and targetId Task_1 (nearest ID-bearing ancestor); the internal calledElement Process_sub has no drawio link, so navigation; the Terminate end is drawn as an end event with semantic-type on its TerminateEventDefinition (never advertised as a lossless Terminate). Counter IDs: page e_0, nodes in UTF-16 key order Band_w_di e_1 .. Task_1_di e_8, edges Assoc_in_di e_9 .. Flow_2_di e_13; unnamed edges have no name field; loss recipes emit nothing, so every loss result is unavailable; loss entries sort by ruleId then source pointer. Support bindings collaboration/main-participant/reference-band give the support roles of the participant records. R coverage in native pre-order (ID-less Documentation and InputOutputSpecification traversed, not listed). The profile is re-pinned to the lot-4 extension packages (they admit every type of the tree)."
+    },
+    {
+      "caseId": "export.map.field-missing-required",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.field-missing-required.json",
+        "sha256": "ee21525f968d28216d5efacf5bb9195bcfac7e927467a623ad7036a3504d271d"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "a required named field evaluating to MISSING refuses export-field-invalid",
+      "derivation": "Node id = read /semanticId; the 'legend' occurrence has no semanticId, so the required id is MISSING: export-field-invalid. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.format-unknown",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.format-unknown.json",
+        "sha256": "de3647113b6ecd50a28196a70574b1f13897b7af7598f3ecb3e2351563523aa6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "a format absent from the profile exports refuses export-format-unsupported",
+      "derivation": "The profile declares only drawio; format sparx has no export record: export-format-unsupported. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.format-without-adapter",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.format-without-adapter.json",
+        "sha256": "7277496821299e43c7bd4c4723042aff3bd2caf9889de79cbfce6fe306c254b5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "a declared format without a registered Python adapter refuses export-format-unsupported",
+      "derivation": "exports[0].format svg is declared, but lot 4 registers only drawio/1: export-format-unsupported. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.grid-fixture",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.grid-fixture.json",
+        "sha256": "5f325d5094aae0ce9fddb2f1d02b89e2ac3ca1d0262b01a23da3a214d14b6c97"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "counterOrigin 10, a later child emission uses an earlier preallocated number, node parent of a node",
+      "derivation": "Input = neutral-grid-fixture.json render records (same semanticId mapping as export.map.neutral-fixture). Allocation is planned before emission: pages e_10, e_11; nodes Z/a-first e_12, Z/z-last e_13, A/a-last-page e_14. export-nodes skips z-last and emits e_12, e_14; export-nested-nodes then emits e_13 with parent outputId(container a-first) = e_12. Projection equals neutral-grid-fixture.json#/expected/exportIR; losses as export.map.neutral-fixture (export id drawing). R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.kinds-and-losses",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.kinds-and-losses.json",
+        "sha256": "a083cb31c22e685f4a64544d1dc341cbb888d66255158971d61496d10d5827ac"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "every export-ir/1 kind, edge endpoints, artifact-global and page metadata, each loss class through the loss action mapping, adapter-declared metadata losses",
+      "derivation": "Recipes in order: pages, nodes (+ loss appearance after each emit), edges (endpoints bound through sourceOccurrence/targetOccurrence), labels, global metadata (self = Definitions, no parent), page metadata (parent = page id), losses (eight loss actions on s-task-a with aliases of self). Planned keys: page e_0, nodes s-task-a e_1 / s-task-b e_2 (reused by the edge endpoints), edge e-flow e_3, label e-flow e_4. Loss action entries: code export-loss/<class>, messageKey export.loss.<class>, loss/warn/export/mapped, lossClass = class, ruleId = recipe id, source = Task_A tree coordinate; the node losses point at the node just emitted (/ir/1, /ir/2), the export-losses recipe emits nothing so its results are unavailable. The drawio/1 adapter serializes no metadata record, so it declares one export-loss/metadata entry per emitted metadata record (DESIGN §10.2 'cannot arbitrarily omit a common supported field without advertising a capability loss'): ruleId adapter, result = the metadata record /ir/5 or /ir/6 (targetId null), source = the emitting self (Definitions_x at the root pointer, unavailable for the PageHandle, pageId P1 for the page metadata). Entries sort by ruleId (adapter < export-losses < export-nodes), then source. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.native-policy",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.native-policy.json",
+        "sha256": "ba8c7d0efd3c8665ca386ed5ced8f488c2e202b363b5a0d251e65596d0adbfd2"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "native ID policy: pageId for a page, semanticId for a semantic occurrence when unique",
+      "derivation": "idPolicy native, counterOrigin 0: page P1 -> 'P1', nodes -> 'Task_A', 'Task_B' (each unique among the requested keys). R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.native-policy-anonymous",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.native-policy-anonymous.json",
+        "sha256": "6cc8ea8b6196cec1e899da266164606ad79013c06ad69bacfc46ffc5d950248f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "an occurrence without semanticId cannot take a native ID",
+      "derivation": "R carries an occurrence 'legend' without semanticId (synthetic-like) that export-nodes emits; under idPolicy native it has no semantic ID: export-id-ambiguous (a digest/counter policy is required). The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.native-policy-duplicate",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.native-policy-duplicate.json",
+        "sha256": "0b90e607417f043576af24ddac881543c73d6b1b5a183a1f7a6d60c614ba8328"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "native IDs that are not unique in the artifact refuse export-id-ambiguous",
+      "derivation": "idPolicy native with edges and labels: (P1,e-flow,edge) and (P1,e-flow,label) both map to semanticId Flow_1: export-id-ambiguous. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.native-policy-repeated-view",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.native-policy-repeated-view.json",
+        "sha256": "408f03c9f250552f05dc46a29d5712614bbe338086457395ff7f06b7c53be229"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "repeated views of one semantic ID make native IDs ambiguous",
+      "derivation": "export.map.neutral-fixture input with idPolicy native: Task_B occurs on Z-page and A-page, so semanticId Task_B is not unique: export-id-ambiguous. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.neutral-fixture",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.neutral-fixture.json",
+        "sha256": "d6215423616a17557af298ce9aeadbd6d3c4b52c4ef003219918914fe7796526"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "export IR of the first neutral fixture: counter order, implicit page parents, copied R values, capability losses, repeated-view idMap",
+      "derivation": "Input = neutral-fixture.json (input tree with isExecutable false as C sets it; render pages sorted by order; render occurrences with semanticIds a-first->Task_A, z-last/a-last-page->Task_B, coverage and a fresh binding). Counter policy, origin 0: pages Z-page (order 0) e_0, A-page e_1, then node keys by page order and UTF-16 key: Z/a-first e_2, Z/z-last e_3, A/a-last-page e_4. Omitted node parents are the current page ids. The ir projection on {kind,id,name,parent} equals neutral-fixture.json #/expected/exportIR; bounds/style/label are copied from R (harmonization B21). The capability record (when true, structural, [semantic-type]) adds one loss per occurrence with ruleId drawing and unavailable result coordinates (B23), sorted by source pointer then pageId. idMap rows are not flattened across the repeated view of Task_B; one artifact record with digest H(ir) and every entry index (B22). R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.optional-field-missing",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.optional-field-missing.json",
+        "sha256": "e843e49ff9b2bf4d071d679de7121f6c0f18a72fae1e91b03ed7b3da071a0ed6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "an optional named field evaluating to MISSING is omitted; no idMap row without a source identity",
+      "derivation": "Occurrence 'legend' has no label: name = read /label/text is MISSING and the optional node field is omitted (no label copied either). Keys: page e_0; nodes legend e_1, s-task-a e_2, s-task-b e_3 (UTF-16 key order). legend has no semanticId, so no idMap row. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.output-id-native-ambiguous",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.output-id-native-ambiguous.json",
+        "sha256": "6dab2f181b8025a546eaf63fe6815da289c5e27a4e5691fa5329b317e242ed27"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.2 outputId; §10.2",
+      "witness": "a native handle with two occurrences on the current page refuses export-occurrence-ambiguous",
+      "derivation": "Same recipe as export.map.output-id-native-handle but Task_A has two occurrences on P1 (s-task-a, s-task-a-2): export-occurrence-ambiguous. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.output-id-native-handle",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.output-id-native-handle.json",
+        "sha256": "f82651807dab2130803caf714c2c934959117ab9933f2deb9a4c0ab103a6ffe4"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.2 outputId; §10.2",
+      "witness": "outputId on a native handle resolves the one exact current-page occurrence",
+      "derivation": "sem = semantic(self) is the native Task_A; on the current page P1 Task_A has exactly one occurrence (s-task-a), so outputId(sem,node) is the key (P1,s-task-a,node) -> e_1. R coverage lists every ID-bearing element in native pre-order (harmonization G3); read-only Result/1 with the B4 report header (source = target = envelope identity, input = output revision); PreparedArtifact.report is the same Report/2 record."
+    },
+    {
+      "caseId": "export.map.parent-invalid-cycle",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.parent-invalid-cycle.json",
+        "sha256": "dea9286fe9e5b15954e9e818a4fc4e9b24a732c4183c34692dc832c1ac7757c8"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "a parent equal to the record's own id is a cycle",
+      "derivation": "Node parent = outputId(self,node), i.e. its own id: export-parent-invalid. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.parent-invalid-duplicate",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.parent-invalid-duplicate.json",
+        "sha256": "db81eaa5565c347aba6a573fc24a2166a18b2cd3a2a0bda4a44bbc3be17dc6b5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "duplicate artifact keys refuse export-parent-invalid",
+      "derivation": "export-nodes-again emits node ids e_1/e_2 a second time in the same call: duplicate keys, export-parent-invalid. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.parent-invalid-kind",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.parent-invalid-kind.json",
+        "sha256": "ea26bca3cbb1979d67fcb20ca91b17cf5f76de9eb8cd2a5c5d787ad717aa17d5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "a parent of incompatible kind refuses export-parent-invalid",
+      "derivation": "The label's parent is the edge id e_3 (emitted earlier) but a parent must be a page or node id: export-parent-invalid. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.parent-invalid-unknown",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.parent-invalid-unknown.json",
+        "sha256": "012bbec1905bd611a234cd247c61e9635e970f49b8bd1b59443883af0f6a0954"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "a handle that this call never emits (cross-call handle) refuses export-parent-invalid",
+      "derivation": "Node parent literal e_99 is never emitted in this call: export-parent-invalid (not export-parent-order). The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.parent-order",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.parent-order.json",
+        "sha256": "0af5b8e5df005613b482b6ec81965691564c7a023d05ac31d09a0af827cdedc2"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "pages before containers: an implicit page parent not yet emitted refuses export-parent-order",
+      "derivation": "Recipes nodes, pages: the first node's omitted parent is the current page id e_0, emitted later in the same call: export-parent-order. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.refuse-action",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.refuse-action.json",
+        "sha256": "f2379f9ebf7fe0f0548a3a862a27829c5c037cbf386b9bcc6ddbb00431e0cf44"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4 refuse; §10.2",
+      "witness": "a refuse action aborts the complete export atomically",
+      "derivation": "export-guard refuses with code export-blocked on s-task-b: the call refuses with that code, no artifact. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.render-unsupported",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.render-unsupported.json",
+        "sha256": "9cd1c35f7914528b3e7073d3e28d55b06899ad867b7337fc49595332a084893c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3; §10.1 unsupported necessary occurrence",
+      "witness": "R coverage with an unsupported element refuses the export",
+      "derivation": "Without a flow notion the drawn Flow_1 has no glyph: R covers it as unsupported with its render-unsupported diagnostic (render.r.coverage-unsupported rule, harmonization K10/B25); the export refuses render-unsupported instead of a partially valid artifact. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.sequence-aba",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.sequence-aba.json",
+        "sha256": "d766396e26aa8fcc0dee00097ae4a04ad1f7d44d8cfc5aa6e21de5d68b87c32d"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 Export recipe, capability and loss contract",
+      "witness": "the symbol table lasts one call, is discarded on refusal and never survives A->B->A",
+      "derivation": "Step 1 = export.map.neutral-fixture; step 2 = a different profile whose export refuses export-parent-order mid-emission; step 3 repeats step 1 and must equal it exactly (no counter, ID or alias state survives)."
+    },
+    {
+      "caseId": "export.map.stale-descriptor",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-descriptor.json",
+        "sha256": "c46d1f2a7ad8b09d704bd05b4dd0500a5ac5cdfe05beeb8d6e2394eaaf7269fc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "each stale binding field returns render-stale",
+      "derivation": "R equals export.map.counter-reuse R except that binding.descriptorDigest does not match the envelope descriptor pins: render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-layout",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-layout.json",
+        "sha256": "bda97e61d7cb9fe8898391a9995d2f8fe68c6bfb5ea1b94e587d03c1f40baff5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a changed page name after R invalidates layoutDigest",
+      "derivation": "The supplied layout renames page P1 while R (and its pages) still carry 'Main': layoutDigest and pages differ: render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-metrics",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-metrics.json",
+        "sha256": "585c3b64a1b388fda2ab33432efbbb0a967f79c5e571ff6e570c259acb6fb91f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "each stale binding field returns render-stale",
+      "derivation": "R equals export.map.counter-reuse R except that binding.metricsDigest does not match the theme chain metric resources: render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-occurrence-geometry",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-occurrence-geometry.json",
+        "sha256": "85515a80fdd4cf4260867e37e8d7ae5277dbe73c6a4e1af7550462ceed59cefd"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "an R whose occurrence geometry differs from the supplied layout record is stale even when its digests were recomputed",
+      "derivation": "R is bound to a layout in which s-task-a sits at x 110000 (binding recomputed over that layout, so every digest is internally consistent) while its occurrence keeps x 100000: occurrence minus emittedType/style/glyphId differs from the layout geometry record, so the R was not produced from that layout: render-stale (DESIGN §9.2 stale input; harmonization K14). The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-payload",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-payload.json",
+        "sha256": "05dec55d4d1ed6e14dd8302c6786528828557e55e1c1c33733139f64c23e53ce"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a payload edited after binding fails payloadDigest",
+      "derivation": "One occurrence style of R was changed without rebinding: H({pages,occurrences,coverage,diagnostics}) no longer equals binding.payloadDigest: render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-profile",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-profile.json",
+        "sha256": "78917522e59374661ccd5c405c2a239c0aea7b1d9facff2e215e48f9e342b1de"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "each stale binding field returns render-stale",
+      "derivation": "R equals export.map.counter-reuse R except that binding.profileDigest is the digest of another profile package: render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-semantic",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-semantic.json",
+        "sha256": "3e590eb319a246274ab823e67feeb3be6862b3e33c9f8dc04f405f7370d05860"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "R bound to an older semantic revision is stale",
+      "derivation": "R was bound to the tree with Task_A named Draft; the envelope now names it Drafted, so binding.semanticRevision differs: render-stale (terminal steps never repair R). The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-theme-digest",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-theme-digest.json",
+        "sha256": "0be388675b06d2700d487589a01808f703a3ce9c98c4ae969652172908dbe6c4"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "each stale binding field returns render-stale",
+      "derivation": "R equals export.map.counter-reuse R except that binding.themeDigest does not match the resolved theme chain: render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.map.stale-theme-unknown",
+      "harness": {
+        "path": "tests/profile_export/expected/export.map.stale-theme-unknown.json",
+        "sha256": "3ea7fd8f85729d89b5e85d4c69c770311e1d744b0edf889f97b8e31694cb6080"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "each stale binding field returns render-stale",
+      "derivation": "R equals export.map.counter-reuse R except that binding.themeId names no theme of the profile (unresolved input): render-stale. The refusal carries no artifact; it echoes the envelope identity and revision, and its report has the B4 source header and no entry (harmonization B2, B3, B4)."
+    },
+    {
+      "caseId": "export.prepare.compat-refusal",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.compat-refusal.json",
+        "sha256": "1bf7de5f468f4f935c90004f78b25826b109863a317e6325374c6b89c9bcbd37"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "compatibility runs right after option validation: refusal with an empty report, no artifact, no mutation",
+      "derivation": "Envelope identity is the unpatched neutral identity while the compiled profile is the patched one (same id/version, different digest): profile-digest-mismatch after the options stage and before any other stage; the report has no entry; the refusal echoes the envelope identity and revision. Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.prepare.lint-refusal-stage-order",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.lint-refusal-stage-order.json",
+        "sha256": "447c959702f1c36078934802e7eb8bf92fefe6ae343210c6810d53b774683f43"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "stage order: the first blocking lint stage (pre-normalize, accept) refuses with the complete report so far",
+      "derivation": "Unpatched neutral profile on the neutral-fixture input (Task_A unnamed, no events, no flows). The trace proves the order and single execution: options, compatibility, graph, complete (C sets isExecutable false on the staged copy), pre-normalize, where the accept table blocks; no later stage runs. The refusal code is the code of the first unresolved error entry in profile-report/2 order, bpmnlint/end-event-required (ruleId end-event-required sorts first; harmonization C19). The report entries are the pre-normalize findings (no C change entry, B2); because the standard entries and raw findings are lint-bridge output (block-A lot-1 adapter), only the listed entries are required (includes) and the entry lists are UNSEALED; every other member is exact. Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.prepare.missing-support",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.missing-support.json",
+        "sha256": "9f52bb018eac2060031c6cdddec539b8ba516274772092008d84f9a862dcfb9f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "preparation never creates supports: placements into an unbound region refuse profile-open",
+      "derivation": "Same as export.prepare.success but keeping place-task: N places Task_A/Task_B in region content and no support binding has role content. A missing support invokes gated N, never layout-created semantics; with support creation disabled (OPEN-RESERVED-N technical gate open, edit activation) preparation refuses profile-open at the layout stage (DESIGN §9.4; harmonization C13: the standalone layout primitive would refuse render-region-missing). No artifact; no later stage; the lint stages before it found nothing. Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.prepare.repairable-not-repaired",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.repairable-not-repaired.json",
+        "sha256": "f8a6a06e2adf9458dfdf6704c286e69b6f009646154f08785ef5e077ecc6b33f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "a declared repair recipe that does not repair leaves the pre-N error unresolved after N",
+      "derivation": "Same as export.prepare.repairable-pre-normalize but the declared recipe assoc-direction-fix selects nothing (its where is false), so N leaves Assoc_1 unchanged. DESIGN §6.2: 'a repairable pre-N error may continue only with its declared bounded repair recipe; post-N unresolved errors block'; §6.4: 'corrected pre-N findings remain history with disposition corrected'. The rule assoc-direction (phase pre-normalize, classification repairable, repairRecipe assoc-direction-fix, accept severity error) finds Assoc_1 without associationDirection. The pre-normalize stage continues (a recipe is declared), N reports no change, the post-normalize lint finds nothing new, and the pre-N finding was not corrected: it is an unresolved error after N, so preparation refuses with its code association-direction-missing at the post-normalize stage (first unresolved error entry, harmonization C19); the report keeps the finding with disposition observed. Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.prepare.repairable-without-recipe",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.repairable-without-recipe.json",
+        "sha256": "baa0546dbbb38de8d7f4d02c62dcd328af8e66ae3a504b151128b7ef06c59bd7"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "a repairable pre-N error without a declared repair recipe blocks at pre-normalize",
+      "derivation": "The rule assoc-direction is classified repairable but declares no repairRecipe (and the profile has no repair recipe): DESIGN §6.2 lets a repairable pre-N error continue only with its declared bounded repair recipe, so the pre-normalize accept stage blocks with association-direction-missing (trace ends at pre-normalize; disposition observed). Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.prepare.unknown-format",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.unknown-format.json",
+        "sha256": "f5f9d1669dbb46a8178f40702b961500d49ba3f7887fe497fcdee5dbe0929b32"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "an option format without an exports[] record and adapter refuses before the pipeline",
+      "derivation": "options.format sparx is not declared in exports[]: export-format-unsupported at the options stage; no C, lint, N or layout runs (trace [options]); no artifact; no mutation. Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.prepare.unknown-theme",
+      "harness": {
+        "path": "tests/profile_export/expected/export.prepare.unknown-theme.json",
+        "sha256": "8f5954a3cf099051ae6caffe921be13e349b7a55d94b57828d7d91af1f6a52ee"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.2 prepareExport; §6.2 stage table",
+      "witness": "an option theme that resolves to no theme refuses before the pipeline",
+      "derivation": "options.themeId standard is neither a theme id nor a declared alias of the profile: unresolved input, render-stale at the options stage (trace [options]). Options are validated before the pipeline (closed option record, format declared with a registered adapter, theme resolvable; harmonization C18); then each stage runs exactly once on a staged deep copy in the DESIGN §10.2 order compatibility -> graph checks -> C -> pre-normalize -> N -> post-normalize -> layout -> post-layout -> release -> R -> map under the accept policy, edit activation; the sealed trace lists the stages the observer saw, in order. A refusal returns the complete report of the executed lint stages (no change entry, no candidate) and no artifact (harmonization B2); no input is mutated."
+    },
+    {
+      "caseId": "export.serialize.drawio-grid-fixture",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.drawio-grid-fixture.json",
+        "sha256": "28cab80269783a497b5d2f4371a2f8fb7499d6f4e168207cd5931d2c2dc9d6fe"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "a node parented to another node keeps that parent in the serialized cells",
+      "derivation": "prepared = export.map.grid-fixture payload (writer = grid exports[0].serializer): diagram e_10 First sheet with cells e_12 'First on first' (layer) and e_13 'Last on first' parented to e_12 in IR emission order (e_12 then e_13 after the other page's node); diagram e_11 Second sheet with e_14 'Second view'. DESIGN R3.3 fixes no draw.io bytes (structural until engine goldens, OPEN-EXPORT-EVIDENCE), so the payload bytes and digest are UNSEALED and checked structurally with the shared drawio-structure/1 projection (harmonization L3): one diagram per IR page in IR order with id and name; inside each, every mxCell with vertex='1' or edge='1' in document order as {id, kind, parent, value?, source?, target?} (parent equal to the diagram layer cell written $layer; a node carries its IR name as value, an edge its IR name and endpoints, a label record is a vertex whose value is its text); byte invariants UTF-8 without BOM, no CR (newline LF), no compression (none), no paired empty element (short), digest = B(bytes); a second call returns identical bytes. Geometry and style attributes are not compared (DESIGN R3.3 pins no draw.io unit or style mapping). The Result echoes the preparation identity and revision; its report carries the idMap and one artifact record whose digest is B(bytes)."
+    },
+    {
+      "caseId": "export.serialize.drawio-kinds",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.drawio-kinds.json",
+        "sha256": "01bce1d5095648b4e275c95353b0358b6e320334bb2d26fb123e560ec226220d"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "structural serialization with an edge, a label record and metadata records",
+      "derivation": "prepared = export.map.kinds-and-losses payload: one diagram (e_0 Main) with cells e_1 'Draft', e_2 'Ready' (vertices), e_3 (edge e_1 -> e_2, value 'go'), e_4 (label record: vertex 'go'). The two metadata records are not serialized by drawio/1; their losses were declared when the artifact was mapped (export-loss/metadata entries of export.map.kinds-and-losses). DESIGN R3.3 fixes no draw.io bytes (structural until engine goldens, OPEN-EXPORT-EVIDENCE), so the payload bytes and digest are UNSEALED and checked structurally with the shared drawio-structure/1 projection (harmonization L3): one diagram per IR page in IR order with id and name; inside each, every mxCell with vertex='1' or edge='1' in document order as {id, kind, parent, value?, source?, target?} (parent equal to the diagram layer cell written $layer; a node carries its IR name as value, an edge its IR name and endpoints, a label record is a vertex whose value is its text); byte invariants UTF-8 without BOM, no CR (newline LF), no compression (none), no paired empty element (short), digest = B(bytes); a second call returns identical bytes. Geometry and style attributes are not compared (DESIGN R3.3 pins no draw.io unit or style mapping). The Result echoes the preparation identity and revision; its report carries the idMap and one artifact record whose digest is B(bytes)."
+    },
+    {
+      "caseId": "export.serialize.drawio-neutral-fixture",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.drawio-neutral-fixture.json",
+        "sha256": "9e48d80983ed5f8c367f3fca8565f10124102bf3bf1a859f5ca72aeccc26cb12"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "structural draw.io serialization of a prepared artifact; digest = B(bytes); idMap and capability carried",
+      "derivation": "prepared = export.map.neutral-fixture payload, writer options = neutral exports[0].serializer (UTF-8, LF, indent 0, no compression, short empty elements). Diagrams e_0 First sheet (cells e_2 'First on first', e_3 'Last on first') and e_1 Second sheet (cell e_4 'Second view'), every node parented to the layer. DESIGN R3.3 fixes no draw.io bytes (structural until engine goldens, OPEN-EXPORT-EVIDENCE), so the payload bytes and digest are UNSEALED and checked structurally with the shared drawio-structure/1 projection (harmonization L3): one diagram per IR page in IR order with id and name; inside each, every mxCell with vertex='1' or edge='1' in document order as {id, kind, parent, value?, source?, target?} (parent equal to the diagram layer cell written $layer; a node carries its IR name as value, an edge its IR name and endpoints, a label record is a vertex whose value is its text); byte invariants UTF-8 without BOM, no CR (newline LF), no compression (none), no paired empty element (short), digest = B(bytes); a second call returns identical bytes. Geometry and style attributes are not compared (DESIGN R3.3 pins no draw.io unit or style mapping). The Result echoes the preparation identity and revision; its report carries the idMap and one artifact record whose digest is B(bytes)."
+    },
+    {
+      "caseId": "export.serialize.format-unsupported",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.format-unsupported.json",
+        "sha256": "8017140cf3a19478b543a4103eea0dbab969cd54d599e58c31afcae83be88268"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "only registered adapters serialize",
+      "derivation": "format svg has no lot-4 Python adapter: export-format-unsupported (checked before freshness)."
+    },
+    {
+      "caseId": "export.serialize.stale-descriptor-digest",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.stale-descriptor-digest.json",
+        "sha256": "6e1f5695efce9708f9caac46cfdbbcd5260040cd25f1fd7079aa7898a63de988"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "the preparation descriptor pins must still match its renderBinding",
+      "derivation": "renderBinding.descriptorDigest differs from descriptorDigest(profileIdentity.descriptors) (viewRevision unaffected by that field): render-stale (harmonization K15)."
+    },
+    {
+      "caseId": "export.serialize.stale-profile-digest",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.stale-profile-digest.json",
+        "sha256": "23f07e7ca83876f9d7657469a344c30a643adc19eff96e2e4930b9cf013a0be7"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "the preparation identity must still name the profile its renderBinding was bound to",
+      "derivation": "renderBinding.profileDigest differs from profileIdentity.sha256 (viewRevision recomputed, so only the profile check can fail): render-stale (harmonization K15)."
+    },
+    {
+      "caseId": "export.serialize.stale-semantic",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.stale-semantic.json",
+        "sha256": "ba660ffc693771161d66abeb025a38a84ee2760089738696730811b697e02f41"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "the prepared semantic revision must match its renderBinding",
+      "derivation": "semanticRevision differs from renderBinding.semanticRevision: render-stale."
+    },
+    {
+      "caseId": "export.serialize.stale-view",
+      "harness": {
+        "path": "tests/profile_export/expected/export.serialize.stale-view.json",
+        "sha256": "eb826aaa8b2b120b8cd6991400eeb94b84f1fcda449d24d93a36817706c0be87"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §10.1 serializePrepared; §10.2 OPEN-EXPORT-EVIDENCE",
+      "witness": "serialization verifies renderBinding freshness",
+      "derivation": "viewRevision no longer equals H of the renderBinding view fields: render-stale (the refusal echoes the preparation identity and revision)."
+    },
+    {
+      "caseId": "render.compile.binding-token-duplicate",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.binding-token-duplicate.json",
+        "sha256": "c3c8b5e05f615b3a78d289859a975ff5f99b26e34f81a3e77e12d890a70bf3b1"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-09 presentation",
+      "witness": "duplicate token name in one render binding",
+      "derivation": "notion task render binding tokens [fill #ffffff, fill #ffffff]; token names are unique per list (§9.1), CR-09 refuses profile-type."
+    },
+    {
+      "caseId": "render.compile.grid-profile",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.grid-profile.json",
+        "sha256": "8b6f3ac2eb4943854142560ee067feb1f3c42009ae24c8cb6e47d26b4f6cfc29"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "the second neutral profile with its header-band glyph and synthetic side stripe compiles",
+      "derivation": "neutral-grid-profile.json unpatched: header-band headerHeight 12 is a nonnegative integer, every token matches its signature."
+    },
+    {
+      "caseId": "render.compile.native-with-commands",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.native-with-commands.json",
+        "sha256": "f367fa42c4e6499ea268a8a90c99193373cffd29eb6340974adfcdc89dbdfa95"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 schema authority; §9.3 glyph shape conditionals",
+      "witness": "native glyph with commands is a schema violation",
+      "derivation": "The pinned schema requires empty commands for kind native (if/then maxItems 0); schema validation precedes compilation, so load_profile refuses profile-schema."
+    },
+    {
+      "caseId": "render.compile.path-bad-arity",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.path-bad-arity.json",
+        "sha256": "d632f704de671ff7ba9ee4a0868e7c179b82ce2bb6019342ea7e2b9863fba70c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 schema authority; §9.3 glyph shape conditionals",
+      "witness": "path command L with three values is a schema violation",
+      "derivation": "pathCommand M/L requires exactly two values in the pinned schema; three values refuse profile-schema at load."
+    },
+    {
+      "caseId": "render.compile.path-valid",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.path-valid.json",
+        "sha256": "fbdad5d6df5439e44a446e9b6fbed884c006d92246c3ac3cfe39238b752a37a3"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "path glyph with M, L, C, Q, Z of the right arities and a positive viewBox compiles",
+      "derivation": "Every DESIGN path condition holds (positive viewBox, nonempty commands, M/L two, C six, Q four, Z zero values); compilation succeeds."
+    },
+    {
+      "caseId": "render.compile.region-token-fraction",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.region-token-fraction.json",
+        "sha256": "d30723907360398547cd0316368166904d6d5ffa6828ccf7b76f4d0ce77f22df"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-09 presentation",
+      "witness": "region tokens are nonnegative integer ticks",
+      "derivation": "region.content.padding = 1.5 fails the pinned regionTokenSchema {type:integer, minimum:0} (§9.4); CR-09 refuses profile-type."
+    },
+    {
+      "caseId": "render.compile.synthetic-token-invalid",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.synthetic-token-invalid.json",
+        "sha256": "68630e7805f1cae114ab1f6a63587aaea55396976b1e1136849d2b18a393504d"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-09 presentation",
+      "witness": "synthetic occurrence tokens follow the same signatures",
+      "derivation": "Grid side-stripe token fill #eef (three digits) fails the color signature; CR-09 refuses profile-type."
+    },
+    {
+      "caseId": "render.compile.template-param-duplicate",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.template-param-duplicate.json",
+        "sha256": "4117581c8d7c69aed97d8f72dab79e3afd7a4ec99d8e2532f1543f0c06f7c8ff"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "duplicate template parameter",
+      "derivation": "Added attached-badge glyph listing offsetX twice; duplicates refuse profile-glyph-shape."
+    },
+    {
+      "caseId": "render.compile.template-param-extra",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.template-param-extra.json",
+        "sha256": "5b84035b391b137205d46f3797ad1c7743d8afd2f7789bc1eb64910923168151"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template glyph with an extra parameter",
+      "derivation": "Added band-stripe glyph with stripeWidth and an extra headerHeight; extras refuse profile-glyph-shape."
+    },
+    {
+      "caseId": "render.compile.template-param-missing",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.template-param-missing.json",
+        "sha256": "ffe94a6ac4913cb52e14905b9858990921dbaf8bb6286257def49c2dc6956868"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template glyph without its exact parameter set",
+      "derivation": "Added header-band glyph with parameters []; headerHeight is missing, CR-09 refuses profile-glyph-shape."
+    },
+    {
+      "caseId": "render.compile.template-param-type",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.template-param-type.json",
+        "sha256": "d32c4023ee62b4e5706e5627464cb10861748e041b2e05fd003dc20acfaa4b2f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter of the wrong type",
+      "derivation": "Added corner-fold glyph with headerRotation \"90\" (string); wrong types refuse profile-glyph-shape."
+    },
+    {
+      "caseId": "render.compile.template-unknown",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.template-unknown.json",
+        "sha256": "93995b3298fa30e070ff059adcc1ee7f1ad69f6d908dc5e2c3037e961b72f01c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 OPEN-RENDER-PRIMITIVES; §2.4.1 schema authority",
+      "witness": "a composite outside the closed template set cannot be expressed",
+      "derivation": "template wavy-document is outside the closed enum header-band|corner-fold|attached-badge|band-stripe; load_profile refuses profile-schema (composites stay disabled)."
+    },
+    {
+      "caseId": "render.compile.theme-token-type",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.theme-token-type.json",
+        "sha256": "d060214bb3cca198ea44b0e7ba92cdec4cb5bb5974bf8753c3a41d3ec46c23c6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-09 presentation",
+      "witness": "theme token with a value outside its render-token/1 signature",
+      "derivation": "neutral theme token fill = 12 (number); fill requires a #RRGGBB(AA) string; CR-09 token types refuse profile-type."
+    },
+    {
+      "caseId": "render.compile.theme-token-unknown",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.theme-token-unknown.json",
+        "sha256": "70619c52238c6919a2e5c6eaff5ae636c89065388ce4cf85680550caa476506c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §2.4.1 CR-09 presentation",
+      "witness": "token without a pinned signature",
+      "derivation": "Added theme token opacity; any additional token requires an explicit pinned signature (§9.3), so CR-09 refuses profile-type."
+    },
+    {
+      "caseId": "render.compile.viewbox-negative-height",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.viewbox-negative-height.json",
+        "sha256": "2d35157f4d0b3ca2cd328ad2d4207a913bc910053bed6b258987e195f847fdf9"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "path glyph viewBox needs a positive height",
+      "derivation": "Added path glyph with viewBox [0,0,24,-24] and valid commands: CR-09 refuses profile-glyph-shape."
+    },
+    {
+      "caseId": "render.compile.viewbox-zero-width",
+      "harness": {
+        "path": "tests/profile_render/expected/render.compile.viewbox-zero-width.json",
+        "sha256": "6fe7bccc7e835b9a82e136aaed72586f2a0d8c5fb85d4aadd7b1baea49366438"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "native glyph viewBox needs a positive width",
+      "derivation": "neutral theme glyph task with viewBox [0,0,0,80]; the schema admits any number, the compiler (CR-09) refuses a non-positive width with profile-glyph-shape."
+    },
+    {
+      "caseId": "render.digest.bag-duplicate-target",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.bag-duplicate-target.json",
+        "sha256": "7ea60c5924d0a66e9344ab92ce97d93d8baed5c200334c52815845ca84bd80f2"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "duplicate DiStyles/1 targets refuse",
+      "derivation": "§9.2: targets unique; two native records for Z-page/k1 refuse render-token-invalid (spec §6.1)."
+    },
+    {
+      "caseId": "render.digest.bag-null-token",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.bag-null-token.json",
+        "sha256": "de0d5d538fe4e45a85153411a893a29ce525cf4989ebb67dc8c20bd69be928bd"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "null token values refuse",
+      "derivation": "§9.2 rejects nulls in Overrides/1; a null token value refuses render-token-invalid (spec §6.1)."
+    },
+    {
+      "caseId": "render.digest.bag-unknown-member",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.bag-unknown-member.json",
+        "sha256": "9cb323bac5c1e8d2b6e0187d2ef97b037f507263a741dddedbd1f263a8450ced"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 records are closed: an unknown member refuses",
+      "derivation": "Overrides/1 is exactly {semantic:[{semanticId,tokens}],occurrence:[...]} (§9.2); the extra member makes the record invalid; shape violations refuse render-token-invalid (spec §6.1)."
+    },
+    {
+      "caseId": "render.digest.bags-reordered",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.bags-reordered.json",
+        "sha256": "f79ac27720e350fb946e85bfaad02f03d67fcaf6bb2f102732ebeea67cecc102"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "reordered override/style records and tokens normalize identically",
+      "derivation": "Same bags as render.digest.bags-sorted with every record array and token array reversed; normalization sorts them back, so every digest equals render.digest.bags-sorted."
+    },
+    {
+      "caseId": "render.digest.bags-sorted",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.bags-sorted.json",
+        "sha256": "929c2d225196c2023cf630d03a01851dbced1f07fc3c45b75bc7dc32577e9cb0"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "non-empty Overrides/1 and DiStyles/1 already in normalized order; overrides change viewRevision but not semanticRevision",
+      "derivation": "R3 input with the listed sorted bags; overridesDigest/diStylesDigest = H of the normalized records (semanticId; pageId, occurrenceKey; token name, UTF-16); semanticRevision keeps the R3 value (a view override never changes the acceptance-context revision)."
+    },
+    {
+      "caseId": "render.digest.distinct-pages",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.distinct-pages.json",
+        "sha256": "bbd24bad27ad61585180af626817d21a2cb205ccbe8e6ac19bc1b8d33338a258"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "two pages with distinct IDs and names in page order (Z-page order 0 before A-page order 1)",
+      "derivation": "R3 input plus a second page A-page/Second sheet at order 1 in layout and payload; arrays keep page order (never sorted by pageId before hashing)."
+    },
+    {
+      "caseId": "render.digest.metric-byte-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.metric-byte-changed.json",
+        "sha256": "96f1a8f8bcb440aaf10c1744c34e4b5da46a3e5bfe59b398cd73e3e196d03c34"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "one changed metric byte changes metricsDigest and viewRevision",
+      "derivation": "Same as render.digest.metric-bytes with the single byte 0 of defaultAdvance 600 changed to 1 (601); B of the raw bytes changes, hence metricsDigest and viewRevision."
+    },
+    {
+      "caseId": "render.digest.metric-bytes",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.metric-bytes.json",
+        "sha256": "2050ee2dc06e1a50640afe73708b2f4e0ca6d17e1a56cb1772dd5f178b2932a7"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "metricsDigest over {id, sha256=B(raw metric bytes)} of the vendored neutral metrics",
+      "derivation": "R3 input with metrics = the exact bytes of contracts/profile-mechanism/1/neutral-metrics.json (B = 151d1a1f..., the pinned resource sha256); metricsDigest = H([{id:neutral-metrics, sha256}])."
+    },
+    {
+      "caseId": "render.digest.occurrence-payload",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.occurrence-payload.json",
+        "sha256": "2e71e60d04a677275fb9098fdbce8ec0d697d0e7076a49b2960c403d8ac593ac"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "payloadDigest over one occurrence record",
+      "derivation": "R3 input whose payload carries one occurrence (Z-page/k1); payloadDigest = H({pages, occurrences, coverage, diagnostics})."
+    },
+    {
+      "caseId": "render.digest.occurrence-payload-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.occurrence-payload-changed.json",
+        "sha256": "b7ecebdc63c5c36320d535d904743cb0c62e004da6eaa8ddb97f714267896b66"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "one changed occurrence payload changes payloadDigest but not viewRevision",
+      "derivation": "render.digest.occurrence-payload with the fill token changed to #fffffe; payloadDigest changes while viewRevision (which excludes payloadDigest, §9.2) keeps its value."
+    },
+    {
+      "caseId": "render.digest.page-id-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.page-id-changed.json",
+        "sha256": "ab62632458bb541fdd6dcc5a2fdbd7f42c6d84468fc9f3b3d305387197d67c29"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "distinct page ID with an identical name changes layoutDigest, payloadDigest and viewRevision only",
+      "derivation": "R3 input with pageId Z-page replaced by A-page in layout and payload pages; H recomputed over the changed Layout/1 and payload records (§9.2 layoutDigest, payloadDigest, viewRevision); all other members keep the R3 values."
+    },
+    {
+      "caseId": "render.digest.page-name-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.page-name-changed.json",
+        "sha256": "8f3a6d724baafe4b3ae81951ceb0b9ac72a5cdf78b0778577ab42b13d691ff07"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "one changed page name with the same pageId invalidates layoutDigest (§9.1) and viewRevision",
+      "derivation": "R3 input with the page name First sheet replaced by Renamed sheet (pageId unchanged); §9.1 says name changes invalidate layoutDigest even when pageId is unchanged."
+    },
+    {
+      "caseId": "render.digest.r3-vectors",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.r3-vectors.json",
+        "sha256": "21d42ae27ce27caa390e40371d906b62a319126e8a5624fe0d4e422999cb7039"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "every binding digest and viewRevision on the pinned R3 vector, empty override/style bags, reordered descriptor pins",
+      "derivation": "Input is contracts/profile-mechanism/1/r3-digest-vectors.json#/input without the xml member (metrics=[] keeps its meaning); expected is the pinned #/expected members for the nine §9.2 values (empty bags hash {semantic:[],occurrence:[]} and {native:[],bioc:[]}, descriptor pins z/1,a/1 are sorted by id)."
+    },
+    {
+      "caseId": "render.digest.theme-selection",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.theme-selection.json",
+        "sha256": "f766be3f51a939f64582bd79001c203faf0ea191e95331d7f80e82787128b4ad"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "selecting another theme changes themeDigest and viewRevision only; the chain runs from the fallback root to the selected theme",
+      "derivation": "Same themes with themeId alt; the chain is [plain, alt] (fallback root first), so themeDigest = H({themeId:alt, themes:[plain, alt]}) and viewRevision change while semanticRevision, layoutDigest, overridesDigest, diStylesDigest and metricsDigest keep their values."
+    },
+    {
+      "caseId": "render.digest.theme-two-themes-plain",
+      "harness": {
+        "path": "tests/profile_render/expected/render.digest.theme-two-themes-plain.json",
+        "sha256": "28afc6d9e0cddca86ee9ea6c5128ac79e89b1cacdf71c4aabf364571fff65123"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "theme list with a second theme; selecting plain hashes only its own chain",
+      "derivation": "R3 input with themes [plain, alt(fallback plain)] and themeId plain; the chain of plain is [plain], so themeDigest equals the R3 value."
+    },
+    {
+      "caseId": "render.fresh.alias-same-theme",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.alias-same-theme.json",
+        "sha256": "28d065a6ed466f4128b59f7917cab747c8503c8f290e24d1d073ad119385d7d3"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a theme alias names the same theme: still fresh",
+      "derivation": "R of render.r.theme-alias (bound to plain, selected as 'std'); verifying with themeId plain resolves the same theme and binding: fresh.",
+      "inputFrom": [
+        {
+          "case": "render.r.theme-alias",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.fresh.di-styles-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.di-styles-changed.json",
+        "sha256": "bb2978b8c40283805bffce56f742ee3887f0d03e99abc90a2ce958d3a2dc4572"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a DI style added after R makes diStylesDigest stale",
+      "derivation": "R of render.r.plain was bound to empty DiStyles/1; a native DI style on Z-page/mm-note changes diStylesDigest: render-stale.",
+      "inputFrom": [
+        {
+          "case": "render.r.plain",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.fresh.overrides-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.overrides-changed.json",
+        "sha256": "1142afc8800841c20bee0de74c4f350783a463f4fef1efcaf5420e4b8099cfdc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "an override added after R makes overridesDigest stale",
+      "derivation": "R of render.r.plain was bound to the empty Overrides/1; verifying it against an override on Z-page/aa-task-b changes overridesDigest: render-stale.",
+      "inputFrom": [
+        {
+          "case": "render.r.plain",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.fresh.payload-tampered",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.payload-tampered.json",
+        "sha256": "86c8cea5a7dbcc4f1266492eee67a739fcbd3e529152c9a8d1a3e6aa1e3c42f9"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a payload edited after binding fails payloadDigest",
+      "derivation": "R of render.r.plain with the first occurrence style edited and the binding unchanged: payloadDigest mismatch, render-stale."
+    },
+    {
+      "caseId": "render.fresh.plain-fresh",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.plain-fresh.json",
+        "sha256": "abd053afa902fe7b51bb70f9b17c5cbf70bcecb602251bd63e3c3ec84f8d71da"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a fresh R verifies and yields its viewRevision",
+      "derivation": "Inputs equal those of render.r.plain and r is its expected payload: every recomputed binding field matches, payloadDigest matches, pages and occurrence geometry equal the layout; payload = {viewRevision: H(view fields of the binding)}.",
+      "inputFrom": [
+        {
+          "case": "render.r.plain",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.fresh.semantic-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.semantic-changed.json",
+        "sha256": "f1c83a93164fc54ba852ca87df8606f8c3f0d072b7c78bd43f52d5149c945a65"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a semantic edit after R makes semanticRevision stale",
+      "derivation": "Task_B renamed Done in the envelope while R was bound to Ready: semanticRevision differs, render-stale.",
+      "inputFrom": [
+        {
+          "case": "render.r.plain",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.fresh.staircase-fresh",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.staircase-fresh.json",
+        "sha256": "c607f49e4d7ac8927ec458eea646d6627b0651d97d9b8d4cfeca56db36b8091c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "the same theme with its overrides and DI styles verifies",
+      "derivation": "Inputs equal those of render.r.precedence-staircase: fresh, payload = {viewRevision}.",
+      "inputFrom": [
+        {
+          "case": "render.r.precedence-staircase",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.fresh.theme-selection-changed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.fresh.theme-selection-changed.json",
+        "sha256": "586a7fc9baa3adff01f1b529f02671d72cde6e6dfb3382dfd232e787937d66c3"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "selecting another theme after R makes the binding stale",
+      "derivation": "R of render.r.precedence-staircase was bound to theme plain (chain [base, plain]); verifying with themeId base changes themeId/themeDigest: render-stale.",
+      "inputFrom": [
+        {
+          "case": "render.r.precedence-staircase",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/r"
+        }
+      ]
+    },
+    {
+      "caseId": "render.legacy.alias-absent",
+      "harness": {
+        "path": "tests/profile_render/expected/render.legacy.alias-absent.json",
+        "sha256": "d002db3e288ac0631b55bd42775a5ec7eb5c3c7393e9a9c54c22ce29db3478e2"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "no built-in legacy look mapping",
+      "derivation": "legend has no compatibility record and generic code has no business enum (§9.5). An unresolved legacy look is an unresolved render input: render-stale (DESIGN §9.2 'unresolved input returns render-stale'; §10.2 limits legacy-unmapped to legacy diagnostic codes; block-B harmonization decision C17)."
+    },
+    {
+      "caseId": "render.legacy.alias-dangling",
+      "harness": {
+        "path": "tests/profile_render/expected/render.legacy.alias-dangling.json",
+        "sha256": "8aaa530078fce8d0ef0d26c228334b5c43e40eea570e8c1834f0e2b231bbe76c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "a legacy alias must land on a declared theme",
+      "derivation": "Record standard -> custom with no theme custom in the profile: unresolved input, render-stale (§9.2)."
+    },
+    {
+      "caseId": "render.legacy.alias-exact-name",
+      "harness": {
+        "path": "tests/profile_render/expected/render.legacy.alias-exact-name.json",
+        "sha256": "a6aae0e2b0a4cbd112f7ddb83c83dc79eea11fd6f66d48e404c0cb81360564a6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "legacy alias names match exactly (no case folding)",
+      "derivation": "compatibilityAliases maps standard -> plain; the requested name Standard differs in case, so no record matches. An unresolved legacy look is an unresolved render input: render-stale (DESIGN §9.2 'unresolved input returns render-stale'; §10.2 limits legacy-unmapped to legacy diagnostic codes; block-B harmonization decision C17)."
+    },
+    {
+      "caseId": "render.legacy.alias-mapped",
+      "harness": {
+        "path": "tests/profile_render/expected/render.legacy.alias-mapped.json",
+        "sha256": "94a5a13f5ccfc460a0ecd73db1ec8e36214afcf4bae711266b8ae2dacbc7754a"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "a legacy look name resolves only through injected compatibility data",
+      "derivation": "compatibilityAliases [{kind:theme, old:standard, destination:plain, mode:explicit-adapter}] maps standard to the injected theme plain (§9.5)."
+    },
+    {
+      "caseId": "render.legacy.alias-removed",
+      "harness": {
+        "path": "tests/profile_render/expected/render.legacy.alias-removed.json",
+        "sha256": "c9e793aef07e52e4c44ef4f9b09a19e3afdd3c52fcc92d5a2e27b0523c30d4f6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "a removed legacy alias maps to nothing",
+      "derivation": "Record {kind:theme, old:colored, destination:plain, mode:remove}: a removal record is not a mapping. An unresolved legacy look is an unresolved render input: render-stale (DESIGN §9.2 'unresolved input returns render-stale'; §10.2 limits legacy-unmapped to legacy diagnostic codes; block-B harmonization decision C17)."
+    },
+    {
+      "caseId": "render.legacy.alias-wrong-kind",
+      "harness": {
+        "path": "tests/profile_render/expected/render.legacy.alias-wrong-kind.json",
+        "sha256": "18afb5b386d59df0f30aa827230d365d46cd6ed3b0f4ebf02609c5a292b553dc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "only kind theme records map looks",
+      "derivation": "Record {kind:marker, old:standard, ...} is not a theme alias, so standard has no theme mapping. An unresolved legacy look is an unresolved render input: render-stale (DESIGN §9.2 'unresolved input returns render-stale'; §10.2 limits legacy-unmapped to legacy diagnostic codes; block-B harmonization decision C17)."
+    },
+    {
+      "caseId": "render.r.attached-badge",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.attached-badge.json",
+        "sha256": "b0a30bfe43a1670a087e6875347a618e9192241200a208acd0bcf63a48be9dcc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "badge occurrence styled from its declaration tokens; source occurrence kept (hideSource false)",
+      "derivation": "Layout = render.layout.attached-badge payload; badge glyph badge, style declaration fill #ccccff + theme stroke; Assoc_N has neither geometry nor glyph: nonvisual. Coverage lists every ID-bearing element in native pre-order with containment members in UTF-16 name order (Definitions, Process, artifacts before flowElements, arrays in index order; harmonization G3, lot-0 precedent): rendered with occurrences, nonvisual without a layout record.",
+      "inputFrom": [
+        {
+          "case": "render.layout.attached-badge",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/layout"
+        }
+      ]
+    },
+    {
+      "caseId": "render.r.coverage-unsupported",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.coverage-unsupported.json",
+        "sha256": "c16b4bb5d671df697561bf7cd524dad22064a24377d7e8fb41628b8b74f8b646"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "no automatic standard-notation fallback: drawn element without a deliberate glyph is covered as unsupported with one render-unsupported diagnostic",
+      "derivation": "Layout = render.layout.edge-without-notion payload; Flow_1 has a geometry record but no notion/glyph in the neutral profile (§9.3 divergence from automatic fallback), so it gets no occurrence, coverage disposition unsupported (laid out without a glyph, harmonization K10) and one R diagnostic (harmonization B25): render-unsupported / render-unsupported, integrity, error, stage render, ruleId adapter, disposition observed, exact source /rootElements/0/flowElements/2 (Flow_1), result unavailable, pageId Z-page, occurrenceKey ee-flow; the resolveTheme report entries are the R diagnostics; everything else as render.r.plain. Coverage lists every ID-bearing element in native pre-order with containment members in UTF-16 name order (Definitions, Process, artifacts before flowElements, arrays in index order; harmonization G3, lot-0 precedent): rendered with occurrences, nonvisual without a layout record.",
+      "inputFrom": [
+        {
+          "case": "render.layout.edge-without-notion",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/layout"
+        }
+      ]
+    },
+    {
+      "caseId": "render.r.di-style-unknown-page",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.di-style-unknown-page.json",
+        "sha256": "145e5b303a183316aadc0bb797faf11398a353ea780af6b26860d5b076925a0b"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 and DiStyles/1 reject unknown targets/members, duplicate targets and non-closed shapes",
+      "derivation": "Input bag with native DI style for a page absent from the layout (unresolved input): shape violations refuse render-token-invalid, unresolved targets refuse render-stale (§9.2, spec §5.1)."
+    },
+    {
+      "caseId": "render.r.edge",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.edge.json",
+        "sha256": "870cc3ae1231882b5c0b7f2c70880c8c138add7fa4ded6c64443d7b96d8cee95"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.1 Closed layout and render data",
+      "witness": "edge occurrence: emittedType edge, binding stroke beats theme stroke",
+      "derivation": "Layout = render.layout.edge payload; flow binding tokens {stroke #333333} beat theme stroke #000000, theme fill #ffffff fills the rest; emittedType edge for the edge record.",
+      "inputFrom": [
+        {
+          "case": "render.layout.edge",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/layout"
+        }
+      ]
+    },
+    {
+      "caseId": "render.r.facet-disjoint",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.facet-disjoint.json",
+        "sha256": "8beee05a7c8e287494214dcbc5da8f1810e1347cff2253a037de15219be4b631"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "multiple matched facets contribute disjoint tokens",
+      "derivation": "Task_B (name Ready) matches notion task and facet flagged; both bind glyph task and the same label; task gives fill #ffffff, flagged gives stroke #ff0000 at the same (binding) level, which beats theme stroke."
+    },
+    {
+      "caseId": "render.r.facet-equal-values",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.facet-equal-values.json",
+        "sha256": "84bf110ec90783249eec3bc69b024b9b221acd25863e79f9dbceef56204c4c15"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "equal values for one token at the same precedence coalesce",
+      "derivation": "flagged contributes fill #ffffff, equal to the task binding value: no conflict, style as render.r.plain."
+    },
+    {
+      "caseId": "render.r.geometry-theme-gated",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.geometry-theme-gated.json",
+        "sha256": "161fc59504656271f482d581b855c1e02f00a5251754fd3c51253e99363131b6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §13 OPEN-DI / OPEN-LOOK; §9.4 shared geometry",
+      "witness": "per-theme geometry is not approved while OPEN-DI/OPEN-LOOK keeps shared geometry",
+      "derivation": "plain declares geometry 'theme'; §16.6 ratified shared geometry and no geometry:theme policy is approved: profile-open."
+    },
+    {
+      "caseId": "render.r.grid-side-stripe",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.grid-side-stripe.json",
+        "sha256": "00def1db2bab0b68e1970c0cbbf4246941944857599f9f54184d70f72451c9bc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "R of the second neutral profile: header-band glyph, ServiceTask glyph, synthetic stripe style, unsupported support lane with its diagnostic",
+      "derivation": "Layout = render.layout.grid-side-stripe payload. Lane_side is laid out but has no notion/glyph: no occurrence, coverage unsupported and one render-unsupported diagnostic (source /rootElements/0/laneSets/0/lanes/0, P-main, Lane_side_di; harmonization K10/B25). The stripe has no semanticId (not in coverage), glyph aid, style = declaration tokens {fill #eeeeff} at binding level + theme stroke. Associations have no geometry: nonvisual. Coverage lists every ID-bearing element in native pre-order with containment members in UTF-16 name order (Definitions, Process, artifacts before flowElements, arrays in index order; harmonization G3, lot-0 precedent): rendered with occurrences, nonvisual without a layout record. The profile is re-pinned to the lot-4 extension packages neutral-render-descriptors/1 and neutral-render-base/1 (tests/profile_render/expected/artifacts/), which admit every native type of the tree.",
+      "inputFrom": [
+        {
+          "case": "render.layout.grid-side-stripe",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/layout"
+        }
+      ]
+    },
+    {
+      "caseId": "render.r.label-empty-string",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.label-empty-string.json",
+        "sha256": "8f173065e0b9238d1b2c46af50bcf5c026bccf8d3a2584018ccca2d512a749c1"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "an occurrence whose evaluated label is the empty string carries no label",
+      "derivation": "Layout = render.layout.label-empty-string payload: Task_A occurrences have no label (evaluated '' gives none, harmonization F3, consistent with the layout so not stale); styles and glyphs as render.r.plain. Coverage lists every ID-bearing element in native pre-order with containment members in UTF-16 name order (Definitions, Process, artifacts before flowElements, arrays in index order; harmonization G3, lot-0 precedent): rendered with occurrences, nonvisual without a layout record.",
+      "inputFrom": [
+        {
+          "case": "render.layout.label-empty-string",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/layout"
+        }
+      ]
+    },
+    {
+      "caseId": "render.r.label-extra",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.label-extra.json",
+        "sha256": "6e8086d6114ba82178ce930639b54a09bffef432d25231117240253a2b62ad93"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a layout label for an element whose bindings produce no label is stale",
+      "derivation": "Layout = render.layout.edge-without-notion payload with a label 'go' added to ee-flow (Flow_1); the neutral profile has no flow notion, so no binding produces a label (presence mismatch). R copies layout geometry and labels; a layout label that differs from the label the selected theme's binding evaluates, or a presence mismatch, is a stale input: render-stale (DESIGN §9.2 stale/unresolved input, §9.3 label is the binding Value; harmonization K16). Nothing is repaired."
+    },
+    {
+      "caseId": "render.r.label-missing",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.label-missing.json",
+        "sha256": "5a444969137ebfc0222cf3848aa390a8fa570141f463b6034229171cd3bea0dc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a layout record without the label the binding evaluates is stale",
+      "derivation": "Layout = render.layout.di-two-pages payload with the aa-task-b label removed while the task binding evaluates Ready (presence mismatch). R copies layout geometry and labels; a layout label that differs from the label the selected theme's binding evaluates, or a presence mismatch, is a stale input: render-stale (DESIGN §9.2 stale/unresolved input, §9.3 label is the binding Value; harmonization K16). Nothing is repaired."
+    },
+    {
+      "caseId": "render.r.label-stale-text",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.label-stale-text.json",
+        "sha256": "cb49c608c3c37cadaa2c517856a12e63a6b0f540c798cd14150df74b71d7238c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "a layout label whose text differs from the evaluated binding label is stale",
+      "derivation": "Layout = render.layout.di-two-pages payload with the aa-task-b (Task_B) label text Done while the task binding read /name evaluates Ready. R copies layout geometry and labels; a layout label that differs from the label the selected theme's binding evaluates, or a presence mismatch, is a stale input: render-stale (DESIGN §9.2 stale/unresolved input, §9.3 label is the binding Value; harmonization K16). Nothing is repaired."
+    },
+    {
+      "caseId": "render.r.layout-foreign-synthetic",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.layout-foreign-synthetic.json",
+        "sha256": "e51a71fae6cbb2b18f68df31ceb3dbdd9c3ab85953e851dd949b2bc11a40ee02"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "a geometry record without semanticId must be a synthetic occurrence of the selected theme",
+      "derivation": "Record Z-page/Legend has no semanticId and the neutral theme declares no synthetic occurrence with that key: render-stale."
+    },
+    {
+      "caseId": "render.r.layout-unsorted",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.layout-unsorted.json",
+        "sha256": "03ed3cc8fe3ab214b42dbf4a171fcb534a2e039fa51d6aee2f13af59cf5fa5af"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.1 Closed layout and render data",
+      "witness": "Layout/1 geometry must use page/occurrence order",
+      "derivation": "The supplied layout lists mm-note before aa-task-b on Z-page; §9.1 requires page/occurrence order; the malformed layout is an unresolved input: render-stale."
+    },
+    {
+      "caseId": "render.r.override-duplicate-target",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.override-duplicate-target.json",
+        "sha256": "7514440d85a3e902ab1f78904b096b2d0bf22e550bd50f18c06608ea7f2d2c45"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 and DiStyles/1 reject unknown targets/members, duplicate targets and non-closed shapes",
+      "derivation": "Input bag with two semantic records for Task_B: shape violations refuse render-token-invalid, unresolved targets refuse render-stale (§9.2, spec §5.1)."
+    },
+    {
+      "caseId": "render.r.override-tokens-not-array",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.override-tokens-not-array.json",
+        "sha256": "1903cad03454a17b5884ff4493611ee921558d0b26bde43e1113a1d88656f67a"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 and DiStyles/1 reject unknown targets/members, duplicate targets and non-closed shapes",
+      "derivation": "Input bag with tokens given as an object: shape violations refuse render-token-invalid, unresolved targets refuse render-stale (§9.2, spec §5.1)."
+    },
+    {
+      "caseId": "render.r.override-unknown-member",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.override-unknown-member.json",
+        "sha256": "bd2ea5daef2fc880566413b8f52533d3be76956b29e5eb61c186cf3931afe847"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 and DiStyles/1 reject unknown targets/members, duplicate targets and non-closed shapes",
+      "derivation": "Input bag with an override record with an unknown member: shape violations refuse render-token-invalid, unresolved targets refuse render-stale (§9.2, spec §5.1)."
+    },
+    {
+      "caseId": "render.r.override-unknown-occurrence-target",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.override-unknown-occurrence-target.json",
+        "sha256": "801fdc8f2086855561b65a4b24261ef6fd49a268edabf126a1d35c8b089c017a"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 and DiStyles/1 reject unknown targets/members, duplicate targets and non-closed shapes",
+      "derivation": "Input bag with occurrence target Z-page/nope absent from the layout (unresolved input): shape violations refuse render-token-invalid, unresolved targets refuse render-stale (§9.2, spec §5.1)."
+    },
+    {
+      "caseId": "render.r.override-unknown-semantic-target",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.override-unknown-semantic-target.json",
+        "sha256": "15d188cc7a4a3c58b56a23f99881d2953c8659b061e03f5e72a3aad2b9ae89c5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "Overrides/1 and DiStyles/1 reject unknown targets/members, duplicate targets and non-closed shapes",
+      "derivation": "Input bag with semantic target Task_Z absent from the tree (unresolved input): shape violations refuse render-token-invalid, unresolved targets refuse render-stale (§9.2, spec §5.1)."
+    },
+    {
+      "caseId": "render.r.plain",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.plain.json",
+        "sha256": "c3cf19b709a0e26d68d6ab34e9aa787ffad9e4658eef75ae1c4ae509138a5690"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.1 Closed layout and render data",
+      "witness": "RenderData/1 for the neutral profile: style from binding then theme, glyphs, coverage of every ID-bearing element, full binding",
+      "derivation": "Occurrences copy render.layout.di-two-pages geometry; task style = binding fill #ffffff + theme stroke #000000 (region.* tokens excluded), aid style = binding fill #eeeeff + theme stroke; layout labels equal the evaluated labels; binding digests per §9.2 (empty bags, metrics [{neutral-metrics, 151d1a1f...}]); read-only Result/1 with the B4 report header (source = target identity, input = output revision) and no entry. Coverage lists every ID-bearing element in native pre-order with containment members in UTF-16 name order (Definitions, Process, artifacts before flowElements, arrays in index order; harmonization G3, lot-0 precedent): rendered with occurrences, nonvisual without a layout record.",
+      "inputFrom": [
+        {
+          "case": "render.layout.di-two-pages",
+          "pointer": "/expected/payload",
+          "inputPointer": "/input/layout"
+        }
+      ]
+    },
+    {
+      "caseId": "render.r.precedence-shuffled-input",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.precedence-shuffled-input.json",
+        "sha256": "4a9a7fb6d3081317b14f888a7957243eae7d3ae1e83a54c2e5a994ba463f62d6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "reordered override/style tokens normalize identically (same R, same digests)",
+      "derivation": "Same as render.r.precedence-staircase with every token array of the override and DI-style bags reversed; normalization sorts tokens by name, so the expected RenderData/1 is identical."
+    },
+    {
+      "caseId": "render.r.precedence-staircase",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.precedence-staircase.json",
+        "sha256": "abc6a15f9df4e6b0852fbeac2619f49458ce8b879ca2b3227268f13cd97d3939"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "token precedence chain, each of the seven levels winning once; fallback chain root-first in themeDigest",
+      "derivation": "Seven levels each win once on Z-page/zz-task-a: fill <- occurrence override #000001, stroke <- semantic override #000020, textColor <- native DI #000300, fontWeight <- bioc DI bold, strokeWidth <- task binding 5, fontSize <- selected theme plain 16, arrow <- fallback theme base 'open' (§9.3 order). A-page/zz-task-a-2 has no occurrence override or DI style: semantic override gives fill #000002/stroke #000020, the binding the rest. Task_B and the aid note fall through to binding, theme and fallback. region.* tokens (only in base) never enter style; themeDigest hashes the chain [base, plain]."
+    },
+    {
+      "caseId": "render.r.shared-theme-not-compared",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.shared-theme-not-compared.json",
+        "sha256": "f873e1d0f602fb2832865ec7c963e0c926f491096fc5405b66f4309b37d9244c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.4 Region geometry, including Process IO",
+      "witness": "a single-theme render never refuses theme-geometry-conflict: the shared-geometry check runs only between two selected themes",
+      "derivation": "A second shared theme dense sets region.content.padding 4 where plain sets 8. DESIGN §9.4 compares 'both selected themes': resolving plain alone selects one theme, so no comparison runs (the switch check is the separate checkThemeSwitch seam, render.switch.*; harmonization K13). R equals render.r.plain except the profile digest and the binding computed from this profile. Coverage lists every ID-bearing element in native pre-order with containment members in UTF-16 name order (Definitions, Process, artifacts before flowElements, arrays in index order; harmonization G3, lot-0 precedent): rendered with occurrences, nonvisual without a layout record."
+    },
+    {
+      "caseId": "render.r.sparse-override",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.sparse-override.json",
+        "sha256": "696232d620eb0d53a96df382427a331c96480508dd59d912f3076c6fa29ed4fc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "sparse overrides stay sparse: one token on one occurrence, digest over the sparse record",
+      "derivation": "Only Z-page/aa-task-b gets fill #123456 (occurrence level); its stroke still comes from the theme; every other occurrence equals render.r.plain; overridesDigest = H of the one-record bag, never an expanded style."
+    },
+    {
+      "caseId": "render.r.style-conflict-glyph",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.style-conflict-glyph.json",
+        "sha256": "664a002a2e4984a56beec14c793a86ab87486b35c8408fc7c75306d994d1a5aa"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "matched bindings naming different glyphs refuse",
+      "derivation": "flagged binds glyph aid while task binds glyph task for Task_B: no winner, render-style-conflict."
+    },
+    {
+      "caseId": "render.r.style-conflict-token",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.style-conflict-token.json",
+        "sha256": "db8a2aec87c9207e766deebd9d99bcf186f69b88914d927185142525dbd24fa7"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "unequal values for one token at the same precedence refuse (no declaration-order winner)",
+      "derivation": "flagged contributes fill #ff0000 while task contributes fill #ffffff, both at the binding level for Task_B: render-style-conflict."
+    },
+    {
+      "caseId": "render.r.theme-alias",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.theme-alias.json",
+        "sha256": "201e87bb41dd91f1144657dc6fe00a5f61857d1bf8ee283ea9a2069f75e8663b"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "a declared theme alias selects the theme; the binding records the theme id",
+      "derivation": "themeId 'std' is not a theme id but plain declares aliases ['std']; it resolves to plain, so binding.themeId = plain and themeDigest = H({themeId:plain, themes:[plain]}); payload as render.r.plain."
+    },
+    {
+      "caseId": "render.r.theme-legacy-name-not-generic",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.theme-legacy-name-not-generic.json",
+        "sha256": "3540eba2290cfdf4124508d37df345c8c3bbc63e0f9ccdf572a3275f0a3c44a6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.5 Legacy themes",
+      "witness": "generic theme resolution never reads compatibility aliases",
+      "derivation": "The profile declares compatibilityAliases standard -> plain, but generic code uses opaque theme ids (§9.5); resolve_theme('standard') is unresolved: render-stale."
+    },
+    {
+      "caseId": "render.r.theme-unknown",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.theme-unknown.json",
+        "sha256": "a02b52000d2acb24f7ec63f69880d4249f5c772696c2617e1930bb1681e242dd"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.2 Digest formulas and freshness",
+      "witness": "an unresolvable theme id is an unresolved input",
+      "derivation": "No theme or alias 'standard' in the neutral profile: render-stale."
+    },
+    {
+      "caseId": "render.r.token-arrow-unknown",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-arrow-unknown.json",
+        "sha256": "dd7f2250da53fe44b8c9aee39600d4aeda18daf354bcb7bf028325e9c017ae42"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with arrow 'triangle': the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-bioc-invalid",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-bioc-invalid.json",
+        "sha256": "15ee9f778a5b9229c89458459b95ddeb444ad1c3ff05539d29a3e7a7d0e3f892"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "DI style bags are validated with the same signatures",
+      "derivation": "bioc DI style on Z-page/aa-task-b with fill 'red' (not #RRGGBB): render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-color-trailing-newline",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-color-trailing-newline.json",
+        "sha256": "b531c7c59789789da6f179657745f5843fb204fe695b808bce3b89e15cda5401"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with textColor '#ffffff\\n' (full match required, no trailing line feed): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-dash-unregistered",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-dash-unregistered.json",
+        "sha256": "faca00558d81fd49c0ec450d4156731685731ea480cef008a427ef715d0e4f40"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with dash 'dotted' (not a registered symbolic style): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-duplicate-name",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-duplicate-name.json",
+        "sha256": "13984492057a574e749d60ec9461dff4ac088201286639d1fd7501ad67549e3f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with two fill tokens in one target: the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-fill-no-hash",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-fill-no-hash.json",
+        "sha256": "61f84f668212a6ce213d002dc039f21da7c53aa346c6106f87b3179b811dcd50"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fill 'ffffff' without '#': the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-fill-non-hex",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-fill-non-hex.json",
+        "sha256": "db11a7ce6f7585411a08d4d1008ded40a79e08cdb083fa8f0c0abc90b1fb1804"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fill '#gggggg' (non-hex): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-fill-seven",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-fill-seven.json",
+        "sha256": "42a393911a95171763172a42a7919b564212487166ffc65c5860e8784933fa54"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fill '#fffffff' (seven digits): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-fill-short",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-fill-short.json",
+        "sha256": "5a8ea84d3dc889b9ccee4cd2eaf0611d6a5a3105c4dfca7aba6d0c090db92c48"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fill '#fff' (three digits): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-family-not-injected",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-family-not-injected.json",
+        "sha256": "3e1a17c08307d1372ecb4709d8f25310b005c96d7614cb6510a22bb8f7e316cc"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontFamily 'Arial' (not an injected family): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-size-boolean",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-size-boolean.json",
+        "sha256": "1945d80fb7d15b18cc953a79abd7d25168185e3f9071eac6b45f2b48e5b631b4"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontSize true (a boolean is not a number): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-size-negative",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-size-negative.json",
+        "sha256": "ec8592034473d8f2d3b7894d29580a90a66b07fa4af1c22ee7137eac7053c0eb"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontSize -1 (nonnegative): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-size-string",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-size-string.json",
+        "sha256": "e62fcb3068d79a2ef5a5ef0e55ad9ad53a1cd10a853c2b3715459f718cd4a1c0"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontSize '12' (string): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-size-unsafe",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-size-unsafe.json",
+        "sha256": "339cc35dee7e696cf3f941cdf1520bf747a82b400c0a12be0d3fd1f064f82697"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontSize 9007199254740993 (integral value outside the safe range): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-weight-case",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-weight-case.json",
+        "sha256": "0c39a3cb00068582dec403f6b41db73894acc8c548f2d4b15311fec639084ab6"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontWeight 'Bold' (case-sensitive): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-font-weight-unknown",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-font-weight-unknown.json",
+        "sha256": "30cc2bfc66e108b75fd8e8bcdffc14df525aac366fc8c718e608ca23f5dc0c5a"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with fontWeight 'bolder': the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-null",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-null.json",
+        "sha256": "554027c6d8d8984555782c1b141081a579ca796ce17b4bcb4c2b0383978d71f0"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with null token value: the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-semantic-invalid",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-semantic-invalid.json",
+        "sha256": "c7a1a788301ade8bf995bb375cb23316c7623215a53a334c612d661b130eb6ac"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "semantic override bags are validated with the same signatures",
+      "derivation": "Semantic override of Task_B with arrow 'double': render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-stroke-number",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-stroke-number.json",
+        "sha256": "da17a43851e7659a717bc591d1073e8a3df246c645a7e72467502c9dcdd00d30"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with stroke 16777215 (number, not a string): the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-stroke-width-negative",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-stroke-width-negative.json",
+        "sha256": "adc19112e597458c9b760ce27259bf4f0f9ba79ae3e5756c8a103fe9a107faa4"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with strokeWidth -0.5: the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-unknown-name",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-unknown-name.json",
+        "sha256": "751dfec95a5c69a419fcecabd0f98e0b515be46c5be1dbc8027ad02f7b3b6c32"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "render-token/1 boundary violation refuses",
+      "derivation": "Occurrence override on Z-page/aa-task-b with token 'opacity' without a pinned signature: the token fails its render-token/1 signature or the closed token-bag rules (§9.2/§9.3), render-token-invalid."
+    },
+    {
+      "caseId": "render.r.token-valid-boundaries",
+      "harness": {
+        "path": "tests/profile_render/expected/render.r.token-valid-boundaries.json",
+        "sha256": "2d90e1bc2ff31b1f47ec1515ac85815ea15815d617beb39978da452db79d87ae"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "each render-token/1 type at an admitted boundary",
+      "derivation": "Uppercase #RRGGBB, #RRGGBBAA, mixed-case hex, fontSize 0, fractional strokeWidth 1.5, fontWeight bold, registered dash 'dashed', arrow hollow-triangle and the injected family fixture-sans (neutral-registry.json) are all admitted; the occurrence style is exactly these nine tokens (values kept as supplied)."
+    },
+    {
+      "caseId": "render.template.attached-badge",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.attached-badge.json",
+        "sha256": "3cb988c57e6f1b765bab32b13f8bd94884787c5d66bdd73c095f6d5ef03d9e53"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "badge at (node.x+offsetX, node.y+node.height+offsetY) with the declared badge size; markerShift echoed",
+      "derivation": "Node (100000,100000,100000,80000), offsets 5000/-10000: x = 105000, y = 100000+80000-10000 = 170000; badge size input (40000,20000)."
+    },
+    {
+      "caseId": "render.template.attached-badge-negative-offset",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.attached-badge-negative-offset.json",
+        "sha256": "5327e55982dd0ddd074b427995b29ea09d3824bfa7483e729ccdbfa55dea2635"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "signed tick offsets",
+      "derivation": "offsetX -20000, offsetY 0 on node (100000,100000,100000,80000): badge (80000,180000,40000,20000)."
+    },
+    {
+      "caseId": "render.template.band-stripe",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.band-stripe.json",
+        "sha256": "46e6a22fa79c01f20297971569384405e84552891d0167239f5580d4a082e547"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "band-stripe takes a leading vertical rectangle of width min(stripeWidth, region.width), full height",
+      "derivation": "Region (0,0,500016,100000); stripeWidth 20000 < region width 500016; height = region height 100000."
+    },
+    {
+      "caseId": "render.template.band-stripe-clamped",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.band-stripe-clamped.json",
+        "sha256": "bb9cd17ed6daa2c45d087b3160900b4cc0728e5e0bfa6260d578a5d2140e3655"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "band-stripe takes a leading vertical rectangle of width min(stripeWidth, region.width), full height",
+      "derivation": "Region (0,0,500016,100000); stripeWidth 600000 > region width: min gives 500016; height = region height 100000."
+    },
+    {
+      "caseId": "render.template.band-stripe-zero",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.band-stripe-zero.json",
+        "sha256": "602122fbe639e79dc6832322c8e146b7672267f6f7eb9fb6e06ccca1188dd761"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "band-stripe takes a leading vertical rectangle of width min(stripeWidth, region.width), full height",
+      "derivation": "Region (0,0,500016,100000); stripeWidth 0 gives an empty leading rectangle; height = region height 100000."
+    },
+    {
+      "caseId": "render.template.corner-fold",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold.json",
+        "sha256": "ca35a9af8e287918290c06a7ee6a323fcc5b043bd18ae05d2354997738d30902"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "corner-fold size roundEven(min(w,h)*foldRatio) and its three-point path",
+      "derivation": "min(100000,80000) x 0.25 = 20000 exactly; path (x+w-fold,y),(x+w-fold,y+fold),(x+w,y+fold) gives the listed points."
+    },
+    {
+      "caseId": "render.template.corner-fold-decimal-ratio",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-decimal-ratio.json",
+        "sha256": "2e6e8c50f5d58455d0379fe3978691d31e8c8b69ac974b7154b28d7c348f5dc8"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "corner-fold size roundEven(min(w,h)*foldRatio) and its three-point path",
+      "derivation": "foldRatio 0.1 is the rational 1/10 (shortest decimal form): 5 x 1/10 = 0.5, tie to even 0 (the exact binary64 value of 0.1 would round to 1); path (x+w-fold,y),(x+w-fold,y+fold),(x+w,y+fold) gives the listed points."
+    },
+    {
+      "caseId": "render.template.corner-fold-height-min",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-height-min.json",
+        "sha256": "26dd5495f56ed7d0a78489a5c6d4479ff80af0cc271953c6bc7bdbe4a4337cf3"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "corner-fold size roundEven(min(w,h)*foldRatio) and its three-point path",
+      "derivation": "min is the height 7; 7 x 0.5 = 3.5, tie to even 4; path (x+w-fold,y),(x+w-fold,y+fold),(x+w,y+fold) gives the listed points."
+    },
+    {
+      "caseId": "render.template.corner-fold-rotation-center",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-rotation-center.json",
+        "sha256": "d94c307aee14d16bbf4d59f00ab09159dcea0cd906c53c45baf3471dca5b6e8b"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "header text rotates about its label bounds centre; the centre rounds once, ties to even",
+      "derivation": "headerRotation 90; label bounds (100000,200000,50001,20001): centre x = 100000+25000.5 -> 125000, y = 200000+10000.5 -> 210000 (ties to even); fold as render.template.corner-fold."
+    },
+    {
+      "caseId": "render.template.corner-fold-rotation-center-up",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-rotation-center-up.json",
+        "sha256": "a61160af1c2bc0ee2cc5e3de681a0ccee73cdb569cb7911b484c0f7cbc1df11c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "rotation centre ties round to the even neighbour upwards",
+      "derivation": "headerRotation 270; label bounds (100001,200001,50001,20001): centre x = 125001.5 -> 125002, y = 210001.5 -> 210002."
+    },
+    {
+      "caseId": "render.template.corner-fold-tie-down",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-tie-down.json",
+        "sha256": "344d42908550350878feefd5989566a286056c12b0ecb26536d83ed4ada229ff"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "corner-fold size roundEven(min(w,h)*foldRatio) and its three-point path",
+      "derivation": "80002 x 0.25 = 20000.5, tie to even 20000; path (x+w-fold,y),(x+w-fold,y+fold),(x+w,y+fold) gives the listed points."
+    },
+    {
+      "caseId": "render.template.corner-fold-tie-up",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-tie-up.json",
+        "sha256": "4fcad9c2bfaad4014a392938063bb0f077c40ab3c6062087a3e2d6d9b48d55ce"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "corner-fold size roundEven(min(w,h)*foldRatio) and its three-point path",
+      "derivation": "80006 x 0.25 = 20001.5, tie to even 20002; path (x+w-fold,y),(x+w-fold,y+fold),(x+w,y+fold) gives the listed points."
+    },
+    {
+      "caseId": "render.template.corner-fold-zero",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.corner-fold-zero.json",
+        "sha256": "c21322d9cd173c4c66c1bca2cf8982e91a96208c3315bf5c03a321cd254e6473"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "corner-fold size roundEven(min(w,h)*foldRatio) and its three-point path",
+      "derivation": "ratio 0 gives fold 0 (all three points on the top-right corner); path (x+w-fold,y),(x+w-fold,y+fold),(x+w,y+fold) gives the listed points."
+    },
+    {
+      "caseId": "render.template.header-band",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.header-band.json",
+        "sha256": "a0cc2b2479c28701dc2f558d169373e852f46167cd0b0f2d843879c68b5e51f4"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "header-band divides at y+min(headerHeight,h)",
+      "derivation": "headerHeight 12000 < h 80000: header (100000,200000,100000,12000), body starts at 200000+12000 with height 80000-12000 = 68000."
+    },
+    {
+      "caseId": "render.template.header-band-body-grows",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.header-band-body-grows.json",
+        "sha256": "b6055dc0ee0b1ad7225041c19eb376d59066e6680524c0927647bed1de6f1378"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "the header keeps its fixed height when the body grows (no uniform scaling)",
+      "derivation": "Same glyph on h = 160000: header height stays 12000; body height 160000-12000 = 148000."
+    },
+    {
+      "caseId": "render.template.header-band-clamped",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.header-band-clamped.json",
+        "sha256": "59a734daeb659e491135343d50ecce459938c3aa6ed024ec55694216a2d0de7b"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "headerHeight larger than h is clamped by min(headerHeight,h)",
+      "derivation": "headerHeight 90000 > h 80000: min = 80000, header covers the bounds, body (100000,280000,100000,0)."
+    },
+    {
+      "caseId": "render.template.header-band-grid-glyph",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.header-band-grid-glyph.json",
+        "sha256": "8b700a8b28f607acad50f0db665fee5035b1a9e765b61b65185933494a82f78c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "the second neutral profile's own header-band glyph (headerHeight 12)",
+      "derivation": "Glyph = neutral-grid-profile.json#/themes/0/glyphs/1 (headerHeight 12 ticks) on (0,0,100000,80000): header (0,0,100000,12), body (0,12,100000,79988)."
+    },
+    {
+      "caseId": "render.template.native-glyph",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.native-glyph.json",
+        "sha256": "fea35541b9e92ca494f28d8dc8d491d872c9cc75c4efca24b6fd841c51c0d7c5"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template geometry exists only for template glyphs",
+      "derivation": "A native glyph has no template geometry; template_geometry refuses render-unsupported (spec §8.2)."
+    },
+    {
+      "caseId": "render.template.param-boolean",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-boolean.json",
+        "sha256": "a30c6c03b39bf0bc44660baf6c0719551fb820b7acecb40e35e7f4aab5640914"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "hideSource must be a boolean: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-duplicate",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-duplicate.json",
+        "sha256": "73ed0a5409884ec0b1c24d4741e838339568fff7a3499118004ee9c0b553f01f"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "duplicate parameter name: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-extra",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-extra.json",
+        "sha256": "e073bb28ac47b3f66c44ea2be46ed4def892bbbb296abf26e14aab20fefcfae3"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "extra parameter foldRatio: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-fraction",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-fraction.json",
+        "sha256": "4e6685e3f6fb3abf19d5a38da15a0f56326f3bb4cd1e25dbf2a6604690268415"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "fractional stripeWidth (integer ticks): template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-missing",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-missing.json",
+        "sha256": "e11eca9666b40c1dc43a5ca6a87b5ff972909703139823db8a04822fff00c0af"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "missing headerHeight: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-negative",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-negative.json",
+        "sha256": "c075bcafdb4e5adff0df6585c6de87fffef398109c59cf94c77f5e869b08e577"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "negative headerHeight (nonnegative ticks): template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-ratio-range",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-ratio-range.json",
+        "sha256": "37ca3523aaa60c2b2ba501cf05d318217fa07a57226045d51d35840ace2fcfb0"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "foldRatio 0.6 outside [0,0.5]: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-rotation",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-rotation.json",
+        "sha256": "d94562f8df7a22f4a42a8262aeaeb56c0e494fd7bd9aa1bd56d9e0f23a5b7710"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "headerRotation 180 outside {0,90,270}: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.param-string",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.param-string.json",
+        "sha256": "25e78081f45c572ae5ae20bcbce17b854e210a58dbcec0949d2291a1d51a2c2c"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "string instead of ticks: template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    },
+    {
+      "caseId": "render.template.viewbox-zero",
+      "harness": {
+        "path": "tests/profile_render/expected/render.template.viewbox-zero.json",
+        "sha256": "44fdc2035cbb2c718c5b1a489076651cacac980c21b8842665a86aa4fdaf1ee9"
+      },
+      "author": "spec-seal",
+      "clause": "DESIGN R3.3 §9.3 Per-notion style, text and glyph contracts",
+      "witness": "template parameter or viewBox violation refuses",
+      "derivation": "viewBox width 0 (positive width required): template parameter duplicates, wrong types, missing fields or extras (and non-positive viewBox) refuse profile-glyph-shape (§9.3)."
+    }
+  ]
+}

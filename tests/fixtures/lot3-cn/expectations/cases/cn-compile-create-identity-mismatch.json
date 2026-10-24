@@ -1,0 +1,24 @@
+{
+  "caseId": "cn-compile-create-identity-mismatch",
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/vendor/py/parity/profiles/neutral-containment-task.json",
+    "sha256": "1fb1508179a05d5150b2d977ed393c0aa6886dad805d9faee22eb24035063882"
+  },
+  "inputArtifacts": [],
+  "expectedArtifacts": [
+    {
+      "role": "compile",
+      "json": {
+        "code": "profile-create-identity",
+        "diagnostics": [],
+        "status": "refused"
+      }
+    }
+  ],
+  "expectedStatus": "refused:profile-create-identity",
+  "comparatorIds": [
+    "compile/lot3"
+  ]
+}

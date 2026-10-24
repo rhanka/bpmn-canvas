@@ -35,8 +35,30 @@
         "sha256": "73e5884af8ad122c480ba99d60ab73e837ba8e6b9e511ee216666411585e7229"
       },
       "new": {
-        "bytes": 54516,
-        "sha256": "8894bfa73d5ab316654b37a99f70a83925ee75484ca48dae5698872b8eb08ca1"
+        "bytes": 62924,
+        "sha256": "ee8d37b11afbcb7d8d7f8cdf8eee67d3c41c08a35f2e9439d6685b9b76526e45"
+      },
+      "g10Transition": {
+        "old": {
+          "bytes": 61230,
+          "sha256": "c6375992eb20509844b43dbad825588d100664604cfff730453c5284b2e69d1c"
+        },
+        "new": {
+          "bytes": 62600,
+          "sha256": "81a5359746be479e589688e098491744cc5d4799c692dafd3c77b1ac0055dace"
+        },
+        "reason": "fix round 2 G3/G4/G6: export occurrence present propagates value type errors, shared recognition non-match boundary, reference traversal refuses scalar and unknown properties"
+      },
+      "fix3Transition": {
+        "old": {
+          "bytes": 62600,
+          "sha256": "81a5359746be479e589688e098491744cc5d4799c692dafd3c77b1ac0055dace"
+        },
+        "new": {
+          "bytes": 62924,
+          "sha256": "ee8d37b11afbcb7d8d7f8cdf8eee67d3c41c08a35f2e9439d6685b9b76526e45"
+        },
+        "reason": "fix round 3 H4: reference branch refuses a declared scalar lacking that type's ID-reference qualification"
       }
     },
     {

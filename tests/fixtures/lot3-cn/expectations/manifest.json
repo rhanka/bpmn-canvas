@@ -1,0 +1,2121 @@
+{
+  "format": "profile-parity-corpus/1",
+  "corpusVersion": "lot3-cn-2.1.0",
+  "pathBase": "tests/fixtures/",
+  "designSha256": "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f",
+  "parentManifests": [
+    {
+      "path": "profile-parity-corpus/profile-parity-corpus/1/manifest.json",
+      "sha256": "01b81fd9fb69f110a7f302631d6da92126bcb1672c67bea3ea68ff802df39faf",
+      "role": "lot-0 vendored profile-parity-corpus/1 manifest"
+    }
+  ],
+  "designParentManifests": {
+    "js": "61903a61e2a6f258b506b4cdcd310a57787eee30845d6deb996afbb54abf33a9",
+    "python": "def4ffb25b6c60f963226fb62d9b433e10a1420f340a1835b8ac273711e29b3d",
+    "source": "DESIGN §14.3 L961"
+  },
+  "executables": [
+    {
+      "file": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+      "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+      "tolerance": "zero",
+      "exports": [
+        "compareCanonical",
+        "compareCompile",
+        "compareDigests",
+        "compareFixedPoint",
+        "comparePlacements",
+        "comparePlanApply",
+        "compareResult",
+        "compareSourcePreservation",
+        "compareStableIds",
+        "compareTrace",
+        "compareTransport"
+      ]
+    }
+  ],
+  "comparators": [
+    {
+      "id": "profile-c14n/2",
+      "kind": "mechanism",
+      "note": "RFC 8785 canonical JSON of every expected json artifact; equality with the actual value of the same role after UNSEALED pointers (DESIGN §3.1).",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareCanonical"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "stable-id/1",
+      "kind": "mechanism",
+      "note": "Recomputes g_ + SHA-256 of JCS [\"profile-mechanism/1\",ownerId,slot,stableKey] for the allocations and compares the ids exactly (DESIGN §3.2).",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareStableIds"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "node-crypto",
+      "kind": "reference",
+      "note": "SHA-256 over the exact UTF-8 bytes of every text artifact, stable-id tuple and transport hop, with Node crypto.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareDigests"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "python-hashlib",
+      "kind": "reference",
+      "note": "The same digest procedure; the Python twin executes it with hashlib over the same bytes.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareDigests"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "result-1/lot3",
+      "kind": "format",
+      "note": "Closed Result/1 or PureResult shape, complete Report/2 (header, entries in profile-report/2 order, idMap in DESIGN L753 order, refusal diagnostics equal to report.entries) and payload, compared canonically after UNSEALED pointers.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareResult"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "placements-order/lot3",
+      "kind": "format",
+      "note": "Placements in the DESIGN L565 UTF-16 tuple order with unique sorted relatedAssociationIds, equal to the expected array (the normalize payload placements, the `value` of sortPlacements, or its vendored `placements` role).",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "comparePlacements"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "source-preservation/lot3",
+      "kind": "format",
+      "note": "The caller-visible input after the call (json canonically, text byte for byte) equals the caller-state artifact, on success and refusal.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareSourcePreservation"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "transport-bytes/lot3",
+      "kind": "format",
+      "note": "Each hop's output bytes equal the profile-c14n/2 UTF-8 bytes of the expected DocumentEnvelope/1 (sealed digest) and each hop's Result/1 equals its expected result.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareTransport"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "transaction-trace/lot3",
+      "kind": "format",
+      "note": "Per script step: the complete Result/1 or PureResult, history counters, every change event per listener and injected outcomes, with $same/$differs relations to actual earlier steps and UNSEALED pointers only.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareTrace"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "fixed-point/lot3",
+      "kind": "mechanism",
+      "note": "rerun the operation on the expected payload envelope (complete: mode retained; same activation and placement intent): status ok, identical envelope and placements, zero report entries, baseRevision = revision = the first revision (Python manifest note; actual role `fixed-point`: the second-run Result/1).",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareFixedPoint"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "plan-apply/lot3",
+      "kind": "format",
+      "note": "planRecipe cases with an apply artifact also call applyPlan(plan.payload, envelope.tree, envelope) and compare that PureResult (Python manifest note); the closed `plan` PureResult and every expected `apply` PureResult are compared canonically, and an applyPlan case expects `apply` only.",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "comparePlanApply"
+      },
+      "tolerance": "zero"
+    },
+    {
+      "id": "compile/lot3",
+      "kind": "format",
+      "note": "compileProfile (parity sync PS-25, PS-35): the compile PureResult (one per profile artifact, in order, for a variant list) is compared under profile-c14n/2 after each {\"$unsealed\": reason} marker is replaced by the actual member at the same position, which must exist (CompiledProfile has no wire shape); the compiled-identity (compiled-identities) artifact is compared under profile-c14n/2 with the compiled section 5.1 identity (Python manifest note; actual roles `compile` and `compiled-identity` or `compiled-identities`).",
+      "executable": {
+        "path": "lot3-cn/expectations/comparators/lot3-comparators.mjs",
+        "sha256": "391fe994ee8661e0d8be232f2cceb68c0f9a3cfb9f50ad35d6ba205e02372254",
+        "export": "compareCompile"
+      },
+      "tolerance": "zero"
+    }
+  ],
+  "profiles": [
+    {
+      "key": "main",
+      "path": "lot3-cn/expectations/profile/neutral-cn.json",
+      "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32",
+      "identitySha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "stale",
+      "path": "lot3-cn/expectations/profile/neutral-cn-stale.json",
+      "sha256": "837b77de3298ff088262866cb35b3b2186da8b003ed7851a80d7554a25811aa0",
+      "identitySha256": "8d08e85046c8a52fbbe22f19e4b6c6218f01acf244f19daaaf42822ac8ee34e6",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "conflict",
+      "path": "lot3-cn/expectations/profile/neutral-cn-conflict.json",
+      "sha256": "5efc67b14eea6ea6314121b6d07de627363407be4dd9c05c3e01ee0c33548c8f",
+      "identitySha256": "46e94ff56e6baca786e96f7b44adc029cf07d111523ea115c589efccec3b7a43",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "coalesce",
+      "path": "lot3-cn/expectations/profile/neutral-cn-coalesce.json",
+      "sha256": "f0c6ffa74d57724d6ac5b68acb1708dbcd01abfd7f6ba5e5cbb105e7c32a295e",
+      "identitySha256": "f4a5868ecf7e4f59799b7e46479a98784f3643f4b7553ebb674cb530ee6115a0",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "outport",
+      "path": "lot3-cn/expectations/profile/neutral-cn-outport.json",
+      "sha256": "7dce72d63cb8da783e03458e2c6cfb50850a83dc1a1ef71b31724d9ab167745d",
+      "identitySha256": "e9e1c302455da6075bff995f41eabf001d209109b2445d7bc7a404b1b762b44e",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "flip",
+      "path": "lot3-cn/expectations/profile/neutral-cn-flip.json",
+      "sha256": "325d9c7c615abf59e087e40ae2c996fb427d800581a33106d6404d4d66c94f31",
+      "identitySha256": "ffb7d285b4aaee577302e6e49c617c0ef4e90b994f65a38a5e4f6ee94aee6b8f",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "dirconflict",
+      "path": "lot3-cn/expectations/profile/neutral-cn-dirconflict.json",
+      "sha256": "fa1f10fc05faeec48065a50ac6f73c5ca946c0e827775150ac465443d7b747fb",
+      "identitySha256": "67762bf08f207b4bede6730a710cec139dc2e5c1a9d4a4a717c81a900087736d",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "ensureconflict",
+      "path": "lot3-cn/expectations/profile/neutral-cn-ensureconflict.json",
+      "sha256": "dbda92973e30aa8d98b1d0bf3324f9bfde4fbc65717ec7c7eafbcf9f38e4ad1a",
+      "identitySha256": "2f0d302b5404cb731af9590d8c54e05406e9a505b7f0e65bf81c0a57b576a254",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "extraction",
+      "path": "lot3-cn/expectations/profile/neutral-cn-extraction.json",
+      "sha256": "125bc7573f39468f177773bff8ec2c4beaa7c5f1b43f0275b4469ec9a13effd1",
+      "identitySha256": "638a41b84f1931db78f56f494be5245bfb91f5b4967e1eaa259d5dc4080e4697",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "abort",
+      "path": "lot3-cn/expectations/profile/neutral-cn-abort.json",
+      "sha256": "81e58e0677a5fb12f0a604af860a1b6679eefd1666136478cd4be4ee5e101abf",
+      "identitySha256": "55cce6fc1e6595076280d99a57078465c741b6fd5d6402a22e295c2ad17c4168",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/profile/neutral-cn-base.json",
+          "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+            "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "neutral",
+      "path": "profile-parity-corpus/profile-mechanism/1/neutral-profile.json",
+      "sha256": "c1319045f538a9f4ef1f3f7500af4a3e0df059e04c7c42dd7e992477c9199650",
+      "identitySha256": "51f1b7b7c69bc77d32e2d167f0a7b19c910ac2a1e5276cc836992487cb426c40",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "profile-parity-corpus/profile-mechanism/1/neutral-base.json",
+          "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+        },
+        "descriptors": [
+          {
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-descriptors.json",
+            "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "grid",
+      "path": "profile-parity-corpus/profile-mechanism/1/neutral-grid-profile.json",
+      "sha256": "7247b5cd90c13fea2d42048a8ea6a5f3a36f64db67a771533adf10968c92cccd",
+      "identitySha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "profile-parity-corpus/profile-mechanism/1/neutral-base.json",
+          "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+        },
+        "descriptors": [
+          {
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-descriptors.json",
+            "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-c",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-c.json",
+      "sha256": "c1ab684d4e81f41e464aabe94b51b5be5ca25a1cdc765491dd7cf61ab05a57db",
+      "identitySha256": "fda235d3aa6448a2b37cd795a657e401b2b0186811a5da7f4bb5d080b262f99b",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-c-noauth",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-c-noauth.json",
+      "sha256": "d1ab644f8430b6d75abfd8e66707d0d64a01b80b691a4a07fa20d54df5c3559d",
+      "identitySha256": "e7444b3167a98a2647c6597e0a23fe0cdc1163ea03c6b3200886ce476f2bd32c",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-c-second-pass",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-c-second-pass.json",
+      "sha256": "6e1d39987793a562b6ac562b74af4560c930a029a9ceaea544a77385765505fc",
+      "identitySha256": "bf0fe1d3b0afaebaa87be46b2d2a3cd0855c7be0091336227718596a024b2e07",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-c-unfixed",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-c-unfixed.json",
+      "sha256": "c3e04704b33992783a457d3f59e6ae76e27f26037b9cc8ab2338437e83c10279",
+      "identitySha256": "21cd4759cbdb251ba1879e8d9f969f13cc30ace506050567008e998e6299cc4b",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-n",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-n.json",
+      "sha256": "4ccd0c50ee390e85220a39263271703d4d8bef148507600c5e57d78db0455531",
+      "identitySha256": "2c08eef06669646b88562d6051aa1d499327c33c1cfde14e02c8f3f5c7b559e0",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-n-conflict",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-n-conflict.json",
+      "sha256": "6fa14a664d4f6aa2c3009cf39ecdeca05b1f92717394073e2226fe7980d64baf",
+      "identitySha256": "4d19a76e115737204be1ee26a2da4642b0b07940652527570b0065d70102b18c",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-n-ensure-conflict",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-n-ensure-conflict.json",
+      "sha256": "4031613de92a0b793ba4ba58cb14b130ecc5bb1a4aa955ba33e4712dd608f0f8",
+      "identitySha256": "a047b64979b8b9b3806c3920fc6c7d28719d4089f76d4ab9dfba7962b9d80dd5",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-n-relocate",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-n-relocate.json",
+      "sha256": "45944ccafc57b2f0d32419b1ee7db1d53abb3e1a1ca251027448cbfe34bcb7cc",
+      "identitySha256": "4d5f50dc43813cf1f5c24e0cf835075a14a054af8bdf81eaa3107d0dd48f07b2",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-n-second-pass",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-n-second-pass.json",
+      "sha256": "6b94b7f684c6ffb1b46ee3377ed5dbea57a3ee4339bc7c81dbf91d6df6d08547",
+      "identitySha256": "0ef4721ff62c67ded55b8e0c9ded0379b9a3c00d8d2eeedde6ba42f9f61df867",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:cn-n-unfixed",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/cn-n-unfixed.json",
+      "sha256": "1fc6b78c6c43cad4a19dca3cbd77fdc7c6710278b02f059f9be0be422c45de39",
+      "identitySha256": "3b5265bdb8370dbb7500351b6e48246030820860ed7e580d645591137b847631",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/cn-base.json",
+          "sha256": "cf8411383d0deeef400cebe16e13aea426ee5b62f30aee4142a1761e506e829e"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/cn-descriptors.json",
+            "sha256": "e7c42137045d9a36caee48e8fecce0934b4a6d7a3cf5c8957dd369ce784dccda"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:grid-extraction",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/grid-extraction.json",
+      "sha256": "64daba77a7af88ae98d07e80452376af6057de9fb201c2981bcfa8ee3c7d62d5",
+      "identitySha256": "4a00d1ecbf2eb1a96e3fe12e8d920fa8b7e4e7191bb6375db01f186db5c53cca",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "profile-parity-corpus/profile-mechanism/1/neutral-base.json",
+          "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+        },
+        "descriptors": [
+          {
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-descriptors.json",
+            "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:neutral-containment-task",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/neutral-containment-task.json",
+      "sha256": "1fb1508179a05d5150b2d977ed393c0aa6886dad805d9faee22eb24035063882",
+      "identitySha256": "3ef20ccf6269a3f8b47ac1333e4d24c73d2d57935d60652c96901064315e8871",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "profile-parity-corpus/profile-mechanism/1/neutral-base.json",
+          "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+        },
+        "descriptors": [
+          {
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-descriptors.json",
+            "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:support",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/support.json",
+      "sha256": "551682f445aede466a1a6e8bcdaa967465b432a11fa6c137578a997a5f7ff470",
+      "identitySha256": "7ddd41340d6d6fe24c4bd2ac2a13b04a47e0094e4114fb9d3fe1ca415ecd6bd0",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/support-base.json",
+          "sha256": "47b7487e06f5bf70ddd99e957c01d023662503f9d2cba3c7f97edf7ad84c0f80"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/support-descriptors.json",
+            "sha256": "fb336396bc174f1a0d1453aee4ee3f235c74bfab923b5485ad6fe203201e5165"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:support-abort",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/support-abort.json",
+      "sha256": "56e990eed9fc3e0275dd600c27ada54631777c66141e8a87fa72cf69f882c341",
+      "identitySha256": "2f3858c3c523de2b7170f70d1e4ef48eac3d58fe33564998e2eeaa36660e0de2",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/support-base.json",
+          "sha256": "47b7487e06f5bf70ddd99e957c01d023662503f9d2cba3c7f97edf7ad84c0f80"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/support-descriptors.json",
+            "sha256": "fb336396bc174f1a0d1453aee4ee3f235c74bfab923b5485ad6fe203201e5165"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:support-cmd",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/support-cmd.json",
+      "sha256": "8cd9c7b7fcfe91db70b2b0965735197b6acc4a665051ce01ec6dc1a59d5dec60",
+      "identitySha256": "1d9c294f911262b3c4bf28deea69e641f4f26e8580f19a8d4cbf40b977ab19f1",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/support-base.json",
+          "sha256": "47b7487e06f5bf70ddd99e957c01d023662503f9d2cba3c7f97edf7ad84c0f80"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/support-descriptors.json",
+            "sha256": "fb336396bc174f1a0d1453aee4ee3f235c74bfab923b5485ad6fe203201e5165"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:support-no-binding-write",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/support-no-binding-write.json",
+      "sha256": "f899daacaca9f6e34ee1c9829cfd5619232030ac11788aca1e332c9e00029145",
+      "identitySha256": "7df6ae4e6a350ee639901e8a0b5ec68e1876b0e04dc2e45de97fd8267afcc7d2",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/support-base.json",
+          "sha256": "47b7487e06f5bf70ddd99e957c01d023662503f9d2cba3c7f97edf7ad84c0f80"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/support-descriptors.json",
+            "sha256": "fb336396bc174f1a0d1453aee4ee3f235c74bfab923b5485ad6fe203201e5165"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    },
+    {
+      "key": "python:support-task-ensure",
+      "path": "lot3-cn/expectations/vendor/py/parity/profiles/support-task-ensure.json",
+      "sha256": "4d068780912094b6484987e664b1ccdea928720f055a1d7404645def5653cf51",
+      "identitySha256": "ff5d4726f3d121566f6372283e90a1960147b54ccf81f67dd5b663a7d789d82e",
+      "inputs": {
+        "schema": {
+          "path": "profile-parity-corpus/profile-mechanism/1/profile-mechanism-1.schema.json",
+          "sha256": "c97cfba64560ec0e7098294a5e185187de9d1f2207b272c2f002f576865692da"
+        },
+        "base": {
+          "path": "lot3-cn/expectations/vendor/py/artifacts/support-base.json",
+          "sha256": "47b7487e06f5bf70ddd99e957c01d023662503f9d2cba3c7f97edf7ad84c0f80"
+        },
+        "descriptors": [
+          {
+            "path": "lot3-cn/expectations/vendor/py/artifacts/support-descriptors.json",
+            "sha256": "fb336396bc174f1a0d1453aee4ee3f235c74bfab923b5485ad6fe203201e5165"
+          }
+        ],
+        "assets": [
+          {
+            "key": "neutral-metrics.json",
+            "path": "profile-parity-corpus/profile-mechanism/1/neutral-metrics.json",
+            "sha256": "151d1a1fac1cbcab8ca53f155c3210437f4a2c285f6b68721973d1da6c362ee0"
+          }
+        ]
+      }
+    }
+  ],
+  "files": {
+    "lot3-cn/expectations/cases/l3-id-stable-vectors.json": "7d8d0b6abb0b6f6758ed58e4cedc1ab366e0f0a5624bd648e925109cb008d867",
+    "lot3-cn/expectations/cases/l3-id-root-first.json": "e7e97ff9cac4f12cd1126f5ba423f47668800a83a72a06a05a4131d4fad36dc6",
+    "lot3-cn/expectations/cases/l3-id-identical-siblings.json": "ef9d60019432aa9d6b7b813ed44e779eb0e1920450548322a6d82b08b3c68f6e",
+    "lot3-cn/expectations/cases/l3-id-reorder-stable.json": "53db371e86ae1bfaaa7974dff3267dfdf0b4b9ecc4eefdb267c1b6ac970422aa",
+    "lot3-cn/expectations/cases/l3-id-rename-stable.json": "50316254bd7d3572775ae93199a0c88f3459beadbdb7d683a1fb1e5471c5ba22",
+    "lot3-cn/expectations/cases/l3-id-ordinal-missing-only.json": "0b5b2395b9a801128aba5511c4f0645c6f5ef7d51b588ff9e6dec8d0e0af4348",
+    "lot3-cn/expectations/cases/l3-id-two-owners.json": "52677741df37f24db1fc42da59d7b54ad021355d28d6c2f6ae715d02a64a9a47",
+    "lot3-cn/expectations/cases/l3-id-unicode-names.json": "2000e3cff896f690a4d89cba7a83789f0eeb48e4cd10c38dc653ca8dca205660",
+    "lot3-cn/expectations/cases/l3-id-timer-siblings.json": "880b56657d7bf34130b3a6fa83acf51ebff8bbc3d2b7843eff305ee50643bc38",
+    "lot3-cn/expectations/cases/l3-id-timer-reorder.json": "581d9fd1198ed99b4c60bcdee7eb0744259f3541b31217ade143b41d7b620ee1",
+    "lot3-cn/expectations/cases/l3-id-collision-computed.json": "83f101b7b9caccb2668bb786360f773b84b31f434dbb7ea9188619c8b9123408",
+    "lot3-cn/expectations/cases/l3-id-duplicate-source.json": "7a9ef88cf107d99a172b9165a7a0b763aa2ddc720990093055485f88bd6d447b",
+    "lot3-cn/expectations/cases/l3-c-isexecutable-neutral.json": "57f93adbb5cbb078d8453a1b25d0e79026b133617cfd9982ad253b926c71c335",
+    "lot3-cn/expectations/cases/l3-c-isexecutable-grid.json": "b1e568ead738ec702dc26a5c62447e209f7b4786ea2dc4b6c3d9ec0b7728328d",
+    "lot3-cn/expectations/cases/l3-c-gateway-direction-control.json": "61b0670724e66d6944a15130b5d766cb1d5898116309279b1675ba12d4d15637",
+    "lot3-cn/expectations/cases/l3-c-empty-process.json": "025fdcfb34528bc1a7275a2a9b55cd737ce25aecd485e93f03d07c805fe3a91c",
+    "lot3-cn/expectations/cases/l3-c-topology.json": "61bd35a6221e5e88e784ae127404e68d0ba5e86b387acaa7e392cd41b2e57f29",
+    "lot3-cn/expectations/cases/l3-c-gateway-direction.json": "80d58adec503fd64c372946aa658a89c1c5f7165093f315ed4e17b27b0dac429",
+    "lot3-cn/expectations/cases/l3-c-gateway-stale-topology.json": "761d7f0e0b9f9015e1a88c29cce83bd6ce9ccc7175f980a60fede9ef733f6e45",
+    "lot3-cn/expectations/cases/l3-c-gateway-phase-start.json": "5f4c6a4a079287851230be197aab86f84c8c24d0e4d2edd571137d9ff275e0bd",
+    "lot3-cn/expectations/cases/l3-c-item-backing.json": "f604b6f06d3c4e194c7d1bfa38f6c8ad98cf5c6479a17c2e80442988f67d52ba",
+    "lot3-cn/expectations/cases/l3-c-input-ports.json": "a8f35012410d575d9ca8defd31fd9b2bd2c3b2ada6425e61850b0082d5975d59",
+    "lot3-cn/expectations/cases/l3-c-sets-default.json": "b801442abc7e417e6be59f666cbbb9b7daa12026b69d67c2dd881fb89a35fa49",
+    "lot3-cn/expectations/cases/l3-c-sets-single-uncovered.json": "e60386a6a9f6caa417014607b4bdfb7254d14382307b4a35d01f246170839200",
+    "lot3-cn/expectations/cases/l3-c-sets-several-uncovered.json": "9f281504657a855d3198112da1406674d4525de3bc621f49b53e5727d3c636a4",
+    "lot3-cn/expectations/cases/l3-c-sets-several-covered.json": "0b32ff41c7ad0ab66da46ec44a57f480d5a2ceca2275e6d2f3266f0c9a8754f4",
+    "lot3-cn/expectations/cases/l3-c-preserve.json": "5314abac4fa2f264d1204824added97e59f9a2909ee06e65dd8ca8e5e44faf28",
+    "lot3-cn/expectations/cases/l3-c-write-conflict.json": "89b246d0f6baa9d7cb8bcfcbda7e38c118afd3a4f8adbf477fd74739e29495da",
+    "lot3-cn/expectations/cases/l3-c-write-coalesce.json": "14420c31cb9a656a4a4fa2f774efe658e4ea40bbfaa456e226615c7b2639ab54",
+    "lot3-cn/expectations/cases/l3-c-namespace-defaults.json": "1503f013c330eb5d3fc267ed098fa4e1403d39f3758d5d0f5f71672cd2976e13",
+    "lot3-cn/expectations/cases/l3-c-dangling-call.json": "4bb9d5b9aa140fd7ddfceecbd76f254572c7c4721e677d6ddd054a7d2963b6c5",
+    "lot3-cn/expectations/cases/l3-c-version-mismatch-first.json": "ef40e87abef40672560c5e4f477f9dc86d21911aae3090242598583e54c1d185",
+    "lot3-cn/expectations/cases/l3-c-digest-mismatch-first.json": "08d0d2aad46499a18b36587ce36c7b506794897874f95c97e1dae9447b47df65",
+    "lot3-cn/expectations/cases/l3-c-document-version.json": "4820f885f7d0aac2128c1e731ae017e40d214e047232b0242c4996879183bbc4",
+    "lot3-cn/expectations/cases/l3-c-descriptor-role-unknown.json": "d93f3ab36895214dd18c92d77b5b079d99cd58aacee48c0ee4b7e592d68c6a30",
+    "lot3-cn/expectations/cases/l3-c-invalid-mode.json": "8387474785d39e860ef6ce611003199cfc28302ced5913e942e9db3507f32ded",
+    "lot3-cn/expectations/cases/l3-c-extraction-authorized.json": "9caa44f133afc4b8bc5d22ed1455d6a02851226c17597f4230043cac2bff421a",
+    "lot3-cn/expectations/cases/l3-c-extraction-unauthorized.json": "b74fec65cbe8c9e7860d44d2e2d8881aaf54e941420c97a430004908b31fbacf",
+    "lot3-cn/expectations/cases/l3-c-output-port-gated.json": "a8c5450d8730c0c04cf8d5ab8a0b0d5742be3a82197e4a42d08f2457ead0c129",
+    "lot3-cn/expectations/cases/l3-c-output-port-qualification.json": "e5ebfb2303c5ac37688d5bdec8f6a08194561602eb45c4f6ef74aa6aaa7b3188",
+    "lot3-cn/expectations/cases/l3-n-full.json": "96253b055f093518b7403dc4245fa6dec9e4f2ccadb562647193b7eca8772ae4",
+    "lot3-cn/expectations/cases/l3-n-full-edit.json": "97c68cf54bd38d1b821e3c8c99c4f28b4dd1c7086799852da3405b264c504d54",
+    "lot3-cn/expectations/cases/l3-n-inserted-link.json": "d88711c7f041bd4c1511dfa5625cb9938ccb551d0d21a6dfb99b974202cc8493",
+    "lot3-cn/expectations/cases/l3-n-two-processes.json": "ad9ce348be22062da6137a2884ce706f07cd2ade8b8ad48231c23cce09fd30eb",
+    "lot3-cn/expectations/cases/l3-n-imported-supports.json": "8a82612d659348f691a052790918d9a7d055fad084453a368351e6be0bec6d9e",
+    "lot3-cn/expectations/cases/l3-n-imported-supports-edit.json": "3811ee0fb0968511c2176d5cc9bbd1286ec11ee26fe22e2036d8ffc3ee5144a0",
+    "lot3-cn/expectations/cases/l3-n-business-lane-refusal.json": "49754807680be0444640f8f15530aac9046c2de5f28dee59335e2b1fb9ba7aec",
+    "lot3-cn/expectations/cases/l3-n-business-lane-refusal-edit.json": "2bac4b68a2bab89eb1703c2ffe5d4b68c0cf6c5e43bd3e4ff82a14251ed6090d",
+    "lot3-cn/expectations/cases/l3-n-binding-duplicate-role.json": "03000b1fc071ed36468bda75d82111c79cd7c210baeef377022d3981e323c529",
+    "lot3-cn/expectations/cases/l3-n-binding-wrong-parent.json": "c3e4a9ba79762335d56d68f81f2a3287c2bd18591c7f4ef6c39153be00747a5b",
+    "lot3-cn/expectations/cases/l3-n-binding-band-process-ref.json": "99f06f0bbecb346a7c72443ad815fb2e9d91cdb0ac7b1518d1a65f0a8dd60f3a",
+    "lot3-cn/expectations/cases/l3-n-binding-wrong-type.json": "c3356edafa90b81add28dbc4f914392341c0acc496e7316ce2f0239893b742e9",
+    "lot3-cn/expectations/cases/l3-n-black-box-pool-retained.json": "220e844bfe97b4786022aa1563bd3ec7ea899253d72576bc09934394ebaf3a2f",
+    "lot3-cn/expectations/cases/l3-n-hash-shaped-occupant.json": "4e20a7567a7647e250001a2954006811611c9b7bececb2e8bd8f6b2812c00372",
+    "lot3-cn/expectations/cases/l3-n-hash-shaped-occupant-edit.json": "374231d18b8881c2a5f961737d771ea1cbf54c6ad0d9e8f2f65adc1bcc2d4cda",
+    "lot3-cn/expectations/cases/l3-n-incomplete-call-untouched.json": "3c44453ff23ddf9e8d722444d7a414d47975fd6d69f0e258cdcf97d6f25d6874",
+    "lot3-cn/expectations/cases/l3-n-internal-call-untouched.json": "5ef5050ac74fbdee86d2bac90e344b42331f5a68542812a82ce66d0c98e8addb",
+    "lot3-cn/expectations/cases/l3-n-legacy-marker-ignored.json": "8bbbb81cd81986d3b520af0707a43675c1fa577a3c54e3935e9a2ed0694fd580",
+    "lot3-cn/expectations/cases/l3-n-empty-process.json": "fa510a6252ba09adacb9fe0a3bcde51c047051068c2720d4117fc3d8edda8e1d",
+    "lot3-cn/expectations/cases/l3-n-roles-and-empty-support.json": "105166a5219981102f1f0291a4b3fcdd4fb3fae11cdf483bd48a1abae07727cc",
+    "lot3-cn/expectations/cases/l3-n-reserved-lane-renamed.json": "aa01a21fb1f33e659dfbebce388d5cf24b40002726e7958169b3e013b1ec5d3c",
+    "lot3-cn/expectations/cases/l3-n-shared-item-anchor.json": "6153205d92c037a5071930f89db0dc38a941bdf1aef213a898bf6584ebde48f0",
+    "lot3-cn/expectations/cases/l3-n-anchor-after-link-removal.json": "15198abeb152f572bf1d0034aa1dace1346877a865352d0e6f5d0d2bfa3d640b",
+    "lot3-cn/expectations/cases/l3-n-direction-reversal.json": "e8ae075d044291f761ae97900cbc984e89da67690a527ccaca1162c8ec0bc27c",
+    "lot3-cn/expectations/cases/l3-n-unicode-names.json": "86f15f6337f7c8b8c9f328389911465f3f043b658d2464636d7dcb3b8e891145",
+    "lot3-cn/expectations/cases/l3-n-deleted-support-stays-absent.json": "30aa8bfd158e8cb57b211c19d8ebf8a18dc5d08de1fa079329de47c7efd6a9cf",
+    "lot3-cn/expectations/cases/l3-n-after-owner-remap.json": "00b0a8a707f20a156ac1bd48403fe608eed85807a5b26220ab5788ed98fcbec7",
+    "lot3-cn/expectations/cases/l3-n-recreate-after-remap.json": "ddeb900daeb6a4c492775fce52b155373a712ca7ce3503faf29f9aa8ff1b0c1f",
+    "lot3-cn/expectations/cases/l3-n-recreate-after-remap-edit.json": "d6540b0f09645756e6914b6ac35f3c02518bb16e96756f0aca1448f3df739974",
+    "lot3-cn/expectations/cases/l3-n-placement-intent-di-only.json": "dfc14b1276220501cd1ae689600b13d1394e0baf2e128cd8eb30c55a9a5a4f65",
+    "lot3-cn/expectations/cases/l3-n-placement-intent-unknown.json": "17aaa49fbc20148e2802be1d508af4b97a1fc9bc75ead43573b2c2adf4ac77dd",
+    "lot3-cn/expectations/cases/l3-n-not-fixed.json": "534529764512dbcb65e7427dae0a083539204b9072e65dca9b5bb5442513f77e",
+    "lot3-cn/expectations/cases/l3-n-relation-direction-conflict.json": "be4baecd5f1e455c72c8abd4231237f490e5a4bc5e41b141a131d8117297eabc",
+    "lot3-cn/expectations/cases/l3-n-ensure-conflicting-definition.json": "1db624263b6edf9cbb17c02ba1ded87ed9b86ee95ea88ed0422297b73fed5907",
+    "lot3-cn/expectations/cases/l3-sort-placements.json": "5fb82409fdf31514b45aff128b2b48ba0bc8270dfa6d1f1ab183794caede9462",
+    "lot3-cn/expectations/cases/l3-n-refusal-after-ensures.json": "a55ad8555ec3ed8b1a874d64bc15d89d18b639c7f5f5d4d521ac4eea99c4c5b9",
+    "lot3-cn/expectations/cases/l3-n-place-neutral.json": "80ebe7a9d6f74afe770fd3fac4b025f8075aaab9d561718881698f07604db27d",
+    "lot3-cn/expectations/cases/l3-n-place-grid-shared-anchor.json": "f84cca15574a2ef5e5ae52d60a0fb3a74e31c48f48d2b706cab95b0d033b46b3",
+    "lot3-cn/expectations/cases/l3-n-place-grid-inserted-association.json": "0f207da477bd3b2723569847613bb98b62cc8371ac289ebc3e6505e4481f09a4",
+    "lot3-cn/expectations/cases/l3-n-place-grid-deleted-association.json": "4292d5d6594b06560448ec0ce7edc2a070155a9bf71762c56f1b5dab966ef3cf",
+    "lot3-cn/expectations/cases/l3-propose-recovery-with-provenance.json": "9299e0c77984b2f41a148efe3c5f5f88a6c7184d26d1acd835163a03858dfcad",
+    "lot3-cn/expectations/cases/l3-propose-recovery-without-provenance.json": "a7a77ffb2d9ba9aea636adea1274347995a8c3f3f29c80d89cbdb2d4ce703c4c",
+    "lot3-cn/expectations/cases/l3-propose-recovery-partial-provenance.json": "1bb06ae871e359bcc632ba7770d4e335d2e9a09ab2778c433d69246f1aa4323d",
+    "lot3-cn/expectations/cases/l3-propose-black-box-pool.json": "9a76be8e2a4c974f7de36e3fcc42acf14a4e6d69b9c12b636c8dc1e84312ca7e",
+    "lot3-cn/expectations/cases/l3-bind-supports-explicit-selection.json": "b14acd721788f92ae02639787215030018bd377af4cb407fd08901ffc6f111e9",
+    "lot3-cn/expectations/cases/l3-bind-supports-gated.json": "0525478d164512de636801c075d423cefda7d1ce1a0c70cdffc78531cdaa659d",
+    "lot3-cn/expectations/cases/l3-bind-supports-conflict.json": "414915c8b001c54f07c52abc990ba78423f73e334610641b9436c5b61aa3b330",
+    "lot3-cn/expectations/cases/l3-n-after-explicit-selection.json": "95b3b7d269851d42c322bff34bba79a47543621b9153c2c76ba115c60ab503b4",
+    "lot3-cn/expectations/cases/l3-fp-n-full.json": "833f3a816a36153eda0a76e99044808bf4745cf69acec50eec66646d7fb28bb1",
+    "lot3-cn/expectations/cases/l3-fp-n-two-processes.json": "b24db90b2a89c548f7fc6bda4a5f5bf78ce0378500ee2b40b564637a7ec59a73",
+    "lot3-cn/expectations/cases/l3-fp-n-imported-supports.json": "a9298cb26d65a9b806a47b2bacd94eab0b8f97cfe974abbfb69d1cacea8b9623",
+    "lot3-cn/expectations/cases/l3-fp-n-direction-reversal.json": "b902b59a0ca61e181a854b465b7d2714310d86bab8572f52c68ebb9c4963f531",
+    "lot3-cn/expectations/cases/l3-fp-n-unicode-names.json": "52e463a45e6c58c816f4695ee62a280f4446da56509986e450661aa1c938a26c",
+    "lot3-cn/expectations/cases/l3-fp-c-root-first.json": "447b32d7098d275cf2781b87bca143c604a0c3d123e1c3303f1631ccd739fbc6",
+    "lot3-cn/expectations/cases/l3-fp-c-topology.json": "b1f662231ccd5ac0a5e0807dea2fa2081b1c3b00027e93f98c24966a0d75b8ba",
+    "lot3-cn/expectations/cases/l3-fp-c-gateways.json": "7b977e4d9ade7cad7c0f84d7dcedb841a485f439f2f058a2bf1dc07eef7423c3",
+    "lot3-cn/expectations/cases/l3-fp-c-ports.json": "2bea9bf7961291d7459bdca438c864afa4539714fb1fb02707c8fef4447f82e8",
+    "lot3-cn/expectations/cases/l3-fp-c-sets-default.json": "2271cd7706bed8b2bdf7057989581aae2207461d6b00f4f27d4683938ae1409d",
+    "lot3-cn/expectations/cases/l3-fp-c-timers.json": "e3c1701b15682d4c01c24f345a769862f3d49d3cba2d2256ca560c8c12e4cfd3",
+    "lot3-cn/expectations/cases/l3-fp-c-on-n-input.json": "ca484579a84c7b9effe5cd061644a6797086763a2324c80393e2eac215013b18",
+    "lot3-cn/expectations/cases/l3-fp-c-after-n.json": "a23db4fc8b7ca8b14fe01522905399bc5a8eef217fe69b704281f8c59e6fd494",
+    "lot3-cn/expectations/cases/l3-mix-n-full-js-py-js.json": "f8f3a2d5a207ad882401a6829099c16882ce12d17366d9324144f5cc67f58bdc",
+    "lot3-cn/expectations/cases/l3-mix-n-full-py-js-py.json": "95ba923a5542a766fb96b8b687b87c4689c6229336d0f66ade9de740115bd7d1",
+    "lot3-cn/expectations/cases/l3-mix-n-two-processes-js-py-js.json": "15be6eb0c7b8ce72c128c9fca0261aee33ace713b22ec210b5a11aa145571127",
+    "lot3-cn/expectations/cases/l3-mix-n-two-processes-py-js-py.json": "399a1b3c13d8502289c897ef70529377737ce1a80ac9cc9f43143f4edd6255fe",
+    "lot3-cn/expectations/cases/l3-mix-n-unicode-names-js-py-js.json": "96d62ec02302158132ce7e3702e0e1b32b140603e323e097dd2c9204460b9348",
+    "lot3-cn/expectations/cases/l3-mix-n-unicode-names-py-js-py.json": "cf411c55c4bd4cdcf5a2685c197d6be612d48bd5a0094edca647246025b390c1",
+    "lot3-cn/expectations/cases/l3-call-external-valid.json": "9f63dbe04818c5ef3a83109f1c3beae6938258bd3cd68d338dd8582c59d67489",
+    "lot3-cn/expectations/cases/l3-call-internal.json": "c3e63e6cd35537f06d11b8a3673d9af018d2c6a631407c10e9ff421b72390e20",
+    "lot3-cn/expectations/cases/l3-call-ambiguous.json": "49f1630c2cae67b81a1bd66f73ef780b7e2bb7ac80e6ffd2531427f954ee4bc7",
+    "lot3-cn/expectations/cases/l3-call-duplicate.json": "1493db4399aa45f18aa61bc689c35787727a0005bbb2da0cc9011070cdd1fa64",
+    "lot3-cn/expectations/cases/l3-call-marker-invalid.json": "f1c6f1f21b453098d52b406945e010a4cc78ab3ce752f9e9cfeec452588b6447",
+    "lot3-cn/expectations/cases/l3-call-conflict.json": "1fafa30b9089484f1dc53e141f646b074e9469045461e324e4f5bbbcdf059f21",
+    "lot3-cn/expectations/cases/l3-call-conflict-empty.json": "7e074387926f238c3e3ba3a8eeb229952ada61e2da3412f44b381e38abbde6f1",
+    "lot3-cn/expectations/cases/l3-call-target-empty-draft.json": "ceacd762fd66ccdaff519d0d14bf8a2d867d37e3e1421f4cd56f7d19c25ec4c9",
+    "lot3-cn/expectations/cases/l3-call-target-empty-accept.json": "f97e07764ee2364a01af9043f60e427158dc852fa18068b5709704e04d89291e",
+    "lot3-cn/expectations/cases/l3-call-target-type.json": "6e29f756faf4ab6f8d014d65e9ab67c68a573b9afd94659e6ab3365c02eb112a",
+    "lot3-cn/expectations/cases/l3-call-target-required-draft.json": "38d3952e28077f9c03a90d875bc4069d87e71b5f8e9501ff52ab56141503307d",
+    "lot3-cn/expectations/cases/l3-call-target-required-accept.json": "a7c441d9c6958c949eeb06be4556945bca5840508cf63b1e06e5501d49709222",
+    "lot3-cn/expectations/cases/l3-call-source-doc-not-marker.json": "32f51ac2c2d903d2df7996514e17bec5819bd1e800f297d1f949969c9e55b345",
+    "lot3-cn/expectations/cases/l3-call-target-dangling-accept.json": "15d06957eace1701b0e79a61cc1d9ac767c9dce73005762ac0283cc7af5148b7",
+    "lot3-cn/expectations/cases/l3-path-disconnected-task-accept.json": "22c65431111213ebe60898b2d4038d938ac8a0eb3dada6bac025d4eb7e59e526",
+    "lot3-cn/expectations/cases/l3-path-disconnected-task-draft.json": "20ce89edd91d0e97a122739a47ff75ecbf6cb70f43777fc3d54be68c958783c5",
+    "lot3-cn/expectations/cases/l3-path-gateway-without-incoming-accept.json": "08bff01ff57577855dced7031ae5b0cc37931c193b2e61a40551718bfca8e1df",
+    "lot3-cn/expectations/cases/l3-path-unreachable-component-accept.json": "c37dece95cb0c0f15c7c3b1bd8b6e33297ed687436d05afb1f76995950795c46",
+    "lot3-cn/expectations/cases/l3-path-cannot-reach-end-accept.json": "fa5056a8c852ec0b43130f495a976f0bf60078f6461766b5be8d98d013a139d5",
+    "lot3-cn/expectations/cases/l3-path-incomplete-call-not-exempt-accept.json": "75fb1603f4ed093ea1521b58d07496d12f9a2dede62c60c49144f5f0bc809214",
+    "lot3-cn/expectations/cases/l3-path-unlinked-external-not-exempt-accept.json": "a1fd5e2696e39763e353ccbc83c8b7054c5fc82d3b5dffd313fc88adbd8c9758",
+    "lot3-cn/expectations/cases/l3-path-cross-container-flow-accept.json": "0341b9964ef0c423b1544eaac1d303d48b04cbf14ec8ce0d6e23b4ed552068da",
+    "lot3-cn/expectations/cases/l3-trig-single-trigger-accept.json": "bff4d4ee2b7c65d542148867e905c9394faf129f14574a1c09f251be0b1ae200",
+    "lot3-cn/expectations/cases/l3-trig-downstream-branch-accept.json": "3b2cdb7bb61aceaa39611b6c649cb1c3fe258afcab75a4e464eff2be74eb0f83",
+    "lot3-cn/expectations/cases/l3-trig-no-branch-accept.json": "85052fedeab485c93e22830c5263eb835a3f7a2879a22a28c1834d499519ff1f",
+    "lot3-cn/expectations/cases/l3-trig-no-branch-draft.json": "692292480594d7cd0453dea1c1c567a6d3fa026f3f1d129abe072d4fcc7deec1",
+    "lot3-cn/expectations/cases/l3-trig-parallel-only-accept.json": "5cf1101647d1bbd6fd283138305ee66a44e4cf791de4d156d888bf2bad8642c9",
+    "lot3-cn/expectations/cases/l3-trig-normalize-no-invention.json": "0c19f395a65011e0e3c9af74ba05a5fdfe94a84c67103526aa6bfe10d7fd0faa",
+    "lot3-cn/expectations/cases/l3-io-complete-links-accept.json": "3fe52100231f901f7a2514cd66dda8d16e1beb8c5139c713d02d1d287a30eed9",
+    "lot3-cn/expectations/cases/l3-io-missing-links-accept.json": "fd93b9228d976b3c0f07fc28254de7b5d057d5198b3065486b405dc6db2b863a",
+    "lot3-cn/expectations/cases/l3-io-missing-links-draft.json": "04561d62526da0dfe107f113ae68536632dd04d14c36efd68430c1f09e8a352a",
+    "lot3-cn/expectations/cases/l3-io-wrong-direction-accept.json": "7b11d51d3632423c4dcf60cec0f96f62625f4813a7cfa038409ff20dc28c581a",
+    "lot3-cn/expectations/cases/l3-io-wrong-direction-draft.json": "7a7a812c4152669594586a723b7f41b3cc45c2950b2cf85053f6b5103a98e17a",
+    "lot3-cn/expectations/cases/l3-io-endpoint-type-accept.json": "1a2b55675d315a0ec3656211dea3e283758b6af13f96b5368714bced5182b119",
+    "lot3-cn/expectations/cases/l3-io-link-owner-accept.json": "15ea0281671a902d32b7287c704346f9dfd8dc3b897c2bcf3e14c99ec31ad292",
+    "lot3-cn/expectations/cases/l3-io-link-owner-draft.json": "4257dced46bbf8e140a76611e016900c32aadf7828b28d7338becaf84e58f0c6",
+    "lot3-cn/expectations/cases/l3-imp-remap-total.json": "5a137646f38678e3ab98b0fdbf88c2b7ea5f05c8b3bee1477fc925459f373bbe",
+    "lot3-cn/expectations/cases/l3-imp-remap-total-edit.json": "ffff4b5eb63f110a18b2cb077111667d1026b0e63221214a71535b1f47c29f3b",
+    "lot3-cn/expectations/cases/l3-imp-remap-unapproved.json": "79b9b6f03c83876a7d114643c4c0ad87d22356c758ba8a91a8b7258e23a493dd",
+    "lot3-cn/expectations/cases/l3-imp-remap-swap.json": "15fc221badc641aeac03c1d2650a0c4353c77c286fa7a204a7365068f05ff1c4",
+    "lot3-cn/expectations/cases/l3-imp-remap-collision.json": "09c05e7c1ae24db25780328516ff3fd89da45e400bcdf8cf831aac967dd11d7d",
+    "lot3-cn/expectations/cases/l3-imp-remap-duplicate-result.json": "9bcf1d408f6744ca8676e67a31aff207949f59691e6bca7e643893505c66c8e7",
+    "lot3-cn/expectations/cases/l3-imp-remap-unknown-source.json": "9e0f69ee426aae802ae4694eb6d87b325e765b8a03e4fd895dcbaa7ac565550c",
+    "lot3-cn/expectations/cases/l3-imp-remap-target-grammar.json": "cb54cc9b78856f06b7359224ddbef7628abebb5e2dac73f6e7cfb3144c7347ed",
+    "lot3-cn/expectations/cases/l3-imp-remap-opaque.json": "879a6fc700b1a1303a8dc081748b1e5cc0eb85f4c4807911b3648bdc45919670",
+    "lot3-cn/expectations/cases/l3-imp-remap-opaque-attested.json": "85fe933ed3adda30b4a829f99de8d0f3ffa4705db2ef44dc699541a7430173bf",
+    "lot3-cn/expectations/cases/l3-imp-remap-dangling.json": "ac828f729eb83b664e43b7acca7d9909f01a3a51a4dc16bfadc84e7e4c414338",
+    "lot3-cn/expectations/cases/l3-imp-remap-nonsubset-id.json": "46a18f1e0ecbbd757dc85ccccf32a4801c5e74aa545804ac3cd3fe8205f6cd39",
+    "lot3-cn/expectations/cases/l3-imp-remap-qname.json": "db18d5b7c78c48c3110795d35367bd13e39a0a2aed9310dfd0d6862401cbc4f7",
+    "lot3-cn/expectations/cases/l3-imp-remap-owner.json": "11295792ea773ac64989e3a436ed72c66c3ffa932275a45aea31bf0c3bef7060",
+    "lot3-cn/expectations/cases/l3-imp-projection-out-of-base.json": "eab297a19174d83da4f736defe1b678ce57ba6a10c6c55be2340a40ed37edffa",
+    "lot3-cn/expectations/cases/l3-tx-incremental-draft.json": "810f461261879b3381e99fa04d428d96399bbda6543caaeea3aede0d55536035",
+    "lot3-cn/expectations/cases/l3-tx-batch-one-entry.json": "22a3c76697ee6a6be4fe0fa7cd0ffd6611d446a445e1107f597f1f2c757adc35",
+    "lot3-cn/expectations/cases/l3-tx-cancelled.json": "887551d553ff3c17ea47f1efcea889d8c8380044d66ae9a7999454d146a21242",
+    "lot3-cn/expectations/cases/l3-tx-cancel-pending.json": "5fd1f787afaeb603d06fb20cdd5a9b99121238745bca3158784e891d24ff823d",
+    "lot3-cn/expectations/cases/l3-tx-dispose-no-leak.json": "ba7513a8fda30950430f3ea59e5791f600b2d0ef0b99daf1712bd378d74bcc7c",
+    "lot3-cn/expectations/cases/l3-tx-dispose-pending.json": "02fb1391761799907faa047c97ae2fcea6375c3929ff6aceebdd8df000921ad6",
+    "lot3-cn/expectations/cases/l3-tx-reentrant-refused.json": "b6c159d640ea4fd1d64ef0705acefbc2393c9a18f5653432397ede59618e6150",
+    "lot3-cn/expectations/cases/l3-tx-guard-recovery.json": "ea365a58c06a6942e602e1da51b5703a28434c3c457708a344e4df2f6f048e79",
+    "lot3-cn/expectations/cases/l3-tx-refusal-preserves.json": "790b231fd41f0763625b0bdfac62386cb46148f7af81a6366f18c526e23763f3",
+    "lot3-cn/expectations/cases/l3-tx-io-set-selection-required.json": "eee4960126c1b48dc01f8b69e8731ec445d97137a0568093a128218d2f7a9cee",
+    "lot3-cn/expectations/cases/l3-tx-io-set-explicit-selection.json": "58daca9de8b153976cdb79e359167d7166e2ccf8a83da934037dd98e0fe12437",
+    "lot3-cn/expectations/cases/l3-tx-di-only-move.json": "8335bab403182ddf174c831d0aa15e477ba4709a0c138bebe4f29e273a3482d6",
+    "lot3-cn/expectations/cases/l3-tx-corrected-noop.json": "bd86794c1cb9b4d62eaa1c0ce4a14494d79c037d6e78b41cbb301ff922d8898d",
+    "lot3-cn/expectations/cases/l3-tx-theme-history.json": "95538b9fdb0ea2822c2690e74cd174aaa44be4bd51aa888419efb88f5673adb9",
+    "lot3-cn/expectations/cases/l3-tx-delete-support-undo.json": "864296dfc43d531cde28e3266ef5193d67d504742a29e6d161a14f213e61ab23",
+    "lot3-cn/expectations/cases/l3-tx-stale-revision.json": "06c0fbc366e66b824880f6859470b8d9749fa05962e323db45ef6c2df2ded393",
+    "lot3-cn/expectations/cases/l3-tx-empty-history.json": "119e4bc09b21fc03e2d84edac7934e6652125a772c0667d17edb53065d28bf57",
+    "lot3-cn/expectations/cases/l3-tx-bare-recipe-refused.json": "22f6559073130e719a4425756bd83241f971238f288ad37b747f311fdcf14dd7",
+    "lot3-cn/expectations/cases/cn-plan-actor-mismatch.json": "5468cd19fcff4b3c17d56daf97cd1c28742ff73985c0b96f96a067fbac54b637",
+    "lot3-cn/expectations/cases/cn-plan-add-note-containment.json": "d687204e5bc6d49981654172a4564a6c0335fc049ab8d8f296c969d8d411dc5a",
+    "lot3-cn/expectations/cases/cn-plan-ambiguous-binding.json": "2c80f98221c82a89c72f17fd061b425cd4d5c39cb06e719262e3365e2c0d0799",
+    "lot3-cn/expectations/cases/cn-plan-append-remove-conflict.json": "11c88ea5d1024606769e2c47c7e9bb71911e83ce7a392f0e32579687a74705aa",
+    "lot3-cn/expectations/cases/cn-plan-create-aid-grid.json": "087b5c2e6f1ab9a0a5748669c5527ebad5cb8f83320fffbe157e3c9bb6ff4f51",
+    "lot3-cn/expectations/cases/cn-plan-create-aid-neutral.json": "e8b85fb04d0d4a4bd101e1676fcd7cc329906ae561118dad9fce4f42a56f1ce6",
+    "lot3-cn/expectations/cases/cn-plan-create-id-collision.json": "87df05836b9d0160d35b55b0f6baaafd4a584fe3fdb5bff00812cf7230a24728",
+    "lot3-cn/expectations/cases/cn-plan-create-process-input.json": "35fe698d70f45cf65721d69272ff46a5014ecdfc64f807cf0eb6281e4c924630",
+    "lot3-cn/expectations/cases/cn-plan-create-task-grid.json": "8a515a8bfb47ff53c414bb00e9c7df11145ae4dbfdda62f1c9ec11e7b8ffd4f5",
+    "lot3-cn/expectations/cases/cn-plan-create-task-neutral.json": "d4b4a4ab3d743a7fddcc105582146d14861383c5081558a90208be47bf2a9374",
+    "lot3-cn/expectations/cases/cn-plan-export-phase.json": "40e7e59ee613f675db27f4000bc733ecc5e6b3f48d0d15b0e7a0b79dbcde9674",
+    "lot3-cn/expectations/cases/cn-plan-invalid-authority.json": "2d90c3834285f7ca301bf688a43a3d6f350f76499ec7709feb17a66067a52933",
+    "lot3-cn/expectations/cases/cn-plan-lane-member-cn.json": "11b4d5abaab6cd6b02f991514178e59032f5ec5c533b99dcc1c7a359c586a550",
+    "lot3-cn/expectations/cases/cn-plan-lane-member-support.json": "3f73647eb2f86f278bf9339f01051e06cff7700da032ec3a247d1f2cd566441c",
+    "lot3-cn/expectations/cases/cn-plan-link.json": "54b835651437b5cb950c1e3daf93eb301e22beb65bccbd5233182f328fabc66a",
+    "lot3-cn/expectations/cases/cn-plan-link-wrong-target-type.json": "5a228a69f45cb443bc023f71565f03149687d8b34b6b9e0d1d54def55e002194",
+    "lot3-cn/expectations/cases/cn-plan-missing-parameter.json": "e766c9a8066209c75b4affc5c88554f45264e26cc31cf22e42531ec9b2ebd9d4",
+    "lot3-cn/expectations/cases/cn-plan-optional-binding-missing.json": "c48e772bc26d8424363b8bba893272d71ec9167ad1e5acc1e2b2a806a78ed6cb",
+    "lot3-cn/expectations/cases/cn-plan-recipe-not-compiled.json": "f8fcd94b4cc903b46e2ed06ea4cd1cfd3a34d80148908e1f01865f61162712ce",
+    "lot3-cn/expectations/cases/cn-plan-remove-referenced.json": "73808a2372cce4d3d8b01256fed66d2bb51a2d61100e23077dfa57e0535e49e0",
+    "lot3-cn/expectations/cases/cn-plan-remove-without-intent.json": "afe7181250095cd31b3ae5e54a2d8823fea45cd8de5d48496c258c9ade15f705",
+    "lot3-cn/expectations/cases/cn-plan-reparent-annotation.json": "68ed479a0a2fbeedbdae52d5992e61f5127f565c9ca7c6d3f66dc98d16a6cfd9",
+    "lot3-cn/expectations/cases/cn-plan-scalar-write-conflict.json": "ffcaf5fa7ad1b9edd1b18ffa66a2ff6981f39256079fa024cc228058515968e2",
+    "lot3-cn/expectations/cases/cn-plan-undeclared-parameter.json": "1c1d2963341e3deb2e6ae60404fbb1387100541c283d9428490d1f29cee15a9f",
+    "lot3-cn/expectations/cases/cn-plan-unknown-element-parameter.json": "9867531e8aed9f7bcb604fd639363fa09ad6021b32a2c05e260f21a624607103",
+    "lot3-cn/expectations/cases/cn-plan-unset-name.json": "3e5fbaf55ecfab41a07f2c337028fec7b9cb96095bfcdf72299f50c5d94f4104",
+    "lot3-cn/expectations/cases/cn-plan-wrong-parameter-type.json": "9823992d743b6c187f46d2451c11ff36f1f3364dd83313f00da90357a4ebd359",
+    "lot3-cn/expectations/cases/cn-apply-stale-plan.json": "e934eb02a661bf5cc0c73e37fe482d60131bcc25611326624b829a79c3fac7ef",
+    "lot3-cn/expectations/cases/cn-apply-input-conflict.json": "3e1778560a0c43c0f89a8ed395d4b59c884c4a4089f9a4dc3bad988c23e8ce4f",
+    "lot3-cn/expectations/cases/cn-c-version-mismatch-first.json": "e64dab1acc11a2d93f086c990b1bdd577f2219f829395c679129ad89dcc3eea8",
+    "lot3-cn/expectations/cases/cn-c-digest-mismatch-first.json": "a980d6b5c3e01dfa7dc5fd87434b83244bf1c61f9c878859e9faf41402ba4688",
+    "lot3-cn/expectations/cases/cn-c-document-version.json": "bfbc01fabd4da19bcfc52d46c629cd75a396b11c13e9b35e131f9191bf2eeb59",
+    "lot3-cn/expectations/cases/cn-c-gateway-direction-control.json": "f294dc680bba81701da9c17622ebc9dd8966ac74802faabd3139c56258d03867",
+    "lot3-cn/expectations/cases/cn-c-output-port-gated.json": "8f300714dfdfdc7b7d161f3f8fcc9c46faf873ea9612054b9deba603337e77cb",
+    "lot3-cn/expectations/cases/cn-c-output-port-qualification.json": "28aa1ffddecd1fa404379d1aa470c87812cb468bde9145e8c2a7f575ec393612",
+    "lot3-cn/expectations/cases/cn-c-not-fixed.json": "e6ca424f82beffea45e8aeeedd483f2c179174ad435ca45f006959a9db5af2c3",
+    "lot3-cn/expectations/cases/cn-c-extraction-authorized.json": "6fac73f0a47c6640f31ad8a87a5123f38103a2de868268d34ffda12100024fe4",
+    "lot3-cn/expectations/cases/cn-c-extraction-unauthorized.json": "6d7933167d9ced9a2c995b7e0201b24e60ed99d205a1ea3f3934014c35afdb1f",
+    "lot3-cn/expectations/cases/cn-c-descriptor-role-unknown.json": "28d97cd14c007fc1167ce6aca425e0d9596633ccebc469f14a555ec08a773e61",
+    "lot3-cn/expectations/cases/cn-c-invalid-mode.json": "8a6a2863033881e51acab66a77374a31ad0dfb84a868931f4eed319abaa90116",
+    "lot3-cn/expectations/cases/cn-n-support-band-process-ref.json": "b9e97806896f900de365ea6065df59c64db0f0ec9b4c87e7d42f0fd25f41682f",
+    "lot3-cn/expectations/cases/cn-n-support-creation-gated.json": "a26a99a2d54e3ba606038ef96e277638f88b1e1d561db287ed63636ea5578d5d",
+    "lot3-cn/expectations/cases/cn-n-support-duplicate-role.json": "59c8b2a4b889ea01b5f2ab47baa9df39ca6165d0b2eacc2939cd1f348a462ec7",
+    "lot3-cn/expectations/cases/cn-n-support-imported-ids.json": "5fcc9e389d4da58ad14af2524a04b855a02023079d257693e9389b3f7c260af5",
+    "lot3-cn/expectations/cases/cn-n-support-imported-ids-edit.json": "1703d53162e816e8224f7772a9995657710c71dfc4ac04fcc7ab837d4c33f157",
+    "lot3-cn/expectations/cases/cn-n-support-late-band-collision.json": "3e63d86e716b8ca692cf5583c4693722fefc78a65ba23143a270fe31aae22487",
+    "lot3-cn/expectations/cases/cn-n-support-late-band-collision-edit.json": "112c82b955a0770b0c2846038c5c686aee09c8e06c31749cf4f69b3173692395",
+    "lot3-cn/expectations/cases/cn-n-support-one-process.json": "224a3d4e1aeb17eb16a847dec7df6bebe2b2b6bb3408b35028e54a78bef67d1e",
+    "lot3-cn/expectations/cases/cn-n-support-refusal-after-five-ensures.json": "291277c5328284061f3d0bfd0ded3f4fed2b8b2cc5a23be1ba26d50f34ede2a6",
+    "lot3-cn/expectations/cases/cn-n-support-two-processes.json": "8aa8cebedf7d6f0fc28f4aaf6060f0b8165cd4bc061d366eeb2408cb390395db",
+    "lot3-cn/expectations/cases/cn-n-support-wrong-parent.json": "8e38a428cdd193ee1f377c6373d3fa4c9c41afa1f5a3671a70451a5499aa3f17",
+    "lot3-cn/expectations/cases/cn-n-place-grid-deleted-association.json": "a01c3b309d22acebaaf8dc9ca9a68f21e9875fee5c4782bd91b57379d50c1e43",
+    "lot3-cn/expectations/cases/cn-n-place-grid-inserted-association.json": "e476b898da9faa441fd3b7c327e68d5f2a7ae129a91582476b9ac195b74e414b",
+    "lot3-cn/expectations/cases/cn-sort-placements.json": "8884e7e3fe965d0a691db6e3010e3199ac33cd4d6c3c252b6d4ed93e83264351",
+    "lot3-cn/expectations/cases/cn-n-placement-intent-di-only.json": "20a8d9431f89d54c101e7b754c5f0193d120ffc82604c063f314dde0a7c83b1f",
+    "lot3-cn/expectations/cases/cn-n-placement-intent-unknown.json": "0425491059962313109a477dc48b73568b69f745e522473a8d803e62f6b46873",
+    "lot3-cn/expectations/cases/cn-plan-remove-empty-support.json": "ab5675f327feeb637a0b3120ca1d38492decd6c8c26c0d117c41cced2af2748a",
+    "lot3-cn/expectations/cases/cn-n-deleted-support-stays-absent.json": "070e7fdbdca4c191d02bd4bda643fb70372a31fbf670cf4989dc2a28d928ebec",
+    "lot3-cn/expectations/cases/cn-n-recreate-after-remap.json": "034726318fdb9093b299d2766c3f2a7ffee737b687c7b6b5c2daa96efa3e3dde",
+    "lot3-cn/expectations/cases/cn-n-reference-region-edit.json": "ee1c97753511b83979c55a95374f47f298a832c34a3795a57bfc95e1c197d17b",
+    "lot3-cn/expectations/cases/cn-n-external-membership-edit.json": "75a695cebbaee9b6ef698481faf7d8ac5e79c70048782cfeb51af3c74b2530be",
+    "lot3-cn/expectations/cases/cn-n-recreate-after-remap-edit.json": "759bb6217fb1cc178120e668a7a33ef21865bbc8a9e0596503273adb17c23ccf",
+    "lot3-cn/expectations/cases/cn-n-relation-direction-conflict.json": "58460ef88a89866e75a1e101d4a1749ef9df622967c5d182bc63df6fda05d855",
+    "lot3-cn/expectations/cases/cn-n-ensure-conflicting-definition.json": "a9de675ad40690b70e626a8c4e1f89489605e04d3d58f223d9dbd9cd8fcd1a96",
+    "lot3-cn/expectations/cases/cn-n-not-fixed.json": "e60bc0fa0d3a64da7c2f7d53d432ddd2fa13d6799d3385bcc405c4d9e17965c1",
+    "lot3-cn/expectations/cases/cn-n-reserved-lane-renamed.json": "bd9b7fa23697e667f2a9c1f6ef7dc21640b2d775fa8c419b9a19a809e4f4de28",
+    "lot3-cn/expectations/cases/cn-remap-owner.json": "c52feb841349129fe79411481a4b105e0d1bf9663b17170b7366e11a378d2cee",
+    "lot3-cn/expectations/cases/cn-remap-gated.json": "200596ff11af9bd6799b31bbf7dcafb4e2ebe417181db3d3bc045a8d0a54b9f7",
+    "lot3-cn/expectations/cases/cn-remap-unknown-source.json": "c663ff5c62255d5d31b05ac4fedb22e0971c3921050bdc2e5d06b1515eeeac73",
+    "lot3-cn/expectations/cases/cn-remap-target-grammar.json": "824654ac02f0bfaf1bed3315e759759f812b4eb39da24f30b26d8bc300b60f65",
+    "lot3-cn/expectations/cases/cn-propose-recovery-partial-provenance.json": "cfd19136ac1b174a519e0a1433c04c6dc173c959a86b30278ebe7dd51fc353c0",
+    "lot3-cn/expectations/cases/cn-propose-recovery-with-provenance.json": "dc2a1aa949069c93614170b902c2ed529e988a97c97d54a14c081c3ddfe358da",
+    "lot3-cn/expectations/cases/cn-propose-recovery-without-provenance.json": "164cfcd185581205302b6e68fcc11540db53ec6e60749da296fd5cf68604367c",
+    "lot3-cn/expectations/cases/cn-propose-black-box-pool.json": "d44cb03bcfc85d67022abe5a3fdbdd4cb9b3fb55f5a9ddd6fd11362676f91e91",
+    "lot3-cn/expectations/cases/cn-bind-supports-conflict.json": "e407821254cc1de0f9f370521124feeb88c338b6d274638f8da4fec62458f089",
+    "lot3-cn/expectations/cases/cn-bind-supports-explicit-selection.json": "2cac33f8357c96a421d3383992ad0bc73657e336db936747d891fe34413ee196",
+    "lot3-cn/expectations/cases/cn-bind-supports-gated.json": "796f8ef68a879f9f41b197e436a1abba5f88ea1d4502681683ad983a3b8d0003",
+    "lot3-cn/expectations/cases/cn-n-after-explicit-selection.json": "ec341a2fb7a129d6f0ed24c305b4167cbadd8f2fd879bd468eb968fb06e05575",
+    "lot3-cn/expectations/cases/cn-compile-create-identity-mismatch.json": "0cf7214863cde3ebf30519da05b8383b8e17cb123499f3154f6d7c332b4d095b",
+    "lot3-cn/expectations/cases/cn-compile-ensure-missing-binding-write.json": "0b4a301996e86c50596f455bde7a4cf318db2746cff0e53d5805608fb7a1d4a1",
+    "lot3-cn/expectations/cases/cn-compile-ensure-non-support-type.json": "a8eb0e54c20e9d7f5e9d532203a913d12811e7e8dea81d80eab5fa7f13ad03ad",
+    "lot3-cn/expectations/cases/cn-compile-port-without-authority.json": "ecd4e9d3a93c02ef8b3ecf473bb0381acfda676bba43328592b327e7ac942a0a",
+    "lot3-cn/expectations/cases/cn-compile-support-profile.json": "ff44e5873819ec1fa788e99d4313a7804dd82d91f56eeb662f841cb693323cd4",
+    "lot3-cn/expectations/cases/cn-compile-variants.json": "0c1cc86d3e087d2a1b566e0180d7800cf7b61f274d147e7c180f4be4e87c4509",
+    "lot3-cn/expectations/cases/cn-c-empty-called-element.json": "466c528ca8b5cb52ccf60d1f47a5940eee0b9c34bc08e8fc5b9579939cb42056",
+    "lot3-cn/expectations/cases/cn-c-second-pass-refused.json": "60738b40de679ce8d02ddbbac8cf3347c47e4d957c5f26fbc127fe7e2133dcd9",
+    "lot3-cn/expectations/cases/cn-c-wrong-type-reference.json": "c7d58592c6d92ad822afef5c6f80902df9912226b5e41856a938ad716e48186b",
+    "lot3-cn/expectations/cases/cn-n-compat-before-integrity.json": "2c395db18fe1619224ef9c94280b86c36c0b09c8a92b18c57f4ef2b3f4b37979",
+    "lot3-cn/expectations/cases/cn-n-dangling-reference.json": "75dd0c1f6f1d5331ee9d61413e4f788ea62cc06de20cb7627355a88460c394e9",
+    "lot3-cn/expectations/cases/cn-n-second-pass-refused.json": "2684b430c49ab43cd9c7248424a5eb6ed08009972aad5ffa5fe143d27500db19"
+  },
+  "vendoredSeal": {
+    "runtime": "python",
+    "commit": "1c2df3166480fe62a233fe91c3ae19bf8839cd2a",
+    "manifest": {
+      "path": "tests/profile_cn/expected/MANIFEST.sha256",
+      "vendored": "lot3-cn/expectations/vendor/py/MANIFEST.sha256",
+      "sha256": "0d3922f74fb71e19d305307a3153989dcdf4ba3685e8a6df06c28046cf15ad8e"
+    },
+    "parityManifest": {
+      "path": "tests/profile_cn/expected/parity/manifest.json",
+      "vendored": "lot3-cn/expectations/vendor/py/parity/manifest.json",
+      "sha256": "2a195405f01458521ef951d5b7b14f554b62c9a20b87d83efdca69a6ff234f52"
+    }
+  },
+  "vendored": [
+    {
+      "caseId": "cn-plan-actor-mismatch",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-actor-mismatch.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-actor-mismatch.json",
+        "sha256": "862d6b15cf59a51bde742a2cae88b366165cdc38e1b74f96be5e07516ce5ba9b"
+      }
+    },
+    {
+      "caseId": "cn-plan-add-note-containment",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-add-note-containment.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-add-note-containment.json",
+        "sha256": "6c2e4dba2babab984cd4a146007bdfe92bc0973fe6b1b8acf098b7c1ccaf8918"
+      }
+    },
+    {
+      "caseId": "cn-plan-ambiguous-binding",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-ambiguous-binding.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-ambiguous-binding.json",
+        "sha256": "9454b1d924ea4a2e346fbf6438785dd56aa156c072e897985c093e0c83381fcd"
+      }
+    },
+    {
+      "caseId": "cn-plan-append-remove-conflict",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-append-remove-conflict.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-append-remove-conflict.json",
+        "sha256": "584f8695b42e540dafb795ba026ee78011e8d9e00b0fc731e2abe4aa03e23e30"
+      }
+    },
+    {
+      "caseId": "cn-plan-create-aid-grid",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-create-aid-grid.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-aid-grid.json",
+        "sha256": "80a9c4cce904fee13c03f358bfe13d4413dc5333c692d004db5ed904e57f74d4"
+      }
+    },
+    {
+      "caseId": "cn-plan-create-aid-neutral",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-create-aid-neutral.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-aid-neutral.json",
+        "sha256": "379ff38fe23d483f42c28574e496c41362ae660d78381e2c3914350a4803f234"
+      }
+    },
+    {
+      "caseId": "cn-plan-create-id-collision",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-create-id-collision.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-id-collision.json",
+        "sha256": "6be51a5cd5408e9d481df64d84eeca68dd06a76300e2e92845a8a1ee7d9e4ebb"
+      }
+    },
+    {
+      "caseId": "cn-plan-create-process-input",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-create-process-input.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-process-input.json",
+        "sha256": "b012db29f9785cd2a134ce4bc87d9cdf179accecbfc294d5f688e65156170bfb"
+      }
+    },
+    {
+      "caseId": "cn-plan-create-task-grid",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-create-task-grid.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-task-grid.json",
+        "sha256": "14a20fcdc7e01251701c9cda733fd72dbb841b3219dec778711944c90300381e"
+      }
+    },
+    {
+      "caseId": "cn-plan-create-task-neutral",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-create-task-neutral.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-create-task-neutral.json",
+        "sha256": "1638d4da27ec4b74303986e14a993026ccf82b65a07d8ae67c304e64b0ec68e8"
+      }
+    },
+    {
+      "caseId": "cn-plan-export-phase",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-export-phase.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-export-phase.json",
+        "sha256": "bd1762caf70b6804a3fac3f1e51d0bac0d0c78b39d0d9f6b2cc17799c6a8563f"
+      }
+    },
+    {
+      "caseId": "cn-plan-invalid-authority",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-invalid-authority.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-invalid-authority.json",
+        "sha256": "db907428a7839c23833c664abac94bc6826d17f10e09e0fef464ded7294bee64"
+      }
+    },
+    {
+      "caseId": "cn-plan-lane-member-cn",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-lane-member-cn.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-lane-member-cn.json",
+        "sha256": "d988625da5d3b769c46b767c7e634f61f851f07a2c1d285cbcef6a3c887ed484"
+      }
+    },
+    {
+      "caseId": "cn-plan-lane-member-support",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-lane-member-support.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-lane-member-support.json",
+        "sha256": "8cb9c55594274af15a889234a4b157fabf07c6e29b117013c535c02b39881bfd"
+      }
+    },
+    {
+      "caseId": "cn-plan-link",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-link.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-link.json",
+        "sha256": "38929fcfe4359eeec5b0f7b43d5efdd56d2bfcc9d783376c0265c789d14d4b89"
+      }
+    },
+    {
+      "caseId": "cn-plan-link-wrong-target-type",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-link-wrong-target-type.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-link-wrong-target-type.json",
+        "sha256": "6196aa10b9432b5f226a0c2d4da5f2902943af93d76ca50d68059a3705b79ef5"
+      }
+    },
+    {
+      "caseId": "cn-plan-missing-parameter",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-missing-parameter.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-missing-parameter.json",
+        "sha256": "8fab8fdf443bd908d995245d5bbf65d3a3fb02be2fc018fb2c91292de2b3e1e0"
+      }
+    },
+    {
+      "caseId": "cn-plan-optional-binding-missing",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-optional-binding-missing.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-optional-binding-missing.json",
+        "sha256": "bc45e17937b9e2b9dc3079fcf2df6ee01c393598d74f98ce9a12bfce4660e9d9"
+      }
+    },
+    {
+      "caseId": "cn-plan-recipe-not-compiled",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-recipe-not-compiled.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-recipe-not-compiled.json",
+        "sha256": "8dc9adb5e050000719b14f86eb3cca7ba29c4780366bbb32c5a30a18afe48f0d"
+      }
+    },
+    {
+      "caseId": "cn-plan-remove-referenced",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-remove-referenced.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-remove-referenced.json",
+        "sha256": "ef6d4338fb83012d77b2a1b5c430d34e1f088225bf463e91c80e04300bfb1c87"
+      }
+    },
+    {
+      "caseId": "cn-plan-remove-without-intent",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-remove-without-intent.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-remove-without-intent.json",
+        "sha256": "cb40019ecab99c32f315d8b831bea6ec65dbbe24cc70b2b22a2e949a427a6d25"
+      }
+    },
+    {
+      "caseId": "cn-plan-reparent-annotation",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-reparent-annotation.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-reparent-annotation.json",
+        "sha256": "7ac46f8e2e2c4005406bcb81f265fe4b6ce98bbd1a9069113f79e1b83415233b"
+      }
+    },
+    {
+      "caseId": "cn-plan-scalar-write-conflict",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-scalar-write-conflict.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-scalar-write-conflict.json",
+        "sha256": "905461ecb2e72ebc387a72851f5da77107a3eeb13b13f940c31a25cff19575e1"
+      }
+    },
+    {
+      "caseId": "cn-plan-undeclared-parameter",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-undeclared-parameter.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-undeclared-parameter.json",
+        "sha256": "532991857d6e4c67350879dd600fb76c2b66f5b0eab73cff688ea65ad3dadbf1"
+      }
+    },
+    {
+      "caseId": "cn-plan-unknown-element-parameter",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-unknown-element-parameter.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-unknown-element-parameter.json",
+        "sha256": "da03034ddf6ecac77091947bd3323d47f9b1d00bb846796fbc9c262227281d86"
+      }
+    },
+    {
+      "caseId": "cn-plan-unset-name",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-unset-name.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-unset-name.json",
+        "sha256": "fd04a3130afaeeb746ddbf6d55c31c663b028e5849d961715d836c210b53e6a3"
+      }
+    },
+    {
+      "caseId": "cn-plan-wrong-parameter-type",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-wrong-parameter-type.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-wrong-parameter-type.json",
+        "sha256": "49bc912c39db019b46b08b72e27172f1ede4133e3e8e361c77e79a89321c828a"
+      }
+    },
+    {
+      "caseId": "cn-apply-stale-plan",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-apply-stale-plan.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-apply-stale-plan.json",
+        "sha256": "93bf006a890727b37c8fc87a6013bac3cb95260904d680b29a67c218876a9449"
+      }
+    },
+    {
+      "caseId": "cn-apply-input-conflict",
+      "row": "PS-H08",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-apply-input-conflict.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-apply-input-conflict.json",
+        "sha256": "3a18ffda6e7bbfe02640c0056ea267129c90b43618cd2eb7e2c4538ff6d3f244"
+      }
+    },
+    {
+      "caseId": "cn-c-version-mismatch-first",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-version-mismatch-first.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-version-mismatch-first.json",
+        "sha256": "ae0b72bfff5dc71147f2d25d4328f8342455c12affe47bd001d87918e202d3e1"
+      }
+    },
+    {
+      "caseId": "cn-c-digest-mismatch-first",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-digest-mismatch-first.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-digest-mismatch-first.json",
+        "sha256": "7cb3b012ed4faa1a05c670f197db7530eb61f02a3417cb52140f9f9b044a169d"
+      }
+    },
+    {
+      "caseId": "cn-c-document-version",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-document-version.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-document-version.json",
+        "sha256": "8012c9eab1f05c6f238649dbbebbbd31f3338a3e7e12314a3d825289bc8b7fdf"
+      }
+    },
+    {
+      "caseId": "cn-c-gateway-direction-control",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-gateway-direction-control.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-gateway-direction-control.json",
+        "sha256": "3883d0ada612313eded6c5400450cf677d82ac45fb0068e27f8cc46fd53deb12"
+      }
+    },
+    {
+      "caseId": "cn-c-output-port-gated",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-output-port-gated.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-output-port-gated.json",
+        "sha256": "2d4236a059fefce560b9bcc1d072be62191b725671340c9cf87a592fd01bdc1a"
+      }
+    },
+    {
+      "caseId": "cn-c-output-port-qualification",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-output-port-qualification.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-output-port-qualification.json",
+        "sha256": "c5cf08001c994c8df5aa5c4d28197aea68809c9c80a302e131e576f2dd687cb1"
+      }
+    },
+    {
+      "caseId": "cn-c-not-fixed",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-not-fixed.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-not-fixed.json",
+        "sha256": "34cab9538a1be7ccee3a5b38915045e5f6eb399df157f37b36d910cf8194e909"
+      }
+    },
+    {
+      "caseId": "cn-c-extraction-authorized",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-extraction-authorized.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-extraction-authorized.json",
+        "sha256": "b85a964dc9a15d77f1a3159ff7e0e7558d9627206dfacd8346658795129c7c2d"
+      }
+    },
+    {
+      "caseId": "cn-c-extraction-unauthorized",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-extraction-unauthorized.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-extraction-unauthorized.json",
+        "sha256": "796894529b9d97391c558c7373f56f46ee330cfb67c315456fb1ede98fee05cb"
+      }
+    },
+    {
+      "caseId": "cn-c-descriptor-role-unknown",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-descriptor-role-unknown.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-descriptor-role-unknown.json",
+        "sha256": "c20fcf085bb458a9cc792225a1f10e9df8673fc8afee831f9e9d6491ba05a4be"
+      }
+    },
+    {
+      "caseId": "cn-c-invalid-mode",
+      "row": "PS-H09",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-invalid-mode.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-invalid-mode.json",
+        "sha256": "9bca965ec02b7b385273c4c416301ddc0485fe4150aa0a9d98ecb802c9d4a246"
+      }
+    },
+    {
+      "caseId": "cn-n-support-band-process-ref",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-band-process-ref.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-band-process-ref.json",
+        "sha256": "6259f8dea5b9551e3d79508cdeed6266281eccbde29b4aeaf61a81635b9d8968"
+      }
+    },
+    {
+      "caseId": "cn-n-support-creation-gated",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-creation-gated.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-creation-gated.json",
+        "sha256": "ecf7278252f96c65751aecad281e304b83117a905cbcd9faad1ee0b4fafa07e4"
+      }
+    },
+    {
+      "caseId": "cn-n-support-duplicate-role",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-duplicate-role.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-duplicate-role.json",
+        "sha256": "e396bcd27de1cf9aaf53ab0955792b15e4f37f701d3e613e446cccb091a8ad46"
+      }
+    },
+    {
+      "caseId": "cn-n-support-imported-ids",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-imported-ids.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-imported-ids.json",
+        "sha256": "c837a5444dc35997b677a1d073cc8c7cde4f5253ae65d690adfd433624210f9b"
+      }
+    },
+    {
+      "caseId": "cn-n-support-imported-ids-edit",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-imported-ids-edit.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-imported-ids-edit.json",
+        "sha256": "35ca9d4838f03a382eb1a5c94f47c6c937855144c58321ed881224c520d807be"
+      }
+    },
+    {
+      "caseId": "cn-n-support-late-band-collision",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-late-band-collision.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-late-band-collision.json",
+        "sha256": "8440d1f1a9765d42e419c65a8a57880deac759dc777e4a9941de07c7b376eef5"
+      }
+    },
+    {
+      "caseId": "cn-n-support-late-band-collision-edit",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-late-band-collision-edit.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-late-band-collision-edit.json",
+        "sha256": "70775f7522145d9fb4f654a73ccc9bf95bec901a485c6984ee16a012f2f9a5df"
+      }
+    },
+    {
+      "caseId": "cn-n-support-one-process",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-one-process.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-one-process.json",
+        "sha256": "e1d70cc0085fd26ecf4c98e9ec71f0c956fa07f5cabf33c27bc18427b9eb6254"
+      }
+    },
+    {
+      "caseId": "cn-n-support-refusal-after-five-ensures",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-refusal-after-five-ensures.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-refusal-after-five-ensures.json",
+        "sha256": "b8261ad586d41eac8be6fefb91861250f4a0b091a59dc147454021021caa06b2"
+      }
+    },
+    {
+      "caseId": "cn-n-support-two-processes",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-two-processes.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-two-processes.json",
+        "sha256": "527015b1131dc166aba7a677f48a617a503e1b958ec7659adf7738050cbc2c04"
+      }
+    },
+    {
+      "caseId": "cn-n-support-wrong-parent",
+      "row": "PS-H10",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-support-wrong-parent.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-support-wrong-parent.json",
+        "sha256": "1ab4862b54573362389ca53fc272180d606b1f47bb821e093c83174f24c94f22"
+      }
+    },
+    {
+      "caseId": "cn-n-place-grid-deleted-association",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-place-grid-deleted-association.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-place-grid-deleted-association.json",
+        "sha256": "cbd9083e98e63304daa0937a18b6b4789f1bcbdcf6379c17e08c9ba45d93ce75"
+      }
+    },
+    {
+      "caseId": "cn-n-place-grid-inserted-association",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-place-grid-inserted-association.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-place-grid-inserted-association.json",
+        "sha256": "18c2e1706f90ee0319abfba8faacf160d3eae5bb17841f57275ecdd9e0c5b8e9"
+      }
+    },
+    {
+      "caseId": "cn-sort-placements",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-sort-placements.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-sort-placements.json",
+        "sha256": "0145bc9b19388289eb8cd08bf8131754fdc7529414abf0f792bbbe5be621ac7c"
+      }
+    },
+    {
+      "caseId": "cn-n-placement-intent-di-only",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-placement-intent-di-only.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-placement-intent-di-only.json",
+        "sha256": "b74bc1895f88d02a3695f3af01b9949d71fdb381dcb28d8712750b50fee4a093"
+      }
+    },
+    {
+      "caseId": "cn-n-placement-intent-unknown",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-placement-intent-unknown.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-placement-intent-unknown.json",
+        "sha256": "6f96584436fdd74418277497169c394ff8ed8c835ce841c77a9b1cdd7dea0db2"
+      }
+    },
+    {
+      "caseId": "cn-plan-remove-empty-support",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-plan-remove-empty-support.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-plan-remove-empty-support.json",
+        "sha256": "cb946b9eba47f1023832d59a03bd2547d1bc05cbefecf2414decd3dc2785742d"
+      }
+    },
+    {
+      "caseId": "cn-n-deleted-support-stays-absent",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-deleted-support-stays-absent.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-deleted-support-stays-absent.json",
+        "sha256": "4aee9b5ea9d18c462cde885af403f94080621ed779a97da7e3c9b6e6ee5640bc"
+      }
+    },
+    {
+      "caseId": "cn-n-recreate-after-remap",
+      "row": "PS-H11",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-recreate-after-remap.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-recreate-after-remap.json",
+        "sha256": "583b98607d98ab3c03271d6c24ee2e6d7840904205f460ae58a419bafae8d1e5"
+      }
+    },
+    {
+      "caseId": "cn-n-reference-region-edit",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-reference-region-edit.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-reference-region-edit.json",
+        "sha256": "bc8dc1a4f416d9a5ff2ad323bb8be6426d776d9cc2146a0e599647f07cc5e197"
+      }
+    },
+    {
+      "caseId": "cn-n-external-membership-edit",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-external-membership-edit.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-external-membership-edit.json",
+        "sha256": "a26589fa9eb0ff0731e5cebc31f407f48e203aa511b5b6dbb5bb91d6b607b6ef"
+      }
+    },
+    {
+      "caseId": "cn-n-recreate-after-remap-edit",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-recreate-after-remap-edit.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-recreate-after-remap-edit.json",
+        "sha256": "191b0ee0ccb4421985763a8d5117333016abbe36421770d4c2664120df72c4c3"
+      }
+    },
+    {
+      "caseId": "cn-n-relation-direction-conflict",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-relation-direction-conflict.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-relation-direction-conflict.json",
+        "sha256": "114a611804bb934b9331e3b63ea7ac317e74ba6d7137c2fa8488e88d3a91595a"
+      }
+    },
+    {
+      "caseId": "cn-n-ensure-conflicting-definition",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-ensure-conflicting-definition.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-ensure-conflicting-definition.json",
+        "sha256": "34836ced5f0820ae95d351bda4673fadcd7f3419c612d4f458e883dabf8e7815"
+      }
+    },
+    {
+      "caseId": "cn-n-not-fixed",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-not-fixed.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-not-fixed.json",
+        "sha256": "0f57d358e95bfb0229f6b0c2067aae240354cb8c0c6851d1c32485c62fac4335"
+      }
+    },
+    {
+      "caseId": "cn-n-reserved-lane-renamed",
+      "row": "PS-H12",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-reserved-lane-renamed.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-reserved-lane-renamed.json",
+        "sha256": "617a3423e037f9d6afddc04ddeedc99cfa9b50c710d12cccb4591362eb1ebac0"
+      }
+    },
+    {
+      "caseId": "cn-remap-owner",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-remap-owner.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-remap-owner.json",
+        "sha256": "7c5f4ce8b9e647b9d8bef78a054970f5a92a6c3a93fe6cfeca19b36939c78212"
+      }
+    },
+    {
+      "caseId": "cn-remap-gated",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-remap-gated.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-remap-gated.json",
+        "sha256": "a47a7da62767f568059cb253bfc37d89238825a651404cdbaee54c40aaee97e6"
+      }
+    },
+    {
+      "caseId": "cn-remap-unknown-source",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-remap-unknown-source.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-remap-unknown-source.json",
+        "sha256": "5162fa3c8f83f2fad6ce922d5136ad73c55ad2cc8afcba806798335c370edf65"
+      }
+    },
+    {
+      "caseId": "cn-remap-target-grammar",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-remap-target-grammar.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-remap-target-grammar.json",
+        "sha256": "b12de715981409cbbdcf2c2f6ef6118ca0bc9be33e2760459a22b05864aa5781"
+      }
+    },
+    {
+      "caseId": "cn-propose-recovery-partial-provenance",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-propose-recovery-partial-provenance.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-propose-recovery-partial-provenance.json",
+        "sha256": "df3c054a54713d9795b68f31dfbab0c941c875c0d53b27ed60bd8d509bffb179"
+      }
+    },
+    {
+      "caseId": "cn-propose-recovery-with-provenance",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-propose-recovery-with-provenance.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-propose-recovery-with-provenance.json",
+        "sha256": "debf90fa3a9087483b7e6efcc281c3f531bf09116b1a4bd0f835460d9e08d6a2"
+      }
+    },
+    {
+      "caseId": "cn-propose-recovery-without-provenance",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-propose-recovery-without-provenance.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-propose-recovery-without-provenance.json",
+        "sha256": "50547ae3b6fa762f4794e510ed086e5642354ddedadf7cc971d3b83b3f8007da"
+      }
+    },
+    {
+      "caseId": "cn-propose-black-box-pool",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-propose-black-box-pool.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-propose-black-box-pool.json",
+        "sha256": "bc25e91dbe3f52a1d36c7bae384a23ea51d7990677597a26682874c70e953ebc"
+      }
+    },
+    {
+      "caseId": "cn-bind-supports-conflict",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-bind-supports-conflict.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-bind-supports-conflict.json",
+        "sha256": "b93bc52f7b739a6d9a1edf885cbf152fba235026ca13a6dfe1ad9b0bdc74ffcc"
+      }
+    },
+    {
+      "caseId": "cn-bind-supports-explicit-selection",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-bind-supports-explicit-selection.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-bind-supports-explicit-selection.json",
+        "sha256": "ecc6866535548e79f00df8e37e628ed72edabed4f36ccf56c732c5186bf81e11"
+      }
+    },
+    {
+      "caseId": "cn-bind-supports-gated",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-bind-supports-gated.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-bind-supports-gated.json",
+        "sha256": "de9cb6d6d64e837e66a58b614eb896a85d3ab1fa958e77520b700a681d37c999"
+      }
+    },
+    {
+      "caseId": "cn-n-after-explicit-selection",
+      "row": "PS-H13",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-after-explicit-selection.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-after-explicit-selection.json",
+        "sha256": "461b79f09b313d394403eed8443095d712f12da552f86eb5d300a399973487b1"
+      }
+    },
+    {
+      "caseId": "cn-compile-create-identity-mismatch",
+      "row": "PS-H14",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-compile-create-identity-mismatch.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-compile-create-identity-mismatch.json",
+        "sha256": "29c0ea04bbcd27e69d12a980d7780445148745f1ef567b599b9c36ba5d5ddda4"
+      }
+    },
+    {
+      "caseId": "cn-compile-ensure-missing-binding-write",
+      "row": "PS-H14",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-compile-ensure-missing-binding-write.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-compile-ensure-missing-binding-write.json",
+        "sha256": "e741482a798e91fafdc75acc259f2b55e447f4954cfdb136be1436d84bfaa513"
+      }
+    },
+    {
+      "caseId": "cn-compile-ensure-non-support-type",
+      "row": "PS-H14",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-compile-ensure-non-support-type.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-compile-ensure-non-support-type.json",
+        "sha256": "1d905c1d14d98ca4169e0f1984b08a03b5d41592f0be1641032aa9a29541dcba"
+      }
+    },
+    {
+      "caseId": "cn-compile-port-without-authority",
+      "row": "PS-H14",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-compile-port-without-authority.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-compile-port-without-authority.json",
+        "sha256": "ef205d7c5fcbe97334a9e8e8a1815f952d4407f7d03c4251936582914260ef11"
+      }
+    },
+    {
+      "caseId": "cn-compile-support-profile",
+      "row": "PS-H14",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-compile-support-profile.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-compile-support-profile.json",
+        "sha256": "395dcfa98b0d35dadc13d0690b358a89c6f1e895b391c9829b14e4509858e0a1"
+      }
+    },
+    {
+      "caseId": "cn-compile-variants",
+      "row": "PS-H14",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-compile-variants.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-compile-variants.json",
+        "sha256": "cdcea7d4cd15ebc10e790b345603606903cee9a91e8c891a5ad069d24fa50fc7"
+      }
+    },
+    {
+      "caseId": "cn-c-empty-called-element",
+      "row": "PS-H15",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-empty-called-element.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-empty-called-element.json",
+        "sha256": "010f355db4fbc16e4d1a0bc0ac042f8d072dac6d87d6111fd0a33d137c081df7"
+      }
+    },
+    {
+      "caseId": "cn-c-second-pass-refused",
+      "row": "PS-H15",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-second-pass-refused.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-second-pass-refused.json",
+        "sha256": "b906b7acd9fcd29d6192d2ad6ad20bac8ce0975a55bd0af30de49e8bc5e2c7ae"
+      }
+    },
+    {
+      "caseId": "cn-c-wrong-type-reference",
+      "row": "PS-H15",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-c-wrong-type-reference.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-c-wrong-type-reference.json",
+        "sha256": "52248b38ddc3e6068eac85b9ebea1b10c9df7ad4b3e057f7ee78aed9a8038fb8"
+      }
+    },
+    {
+      "caseId": "cn-n-compat-before-integrity",
+      "row": "PS-H15",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-compat-before-integrity.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-compat-before-integrity.json",
+        "sha256": "7764ca39610a7e5ae0b5b09f259389e1b42d790881fb9eb2b59191a38fb897b3"
+      }
+    },
+    {
+      "caseId": "cn-n-dangling-reference",
+      "row": "PS-H15",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-dangling-reference.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-dangling-reference.json",
+        "sha256": "4032592cb2005362ba4f6a6144f921fabafe3106fedc5aea89e832869bb08299"
+      }
+    },
+    {
+      "caseId": "cn-n-second-pass-refused",
+      "row": "PS-H15",
+      "source": {
+        "path": "tests/profile_cn/expected/parity/cases/cn-n-second-pass-refused.json",
+        "vendored": "lot3-cn/expectations/vendor/py/parity/cases/cn-n-second-pass-refused.json",
+        "sha256": "2e22b736117a274aee724c61113577677a2ef8a85acd7882a73476e13638abc7"
+      }
+    }
+  ],
+  "aliases": [
+    {
+      "caseId": "cn-n-place-neutral",
+      "aliasOf": "l3-n-place-neutral",
+      "sha256": "c1a0dbb245d2714a1dba73a7c3c3e3ca58fd656c734dc975adfc1c5cb593b094"
+    },
+    {
+      "caseId": "cn-n-place-grid-shared-anchor",
+      "aliasOf": "l3-n-place-grid-shared-anchor",
+      "sha256": "f85172c4d14d905566921bd90078dd1e6adc79503404e9412a550eafc9bdc3ee"
+    }
+  ]
+}

@@ -1,0 +1,2449 @@
+{
+  "format": "block-b-lot3-reseal/1",
+  "lot": "block B lot 3 (C/N, command authority and early history proof)",
+  "reviews": [
+    "independent seal review of the first lot-3 seal (REWORK)",
+    "JS/Python block B seal harmonization decisions of 2026-10-18"
+  ],
+  "previous": {
+    "commit": "39012e25b3527d99ed4f60a0864033ad8f99829b",
+    "seal": {
+      "bytes": 24012,
+      "sha256": "986190925108a03e1996342638aaf9f3bcef9d37ddd6f3c6c5ae6246b0ab2904"
+    },
+    "files": [
+      {
+        "path": "docs/design/block-b-lot3-expectations.md",
+        "bytes": 13366,
+        "sha256": "e8c94477d1fdc917bcb706742eaef7cc893d698bbba21bc4a2e60cc4f64f2931"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/README.md",
+        "bytes": 46459,
+        "sha256": "75723855e0fdceebcddf88e75d35afd5cbcef3bbf7cb38d034bfbbe7be31767f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+        "bytes": 197339,
+        "sha256": "04004002d83eb4c6b013f9f30ec12386b78991e479a49f499a23905c41e21dc4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/author/digests.json",
+        "bytes": 52907,
+        "sha256": "bba55c222fdef349762331f00510df6697df47bbc5cda5cf549674d473edb12e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-dangling-call.json",
+        "bytes": 6763,
+        "sha256": "a4870e41cadafcf26b638ddbdcf4419f8a6fb4a32e4cafde8f68bbfc2d6e7f87"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-empty-process.json",
+        "bytes": 4459,
+        "sha256": "0630a77354c848f68d6e8451d55c06311d307c2a84f08891ed371ca3bded667f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-direction.json",
+        "bytes": 16740,
+        "sha256": "7849dd084f08635d10d4d637dbf53cda1331f9ce12edb2dfe9c1d63ec5163443"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-phase-start.json",
+        "bytes": 15581,
+        "sha256": "2514ec122f149cdf7f626e996883797ecc44816469613c262dbb625b977d0550"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-stale-topology.json",
+        "bytes": 16610,
+        "sha256": "d7cb992ddf5f17ef1585de262736e3944f2dc8bfcaa280155c22198cb3715de2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-input-ports.json",
+        "bytes": 11397,
+        "sha256": "fc60eddf6e4395970c09aaddcb4b80eed80d4342780cf4bcdd7b3fbaeefc0e6d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-isexecutable-grid.json",
+        "bytes": 4746,
+        "sha256": "1e632940b514b3fb1374755d68c70d88f9f5c3e4391c1889453f29b3971e8a72"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-isexecutable-neutral.json",
+        "bytes": 4731,
+        "sha256": "765f56fd097d6e4fba28e97326dcec4a4e7b87c845fe2eb13b35ffcf6debec25"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-item-backing.json",
+        "bytes": 7063,
+        "sha256": "d1fe8feb0ed372a1c587bdcf0ffeb5b3a94dc25a528ec1b225c73e11c4cc2e49"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-namespace-defaults.json",
+        "bytes": 4596,
+        "sha256": "5cf113de64d93c64a61da3f58fcc87ffce8b344e515ed959c259faa9972faea0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-preserve.json",
+        "bytes": 12796,
+        "sha256": "8065804c6174997545802e61a28b7c431ed948c4c63aa9a7efba2d33bd6acd36"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-default.json",
+        "bytes": 7888,
+        "sha256": "98700a7144116a2e55fb4652d386de8c1d9f3ef7d871583731d27e4ea334c419"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-several-covered.json",
+        "bytes": 7756,
+        "sha256": "809c2024f97179aa2ba612123ffe0a457180f55a5303e58af9ece3fc611a58ab"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-several-uncovered.json",
+        "bytes": 7484,
+        "sha256": "c3b0735a83f57d8c4645298e0b10e252972471a6035fd0c965936401d7a76429"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-single-uncovered.json",
+        "bytes": 7673,
+        "sha256": "e384f1a13076d9dffe73e16a84918a22d75e91190d912528c48784e20f983dcc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-topology.json",
+        "bytes": 9985,
+        "sha256": "8c03b8ff66ec1429f5a28529bfa79619274eecfb46000498d854623dfec1d00a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-write-coalesce.json",
+        "bytes": 4490,
+        "sha256": "2db59fc25cf03f9f1fcef664cb55ebd84140137bda2a08999691ddb84431e8d0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-write-conflict.json",
+        "bytes": 4154,
+        "sha256": "034aeb4980e80b9fd0f2ee106072eb2957eb68fe214c8a31301ddf18f39e60bc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-ambiguous.json",
+        "bytes": 5515,
+        "sha256": "7478df0780d4ea5ebd13ba7f5cd4da4075c19a6094debfd8e777db6df6d92f57"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-conflict-empty.json",
+        "bytes": 5166,
+        "sha256": "4efee08e4bfee6dc4be551d7520462d336735d18ff8e3b6b5dc00648e04a2078"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-conflict.json",
+        "bytes": 5352,
+        "sha256": "a2d5a3ce357cfe905f2108f1c3daa7cc0b570789530fb03ba13a47add93a4db8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-duplicate.json",
+        "bytes": 5342,
+        "sha256": "f383ab85e13115bf0426a1112a4b976cd5332bf967e54165af3684a33ed944bb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-external-valid.json",
+        "bytes": 5344,
+        "sha256": "7fd7e20f0e739e416641ad78c200f19d026589601fb6ad10e4e0c5a2113e0c6f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-internal.json",
+        "bytes": 4606,
+        "sha256": "d3e342a5bc751002a49be90c1ada00943a10abbf3ae117df4466af79d7f562ca"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-marker-invalid.json",
+        "bytes": 5145,
+        "sha256": "94fd48b36cf2ae74164c5742820107c9463d0b97dafbd2c09c81239d83f4d29d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-source-doc-not-marker.json",
+        "bytes": 5131,
+        "sha256": "0e0c737a6c9b57c79d1773df4a1392e5481a37bfd3fd74c8fd5af5959005ec8c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-empty-accept.json",
+        "bytes": 4913,
+        "sha256": "423dc287ea3257a6319315193619b993e9e2c315db11a0eada1e5fe430313ee8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-empty-draft.json",
+        "bytes": 4909,
+        "sha256": "c8a45e0dce8740e0f4e32241094253e6998b8a60ef3a22632820b2f02bccd08b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-required-accept.json",
+        "bytes": 4886,
+        "sha256": "87218205ada89ddfb501bf508a005a48480cd123ad99d548e5dc81495327c651"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-required-draft.json",
+        "bytes": 4882,
+        "sha256": "ffd21bd1b9b3dbc028f08a5f6bd965cbc83a4d0d70689fb88c30cab0b662a40f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-type.json",
+        "bytes": 5052,
+        "sha256": "77f01a2a7a0511a6fdb5b0d1657122ca9b160fb48d501e4a835d0df6a99fb58a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-after-n.json",
+        "bytes": 21914,
+        "sha256": "6a3a4acc6be6aeefbe2aba6e49be1dc1b9138c46cf96e439c1a57cacabe94f03"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-gateways.json",
+        "bytes": 16059,
+        "sha256": "2442958e8be3ceea9c1d8e169e1eecf655edd17f5164ce69203e55cc810b0722"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-on-n-input.json",
+        "bytes": 17111,
+        "sha256": "0e650b2e3af7f08b34c2fa707b4de495ce1a499db2de5ef2c75e522605c11f01"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-ports.json",
+        "bytes": 10712,
+        "sha256": "5443f172bd19c074dca967d9fd5ed4776962c5d15e313c257f924ee02cc641b2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-root-first.json",
+        "bytes": 6675,
+        "sha256": "bbb97cd33084e8ab9872157d46a88c980fed4075caaf64745bcf0e0927a7c196"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-sets-default.json",
+        "bytes": 7179,
+        "sha256": "fba3da3af088bdcb5e32cbf848d8bf25a19976ead17aca2fc6ed16fe22cabf8c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-timers.json",
+        "bytes": 7311,
+        "sha256": "b1c5a9e8160c0408296f44b6b950712db3665fbfb56056c6928d82b380d10290"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-topology.json",
+        "bytes": 9283,
+        "sha256": "82d3cdde5224f22a9432c04ff18e87ffb5b40aa30b583139b166056f7699891b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-direction-reversal.json",
+        "bytes": 19761,
+        "sha256": "2a486866e35d0eac65d38d525a23a4486a1d441b70b9bd8ee7683034c8e3a61f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-full.json",
+        "bytes": 23810,
+        "sha256": "9b1a595af07d4e9b988f74df56210a2f015791c16c539b54eadf9c8b3500c17a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-imported-supports.json",
+        "bytes": 15257,
+        "sha256": "0ae907b4fbef8e251d7a88142f5eb246d8e18423deea68213bef1815b8e14ce8"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-two-processes.json",
+        "bytes": 18857,
+        "sha256": "e7dba476abdc2df8b0f083b1b964b973f417a45d00f4e8f9bf2d3de061b55df4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-unicode-names.json",
+        "bytes": 12264,
+        "sha256": "ea00804bce481fd04038b518cb21cd9efe0b4c79c05ef12d88b77b4aa5245bfa"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-collision-computed.json",
+        "bytes": 5053,
+        "sha256": "8a713e2ef1390afc9376fee8e7d866bf5625c78d2a72cf1e575bed08003602c9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-duplicate-source.json",
+        "bytes": 5137,
+        "sha256": "4c214a218dbd027eefbf2957412d4e08a466cc5cda8b8acc7f8d0b8238892ede"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-identical-siblings.json",
+        "bytes": 7537,
+        "sha256": "64f8e487511da2b4a37f68fdd39783f47b1aef7d88d5d6d46d88ce5c50e9dfa9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-rename-stable.json",
+        "bytes": 6542,
+        "sha256": "9144133dc57c7b8a88bc8727920ba3dda221e6ed428a4af906b53109547856c3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-reorder-stable.json",
+        "bytes": 6525,
+        "sha256": "9621582e67fd6ed99e4b7017790576bd3f4b0901736808e918bfcc3a9c0386e4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-root-first.json",
+        "bytes": 8458,
+        "sha256": "a53c8c996054cb0db7f0e21dfcbeb4c3d9601128f92b43e1e572621d46635ee3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-stable-vectors.json",
+        "bytes": 1695,
+        "sha256": "9a859746a8d8b6244604323792871e16bc9ec49f42b226d2c423b663f77f0a55"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-timer-reorder.json",
+        "bytes": 7316,
+        "sha256": "d40307f295fa33803c7e7d27f578071bcad4e3592b9b647a923af602d5479575"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-timer-siblings.json",
+        "bytes": 8689,
+        "sha256": "ee5d5ccd2a4279b001a49c810c8ef0844682a49e9019b363e6c8b09a1bb28de6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-two-owners.json",
+        "bytes": 6961,
+        "sha256": "205e3b219e0433cad116a66bbf5737cb6a4df1a44d8505a42a63fd8aef86ea80"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-unicode-names.json",
+        "bytes": 10836,
+        "sha256": "fdd3694ffe80ec5ba8692329b819a616ecfb7b3a1b30d4dd2c99e15736d3c477"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-projection-out-of-base.json",
+        "bytes": 5162,
+        "sha256": "1857ea721acb1cbc1aefb4ac5a9adb5db4074f6afbdc5cff6f0ec44efe38180c"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-collision.json",
+        "bytes": 2495,
+        "sha256": "0608a814b98e91ee6b34a05eb6626489de6d5625877107249a5c501c1e315abe"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-dangling.json",
+        "bytes": 2416,
+        "sha256": "a40f12b540953057900f8395bf9039d9174293fd28004fd433114e13379abfe9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-duplicate-result.json",
+        "bytes": 2621,
+        "sha256": "7c3654e835d7f6d75ede3744f0df0ff3d1cfe7bcc1601d61f6fedc27fadafc26"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-nonsubset-id.json",
+        "bytes": 4531,
+        "sha256": "3d95f6ab15f8691a0e15250d694e8b9b5d5f90eb639953b032db068f40af555b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-opaque-attested.json",
+        "bytes": 4570,
+        "sha256": "300460ab5c50ecb3aa6647de32d493eef4e24bdd2a281d31634eb81409f6d1d4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-opaque.json",
+        "bytes": 2420,
+        "sha256": "13bc8dc26e91df4895f2412e6b2ba4440e0e415364c4da4290d34c930b2c8720"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-swap.json",
+        "bytes": 6207,
+        "sha256": "f8a569b20346f1fbcd8fc264813af854cdb05602e351051909801d8c44fd4646"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-total.json",
+        "bytes": 10714,
+        "sha256": "acd5a07c17995a23a56807decb621487a7d9730ae19307bcbf6a540ff9adc107"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-complete-links-accept.json",
+        "bytes": 8439,
+        "sha256": "93ab752b9fc54dc8a289e7a673d2e4612a93ea9d525c6ca82e5b88ef454567ef"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-missing-links-accept.json",
+        "bytes": 8876,
+        "sha256": "65a5f6cbac9805e125e0c282f9ddcfaa579ab39f7e1baf2af4db3306c65a496d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-missing-links-draft.json",
+        "bytes": 8869,
+        "sha256": "591f88671938d8f7377d8cb1e0cf2737ce4b2b8c963e7934612fbf30cdb3c3fc"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-wrong-direction-accept.json",
+        "bytes": 9473,
+        "sha256": "1cbb55b4847ca5a3625f2358ef935579aec3306723ffc607ec62fd4581b43b5a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-full-js-py-js.json",
+        "bytes": 19377,
+        "sha256": "1d34e2bff3efdc3ed948a7af580563574756b216ac937e234da39decfecab3d6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-full-py-js-py.json",
+        "bytes": 19389,
+        "sha256": "c1d7e9594222e33f43447419ab640ec60066efa925aa83d062c5f8c155404220"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-two-processes-js-py-js.json",
+        "bytes": 16184,
+        "sha256": "8a3df911e84a9e7d56aa42ec0005323672544a23bf98fdcab982a204aa9c95f2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-two-processes-py-js-py.json",
+        "bytes": 16196,
+        "sha256": "6a6bf5ebdefb267a501a25ff54d2458be78b37322afa0fb209fb9592fbb8da25"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-unicode-names-js-py-js.json",
+        "bytes": 10718,
+        "sha256": "44124d1e7dd70d931fcbe34b20c0d850d795b52ffd18eda2e65a2354268f06b0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-unicode-names-py-js-py.json",
+        "bytes": 10730,
+        "sha256": "13d377cf9c0e00ae9a35decc43623519ef746fafc377d30f4e3048e0cb8543ab"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-band-process-ref.json",
+        "bytes": 13782,
+        "sha256": "a16103399e51e58ccb7b3e4cd633f6a9c882dabff22f4a03f40cd6bfcc40bc78"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-duplicate-role.json",
+        "bytes": 13990,
+        "sha256": "fb015cc4188e0d3e42023302b79971717ec9b0424dd8f7d3343f36b1cf02be49"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-wrong-parent.json",
+        "bytes": 14078,
+        "sha256": "8c887b704e7788c648c615b92edc034083fe64fadffed9e8d525942a593ceed2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-wrong-type.json",
+        "bytes": 13668,
+        "sha256": "87813f6f563dc6cc795fe671d3af2c1a6449cdc7f4464b8f66ba56a2c1904f57"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-black-box-pool-retained.json",
+        "bytes": 13316,
+        "sha256": "b723c89e51bb6880d6e72b2909bedfb27395d32109449f589894bad134f51b99"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-business-lane-refusal.json",
+        "bytes": 13793,
+        "sha256": "b8044197efc34609a25e4bbae1660f7c48a78bd602309e0f7ecbc421cd94cc59"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-direction-reversal.json",
+        "bytes": 22996,
+        "sha256": "e51f3762052fbbabd70034d289ab441961f094d225fc8e048f4cfa99a701bd2a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-empty-process.json",
+        "bytes": 6703,
+        "sha256": "31fca8361a495173093239c1b981ffcc032ac01d15caa403dba8fc3a09bf8322"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-full.json",
+        "bytes": 24702,
+        "sha256": "7fcc6c9d5d015b3064527acac1386326101e774dc5cf1487e00c693313f98057"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-hash-shaped-occupant.json",
+        "bytes": 8730,
+        "sha256": "9813add0f3273b394491403672e79d6cf54a39f9556f31c42228094b6989a8c0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-imported-supports.json",
+        "bytes": 15468,
+        "sha256": "c14ed98a24663cb51992bcedabd8d1e8f848632c9a1dee38873b1623788cbfe4"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-incomplete-call-untouched.json",
+        "bytes": 10471,
+        "sha256": "e91553f1dffb52b671f237519c71a87d62aba6a2b4e5103e4c4873f097084370"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-inserted-link.json",
+        "bytes": 25324,
+        "sha256": "65a688ef4477351d3dae8be9e9e1f82ff3ad71370dc22375fa11d5ec9504bbad"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-internal-call-untouched.json",
+        "bytes": 12588,
+        "sha256": "bcd859f99439bd3745644ed9185f350482d2449d8975c0dbd78b5c1ed20833a6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-legacy-marker-ignored.json",
+        "bytes": 11351,
+        "sha256": "45c62c100f9986eecbdc6b92cb4bd5c2e558145f1f6c06a4216462f3b43dcb94"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-roles-and-empty-support.json",
+        "bytes": 13560,
+        "sha256": "5e37a26e4c490a2c453968ec6a5d6ad13d43f4138807610cecd12aba1991373b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-shared-item-anchor.json",
+        "bytes": 15771,
+        "sha256": "37e41f403894b1abe0e1ae3fc50b628f420a42508cba3d0f7ca0af088ce697f2"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-two-processes.json",
+        "bytes": 19942,
+        "sha256": "4b4c61568567840cb2c3f033f82983f743ba620671fbfcf13cea2b8bcda791fb"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-unicode-names.json",
+        "bytes": 12804,
+        "sha256": "cce96d5e4f3715860b919728b932c14d71604327f2f4fe6c014199620256b7a6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-cannot-reach-end-accept.json",
+        "bytes": 7294,
+        "sha256": "71cc3d47f5d5b6567dbf3cbdd94ffd73f4ec910ef4f53937f367051dd71bbec0"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-cross-container-flow-accept.json",
+        "bytes": 7556,
+        "sha256": "4627f23b97cb8214836d6bad0f495795ed314dc7680cdfeca3dcb5dd1310f3ab"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-disconnected-task-accept.json",
+        "bytes": 7416,
+        "sha256": "6cbe608d62c48ff069579837bd7da0134450e9a5bceccc8bb7d03bbe324c0460"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-disconnected-task-draft.json",
+        "bytes": 7409,
+        "sha256": "b660d1fe6e5fccb1891f1fb69e50b6ba87952a6e9b07c73aac3c7675eed14863"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-gateway-without-incoming-accept.json",
+        "bytes": 7061,
+        "sha256": "1378d19114007686fe5781914d06790b35ce77ece05eb5d81a3a9dc3c03a3716"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-incomplete-call-not-exempt-accept.json",
+        "bytes": 8186,
+        "sha256": "2d08faf458ee8226242b41616f9869f26386b0cddae81a6b7c3be916a2e3920f"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-unlinked-external-not-exempt-accept.json",
+        "bytes": 7704,
+        "sha256": "302d5cc30e5409c6e737edaa38332b57e3df1c227e9f27fe16cd8e0c83988e37"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-unreachable-component-accept.json",
+        "bytes": 7713,
+        "sha256": "5f3f85d9f632febec6644b2d1af78716a667e83e5f79eb457daf7fd7c4ebf29a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-downstream-branch-accept.json",
+        "bytes": 7867,
+        "sha256": "21cd960f168b7ebe31753a1af70effa6c819c2bceb856a2c649ed6bd6f8ce931"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-no-branch-accept.json",
+        "bytes": 6416,
+        "sha256": "00c6921ecb1d2fb7d462f3a67c8ae2206ecd2c50a6d5988ab69362f90d255e85"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-no-branch-draft.json",
+        "bytes": 6412,
+        "sha256": "8465ac8740914795fd001e86443fc533ccadf9f035d9b87ffea268e29b74866b"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-normalize-no-invention.json",
+        "bytes": 15671,
+        "sha256": "ccac6771590f92f0d97dfdf2c0b2bac21acf94b4c25ed688b3642f00d6fe71d6"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-parallel-only-accept.json",
+        "bytes": 8406,
+        "sha256": "3efc110f8ab69111c416bcd04c7ff95ab315d60ec88dfa3dcc283066d3733a8d"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-single-trigger-accept.json",
+        "bytes": 5185,
+        "sha256": "970e531d045f9c7543d135a78eabddfcf75820501cb8e64ab9a81c179ee76266"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-batch-one-entry.json",
+        "bytes": 23763,
+        "sha256": "8d7c9cea90d735e8720dcab229b79e12fb5340ee7febf25a8fa02564efd5fca9"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancelled.json",
+        "bytes": 10238,
+        "sha256": "50217ea68649259df4ac4f1f03078b0538e0d4e76d750f171e32d2f63ff2e0cd"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-corrected-noop.json",
+        "bytes": 17166,
+        "sha256": "d49818517dc33dbe01097fc013b33256a1b69bec12063144ec49fc2b19812c84"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-di-only-move.json",
+        "bytes": 33783,
+        "sha256": "54baf542bb503a1561c096bf4a9266a30148885563aba9d3ea79a2159b054847"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-no-leak.json",
+        "bytes": 15289,
+        "sha256": "febce02627c8d590a7086b50e27cb378a60d77c36f235de2a8595ab2af15c9fe"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-incremental-draft.json",
+        "bytes": 47715,
+        "sha256": "d25df3125423f4b7092d4ac7b6185484b30b3d3e057d149ac96102202e6eb640"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-explicit-selection.json",
+        "bytes": 32617,
+        "sha256": "e81ad8edb0589039ef39710507736814d995363b2625c2e6c36d22dab16bf849"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-selection-required.json",
+        "bytes": 16717,
+        "sha256": "c1e8d4ac59be27e0c6b9f8a780079ddd27c03173b51cd2c9a41bab19494dec14"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-reentrant-refused.json",
+        "bytes": 13839,
+        "sha256": "ca443e5f47fcc3097ac2e51638c3b66e7d87908ca2e31b00ccc91b1c06d49236"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-refusal-preserves.json",
+        "bytes": 17131,
+        "sha256": "32eea2b921a955ad0294bee44bfbe11750b2e9e9009b4e4c968793998ba7fb59"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/index.json",
+        "bytes": 112614,
+        "sha256": "1a95bda8fd595f928115a523966b548cac04656477c429d5465134e25fe31e61"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/manifest.json",
+        "bytes": 27096,
+        "sha256": "2668dc58c753975c4f93fdd2079c8ac75e6f80c0eefd348d0db1ac69eeab1dec"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-base.json",
+        "bytes": 24239,
+        "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-coalesce.json",
+        "bytes": 246014,
+        "sha256": "d30d2e0e2098ad7ec1cff33a44953c76f007a4c803e637d0fba05eec9a1ef442"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-conflict.json",
+        "bytes": 246017,
+        "sha256": "b9a0a146a196737d477b27818c3ce78d4c2a272fa9da2cf13a2c0fed9a923810"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+        "bytes": 13520,
+        "sha256": "818e1b26d73426cd4c55b017286f1e0697577a34beb7a88bd870cc677a67ae6e"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-stale.json",
+        "bytes": 244235,
+        "sha256": "d9475788b14d922be92c54f083b7f2709f4332febafe74c27f2b2bcd1ac9d6d3"
+      },
+      {
+        "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn.json",
+        "bytes": 245261,
+        "sha256": "4a7e100e13980cdd1e992d0d1b73d692a15ffa8e488ae82872406fb74b83ee1b"
+      },
+      {
+        "path": "tests/profile-lot3-admission.test.mjs",
+        "bytes": 1809,
+        "sha256": "7d28f7b8ae037a6ac5c8f7b230ecc77cd09b54c688ff59b1aa819eff91c0e35b"
+      },
+      {
+        "path": "tests/profile-lot3-golden-independence.test.mjs",
+        "bytes": 10353,
+        "sha256": "59e98fd7debcaeafb6237d2b28e540b6eba6f3f7d24e0660de5eb34df438d699"
+      }
+    ]
+  },
+  "current": {
+    "seal": {
+      "bytes": 36537,
+      "sha256": "6b807ee2c219f614d0f434cb8568c8d15acc0cc425a11bfdaa5cf027d86e8b06"
+    }
+  },
+  "supersedesFiles": [
+    {
+      "path": "docs/design/block-b-lot3-expectations.md",
+      "old": {
+        "bytes": 13366,
+        "sha256": "e8c94477d1fdc917bcb706742eaef7cc893d698bbba21bc4a2e60cc4f64f2931"
+      },
+      "new": {
+        "bytes": 18527,
+        "sha256": "b1fbcb1baa24a4c000a5938a2e97328c79aea693a8fe5111fec6838adb78c05d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/README.md",
+      "old": {
+        "bytes": 46459,
+        "sha256": "75723855e0fdceebcddf88e75d35afd5cbcef3bbf7cb38d034bfbbe7be31767f"
+      },
+      "new": {
+        "bytes": 71998,
+        "sha256": "53a0df856154753023161d4fb0f94d9c9796bf671598fe076fa8b65606e03d89"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+      "old": {
+        "bytes": 197339,
+        "sha256": "04004002d83eb4c6b013f9f30ec12386b78991e479a49f499a23905c41e21dc4"
+      },
+      "new": {
+        "bytes": 306365,
+        "sha256": "1ba360beb6c9b14ca8bd6fdf4d1ec05b41459355fca8f329de38c503d94d7c30"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/author/digests.json",
+      "old": {
+        "bytes": 52907,
+        "sha256": "bba55c222fdef349762331f00510df6697df47bbc5cda5cf549674d473edb12e"
+      },
+      "new": {
+        "bytes": 67934,
+        "sha256": "a6b13f11aac787912942c34594d9f45c885bb4678ad3bce7c4eb9369165417bd"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-dangling-call.json",
+      "old": {
+        "bytes": 6763,
+        "sha256": "a4870e41cadafcf26b638ddbdcf4419f8a6fb4a32e4cafde8f68bbfc2d6e7f87"
+      },
+      "new": {
+        "bytes": 7813,
+        "sha256": "4bb9d5b9aa140fd7ddfceecbd76f254572c7c4721e677d6ddd054a7d2963b6c5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-empty-process.json",
+      "old": {
+        "bytes": 4459,
+        "sha256": "0630a77354c848f68d6e8451d55c06311d307c2a84f08891ed371ca3bded667f"
+      },
+      "new": {
+        "bytes": 8285,
+        "sha256": "025fdcfb34528bc1a7275a2a9b55cd737ce25aecd485e93f03d07c805fe3a91c"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-direction.json",
+      "old": {
+        "bytes": 16740,
+        "sha256": "7849dd084f08635d10d4d637dbf53cda1331f9ce12edb2dfe9c1d63ec5163443"
+      },
+      "new": {
+        "bytes": 27743,
+        "sha256": "80d58adec503fd64c372946aa658a89c1c5f7165093f315ed4e17b27b0dac429"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-phase-start.json",
+      "old": {
+        "bytes": 15581,
+        "sha256": "2514ec122f149cdf7f626e996883797ecc44816469613c262dbb625b977d0550"
+      },
+      "new": {
+        "bytes": 16637,
+        "sha256": "5f4c6a4a079287851230be197aab86f84c8c24d0e4d2edd571137d9ff275e0bd"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-stale-topology.json",
+      "old": {
+        "bytes": 16610,
+        "sha256": "d7cb992ddf5f17ef1585de262736e3944f2dc8bfcaa280155c22198cb3715de2"
+      },
+      "new": {
+        "bytes": 26923,
+        "sha256": "761d7f0e0b9f9015e1a88c29cce83bd6ce9ccc7175f980a60fede9ef733f6e45"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-input-ports.json",
+      "old": {
+        "bytes": 11397,
+        "sha256": "fc60eddf6e4395970c09aaddcb4b80eed80d4342780cf4bcdd7b3fbaeefc0e6d"
+      },
+      "new": {
+        "bytes": 20025,
+        "sha256": "a8f35012410d575d9ca8defd31fd9b2bd2c3b2ada6425e61850b0082d5975d59"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-isexecutable-grid.json",
+      "old": {
+        "bytes": 4746,
+        "sha256": "1e632940b514b3fb1374755d68c70d88f9f5c3e4391c1889453f29b3971e8a72"
+      },
+      "new": {
+        "bytes": 8674,
+        "sha256": "b1e568ead738ec702dc26a5c62447e209f7b4786ea2dc4b6c3d9ec0b7728328d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-isexecutable-neutral.json",
+      "old": {
+        "bytes": 4731,
+        "sha256": "765f56fd097d6e4fba28e97326dcec4a4e7b87c845fe2eb13b35ffcf6debec25"
+      },
+      "new": {
+        "bytes": 8644,
+        "sha256": "57f93adbb5cbb078d8453a1b25d0e79026b133617cfd9982ad253b926c71c335"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-item-backing.json",
+      "old": {
+        "bytes": 7063,
+        "sha256": "d1fe8feb0ed372a1c587bdcf0ffeb5b3a94dc25a528ec1b225c73e11c4cc2e49"
+      },
+      "new": {
+        "bytes": 12622,
+        "sha256": "f604b6f06d3c4e194c7d1bfa38f6c8ad98cf5c6479a17c2e80442988f67d52ba"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-namespace-defaults.json",
+      "old": {
+        "bytes": 4596,
+        "sha256": "5cf113de64d93c64a61da3f58fcc87ffce8b344e515ed959c259faa9972faea0"
+      },
+      "new": {
+        "bytes": 9065,
+        "sha256": "1503f013c330eb5d3fc267ed098fa4e1403d39f3758d5d0f5f71672cd2976e13"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-preserve.json",
+      "old": {
+        "bytes": 12796,
+        "sha256": "8065804c6174997545802e61a28b7c431ed948c4c63aa9a7efba2d33bd6acd36"
+      },
+      "new": {
+        "bytes": 20077,
+        "sha256": "7b0381e47cf676c89c3163c718200032f4c7117dfe71628aadea9f178e416f40"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-default.json",
+      "old": {
+        "bytes": 7888,
+        "sha256": "98700a7144116a2e55fb4652d386de8c1d9f3ef7d871583731d27e4ea334c419"
+      },
+      "new": {
+        "bytes": 14769,
+        "sha256": "b801442abc7e417e6be59f666cbbb9b7daa12026b69d67c2dd881fb89a35fa49"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-several-covered.json",
+      "old": {
+        "bytes": 7756,
+        "sha256": "809c2024f97179aa2ba612123ffe0a457180f55a5303e58af9ece3fc611a58ab"
+      },
+      "new": {
+        "bytes": 12586,
+        "sha256": "0b32ff41c7ad0ab66da46ec44a57f480d5a2ceca2275e6d2f3266f0c9a8754f4"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-several-uncovered.json",
+      "old": {
+        "bytes": 7484,
+        "sha256": "c3b0735a83f57d8c4645298e0b10e252972471a6035fd0c965936401d7a76429"
+      },
+      "new": {
+        "bytes": 8534,
+        "sha256": "9f281504657a855d3198112da1406674d4525de3bc621f49b53e5727d3c636a4"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-sets-single-uncovered.json",
+      "old": {
+        "bytes": 7673,
+        "sha256": "e384f1a13076d9dffe73e16a84918a22d75e91190d912528c48784e20f983dcc"
+      },
+      "new": {
+        "bytes": 13023,
+        "sha256": "e60386a6a9f6caa417014607b4bdfb7254d14382307b4a35d01f246170839200"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-topology.json",
+      "old": {
+        "bytes": 9985,
+        "sha256": "8c03b8ff66ec1429f5a28529bfa79619274eecfb46000498d854623dfec1d00a"
+      },
+      "new": {
+        "bytes": 17633,
+        "sha256": "61bd35a6221e5e88e784ae127404e68d0ba5e86b387acaa7e392cd41b2e57f29"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-write-coalesce.json",
+      "old": {
+        "bytes": 4490,
+        "sha256": "2db59fc25cf03f9f1fcef664cb55ebd84140137bda2a08999691ddb84431e8d0"
+      },
+      "new": {
+        "bytes": 8332,
+        "sha256": "14420c31cb9a656a4a4fa2f774efe658e4ea40bbfaa456e226615c7b2639ab54"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-write-conflict.json",
+      "old": {
+        "bytes": 4154,
+        "sha256": "034aeb4980e80b9fd0f2ee106072eb2957eb68fe214c8a31301ddf18f39e60bc"
+      },
+      "new": {
+        "bytes": 5213,
+        "sha256": "89b246d0f6baa9d7cb8bcfcbda7e38c118afd3a4f8adbf477fd74739e29495da"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-ambiguous.json",
+      "old": {
+        "bytes": 5515,
+        "sha256": "7478df0780d4ea5ebd13ba7f5cd4da4075c19a6094debfd8e777db6df6d92f57"
+      },
+      "new": {
+        "bytes": 10900,
+        "sha256": "49f1630c2cae67b81a1bd66f73ef780b7e2bb7ac80e6ffd2531427f954ee4bc7"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-conflict-empty.json",
+      "old": {
+        "bytes": 5166,
+        "sha256": "4efee08e4bfee6dc4be551d7520462d336735d18ff8e3b6b5dc00648e04a2078"
+      },
+      "new": {
+        "bytes": 10200,
+        "sha256": "7e074387926f238c3e3ba3a8eeb229952ada61e2da3412f44b381e38abbde6f1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-conflict.json",
+      "old": {
+        "bytes": 5352,
+        "sha256": "a2d5a3ce357cfe905f2108f1c3daa7cc0b570789530fb03ba13a47add93a4db8"
+      },
+      "new": {
+        "bytes": 10578,
+        "sha256": "1fafa30b9089484f1dc53e141f646b074e9469045461e324e4f5bbbcdf059f21"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-duplicate.json",
+      "old": {
+        "bytes": 5342,
+        "sha256": "f383ab85e13115bf0426a1112a4b976cd5332bf967e54165af3684a33ed944bb"
+      },
+      "new": {
+        "bytes": 10540,
+        "sha256": "1493db4399aa45f18aa61bc689c35787727a0005bbb2da0cc9011070cdd1fa64"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-external-valid.json",
+      "old": {
+        "bytes": 5344,
+        "sha256": "7fd7e20f0e739e416641ad78c200f19d026589601fb6ad10e4e0c5a2113e0c6f"
+      },
+      "new": {
+        "bytes": 10715,
+        "sha256": "9f63dbe04818c5ef3a83109f1c3beae6938258bd3cd68d338dd8582c59d67489"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-internal.json",
+      "old": {
+        "bytes": 4606,
+        "sha256": "d3e342a5bc751002a49be90c1ada00943a10abbf3ae117df4466af79d7f562ca"
+      },
+      "new": {
+        "bytes": 9245,
+        "sha256": "c3e63e6cd35537f06d11b8a3673d9af018d2c6a631407c10e9ff421b72390e20"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-marker-invalid.json",
+      "old": {
+        "bytes": 5145,
+        "sha256": "94fd48b36cf2ae74164c5742820107c9463d0b97dafbd2c09c81239d83f4d29d"
+      },
+      "new": {
+        "bytes": 10140,
+        "sha256": "f1c6f1f21b453098d52b406945e010a4cc78ab3ce752f9e9cfeec452588b6447"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-source-doc-not-marker.json",
+      "old": {
+        "bytes": 5131,
+        "sha256": "0e0c737a6c9b57c79d1773df4a1392e5481a37bfd3fd74c8fd5af5959005ec8c"
+      },
+      "new": {
+        "bytes": 10112,
+        "sha256": "32f51ac2c2d903d2df7996514e17bec5819bd1e800f297d1f949969c9e55b345"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-empty-accept.json",
+      "old": {
+        "bytes": 4913,
+        "sha256": "423dc287ea3257a6319315193619b993e9e2c315db11a0eada1e5fe430313ee8"
+      },
+      "new": {
+        "bytes": 9687,
+        "sha256": "f97e07764ee2364a01af9043f60e427158dc852fa18068b5709704e04d89291e"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-empty-draft.json",
+      "old": {
+        "bytes": 4909,
+        "sha256": "c8a45e0dce8740e0f4e32241094253e6998b8a60ef3a22632820b2f02bccd08b"
+      },
+      "new": {
+        "bytes": 9683,
+        "sha256": "ceacd762fd66ccdaff519d0d14bf8a2d867d37e3e1421f4cd56f7d19c25ec4c9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-required-accept.json",
+      "old": {
+        "bytes": 4886,
+        "sha256": "87218205ada89ddfb501bf508a005a48480cd123ad99d548e5dc81495327c651"
+      },
+      "new": {
+        "bytes": 9621,
+        "sha256": "a7c441d9c6958c949eeb06be4556945bca5840508cf63b1e06e5501d49709222"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-required-draft.json",
+      "old": {
+        "bytes": 4882,
+        "sha256": "ffd21bd1b9b3dbc028f08a5f6bd965cbc83a4d0d70689fb88c30cab0b662a40f"
+      },
+      "new": {
+        "bytes": 9617,
+        "sha256": "38d3952e28077f9c03a90d875bc4069d87e71b5f8e9501ff52ab56141503307d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-type.json",
+      "old": {
+        "bytes": 5052,
+        "sha256": "77f01a2a7a0511a6fdb5b0d1657122ca9b160fb48d501e4a835d0df6a99fb58a"
+      },
+      "new": {
+        "bytes": 9976,
+        "sha256": "6e29f756faf4ab6f8d014d65e9ab67c68a573b9afd94659e6ab3365c02eb112a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-after-n.json",
+      "old": {
+        "bytes": 21914,
+        "sha256": "6a3a4acc6be6aeefbe2aba6e49be1dc1b9138c46cf96e439c1a57cacabe94f03"
+      },
+      "new": {
+        "bytes": 33636,
+        "sha256": "a23db4fc8b7ca8b14fe01522905399bc5a8eef217fe69b704281f8c59e6fd494"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-gateways.json",
+      "old": {
+        "bytes": 16059,
+        "sha256": "2442958e8be3ceea9c1d8e169e1eecf655edd17f5164ce69203e55cc810b0722"
+      },
+      "new": {
+        "bytes": 24918,
+        "sha256": "7b977e4d9ade7cad7c0f84d7dcedb841a485f439f2f058a2bf1dc07eef7423c3"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-on-n-input.json",
+      "old": {
+        "bytes": 17111,
+        "sha256": "0e650b2e3af7f08b34c2fa707b4de495ce1a499db2de5ef2c75e522605c11f01"
+      },
+      "new": {
+        "bytes": 26491,
+        "sha256": "ca484579a84c7b9effe5cd061644a6797086763a2324c80393e2eac215013b18"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-ports.json",
+      "old": {
+        "bytes": 10712,
+        "sha256": "5443f172bd19c074dca967d9fd5ed4776962c5d15e313c257f924ee02cc641b2"
+      },
+      "new": {
+        "bytes": 16996,
+        "sha256": "2bea9bf7961291d7459bdca438c864afa4539714fb1fb02707c8fef4447f82e8"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-root-first.json",
+      "old": {
+        "bytes": 6675,
+        "sha256": "bbb97cd33084e8ab9872157d46a88c980fed4075caaf64745bcf0e0927a7c196"
+      },
+      "new": {
+        "bytes": 10993,
+        "sha256": "447b32d7098d275cf2781b87bca143c604a0c3d123e1c3303f1631ccd739fbc6"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-sets-default.json",
+      "old": {
+        "bytes": 7179,
+        "sha256": "fba3da3af088bdcb5e32cbf848d8bf25a19976ead17aca2fc6ed16fe22cabf8c"
+      },
+      "new": {
+        "bytes": 11735,
+        "sha256": "2271cd7706bed8b2bdf7057989581aae2207461d6b00f4f27d4683938ae1409d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-timers.json",
+      "old": {
+        "bytes": 7311,
+        "sha256": "b1c5a9e8160c0408296f44b6b950712db3665fbfb56056c6928d82b380d10290"
+      },
+      "new": {
+        "bytes": 11941,
+        "sha256": "e3c1701b15682d4c01c24f345a769862f3d49d3cba2d2256ca560c8c12e4cfd3"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-c-topology.json",
+      "old": {
+        "bytes": 9283,
+        "sha256": "82d3cdde5224f22a9432c04ff18e87ffb5b40aa30b583139b166056f7699891b"
+      },
+      "new": {
+        "bytes": 14853,
+        "sha256": "b1f662231ccd5ac0a5e0807dea2fa2081b1c3b00027e93f98c24966a0d75b8ba"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-direction-reversal.json",
+      "old": {
+        "bytes": 19761,
+        "sha256": "2a486866e35d0eac65d38d525a23a4486a1d441b70b9bd8ee7683034c8e3a61f"
+      },
+      "new": {
+        "bytes": 31726,
+        "sha256": "b902b59a0ca61e181a854b465b7d2714310d86bab8572f52c68ebb9c4963f531"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-full.json",
+      "old": {
+        "bytes": 23810,
+        "sha256": "9b1a595af07d4e9b988f74df56210a2f015791c16c539b54eadf9c8b3500c17a"
+      },
+      "new": {
+        "bytes": 37527,
+        "sha256": "833f3a816a36153eda0a76e99044808bf4745cf69acec50eec66646d7fb28bb1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-imported-supports.json",
+      "old": {
+        "bytes": 15257,
+        "sha256": "0ae907b4fbef8e251d7a88142f5eb246d8e18423deea68213bef1815b8e14ce8"
+      },
+      "new": {
+        "bytes": 25238,
+        "sha256": "a9298cb26d65a9b806a47b2bacd94eab0b8f97cfe974abbfb69d1cacea8b9623"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-two-processes.json",
+      "old": {
+        "bytes": 18857,
+        "sha256": "e7dba476abdc2df8b0f083b1b964b973f417a45d00f4e8f9bf2d3de061b55df4"
+      },
+      "new": {
+        "bytes": 30539,
+        "sha256": "b24db90b2a89c548f7fc6bda4a5f5bf78ce0378500ee2b40b564637a7ec59a73"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-fp-n-unicode-names.json",
+      "old": {
+        "bytes": 12264,
+        "sha256": "ea00804bce481fd04038b518cb21cd9efe0b4c79c05ef12d88b77b4aa5245bfa"
+      },
+      "new": {
+        "bytes": 20953,
+        "sha256": "874fb893adc012a080e2fe17271a4fb08ed1d81a3262a9d79b2a59e7684255a1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-collision-computed.json",
+      "old": {
+        "bytes": 5053,
+        "sha256": "8a713e2ef1390afc9376fee8e7d866bf5625c78d2a72cf1e575bed08003602c9"
+      },
+      "new": {
+        "bytes": 6103,
+        "sha256": "83f101b7b9caccb2668bb786360f773b84b31f434dbb7ea9188619c8b9123408"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-duplicate-source.json",
+      "old": {
+        "bytes": 5137,
+        "sha256": "4c214a218dbd027eefbf2957412d4e08a466cc5cda8b8acc7f8d0b8238892ede"
+      },
+      "new": {
+        "bytes": 6187,
+        "sha256": "7a9ef88cf107d99a172b9165a7a0b763aa2ddc720990093055485f88bd6d447b"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-identical-siblings.json",
+      "old": {
+        "bytes": 7537,
+        "sha256": "64f8e487511da2b4a37f68fdd39783f47b1aef7d88d5d6d46d88ce5c50e9dfa9"
+      },
+      "new": {
+        "bytes": 16087,
+        "sha256": "ef9d60019432aa9d6b7b813ed44e779eb0e1920450548322a6d82b08b3c68f6e"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-rename-stable.json",
+      "old": {
+        "bytes": 6542,
+        "sha256": "9144133dc57c7b8a88bc8727920ba3dda221e6ed428a4af906b53109547856c3"
+      },
+      "new": {
+        "bytes": 10791,
+        "sha256": "50316254bd7d3572775ae93199a0c88f3459beadbdb7d683a1fb1e5471c5ba22"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-reorder-stable.json",
+      "old": {
+        "bytes": 6525,
+        "sha256": "9621582e67fd6ed99e4b7017790576bd3f4b0901736808e918bfcc3a9c0386e4"
+      },
+      "new": {
+        "bytes": 10765,
+        "sha256": "53db371e86ae1bfaaa7974dff3267dfdf0b4b9ecc4eefdb267c1b6ac970422aa"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-root-first.json",
+      "old": {
+        "bytes": 8458,
+        "sha256": "a53c8c996054cb0db7f0e21dfcbeb4c3d9601128f92b43e1e572621d46635ee3"
+      },
+      "new": {
+        "bytes": 20348,
+        "sha256": "e7e97ff9cac4f12cd1126f5ba423f47668800a83a72a06a05a4131d4fad36dc6"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-stable-vectors.json",
+      "old": {
+        "bytes": 1695,
+        "sha256": "9a859746a8d8b6244604323792871e16bc9ec49f42b226d2c423b663f77f0a55"
+      },
+      "new": {
+        "bytes": 1691,
+        "sha256": "844f698327b3954d667fd9d3598297320686b80f4320c02f2a8fc973906db7e1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-timer-reorder.json",
+      "old": {
+        "bytes": 7316,
+        "sha256": "d40307f295fa33803c7e7d27f578071bcad4e3592b9b647a923af602d5479575"
+      },
+      "new": {
+        "bytes": 11946,
+        "sha256": "581d9fd1198ed99b4c60bcdee7eb0744259f3541b31217ade143b41d7b620ee1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-timer-siblings.json",
+      "old": {
+        "bytes": 8689,
+        "sha256": "ee5d5ccd2a4279b001a49c810c8ef0844682a49e9019b363e6c8b09a1bb28de6"
+      },
+      "new": {
+        "bytes": 18993,
+        "sha256": "880b56657d7bf34130b3a6fa83acf51ebff8bbc3d2b7843eff305ee50643bc38"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-two-owners.json",
+      "old": {
+        "bytes": 6961,
+        "sha256": "205e3b219e0433cad116a66bbf5737cb6a4df1a44d8505a42a63fd8aef86ea80"
+      },
+      "new": {
+        "bytes": 15233,
+        "sha256": "52677741df37f24db1fc42da59d7b54ad021355d28d6c2f6ae715d02a64a9a47"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-unicode-names.json",
+      "old": {
+        "bytes": 10836,
+        "sha256": "fdd3694ffe80ec5ba8692329b819a616ecfb7b3a1b30d4dd2c99e15736d3c477"
+      },
+      "new": {
+        "bytes": 28616,
+        "sha256": "19668f03ba881506bf1dc86acc4c9952a02ce936c170eea1364819579c184ba1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-projection-out-of-base.json",
+      "old": {
+        "bytes": 5162,
+        "sha256": "1857ea721acb1cbc1aefb4ac5a9adb5db4074f6afbdc5cff6f0ec44efe38180c"
+      },
+      "new": {
+        "bytes": 19088,
+        "sha256": "d138cb0f3b4f81b157ec9449fd6be503df9cfedbabdc8cbf34919661129ff8a7"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-collision.json",
+      "old": {
+        "bytes": 2495,
+        "sha256": "0608a814b98e91ee6b34a05eb6626489de6d5625877107249a5c501c1e315abe"
+      },
+      "new": {
+        "bytes": 7606,
+        "sha256": "09c05e7c1ae24db25780328516ff3fd89da45e400bcdf8cf831aac967dd11d7d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-dangling.json",
+      "old": {
+        "bytes": 2416,
+        "sha256": "a40f12b540953057900f8395bf9039d9174293fd28004fd433114e13379abfe9"
+      },
+      "new": {
+        "bytes": 12031,
+        "sha256": "cfdde71f41ba2531abc80507a8c7678665ed77ead2212086f12380211ebb36c5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-duplicate-result.json",
+      "old": {
+        "bytes": 2621,
+        "sha256": "7c3654e835d7f6d75ede3744f0df0ff3d1cfe7bcc1601d61f6fedc27fadafc26"
+      },
+      "new": {
+        "bytes": 7732,
+        "sha256": "9bcf1d408f6744ca8676e67a31aff207949f59691e6bca7e643893505c66c8e7"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-nonsubset-id.json",
+      "old": {
+        "bytes": 4531,
+        "sha256": "3d95f6ab15f8691a0e15250d694e8b9b5d5f90eb639953b032db068f40af555b"
+      },
+      "new": {
+        "bytes": 11944,
+        "sha256": "46a18f1e0ecbbd757dc85ccccf32a4801c5e74aa545804ac3cd3fe8205f6cd39"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-opaque-attested.json",
+      "old": {
+        "bytes": 4570,
+        "sha256": "300460ab5c50ecb3aa6647de32d493eef4e24bdd2a281d31634eb81409f6d1d4"
+      },
+      "new": {
+        "bytes": 11416,
+        "sha256": "85fe933ed3adda30b4a829f99de8d0f3ffa4705db2ef44dc699541a7430173bf"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-opaque.json",
+      "old": {
+        "bytes": 2420,
+        "sha256": "13bc8dc26e91df4895f2412e6b2ba4440e0e415364c4da4290d34c930b2c8720"
+      },
+      "new": {
+        "bytes": 7421,
+        "sha256": "879a6fc700b1a1303a8dc081748b1e5cc0eb85f4c4807911b3648bdc45919670"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-swap.json",
+      "old": {
+        "bytes": 6207,
+        "sha256": "f8a569b20346f1fbcd8fc264813af854cdb05602e351051909801d8c44fd4646"
+      },
+      "new": {
+        "bytes": 15723,
+        "sha256": "15fc221badc641aeac03c1d2650a0c4353c77c286fa7a204a7365068f05ff1c4"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-total.json",
+      "old": {
+        "bytes": 10714,
+        "sha256": "acd5a07c17995a23a56807decb621487a7d9730ae19307bcbf6a540ff9adc107"
+      },
+      "new": {
+        "bytes": 25543,
+        "sha256": "5a137646f38678e3ab98b0fdbf88c2b7ea5f05c8b3bee1477fc925459f373bbe"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-complete-links-accept.json",
+      "old": {
+        "bytes": 8439,
+        "sha256": "93ab752b9fc54dc8a289e7a673d2e4612a93ea9d525c6ca82e5b88ef454567ef"
+      },
+      "new": {
+        "bytes": 16900,
+        "sha256": "3fe52100231f901f7a2514cd66dda8d16e1beb8c5139c713d02d1d287a30eed9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-missing-links-accept.json",
+      "old": {
+        "bytes": 8876,
+        "sha256": "65a5f6cbac9805e125e0c282f9ddcfaa579ab39f7e1baf2af4db3306c65a496d"
+      },
+      "new": {
+        "bytes": 17012,
+        "sha256": "fd93b9228d976b3c0f07fc28254de7b5d057d5198b3065486b405dc6db2b863a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-missing-links-draft.json",
+      "old": {
+        "bytes": 8869,
+        "sha256": "591f88671938d8f7377d8cb1e0cf2737ce4b2b8c963e7934612fbf30cdb3c3fc"
+      },
+      "new": {
+        "bytes": 17005,
+        "sha256": "04561d62526da0dfe107f113ae68536632dd04d14c36efd68430c1f09e8a352a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-wrong-direction-accept.json",
+      "old": {
+        "bytes": 9473,
+        "sha256": "1cbb55b4847ca5a3625f2358ef935579aec3306723ffc607ec62fd4581b43b5a"
+      },
+      "new": {
+        "bytes": 18553,
+        "sha256": "7b11d51d3632423c4dcf60cec0f96f62625f4813a7cfa038409ff20dc28c581a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-full-js-py-js.json",
+      "old": {
+        "bytes": 19377,
+        "sha256": "1d34e2bff3efdc3ed948a7af580563574756b216ac937e234da39decfecab3d6"
+      },
+      "new": {
+        "bytes": 87656,
+        "sha256": "f8f3a2d5a207ad882401a6829099c16882ce12d17366d9324144f5cc67f58bdc"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-full-py-js-py.json",
+      "old": {
+        "bytes": 19389,
+        "sha256": "c1d7e9594222e33f43447419ab640ec60066efa925aa83d062c5f8c155404220"
+      },
+      "new": {
+        "bytes": 87668,
+        "sha256": "95ba923a5542a766fb96b8b687b87c4689c6229336d0f66ade9de740115bd7d1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-two-processes-js-py-js.json",
+      "old": {
+        "bytes": 16184,
+        "sha256": "8a3df911e84a9e7d56aa42ec0005323672544a23bf98fdcab982a204aa9c95f2"
+      },
+      "new": {
+        "bytes": 77939,
+        "sha256": "15be6eb0c7b8ce72c128c9fca0261aee33ace713b22ec210b5a11aa145571127"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-two-processes-py-js-py.json",
+      "old": {
+        "bytes": 16196,
+        "sha256": "6a6bf5ebdefb267a501a25ff54d2458be78b37322afa0fb209fb9592fbb8da25"
+      },
+      "new": {
+        "bytes": 77951,
+        "sha256": "399a1b3c13d8502289c897ef70529377737ce1a80ac9cc9f43143f4edd6255fe"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-unicode-names-js-py-js.json",
+      "old": {
+        "bytes": 10718,
+        "sha256": "44124d1e7dd70d931fcbe34b20c0d850d795b52ffd18eda2e65a2354268f06b0"
+      },
+      "new": {
+        "bytes": 52573,
+        "sha256": "f80e79a4a5c83db63d46accdc70531d5ef8763261bee9ffe8780522cab1b52b7"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-mix-n-unicode-names-py-js-py.json",
+      "old": {
+        "bytes": 10730,
+        "sha256": "13d377cf9c0e00ae9a35decc43623519ef746fafc377d30f4e3048e0cb8543ab"
+      },
+      "new": {
+        "bytes": 52585,
+        "sha256": "5255fb2d7a50cf47d8af73cd3e3b715361054cfc25997a0d4008490ff91b6ad5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-band-process-ref.json",
+      "old": {
+        "bytes": 13782,
+        "sha256": "a16103399e51e58ccb7b3e4cd633f6a9c882dabff22f4a03f40cd6bfcc40bc78"
+      },
+      "new": {
+        "bytes": 14830,
+        "sha256": "99f06f0bbecb346a7c72443ad815fb2e9d91cdb0ac7b1518d1a65f0a8dd60f3a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-duplicate-role.json",
+      "old": {
+        "bytes": 13990,
+        "sha256": "fb015cc4188e0d3e42023302b79971717ec9b0424dd8f7d3343f36b1cf02be49"
+      },
+      "new": {
+        "bytes": 15038,
+        "sha256": "03000b1fc071ed36468bda75d82111c79cd7c210baeef377022d3981e323c529"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-wrong-parent.json",
+      "old": {
+        "bytes": 14078,
+        "sha256": "8c887b704e7788c648c615b92edc034083fe64fadffed9e8d525942a593ceed2"
+      },
+      "new": {
+        "bytes": 15126,
+        "sha256": "c3e4a9ba79762335d56d68f81f2a3287c2bd18591c7f4ef6c39153be00747a5b"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-binding-wrong-type.json",
+      "old": {
+        "bytes": 13668,
+        "sha256": "87813f6f563dc6cc795fe671d3af2c1a6449cdc7f4464b8f66ba56a2c1904f57"
+      },
+      "new": {
+        "bytes": 14716,
+        "sha256": "c3356edafa90b81add28dbc4f914392341c0acc496e7316ce2f0239893b742e9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-black-box-pool-retained.json",
+      "old": {
+        "bytes": 13316,
+        "sha256": "b723c89e51bb6880d6e72b2909bedfb27395d32109449f589894bad134f51b99"
+      },
+      "new": {
+        "bytes": 29197,
+        "sha256": "220e844bfe97b4786022aa1563bd3ec7ea899253d72576bc09934394ebaf3a2f"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-business-lane-refusal.json",
+      "old": {
+        "bytes": 13793,
+        "sha256": "b8044197efc34609a25e4bbae1660f7c48a78bd602309e0f7ecbc421cd94cc59"
+      },
+      "new": {
+        "bytes": 14912,
+        "sha256": "49754807680be0444640f8f15530aac9046c2de5f28dee59335e2b1fb9ba7aec"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-direction-reversal.json",
+      "old": {
+        "bytes": 22996,
+        "sha256": "e51f3762052fbbabd70034d289ab441961f094d225fc8e048f4cfa99a701bd2a"
+      },
+      "new": {
+        "bytes": 64342,
+        "sha256": "e8ae075d044291f761ae97900cbc984e89da67690a527ccaca1162c8ec0bc27c"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-empty-process.json",
+      "old": {
+        "bytes": 6703,
+        "sha256": "31fca8361a495173093239c1b981ffcc032ac01d15caa403dba8fc3a09bf8322"
+      },
+      "new": {
+        "bytes": 17925,
+        "sha256": "fa510a6252ba09adacb9fe0a3bcde51c047051068c2720d4117fc3d8edda8e1d"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-full.json",
+      "old": {
+        "bytes": 24702,
+        "sha256": "7fcc6c9d5d015b3064527acac1386326101e774dc5cf1487e00c693313f98057"
+      },
+      "new": {
+        "bytes": 50483,
+        "sha256": "96253b055f093518b7403dc4245fa6dec9e4f2ccadb562647193b7eca8772ae4"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-hash-shaped-occupant.json",
+      "old": {
+        "bytes": 8730,
+        "sha256": "9813add0f3273b394491403672e79d6cf54a39f9556f31c42228094b6989a8c0"
+      },
+      "new": {
+        "bytes": 9849,
+        "sha256": "4e20a7567a7647e250001a2954006811611c9b7bececb2e8bd8f6b2812c00372"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-imported-supports.json",
+      "old": {
+        "bytes": 15468,
+        "sha256": "c14ed98a24663cb51992bcedabd8d1e8f848632c9a1dee38873b1623788cbfe4"
+      },
+      "new": {
+        "bytes": 27316,
+        "sha256": "8a82612d659348f691a052790918d9a7d055fad084453a368351e6be0bec6d9e"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-incomplete-call-untouched.json",
+      "old": {
+        "bytes": 10471,
+        "sha256": "e91553f1dffb52b671f237519c71a87d62aba6a2b4e5103e4c4873f097084370"
+      },
+      "new": {
+        "bytes": 23457,
+        "sha256": "3c44453ff23ddf9e8d722444d7a414d47975fd6d69f0e258cdcf97d6f25d6874"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-inserted-link.json",
+      "old": {
+        "bytes": 25324,
+        "sha256": "65a688ef4477351d3dae8be9e9e1f82ff3ad71370dc22375fa11d5ec9504bbad"
+      },
+      "new": {
+        "bytes": 51381,
+        "sha256": "d88711c7f041bd4c1511dfa5625cb9938ccb551d0d21a6dfb99b974202cc8493"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-internal-call-untouched.json",
+      "old": {
+        "bytes": 12588,
+        "sha256": "bcd859f99439bd3745644ed9185f350482d2449d8975c0dbd78b5c1ed20833a6"
+      },
+      "new": {
+        "bytes": 31482,
+        "sha256": "5ef5050ac74fbdee86d2bac90e344b42331f5a68542812a82ce66d0c98e8addb"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-legacy-marker-ignored.json",
+      "old": {
+        "bytes": 11351,
+        "sha256": "45c62c100f9986eecbdc6b92cb4bd5c2e558145f1f6c06a4216462f3b43dcb94"
+      },
+      "new": {
+        "bytes": 24755,
+        "sha256": "8bbbb81cd81986d3b520af0707a43675c1fa577a3c54e3935e9a2ed0694fd580"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-roles-and-empty-support.json",
+      "old": {
+        "bytes": 13560,
+        "sha256": "5e37a26e4c490a2c453968ec6a5d6ad13d43f4138807610cecd12aba1991373b"
+      },
+      "new": {
+        "bytes": 23025,
+        "sha256": "105166a5219981102f1f0291a4b3fcdd4fb3fae11cdf483bd48a1abae07727cc"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-shared-item-anchor.json",
+      "old": {
+        "bytes": 15771,
+        "sha256": "37e41f403894b1abe0e1ae3fc50b628f420a42508cba3d0f7ca0af088ce697f2"
+      },
+      "new": {
+        "bytes": 26113,
+        "sha256": "6153205d92c037a5071930f89db0dc38a941bdf1aef213a898bf6584ebde48f0"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-two-processes.json",
+      "old": {
+        "bytes": 19942,
+        "sha256": "4b4c61568567840cb2c3f033f82983f743ba620671fbfcf13cea2b8bcda791fb"
+      },
+      "new": {
+        "bytes": 45413,
+        "sha256": "ad9ce348be22062da6137a2884ce706f07cd2ade8b8ad48231c23cce09fd30eb"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-unicode-names.json",
+      "old": {
+        "bytes": 12804,
+        "sha256": "cce96d5e4f3715860b919728b932c14d71604327f2f4fe6c014199620256b7a6"
+      },
+      "new": {
+        "bytes": 28427,
+        "sha256": "ee4fd2776d3637c96ffb2c362917beac9db9093b56fb7d046df3ae5e3c0bcaf9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-cannot-reach-end-accept.json",
+      "old": {
+        "bytes": 7294,
+        "sha256": "71cc3d47f5d5b6567dbf3cbdd94ffd73f4ec910ef4f53937f367051dd71bbec0"
+      },
+      "new": {
+        "bytes": 14251,
+        "sha256": "fa5056a8c852ec0b43130f495a976f0bf60078f6461766b5be8d98d013a139d5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-cross-container-flow-accept.json",
+      "old": {
+        "bytes": 7556,
+        "sha256": "4627f23b97cb8214836d6bad0f495795ed314dc7680cdfeca3dcb5dd1310f3ab"
+      },
+      "new": {
+        "bytes": 14438,
+        "sha256": "0341b9964ef0c423b1544eaac1d303d48b04cbf14ec8ce0d6e23b4ed552068da"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-disconnected-task-accept.json",
+      "old": {
+        "bytes": 7416,
+        "sha256": "6cbe608d62c48ff069579837bd7da0134450e9a5bceccc8bb7d03bbe324c0460"
+      },
+      "new": {
+        "bytes": 14130,
+        "sha256": "22c65431111213ebe60898b2d4038d938ac8a0eb3dada6bac025d4eb7e59e526"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-disconnected-task-draft.json",
+      "old": {
+        "bytes": 7409,
+        "sha256": "b660d1fe6e5fccb1891f1fb69e50b6ba87952a6e9b07c73aac3c7675eed14863"
+      },
+      "new": {
+        "bytes": 14123,
+        "sha256": "20ce89edd91d0e97a122739a47ff75ecbf6cb70f43777fc3d54be68c958783c5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-gateway-without-incoming-accept.json",
+      "old": {
+        "bytes": 7061,
+        "sha256": "1378d19114007686fe5781914d06790b35ce77ece05eb5d81a3a9dc3c03a3716"
+      },
+      "new": {
+        "bytes": 13759,
+        "sha256": "08bff01ff57577855dced7031ae5b0cc37931c193b2e61a40551718bfca8e1df"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-incomplete-call-not-exempt-accept.json",
+      "old": {
+        "bytes": 8186,
+        "sha256": "2d08faf458ee8226242b41616f9869f26386b0cddae81a6b7c3be916a2e3920f"
+      },
+      "new": {
+        "bytes": 15490,
+        "sha256": "75fb1603f4ed093ea1521b58d07496d12f9a2dede62c60c49144f5f0bc809214"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-unlinked-external-not-exempt-accept.json",
+      "old": {
+        "bytes": 7704,
+        "sha256": "302d5cc30e5409c6e737edaa38332b57e3df1c227e9f27fe16cd8e0c83988e37"
+      },
+      "new": {
+        "bytes": 14695,
+        "sha256": "a1fd5e2696e39763e353ccbc83c8b7054c5fc82d3b5dffd313fc88adbd8c9758"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-path-unreachable-component-accept.json",
+      "old": {
+        "bytes": 7713,
+        "sha256": "5f3f85d9f632febec6644b2d1af78716a667e83e5f79eb457daf7fd7c4ebf29a"
+      },
+      "new": {
+        "bytes": 14904,
+        "sha256": "c37dece95cb0c0f15c7c3b1bd8b6e33297ed687436d05afb1f76995950795c46"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-downstream-branch-accept.json",
+      "old": {
+        "bytes": 7867,
+        "sha256": "21cd960f168b7ebe31753a1af70effa6c819c2bceb856a2c649ed6bd6f8ce931"
+      },
+      "new": {
+        "bytes": 15751,
+        "sha256": "3b2cdb7bb61aceaa39611b6c649cb1c3fe258afcab75a4e464eff2be74eb0f83"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-no-branch-accept.json",
+      "old": {
+        "bytes": 6416,
+        "sha256": "00c6921ecb1d2fb7d462f3a67c8ae2206ecd2c50a6d5988ab69362f90d255e85"
+      },
+      "new": {
+        "bytes": 12686,
+        "sha256": "85052fedeab485c93e22830c5263eb835a3f7a2879a22a28c1834d499519ff1f"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-no-branch-draft.json",
+      "old": {
+        "bytes": 6412,
+        "sha256": "8465ac8740914795fd001e86443fc533ccadf9f035d9b87ffea268e29b74866b"
+      },
+      "new": {
+        "bytes": 12682,
+        "sha256": "692292480594d7cd0453dea1c1c567a6d3fa026f3f1d129abe072d4fcc7deec1"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-normalize-no-invention.json",
+      "old": {
+        "bytes": 15671,
+        "sha256": "ccac6771590f92f0d97dfdf2c0b2bac21acf94b4c25ed688b3642f00d6fe71d6"
+      },
+      "new": {
+        "bytes": 35904,
+        "sha256": "0c19f395a65011e0e3c9af74ba05a5fdfe94a84c67103526aa6bfe10d7fd0faa"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-parallel-only-accept.json",
+      "old": {
+        "bytes": 8406,
+        "sha256": "3efc110f8ab69111c416bcd04c7ff95ab315d60ec88dfa3dcc283066d3733a8d"
+      },
+      "new": {
+        "bytes": 16662,
+        "sha256": "5cf1101647d1bbd6fd283138305ee66a44e4cf791de4d156d888bf2bad8642c9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-trig-single-trigger-accept.json",
+      "old": {
+        "bytes": 5185,
+        "sha256": "970e531d045f9c7543d135a78eabddfcf75820501cb8e64ab9a81c179ee76266"
+      },
+      "new": {
+        "bytes": 10390,
+        "sha256": "bff4d4ee2b7c65d542148867e905c9394faf129f14574a1c09f251be0b1ae200"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-batch-one-entry.json",
+      "old": {
+        "bytes": 23763,
+        "sha256": "8d7c9cea90d735e8720dcab229b79e12fb5340ee7febf25a8fa02564efd5fca9"
+      },
+      "new": {
+        "bytes": 79360,
+        "sha256": "cb6686c352763a3924d7fc6ab08d84deeb0293feb5bc80111ad8db982689f14a"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancelled.json",
+      "old": {
+        "bytes": 10238,
+        "sha256": "50217ea68649259df4ac4f1f03078b0538e0d4e76d750f171e32d2f63ff2e0cd"
+      },
+      "new": {
+        "bytes": 21375,
+        "sha256": "b453b7e077f8dee9dfe89a2bfa8fd99b8fcca6db7dfc0a038bd2bf5ac5b0c4df"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-corrected-noop.json",
+      "old": {
+        "bytes": 17166,
+        "sha256": "d49818517dc33dbe01097fc013b33256a1b69bec12063144ec49fc2b19812c84"
+      },
+      "new": {
+        "bytes": 46162,
+        "sha256": "4323196c2219d9c21c190ebfeb296b5a2df3d3bd878689f6c8a061d6088336ed"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-di-only-move.json",
+      "old": {
+        "bytes": 33783,
+        "sha256": "54baf542bb503a1561c096bf4a9266a30148885563aba9d3ea79a2159b054847"
+      },
+      "new": {
+        "bytes": 97846,
+        "sha256": "6c484a0fa9cd3ecba4a7b4b4057d41ee9ddd2646b03a17406c52209820c53259"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-no-leak.json",
+      "old": {
+        "bytes": 15289,
+        "sha256": "febce02627c8d590a7086b50e27cb378a60d77c36f235de2a8595ab2af15c9fe"
+      },
+      "new": {
+        "bytes": 40967,
+        "sha256": "bb81d3ad7b7de4f138306ae6d3c5889434e0129cf4bef9ec6abef7abc62057fe"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-incremental-draft.json",
+      "old": {
+        "bytes": 47715,
+        "sha256": "d25df3125423f4b7092d4ac7b6185484b30b3d3e057d149ac96102202e6eb640"
+      },
+      "new": {
+        "bytes": 157965,
+        "sha256": "b6d947ff17000c1af7d6faeffe7e886cae8bb6fa2b2b92e3f39c4683200243ea"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-explicit-selection.json",
+      "old": {
+        "bytes": 32617,
+        "sha256": "e81ad8edb0589039ef39710507736814d995363b2625c2e6c36d22dab16bf849"
+      },
+      "new": {
+        "bytes": 86134,
+        "sha256": "c46c00624fa92285344c7485d3eed6ba04aed4773acda30dbddd5b999e3f70a5"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-io-set-selection-required.json",
+      "old": {
+        "bytes": 16717,
+        "sha256": "c1e8d4ac59be27e0c6b9f8a780079ddd27c03173b51cd2c9a41bab19494dec14"
+      },
+      "new": {
+        "bytes": 30595,
+        "sha256": "1e330b9c4e336a6779b7a9d29adb4331fcd1f2ebb5dbe4a8974e7b8dcf7fbe54"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-reentrant-refused.json",
+      "old": {
+        "bytes": 13839,
+        "sha256": "ca443e5f47fcc3097ac2e51638c3b66e7d87908ca2e31b00ccc91b1c06d49236"
+      },
+      "new": {
+        "bytes": 38460,
+        "sha256": "3383c1999a60c63e320415f9899aae5a94866840ff33c5cc0d1d567ab27643b9"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-refusal-preserves.json",
+      "old": {
+        "bytes": 17131,
+        "sha256": "32eea2b921a955ad0294bee44bfbe11750b2e9e9009b4e4c968793998ba7fb59"
+      },
+      "new": {
+        "bytes": 47323,
+        "sha256": "81d471d5e0d338f55340027cdf3aae34ee571a331f05092417b34c4e0901a46f"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/index.json",
+      "old": {
+        "bytes": 112614,
+        "sha256": "1a95bda8fd595f928115a523966b548cac04656477c429d5465134e25fe31e61"
+      },
+      "new": {
+        "bytes": 159724,
+        "sha256": "cc3151ccba8bb49513fe4b059c8331364e7c5c5cda731e76cea9afcbd8945721"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/manifest.json",
+      "old": {
+        "bytes": 27096,
+        "sha256": "2668dc58c753975c4f93fdd2079c8ac75e6f80c0eefd348d0db1ac69eeab1dec"
+      },
+      "new": {
+        "bytes": 43489,
+        "sha256": "3ece1cbb2e7e17bb3875dd70be7484b6ab4b5e49d967cef501891bf418986c76"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-coalesce.json",
+      "old": {
+        "bytes": 246014,
+        "sha256": "d30d2e0e2098ad7ec1cff33a44953c76f007a4c803e637d0fba05eec9a1ef442"
+      },
+      "new": {
+        "bytes": 122957,
+        "sha256": "f0c6ffa74d57724d6ac5b68acb1708dbcd01abfd7f6ba5e5cbb105e7c32a295e"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-conflict.json",
+      "old": {
+        "bytes": 246017,
+        "sha256": "b9a0a146a196737d477b27818c3ce78d4c2a272fa9da2cf13a2c0fed9a923810"
+      },
+      "new": {
+        "bytes": 122960,
+        "sha256": "5efc67b14eea6ea6314121b6d07de627363407be4dd9c05c3e01ee0c33548c8f"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-descriptors.json",
+      "old": {
+        "bytes": 13520,
+        "sha256": "818e1b26d73426cd4c55b017286f1e0697577a34beb7a88bd870cc677a67ae6e"
+      },
+      "new": {
+        "bytes": 13840,
+        "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-stale.json",
+      "old": {
+        "bytes": 244235,
+        "sha256": "d9475788b14d922be92c54f083b7f2709f4332febafe74c27f2b2bcd1ac9d6d3"
+      },
+      "new": {
+        "bytes": 122018,
+        "sha256": "837b77de3298ff088262866cb35b3b2186da8b003ed7851a80d7554a25811aa0"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn.json",
+      "old": {
+        "bytes": 245261,
+        "sha256": "4a7e100e13980cdd1e992d0d1b73d692a15ffa8e488ae82872406fb74b83ee1b"
+      },
+      "new": {
+        "bytes": 271558,
+        "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+      }
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/seal.json",
+      "old": {
+        "bytes": 24012,
+        "sha256": "986190925108a03e1996342638aaf9f3bcef9d37ddd6f3c6c5ae6246b0ab2904"
+      },
+      "new": {
+        "bytes": 36537,
+        "sha256": "6b807ee2c219f614d0f434cb8568c8d15acc0cc425a11bfdaa5cf027d86e8b06"
+      }
+    },
+    {
+      "path": "tests/profile-lot3-golden-independence.test.mjs",
+      "old": {
+        "bytes": 10353,
+        "sha256": "59e98fd7debcaeafb6237d2b28e540b6eba6f3f7d24e0660de5eb34df438d699"
+      },
+      "new": {
+        "bytes": 30014,
+        "sha256": "424b33306fa92ff07aa937328c43c853000665873f962ecbc4b3805ec4df22bc"
+      }
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-bind-supports-conflict.json",
+      "bytes": 10288,
+      "sha256": "414915c8b001c54f07c52abc990ba78423f73e334610641b9436c5b61aa3b330"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-bind-supports-explicit-selection.json",
+      "bytes": 14759,
+      "sha256": "b14acd721788f92ae02639787215030018bd377af4cb407fd08901ffc6f111e9"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-bind-supports-gated.json",
+      "bytes": 9884,
+      "sha256": "0525478d164512de636801c075d423cefda7d1ce1a0c70cdffc78531cdaa659d"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-descriptor-role-unknown.json",
+      "bytes": 5857,
+      "sha256": "d93f3ab36895214dd18c92d77b5b079d99cd58aacee48c0ee4b7e592d68c6a30"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-digest-mismatch-first.json",
+      "bytes": 5581,
+      "sha256": "08d0d2aad46499a18b36587ce36c7b506794897874f95c97e1dae9447b47df65"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-document-version.json",
+      "bytes": 3936,
+      "sha256": "4820f885f7d0aac2128c1e731ae017e40d214e047232b0242c4996879183bbc4"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-extraction-authorized.json",
+      "bytes": 15649,
+      "sha256": "9caa44f133afc4b8bc5d22ed1455d6a02851226c17597f4230043cac2bff421a"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-extraction-unauthorized.json",
+      "bytes": 5179,
+      "sha256": "b74fec65cbe8c9e7860d44d2e2d8881aaf54e941420c97a430004908b31fbacf"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-gateway-direction-control.json",
+      "bytes": 9971,
+      "sha256": "61b0670724e66d6944a15130b5d766cb1d5898116309279b1675ba12d4d15637"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-invalid-mode.json",
+      "bytes": 6109,
+      "sha256": "8387474785d39e860ef6ce611003199cfc28302ced5913e942e9db3507f32ded"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-output-port-gated.json",
+      "bytes": 6959,
+      "sha256": "a8c5450d8730c0c04cf8d5ab8a0b0d5742be3a82197e4a42d08f2457ead0c129"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-output-port-qualification.json",
+      "bytes": 12742,
+      "sha256": "e5ebfb2303c5ac37688d5bdec8f6a08194561602eb45c4f6ef74aa6aaa7b3188"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-c-version-mismatch-first.json",
+      "bytes": 5588,
+      "sha256": "ef40e87abef40672560c5e4f477f9dc86d21911aae3090242598583e54c1d185"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-call-target-dangling-accept.json",
+      "bytes": 9726,
+      "sha256": "15d06957eace1701b0e79a61cc1d9ac767c9dce73005762ac0283cc7af5148b7"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-id-ordinal-missing-only.json",
+      "bytes": 16942,
+      "sha256": "0b5b2395b9a801128aba5511c4f0645c6f5ef7d51b588ff9e6dec8d0e0af4348"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-owner.json",
+      "bytes": 18889,
+      "sha256": "11295792ea773ac64989e3a436ed72c66c3ffa932275a45aea31bf0c3bef7060"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-qname.json",
+      "bytes": 13288,
+      "sha256": "00f97bfac9591aa081edc2a29e36568b56e9895f9352df92176a6f2173311c8c"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-target-grammar.json",
+      "bytes": 7610,
+      "sha256": "cb54cc9b78856f06b7359224ddbef7628abebb5e2dac73f6e7cfb3144c7347ed"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-total-edit.json",
+      "bytes": 15859,
+      "sha256": "ffff4b5eb63f110a18b2cb077111667d1026b0e63221214a71535b1f47c29f3b"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-unapproved.json",
+      "bytes": 15881,
+      "sha256": "79b9b6f03c83876a7d114643c4c0ad87d22356c758ba8a91a8b7258e23a493dd"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-imp-remap-unknown-source.json",
+      "bytes": 7625,
+      "sha256": "9e0f69ee426aae802ae4694eb6d87b325e765b8a03e4fd895dcbaa7ac565550c"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-endpoint-type-accept.json",
+      "bytes": 18242,
+      "sha256": "1a2b55675d315a0ec3656211dea3e283758b6af13f96b5368714bced5182b119"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-link-owner-accept.json",
+      "bytes": 18576,
+      "sha256": "15ea0281671a902d32b7287c704346f9dfd8dc3b897c2bcf3e14c99ec31ad292"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-link-owner-draft.json",
+      "bytes": 18574,
+      "sha256": "4257dced46bbf8e140a76611e016900c32aadf7828b28d7338becaf84e58f0c6"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-io-wrong-direction-draft.json",
+      "bytes": 18550,
+      "sha256": "7a7a812c4152669594586a723b7f41b3cc45c2950b2cf85053f6b5103a98e17a"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-after-explicit-selection.json",
+      "bytes": 25096,
+      "sha256": "95b3b7d269851d42c322bff34bba79a47543621b9153c2c76ba115c60ab503b4"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-after-owner-remap.json",
+      "bytes": 17736,
+      "sha256": "00b0a8a707f20a156ac1bd48403fe608eed85807a5b26220ab5788ed98fcbec7"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-anchor-after-link-removal.json",
+      "bytes": 23788,
+      "sha256": "15198abeb152f572bf1d0034aa1dace1346877a865352d0e6f5d0d2bfa3d640b"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-business-lane-refusal-edit.json",
+      "bytes": 14798,
+      "sha256": "2bac4b68a2bab89eb1703c2ffe5d4b68c0cf6c5e43bd3e4ff82a14251ed6090d"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-deleted-support-stays-absent.json",
+      "bytes": 17747,
+      "sha256": "30aa8bfd158e8cb57b211c19d8ebf8a18dc5d08de1fa079329de47c7efd6a9cf"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-ensure-conflicting-definition.json",
+      "bytes": 9087,
+      "sha256": "1db624263b6edf9cbb17c02ba1ded87ed9b86ee95ea88ed0422297b73fed5907"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-full-edit.json",
+      "bytes": 17613,
+      "sha256": "97c68cf54bd38d1b821e3c8c99c4f28b4dd1c7086799852da3405b264c504d54"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-hash-shaped-occupant-edit.json",
+      "bytes": 9783,
+      "sha256": "374231d18b8881c2a5f961737d771ea1cbf54c6ad0d9e8f2f65adc1bcc2d4cda"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-imported-supports-edit.json",
+      "bytes": 14714,
+      "sha256": "3811ee0fb0968511c2176d5cc9bbd1286ec11ee26fe22e2036d8ffc3ee5144a0"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-not-fixed.json",
+      "bytes": 11596,
+      "sha256": "534529764512dbcb65e7427dae0a083539204b9072e65dca9b5bb5442513f77e"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-grid-deleted-association.json",
+      "bytes": 13186,
+      "sha256": "4292d5d6594b06560448ec0ce7edc2a070155a9bf71762c56f1b5dab966ef3cf"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-grid-inserted-association.json",
+      "bytes": 15719,
+      "sha256": "0f207da477bd3b2723569847613bb98b62cc8371ac289ebc3e6505e4481f09a4"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-grid-shared-anchor.json",
+      "bytes": 14868,
+      "sha256": "f84cca15574a2ef5e5ae52d60a0fb3a74e31c48f48d2b706cab95b0d033b46b3"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-place-neutral.json",
+      "bytes": 12114,
+      "sha256": "80ebe7a9d6f74afe770fd3fac4b025f8075aaab9d561718881698f07604db27d"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-placement-intent-di-only.json",
+      "bytes": 37687,
+      "sha256": "dfc14b1276220501cd1ae689600b13d1394e0baf2e128cd8eb30c55a9a5a4f65"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-placement-intent-unknown.json",
+      "bytes": 22453,
+      "sha256": "17aaa49fbc20148e2802be1d508af4b97a1fc9bc75ead43573b2c2adf4ac77dd"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-recreate-after-remap-edit.json",
+      "bytes": 11999,
+      "sha256": "d6540b0f09645756e6914b6ac35f3c02518bb16e96756f0aca1448f3df739974"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-recreate-after-remap.json",
+      "bytes": 25618,
+      "sha256": "ddeb900daeb6a4c492775fce52b155373a712ca7ce3503faf29f9aa8ff1b0c1f"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-refusal-after-ensures.json",
+      "bytes": 17728,
+      "sha256": "a55ad8555ec3ed8b1a874d64bc15d89d18b639c7f5f5d4d521ac4eea99c4c5b9"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-relation-direction-conflict.json",
+      "bytes": 11649,
+      "sha256": "be4baecd5f1e455c72c8abd4231237f490e5a4bc5e41b141a131d8117297eabc"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-n-reserved-lane-renamed.json",
+      "bytes": 22127,
+      "sha256": "aa01a21fb1f33e659dfbebce388d5cf24b40002726e7958169b3e013b1ec5d3c"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-black-box-pool.json",
+      "bytes": 7861,
+      "sha256": "9a76be8e2a4c974f7de36e3fcc42acf14a4e6d69b9c12b636c8dc1e84312ca7e"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-recovery-partial-provenance.json",
+      "bytes": 18865,
+      "sha256": "1bb06ae871e359bcc632ba7770d4e335d2e9a09ab2778c433d69246f1aa4323d"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-recovery-with-provenance.json",
+      "bytes": 19977,
+      "sha256": "9299e0c77984b2f41a148efe3c5f5f88a6c7184d26d1acd835163a03858dfcad"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-propose-recovery-without-provenance.json",
+      "bytes": 18570,
+      "sha256": "a7a77ffb2d9ba9aea636adea1274347995a8c3f3f29c80d89cbdb2d4ce703c4c"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-sort-placements.json",
+      "bytes": 4050,
+      "sha256": "5fb82409fdf31514b45aff128b2b48ba0bc8270dfa6d1f1ab183794caede9462"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-bare-recipe-refused.json",
+      "bytes": 24402,
+      "sha256": "160dbe5900bb1c40a61e9b5eb35fc0a1fe4e321b4f377ec61571895090053ea9"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-cancel-pending.json",
+      "bytes": 21490,
+      "sha256": "f72440af2d6d07de203a458b25deedba5e8046dd9a8f84f3c7b1e1a6b0c9a377"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-delete-support-undo.json",
+      "bytes": 56874,
+      "sha256": "5d8361f1075caac5c98a8464d1dd2c753fd5474dc066a08ce209e98e3f880b82"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-dispose-pending.json",
+      "bytes": 14553,
+      "sha256": "3394d2aac8ebcf7a4d39781e73e03f08a38100b363ca63623e393673e7d07ddd"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-empty-history.json",
+      "bytes": 17992,
+      "sha256": "6777bc969f6034619d94f26163df2a7651f47e7919d5dbd0f8cda1c79d022280"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-guard-recovery.json",
+      "bytes": 48944,
+      "sha256": "11460e7306d5eb42c469e3f90a8dd1c1351a20bb3c2c5f7b2340ebea4efca18f"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-stale-revision.json",
+      "bytes": 53167,
+      "sha256": "956512d5654f82e7a1ddc4fdc1fcdc835c7bf5a94c51a791199f51c40acf4987"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/cases/l3-tx-theme-history.json",
+      "bytes": 82475,
+      "sha256": "70d9c7929609ebab344e34e9950188925a857cb2f931ed4230dc2825a1e5aacb"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/comparators/lot3-comparators.mjs",
+      "bytes": 21960,
+      "sha256": "c22344c7ccbd21bff271db97b50424785ce57baaec86be254689baf621723d5b"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-abort.json",
+      "bytes": 122857,
+      "sha256": "81e58e0677a5fb12f0a604af860a1b6679eefd1666136478cd4be4ee5e101abf"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-dirconflict.json",
+      "bytes": 123370,
+      "sha256": "fa1f10fc05faeec48065a50ac6f73c5ca946c0e827775150ac465443d7b747fb"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-ensureconflict.json",
+      "bytes": 123863,
+      "sha256": "dbda92973e30aa8d98b1d0bf3324f9bfde4fbc65717ec7c7eafbcf9f38e4ad1a"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-extraction.json",
+      "bytes": 123171,
+      "sha256": "125bc7573f39468f177773bff8ec2c4beaa7c5f1b43f0275b4469ec9a13effd1"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-flip.json",
+      "bytes": 123744,
+      "sha256": "325d9c7c615abf59e087e40ae2c996fb427d800581a33106d6404d4d66c94f31"
+    },
+    {
+      "path": "tests/fixtures/lot3-cn/expectations/profile/neutral-cn-outport.json",
+      "bytes": 123551,
+      "sha256": "7dce72d63cb8da783e03458e2c6cfb50850a83dc1a1ef71b31724d9ab167745d"
+    }
+  ],
+  "removedFiles": [
+    {
+      "path": "tests/profile-lot3-admission.test.mjs",
+      "bytes": 1809,
+      "sha256": "7d28f7b8ae037a6ac5c8f7b230ecc77cd09b54c688ff59b1aa819eff91c0e35b"
+    }
+  ]
+}

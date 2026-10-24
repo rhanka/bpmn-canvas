@@ -1,0 +1,69 @@
+{
+  "caseId": "legacy-adapter-004-unknown-format",
+  "operation": "mapLegacyDiagnostics",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "adapter",
+      "json": "js-legacy-export"
+    },
+    {
+      "role": "legacy",
+      "json": {
+        "kind": "IoError",
+        "code": "unknown-format",
+        "ids": [],
+        "message": "x"
+      }
+    },
+    {
+      "role": "sourceIndex",
+      "json": {}
+    },
+    {
+      "role": "manifest",
+      "path": "lot4-layout-export/expectations/artifacts/legacy-adapter-manifest.json",
+      "sha256": "703d26a87a6eb5c8beed42337f331af14b22b99843a2eaa571b8263831574c89"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": [
+          {
+            "code": "export-format-unsupported",
+            "severity": "error",
+            "classification": "integrity",
+            "stage": "export",
+            "ruleId": "adapter",
+            "messageKey": "export.format-unsupported",
+            "disposition": "refused",
+            "source": {
+              "domain": "none",
+              "pointer": null,
+              "targetId": null,
+              "provenance": "unavailable"
+            },
+            "result": {
+              "domain": "none",
+              "pointer": null,
+              "targetId": null,
+              "provenance": "unavailable"
+            },
+            "beforePresent": false,
+            "afterPresent": false,
+            "legacyCode": "unknown-format"
+          }
+        ],
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

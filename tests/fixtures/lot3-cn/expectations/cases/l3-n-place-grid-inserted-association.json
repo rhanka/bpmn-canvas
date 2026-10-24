@@ -1,0 +1,445 @@
+{
+  "caseId": "l3-n-place-grid-inserted-association",
+  "operation": "normalize",
+  "phase": "normalize",
+  "profileArtifact": {
+    "path": "profile-parity-corpus/profile-mechanism/1/neutral-grid-profile.json",
+    "sha256": "7247b5cd90c13fea2d42048a8ea6a5f3a36f64db67a771533adf10968c92cccd"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-grid/1",
+          "version": "2.0.0",
+          "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+          "base": {
+            "id": "neutral-base/1",
+            "version": "fixture-2",
+            "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-descriptors/1",
+              "version": "fixture-2",
+              "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_1",
+              "flowElements": [
+                {
+                  "$type": "bpmn:ServiceTask",
+                  "id": "Task_B",
+                  "name": "Ready",
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "Preserved source",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                },
+                {
+                  "$type": "bpmn:ServiceTask",
+                  "id": "Task_A",
+                  "name": ""
+                }
+              ],
+              "artifacts": [
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Z-consumer",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Task_B",
+                  "associationDirection": "One"
+                },
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Y-consumer",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Task_B",
+                  "associationDirection": "One"
+                },
+                {
+                  "$type": "bpmn:Association",
+                  "id": "A-producer",
+                  "sourceRef": "Task_B",
+                  "targetRef": "Task_A",
+                  "associationDirection": "One"
+                },
+                {
+                  "$type": "bpmn:TextAnnotation",
+                  "id": "g_61b268027699fa668a9b0e3eced8130a2b2e188f426051e9ad25ebb1e33a800c",
+                  "text": "[Note] helper"
+                },
+                {
+                  "$type": "bpmn:Association",
+                  "id": "B-consumer",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Task_B",
+                  "associationDirection": "One"
+                }
+              ],
+              "isExecutable": true
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a"
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "operation": "normalize",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-grid/1",
+          "version": "2.0.0",
+          "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+          "base": {
+            "id": "neutral-base/1",
+            "version": "fixture-2",
+            "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-descriptors/1",
+              "version": "fixture-2",
+              "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+            }
+          ]
+        },
+        "baseRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a",
+        "revision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a",
+        "report": {
+          "reportVersion": "2",
+          "operation": "normalize",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-grid/1",
+            "version": "2.0.0",
+            "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+            "base": {
+              "id": "neutral-base/1",
+              "version": "fixture-2",
+              "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-descriptors/1",
+                "version": "fixture-2",
+                "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+              }
+            ]
+          },
+          "targetIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-grid/1",
+            "version": "2.0.0",
+            "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+            "base": {
+              "id": "neutral-base/1",
+              "version": "fixture-2",
+              "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-descriptors/1",
+                "version": "fixture-2",
+                "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+              }
+            ]
+          },
+          "inputRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a",
+          "outputRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a",
+          "entries": [],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        },
+        "payload": {
+          "envelope": {
+            "documentVersion": "1",
+            "profileIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-grid/1",
+              "version": "2.0.0",
+              "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+              "base": {
+                "id": "neutral-base/1",
+                "version": "fixture-2",
+                "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-descriptors/1",
+                  "version": "fixture-2",
+                  "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                }
+              ]
+            },
+            "tree": {
+              "$type": "bpmn:Definitions",
+              "id": "Definitions_1",
+              "rootElements": [
+                {
+                  "$type": "bpmn:Process",
+                  "id": "Process_1",
+                  "flowElements": [
+                    {
+                      "$type": "bpmn:ServiceTask",
+                      "id": "Task_B",
+                      "name": "Ready",
+                      "documentation": [
+                        {
+                          "$type": "bpmn:Documentation",
+                          "text": "Preserved source",
+                          "textFormat": "text/plain"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "bpmn:ServiceTask",
+                      "id": "Task_A",
+                      "name": ""
+                    }
+                  ],
+                  "artifacts": [
+                    {
+                      "$type": "bpmn:Association",
+                      "id": "Z-consumer",
+                      "sourceRef": "Task_A",
+                      "targetRef": "Task_B",
+                      "associationDirection": "One"
+                    },
+                    {
+                      "$type": "bpmn:Association",
+                      "id": "Y-consumer",
+                      "sourceRef": "Task_A",
+                      "targetRef": "Task_B",
+                      "associationDirection": "One"
+                    },
+                    {
+                      "$type": "bpmn:Association",
+                      "id": "A-producer",
+                      "sourceRef": "Task_B",
+                      "targetRef": "Task_A",
+                      "associationDirection": "One"
+                    },
+                    {
+                      "$type": "bpmn:TextAnnotation",
+                      "id": "g_61b268027699fa668a9b0e3eced8130a2b2e188f426051e9ad25ebb1e33a800c",
+                      "text": "[Note] helper"
+                    },
+                    {
+                      "$type": "bpmn:Association",
+                      "id": "B-consumer",
+                      "sourceRef": "Task_A",
+                      "targetRef": "Task_B",
+                      "associationDirection": "One"
+                    }
+                  ],
+                  "isExecutable": true
+                }
+              ]
+            },
+            "bindings": [],
+            "semanticRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a"
+          },
+          "placements": [
+            {
+              "elementId": "Task_A",
+              "ownerProcessId": "Process_1",
+              "regionKey": "side",
+              "anchorAssociationId": "B-consumer",
+              "relatedAssociationIds": [
+                "A-producer",
+                "B-consumer",
+                "Y-consumer",
+                "Z-consumer"
+              ]
+            },
+            {
+              "elementId": "Task_B",
+              "ownerProcessId": "Process_1",
+              "regionKey": "side",
+              "anchorAssociationId": "A-producer",
+              "relatedAssociationIds": [
+                "A-producer",
+                "B-consumer",
+                "Y-consumer",
+                "Z-consumer"
+              ]
+            }
+          ],
+          "report": {
+            "reportVersion": "2",
+            "operation": "normalize",
+            "sourceIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-grid/1",
+              "version": "2.0.0",
+              "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+              "base": {
+                "id": "neutral-base/1",
+                "version": "fixture-2",
+                "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-descriptors/1",
+                  "version": "fixture-2",
+                  "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                }
+              ]
+            },
+            "targetIdentity": {
+              "mechanismVersion": "1",
+              "schemaVersion": "1.0.0",
+              "profile": "neutral-grid/1",
+              "version": "2.0.0",
+              "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+              "base": {
+                "id": "neutral-base/1",
+                "version": "fixture-2",
+                "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+              },
+              "descriptors": [
+                {
+                  "id": "neutral-descriptors/1",
+                  "version": "fixture-2",
+                  "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+                }
+              ]
+            },
+            "inputRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a",
+            "outputRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a",
+            "entries": [],
+            "rawStandardFindings": [],
+            "idMap": [],
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-grid/1",
+          "version": "2.0.0",
+          "sha256": "3d0c95bd8359e3acb107fb114ed8073239cbe4ff3b64b6f280a1f36ae6a87058",
+          "base": {
+            "id": "neutral-base/1",
+            "version": "fixture-2",
+            "sha256": "a23a15d22585e765caeb8ad83bedb76c20bcb5fa1f7bee81ef062f4e97a15ea9"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-descriptors/1",
+              "version": "fixture-2",
+              "sha256": "d737e07dc2b397bb02261fb5e7e46b51b7225f58fe82bebaa78cca2e613d62d2"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_1",
+              "flowElements": [
+                {
+                  "$type": "bpmn:ServiceTask",
+                  "id": "Task_B",
+                  "name": "Ready",
+                  "documentation": [
+                    {
+                      "$type": "bpmn:Documentation",
+                      "text": "Preserved source",
+                      "textFormat": "text/plain"
+                    }
+                  ]
+                },
+                {
+                  "$type": "bpmn:ServiceTask",
+                  "id": "Task_A",
+                  "name": ""
+                }
+              ],
+              "artifacts": [
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Z-consumer",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Task_B",
+                  "associationDirection": "One"
+                },
+                {
+                  "$type": "bpmn:Association",
+                  "id": "Y-consumer",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Task_B",
+                  "associationDirection": "One"
+                },
+                {
+                  "$type": "bpmn:Association",
+                  "id": "A-producer",
+                  "sourceRef": "Task_B",
+                  "targetRef": "Task_A",
+                  "associationDirection": "One"
+                },
+                {
+                  "$type": "bpmn:TextAnnotation",
+                  "id": "g_61b268027699fa668a9b0e3eced8130a2b2e188f426051e9ad25ebb1e33a800c",
+                  "text": "[Note] helper"
+                },
+                {
+                  "$type": "bpmn:Association",
+                  "id": "B-consumer",
+                  "sourceRef": "Task_A",
+                  "targetRef": "Task_B",
+                  "associationDirection": "One"
+                }
+              ],
+              "isExecutable": true
+            }
+          ]
+        },
+        "bindings": [],
+        "semanticRevision": "430e6ededdce478775c9918465b87ad74a301b055e6f95604d0446c626d5413a"
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2",
+    "placements-order/lot3"
+  ]
+}

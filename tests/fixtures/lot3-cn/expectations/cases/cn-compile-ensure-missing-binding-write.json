@@ -1,0 +1,24 @@
+{
+  "caseId": "cn-compile-ensure-missing-binding-write",
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/vendor/py/parity/profiles/support-no-binding-write.json",
+    "sha256": "f899daacaca9f6e34ee1c9829cfd5619232030ac11788aca1e332c9e00029145"
+  },
+  "inputArtifacts": [],
+  "expectedArtifacts": [
+    {
+      "role": "compile",
+      "json": {
+        "code": "profile-write-set",
+        "diagnostics": [],
+        "status": "refused"
+      }
+    }
+  ],
+  "expectedStatus": "refused:profile-write-set",
+  "comparatorIds": [
+    "compile/lot3"
+  ]
+}

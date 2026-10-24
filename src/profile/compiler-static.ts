@@ -2,7 +2,7 @@ import { canonicalize } from "./canonical.js";
 import { failContract, pointerKey, typeMatches } from "./native-contracts.js";
 import type { CompilerAuthority } from "./compiler-authority.js";
 import type { CompleteProfileDocument } from "./envelope.js";
-import { checkActionPhase, checkStaticRule, requiredWrites } from "./static-contracts.js";
+import { checkActionPhase, checkRenderTokenSignature, checkStaticRule, requiredWrites } from "./static-contracts.js";
 
 type Ast = Record<string, any>;
 type Domain = { types: readonly string[]; generic?: boolean };
@@ -38,6 +38,17 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
   const notions = unique(p.notions, "id"), recipes = unique(p.recipes, "id"), themes = unique(p.themes, "id"), messages = unique(p.messages, "id"), resources = unique(p.resources, "id");
   for (const section of ["rules", "ui", "exports", "migrations", "providerDialects"]) unique(p[section], "id");
   const symbol = (map: Map<string, Ast>, name: string): Ast => map.get(name) ?? failContract("profile-symbol");
+  // Lot 5: upstream IDs have one owner, and every localized message
+  // provides the configured fallback text (DESIGN §8.3).
+  const upstreamIds = new Set<string>();
+  for (const entry of p.ui) for (const id of entry.upstreamEntries ?? []) {
+    if (typeof id !== "string" || upstreamIds.has(id)) failContract("profile-symbol");
+    upstreamIds.add(id);
+  }
+  const fallback = (p.policies as Ast)?.localeFallback;
+  if (typeof fallback === "string") for (const record of messages.values()) {
+    if (!(record.texts ?? []).some((text: Ast) => text?.name === fallback)) failContract("profile-symbol");
+  }
   const type = (name: string): void => { if (!Object.hasOwn(descriptors, name) || !authority.types.includes(name)) failContract("profile-type"); };
   const binding = (env: Env, name: string): Domain => env.get(name) ?? failContract("profile-symbol");
   const baseEnv = (): Env => new Map([["root", { types: ["bpmn:Definitions"] }], ["self", native], ["bindingOwner", elements]]);
@@ -77,7 +88,9 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
       case "param": { const t = params.get(v.name) ?? failContract("profile-symbol"); return t === "element" ? "string" : t; }
       case "read": return read(binding(env, v.binding), v.path);
       case "id": {
-        if (binding(env, v.binding).types.some(t => !descriptors[t]?.id)) failContract("profile-type");
+        // An id-less instance yields MISSING at runtime; only a domain that
+        // can never bear an ID is rejected statically.
+        if (binding(env, v.binding).types.every(t => !descriptors[t]?.id)) failContract("profile-type");
         return "string";
       }
       case "concat": for (const part of v.values) expectType(value(part, env, params, location), "string"); return "string";
@@ -144,7 +157,13 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
     switch (s.via) {
       case "pages": if (!exporting || domain !== "RenderData") failContract("profile-type"); result = render("PageHandle"); order = "page-occurrence"; break;
       case "occurrences": if (!exporting || !["RenderData", "PageHandle"].includes(domain!)) failContract("profile-type"); result = render("OccurrenceHandle"); order = "page-occurrence"; break;
-      case "semantic": if (!exporting || domain !== "OccurrenceHandle") failContract("profile-type"); result = native; break;
+      // Render occurrences resolve to their semantic element in export/render
+      // code; an endpoint capability predicate guards on the semantic
+      // counterparts of native self, which selects no render handle.
+      case "semantic": if (!exporting || domain !== "OccurrenceHandle") {
+        const nativeDomain = domain !== undefined && !["RenderData", "PageHandle", "OccurrenceHandle"].includes(domain);
+        if (!nativeDomain || location !== "capability") failContract("profile-type");
+      } result = native; break;
       case "self": if (["PageHandle", "OccurrenceHandle"].includes(domain!)) order = "page-occurrence"; break;
       case "root": result = { types: ["bpmn:Definitions"] }; break;
       case "all": result = native; break;
@@ -243,7 +262,11 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
             if (step.op === "create") {
               expectType(value(step.ownerId, env, params, "create.ownerId"), "string", "profile-create-identity");
               expectType(value(step.key, env, params, "create.key"), "string", "profile-create-identity");
-            } else { binding(env, step.owner); binding(env, step.ownerId); }
+            } else {
+              binding(env, step.owner);
+              expectType(value(step.ownerId, env, params, "ensure.ownerId"), "string", "profile-create-identity");
+              expectType(value(step.key, env, params, "ensure.key"), "string", "profile-create-identity");
+            }
             write({ types: [step.type] }, "/id", "scalar", recipe.phase);
           }
           write(parent, path, "containment", recipe.phase);
@@ -288,7 +311,7 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
           break;
         }
         case "loss": case "refuse": binding(env, step.target); break;
-        case "remove": binding(env, step.target); for (const s of step.dependents) select(s, env, params, recipe.phase); break;
+        case "remove": binding(env, step.target); select(step.dependents, env, params, recipe.phase); break;
       }
     }
     for (const w of recipe.writes) if (!["envelope", "artifact"].includes(w.binding)) binding(env, w.binding);
@@ -297,6 +320,7 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
   for (const theme of p.themes) {
     for (const name of [theme.id, ...theme.aliases]) { if (themeNames.has(name)) failContract("profile-symbol"); themeNames.add(name); }
     unique(theme.tokens, "name"); unique(theme.glyphs, "id"); unique(theme.syntheticOccurrences, "id");
+    for (const token of theme.tokens) checkRenderTokenSignature(token.name, token.value);
     symbol(resources, theme.metricsResource);
     if (theme.fallback) symbol(themes, theme.fallback);
     for (const glyph of theme.glyphs) { checkStaticRule("CR-09", { glyph }, {}); if (glyph.nativeType) type(glyph.nativeType); }
@@ -306,8 +330,18 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
   for (const id of themes.keys()) visit(id);
   function icon(i: Ast): Ast { const theme = symbol(themes, i.theme); symbol(unique(theme.glyphs, "id"), i.glyph); return theme; }
   function tokens(items: Ast[], theme: Ast): void {
-    const known = unique(theme.tokens, "name"); unique(items, "name");
-    for (const token of items) if (typeof token.value !== typeof symbol(known, token.name).value) failContract("profile-type");
+    const known = unique(theme.tokens, "name");
+    const seen = new Set<string>();
+    for (const token of items) {
+      if (seen.has(token.name)) failContract("profile-type");
+      seen.add(token.name);
+      // A binding may override a render token the theme does not declare; the
+      // declared type agrees when the theme declares the name, and every
+      // override value keeps its render token signature.
+      const declared = known.get(token.name);
+      if (declared !== undefined && typeof token.value !== typeof declared.value) failContract("profile-type");
+      checkRenderTokenSignature(token.name, token.value);
+    }
   }
   function ui(entry: Ast, env: Env, valueType = "string"): void {
     symbol(messages, entry.label); if (entry.message) symbol(messages, entry.message);
@@ -336,6 +370,7 @@ export function checkWholeProfile(profile: CompleteProfileDocument, authority: C
   for (const endpoint of p.exports) {
     for (const id of endpoint.recipes) if (symbol(recipes, id).phase !== "export") failContract("profile-type");
     for (const cap of endpoint.capabilities) predicate(cap.when, baseEnv(), new Map(), "capability");
+    if (endpoint.counterOrigin !== 0 && endpoint.idPolicy !== "counter") failContract("profile-type");
   }
   for (const m of p.messages) unique(m.texts, "name");
   // Aliases share their declared kind's namespace, including canonical IDs.

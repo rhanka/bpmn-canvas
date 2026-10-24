@@ -1,0 +1,32 @@
+{
+  "caseId": "export.compile.all-fields-valid",
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot4-layout-export/expectations/vendor/py/parity/artifacts/profile-17c523baa271e4a3.json",
+    "sha256": "b37d17f0371543ed228bd5cd942ef6d454d8ef87dc9323e5becf128166d62f5f"
+  },
+  "inputArtifacts": [],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "diagnostics": []
+      }
+    },
+    {
+      "role": "unsealed",
+      "json": [
+        {
+          "pointer": "/payload",
+          "reason": "CompiledProfile is an in-memory implementation object without a closed DESIGN wire shape (BLOCKB-PARITY-SYNC PS-35); compile success and empty diagnostics are sealed."
+        }
+      ]
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "caseId": "cn-compile-ensure-non-support-type",
+  "operation": "compileProfile",
+  "phase": null,
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/vendor/py/parity/profiles/support-task-ensure.json",
+    "sha256": "4d068780912094b6484987e664b1ccdea928720f055a1d7404645def5653cf51"
+  },
+  "inputArtifacts": [],
+  "expectedArtifacts": [
+    {
+      "role": "compile",
+      "json": {
+        "code": "profile-producer",
+        "diagnostics": [],
+        "status": "refused"
+      }
+    }
+  ],
+  "expectedStatus": "refused:profile-producer",
+  "comparatorIds": [
+    "compile/lot3"
+  ]
+}

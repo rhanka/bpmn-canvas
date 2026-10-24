@@ -1,0 +1,96 @@
+{
+  "format": "block-b-final-x24-rebind/1",
+  "headBefore": "f4e5f91dff6deaaa42b209aca2cb14d850c5ae20",
+  "oldSeal": {
+    "bytes": 31693,
+    "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+  },
+  "newSeal": {
+    "bytes": 31693,
+    "sha256": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+  },
+  "reviewedTokens": 12,
+  "boundRecords": 255,
+  "reviewedSpans": 587,
+  "allowances": 1,
+  "staleBindings": 0,
+  "reviewedSpanBytesChanged": 0,
+  "allowanceSpanBytesChanged": 0,
+  "expectedValuesChanged": 0,
+  "sealedFileChanges": 0,
+  "sealGateBefore": {
+    "tests": 13,
+    "pass": 13,
+    "fail": 0
+  },
+  "stoppedCases": [
+    {
+      "caseId": "x24-L-004-zero-unmatched",
+      "clause": "I1 zero-literal scan of the tracked tree",
+      "expected": 0,
+      "observed": 3,
+      "positions": [
+        "unmatched src/react/workshop.tsx:110:39 raw LX-NV-1 b53d4d24",
+        "unmatched src/react/workshop.tsx:326:30 raw LX-NV-1 b53d4d24",
+        "unmatched src/react/workshop.tsx:326:94 raw LX-NV-1 5a434281"
+      ],
+      "source": "src/react/workshop.tsx",
+      "identicalToStartingCommit": true,
+      "action": "Stopped this case. No source, matcher, allowance or assertion was changed."
+    }
+  ],
+  "scan": {
+    "files": 2934,
+    "occurrences": 3958,
+    "paired": 3368,
+    "reviewed": 587,
+    "unmatched": 3,
+    "byToken": {
+      "RV-01": 153,
+      "RV-02": 186,
+      "RV-03": 86,
+      "RV-04": 53,
+      "RV-05": 51,
+      "RV-06": 4,
+      "RV-07": 13,
+      "RV-08": 11,
+      "RV-09": 7,
+      "RV-10": 21,
+      "RV-11": 1,
+      "RV-12": 1
+    }
+  },
+  "tooling": [
+    {
+      "tool": "tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs",
+      "status": 1,
+      "changedFiles": 0
+    },
+    {
+      "tool": "tests/fixtures/x24-externalization/expectations/derive/policies.mjs",
+      "status": 0,
+      "changedFiles": 0
+    },
+    {
+      "tool": "tests/fixtures/x24-externalization/expectations/derive/inputs.mjs",
+      "status": 0,
+      "changedFiles": 0
+    },
+    {
+      "tool": "tests/fixtures/x24-externalization/expectations/derive/author-cases.mjs",
+      "status": 0,
+      "changedFiles": 0
+    },
+    {
+      "tool": "tests/fixtures/x24-externalization/expectations/derive/clause-table.mjs",
+      "status": 0,
+      "changedFiles": 0
+    },
+    {
+      "tool": "tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+      "status": 0,
+      "changedFiles": 0
+    }
+  ],
+  "result": "All bindings were current. The author tools reproduced every sealed byte; the old and new seals are identical. The zero-unmatched case is stopped on three existing source occurrences."
+}

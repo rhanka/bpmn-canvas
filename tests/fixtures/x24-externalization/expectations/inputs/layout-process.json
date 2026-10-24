@@ -1,0 +1,145 @@
+{
+  "processes": [
+    {
+      "id": "P1",
+      "proc": {
+        "name": "Intake",
+        "lanes": [
+          {
+            "name": "Desk",
+            "nodes": [
+              {
+                "kind": "start",
+                "id": "S1",
+                "text": "Received"
+              },
+              {
+                "kind": "task",
+                "id": "T1",
+                "text": "Review the request",
+                "application": "Registry"
+              },
+              {
+                "kind": "gateway",
+                "id": "G1",
+                "text": "Complete?",
+                "subtype": "OR"
+              },
+              {
+                "kind": "end",
+                "id": "E1",
+                "text": "Done"
+              },
+              {
+                "kind": "document",
+                "id": "D1",
+                "text": "Checklist",
+                "attachedTo": "T1",
+                "direction": "document"
+              },
+              {
+                "kind": "object-in",
+                "id": "I1",
+                "text": "Form",
+                "attachedTo": "T1",
+                "direction": "in"
+              },
+              {
+                "kind": "object-out",
+                "id": "O1",
+                "text": "Form with the signed decision of the partner",
+                "attachedTo": "T1",
+                "direction": "out"
+              }
+            ]
+          },
+          {
+            "name": "Back office",
+            "nodes": [
+              {
+                "kind": "call",
+                "id": "C1",
+                "text": "Ask the partner"
+              },
+              {
+                "kind": "subprocess",
+                "id": "SP1",
+                "text": "Archive",
+                "application": "Vault"
+              },
+              {
+                "kind": "port-in",
+                "id": "P1",
+                "text": "Inbox of the regional office for every open question"
+              },
+              {
+                "kind": "end",
+                "id": "E2",
+                "text": "Closed after the regional office answered every open question"
+              }
+            ]
+          },
+          {
+            "name": "Archive",
+            "nodes": [
+              {
+                "kind": "event",
+                "id": "EV1",
+                "text": "Wait"
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "source": "I1",
+            "target": "T1",
+            "kind": "data"
+          },
+          {
+            "source": "T1",
+            "target": "O1",
+            "kind": "data"
+          },
+          {
+            "source": "S1",
+            "target": "T1",
+            "kind": "sequence"
+          },
+          {
+            "source": "T1",
+            "target": "G1",
+            "kind": "sequence"
+          },
+          {
+            "source": "G1",
+            "target": "E1",
+            "kind": "sequence",
+            "label": "yes"
+          },
+          {
+            "source": "G1",
+            "target": "C1",
+            "kind": "sequence",
+            "label": "no"
+          },
+          {
+            "source": "C1",
+            "target": "SP1",
+            "kind": "sequence"
+          },
+          {
+            "source": "SP1",
+            "target": "E2",
+            "kind": "sequence"
+          },
+          {
+            "source": "D1",
+            "target": "T1",
+            "kind": "document"
+          }
+        ]
+      }
+    }
+  ]
+}

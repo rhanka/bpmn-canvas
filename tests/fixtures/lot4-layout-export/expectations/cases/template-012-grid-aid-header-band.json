@@ -1,0 +1,64 @@
+{
+  "caseId": "template-012-grid-aid-header-band",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "aid",
+          "kind": "template",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": [],
+          "template": "header-band",
+          "parameters": [
+            {
+              "name": "headerHeight",
+              "value": 12
+            }
+          ]
+        },
+        "bounds": {
+          "x": 100000,
+          "y": 350000,
+          "width": 150000,
+          "height": 40000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": {
+          "header": {
+            "x": 100000,
+            "y": 350000,
+            "width": 150000,
+            "height": 12
+          },
+          "body": {
+            "x": 100000,
+            "y": 350012,
+            "width": 150000,
+            "height": 39988
+          }
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

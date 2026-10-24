@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:yf="urn:x24:facts-b:1" id="Defs" targetNamespace="urn:x24:export">
+  <bpmn:collaboration id="C1">
+    <bpmn:participant id="Pool1" name="Ledger" processRef="P1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="P1" isExecutable="false">
+    <bpmn:laneSet id="LS_P1">
+      <bpmn:lane id="L1" name="Desk">
+        <bpmn:flowNodeRef>S1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="S1" name="In"><bpmn:outgoing>F1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:task id="T1" name="Review"><bpmn:extensionElements><yf:facts pos="3" goes="P2"/></bpmn:extensionElements><bpmn:incoming>F1</bpmn:incoming><bpmn:outgoing>F2</bpmn:outgoing><bpmn:property id="T1_input" name="input"/><bpmn:dataInputAssociation id="DIA1"><bpmn:extensionElements><yf:facts tag="reads"/></bpmn:extensionElements><bpmn:sourceRef>D1</bpmn:sourceRef><bpmn:targetRef>T1_input</bpmn:targetRef></bpmn:dataInputAssociation></bpmn:task>
+    <bpmn:task id="T2" name="Approve"><bpmn:incoming>F2</bpmn:incoming><bpmn:outgoing>F3</bpmn:outgoing><bpmn:property id="T2_input" name="input"/><bpmn:dataInputAssociation id="DIA2"><bpmn:sourceRef>D1</bpmn:sourceRef><bpmn:targetRef>T2_input</bpmn:targetRef></bpmn:dataInputAssociation></bpmn:task>
+    <bpmn:endEvent id="E1" name="Out"><bpmn:incoming>F3</bpmn:incoming></bpmn:endEvent>
+    <bpmn:dataObjectReference id="D1" name="Form" dataObjectRef="DO1"><bpmn:extensionElements><yf:facts row="L1" dir="in" lead="DIA2"/></bpmn:extensionElements></bpmn:dataObjectReference>
+    <bpmn:dataObjectReference id="D2" name="Archive" dataObjectRef="DO2"><bpmn:extensionElements><yf:facts row="L1" dir="out"/></bpmn:extensionElements></bpmn:dataObjectReference>
+    <bpmn:dataObject id="DO1"/>
+    <bpmn:dataObject id="DO2"/>
+    <bpmn:sequenceFlow id="F1" sourceRef="S1" targetRef="T1"></bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F2" sourceRef="T1" targetRef="T2"></bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F3" sourceRef="T2" targetRef="E1"></bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:process id="P2" name="Sub ledger" isExecutable="false">
+    <bpmn:startEvent id="S2" name="Begin"><bpmn:outgoing>F4</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:endEvent id="E2" name="Finish"><bpmn:incoming>F4</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="F4" sourceRef="S2" targetRef="E2"></bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="D_P1">
+    <bpmndi:BPMNPlane id="Plane_D_P1" bpmnElement="C1">
+      <bpmndi:BPMNShape id="Pool1_di" bpmnElement="Pool1" isHorizontal="true"><dc:Bounds x="0" y="0" width="600" height="280"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L1_di" bpmnElement="L1" isHorizontal="true"><dc:Bounds x="30" y="0" width="570" height="280"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S1_di" bpmnElement="S1"><dc:Bounds x="80" y="110" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T1_di" bpmnElement="T1"><dc:Bounds x="160" y="88" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T2_di" bpmnElement="T2"><dc:Bounds x="300" y="88" width="100" height="80"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E1_di" bpmnElement="E1"><dc:Bounds x="440" y="110" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="D1_di" bpmnElement="D1"><dc:Bounds x="220" y="200" width="36" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="D2_di" bpmnElement="D2"><dc:Bounds x="520" y="200" width="36" height="50"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DIA1_di" bpmnElement="DIA1"><di:waypoint x="238" y="200"/><di:waypoint x="210" y="168"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DIA2_di" bpmnElement="DIA2"><di:waypoint x="256" y="225"/><di:waypoint x="350" y="168"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1"><di:waypoint x="116" y="128"/><di:waypoint x="160" y="128"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2"><di:waypoint x="260" y="128"/><di:waypoint x="300" y="128"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3"><di:waypoint x="400" y="128"/><di:waypoint x="440" y="128"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="D_P2">
+    <bpmndi:BPMNPlane id="Plane_D_P2" bpmnElement="P2">
+      <bpmndi:BPMNShape id="S2_di" bpmnElement="S2"><dc:Bounds x="80" y="400" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E2_di" bpmnElement="E2"><dc:Bounds x="200" y="400" width="36" height="36"/></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F4_di" bpmnElement="F4"><di:waypoint x="116" y="418"/><di:waypoint x="200" y="418"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

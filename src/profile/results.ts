@@ -3,6 +3,7 @@ import { cloneJson, failContract, validateBindingKeys } from "./native-contracts
 import { array, choice, compareText, digest, equal, noNull, record, text, validateIdentity } from "./boundary.js";
 import type { DocumentEnvelope, ProfileIdentity } from "./envelope.js";
 import { normalizeDiStyles, normalizeOverrides, validateLayout, validateRenderDataShape, validateRenderBinding, viewRevision } from "./presentation-contracts.js";
+import type { TokenContext } from "./presentation-contracts.js";
 import type { RenderBinding, RenderData, Snapshot } from "./presentation-contracts.js";
 import { buildReport, capabilities, sortIdMap, validateEntry, validateReport, resultOperations } from "./report.js";
 import type { Capability, IdMapping, Report, ReportEntry } from "./report.js";
@@ -92,8 +93,11 @@ export function validatePureResult<T = unknown>(value: unknown, operation?: stri
   return cloneJson(value) as PureResult<T>;
 }
 const operations = resultOperations;
-const readonlyOperations = ["getDefinitions", "getSnapshot", "validate", "resolveTheme", "mapExport", "serializePrepared", "exportPrepared", "setTheme"];
-export function validateResult<T = unknown>(value: unknown): Result<T> {
+const readonlyOperations = ["getDefinitions", "getSnapshot", "validate", "layout", "resolveTheme", "mapExport", "serializePrepared", "exportPrepared", "setTheme"];
+// Lot 4 resolves render payloads whose styles carry injected font and dash
+// tokens; the caller that owns those registries passes them here so the
+// render shape check admits exactly what lot-4 validation admitted.
+export function validateResult<T = unknown>(value: unknown, options: { readonly tokenContext?: TokenContext } = {}): Result<T> {
   const status = (value as { status?: unknown })?.status;
   const r = record(value, status === "ok" ? ["status", "operation", "profileIdentity", "baseRevision", "revision", "report", "payload"] : ["status", "operation", "code", "diagnostics", "report"], status === "ok" ? [] : ["profileIdentity", "baseRevision"]);
   choice(status, ["ok", "refused"]); choice(r.operation, operations); const operation = r.operation as string;
@@ -120,7 +124,7 @@ export function validateResult<T = unknown>(value: unknown): Result<T> {
     if (payload.ok !== (counts.error === 0)) failContract();
     if (!equal(payload, lintSummary(report.entries))) failContract();
   }
-  else if (operation === "resolveTheme") validateRenderDataShape(p);
+  else if (operation === "resolveTheme") validateRenderDataShape(p, options.tokenContext === undefined ? {} : { tokenContext: options.tokenContext });
   else if (["serializePrepared", "exportPrepared"].includes(operation)) {
     const payload = record(p, ["format", "bytes", "digest", "idMap", "capability"]); text(payload.format); digest(payload.digest); array(payload.idMap); if (!equal(sortIdMap(payload.idMap as IdMapping[]), payload.idMap)) failContract(); choice(payload.capability, ["engine-byte-compatible", "structural"]);
     if (!(payload.bytes instanceof Uint8Array)) failContract();

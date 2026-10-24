@@ -1,0 +1,71 @@
+{
+  "caseId": "legacy-adapter-010-adapter-scope",
+  "operation": "mapLegacyDiagnostics",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "adapter",
+      "json": "assistant-ui-export"
+    },
+    {
+      "role": "legacy",
+      "json": {
+        "kind": "IoError",
+        "code": "duplicate-id",
+        "ids": [
+          "X"
+        ],
+        "message": "x"
+      }
+    },
+    {
+      "role": "sourceIndex",
+      "json": {}
+    },
+    {
+      "role": "manifest",
+      "path": "lot4-layout-export/expectations/artifacts/legacy-adapter-manifest.json",
+      "sha256": "703d26a87a6eb5c8beed42337f331af14b22b99843a2eaa571b8263831574c89"
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "ok",
+        "payload": [
+          {
+            "code": "legacy-unmapped",
+            "severity": "error",
+            "classification": "integrity",
+            "stage": "export",
+            "ruleId": "adapter",
+            "messageKey": "legacy.unmapped",
+            "disposition": "refused",
+            "source": {
+              "domain": "tree",
+              "pointer": null,
+              "targetId": "X",
+              "provenance": "unavailable"
+            },
+            "result": {
+              "domain": "none",
+              "pointer": null,
+              "targetId": null,
+              "provenance": "unavailable"
+            },
+            "beforePresent": false,
+            "afterPresent": false,
+            "legacyCode": "duplicate-id"
+          }
+        ],
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "ok",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}

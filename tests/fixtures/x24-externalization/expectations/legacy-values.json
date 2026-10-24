@@ -1,0 +1,226 @@
+{
+ "format": "x24-legacy-values/2",
+ "note": "Canonical SHA-256 of each base-tree business value in business-policy/1 shape, recomputed from the cited base lines (files named by masked path). The private integration legacy data supplied to the legacy adapter must hash to these values field by field; the values themselves are not copied into this public seal.",
+ "canonical": "object keys sorted by UTF-16 code units, no whitespace, ECMAScript strings and numbers",
+ "values": {
+  "classification": {
+   "sha256": "ea6e4a9e9139313e5cad7e80ccae6f7366f94d2b1e4773b9e97f5ee33bf6a268",
+   "sources": [
+    {
+     "file": "src/internal/annotations.ts",
+     "lines": "7",
+     "sourceSha256": "48fe76b010b737b43297b3eb9c107bd2c86b806cb00db66b8cc7e98e82259ea9"
+    },
+    {
+     "file": "src/internal/annotations.ts",
+     "lines": "11",
+     "sourceSha256": "48fe76b010b737b43297b3eb9c107bd2c86b806cb00db66b8cc7e98e82259ea9"
+    },
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/palette.ts",
+     "lines": "71-72",
+     "sourceSha256": "e77a7698b1d58945834d089e22241091544ade1d7cfdde83d47374e6b6bb1964"
+    }
+   ],
+   "note": "Role markers of the base tree, recognised after the ECMAScript leading trim (JS \\s), and the one-space insertion separator."
+  },
+  "attachment.applicationHost": {
+   "sha256": "1f5db1f90c233a6bb24774ddfca8fe10caad532ffb7a001598f8cf43b517af82",
+   "sources": [
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/renderer.ts",
+     "lines": "74-76",
+     "sourceSha256": "c34cdca221b15fe80b0b7a6fdc48093a6ee59ee59423f8f67967017cf26cfb71"
+    },
+    {
+     "file": "src/io/reference-model.ts",
+     "lines": "32",
+     "sourceSha256": "c3bfc6c7564fd32dcd2a11b4202b2d6158445f23dab47353439c175933a647d1"
+    }
+   ],
+   "note": "The implicit link retarget of the base layout input is not pinned: business-policy/1 admits only preserve-report (UNSEALED, OPEN-MIGRATION)."
+  },
+  "metrics.tables": {
+   "sha256": "9b179e8c74e5f690172a2c2d07c62a13536b9ed171aa72a7d64f5d6ba70ae463",
+   "sources": [
+    {
+     "file": "src/internal/textMetrics.ts",
+     "lines": "24-33",
+     "sourceSha256": "36e4d38834ebc1c403db55ed07394368479400e050bd5c5f35e00f800abce8da"
+    },
+    {
+     "file": "src/internal/textMetrics.ts",
+     "lines": "41",
+     "sourceSha256": "36e4d38834ebc1c403db55ed07394368479400e050bd5c5f35e00f800abce8da"
+    },
+    {
+     "file": "src/internal/swimlaneLayout.ts",
+     "lines": "55",
+     "sourceSha256": "090dcf468335554b9c1b145a7143effed2c853bfa7a940c8cca076edf7acfd62"
+    }
+   ],
+   "note": "Release-derived regular and bold advance tables (per mille em, ASCII 32..126), fallback width and wrapping line height. The complete alias table equivalent to the ambient canonical decomposition is UNSEALED (metrics owned by the private integration)."
+  },
+  "navigation": {
+   "sha256": "515cc17ddfda2f954aaee713824b3f01caff073e542c4e9b2f04c5ef5a8122e2",
+   "sources": [
+    {
+     "file": "src/react/workshop.tsx",
+     "lines": "130-143",
+     "sourceSha256": "5613239bd8ea1f87aec713745f3e9961b4a82b8946382b4af72d2acf18ec9072"
+    }
+   ]
+  },
+  "presentation.layout": {
+   "sha256": "4893ac9d31804ef5d1c2ea7ecc1eea0724c9080de911df20cf017805f28cd72f",
+   "sources": [
+    {
+     "file": "src/internal/swimlaneLayout.ts",
+     "lines": "43-76",
+     "sourceSha256": "090dcf468335554b9c1b145a7143effed2c853bfa7a940c8cca076edf7acfd62"
+    },
+    {
+     "file": "src/internal/swimlaneLayout.ts",
+     "lines": "132",
+     "sourceSha256": "090dcf468335554b9c1b145a7143effed2c853bfa7a940c8cca076edf7acfd62"
+    },
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/style.ts",
+     "lines": "141",
+     "sourceSha256": "8381e2e0a050a697d43ebf7630a1bf21053fdff099b43694c22a0d258c58f8e5"
+    },
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/style.ts",
+     "lines": "174-175",
+     "sourceSha256": "8381e2e0a050a697d43ebf7630a1bf21053fdff099b43694c22a0d258c58f8e5"
+    },
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/style.ts",
+     "lines": "188",
+     "sourceSha256": "8381e2e0a050a697d43ebf7630a1bf21053fdff099b43694c22a0d258c58f8e5"
+    },
+    {
+     "file": "src/internal/layout/autoLayout.ts",
+     "lines": "67",
+     "sourceSha256": "1d128de7751a1c6bb4ab9a9c3d14a8a181ad8c4ab6e8d0b1413b7c398b4fd87e"
+    },
+    {
+     "file": "src/internal/layout/autoLayout.ts",
+     "lines": "72",
+     "sourceSha256": "1d128de7751a1c6bb4ab9a9c3d14a8a181ad8c4ab6e8d0b1413b7c398b4fd87e"
+    }
+   ],
+   "note": "Node kinds are recorded under the business-policy/1 slot names, mapped from the base keys by SHA-256 in source order."
+  },
+  "presentation.looks": {
+   "sha256": "312ef62daf16b0c7bac916fa42928718abd84d6683c2bd00b90257fd5ff60ad9",
+   "sources": [
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/tokens.ts",
+     "lines": "5-39",
+     "sourceSha256": "56551a5b26c7b3fb60380bcf32997b86e0709f649d5561b8055cad4b9b4b8bd7"
+    },
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/tokens.ts",
+     "lines": "46-80",
+     "sourceSha256": "56551a5b26c7b3fb60380bcf32997b86e0709f649d5561b8055cad4b9b4b8bd7"
+    },
+    {
+     "file": "src/internal/canvas.ts",
+     "lines": "68-69",
+     "sourceSha256": "3ce244e50dbb73011995c254e22903ce52bf8e93bfd807dcaacbcb33fc486884"
+    },
+    {
+     "file": "src/internal/engine.ts",
+     "lines": "74-105",
+     "sourceSha256": "f3a60b016e49ff6553dad9ba58db18eb27ff47be1d167fbc14092a9318e22969"
+    }
+   ],
+   "note": "Look registry of the base tree in business-policy/1 shape. The flat drawing option and the annotated palette option of the legacy API override flat and palette at selection time; the recolouring look adds no module without named tokens and follows the text colour for the label colour unless named."
+  },
+  "presentation.legacyOptions": {
+   "sha256": "9848e5b7a0b8d5103d1d6430de02e7976417b1de4765447dbc6884a69049adaa",
+   "sources": [
+    {
+     "file": "src/internal/engine.ts",
+     "lines": "82",
+     "sourceSha256": "f3a60b016e49ff6553dad9ba58db18eb27ff47be1d167fbc14092a9318e22969"
+    },
+    {
+     "file": "src/internal/engine.ts",
+     "lines": "94",
+     "sourceSha256": "f3a60b016e49ff6553dad9ba58db18eb27ff47be1d167fbc14092a9318e22969"
+    }
+   ],
+   "note": "Option values of the legacy look API that force flat drawing and add the annotated palette, compared as opaque keys."
+  },
+  "presentation.exportStyles.drawio": {
+   "sha256": "9e767081e54eac70693bb378d27e2ff40b4b5daff9f78e42eac01daff136385c",
+   "sources": [
+    {
+     "file": "src/io/reference-drawio.ts",
+     "lines": "11-29",
+     "sourceSha256": "22bdf771505c98c1c501331116d613d6aeee4890bcb039d5756c8d15c92e0621"
+    }
+   ]
+  },
+  "presentation.exportStyles.decode": {
+   "sha256": "5859bdbe9085403af97d43ad1345f092c89b70286434a11d29e9e3406d0bf3c3",
+   "sources": [
+    {
+     "file": "src/io/drawio-decode.ts",
+     "lines": "50-54",
+     "sourceSha256": "c4d8757da34d8f62aba4ef47b1f18d0d3014b3588734c80ee5a1d4a2b172b985"
+    },
+    {
+     "file": "src/io/drawio-decode.ts",
+     "lines": "107-108",
+     "sourceSha256": "c4d8757da34d8f62aba4ef47b1f18d0d3014b3588734c80ee5a1d4a2b172b985"
+    },
+    {
+     "file": "src/io/drawio-decode.ts",
+     "lines": "130",
+     "sourceSha256": "c4d8757da34d8f62aba4ef47b1f18d0d3014b3588734c80ee5a1d4a2b172b985"
+    }
+   ],
+   "note": "The suffix of the synthesised association id of a decoded application annotation is injected (ledger rule R-064)."
+  },
+  "presentation.palette": {
+   "sha256": "f8fba0815a47193f0f3a775c8287b3e7a42e08c87f8d3d39ee6bddc9f0290aae",
+   "sources": [
+    {
+     "file": "src/profiles/{LX-TH-1:ba29297b}/palette.ts",
+     "lines": "33-75",
+     "sourceSha256": "e77a7698b1d58945834d089e22241091544ade1d7cfdde83d47374e6b6bb1964"
+    }
+   ],
+   "note": "Gateway creation subtypes are dropped: the base palette provider never applies them."
+  },
+  "exportFacts": {
+   "sha256": "14aebfe63cc6b51d90e9fd5ae0227a1733c1f2035b9d97762996e402fe609f79",
+   "sources": [
+    {
+     "file": "src/io/{LX-DS-2:37bb91b5}",
+     "lines": "1-51",
+     "sourceSha256": "c274f46f773b5f557f7995fa70aae9d8a50384aedfcc6c3a5d166563a17a7c97"
+    },
+    {
+     "file": "src/io/reference-model.ts",
+     "lines": "37",
+     "sourceSha256": "c3bfc6c7564fd32dcd2a11b4202b2d6158445f23dab47353439c175933a647d1"
+    },
+    {
+     "file": "src/io/reference-model.ts",
+     "lines": "171",
+     "sourceSha256": "c3bfc6c7564fd32dcd2a11b4202b2d6158445f23dab47353439c175933a647d1"
+    },
+    {
+     "file": "src/io/reference-model.ts",
+     "lines": "177-186",
+     "sourceSha256": "c3bfc6c7564fd32dcd2a11b4202b2d6158445f23dab47353439c175933a647d1"
+    }
+   ],
+   "note": "Facts descriptor package of the base tree (removed from the generic distribution), the facts type, namespace family and fact property names read by the reference exporter."
+  }
+ }
+}

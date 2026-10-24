@@ -7,6 +7,10 @@ export interface NativeType {
   readonly references: Readonly<Record<string, readonly string[]>>;
   readonly extends?: readonly string[];
   readonly scalarTypes?: Readonly<Record<string, string>>;
+  /** Multi-valued reference properties of the descriptor slice. */
+  readonly many?: readonly string[];
+  /** Single-valued containment properties of the descriptor slice. */
+  readonly single?: readonly string[];
 }
 export type DescriptorIndex = Readonly<Record<string, NativeType>>;
 export interface NativeNode { $type: string; id?: string; [key: string]: unknown }
@@ -47,7 +51,9 @@ export function descriptorIndex(input: { readonly types: DescriptorIndex }): Des
     const result = { ...type, scalars: [...new Set([...parents.flatMap(p => p.scalars), ...type.scalars])],
       containment: Object.assign({}, ...parents.map(p => p.containment), type.containment) as NativeType["containment"],
       references: Object.assign({}, ...parents.map(p => p.references), type.references) as NativeType["references"],
-      scalarTypes: Object.assign({}, ...parents.map(p => p.scalarTypes), type.scalarTypes) as NonNullable<NativeType["scalarTypes"]> };
+      scalarTypes: Object.assign({}, ...parents.map(p => p.scalarTypes), type.scalarTypes) as NonNullable<NativeType["scalarTypes"]>,
+      many: [...new Set([...parents.flatMap(p => p.many ?? []), ...(type.many ?? [])])],
+      single: [...new Set([...parents.flatMap(p => p.single ?? []), ...(type.single ?? [])])] };
     active.delete(name); done[name] = result;
     return result;
   }
@@ -83,14 +89,17 @@ export function nativeIndex(tree: NativeNode, descriptors: DescriptorIndex): {
       if (byId.has(node.id!)) failContract("id-collision");
       byId.set(node.id!, entry);
     }
-    for (const [field, allowed] of Object.entries(type.containment)) {
+    // Containment admission is not a graph-index check: every member holding a
+    // node is indexed at its actual location; misplaced children surface at
+    // write time (containment admission, parent validation), never here.
+    for (const field of Object.keys(type.containment)) {
       if (!own(node, field)) continue;
       const value = node[field];
       const children = Array.isArray(value) ? value : [value];
       children.forEach((child: unknown, i) => {
         if (!child || typeof child !== "object" || Array.isArray(child)) failContract("profile-type");
         const native = child as NativeNode;
-        if (!allowed.some(name => typeMatches(native.$type, name, "assignable", descriptors))) failContract("profile-type");
+        if (typeof native.$type !== "string") failContract("profile-type");
         walk(native, `${pointer}/${pointerKey(field)}${Array.isArray(value) ? `/${i}` : ""}`, node, field);
       });
     }
@@ -161,7 +170,7 @@ export async function createIdentity(type: string, identity: "allocated" | "cont
   return { $type: type, id: await stableId(args.ownerId!, args.slot!, args.key!), ...cloneJson(args.fields) };
 }
 
-interface Allocation { readonly id: string; readonly contentSignature: string; readonly duplicateOrdinal: number; readonly stableKey: string }
+interface Allocation { readonly id: string; readonly contentSignature: string; readonly duplicateOrdinal: number; readonly stableKey: string; readonly owner: string; readonly sourceOwner: string | null }
 /** Identity-only C sub-operation on an already projected, admitted semantic tree.
  * Capture every birth signature before adding any IDs; never supply defaults.
  */
@@ -171,17 +180,30 @@ export async function allocateMissingIds(source: NativeNode, descriptors: Descri
   const tree = cloneJson(source), index = nativeIndex(tree, descriptors);
   const signatures = new Map<NativeNode, string>(), ordinals = new Map<NativeNode, number>();
   const counts = new Map<string, number>();
+  const owners = new Map<NativeNode, string | null>();
+  // Parent entries by node: the pre-order index lists every parent before its
+  // children, so a single linear map replaces the quadratic entry scans.
+  const byNode = new Map<NativeNode, (typeof index.entries)[number]>(index.entries.map(entry => [entry.node, entry]));
+  const preIdentified = new Set(index.entries.filter(e => e.node.id !== undefined).map(e => e.node));
+  for (const entry of index.entries) {
+    let anchor = entry.parent ? byNode.get(entry.parent) : undefined;
+    while (anchor && !preIdentified.has(anchor.node)) {
+      anchor = anchor.parent ? byNode.get(anchor.parent) : undefined;
+    }
+    owners.set(entry.node, anchor?.node.id ?? null);
+  }
   function withoutIds(value: unknown): unknown {
     if (Array.isArray(value)) return value.map(withoutIds);
     if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).filter(([key]) => key !== "id").map(([k, v]) => [k, withoutIds(v)]));
     return value;
   }
   for (const entry of index.entries) {
+    if (entry.node.id !== undefined || !descriptors[entry.node.$type]!.id) continue;
     const signature = await canonicalDigest(withoutIds(entry.node));
     signatures.set(entry.node, signature);
     // Source parent pointer distinguishes domains even before the parent has an ID.
-    let allocationOwner = entry.parent ? index.entries.find(e => e.node === entry.parent) : undefined;
-    while (allocationOwner && !descriptors[allocationOwner.node.$type]!.id) allocationOwner = allocationOwner.parent ? index.entries.find(e => e.node === allocationOwner!.parent) : undefined;
+    let allocationOwner = entry.parent ? byNode.get(entry.parent) : undefined;
+    while (allocationOwner && !descriptors[allocationOwner.node.$type]!.id) allocationOwner = allocationOwner.parent ? byNode.get(allocationOwner.parent) : undefined;
     const key = canonicalize([allocationOwner?.pointer ?? "", entry.parent ? `${entry.parent.$type}.${entry.property}` : "", signature]);
     ordinals.set(entry.node, counts.get(key) ?? 0); counts.set(key, (counts.get(key) ?? 0) + 1);
   }
@@ -190,20 +212,23 @@ export async function allocateMissingIds(source: NativeNode, descriptors: Descri
   for (const entry of index.entries) {
     const node = entry.node;
     if (node.id !== undefined || !descriptors[node.$type]!.id) continue;
-    const parentEntry = entry.parent ? index.entries.find(e => e.node === entry.parent) : undefined;
+    const parentEntry = entry.parent ? byNode.get(entry.parent) : undefined;
     let owner = entry.parent;
     let ancestor = parentEntry;
     while (owner && !owner.id) {
       owner = ancestor?.parent;
-      ancestor = owner ? index.entries.find(e => e.node === owner) : undefined;
+      ancestor = owner ? byNode.get(owner) : undefined;
     }
     const contentSignature = signatures.get(node)!, duplicateOrdinal = ordinals.get(node)!;
     const stableKey = canonicalize([contentSignature, duplicateOrdinal]);
-    const id = entry.parent ? await stableId(owner?.id ?? failContract("profile-create-identity"), `${entry.parent.$type}.${entry.property}`, stableKey) :
+    const ownerId = entry.parent ? owner?.id ?? failContract("profile-create-identity") : "document-root/1";
+    const slot = entry.parent ? `${entry.parent.$type}.${entry.property}` : "definitions";
+    const id = entry.parent ? await stableId(ownerId, slot, stableKey) :
       await stableId("document-root/1", "definitions", "root");
     if (occupied.has(id)) failContract("id-collision");
     node.id = id; occupied.add(id); createdIds.push(id);
-    allocations.push({ id, contentSignature, duplicateOrdinal, stableKey });
+    allocations.push({ id, contentSignature, duplicateOrdinal, stableKey, owner: ownerId,
+      sourceOwner: owners.get(node) ?? null });
   }
   return { tree, createdIds, allocations };
 }
@@ -254,22 +279,58 @@ export function readNative(node: NativeNode, path: string, descriptors: Descript
   return MISSING;
 }
 
-export function validateNativeReferences(tree: NativeNode, descriptors: DescriptorIndex, idRefScalars: readonly string[] = []): ReturnType<typeof nativeIndex> {
+export interface DanglingReference {
+  readonly elementId: string | null;
+  readonly property: string;
+  readonly pointer: string;
+}
+/** Lenient graph index: member and identity checks still refuse, but dangling
+ * reference values are collected (element pointer plus property) instead of
+ * refused, so validate can report them as adapter findings. */
+export function listDanglingReferences(tree: NativeNode, descriptors: DescriptorIndex, idRefScalars: readonly string[] = []): {
+    readonly index: ReturnType<typeof nativeIndex>; readonly dangling: readonly DanglingReference[] } {
   const index = nativeIndex(tree, descriptors);
-  for (const { node } of index.entries) for (const [field, targets] of Object.entries(descriptors[node.$type]!.references)) {
-    if (!own(node, field)) continue;
-    const values = Array.isArray(node[field]) ? node[field] as unknown[] : [node[field]];
-    for (const value of values) {
-      const target = typeof value === "string" ? index.byId.get(value) : undefined;
-      if (!target) failContract("reference-dangling");
-      if (!targets.some(type => typeMatches(target!.node.$type, type, "assignable", descriptors))) failContract("profile-type");
+  for (const { node } of index.entries) {
+    const known = descriptors[node.$type]!;
+    for (const field of Object.keys(node)) {
+      if (field === "$type" || field === "id" || known.scalars.includes(field) ||
+        own(known.containment, field) || own(known.references, field)) continue;
+      failContract("descriptor-role-unknown");
     }
   }
-  for (const { node } of index.entries) for (const field of descriptors[node.$type]!.scalars) {
-    if (!idRefScalars.includes(`${node.$type}.${field}`) || !own(node, field)) continue;
-    const values = Array.isArray(node[field]) ? node[field] as unknown[] : [node[field]];
-    for (const value of values) if (typeof value !== "string" || !index.byId.has(value)) failContract("reference-dangling");
+  const dangling: DanglingReference[] = [];
+  // An empty single-valued reference value is not a reference: dangling and
+  // wrong-type checks apply to nonempty values only. A reference that resolves
+  // to an inadmissible endpoint dangles; the static compiler rejects bad
+  // traversals separately at compile time.
+  for (const { node, pointer } of index.entries) {
+    const elementId = typeof node.id === "string" ? node.id : null;
+    for (const [field, targets] of Object.entries(descriptors[node.$type]!.references)) {
+      if (!own(node, field)) continue;
+      const values = Array.isArray(node[field]) ? node[field] as unknown[] : [node[field]];
+      for (const value of values) {
+        if (value === "") continue;
+        const target = typeof value === "string" ? index.byId.get(value) : undefined;
+        if (!target || !targets.some(type => typeMatches(target.node.$type, type, "assignable", descriptors))) {
+          dangling.push({ elementId, property: field, pointer });
+        }
+      }
+    }
+    for (const field of descriptors[node.$type]!.scalars) {
+      if (!idRefScalars.includes(`${node.$type}.${field}`) || !own(node, field)) continue;
+      const values = Array.isArray(node[field]) ? node[field] as unknown[] : [node[field]];
+      for (const value of values) {
+        if (value === "") continue;
+        if (typeof value !== "string" || !index.byId.has(value)) dangling.push({ elementId, property: field, pointer });
+      }
+    }
   }
+  return { index, dangling };
+}
+
+export function validateNativeReferences(tree: NativeNode, descriptors: DescriptorIndex, idRefScalars: readonly string[] = []): ReturnType<typeof nativeIndex> {
+  const { index, dangling } = listDanglingReferences(tree, descriptors, idRefScalars);
+  if (dangling.length > 0) failContract("reference-dangling");
   return index;
 }
 

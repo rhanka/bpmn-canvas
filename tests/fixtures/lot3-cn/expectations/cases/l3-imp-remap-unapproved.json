@@ -1,0 +1,504 @@
+{
+  "caseId": "l3-imp-remap-unapproved",
+  "operation": "remapIds",
+  "phase": "import",
+  "profileArtifact": {
+    "path": "lot3-cn/expectations/profile/neutral-cn.json",
+    "sha256": "f94d4589a850bdf664612bc10e61be88efc6bae7d1f8e25f6b70b919f5096c32"
+  },
+  "inputArtifacts": [
+    {
+      "role": "envelope",
+      "json": {
+        "documentVersion": "1",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "tree": {
+          "$type": "bpmn:Definitions",
+          "id": "Definitions_old",
+          "targetNamespace": "urn:neutral-cn:1",
+          "exporterVersion": "fixture-cn-1",
+          "rootElements": [
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_old",
+              "name": "Old process",
+              "isExecutable": false,
+              "laneSets": [
+                {
+                  "$type": "bpmn:LaneSet",
+                  "id": "LaneSet_x",
+                  "name": "Roles",
+                  "lanes": [
+                    {
+                      "$type": "bpmn:Lane",
+                      "id": "Lane_x",
+                      "name": "Clerk",
+                      "flowNodeRef": [
+                        "Task_old"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "flowElements": [
+                {
+                  "$type": "bpmn:StartEvent",
+                  "id": "Start_old",
+                  "name": "Start",
+                  "outgoing": [
+                    "Flow_old_1"
+                  ]
+                },
+                {
+                  "$type": "bpmn:Task",
+                  "id": "Task_old",
+                  "name": "Handle",
+                  "incoming": [
+                    "Flow_old_1"
+                  ],
+                  "outgoing": [
+                    "Flow_old_2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:EndEvent",
+                  "id": "End_old",
+                  "name": "End",
+                  "incoming": [
+                    "Flow_old_2"
+                  ]
+                },
+                {
+                  "$type": "bpmn:CallActivity",
+                  "id": "Call_old",
+                  "name": "Sub",
+                  "incoming": [],
+                  "outgoing": [],
+                  "calledElement": "Process_sub_old"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_old_1",
+                  "sourceRef": "Start_old",
+                  "targetRef": "Task_old"
+                },
+                {
+                  "$type": "bpmn:SequenceFlow",
+                  "id": "Flow_old_2",
+                  "sourceRef": "Task_old",
+                  "targetRef": "End_old"
+                }
+              ]
+            },
+            {
+              "$type": "bpmn:Process",
+              "id": "Process_sub_old",
+              "name": "Sub process body",
+              "isExecutable": false
+            },
+            {
+              "$type": "bpmn:Collaboration",
+              "id": "Collaboration_x",
+              "name": "Pool collaboration",
+              "participants": [
+                {
+                  "$type": "bpmn:Participant",
+                  "id": "Participant_x",
+                  "name": "Old pool",
+                  "processRef": "Process_old"
+                }
+              ]
+            }
+          ]
+        },
+        "bindings": [
+          {
+            "ownerId": "Process_old",
+            "role": "collaboration",
+            "targetId": "Collaboration_x"
+          },
+          {
+            "ownerId": "Process_old",
+            "role": "main-participant",
+            "targetId": "Participant_x"
+          }
+        ],
+        "semanticRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c"
+      }
+    },
+    {
+      "role": "importedDi",
+      "json": {
+        "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+        "diagrams": [
+          {
+            "$type": "bpmndi:BPMNDiagram",
+            "id": "Diagram_1",
+            "name": "Old diagram",
+            "plane": {
+              "$type": "bpmndi:BPMNPlane",
+              "id": "Plane_1",
+              "bpmnElement": "Collaboration_x",
+              "planeElement": [
+                {
+                  "$type": "bpmndi:BPMNShape",
+                  "id": "Shape_task",
+                  "bpmnElement": "Task_old",
+                  "bounds": {
+                    "$type": "dc:Bounds",
+                    "x": 100,
+                    "y": 80,
+                    "width": 100,
+                    "height": 80
+                  }
+                },
+                {
+                  "$type": "bpmndi:BPMNEdge",
+                  "id": "Edge_flow",
+                  "bpmnElement": "Flow_old_1",
+                  "waypoint": [
+                    {
+                      "$type": "dc:Point",
+                      "x": 50,
+                      "y": 120
+                    },
+                    {
+                      "$type": "dc:Point",
+                      "x": 100,
+                      "y": 120
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "$type": "bpmndi:BPMNDiagram",
+            "id": "Diagram_sub",
+            "name": "Sub process view",
+            "plane": {
+              "$type": "bpmndi:BPMNPlane",
+              "id": "Plane_sub",
+              "bpmnElement": "Process_sub_old",
+              "planeElement": []
+            }
+          }
+        ],
+        "sha256": "9015c9f71f20d56ce727793d2199a2eb8b751659ef290be42dfa9e7998492472"
+      }
+    },
+    {
+      "role": "activation",
+      "json": "qualification"
+    }
+  ],
+  "commandArtifact": {
+    "role": "migration",
+    "json": {
+      "kind": "id-remap",
+      "map": [
+        {
+          "sourceId": "Process_old",
+          "resultId": "Process_new",
+          "domain": "migration"
+        },
+        {
+          "sourceId": "Task_old",
+          "resultId": "Task_new",
+          "domain": "migration"
+        },
+        {
+          "sourceId": "Flow_old_1",
+          "resultId": "Flow_new_1",
+          "domain": "migration"
+        },
+        {
+          "sourceId": "Process_sub_old",
+          "resultId": "Process_sub_new",
+          "domain": "migration"
+        }
+      ],
+      "referenceFreeAttestations": []
+    }
+  },
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "refused",
+        "operation": "remapIds",
+        "profileIdentity": {
+          "mechanismVersion": "1",
+          "schemaVersion": "1.0.0",
+          "profile": "neutral-cn/1",
+          "version": "1.1.0",
+          "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+          "base": {
+            "id": "neutral-cn-base/1",
+            "version": "fixture-cn-1",
+            "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+          },
+          "descriptors": [
+            {
+              "id": "neutral-cn-descriptors/1",
+              "version": "fixture-cn-1",
+              "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+            }
+          ]
+        },
+        "baseRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c",
+        "code": "operation-error",
+        "diagnostics": [],
+        "report": {
+          "reportVersion": "2",
+          "operation": "remapIds",
+          "sourceIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "inputRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c",
+          "entries": [],
+          "rawStandardFindings": [],
+          "idMap": [],
+          "artifacts": []
+        }
+      }
+    },
+    {
+      "role": "caller-state",
+      "json": {
+        "envelope": {
+          "documentVersion": "1",
+          "profileIdentity": {
+            "mechanismVersion": "1",
+            "schemaVersion": "1.0.0",
+            "profile": "neutral-cn/1",
+            "version": "1.1.0",
+            "sha256": "cec8e0fdb6bab44ed31b15042372ff21d031b561ee83052a20bb10eade8b1845",
+            "base": {
+              "id": "neutral-cn-base/1",
+              "version": "fixture-cn-1",
+              "sha256": "92ed7564f70e2ab45c0b042f1621d37b0c9ffb2e24466ed9d35a75a275fd281a"
+            },
+            "descriptors": [
+              {
+                "id": "neutral-cn-descriptors/1",
+                "version": "fixture-cn-1",
+                "sha256": "de6bd1eee25c76da263e67e1302be70fa5cb045a18721254a1bd08c29c67b7b3"
+              }
+            ]
+          },
+          "tree": {
+            "$type": "bpmn:Definitions",
+            "id": "Definitions_old",
+            "targetNamespace": "urn:neutral-cn:1",
+            "exporterVersion": "fixture-cn-1",
+            "rootElements": [
+              {
+                "$type": "bpmn:Process",
+                "id": "Process_old",
+                "name": "Old process",
+                "isExecutable": false,
+                "laneSets": [
+                  {
+                    "$type": "bpmn:LaneSet",
+                    "id": "LaneSet_x",
+                    "name": "Roles",
+                    "lanes": [
+                      {
+                        "$type": "bpmn:Lane",
+                        "id": "Lane_x",
+                        "name": "Clerk",
+                        "flowNodeRef": [
+                          "Task_old"
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "flowElements": [
+                  {
+                    "$type": "bpmn:StartEvent",
+                    "id": "Start_old",
+                    "name": "Start",
+                    "outgoing": [
+                      "Flow_old_1"
+                    ]
+                  },
+                  {
+                    "$type": "bpmn:Task",
+                    "id": "Task_old",
+                    "name": "Handle",
+                    "incoming": [
+                      "Flow_old_1"
+                    ],
+                    "outgoing": [
+                      "Flow_old_2"
+                    ]
+                  },
+                  {
+                    "$type": "bpmn:EndEvent",
+                    "id": "End_old",
+                    "name": "End",
+                    "incoming": [
+                      "Flow_old_2"
+                    ]
+                  },
+                  {
+                    "$type": "bpmn:CallActivity",
+                    "id": "Call_old",
+                    "name": "Sub",
+                    "incoming": [],
+                    "outgoing": [],
+                    "calledElement": "Process_sub_old"
+                  },
+                  {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_old_1",
+                    "sourceRef": "Start_old",
+                    "targetRef": "Task_old"
+                  },
+                  {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_old_2",
+                    "sourceRef": "Task_old",
+                    "targetRef": "End_old"
+                  }
+                ]
+              },
+              {
+                "$type": "bpmn:Process",
+                "id": "Process_sub_old",
+                "name": "Sub process body",
+                "isExecutable": false
+              },
+              {
+                "$type": "bpmn:Collaboration",
+                "id": "Collaboration_x",
+                "name": "Pool collaboration",
+                "participants": [
+                  {
+                    "$type": "bpmn:Participant",
+                    "id": "Participant_x",
+                    "name": "Old pool",
+                    "processRef": "Process_old"
+                  }
+                ]
+              }
+            ]
+          },
+          "bindings": [
+            {
+              "ownerId": "Process_old",
+              "role": "collaboration",
+              "targetId": "Collaboration_x"
+            },
+            {
+              "ownerId": "Process_old",
+              "role": "main-participant",
+              "targetId": "Participant_x"
+            }
+          ],
+          "semanticRevision": "186be9a1b30f319c4aa78987e3811b28cb4e51dbe8f92619bf252f4fb173e52c"
+        },
+        "importedDi": {
+          "descriptorDigest": "06cd02b4d67d07bd3b81f54d4226f845764438a8f0eb794dc51fb91c4210ae94",
+          "diagrams": [
+            {
+              "$type": "bpmndi:BPMNDiagram",
+              "id": "Diagram_1",
+              "name": "Old diagram",
+              "plane": {
+                "$type": "bpmndi:BPMNPlane",
+                "id": "Plane_1",
+                "bpmnElement": "Collaboration_x",
+                "planeElement": [
+                  {
+                    "$type": "bpmndi:BPMNShape",
+                    "id": "Shape_task",
+                    "bpmnElement": "Task_old",
+                    "bounds": {
+                      "$type": "dc:Bounds",
+                      "x": 100,
+                      "y": 80,
+                      "width": 100,
+                      "height": 80
+                    }
+                  },
+                  {
+                    "$type": "bpmndi:BPMNEdge",
+                    "id": "Edge_flow",
+                    "bpmnElement": "Flow_old_1",
+                    "waypoint": [
+                      {
+                        "$type": "dc:Point",
+                        "x": 50,
+                        "y": 120
+                      },
+                      {
+                        "$type": "dc:Point",
+                        "x": 100,
+                        "y": 120
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "$type": "bpmndi:BPMNDiagram",
+              "id": "Diagram_sub",
+              "name": "Sub process view",
+              "plane": {
+                "$type": "bpmndi:BPMNPlane",
+                "id": "Plane_sub",
+                "bpmnElement": "Process_sub_old",
+                "planeElement": []
+              }
+            }
+          ],
+          "sha256": "9015c9f71f20d56ce727793d2199a2eb8b751659ef290be42dfa9e7998492472"
+        }
+      }
+    }
+  ],
+  "expectedStatus": "refused:operation-error",
+  "comparatorIds": [
+    "result-1/lot3",
+    "source-preservation/lot3",
+    "profile-c14n/2"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "caseId": "template-014-native-glyph",
+  "operation": "templateGeometry",
+  "phase": null,
+  "profileArtifact": null,
+  "inputArtifacts": [
+    {
+      "role": "template-input",
+      "json": {
+        "glyph": {
+          "id": "task",
+          "kind": "native",
+          "nativeType": "bpmn:Task",
+          "viewBox": [
+            0,
+            0,
+            100,
+            80
+          ],
+          "commands": []
+        },
+        "bounds": {
+          "x": 180000,
+          "y": 260000,
+          "width": 100000,
+          "height": 80000
+        }
+      }
+    }
+  ],
+  "expectedArtifacts": [
+    {
+      "role": "result",
+      "json": {
+        "status": "refused",
+        "code": "render-unsupported",
+        "diagnostics": []
+      }
+    }
+  ],
+  "expectedStatus": "refused:render-unsupported",
+  "comparatorIds": [
+    "result-exact/1"
+  ]
+}
