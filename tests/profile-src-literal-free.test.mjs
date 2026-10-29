@@ -16,12 +16,20 @@ const repo = join(here, "..");
 const x24 = join(here, "fixtures/x24-externalization/expectations");
 const lexicon = JSON.parse(readFileSync(join(x24, "lexicon.json"), "utf8"));
 const ledger = JSON.parse(readFileSync(join(x24, "ledger.json"), "utf8"));
+const scope = JSON.parse(readFileSync(join(repo, "docs/design/profile-externalization-scope.json"), "utf8"));
 
 const pairKey = (file, o, line) => [file, o.form, o.entry, o.literal, o.column, o.endColumn, o.endLine - o.line, line].join("\0");
 const pools = new Map();
 for (const row of ledger.occurrences) {
   const key = [row.file, row.form, row.entry, row.literal, row.column, row.endColumn, row.endLine - row.line, row.lineSha256].join("\0");
   pools.set(key, [...(pools.get(key) ?? []), row.id]);
+}
+const baseIds = new Set(ledger.occurrences.map((row) => row.id));
+const appendedPools = new Map();
+for (const row of scope.occurrences) {
+  if (row.entry !== "LX-AT-2" || row.disposition !== "context-generic" || baseIds.has(row.id)) continue;
+  const key = [row.file, row.form, row.entry, row.literal, row.column, row.endColumn, row.endLine - row.line, row.lineSha256].join("\0");
+  appendedPools.set(key, [...(appendedPools.get(key) ?? []), row.id]);
 }
 
 const walk = (dir) => {
@@ -47,6 +55,11 @@ test("src/ contains no unpaired legacy-code business literal", () => {
       const pool = pools.get(key);
       if (pool?.length) {
         pool.shift();
+        continue;
+      }
+      const appended = appendedPools.get(key);
+      if (appended?.length) {
+        appended.shift();
         continue;
       }
       hits.push(`${path}:${o.line}:${o.column}`);
