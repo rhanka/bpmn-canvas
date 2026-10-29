@@ -86,6 +86,9 @@ export interface AnnotatedTokens {
   readonly appFill: string;
 }
 
+/** Published token type name, kept as an alias of the category name. */
+export type LegendTokens = AnnotatedTokens;
+
 export interface ProfileDefinition {
   readonly businessPolicy?: BusinessPolicy;
   readonly renderer?: string;

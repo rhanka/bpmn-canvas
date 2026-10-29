@@ -1,7 +1,7 @@
 // Compile-time proof of the 0.4.0 API surface (test list §11.2). Run with: npm run typecheck:compat
 import type { ReactNode } from "react";
 import { createBpmnCanvas } from "../../src/index.js";
-import type { BpmnCanvasHandle, DiagnosticCode, SetXmlOptions } from "../../src/index.js";
+import type { AnnotatedTokens, BpmnCanvasHandle, BpmnCanvasOptions, DiagnosticCode, LegendTokens, RenderOptions, SetXmlOptions } from "../../src/index.js";
 import { export as exportModel, initializeCodecs, parseDefinitions, listDiagrams } from "../../src/io/index.js";
 import type { DiagramFile, IoErrorCode, IoOptions } from "../../src/io/index.js";
 import { BpmnWorkshop, navigationResolver } from "../../src/react/index.js";
@@ -42,3 +42,10 @@ export const props: BpmnWorkshopProps = {
 export const resolver = navigationResolver(rules);
 export const workshop = BpmnWorkshop;
 export const used = [file, names, codes, diagnostic];
+
+// Published look-token names stay as aliases (LX-TH-1 / LX-TH-2 per ruling).
+const legacyTokens: LegendTokens = {} as AnnotatedTokens;
+const aliased: AnnotatedTokens = {} as LegendTokens;
+const canvasWithLegacy: BpmnCanvasOptions = { legendTokens: legacyTokens, coloredTokens: legacyTokens };
+const renderWithLegacy: RenderOptions = { legendTokens: legacyTokens, coloredTokens: legacyTokens };
+void [legacyTokens, aliased, canvasWithLegacy, renderWithLegacy];

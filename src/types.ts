@@ -2,8 +2,10 @@ import type { BusinessPolicy } from "./internal/business-policy.js";
 /** Public types. Nothing here references bpmn-js, diagram-js or any DOM-only global at runtime. */
 
 import type { AnnotatedTokens } from "./internal/contracts.js";
+import type { LegendTokens } from "./internal/contracts.js";
 
 export type { AnnotatedTokens };
+export type { LegendTokens };
 /** `standard`: upstream bpmn-js. `annotated`: the annotated look. `recolor`: upstream notation, drawn by upstream, recoloured by tokens. */
 export type ProfileId = string;
 
@@ -161,6 +163,10 @@ export interface BpmnCanvasOptions {
   readonly annotatedTokens?: Partial<AnnotatedTokens>;
   /** Colours of the `recolor` profile, same fields as the annotated tokens. Only the keys given recolour; see the README. */
   readonly recolorTokens?: Partial<AnnotatedTokens>;
+  /** Look inputs for the `legend` profile. Missing keys fall back to its defaults, the reference Custom look. */
+  readonly legendTokens?: Partial<LegendTokens>;
+  /** Colours of the `colored` profile, same fields as the legend tokens. Only the keys given recolour; see the README. */
+  readonly coloredTokens?: Partial<LegendTokens>;
   /** Palette layout: one column, two, or diagram-js default (`auto`, which switches on the available height). */
   readonly paletteColumns?: PaletteColumns;
   readonly readOnly?: boolean;
@@ -255,6 +261,8 @@ export interface RenderOptions {
   readonly profile?: ProfileId;
   readonly annotatedTokens?: Partial<AnnotatedTokens>;
   readonly recolorTokens?: Partial<AnnotatedTokens>;
+  readonly legendTokens?: Partial<LegendTokens>;
+  readonly coloredTokens?: Partial<LegendTokens>;
   /** Diagrams whose SVG is smaller than this edge length in px are reported as `filtered-small` (default 20). */
   readonly minSize?: number;
   readonly signal?: AbortSignal;

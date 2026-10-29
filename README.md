@@ -467,7 +467,8 @@ white lane headers, red dashed links (`[LX-PR-3]`, `5 5`, no arrow head on task 
 
 `legendTokens` is a `Partial<LegendTokens>`. Missing keys use the defaults above (`[LX-TH-6]`). Two conveniences: `stroke` feeds
 every `*Line` and `flow` you did not name, `fill` feeds `taskFill`; `taskFillEnd` is derived from `taskFill`
-when you do not name it. An explicit per-type value always wins.
+when you do not name it. An explicit per-type value always wins. The category names `annotatedTokens`,
+`recolorTokens` and `AnnotatedTokens` are aliases of `legendTokens`, `coloredTokens` and `LegendTokens`.
 
 | Group | Keys |
 |---|---|

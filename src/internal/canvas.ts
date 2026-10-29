@@ -17,7 +17,7 @@ import type {
 } from "../types.js";
 import type { BpmnCanvasLayoutService } from "./contracts.js";
 import { analyzeDefinitions, classifyWarnings, hasXmlComment, isLossy } from "./diagnostics.js";
-import { diagramName, loadEngine, loadProfile, newInstanceId, profileConfig } from "./engine.js";
+import { diagramName, loadEngine, loadProfile, newInstanceId, profileConfig, tokensFromOptions } from "./engine.js";
 import type { DefinitionsLike, EventBusLike, ModdleLike, ViewerLike } from "./engine.js";
 import { PaletteSupportModule } from "./palette.js";
 import { ReadOnlyModule } from "./readonly.js";
@@ -129,7 +129,7 @@ export class CanvasController implements BpmnCanvasHandle {
     this.options = options;
     this.hostReadOnly = options.readOnly === true;
     this.profileId = options.profile ?? "";
-    this.tokens = options.tokens ?? options.recolorTokens ?? options.annotatedTokens;
+    this.tokens = tokensFromOptions(options);
     this.profileOptions = options.profileOptions ?? {};
     this.fitMode = options.fitMode ?? "readable";
     this.baseRevision = options.revision;

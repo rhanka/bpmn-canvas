@@ -1,7 +1,7 @@
 import type { Diagnostic, RenderOptions, RenderResult, RenderedDiagram } from "../types.js";
 import { abortError } from "./canvas.js";
 import { analyzeDefinitions, classifyWarnings, hasXmlComment } from "./diagnostics.js";
-import { diagramName, loadProfile, loadViewer, newInstanceId, profileConfig } from "./engine.js";
+import { diagramName, loadProfile, loadViewer, newInstanceId, profileConfig, tokensFromOptions } from "./engine.js";
 import type { ModdleLike } from "./engine.js";
 
 /**
@@ -16,7 +16,7 @@ export async function renderDiagrams(xml: string, options: RenderOptions = {}): 
   };
   check();
   const minSize = options.minSize ?? 20;
-  const [Viewer, profile] = await Promise.all([loadViewer(), loadProfile(options.profile ?? "", options.tokens ?? options.recolorTokens ?? options.annotatedTokens, options.profileOptions ?? {}, options.businessPolicy)]);
+  const [Viewer, profile] = await Promise.all([loadViewer(), loadProfile(options.profile ?? "", tokensFromOptions(options), options.profileOptions ?? {}, options.businessPolicy)]);
   check();
 
   const diagnostics: Diagnostic[] = [];
