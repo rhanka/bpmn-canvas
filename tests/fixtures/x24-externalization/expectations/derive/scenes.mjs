@@ -54,7 +54,7 @@ export function exportScene(k) {
   const flow = (id, source, target, name) => ({ id, type: "bpmn:SequenceFlow", source, target, ...(name ? { name } : {}), points: centreLine(b[source], b[target]) });
   return {
     namespaces: { [FACTS_NS[k].prefix]: FACTS_NS[k].uri },
-    collaboration: { id: "C1", participant: { id: "Pool1", name: "Intake", processRef: "P1", box: { x: 0, y: 0, w: 820, h: 270 } } },
+    collaboration: { id: "Collab1", participant: { id: "Pool1", name: "Intake", processRef: "P1", box: { x: 0, y: 0, w: 820, h: 270 } } },
     processes: [{
       id: "P1",
       lanes: [{ id: "L1", name: "Desk", box: { x: 30, y: 0, w: 790, h: 270 }, members: ["S1", "T1", "G1", "SP1", "C1", "EV1", "E1"] }],

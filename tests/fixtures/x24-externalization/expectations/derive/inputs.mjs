@@ -146,7 +146,7 @@ write("export-facts-version-b.bpmn", sceneXml(factsVersionScene("B")));
   write("surface.bpmn", [
     '<?xml version="1.0" encoding="UTF-8"?>',
     `<bpmn:definitions ${NS} id="Defs" targetNamespace="urn:x24:surface">`,
-    '  <bpmn:collaboration id="C1">',
+    '  <bpmn:collaboration id="Collab1">',
     `    <bpmn:participant id="${s.pool.id}" name="${s.pool.name}" processRef="P1"/>`,
     "  </bpmn:collaboration>",
     '  <bpmn:process id="P1" isExecutable="false">',
@@ -161,7 +161,7 @@ write("export-facts-version-b.bpmn", sceneXml(factsVersionScene("B")));
     ...s.annotations.map((a) => `    <bpmn:association id="As_${a.id}" sourceRef="${a.id}" targetRef="${a.host}"/>`),
     "  </bpmn:process>",
     '  <bpmndi:BPMNDiagram id="D1">',
-    '    <bpmndi:BPMNPlane id="Plane1" bpmnElement="C1">',
+    '    <bpmndi:BPMNPlane id="Plane1" bpmnElement="Collab1">',
     shape(s.pool.id, s.pool.id, s.pool.box, ' isHorizontal="true"'),
     shape(s.lane.id, s.lane.id, s.lane.box, ' isHorizontal="true"'),
     ...s.nodes.map((n) => shape(n.id, n.id, n.box, n.type === "bpmn:SubProcess" ? ' isExpanded="false"' : "")),

@@ -2766,7 +2766,7 @@
    "category": "generic-context",
    "consumer": "history-record",
    "target": "T-NONE",
-   "disposition": "history-record",
+   "disposition": "context-generic",
    "policy": "Squash preparation record; not shipped."
   },
   {

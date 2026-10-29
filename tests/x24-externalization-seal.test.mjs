@@ -19,7 +19,7 @@ import { rolesOf } from "./fixtures/x24-externalization/expectations/derive/arit
 
 const repo = fileURLToPath(new URL("../", import.meta.url));
 const ROOT = "tests/fixtures/x24-externalization/expectations";
-const SEAL_SHA256 = "e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78";
+const SEAL_SHA256 = "85a68b7a54125f8e57d19bfcb76c685acca8abd328fd10d94eb0172f7ced597c";
 const PREVIOUS_SEAL_SHA256 = "74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974";
 /** First seal, single seal fix round, integration micro-reseal, Unicode literal restoration, P-006 allowance, I1 relocation, final spec pass: seal.json#/previousSeals in order. */
 const SEAL_CHAIN = ["d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5", "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c", "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f", "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b", "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746", "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac", PREVIOUS_SEAL_SHA256];
@@ -32,8 +32,8 @@ const HISTORY_GUARD_RECEIPT = "docs/design/receipts/block-b-x24-history-guard.js
 const UNICODE_RECEIPT = "docs/design/receipts/block-b-x24-unicode-literals-fix.json";
 const ALLOWANCE_RECEIPT = "docs/design/receipts/block-b-x24-p006-selector-allowance.json";
 const RELOCATION_RECEIPT = "docs/design/receipts/block-b-x24-i1-relocated-rows.json";
-const RECEIPT = "docs/design/receipts/block-b-x24-final-spec-rebind.json";
-const VENDORPY_RECEIPT = "docs/design/receipts/block-b-vendor-py-x24-rebind.json";
+const FINAL_SPEC_RECEIPT = "docs/design/receipts/block-b-x24-final-spec-rebind.json";
+const RECEIPT = "docs/design/receipts/block-b2-x24-micro-reseal.json";
 const HEX64 = /^[0-9a-f]{64}$/;
 
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -518,7 +518,7 @@ test("x24 seal: the ledger has one row per occurrence, consistent with its rules
 });
 
 // ------------------------------------------------------------------ literal-free seal (BLOCKER 1)
-const hygieneScope = () => [...sealed.map((e) => e.repoPath), SEAL_TEST, HISTORY_GUARD_RECEIPT, UNICODE_RECEIPT, ALLOWANCE_RECEIPT, RELOCATION_RECEIPT, RECEIPT, VENDORPY_RECEIPT];
+const hygieneScope = () => [...sealed.map((e) => e.repoPath), SEAL_TEST, HISTORY_GUARD_RECEIPT, UNICODE_RECEIPT, ALLOWANCE_RECEIPT, RELOCATION_RECEIPT, FINAL_SPEC_RECEIPT, RECEIPT];
 /** Every hygiene hit of one file (rules R1 to R3 of probe-expectations.json#/sealHygiene). */
 function fileHits(path, text, set) {
   const hits = scanText(path, text, lexicon, { relaxed: true }).occurrences.map((o) => ({ at: `R1 ${o.form}`, line: o.line, column: o.column, entry: o.entry, literal: o.literal, form: o.form }));
@@ -957,19 +957,19 @@ const valueAt = (path, pointer) => pointer.split("/").slice(1).map((k) => k.repl
 test("x24 seal: the reseal receipts chain the seals and record every changed file", () => {
   // The history-guard receipt is the frozen record of the integration micro-reseal; each later receipt pins the
   // earlier ones: the Unicode receipt pins the history-guard receipt, the P-006 allowance receipt pins both, the
-  // I1 relocation receipt pins the three, the final spec rebind receipt pins the four and the vendor-py
-  // rebind receipt pins the five.
+  // I1 relocation receipt pins the three, the final spec rebind receipt pins the four and the stage B2 micro-reseal
+  // receipt pins the five.
   const guard = json(HISTORY_GUARD_RECEIPT);
   const unicode = json(UNICODE_RECEIPT);
   const allowance = json(ALLOWANCE_RECEIPT);
   const relocation = json(RELOCATION_RECEIPT);
+  const finalSpec = json(FINAL_SPEC_RECEIPT);
   const receipt = json(RECEIPT);
-  const vendorpy = json(VENDORPY_RECEIPT);
   const guardPin = { receipt: HISTORY_GUARD_RECEIPT, ...pinOf(HISTORY_GUARD_RECEIPT), seal: SEAL_CHAIN[2], previousSeal: SEAL_CHAIN[1] };
   const unicodePin = { receipt: UNICODE_RECEIPT, ...pinOf(UNICODE_RECEIPT), seal: SEAL_CHAIN[3], previousSeal: SEAL_CHAIN[2] };
   const allowancePin = { receipt: ALLOWANCE_RECEIPT, ...pinOf(ALLOWANCE_RECEIPT), seal: SEAL_CHAIN[4], previousSeal: SEAL_CHAIN[3] };
   const relocationPin = { receipt: RELOCATION_RECEIPT, ...pinOf(RELOCATION_RECEIPT), seal: SEAL_CHAIN[5], previousSeal: SEAL_CHAIN[4] };
-  const finalSpecPin = { receipt: RECEIPT, ...pinOf(RECEIPT), seal: SEAL_CHAIN[6], previousSeal: SEAL_CHAIN[5] };
+  const finalSpecPin = { receipt: FINAL_SPEC_RECEIPT, ...pinOf(FINAL_SPEC_RECEIPT), seal: PREVIOUS_SEAL_SHA256, previousSeal: SEAL_CHAIN[5] };
   assert.equal(guard.format, "block-b-x24-history-guard/1");
   assert.equal(guard.previousSeal.sha256, SEAL_CHAIN[1]);
   assert.equal(guard.newSeal.sha256, SEAL_CHAIN[2]);
@@ -986,15 +986,15 @@ test("x24 seal: the reseal receipts chain the seals and record every changed fil
   assert.deepEqual(relocation.history, [guardPin, unicodePin, allowancePin]);
   assert.deepEqual(relocation.previousSeal, allowance.newSeal);
   assert.deepEqual([relocation.newSeal.path, relocation.newSeal.sha256], [`${ROOT}/seal.json`, SEAL_CHAIN[5]]);
-  assert.equal(receipt.format, "block-b-x24-final-spec-rebind/1");
-  assert.deepEqual(receipt.history, [guardPin, unicodePin, allowancePin, relocationPin]);
-  assert.deepEqual(receipt.previousSeal, relocation.newSeal);
-  assert.deepEqual([receipt.newSeal.path, receipt.newSeal.sha256], [`${ROOT}/seal.json`, SEAL_CHAIN[6]]);
-  assert.equal(vendorpy.format, "block-b-vendor-py-x24-rebind/1");
-  assert.deepEqual(vendorpy.history, [guardPin, unicodePin, allowancePin, relocationPin, finalSpecPin]);
-  assert.deepEqual(vendorpy.previousSeal, receipt.newSeal);
-  assert.deepEqual(vendorpy.newSeal, { path: `${ROOT}/seal.json`, bytes: sealBytes.length, sha256: SEAL_SHA256 });
-  const rounds = [unicode, allowance, relocation, receipt, vendorpy];
+  assert.equal(finalSpec.format, "block-b-x24-final-spec-rebind/1");
+  assert.deepEqual(finalSpec.history, [guardPin, unicodePin, allowancePin, relocationPin]);
+  assert.deepEqual(finalSpec.previousSeal, relocation.newSeal);
+  assert.deepEqual([finalSpec.newSeal.path, finalSpec.newSeal.sha256], [`${ROOT}/seal.json`, PREVIOUS_SEAL_SHA256]);
+  assert.equal(receipt.format, "block-b2-x24-micro-reseal/1");
+  assert.deepEqual(receipt.history, [guardPin, unicodePin, allowancePin, relocationPin, finalSpecPin]);
+  assert.deepEqual(receipt.previousSeal, finalSpec.newSeal);
+  assert.deepEqual(receipt.newSeal, { path: `${ROOT}/seal.json`, bytes: sealBytes.length, sha256: SEAL_SHA256 });
+  const rounds = [unicode, allowance, relocation, finalSpec, receipt];
   for (const r of [guard, ...rounds]) {
     for (const list of [r.supersedesFiles, r.addedFiles]) assert.deepEqual(list.map((f) => f.path), [...list.map((f) => f.path)].sort(), "sorted file lists");
     const paths = [...r.supersedesFiles, ...r.addedFiles].map((f) => f.path);

@@ -23,16 +23,19 @@ acceptance probes must satisfy once green.
   occurrences", "Lot-5 CR-10 rebind"): the seal `682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746`.
   The next revision relocated three base rows of `src/react/workshop.tsx` whose lines a block B edit changed, the
   residual of the I1 scan (section "Reviewed occurrences", "Relocated base rows"): the seal
-  `7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac`. This revision is the block B final spec pass
-  after the fix round (section "Reviewed occurrences", "Final spec rebind"): it rebinds the reviewed records and the
-  reviewed allowance RA-01 to the bytes that the fix round and the lot-3 and lot-4 reseals left, reviews eleven
-  occurrences of two block B tests eligible by exact path (one new token, RV-13) and retires the three relocated
-  rows, whose base lines the fix round restored; its digest is `seal.json`, pinned by
-  `tests/x24-externalization-seal.test.mjs`.
+  `7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac`. The next revision was the block B final spec
+  pass after the fix round (section "Reviewed occurrences", "Final spec rebind"): it rebound the reviewed records and
+  the reviewed allowance RA-01 to the bytes that the fix round and the lot-3 and lot-4 reseals left, reviewed eleven
+  occurrences of two block B tests eligible by exact path (one new token, RV-13) and retired the three relocated
+  rows, whose base lines the fix round restored; with the later RA-01 rebinds recorded in place in its receipt, the
+  seal `74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974`. This revision is the stage B2
+  micro-reseal (section "Stage B2 micro-reseal"): a unique collaboration ID in four inputs and two ledger rows
+  reclassified context-generic; its digest is `seal.json`, pinned by `tests/x24-externalization-seal.test.mjs`.
   `docs/design/receipts/block-b-x24-history-guard.json`, `docs/design/receipts/block-b-x24-unicode-literals-fix.json`,
-  `docs/design/receipts/block-b-x24-p006-selector-allowance.json`, `docs/design/receipts/block-b-x24-i1-relocated-rows.json`
-  and `docs/design/receipts/block-b-x24-final-spec-rebind.json` record the old and new values of every file each of
-  the five rounds changes; the second also records the old and new values of the exact-path relink (`relinks`).
+  `docs/design/receipts/block-b-x24-p006-selector-allowance.json`, `docs/design/receipts/block-b-x24-i1-relocated-rows.json`,
+  `docs/design/receipts/block-b-x24-final-spec-rebind.json` and `docs/design/receipts/block-b2-x24-micro-reseal.json`
+  record the old and new values of every file each of the six rounds changes; the second also records the old and
+  new values of the exact-path relink (`relinks`).
 - Authorities, in precedence order: DESIGN.md R3.3 (SHA-256
   `48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f`), the block B seal harmonization
   (section 3.4, X24, and section 7, hygiene residual HY-1), the review findings. Clause references are
@@ -182,6 +185,45 @@ reason; only `sha256`, `line` and `endLine` change (section "Reviewed occurrence
 build of this tree the package member attributed to the module carries the branch at
 `dist/profile/lot4-export.js:886`, columns 8 to 16 (a scope exception of the code, not a seal value).
 
+## Stage B2 micro-reseal
+
+The stage B2 ruling on the replay of C24 onto main `fec4dae` (spec author; classes A and B3, step 1 of its work order)
+attributes two defects to this seal. The round changes no expected output of a consumer, no parser and no probe.
+
+| Class | Finding | Correction |
+| --- | --- | --- |
+| A | The inputs `export-a.bpmn`, `export-b.bpmn`, `export-legacy.bpmn` and `surface.bpmn` gave the collaboration the ID of the call activity `C1`. The public parser refuses a document with a duplicated ID (`invalid-semantics`), while the cases that read these inputs expect an export or a surface. | The collaboration of the three reference export scenes (`derive/scenes.mjs`, `exportScene`) and of the surface input (`derive/inputs.mjs`) is `Collab1`, and the plane of each diagram references it. The call activity keeps `C1`; every other byte of the four inputs is unchanged. The facts inputs keep their collaboration ID, which none of their elements shares. |
+| B3 | The ledger rows I-0001 and I-0002 (entry LX-TH-4, rule R-162, the only rows of that rule) sit in a squash-preparation note that the tracked tree no longer holds at the block B head. Their disposition `history-record` allows the single post-migration status `retained-history`, which requires the occurrence to stay present, so P-006 counted two presence conflicts. | Rule R-162 and the two rows take the disposition `context-generic` (a generic word of a context entry; status `retained-context` or `removed`), so that the scope may record the two occurrences removed. Category, consumer, policy, target, every other field and every other row are unchanged. The probe, its P-006 assertions and the post-migration status table are unchanged. |
+
+Expected values. For class A, the twelve cases that read the four inputs (A-017, A-018, A-019, A-021, A-025, A-026,
+A-027, X-015, X-016, X-017, X-028 and X-029) change only by the SHA-256 of their `bpmn` input artifact. No expected
+artifact names the collaboration: each `C1` of these cases is the call activity (the `call` node of the reference
+pages and its connections, the `external` element of the surfaces), the participant is `Pool1`, and the Sparx plane ID
+is derived from the participant name. For class B3, `ledger.json` changes by the two dispositions, by
+`summary.byDisposition` (context-generic 175 to 177, history-record 161 to 159) and by `inputs.rules`; the expected
+section of L-001 carries the same two counts; L-001 to L-004, L-006 and P-005 otherwise change by the digests of
+`ledger.json` and `classification-rules.json` only. The justification of the reviewed token RV-04 counts 28
+context-generic rows of its literal, the count before this round; with I-0002 the ledger holds 29. `lexicon.json` is
+unchanged.
+
+| File | SHA-256 before | SHA-256 after |
+| --- | --- | --- |
+| `inputs/export-a.bpmn` | `7c0888f6138e94674e8fe081a9073b88003b69462b3548e442ce485c0a33a73f` | `14686fdea32dd84484e229c37f5a71dae1a79a9d678a5f3049074f956e6fd0cd` |
+| `inputs/export-b.bpmn` | `73c9a0b9e818c76af1b6a339e2f58912c7e63de869a87ef6d8e419b0c5a87606` | `577c179caaadc7867016bf05f1e364fe06274722df3224f38ec054c75c662221` |
+| `inputs/export-legacy.bpmn` | `e55294836fe9b264f6fde94d7ef13d8cbf5545dc0dd7fb41a4a67f54fb3c51fe` | `d42b928f798a21741c906d055410e523fe6786481a97db01670b0eb156cfffcd` |
+| `inputs/surface.bpmn` | `3514d83fce0e64e297232810443050f25a0689cc4e444c883642b7a49a788aa3` | `12dd6b9119e54940a2f8803686fb7ae191d4833297c26fc49dfb684bc9ca544a` |
+| `classification-rules.json` | `193cb1547d4ab8b319a1aa5cf9d5bbbb0bfd27d3429c89a17cad70a9b0172ec7` | `ffe834a42857a548a2af76801041ab9a43a1d6d1faed28da815c4382bdb14c00` |
+| `ledger.json` | `cc09d3097731650bd935328d7cd37ca036c5b85aad3ac5945c110bdf8edf8679` | `f1da5d9e6e7175e67350fe959761dd80bbd8b88335f3e2f3f997189523cd0b9d` |
+
+Derivation. `derive/inputs.mjs` writes the four inputs from the edited scenes, and `derive/author-cases.mjs` writes
+the eighteen cases and `manifest.json`; `derive/policies.mjs`, `derive/clause-table.mjs` and the coverage analysis
+reproduce their files byte for byte. Rule R-162 and the ledger were edited by hand; the normative recomputation
+(`derive/ledger.mjs` on a checkout of the base commit) was not rerun in this round. It applies the same first-match
+rules, and R-162 matches these two occurrences only, so no other row depends on the edit. `derive/seal.mjs` (authority,
+status and previous seal), this README, `seal.json` and the seal test (pinned digest and a chain of six receipts)
+follow. `docs/design/receipts/block-b2-x24-micro-reseal.json` records the old and new pins of every changed file and
+the old and new value at every changed pointer.
+
 ## Gate summary
 
 | Item | Count |
@@ -281,8 +323,8 @@ listing all its occurrences at the base and reading the lines; an occurrence tha
 the build. Counts by family: theme 1592, descriptor 559, presentation 483, type-vocabulary 158, marker
 140, attachment 88, export-style 85, classification-api 82, navigation 81, metrics 71, palette 41,
 private 1. By disposition: test-input 1310, inject 600, doc-update 356, neutral-successor 344, replace
-261, context-generic 175, history-record 161, legacy-api 148, remove 21, retain-notice 5. The disposition
-vocabulary is `classification-rules.json#/vocabulary/disposition`.
+261, context-generic 177, history-record 159, legacy-api 148, remove 21, retain-notice 5 (175 and 161 before the
+stage B2 micro-reseal). The disposition vocabulary is `classification-rules.json#/vocabulary/disposition`.
 
 ### Commands
 
@@ -374,8 +416,9 @@ clauses, the wrong implementation (`W-*`) the case rejects and the data sets the
 reseal receipts `docs/design/receipts/block-b-x24-history-guard.json`,
 `docs/design/receipts/block-b-x24-unicode-literals-fix.json`,
 `docs/design/receipts/block-b-x24-p006-selector-allowance.json`,
-`docs/design/receipts/block-b-x24-i1-relocated-rows.json` and
-`docs/design/receipts/block-b-x24-final-spec-rebind.json`. The literal set is `literal-set.json`:
+`docs/design/receipts/block-b-x24-i1-relocated-rows.json`,
+`docs/design/receipts/block-b-x24-final-spec-rebind.json` and
+`docs/design/receipts/block-b2-x24-micro-reseal.json`. The literal set is `literal-set.json`:
 one hashed record per distinct exact text of the ledger occurrences, derived by `derive/literal-set.mjs`
 from the base tree at each row's span and checked against the row's literal SHA-256. A record holds the
 SHA-256 and the length of the text, the entry of its first row, the word class of its first and last unit and,
