@@ -1,9 +1,11 @@
 // Business-literal guard: the legacy fallback inventories published by
 // adapterManifest() are injected profile data, never source literals. This
 // test scans every file under src/ with the sealed x24 scanner and fails on
-// any occurrence of the legacy-code ledger entry that pairs with no ledger
-// row (the entry is referenced by id only, never by text). Occurrences
-// recorded in the ledger before the base commit keep pairing and stay green.
+// any occurrence of any lexicon entry that pairs with no ledger row (entries
+// are referenced by id only, never by text). Occurrences recorded in the
+// ledger before the base commit keep pairing and stay green, as do the
+// appended context-generic rows of the measured scope for the legacy-code
+// entry. No allowlist, no count tolerance.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -42,7 +44,7 @@ const walk = (dir) => {
   return out;
 };
 
-test("src/ contains no unpaired legacy-code business literal", () => {
+test("src/ contains no unpaired business literal", () => {
   const hits = [];
   for (const full of walk(join(repo, "src"))) {
     const path = relative(repo, full);
@@ -50,8 +52,7 @@ test("src/ contains no unpaired legacy-code business literal", () => {
     const file = maskPath(path, lexicon);
     const { lines, occurrences } = scanBytes(path, bytes, lexicon, { reviewed: false });
     for (const o of occurrences) {
-      if (o.entry !== "LX-AT-2") continue;
-      const key = pairKey(file, o, sha256(lines[o.line - 1]));
+      const key = pairKey(file, o, o.line === 0 ? sha256(path) : sha256(lines[o.line - 1]));
       const pool = pools.get(key);
       if (pool?.length) {
         pool.shift();
@@ -62,7 +63,7 @@ test("src/ contains no unpaired legacy-code business literal", () => {
         appended.shift();
         continue;
       }
-      hits.push(`${path}:${o.line}:${o.column}`);
+      hits.push(`${path}:${o.line}:${o.column}:${o.endColumn} ${o.form} ${o.entry}`);
     }
   }
   assert.deepEqual(hits, [], "business literals live in injected profile data, not in src/");
