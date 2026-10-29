@@ -64,7 +64,7 @@ export interface DiagramElement {
 
 // --- model helpers ------------------------------------------------------------
 
-function isAppShape(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+function isApplicationShape(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
   const bo = el?.businessObject;
   return Boolean(bo) && bo.$type === "bpmn:TextAnnotation" && isAppAnnotation(typeof bo.text === "string" ? bo.text : "", policy);
 }
@@ -91,7 +91,7 @@ export function appsOf(host: DiagramElement, policy?: BusinessPolicy): DiagramEl
 
 /** An [LX-MK-2] annotation linked to at least one activity. */
 export function isLinkedApp(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
-  return Boolean(el) && isAppShape(el, policy) && associated(el as DiagramElement).some(e => isActivity(e, policy));
+  return Boolean(el) && isApplicationShape(el, policy) && associated(el as DiagramElement).some(e => isActivity(e, policy));
 }
 
 /** Elements the annotated hides: linked [LX-MK-2] annotations and their links. */
@@ -105,7 +105,7 @@ export function isHiddenInAnnotated(el: DiagramElement, policy?: BusinessPolicy)
   return isLinkedApp(el, policy);
 }
 
-function shapeKindOf(element: object, policy?: BusinessPolicy): AnnotatedShapeKind | undefined {
+function shapeKind(element: object, policy?: BusinessPolicy): AnnotatedShapeKind | undefined {
   const bo = (element as DiagramElement).businessObject as AnnotatedBoLike | undefined;
   if (!bo) return undefined;
   const facts: { expanded?: boolean; horizontal?: boolean } = {};
@@ -150,14 +150,14 @@ export class AnnotatedRenderer extends BaseRenderer {
 
   override canRender(element: Any): boolean {
     const el = element as DiagramElement;
-    // External labels are separate diagram-js elements: the upstream renderer draws them, recoloured only when asked.
+    // External labels are separate diagram-js elements: the upstream renderer draws them, tinted only when asked.
     if (el.type === "label") return this.recolorsLabels && Boolean(el.businessObject);
     if (!el.businessObject) return false;
     if (el.waypoints) return this.connectionKind(el) !== undefined;
-    return shapeKindOf(element, this.businessPolicy) !== undefined;
+    return shapeKind(element, this.businessPolicy) !== undefined;
   }
 
-  private endsOnDocument(el: DiagramElement): boolean {
+  private endsOnDoc(el: DiagramElement): boolean {
     return [el.source, el.target].some((end) => end?.businessObject && annotatedKind(end.businessObject as AnnotatedBoLike, {}, this.businessPolicy) === "document");
   }
 
@@ -167,7 +167,7 @@ export class AnnotatedRenderer extends BaseRenderer {
    */
   private connectionKind(el: DiagramElement): ReturnType<typeof annotatedConnectionKind> {
     const kind = annotatedConnectionKind(el.businessObject);
-    if (kind === undefined && el.businessObject?.$type === "bpmn:Association" && this.endsOnDocument(el)) return "link";
+    if (kind === undefined && el.businessObject?.$type === "bpmn:Association" && this.endsOnDoc(el)) return "link";
     return kind;
   }
 
@@ -192,7 +192,7 @@ export class AnnotatedRenderer extends BaseRenderer {
       svgClasses(path).add("annotated-flow");
     } else {
       // Associations. Data associations carry a direction, so they keep their arrow.
-      const toDoc = this.endsOnDocument(el);
+      const toDoc = this.endsOnDoc(el);
       const colour = getStrokeColor(el as never, toDoc ? t.docLink : t.link);
       svgAttr(path, {
         d: waypointsPath(el.waypoints),
@@ -208,16 +208,16 @@ export class AnnotatedRenderer extends BaseRenderer {
     return path as unknown as SVGElement;
   }
 
-  /** Upstream label, with the colour of the `labelText` token unless the user coloured that label. */
+  /** Upstream label, with the colour of the `labelText` token unless the user tinted that label. */
   private drawLabel(parentGfx: Any, shape: Any): SVGElement {
     const drawn = this.upstream.drawShape(parentGfx, shape) as SVGElement;
-    let userColoured = false;
+    let userTinted = false;
     try {
-      userColoured = !!getDi(shape.labelTarget ?? shape).get("label")?.get("color:color");
+      userTinted = !!getDi(shape.labelTarget ?? shape).get("label")?.get("color:color");
     } catch {
       /* no DI: keep the token */
     }
-    if (!userColoured) {
+    if (!userTinted) {
       for (const text of svgSelectAll(parentGfx, "text") as SVGElement[]) {
         svgAttr(text, { fill: this.tokens.labelText });
         for (const span of svgSelectAll(text, "tspan") as SVGElement[]) if (span.style.fill) svgAttr(span, { fill: this.tokens.labelText });
@@ -240,12 +240,12 @@ export class AnnotatedRenderer extends BaseRenderer {
   }
 
   private draw(gfx: Any, element: DiagramElement): void {
-    const kind = shapeKindOf(element, this.businessPolicy);
+    const kind = shapeKind(element, this.businessPolicy);
     if (!kind) return;
     const t = this.tokens;
     const defaultFill = this.defaultFill(kind);
-    const custom = getFillColor(element as never, NO_COLOUR);
-    const fill = custom === NO_COLOUR ? defaultFill : custom;
+    const ownFill = getFillColor(element as never, NO_COLOUR);
+    const fill = ownFill === NO_COLOUR ? defaultFill : ownFill;
     const stroke = getStrokeColor(element as never, this.lineFor(kind));
     const sw = t.strokeWidth;
     const w = element.width;
@@ -255,7 +255,7 @@ export class AnnotatedRenderer extends BaseRenderer {
       case "task":
       case "subprocess": {
         const rect = svgCreate("rect");
-        const body = custom === NO_COLOUR ? `url(#${this.taskGradient()})` : fill;
+        const body = ownFill === NO_COLOUR ? `url(#${this.taskGradient()})` : fill;
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill: body, stroke, "stroke-width": sw });
         svgClasses(rect).add("annotated-task");
         svgAppend(gfx, rect);
@@ -276,9 +276,9 @@ export class AnnotatedRenderer extends BaseRenderer {
           stroke,
           "stroke-width": sw,
           "pointer-events": "all",
-          "data-marker": "process-icon",
+          "data-marker": "process-mark",
         });
-        svgClasses(icon).add("annotated-process-icon");
+        svgClasses(icon).add("annotated-process-mark");
         svgClasses(icon).add("annotated-marker");
         svgAppend(gfx, icon);
         this.label(gfx, element, fill, stroke, w, h);
@@ -612,7 +612,7 @@ export class AnnotatedRenderer extends BaseRenderer {
 
   override getShapePath(shape: Any): string {
     const element = shape as DiagramElement;
-    const kind = shapeKindOf(shape, this.businessPolicy);
+    const kind = shapeKind(shape, this.businessPolicy);
     const w = element.width;
     const h = element.height;
     // Hit/interaction outlines follow the drawn shape, not the bounding box.
@@ -663,7 +663,7 @@ export class AnnotatedSync {
       const hide = isHiddenInAnnotated(el, this.businessPolicy);
       const toggled = Boolean(el.hidden) !== hide;
       el.hidden = hide;
-      const kind = shapeKindOf(el, this.businessPolicy);
+      const kind = shapeKind(el, this.businessPolicy);
       const host = !el.waypoints && (isActivity(el, this.businessPolicy) || kind === "data" || kind === "input" || kind === "output");
       if (all || host || toggled) {
         try {

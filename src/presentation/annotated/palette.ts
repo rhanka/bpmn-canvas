@@ -60,7 +60,7 @@ export class AnnotatedPaletteProvider {
 
 // --- bpmn:DataInput / bpmn:DataOutput support ----------------------------------
 
-const DATA_IO_TARGETS = ["bpmn:Lane", "bpmn:Participant", "bpmn:Process", "bpmn:SubProcess"];
+const DATA_DROP_TARGETS = ["bpmn:Lane", "bpmn:Participant", "bpmn:Process", "bpmn:SubProcess"];
 
 /** Creation drops of DataInput/DataOutput, which the default rules reject. */
 export class AnnotatedRules {
@@ -73,7 +73,7 @@ export class AnnotatedRules {
       if (
         shapes.length === 1 &&
         (is(shapes[0] as object, "bpmn:DataInput") || is(shapes[0] as object, "bpmn:DataOutput")) &&
-        DATA_IO_TARGETS.some((t) => is(target as object, t))
+        DATA_DROP_TARGETS.some((t) => is(target as object, t))
       ) {
         return true;
       }
@@ -178,7 +178,7 @@ export class AnnotatedBpmnUpdater extends UpdaterBase {
     const input = businessObject.$type === "bpmn:DataInput";
     ioSpec.get(input ? "dataInputs" : "dataOutputs").push(businessObject);
     businessObject.$parent = ioSpec;
-    // Put the item in the first set so it belongs to at least one, as BPMN requires.
+    // Put the item in the set at index zero so it belongs to at least one, as BPMN requires.
     const set = selected ?? ioSpec.get(input ? "inputSets" : "outputSets")[0];
     set?.get(input ? "dataInputRefs" : "dataOutputRefs").push(businessObject);
   }

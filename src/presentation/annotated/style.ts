@@ -4,10 +4,10 @@ import { badgeSize, badgeBoxes, documentRect } from "../../internal/legacy-polic
 // the geometry shared with the swimlane layout. Adapted from an internal
 // implementation (render style + draw.io-reference geometry). No DOM, no bpmn-js.
 
-import { annotationName, isAppAnnotation, isDocumentAnnotation } from "../../internal/annotations.js";
+import { annotationName, isAppAnnotation, isDocumentRole } from "../../internal/annotations.js";
 import { textWidth, wrapText } from "../../internal/textMetrics.js";
 
-export { annotationName, isAppAnnotation, isDocumentAnnotation };
+export { annotationName, isAppAnnotation, isDocumentRole };
 
 export type AnnotatedShapeKind =
   | "task"
@@ -79,7 +79,7 @@ export function annotatedKind(bo: AnnotatedBoLike, di: AnnotatedDiFacts = {}, po
       return bo.dataState || bo.isCollection || bo.dataObjectRef?.isCollection ? undefined : "data";
     case "bpmn:TextAnnotation": {
       const text = typeof bo.text === "string" ? bo.text : "";
-      if (isDocumentAnnotation(text, policy)) return "document";
+      if (isDocumentRole(text, policy)) return "document";
       if (isAppAnnotation(text, policy)) return "application";
       return undefined;
     }

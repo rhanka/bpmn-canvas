@@ -2,7 +2,7 @@ import { ProfileContractError } from "../../profile/canonical.js";
 import type { BusinessPolicy } from "../../internal/business-policy.js";
 import { annotationKind } from "../../internal/legacy-policy.js";
 /**
- * Upstream bpmn-js notation, recoloured per element kind from tokens.
+ * Upstream bpmn-js notation, tinted per element kind from tokens.
  *
  * The upstream renderer draws every element (shapes, inner decorations, markers); this renderer only tells it
  * which `fill` and `stroke` to use, then sets the text colour. No geometry is touched, so the notation is exactly

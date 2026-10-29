@@ -1,6 +1,6 @@
 import { annotationRole, roleLabel, type BusinessPolicy } from "./business-policy.js";
 
-export function isDocumentAnnotation(text: string | undefined, policy?: BusinessPolicy): boolean {
+export function isDocumentRole(text: string | undefined, policy?: BusinessPolicy): boolean {
   return annotationRole(text, policy)?.role === "document";
 }
 

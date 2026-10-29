@@ -6,7 +6,7 @@ import { annotationKind, layoutPolicy } from "../../internal/legacy-policy.js";
  * `drawing: "flat"` of the `recolor` profile: flat shapes in the profile's colours (rounded activities with a
  * 1.4 line, a thick end ring with an inner dot, a flat gateway with a bold marker, data pages, open-bracket
  * annotations, pools and lanes with a header line), each label inside its shape. Connections and external labels
- * stay with the upstream renderer (recoloured by the profile). Colours the user set on an element keep priority.
+ * stay with the upstream renderer (tinted by the profile). Colours the user set on an element keep priority.
  */
 import BaseRenderer from "diagram-js/lib/draw/BaseRenderer.js";
 import { is } from "bpmn-js/lib/util/ModelUtil.js";
