@@ -114,7 +114,7 @@ function labelBox(text: string, size: number, maxW: number, bold = false): [numb
 
 // --- sizes ------------------------------------------------------------------
 
-function appBoxSizeLayout(name: string, hostW: number): [number, number] {
+function badgeSize(name: string, hostW: number): [number, number] {
   const wanted = textWidth(name, l.appBadge.font, true) + appChrome;
   const maxW = Math.max(appMinW, hostW - 2 * appMargin);
   const w = Math.trunc(Math.min(maxW, Math.max(appMinW, Math.ceil(wanted))));
@@ -123,7 +123,7 @@ function appBoxSizeLayout(name: string, hostW: number): [number, number] {
   return [w, Math.trunc(Math.max(appH, Math.ceil(lines * l.appBadge.font * policy.metrics.lineHeight + 8)))];
 }
 
-function appMinHostW(name: string): number {
+function badgeMinHostWidth(name: string): number {
   const words = (name ?? "").split(/\s+/).filter(Boolean);
   const longest = words.length ? Math.max(...words.map((w) => textWidth(w, l.appBadge.font, true))) : 0;
   return Math.trunc(Math.ceil(longest + appChrome + 2 * appMargin));
@@ -144,7 +144,7 @@ function nodeSize(n: LayoutNode, kind: string): [number, number] {
   const nativeType = ({ task: "bpmn:Task", subprocess: "bpmn:SubProcess", call: "bpmn:CallActivity" } as Record<string, string>)[kind];
   const app = nativeType && applicationHost({ $type: nativeType }, policy) ? String(n.application || "") : "";
   const base = kind === "subprocess" ? sizes.subprocess! : sizes.task!;
-  const minimum = app ? Math.min(200, Math.max(base[0]!, appMinHostW(app))) : base[0]!;
+  const minimum = app ? Math.min(200, Math.max(base[0]!, badgeMinHostWidth(app))) : base[0]!;
   if (kind === "task" || kind === "subprocess") return fit(textOf(n), font, { minW: minimum, maxW: Math.max(200, minimum), minH: base[1]!, padX: 8, padY: 8, extraH: app ? appOverlap : 0 });
   if (kind === "call") return fit(textOf(n), font, { minW: Math.max(own[0]!, app ? minimum : own[0]!), maxW: 200, minH: own[1]!, padX: 14, padY: 8, extraH: 10 });
   if (kind === "document") return [docW, docHeight(textOf(n))];
@@ -320,7 +320,7 @@ async function layoutProcess(
   const appWh = new Map<string, [number, number]>();
   for (const n of flowOrder) {
     const nd = nodeOf.get(n)!;
-    if (nd.application && applicationHost({ $type: ({ task: "bpmn:Task", subprocess: "bpmn:SubProcess", call: "bpmn:CallActivity" } as Record<string, string>)[kind.get(n)!] }, policy)) appWh.set(n, appBoxSizeLayout(String(nd.application), size.get(n)![0]));
+    if (nd.application && applicationHost({ $type: ({ task: "bpmn:Task", subprocess: "bpmn:SubProcess", call: "bpmn:CallActivity" } as Record<string, string>)[kind.get(n)!] }, policy)) appWh.set(n, badgeSize(String(nd.application), size.get(n)![0]));
   }
   const docs = new Map<string, string[]>();
   const ins = new Map<string, string[]>();
@@ -616,12 +616,12 @@ function link(
   return [[cx(art), art.y], [cx(art), ay], [gx, ay], [gx, yy], [lo, yy], [lo, bottom]];
 }
 
-return { fit, labelBox, appBoxSizeLayout, docHeight, flowXml, bpmnioColumns, layoutProcess, appMinHostW, nodeSize };
+return { fit, labelBox, badgeSize, docHeight, flowXml, bpmnioColumns, layoutProcess, badgeMinHostWidth, nodeSize };
 }
 
 export function fit(text: string, size: number, options: { minW: number; maxW: number; minH: number; padX?: number; padY?: number; bold?: boolean; extraH?: number }, policy?: BusinessPolicy): [number, number] { return createLayout(policy).fit(text, size, options); }
 export function labelBox(text: string, size: number, width: number, bold = false, policy?: BusinessPolicy): [number, number] { return createLayout(policy).labelBox(text, size, width, bold); }
-export function appBoxSizeLayout(name: string, width: number, policy?: BusinessPolicy): [number, number] { return createLayout(policy).appBoxSizeLayout(name, width); }
+export * from "./swimlane-exports.js";
 export function docHeight(text: string, policy?: BusinessPolicy): number { return createLayout(policy).docHeight(text); }
 export function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>, policy?: BusinessPolicy): { xml: string; ids: Map<string,string> } { return createLayout(policy).flowXml(nodes, flows); }
 export function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string,string]>, policy?: BusinessPolicy): Promise<Map<string,number> | null> { return createLayout(policy).bpmnioColumns(nodes, flows); }

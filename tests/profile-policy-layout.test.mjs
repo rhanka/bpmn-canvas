@@ -18,8 +18,8 @@ for (const row of load("manifest.json").cases) {
       const policy = input(c, suffix ? `policy-${suffix}` : "policy");
       if (c.operation === "x24.layout.size") {
         const runtime = createLayout(policy);
-        const actual = input(c, "vectors").map(v => ({ ...v, result: v.measure === "badge-size" ? runtime.appBoxSizeLayout(v.name, v.hostWidth)
-          : v.measure === "badge-min-host-width" ? runtime.appMinHostW(v.name)
+        const actual = input(c, "vectors").map(v => ({ ...v, result: v.measure === "badge-size" ? runtime.badgeSize(v.name, v.hostWidth)
+          : v.measure === "badge-min-host-width" ? runtime.badgeMinHostWidth(v.name)
           : v.measure === "document-height" ? runtime.docHeight(v.label)
           : v.measure === "label-box" ? runtime.labelBox(v.text, v.size, v.maxWidth, v.bold)
           : runtime.nodeSize({ type: v.kind, label: v.label, application: v.application }, v.kind) }));
