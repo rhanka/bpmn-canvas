@@ -3,6 +3,7 @@
 import type { BusinessPolicy } from "../internal/business-policy.js";
 import { navigationTarget } from "../internal/legacy-policy.js";
 import { documentNavigationIndex } from "../internal/navigation-policy.js";
+import { explicitTargetResolver } from "./navigation-target.js";
 
 import { useCallback, useEffect, useId, useImperativeHandle, useRef, useState } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
@@ -57,7 +58,7 @@ export interface DownloadContext {
 }
 
 /** Rules a sub-process marker uses to find the diagram it opens, tried on each diagram in order. */
-export type NavigationRule = NonNullable<BusinessPolicy["navigation"]["rules"]>[number];
+export type NavigationRule = "calledElement" | "exactName" | "sectionNumber" | "substring";
 
 export interface WorkshopHandle {
   /** The complete current document, after any pending edit and save. */
@@ -134,12 +135,7 @@ export interface BpmnWorkshopProps {
   readonly ref?: Ref<WorkshopHandle>;
 }
 
-
-/** Called element first (by id or name), then the element's own name; never the diagram already shown. */
-export function defaultResolveTarget(click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined, policy?: BusinessPolicy, index?: Record<string, any>): string | null {
-  const result = navigationTarget({ click, diagrams, activeId, activeDiagramId: activeId }, index ?? { processes: [], entries: [] }, policy);
-  return result.kind === "open" || result.kind === "current" ? result.diagramId : null;
-}
+export * from "./navigation-target.js";
 
 /** Resolve diagrams using caller-provided navigation rule categories. */
 export function navigationResolver(rules: readonly NavigationRule[]): (click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined) => string | null {
@@ -299,7 +295,7 @@ function XmlWorkshop(props: BpmnWorkshopProps): ReactElement {
         const h = handleRef.current;
         if (!h) return;
         const p = latest.current;
-        const explicit = p.resolveTarget;
+        const explicit = explicitTargetResolver(p);
         if (explicit) {
           const target = explicit(click, diagramsRef.current, activeRef.current);
           if (target && target !== activeRef.current) void h.selectDiagram(target).catch(() => undefined);
