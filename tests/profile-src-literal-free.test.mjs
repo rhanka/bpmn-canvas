@@ -1,11 +1,12 @@
 // Business-literal guard: the legacy fallback inventories published by
 // adapterManifest() are injected profile data, never source literals. This
 // test scans every file under src/ with the sealed x24 scanner and fails on
-// any occurrence of any lexicon entry that pairs with no ledger row (entries
-// are referenced by id only, never by text). Occurrences recorded in the
-// ledger before the base commit keep pairing and stay green, as do the
-// appended context-generic rows of the measured scope for the legacy-code
-// entry. No allowlist, no count tolerance.
+// any occurrence of any lexicon entry that pairs with no ledger row and no
+// reviewed record (entries are referenced by id only, never by text).
+// Occurrences recorded in the ledger before the base commit keep pairing and
+// stay green, as do the appended context-generic rows of the measured scope
+// for the legacy-code entry and the reviewed records the scanner honours.
+// Strict scan: reviewed bindings apply. No allowlist, no count tolerance.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -50,7 +51,7 @@ test("src/ contains no unpaired business literal", () => {
     const path = relative(repo, full);
     const bytes = readFileSync(full);
     const file = maskPath(path, lexicon);
-    const { lines, occurrences } = scanBytes(path, bytes, lexicon, { reviewed: false });
+    const { lines, occurrences } = scanBytes(path, bytes, lexicon);
     for (const o of occurrences) {
       const key = pairKey(file, o, o.line === 0 ? sha256(path) : sha256(lines[o.line - 1]));
       const pool = pools.get(key);
