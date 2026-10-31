@@ -6,7 +6,7 @@ import type { LegendTokens } from "./internal/contracts.js";
 
 export type { AnnotatedTokens };
 export type { LegendTokens };
-/** `standard`: upstream bpmn-js. `annotated`: the annotated look. `recolor`: upstream notation, drawn by upstream, recoloured by tokens. */
+/** Opaque look id: the alias of an injected look. Without one, upstream bpmn-js draws the diagram. */
 export type ProfileId = string;
 
 export type PaletteColumns = 1 | 2 | "auto";
@@ -112,7 +112,7 @@ export interface SetXmlOptions {
 export interface ProfileOptions {
   /** `annotated`: the annotated palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
   readonly palette?: string;
-  /** `recolor` only. `flat`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes recoloured. */
+  /** `recolor` only. `flat`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes, tinted. */
   readonly drawing?: string;
 }
 
@@ -159,7 +159,7 @@ export interface BpmnCanvasOptions {
   readonly profileOptions?: ProfileOptions;
   /** `layoutOnLoad` for the first document (see `SetXmlOptions`). */
   readonly layoutOnLoad?: boolean;
-  /** Look inputs for the `annotated` profile. Missing keys fall back to its defaults, the reference Custom look. */
+  /** Look inputs for the `annotated` profile. Missing keys fall back to the tokens of the injected look. */
   readonly annotatedTokens?: Partial<AnnotatedTokens>;
   /** Colours of the `recolor` profile, same fields as the annotated tokens. Only the keys given recolour; see the README. */
   readonly recolorTokens?: Partial<AnnotatedTokens>;

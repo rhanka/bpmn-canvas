@@ -24,7 +24,7 @@ export interface BpmnCanvasConfig {
 
 /**
  * Host-overridable look inputs for the `annotated` and `recolor` profiles. A host passes a `Partial`; missing keys
- * fall back to the profile defaults (annotated: the reference Custom look; recolor: neutral values), with two
+ * fall back to the tokens of the injected look, with two
  * convenience fallbacks: `stroke` feeds every `*Line` and `flow` not given, and `fill`
  * feeds `taskFill` when not given. `taskFillEnd` is derived from `taskFill` when not given.
  */
@@ -86,8 +86,7 @@ export interface AnnotatedTokens {
   readonly appFill: string;
 }
 
-/** Published token type name, kept as an alias of the category name. */
-export type LegendTokens = AnnotatedTokens;
+export type * from "./published-token-type.js";
 
 export interface ProfileDefinition {
   readonly businessPolicy?: BusinessPolicy;
