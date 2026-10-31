@@ -3,6 +3,7 @@ import { factElement, factsOf } from "./facts.js";
 // Ephemeral formatting projection of one immutable moddle Definitions snapshot.
 // Semantic identity, membership, ordering and attachment never come from DI.
 import { IoError } from "./errors.js";
+import { UNHOSTED_ANNOTATION } from "./refusal-codes.js";
 import type { BpmnDefinitions, ModdleElement } from "../types.js";
 type E = ModdleElement;
 export interface RefBox { readonly x: number; readonly y: number; readonly w: number; readonly h: number }
@@ -349,7 +350,7 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     }
     if (k === "Association" && (annotationBoxes.has(s?.id) || annotationBoxes.has(t?.id))) {
       const ann = annotationBoxes.has(s?.id) ? s : t, host = ann === s ? t : s;
-      if (!host || !applicationHost(host, policy)) fail("orphan-application", ann, "Application needs an activity");
+      if (!host || !applicationHost(host, policy)) fail(UNHOSTED_ANNOTATION, ann, "Application needs an activity");
       if (usedAnnotations.has(ann.id) || applicationsByHost.has(host.id)) fail("unsupported-element", a, "Multiple application attachments are not exported");
       usedAnnotations.add(ann.id); if (!applicationsByHost.has(host.id)) { applicationsByHost.set(host.id, annotationBoxes.get(ann.id)!); nodes.get(host.id)!.application = annotationBoxes.get(ann.id)!.text; }
       continue;
@@ -364,7 +365,7 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     });
     connections.push({ id: a.id, source: s.id, target: t.id, kind: ck, label: ck === "sequence" ? a.name ?? "" : factsOf(a, policy)?.label ?? "", points, semanticOrder: rank.get(a)! });
   }
-  for (const id of annotationBoxes.keys()) if (!usedAnnotations.has(id)) fail("orphan-application", byId.get(id)!, "Application is not attached");
+  for (const id of annotationBoxes.keys()) if (!usedAnnotations.has(id)) fail(UNHOSTED_ANNOTATION, byId.get(id)!, "Application is not attached");
   connections.sort((a, b) => Number(a.kind !== "sequence") - Number(b.kind !== "sequence") || a.semanticOrder - b.semanticOrder);
   for (const e of drawable.filter(artifact)) {
     const n = nodes.get(e.id); if (!n) continue;
