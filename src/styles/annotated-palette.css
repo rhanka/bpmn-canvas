@@ -1,6 +1,6 @@
 /*
  * Annotated palette (profile "annotated" only). Every rule is scoped to entries whose data-action starts
- * with "annotated.", so the default palette of the "standard" profile is never touched.
+ * with "annotated.", so the upstream palette is never touched.
  * Icons are monochrome masks authored for this package; the colour comes from
  * --bpmn-canvas-annotated-icon (default #333333), the hover ring from --bpmn-canvas-annotated-accent.
  * Action ids are listed in the README ("Annotated profile").

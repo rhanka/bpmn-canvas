@@ -17,7 +17,7 @@ const iconRules = fontCss
   .trim();
 
 import { existsSync } from "node:fs";
-const annotatedCss = ["annotated-palette.css", "palette-colors.css", "workshop.css", "workshop-shell.css"].map((f) => (existsSync(root + "src/styles/" + f) ? read("src/styles/" + f) : "")).join("\n");
+const annotatedCss = ["annotated-palette.css", "palette-colors.css", "workshop.css", "workshop-shell.css"].map((f) => (existsSync(root + "src/styles/" + f) ? read("src/styles/" + f) : "")).join("\n").replace(/\/\*[\s\S]*?\*\//g, "");
 const base = [
   read("node_modules/diagram-js/assets/diagram-js.css"),
   read("node_modules/bpmn-js/dist/assets/bpmn-js.css"),
