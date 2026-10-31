@@ -22,12 +22,12 @@ import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as 
 
 import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
 import {
-  annotationName,
+  roleText,
   appBoxes,
   contrastText,
   documentPath,
   documentTextRect,
-  isAppAnnotation,
+  hasApplicationRole,
   annotatedConnectionKind,
   annotatedKind,
   waypointsPath,
@@ -66,7 +66,7 @@ export interface DiagramElement {
 
 function isApplicationShape(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
   const bo = el?.businessObject;
-  return Boolean(bo) && bo.$type === "bpmn:TextAnnotation" && isAppAnnotation(typeof bo.text === "string" ? bo.text : "", policy);
+  return Boolean(bo) && bo.$type === "bpmn:TextAnnotation" && hasApplicationRole(typeof bo.text === "string" ? bo.text : "", policy);
 }
 
 function isActivity(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
@@ -276,9 +276,9 @@ export class AnnotatedRenderer extends BaseRenderer {
           stroke,
           "stroke-width": sw,
           "pointer-events": "all",
-          "data-marker": "process-mark",
+          "data-marker": "process-icon",
         });
-        svgClasses(icon).add("annotated-process-mark");
+        svgClasses(icon).add("annotated-process-icon");
         svgClasses(icon).add("annotated-marker");
         svgAppend(gfx, icon);
         this.label(gfx, element, fill, stroke, w, h);
@@ -332,7 +332,7 @@ export class AnnotatedRenderer extends BaseRenderer {
         svgAppend(gfx, bar);
         // Text between the band and the wave crest (the layout sized the height for it).
         const inner = documentTextRect(w, h, this.businessPolicy);
-        const docText = this.textRenderer.createText(annotationName(element.businessObject?.text, this.businessPolicy), {
+        const docText = this.textRenderer.createText(roleText(element.businessObject?.text, this.businessPolicy), {
           box: { width: inner.width, height: inner.height },
           align: "center-top",
           padding: 0,
@@ -350,7 +350,7 @@ export class AnnotatedRenderer extends BaseRenderer {
       }
       case "application": {
         // Unlinked [LX-MK-2] annotation (linked ones are hidden and drawn under their activity).
-        this.appBox(gfx, { name: annotationName(element.businessObject?.text, this.businessPolicy), x: 0, y: 0, width: w, height: h }, fill, stroke);
+        this.appBox(gfx, { name: roleText(element.businessObject?.text, this.businessPolicy), x: 0, y: 0, width: w, height: h }, fill, stroke);
         break;
       }
       case "lane": {
@@ -436,7 +436,7 @@ export class AnnotatedRenderer extends BaseRenderer {
   private drawApps(gfx: Any, element: DiagramElement): void {
     const apps = appsOf(element, this.businessPolicy);
     if (apps.length === 0) return;
-    const names = apps.map((a) => annotationName(a.businessObject?.text, this.businessPolicy));
+    const names = apps.map((a) => roleText(a.businessObject?.text, this.businessPolicy));
     // The layout stores the annotation where the box goes (text-fitted, space
     // reserved): use that DI when it sits in the activity's bottom band, else
     // compute the box (applications added in the editor).
