@@ -85,12 +85,12 @@ function associated(el: DiagramElement): DiagramElement[] {
 }
 
 /** [LX-MK-2] annotations associated to this activity (none for other types). */
-export function appsOf(host: DiagramElement, policy?: BusinessPolicy): DiagramElement[] {
+export function applicationsOf(host: DiagramElement, policy?: BusinessPolicy): DiagramElement[] {
   return attachedAnnotations(host, policy) as DiagramElement[];
 }
 
 /** An [LX-MK-2] annotation linked to at least one activity. */
-export function isLinkedApp(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+export function isAttachedApplication(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
   return Boolean(el) && isApplicationShape(el, policy) && associated(el as DiagramElement).some(e => isActivity(e, policy));
 }
 
@@ -99,10 +99,10 @@ export function isHiddenInAnnotated(el: DiagramElement, policy?: BusinessPolicy)
   if (el.waypoints) {
     return (
       el.type === "bpmn:Association" &&
-      ((isLinkedApp(el.source, policy) && isActivity(el.target, policy)) || (isLinkedApp(el.target, policy) && isActivity(el.source, policy)))
+      ((isAttachedApplication(el.source, policy) && isActivity(el.target, policy)) || (isAttachedApplication(el.target, policy) && isActivity(el.source, policy)))
     );
   }
-  return isLinkedApp(el, policy);
+  return isAttachedApplication(el, policy);
 }
 
 function shapeKind(element: object, policy?: BusinessPolicy): AnnotatedShapeKind | undefined {
@@ -259,7 +259,7 @@ export class AnnotatedRenderer extends BaseRenderer {
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill: body, stroke, "stroke-width": sw });
         svgClasses(rect).add("annotated-task");
         svgAppend(gfx, rect);
-        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, appsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
+        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, applicationsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
         this.label(gfx, element, fill, stroke, w, h);
         this.drawApps(gfx, element);
         break;
@@ -434,7 +434,7 @@ export class AnnotatedRenderer extends BaseRenderer {
 
   /** Application component boxes of an activity, under its bottom edge. */
   private drawApps(gfx: Any, element: DiagramElement): void {
-    const apps = appsOf(element, this.businessPolicy);
+    const apps = applicationsOf(element, this.businessPolicy);
     if (apps.length === 0) return;
     const names = apps.map((a) => roleText(a.businessObject?.text, this.businessPolicy));
     // The layout stores the annotation where the box goes (text-fitted, space
@@ -529,7 +529,7 @@ export class AnnotatedRenderer extends BaseRenderer {
   private label(gfx: Any, element: DiagramElement, fill: string, stroke: string, w: number, h: number): void {
     const t = this.tokens;
     // Above the application band when the activity has one (the layout reserved that height).
-    const band = appsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0;
+    const band = applicationsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0;
     const text = this.textRenderer.createText((element.businessObject?.name as string) || "", {
       box: { width: w, height: h - band },
       align: "center-middle",
@@ -688,7 +688,7 @@ export class AnnotatedAppFollow {
     interceptor.preExecute("elements.move", (event: { context: { shapes: DiagramElement[] } }) => {
       const shapes = event.context.shapes;
       for (const shape of [...shapes]) {
-        for (const app of appsOf(shape, this.businessPolicy)) {
+        for (const app of applicationsOf(shape, this.businessPolicy)) {
           if (!shapes.includes(app)) shapes.push(app);
         }
       }

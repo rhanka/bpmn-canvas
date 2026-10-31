@@ -14,7 +14,7 @@ import { getFillColor, getLabelColor, getStrokeColor } from "bpmn-js/lib/draw/Bp
 import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as svgCreate } from "tiny-svg";
 
 import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
-import { appsOf } from "../annotated/renderer.js";
+import { applicationsOf } from "../annotated/renderer.js";
 import { contrastText } from "../annotated/style.js";
 import { resolveRecolorTokens } from "./tokens.js";
 
@@ -94,7 +94,7 @@ export class FlatRenderer extends BaseRenderer {
         const rect = svgCreate("rect");
         svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 9, fill, stroke, "stroke-width": call ? 3.5 : 1.4 });
         svgAppend(gfx, rect);
-        if (kind === "subprocess" || call) this.subprocessMarker(gfx, w, h, stroke, appsOf(element).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
+        if (kind === "subprocess" || call) this.subprocessMarker(gfx, w, h, stroke, applicationsOf(element).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
         this.embeddedLabel(gfx, element, kind, w, h, 12, fill, stroke);
         break;
       }
