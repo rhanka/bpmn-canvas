@@ -1,7 +1,7 @@
 import type { AnnotatedTokens, ProfileDefinition } from "../../internal/contracts.js";
 import type { BusinessPolicy } from "../../internal/business-policy.js";
 import { ProfileContractError } from "../../profile/canonical.js";
-import { resolveColoredTokens, hasTokens, namedColoredTokens } from "./tokens.js";
+import { resolveRecolorTokens, hasTokens, namedRecolorTokens } from "./tokens.js";
 import { RecolorRendererModule } from "./renderer.js";
 export function recolorProfile(tokens?: Partial<AnnotatedTokens>, businessPolicy?: BusinessPolicy): ProfileDefinition {
   const look = businessPolicy?.presentation?.looks?.find((look: any) => look.renderer === "recolor");
@@ -15,7 +15,7 @@ export function recolorProfile(tokens?: Partial<AnnotatedTokens>, businessPolicy
     renderer: look.renderer,
     modelerModules: modules,
     viewerModules: modules,
-    tokens: resolveColoredTokens(tokens, look.tokens),
-    named: namedColoredTokens(tokens),
+    tokens: resolveRecolorTokens(tokens, look.tokens),
+    named: namedRecolorTokens(tokens),
   };
 }

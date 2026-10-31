@@ -4,7 +4,7 @@ import { shade } from "./style.js";
 export const lineKeys = ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"] as const;
 
 /** The annotated defaults, then the host's `stroke`/`fill` conveniences, then the host's explicit per-type values. */
-export function resolveLegendTokens(overrides?: Partial<AnnotatedTokens>, base?: AnnotatedTokens): AnnotatedTokens {
+export function resolveAnnotatedTokens(overrides?: Partial<AnnotatedTokens>, base?: AnnotatedTokens): AnnotatedTokens {
   if (!base) throw new ProfileContractError("profile-resource-missing");
   return resolveTokens(base, overrides);
 }

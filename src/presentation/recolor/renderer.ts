@@ -14,7 +14,7 @@ import { getDi, is } from "bpmn-js/lib/util/ModelUtil.js";
 import { attr as svgAttr, select as svgSelect, selectAll as svgSelectAll } from "tiny-svg";
 
 import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
-import { resolveColoredTokens } from "./tokens.js";
+import { resolveRecolorTokens } from "./tokens.js";
 
 type Any = any; // diagram-js and bpmn-js services are untyped here, as in the annotated profile.
 

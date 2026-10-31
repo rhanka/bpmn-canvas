@@ -16,7 +16,7 @@ import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as 
 import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
 import { appsOf } from "../annotated/renderer.js";
 import { contrastText } from "../annotated/style.js";
-import { resolveColoredTokens } from "./tokens.js";
+import { resolveRecolorTokens } from "./tokens.js";
 
 type Any = any; // diagram-js and bpmn-js services are untyped here, as in the other profiles.
 
