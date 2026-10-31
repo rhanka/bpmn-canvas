@@ -114,7 +114,7 @@ Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-
 
 `profile: "standard"` (default) is upstream bpmn-js: its renderer, palette and context pad, so every
 BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in look (rounded task
-boxes, `[LX-MK-2]`/`[LX-MK-1]` annotations, a legend palette) that draws only the shapes it can draw
+boxes, `[LX-MK-2]`/`[LX-MK-1]` annotations, its own palette) that draws only the shapes it can draw
 faithfully; everything else falls through to the upstream renderer.
 
 ## The workshop (`/react`)
@@ -371,10 +371,10 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 0.3 changes the default look of the `legend` profile and the outcome of superseded work; entries, types and methods
 are unchanged.
 
-- `[LX-TH-6]` is now the reference Custom look (see [Legend profile](#legend-profile)): a legend canvas
+- `[LX-TH-6]` is now the reference look (see the profile section below): a canvas of that profile
   without tokens draws black lines, a beige task gradient, red events, green gateways, yellow external processes and
   documents, red dashed links and white lane headers. To keep the 0.2 neutral look, pass the neutral values, which
-  remain the colored profile's defaults: `legendTokens: [LX-TH-6]` (exported by
+  remain the defaults of the other built-in look; give them as its look tokens: `[LX-TH-6]` (exported by
   `@sentropic/bpmn-canvas/browser`).
 - `dataLinkArrow` defaults to `false` in the legend profile (plain dashed task input and output links); pass `true`
   for the BPMN arrow head.
@@ -465,10 +465,10 @@ white lane headers, red dashed links (`[LX-PR-3]`, `5 5`, no arrow head on task 
 
 ### Tokens
 
-`legendTokens` is a `Partial<LegendTokens>`. Missing keys use the defaults above (`[LX-TH-6]`). Two conveniences: `stroke` feeds
+The look-token option is a `Partial` of the token type. Missing keys use the defaults above (`[LX-TH-6]`). Two conveniences: `stroke` feeds
 every `*Line` and `flow` you did not name, `fill` feeds `taskFill`; `taskFillEnd` is derived from `taskFill`
 when you do not name it. An explicit per-type value always wins. The category names `annotatedTokens`,
-`recolorTokens` and `AnnotatedTokens` are aliases of `legendTokens`, `coloredTokens` and `LegendTokens`.
+`recolorTokens` and `AnnotatedTokens` are aliases of the published look-token options and type documented above.
 
 | Group | Keys |
 |---|---|
@@ -501,7 +501,8 @@ The icon CSS ships with the package (monochrome masks, SVG files under `dist/ass
 
 The collapsed sub-process `[+]` and the external-process icon carry `data-marker` and the class
 `legend-marker`. The lib's CSS lets a click land on the marker itself and keeps the body of the element
-selectable and draggable, so a host can tell a body click from a marker click.
+selectable and draggable, so a host can tell a body click from a marker click. These hooks are a stable DOM
+contract pinned under LX-NV-1 (R-038).
 
 ## Palette layout and icon colours
 
