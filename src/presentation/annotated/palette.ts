@@ -26,8 +26,6 @@ export interface PaletteEntry {
   readonly title: string;
   readonly bpmnType: string;
   readonly group: "events" | "activities" | "gateways" | "data" | "annotations" | "structure" | "flows";
-  /** Marker or preset applied at creation. */
-  readonly preset?: { readonly subtype?: string; readonly name?: string; readonly text?: string; readonly collapsed?: boolean };
   /** Special creation path (default: diagram-js create flow). */
   readonly tool?: "connect";
 }
@@ -178,8 +176,9 @@ export class AnnotatedBpmnUpdater extends UpdaterBase {
     const input = businessObject.$type === "bpmn:DataInput";
     ioSpec.get(input ? "dataInputs" : "dataOutputs").push(businessObject);
     businessObject.$parent = ioSpec;
-    // Put the item in the set at index zero so it belongs to at least one, as BPMN requires.
-    const set = selected ?? ioSpec.get(input ? "inputSets" : "outputSets")[0];
+    // Put the item in the only set, so it belongs to one, as BPMN requires; several sets need a selection.
+    const sole = ioSpec.get(input ? "inputSets" : "outputSets");
+    const set = selected ?? (sole.length === 1 ? sole[0] : undefined);
     set?.get(input ? "dataInputRefs" : "dataOutputRefs").push(businessObject);
   }
 
