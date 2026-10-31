@@ -6,26 +6,9 @@ import { ProfileContractError } from "../profile/canonical.js";
  * the engine is loaded when a canvas or a render is actually created.
  */
 import type { BpmnCanvasConfig, ProfileDefinition } from "./contracts.js";
-import type { AnnotatedTokens, LegendTokens, ProfileId, ProfileOptions } from "../types.js";
+import type { AnnotatedTokens, ProfileId, ProfileOptions } from "../types.js";
 
-/** Published look-token options stay as aliases: new names first, then the old published names. */
-export function tokensFromOptions(
-  options: {
-    readonly tokens?: Partial<AnnotatedTokens>;
-    readonly recolorTokens?: Partial<AnnotatedTokens>;
-    readonly annotatedTokens?: Partial<AnnotatedTokens>;
-    readonly legendTokens?: Partial<LegendTokens>;
-    readonly coloredTokens?: Partial<LegendTokens>;
-  },
-): Partial<AnnotatedTokens> | undefined {
-  return (
-    options.tokens ??
-    options.recolorTokens ??
-    options.annotatedTokens ??
-    options.coloredTokens ??
-    options.legendTokens
-  );
-}
+export { tokensFromOptions } from "./token-options.js";
 
 export interface ModdleLike {
   fromXML(xml: string): Promise<{ rootElement: DefinitionsLike; warnings: Array<{ message: string; element?: { id?: string }; value?: string }> }>;
