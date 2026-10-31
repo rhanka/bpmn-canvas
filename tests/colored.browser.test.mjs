@@ -117,7 +117,7 @@ test("colored profile in a real browser", { timeout: 400000 }, async (t) => {
   };
 
   for (const name of Object.keys(DOCS)) {
-    await t.test(`(a) ${name}: recolor without tokens adds no renderer and its markup equals the standard profile`, () => {
+    await t.test(`(a) ${name}: colored without tokens adds no renderer and its markup equals the standard profile`, () => {
       assert.equal(o.plain[name].hasRenderer, false);
       assert.ok(o.plain[name].count >= 5, String(o.plain[name].count));
       assert.equal(o.plain[name].equal, true);
