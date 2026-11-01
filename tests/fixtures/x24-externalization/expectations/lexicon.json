@@ -1732,7 +1732,17 @@
    "src/profile/lot4-export.ts",
    "tests/profile-lot3-golden-independence.test.mjs",
    "tests/profile-bfix-f2.test.mjs",
-   "tests/profile-workshop-prop.test.mjs"
+   "tests/profile-workshop-prop.test.mjs",
+   "src/internal/published-token-type.ts",
+   "src/internal/token-options.ts",
+   "src/react/navigation-target.ts",
+   "tests/types/v04-published-token-names.ts",
+   "tests/profile-published-token-names.test.mjs",
+   "src/presentation/annotated/renderer.ts",
+   "src/presentation/annotated/style.ts",
+   "src/internal/swimlane-exports.ts",
+   "src/io/refusal-codes.ts",
+   "src/internal/role-exports.ts"
   ],
   "tokens": [
    {
@@ -5186,8 +5196,8 @@
     "literal": "ca8c522af0a0dfc10c8747ed205c4a650df4ccb350adbd450bbce753f6385c51",
     "key": "ca8c522af0a0dfc10c8747ed205c4a650df4ccb350adbd450bbce753f6385c51",
     "class": "legacy-api-value",
-    "justification": "An English adjective that is a published look name of the legacy 0.3 and 0.4 API: the base retains it as legacy API (I-1417, I-1421, I-1575, I-1589, I-1594). In lot 4 it is legacy compatibility data: the old name of an alias record, a legacy theme id, the id and file name of a legacy theme case and of its main render artifacts, and prose; it never selects behaviour in library code (the selector-branch rule of src/ and the package is unchanged). Whole word in 5 files of 4 installed third-party packages.",
-    "count": 86,
+    "justification": "An English adjective that is a published look name of the legacy 0.3 and 0.4 API: the base retains it as legacy API (I-1417, I-1421, I-1575, I-1589, I-1594). In lot 4 it is legacy compatibility data: the old name of an alias record, a legacy theme id, the id and file name of a legacy theme case and of its main render artifacts, and prose; it never selects behaviour in library code (the selector-branch rule of src/ and the package is unchanged). Whole word in 5 files of 4 installed third-party packages. Also bound in the block B module src/internal/token-options.ts, the D5 witness tests/profile-published-token-names.test.mjs and the block B compat proof tests/types/v04-published-token-names.ts.",
+    "count": 90,
     "files": [
      {
       "file": "docs/design/block-b-lot4-expectations.md",
@@ -5221,6 +5231,20 @@
         30,
         118,
         37
+       ]
+      ]
+     },
+     {
+      "file": "src/internal/token-options.ts",
+      "pathSha256": "9a902c5e829a8e83fce7ac773181f747f8331998307baab0b43691d73d3d69ef",
+      "sha256": "60597d719f6f55c049d554c7d0725fa7abc1b28b6af471f4b1378f396ef9f334",
+      "spans": [
+       [
+        "raw",
+        9,
+        12,
+        9,
+        19
        ]
       ]
      },
@@ -5965,6 +5989,41 @@
         285
        ]
       ]
+     },
+     {
+      "file": "tests/profile-published-token-names.test.mjs",
+      "pathSha256": "66bea18aadb49558fdfe14dbac8bad5564963b2796761526b494434083e02be0",
+      "sha256": "98b87e5f084c3ba9524013a3d35d840f94b72a82d4200f14be8dfc2f0bf9c6bf",
+      "spans": [
+       [
+        "raw",
+        22,
+        4,
+        22,
+        11
+       ]
+      ]
+     },
+     {
+      "file": "tests/types/v04-published-token-names.ts",
+      "pathSha256": "2bc228e4b4b8e2e6023a477fe0903d8f083d341eb5133ead712bcf1304bcbfa8",
+      "sha256": "65c4263c5325122a5ddb498ac98f9da0b3e04620305a50c4ae75b5d04c95b6bb",
+      "spans": [
+       [
+        "raw",
+        5,
+        74,
+        5,
+        81
+       ],
+       [
+        "raw",
+        6,
+        70,
+        6,
+        77
+       ]
+      ]
      }
     ]
    },
@@ -6545,8 +6604,8 @@
     "literal": "ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033",
     "key": "ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033",
     "class": "legacy-api-value",
-    "justification": "An English noun that is a published look name of the legacy API: the base retains it as legacy API (I-1416, I-1419, I-1420, I-1574, I-1578, I-1585, I-1592). In lot 4 it is the old name of a compatibility alias record, a legacy-name input, the id and file name of a legacy theme case, the occurrence key of a synthetic band stripe in the export and render records and in their vendored Python copies, and prose about the legacy look. Whole word in 20 files of 9 installed third-party packages.",
-    "count": 51,
+    "justification": "An English noun that is a published look name of the legacy API: the base retains it as legacy API (I-1416, I-1419, I-1420, I-1574, I-1578, I-1585, I-1592). In lot 4 it is the old name of a compatibility alias record, a legacy-name input, the id and file name of a legacy theme case, the occurrence key of a synthetic band stripe in the export and render records and in their vendored Python copies, and prose about the legacy look. Whole word in 20 files of 9 installed third-party packages. Also bound in the block B module src/internal/token-options.ts, the D5 witness tests/profile-published-token-names.test.mjs and the block B compat proof tests/types/v04-published-token-names.ts.",
+    "count": 55,
     "files": [
      {
       "file": "docs/design/block-b-lot4-expectations.md",
@@ -6566,6 +6625,20 @@
         158,
         107,
         164
+       ]
+      ]
+     },
+     {
+      "file": "src/internal/token-options.ts",
+      "pathSha256": "9a902c5e829a8e83fce7ac773181f747f8331998307baab0b43691d73d3d69ef",
+      "sha256": "60597d719f6f55c049d554c7d0725fa7abc1b28b6af471f4b1378f396ef9f334",
+      "spans": [
+       [
+        "raw",
+        10,
+        12,
+        10,
+        18
        ]
       ]
      },
@@ -7107,6 +7180,41 @@
         283
        ]
       ]
+     },
+     {
+      "file": "tests/profile-published-token-names.test.mjs",
+      "pathSha256": "66bea18aadb49558fdfe14dbac8bad5564963b2796761526b494434083e02be0",
+      "sha256": "98b87e5f084c3ba9524013a3d35d840f94b72a82d4200f14be8dfc2f0bf9c6bf",
+      "spans": [
+       [
+        "raw",
+        21,
+        4,
+        21,
+        10
+       ]
+      ]
+     },
+     {
+      "file": "tests/types/v04-published-token-names.ts",
+      "pathSha256": "2bc228e4b4b8e2e6023a477fe0903d8f083d341eb5133ead712bcf1304bcbfa8",
+      "sha256": "65c4263c5325122a5ddb498ac98f9da0b3e04620305a50c4ae75b5d04c95b6bb",
+      "spans": [
+       [
+        "raw",
+        5,
+        46,
+        5,
+        52
+       ],
+       [
+        "raw",
+        6,
+        42,
+        6,
+        48
+       ]
+      ]
      }
     ]
    },
@@ -7115,10 +7223,24 @@
     "entry": "LX-TH-1",
     "literal": "7482e374b5bddc0a48ea3b3430de633b7938e3045e64aebca2574a50a53a5719",
     "key": "ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033",
-    "class": "generic-word",
-    "justification": "Capitalized form of the noun of RV-05, used in lot 4 as the occurrence key of a synthetic band stripe of a foreign layout record, in its derivation text and in their vendored Python copies. The base retains this exact form as legacy API in 21 rows (for example I-0463, I-0475).",
-    "count": 4,
+    "class": "legacy-api-value",
+    "justification": "Capitalized form of the noun of RV-05, used in lot 4 as the occurrence key of a synthetic band stripe of a foreign layout record, in its derivation text and in their vendored Python copies. The base retains this exact form as legacy API in 21 rows (for example I-0463, I-0475). Also bound in the block B module src/internal/published-token-type.ts and the block B compat proof tests/types/v04-published-token-names.ts.",
+    "count": 8,
     "files": [
+     {
+      "file": "src/internal/published-token-type.ts",
+      "pathSha256": "d7faf1c688d686c1b719f1444a174bc1ea860d0b7061ca07798a3cce5674690b",
+      "sha256": "c971fe72ebbc44b38972a5c4d4d11e83efce8b436115c29167a5ee1f0842dad2",
+      "spans": [
+       [
+        "raw",
+        4,
+        12,
+        4,
+        18
+       ]
+      ]
+     },
      {
       "file": "tests/fixtures/lot4-layout-export/expectations/cases/render.r.layout-foreign-synthetic.json",
       "pathSha256": "99bca7938cf16d6fe8215de302467e0e9a112b351075017f1f4c147422a7c4b4",
@@ -7172,6 +7294,34 @@
         1635,
         1,
         1641
+       ]
+      ]
+     },
+     {
+      "file": "tests/types/v04-published-token-names.ts",
+      "pathSha256": "2bc228e4b4b8e2e6023a477fe0903d8f083d341eb5133ead712bcf1304bcbfa8",
+      "sha256": "65c4263c5325122a5ddb498ac98f9da0b3e04620305a50c4ae75b5d04c95b6bb",
+      "spans": [
+       [
+        "raw",
+        1,
+        50,
+        1,
+        56
+       ],
+       [
+        "raw",
+        3,
+        20,
+        3,
+        26
+       ],
+       [
+        "raw",
+        4,
+        39,
+        4,
+        45
        ]
       ]
      }
@@ -7450,9 +7600,23 @@
     "literal": "3cc838aabc52939c80e95e5036de2835c01cad9569b33364be0744be9692cc58",
     "key": "3cc838aabc52939c80e95e5036de2835c01cad9569b33364be0744be9692cc58",
     "class": "legacy-api-value",
-    "justification": "A refusal code of the published legacy exporter: the base retains it as legacy API (I-0769, rule R-066). Lot 4 seals the closed refusal-code set of the legacy adapter (legacy-adapter manifest, two legacy-adapter cases and the derivation list of the export cases), which must reproduce the legacy codes exactly (OPEN-LEGACY, DESIGN section 12.2).",
-    "count": 7,
+    "justification": "A refusal code of the published legacy exporter: the base retains it as legacy API (I-0769, rule R-066). Lot 4 seals the closed refusal-code set of the legacy adapter (legacy-adapter manifest, two legacy-adapter cases and the derivation list of the export cases), which must reproduce the legacy codes exactly (OPEN-LEGACY, DESIGN section 12.2). Also bound in the block B module src/io/refusal-codes.ts.",
+    "count": 8,
     "files": [
+     {
+      "file": "src/io/refusal-codes.ts",
+      "pathSha256": "3ebd61f4ae56002bd80895543fed902b7abb6ca0bac08eb83db5441e7beb5ba4",
+      "sha256": "b425f78fa8db72656bd544b7e9a6876aed2e5faab6d81aeb586231b4384c3a74",
+      "spans": [
+       [
+        "raw",
+        2,
+        36,
+        2,
+        54
+       ]
+      ]
+     },
      {
       "file": "tests/fixtures/lot4-layout-export/expectations/artifacts/legacy-adapter-manifest.json",
       "pathSha256": "be295cf245fc104cd18c14b32a3b71c92f38bb28906645a090477a78a496fc21",
@@ -7802,9 +7966,23 @@
     "literal": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
     "key": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
     "class": "legacy-api-value",
-    "justification": "Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens.",
-    "count": 7,
+    "justification": "Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. Also bound in the block B module src/react/navigation-target.ts.",
+    "count": 8,
     "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "spans": [
+       [
+        "raw",
+        13,
+        74,
+        13,
+        87
+       ]
+      ]
+     },
      {
       "file": "tests/profile-workshop-prop.test.mjs",
       "pathSha256": "fb9eb1e8935e7b880c2b69727314e4ef906dea8a93921f9b2ee2bd73ac289b35",
@@ -7858,6 +8036,234 @@
         87,
         17,
         100
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-14",
+    "entry": "LX-AT-2",
+    "literal": "0ec4cd4f9cc1d85f0d2a93c3440aa5f8702305ecdb26dd33bc789ba73301a0f0",
+    "key": "0ec4cd4f9cc1d85f0d2a93c3440aa5f8702305ecdb26dd33bc789ba73301a0f0",
+    "class": "legacy-api-value",
+    "justification": "Base export name of the legacy layout module (I-0671, R-024: generic badge-sizing algorithm name, every value injected), kept for its base callers; the layout module re-exports this block B module.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/internal/swimlane-exports.ts",
+      "pathSha256": "4e8b3205c6e390ca733cbc0c931978aa539fcfeb901d8fcc5ae893fba5965ebc",
+      "sha256": "9f145f87c8393a2d7097738f3768a368e038a931700ccc2999102ab06912a174",
+      "spans": [
+       [
+        "raw",
+        5,
+        16,
+        5,
+        32
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-15",
+    "entry": "LX-NV-1",
+    "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "class": "legacy-api-value",
+    "justification": "Published default target resolver of the react entry (0.3.0 and main; base export row I-1412, legacy-api, rule R-149), now evaluating the injected navigation policy.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "spans": [
+       [
+        "raw",
+        7,
+        16,
+        7,
+        36
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-16",
+    "entry": "LX-NV-1",
+    "literal": "9e653023115a4c9ae92cdd3e985cd0fa5dfe018244d1e877a5857a0b7c29414e",
+    "key": "9e653023115a4c9ae92cdd3e985cd0fa5dfe018244d1e877a5857a0b7c29414e",
+    "class": "legacy-api-value",
+    "justification": "The two documented DOM hooks the block B renderer emits on the process icon (base rows I-1157 and I-1159, reclassified legacy-api), carrying the pinned legacy marker hash of base row I-0477, rule R-038.",
+    "count": 2,
+    "files": [
+     {
+      "file": "src/presentation/annotated/renderer.ts",
+      "pathSha256": "90a27e4c8a4dbb102706fc12ce7a4551e43dbd45e51c16d98dcef6812001a0f1",
+      "sha256": "21a6d2c9638132fdd5bdcc093474567d9d5aa85226a7630b5ef8d6213e76c67d",
+      "spans": [
+       [
+        "raw",
+        279,
+        26,
+        279,
+        38
+       ],
+       [
+        "raw",
+        281,
+        40,
+        281,
+        52
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-17",
+    "entry": "LX-AT-2",
+    "literal": "f3902178f562e8df73808d57ce2ebcc7229b6982698d917ddfd47d1627c3e9e9",
+    "key": "f3902178f562e8df73808d57ce2ebcc7229b6982698d917ddfd47d1627c3e9e9",
+    "class": "legacy-api-value",
+    "justification": "Badge-size algorithm name of the legacy style module (base rows legacy-api, R-119), defined in the block B style module with the injected policy.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/presentation/annotated/style.ts",
+      "pathSha256": "7eb7dff20a53c6208859d81e2ec16f9b0c6520d69fc5c79e04dd210d624d3774",
+      "sha256": "8969aa2acf9e2d1b0af574dce6c050943cc7788e6703ec8acdb9c25bdc22329c",
+      "spans": [
+       [
+        "raw",
+        144,
+        16,
+        144,
+        26
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-18",
+    "entry": "LX-AT-2",
+    "literal": "1b82f18171ee7a4975410dc43411ae61aae3b4b7c26245d4aaf0e3453e81130f",
+    "key": "1b82f18171ee7a4975410dc43411ae61aae3b4b7c26245d4aaf0e3453e81130f",
+    "class": "legacy-api-value",
+    "justification": "Badge-row algorithm name of the legacy style module (base row legacy-api, R-119), defined in the block B style module and imported and called by the block B renderer with the injected policy; its base call rows (R-131, inject) stay injected.",
+    "count": 3,
+    "files": [
+     {
+      "file": "src/presentation/annotated/renderer.ts",
+      "pathSha256": "90a27e4c8a4dbb102706fc12ce7a4551e43dbd45e51c16d98dcef6812001a0f1",
+      "sha256": "21a6d2c9638132fdd5bdcc093474567d9d5aa85226a7630b5ef8d6213e76c67d",
+      "spans": [
+       [
+        "raw",
+        26,
+        2,
+        26,
+        10
+       ],
+       [
+        "raw",
+        448,
+        10,
+        448,
+        18
+       ]
+      ]
+     },
+     {
+      "file": "src/presentation/annotated/style.ts",
+      "pathSha256": "7eb7dff20a53c6208859d81e2ec16f9b0c6520d69fc5c79e04dd210d624d3774",
+      "sha256": "8969aa2acf9e2d1b0af574dce6c050943cc7788e6703ec8acdb9c25bdc22329c",
+      "spans": [
+       [
+        "raw",
+        157,
+        16,
+        157,
+        24
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-19",
+    "entry": "LX-CA-1",
+    "literal": "8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2",
+    "key": "8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2",
+    "class": "legacy-api-value",
+    "justification": "Document-role export name that the sealed probe calls by digest (probe1, P-001 to P-003) and that main ships in dist/internal/annotations.js, re-exported as the policy-driven hasDocumentRole; I-0467 (R-002) stays injected.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/internal/role-exports.ts",
+      "pathSha256": "17b28a049fb8717ae9098c3cc27e1b330c340869bb7cd61e393483d834398405",
+      "sha256": "de158e5d64e2e9a5a061eb0bcbb0131bdad5fbe9a76990e45f202048cf90840f",
+      "spans": [
+       [
+        "raw",
+        2,
+        28,
+        2,
+        48
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-20",
+    "entry": "LX-CA-1",
+    "literal": "8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53",
+    "key": "8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53",
+    "class": "legacy-api-value",
+    "justification": "Application-role export name, same grounds, re-exported as hasApplicationRole; I-0469 (R-003) stays injected.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/internal/role-exports.ts",
+      "pathSha256": "17b28a049fb8717ae9098c3cc27e1b330c340869bb7cd61e393483d834398405",
+      "sha256": "de158e5d64e2e9a5a061eb0bcbb0131bdad5fbe9a76990e45f202048cf90840f",
+      "spans": [
+       [
+        "raw",
+        2,
+        72,
+        2,
+        87
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-21",
+    "entry": "LX-CA-1",
+    "literal": "e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8",
+    "key": "e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8",
+    "class": "legacy-api-value",
+    "justification": "Display-name export name, same grounds, re-exported as roleText; I-0473 (R-004) stays injected.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/internal/role-exports.ts",
+      "pathSha256": "17b28a049fb8717ae9098c3cc27e1b330c340869bb7cd61e393483d834398405",
+      "sha256": "de158e5d64e2e9a5a061eb0bcbb0131bdad5fbe9a76990e45f202048cf90840f",
+      "spans": [
+       [
+        "raw",
+        2,
+        101,
+        2,
+        115
        ]
       ]
      }

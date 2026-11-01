@@ -2419,7 +2419,7 @@
    "category": "navigation",
    "consumer": "render",
    "target": "T-NAV-MARKER",
-   "disposition": "inject",
+   "disposition": "legacy-api",
    "policy": "Look-specific process icon marker used as a navigation hit target."
   },
   {
