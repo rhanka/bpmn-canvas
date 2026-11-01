@@ -30,15 +30,19 @@ acceptance probes must satisfy once green.
   rows, whose base lines the fix round restored; with the later RA-01 rebinds recorded in place in its receipt, the
   seal `74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974`. The next revision was the stage B2
   micro-reseal (section "Stage B2 micro-reseal"): a unique collaboration ID in four inputs and two ledger rows
-  reclassified context-generic. This revision is the stage B2 step 6 rebind (section "Stage B2 step 6 rebind"):
+  reclassified context-generic. The next revision was the stage B2 step 6 rebind (section "Stage B2 step 6 rebind"):
   records R-04 to R-18 (R-04 to R-11 under the existing tokens, R-08 and R-12 to R-18 under the eight new tokens
   RV-14 to RV-21), the R2' ground, the S-1 reclassification of the rows I-1157 and I-1159 to legacy-api, and the
-  F-18 to F-22 code fixes by location; its digest is `seal.json`, pinned by `tests/x24-externalization-seal.test.mjs`.
+  F-18 to F-22 code fixes by location; its seal `32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518`.
+  This revision is the stage B2 step 9 README correction (section "Stage B2 step 9 README correction"): two README
+  defects of the step 6 rebind corrected (the token-table cell of RV-21 and the receipt list of the seal hygiene),
+  no case, manifest entry, lexicon record, ledger row, rule, probe assertion, comparator or clause row changes.
   `docs/design/receipts/block-b-x24-history-guard.json`, `docs/design/receipts/block-b-x24-unicode-literals-fix.json`,
   `docs/design/receipts/block-b-x24-p006-selector-allowance.json`, `docs/design/receipts/block-b-x24-i1-relocated-rows.json`,
-  `docs/design/receipts/block-b-x24-final-spec-rebind.json`, `docs/design/receipts/block-b2-x24-micro-reseal.json` and
-  `docs/design/receipts/block-b2-x24-step6-rebind.json`
-  record the old and new values of every file each of the seven rounds changes; the second also records the old and
+  `docs/design/receipts/block-b-x24-final-spec-rebind.json`, `docs/design/receipts/block-b2-x24-micro-reseal.json`,
+  `docs/design/receipts/block-b2-x24-step6-rebind.json` and
+  `docs/design/receipts/block-b2-x24-step9-readme-fix.json`
+  record the old and new values of every file each of the eight rounds changes; the second also records the old and
   new values of the exact-path relink (`relinks`).
 - Authorities, in precedence order: DESIGN.md R3.3 (SHA-256
   `48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f`), the block B seal harmonization
@@ -264,8 +268,27 @@ the ledger were edited by hand, and the normative recomputation (`derive/ledger.
 commit) was not rerun in this round. It applies the same first-match rules, and R-134 matches these two rows
 only, so no other row depends on the edit. `derive/author-cases.mjs` writes the cases and `manifest.json`;
 `derive/seal.mjs` (authority, status and previous seal), this README, `seal.json` and the seal test (pinned
-digest, a chain of seven receipts and reviewed total 623) follow.
+digest, a chain of eight receipts and reviewed total 623) follow.
 `docs/design/receipts/block-b2-x24-step6-rebind.json` records the old and new pins of every changed file and
+the old and new value at every changed pointer.
+
+## Stage B2 step 9 README correction
+
+The step 9 ruling on the stopped campaign (spec author) corrects two README defects of the step 6 rebind: the
+token-table cell of RV-21 holds 60 hex digits that match no file of the tree, and the receipt list of
+"Literal-free seal" omits the step 6 receipt that the seal test's hygiene scope reads. The rescan without
+`--write` reports 2817 occurrences, 2194 paired, 0 relocated, 623 reviewed, 0 unmatched; no case, manifest
+entry, lexicon record, ledger row, rule, probe assertion, comparator or clause row changes.
+
+| Location | Old | New |
+| --- | --- | --- |
+| `README.md` token table, row RV-21, column "Literal SHA-256" | `e2dc1fad01302375df2f9eb74a0bac2008e664761466a6d574812a7bfb8f` (60 hex digits, found in no other file) | `e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8` (the RV-21 literal and key of `lexicon.json`, the display-name digest of `probe-expectations.json#/probe1/functions`, record R-17 of the step 6 ruling) |
+| `README.md` section "Literal-free seal", receipt list | six receipts | the eight receipts of the seal test's hygiene scope after this round: the six listed, `docs/design/receipts/block-b2-x24-step6-rebind.json` and `docs/design/receipts/block-b2-x24-step9-readme-fix.json` |
+| `derive/seal.mjs` header comment | six receipts | the same eight receipts |
+
+Derivation. `derive/seal.mjs` (authority, status and previous seal), this README, `seal.json` and the seal test
+(pinned digest, a chain of eight receipts and reviewed total 623) follow.
+`docs/design/receipts/block-b2-x24-step9-readme-fix.json` records the old and new pins of every changed file and
 the old and new value at every changed pointer.
 
 ## Gate summary
@@ -462,8 +485,10 @@ reseal receipts `docs/design/receipts/block-b-x24-history-guard.json`,
 `docs/design/receipts/block-b-x24-unicode-literals-fix.json`,
 `docs/design/receipts/block-b-x24-p006-selector-allowance.json`,
 `docs/design/receipts/block-b-x24-i1-relocated-rows.json`,
-`docs/design/receipts/block-b-x24-final-spec-rebind.json` and
-`docs/design/receipts/block-b2-x24-micro-reseal.json`. The literal set is `literal-set.json`:
+`docs/design/receipts/block-b-x24-final-spec-rebind.json`,
+`docs/design/receipts/block-b2-x24-micro-reseal.json`,
+`docs/design/receipts/block-b2-x24-step6-rebind.json` and
+`docs/design/receipts/block-b2-x24-step9-readme-fix.json`. The literal set is `literal-set.json`:
 one hashed record per distinct exact text of the ledger occurrences, derived by `derive/literal-set.mjs`
 from the base tree at each row's span and checked against the row's literal SHA-256. A record holds the
 SHA-256 and the length of the text, the entry of its first row, the word class of its first and last unit and,
@@ -558,7 +583,7 @@ packages installed from the lockfile):
 | RV-18 | LX-AT-2 | `1b82f18171ee7a4975410dc43411ae61aae3b4b7c26245d4aaf0e3453e81130f` | legacy-api-value | 3 (2) | Badge-row algorithm name of the legacy style module (base row legacy-api, R-119), defined in the block B style module and imported and called by the block B renderer with the injected policy; its base call rows (R-131, inject) stay injected. |
 | RV-19 | LX-CA-1 | `8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2` | legacy-api-value | 1 (1) | Document-role export name that the sealed probe calls by digest (probe1, P-001 to P-003) and that main ships in dist/internal/annotations.js, re-exported as the policy-driven hasDocumentRole; I-0467 (R-002) stays injected. |
 | RV-20 | LX-CA-1 | `8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53` | legacy-api-value | 1 (1) | Application-role export name, same grounds, re-exported as hasApplicationRole; I-0469 (R-003) stays injected. |
-| RV-21 | LX-CA-1 | `e2dc1fad01302375df2f9eb74a0bac2008e664761466a6d574812a7bfb8f` | legacy-api-value | 1 (1) | Display-name export name, same grounds, re-exported as roleText; I-0473 (R-004) stays injected. |
+| RV-21 | LX-CA-1 | `e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8` | legacy-api-value | 1 (1) | Display-name export name, same grounds, re-exported as roleText; I-0473 (R-004) stays injected. |
 
 Class (a), 29 occurrences of 2 tokens, all in lot-5 files, not reviewed and left to the lot-5 seals
 (positions at the integration scan, removed since by the lot-5 micro-reseal):

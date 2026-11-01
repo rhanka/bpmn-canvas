@@ -21,12 +21,13 @@
   "Spec author ruling on the I1 residual of src/react/workshop.tsx (DESIGN.md:859, 863, 874): the three unmatched occurrences are the base rows I-1427, I-1462 and I-1464, whose lines the block B commit dc183c2 edited; sealed as the relocated rows RL-01 to RL-03",
   "Block B final spec pass after the fix round (review findings 17 and 20, DESIGN.md:874, 899, 927): reviewed records and RA-01 rebound to the bytes the fix round and the lot-3 and lot-4 reseals left (RA-01 now at src/profile/lot4-export.ts:867, same line bytes), three RV-08 lines reviewed again, eleven occurrences of two block B tests reviewed by exact path (RV-04 and the published API name RV-13), RL-01 to RL-03 retired after the restoration of their base lines",
   "Stage B2 ruling on the replay of C24 onto main fec4dae (spec author, classes A and B3): four inputs whose collaboration shared its ID with a call activity, refused by the public parser (invalid-semantics), get a unique collaboration ID; the rows I-0001 and I-0002 of a squash-preparation note absent from the tracked tree, counted by P-006 as presence conflicts, are reclassified context-generic (rule R-162)",
-  "Stage B2 step 6 rebind ruling (spec author, step 6 of the same work order): 28 LX-AT-2 occurrences reviewed (15 renamed away, 4 accepted where they sit, 9 moved to block B modules with records R-11 to R-14; the appended-row pairing of the guard withdrawn); the sealed classifier exports restored through a block B re-export module (records R-15 to R-17 under the R2' ground); the S-1 hook rows reclassified legacy-api (rule R-134) with the S-1 record R-18"
+  "Stage B2 step 6 rebind ruling (spec author, step 6 of the same work order): 28 LX-AT-2 occurrences reviewed (15 renamed away, 4 accepted where they sit, 9 moved to block B modules with records R-11 to R-14; the appended-row pairing of the guard withdrawn); the sealed classifier exports restored through a block B re-export module (records R-15 to R-17 under the R2' ground); the S-1 hook rows reclassified legacy-api (rule R-134) with the S-1 record R-18",
+  "Stage B2 step 9 README correction round (spec author, step 9 of the same work order): two README defects of the step 6 rebind corrected (the RV-21 token-table cell and the receipt list of the seal hygiene), no expected value changes"
  ],
  "precedence": "DESIGN R3.3 > harmonization > review",
  "author": "Opus (claude-opus-5-5), spec author, owner exception",
  "reviewer": "gpt-6-astra, max effort",
- "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); pending targeted verification and conductor acceptance",
+ "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; pending targeted verification and conductor acceptance",
  "previousSeals": [
   {
    "sha256": "d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5",
@@ -83,6 +84,13 @@
    "cases": 111,
    "occurrenceRows": 3381,
    "verdict": "integrated into the workbench branch; the step 6 rebind reviewed the remaining guard hits, renamed legacy-code identifiers, moved the refusal code and two legacy exports to block B modules, restored the sealed classifier exports and rewrote the S-1 witness"
+  },
+  {
+   "sha256": "32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518",
+   "round": "stage B2 step 6 rebind",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated into the workbench branch; the step 9 README correction fixes two defects of this round (the RV-21 token-table cell and the receipt list of the seal hygiene)"
   }
  ],
  "authoringMethod": "Expected values read from the cited base lines and DESIGN clauses or computed by derive/arith.mjs, an independent re-implementation of the legacy formulas; no product module, codec, layout, renderer, exporter or command was executed and nothing was updated from actual output.",
@@ -189,8 +197,8 @@
  "files": [
   {
    "path": "README.md",
-   "bytes": 114204,
-   "sha256": "40b76b09b3a6672c5f2e9457ecd61f3478250495d8335998aafc49c9527f0958"
+   "bytes": 116423,
+   "sha256": "b29fad668f643adad612fea8998ed734c561eda6bb3a19157e522ac03887ebbb"
   },
   {
    "path": "cases/x24-A-001-classify.json",
@@ -839,8 +847,8 @@
   },
   {
    "path": "derive/seal.mjs",
-   "bytes": 11904,
-   "sha256": "b31948f4a6a16a35aaebbd8e11dc05343d825790dad3c0f2164f0b6efd121896"
+   "bytes": 12635,
+   "sha256": "cad28267fcdf42281d47d9f662e8f9e6a1489dcea44b0869ef1a548af253fc30"
   },
   {
    "path": "derive/sourcemap.mjs",
