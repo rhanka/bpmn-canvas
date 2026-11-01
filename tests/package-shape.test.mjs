@@ -30,7 +30,7 @@ test("exports name only implemented entries", () => {
 
 test("root entry imports in Node without DOM and exposes the core API", async () => {
   const mod = await import(root + "dist/index.js");
-  assert.deepEqual(Object.keys(mod).sort(), ["analyzeXml", "createBpmnCanvas", "renderDiagrams"]);
+  assert.deepEqual(Object.keys(mod).sort(), ["analyzeXml", "createBpmnCanvas", "createLegacyAdapter", "readBusinessPolicy", "renderDiagrams", "validateBusinessPolicy"]);
   await assert.rejects(() => mod.renderDiagrams("<x/>"), /needs a browser DOM/);
 });
 
