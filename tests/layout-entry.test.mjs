@@ -3,7 +3,9 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const layout = await import(root + "dist/layout/index.js");
+const entry = await import(root + "dist/layout/index.js");
+const { fixturePolicy } = await import("./helpers/injected-policy.mjs");
+const layout = { ...entry, layoutProcess: (p, o) => entry.layoutProcess(p, o, fixturePolicy), textWidth: (t, s, b) => entry.textWidth(t, s, b, fixturePolicy), wrapText: (t, s, w, b) => entry.wrapText(t, s, w, b, fixturePolicy) };
 
 const input = {
   name: "Request",

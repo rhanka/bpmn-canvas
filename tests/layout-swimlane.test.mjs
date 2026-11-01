@@ -1,15 +1,17 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { layoutProcess, fit, labelBox, appBoxSizeLayout, docHeight } from "../dist/internal/swimlaneLayout.js";
+import { createLayout } from "../dist/internal/swimlaneLayout.js";
+import { fixturePolicy } from "./helpers/injected-policy.mjs";
 import { initialView, contentBounds, MIN_FIT_SCALE } from "../dist/internal/viewbox.js";
+const { layoutProcess, fit, labelBox, badgeSize, docHeight } = createLayout(fixturePolicy);
 
 const proc = () => ({
   name: "P",
   lanes: [
     { name: "L1", nodes: [
       { type: "START", label: "s", text: "Start" },
-      { type: "TASK", label: "t1", text: "Review request", app_label: "CRM" },
+      { type: "TASK", label: "t1", text: "Review request", application: "CRM" },
       { type: "GATEWAY", label: "g", text: "OK?", subtype: "OR" },
       { type: "END", label: "e", text: "Done" },
     ] },
@@ -27,11 +29,11 @@ const proc = () => ({
 // Regression pins of the current TypeScript output. They pin determinism and geometry;
 // they are not a parity claim against the Python original.
 const NODES = {
-  s: { x: 100, y: 41, w: 50, h: 50 },
-  t1: { x: 220, y: 26, w: 120, h: 80 },
-  g: { x: 410, y: 41, w: 50, h: 50 },
-  e: { x: 565, y: 41, w: 50, h: 50 },
-  t2: { x: 530, y: 226, w: 120, h: 80 },
+  s: { x: 100, y: 40, w: 48, h: 48 },
+  t1: { x: 218, y: 25, w: 118, h: 78 },
+  g: { x: 406, y: 40, w: 48, h: 48 },
+  e: { x: 559, y: 40, w: 48, h: 48 },
+  t2: { x: 524, y: 215, w: 118, h: 78 },
 };
 
 for (const columns of ["longest-path", "bpmn-io"]) {
@@ -39,12 +41,12 @@ for (const columns of ["longest-path", "bpmn-io"]) {
     const a = await layoutProcess(proc(), { columns });
     const b = await layoutProcess(proc(), { columns });
     assert.deepEqual(a, b);
-    assert.deepEqual(a.pool, { x: 0, y: 0, w: 720, h: 400 });
-    assert.deepEqual(a.lanes, [["L1", { x: 30, y: 0, w: 690, h: 200 }], ["L2", { x: 30, y: 200, w: 690, h: 200 }]]);
+    assert.deepEqual(a.pool, { x: 0, y: 0, w: 712, h: 380 });
+    assert.deepEqual(a.lanes, [["L1", { x: 31, y: 0, w: 681, h: 190 }], ["L2", { x: 31, y: 190, w: 681, h: 190 }]]);
     assert.deepEqual(a.nodes, NODES);
-    assert.deepEqual(a.apps, { t1: { x: 240, y: 96, w: 80, h: 30 } });
-    assert.deepEqual(a.edges[0], [[150, 66], [220, 66]]);
-    assert.deepEqual(a.edges[4], [[590, 226], [590, 8], [280, 8], [280, 26]], "back edge routes through the channel above");
+    assert.deepEqual(a.apps, { t1: { x: 238, y: 94, w: 78, h: 28 } });
+    assert.deepEqual(a.edges[0], [[148, 64], [218, 64]]);
+    assert.deepEqual(a.edges[4], [[583, 215], [583, 8], [277, 8], [277, 25]], "back edge routes through the channel above");
   });
 }
 
@@ -74,7 +76,7 @@ test("a lane order or id change does not change the geometry of unrelated nodes"
 test("an empty process lays out without throwing", async () => {
   const lay = await layoutProcess({ lanes: [], connections: [] }, { columns: "longest-path" });
   assert.deepEqual(lay.nodes, {});
-  assert.ok(lay.pool.h >= 200);
+  assert.ok(lay.pool.h >= 190);
 });
 
 test("text fitting helpers", () => {
@@ -86,8 +88,8 @@ test("text fitting helpers", () => {
   assert.deepEqual(labelBox("", 11, 100), [0, 0]);
   const [lw, lh] = labelBox("Hello world", 11, 100);
   assert.ok(lw > 4 && lh > 2);
-  assert.deepEqual(appBoxSizeLayout("CRM", 120), [80, 30]);
-  assert.ok(docHeight("Invoice") >= 50);
+  assert.deepEqual(badgeSize("CRM", 120), [78, 28]);
+  assert.ok(docHeight("Invoice") >= 48);
 });
 
 test("initialView fits a small diagram and anchors a large one", () => {

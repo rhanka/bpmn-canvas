@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { baselineHashAllowlist, outsideBaselineHashes } from "./helpers/brand-baseline.mjs";
+import { fixturePolicy } from "./helpers/injected-policy.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = process.env.ANNOTATED_DIST ?? `${root}dist`;
@@ -11,18 +12,20 @@ const style = await load("style.js");
 const tokens = await load("tokens.js");
 
 const bo = (type, extra = {}) => ({ $type: type, ...extra });
+const look = fixturePolicy.presentation.looks.find((entry) => entry.renderer === "annotated");
+const marked = (role, text) => `${fixturePolicy.classification.annotationRoles.find((entry) => entry.role === role).prefix} ${text}`;
 
 test("legend draws only what it draws faithfully", () => {
-  assert.equal(style.legendKind(bo("bpmn:Task")), "task");
-  assert.equal(style.legendKind(bo("bpmn:CallActivity")), "external");
-  assert.equal(style.legendKind(bo("bpmn:ExclusiveGateway")), "gateway");
-  assert.equal(style.legendKind(bo("bpmn:ParallelGateway")), "gateway");
-  assert.equal(style.legendKind(bo("bpmn:StartEvent", { eventDefinitions: [] })), "event");
-  assert.equal(style.legendKind(bo("bpmn:EndEvent")), "event");
-  assert.equal(style.legendKind(bo("bpmn:IntermediateCatchEvent", { eventDefinitions: [] })), "event");
-  assert.equal(style.legendKind(bo("bpmn:DataObjectReference")), "data");
-  assert.equal(style.legendKind(bo("bpmn:DataInput")), "input");
-  assert.equal(style.legendKind(bo("bpmn:DataOutput")), "output");
+  assert.equal(style.annotatedKind(bo("bpmn:Task")), "task");
+  assert.equal(style.annotatedKind(bo("bpmn:CallActivity")), "external");
+  assert.equal(style.annotatedKind(bo("bpmn:ExclusiveGateway")), "gateway");
+  assert.equal(style.annotatedKind(bo("bpmn:ParallelGateway")), "gateway");
+  assert.equal(style.annotatedKind(bo("bpmn:StartEvent", { eventDefinitions: [] })), "event");
+  assert.equal(style.annotatedKind(bo("bpmn:EndEvent")), "event");
+  assert.equal(style.annotatedKind(bo("bpmn:IntermediateCatchEvent", { eventDefinitions: [] })), "event");
+  assert.equal(style.annotatedKind(bo("bpmn:DataObjectReference")), "data");
+  assert.equal(style.annotatedKind(bo("bpmn:DataInput")), "input");
+  assert.equal(style.annotatedKind(bo("bpmn:DataOutput")), "output");
 });
 
 test("everything else falls through to upstream (no task rectangle, no X marker)", () => {
@@ -53,30 +56,30 @@ test("everything else falls through to upstream (no task rectangle, no X marker)
     bo("bpmn:TextAnnotation", { text: "plain note" }),
     bo("bpmn:TextAnnotation"),
   ];
-  for (const b of through) assert.equal(style.legendKind(b), undefined, `${b.$type} must fall through`);
+  for (const b of through) assert.equal(style.annotatedKind(b), undefined, `${b.$type} must fall through`);
 });
 
 test("sub-process, pool and lane depend on the DI", () => {
-  assert.equal(style.legendKind(bo("bpmn:SubProcess"), { expanded: false }), "subprocess");
-  assert.equal(style.legendKind(bo("bpmn:SubProcess"), { expanded: true }), undefined);
-  assert.equal(style.legendKind(bo("bpmn:SubProcess"), {}), undefined);
-  assert.equal(style.legendKind(bo("bpmn:SubProcess", { triggeredByEvent: true }), { expanded: false }), undefined);
-  assert.equal(style.legendKind(bo("bpmn:Participant"), { expanded: true, horizontal: true }), "pool");
-  assert.equal(style.legendKind(bo("bpmn:Participant"), { expanded: false, horizontal: true }), undefined);
-  assert.equal(style.legendKind(bo("bpmn:Participant"), { expanded: true, horizontal: false }), undefined);
-  assert.equal(style.legendKind(bo("bpmn:Lane"), { horizontal: true }), "lane");
-  assert.equal(style.legendKind(bo("bpmn:Lane"), { horizontal: false }), undefined);
+  assert.equal(style.annotatedKind(bo("bpmn:SubProcess"), { expanded: false }), "subprocess");
+  assert.equal(style.annotatedKind(bo("bpmn:SubProcess"), { expanded: true }), undefined);
+  assert.equal(style.annotatedKind(bo("bpmn:SubProcess"), {}), undefined);
+  assert.equal(style.annotatedKind(bo("bpmn:SubProcess", { triggeredByEvent: true }), { expanded: false }), undefined);
+  assert.equal(style.annotatedKind(bo("bpmn:Participant"), { expanded: true, horizontal: true }), "pool");
+  assert.equal(style.annotatedKind(bo("bpmn:Participant"), { expanded: false, horizontal: true }), undefined);
+  assert.equal(style.annotatedKind(bo("bpmn:Participant"), { expanded: true, horizontal: false }), undefined);
+  assert.equal(style.annotatedKind(bo("bpmn:Lane"), { horizontal: true }), "lane");
+  assert.equal(style.annotatedKind(bo("bpmn:Lane"), { horizontal: false }), undefined);
 });
 
 test("[Reference] and [Component] annotations only; plain annotations stay upstream", () => {
-  assert.equal(style.legendKind(bo("bpmn:TextAnnotation", { text: "[Reference] Spec" })), "document");
-  assert.equal(style.legendKind(bo("bpmn:TextAnnotation", { text: "  [Component] CRM" })), "application");
-  assert.equal(style.annotationName("[Component]  CRM"), "CRM");
-  assert.equal(style.annotationName("[Reference] Spec"), "Spec");
+  assert.equal(style.annotatedKind(bo("bpmn:TextAnnotation", { text: marked("document", "Spec") }), undefined, fixturePolicy), "document");
+  assert.equal(style.annotatedKind(bo("bpmn:TextAnnotation", { text: `  ${marked("application", "CRM")}` }), undefined, fixturePolicy), "application");
+  assert.equal(style.roleText(marked("application", " CRM"), fixturePolicy), "CRM");
+  assert.equal(style.roleText(marked("document", "Spec"), fixturePolicy), "Spec");
 });
 
 test("connections: conditional, default, message and directed associations stay upstream", () => {
-  const k = style.legendConnectionKind;
+  const k = style.annotatedConnectionKind;
   assert.equal(k(bo("bpmn:SequenceFlow")), "sequence");
   assert.equal(k(bo("bpmn:SequenceFlow", { conditionExpression: {} })), undefined);
   const flow = bo("bpmn:SequenceFlow");
@@ -93,7 +96,7 @@ test("connections: conditional, default, message and directed associations stay 
 test("default flow is recognised by identity", () => {
   const flow = { $type: "bpmn:SequenceFlow" };
   flow.sourceRef = { default: flow };
-  assert.equal(style.legendConnectionKind(flow), undefined);
+  assert.equal(style.annotatedConnectionKind(flow), undefined);
 });
 
 test("colour helpers", () => {
@@ -104,28 +107,17 @@ test("colour helpers", () => {
   assert.equal(style.contrastText("rgb(0,0,0)", "#111111", "#ffffff"), "#111111");
 });
 
-test("app box geometry matches the reference (80x30 under a 120x80 task, overlap 10)", () => {
-  assert.deepEqual(style.appBoxSize("CRM", 120), { width: 80, height: 30 });
-  const [box] = style.appBoxes(["CRM"], 120, 80);
-  assert.deepEqual(box, { name: "CRM", x: 20, y: 70, width: 80, height: 30 });
-  const long = style.appBoxSize("A very long application component name that must wrap", 120);
-  assert.equal(long.width, 100);
-  assert.ok(long.height > 30);
-});
-
 test("document geometry", () => {
   assert.match(style.documentPath(100, 60), /^M0 0H100V51Q/);
-  const r = style.documentTextRect(100, 60);
-  assert.equal(r.x, 6);
-  assert.equal(r.width, 88);
+  const r = style.documentTextRect(100, 60, fixturePolicy);
+  assert.equal(r.x, 5);
+  assert.equal(r.width, 90);
   assert.ok(r.height >= 0);
 });
 
-test("tokens: neutral defaults, overridable, frozen", () => {
-  const t = tokens.DEFAULT_LEGEND_TOKENS;
-  assert.equal(t.fill, "#ffffff");
-  assert.ok(Object.isFrozen(t));
-  const merged = tokens.resolveLegendTokens({ stroke: "#112233", fontSize: undefined });
+test("tokens: the injected look, overridable", () => {
+  const t = look.tokens;
+  const merged = tokens.resolveAnnotatedTokens({ stroke: "#112233", fontSize: undefined }, t);
   assert.equal(merged.stroke, "#112233");
   assert.equal(merged.fontSize, 12, "undefined override is ignored");
   const keys = ["fontFamily", "fontSize", "strokeWidth", "stroke", "fill", "text", "headerText", "labelText", "flow", "link", "docLink", "docLinkDash", "dataLinkArrow", "taskLine", "taskFill", "taskFillEnd",
@@ -135,18 +127,18 @@ test("tokens: neutral defaults, overridable, frozen", () => {
 });
 
 test("tokens: stroke feeds every line, fill feeds the task, the gradient end is derived", () => {
-  const m = tokens.resolveLegendTokens({ stroke: "#112233", fill: "#808080" });
+  const m = tokens.resolveAnnotatedTokens({ stroke: "#112233", fill: "#808080" }, look.tokens);
   for (const k of ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"]) {
     assert.equal(m[k], "#112233", k);
   }
-  assert.equal(m.link, tokens.DEFAULT_LEGEND_TOKENS.link, "link is not fed by stroke");
+  assert.equal(m.link, look.tokens.link, "link is not fed by stroke");
   assert.equal(m.taskFill, "#808080");
   assert.equal(m.taskFillEnd, style.shade("#808080", 0.95), "derived second tone");
-  assert.equal(m.eventFill, tokens.DEFAULT_LEGEND_TOKENS.eventFill, "fill does not leak into other types");
+  assert.equal(m.eventFill, look.tokens.eventFill, "fill does not leak into other types");
 });
 
 test("tokens: an explicit per-type value wins over the conveniences", () => {
-  const m = tokens.resolveLegendTokens({ stroke: "#112233", taskLine: "#445566", taskFill: "#808080", taskFillEnd: "#707070" });
+  const m = tokens.resolveAnnotatedTokens({ stroke: "#112233", taskLine: "#445566", taskFill: "#808080", taskFillEnd: "#707070" }, look.tokens);
   assert.equal(m.taskLine, "#445566");
   assert.equal(m.eventLine, "#112233");
   assert.equal(m.taskFillEnd, "#707070");
@@ -166,10 +158,10 @@ test("legend sources contain no banned symbol", () => {
 });
 
 test("tokens: docLink follows link and laneHeaderFill follows laneFill unless named", () => {
-  const a = tokens.resolveLegendTokens({ link: "#010203", laneFill: "#040506" });
+  const a = tokens.resolveAnnotatedTokens({ link: "#010203", laneFill: "#040506" }, look.tokens);
   assert.equal(a.docLink, "#010203");
   assert.equal(a.laneHeaderFill, "#040506");
   assert.equal(a.docLinkDash, "5 5");
-  const b = tokens.resolveLegendTokens({ link: "#010203", docLink: "#b85450", docLinkDash: "3 4", laneFill: "#040506", laneHeaderFill: "#fbf9f6" });
-  assert.deepEqual([b.docLink, b.docLinkDash, b.laneHeaderFill, b.link, b.laneFill], ["#b85450", "3 4", "#fbf9f6", "#010203", "#040506"]);
+  const b = tokens.resolveAnnotatedTokens({ link: "#010203", docLink: "#0a0b0c", docLinkDash: "3 4", laneFill: "#040506", laneHeaderFill: "#0d0e0f" }, look.tokens);
+  assert.deepEqual([b.docLink, b.docLinkDash, b.laneHeaderFill, b.link, b.laneFill], ["#0a0b0c", "3 4", "#0d0e0f", "#010203", "#040506"]);
 });

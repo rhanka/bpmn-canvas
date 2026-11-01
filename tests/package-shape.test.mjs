@@ -19,7 +19,7 @@ test("package identity and license", () => {
 });
 
 test("exports name only implemented entries", () => {
-  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./profile", "./profile-lint", "./profile/compiler", "./react", "./semantics.json", "./styles.css"]);
+  assert.deepEqual(Object.keys(pkg.exports).sort(), [".", "./assistant-ui", "./browser", "./browser/iife", "./io", "./layout", "./package.json", "./profile", "./profile-lint", "./profile/compiler", "./react", "./styles.css"]);
   assert.equal(pkg.unpkg, "./dist/browser/bpmn-canvas.iife.min.js");
   assert.equal(pkg.jsdelivr, "./dist/browser/bpmn-canvas.iife.min.js");
   for (const [key, target] of Object.entries(pkg.exports)) {
@@ -109,7 +109,7 @@ test("npm pack contents stay inside the positive allowlist", () => {
   assert.ok(!info.files.some((f) => /\.xsd$/i.test(f.path)), "no XSD in the tarball (test-only)");
 });
 
-test("every packed file carries no banned identifier; the layout corpus is packed", () => {
+test("every packed file carries no banned identifier; the layout corpus is not packed", () => {
   const allowed = baselineHashAllowlist();
   const [info] = JSON.parse(execFileSync("npm", ["pack", "--dry-run", "--json", "--ignore-scripts"], { cwd: root, encoding: "utf8" }));
   const hits = info.files.filter((f) => !/\.(png|woff2?|ttf|eot)$/.test(f.path)).flatMap((f) => {
@@ -124,7 +124,7 @@ test("every packed file carries no banned identifier; the layout corpus is packe
     return outsideBaselineHashes(f.path, text, allowed);
   });
   assert.deepEqual(hits, []);
-  assert.ok(info.files.some((f) => f.path === "dist/layout-corpus.json"), "dist/layout-corpus.json must be packed");
+  assert.ok(!info.files.some((f) => f.path === "dist/layout-corpus.json"), "the layout corpus is not packed");
 });
 
 test("no Python, no AI trailer files, no private markers in tree", () => {
@@ -184,14 +184,12 @@ test("no banned identifier anywhere: tracked files (tests and docs included) and
   assert.deepEqual(messages, [], "commit messages with a banned identifier");
 });
 
- test("semantic descriptor/checksum is packed; dependency and versions are exact", async () => {
+ test("dependency and versions are exact", async () => {
  const io = await import(root + "dist/io/index.js");
  assert.equal(pkg.dependencies["bpmn-moddle"], "10.3.1");
  const lock = JSON.parse(read("package-lock.json"));
  assert.equal(lock.version, pkg.version); assert.equal(lock.packages[""].version, pkg.version);
  assert.match(pkg.version, /^\d+\.\d+\.\d+$/);
- assert.equal(pkg.exports["./semantics.json"], "./dist/io/semantics.json");
- assert.equal(io.semanticsChecksum, sha("dist/io/semantics.json"));
  });
  test("release requires OIDC and provenance without token fallback", () => {
  const workflow = read(".github/workflows/release.yml").toString("utf8");
