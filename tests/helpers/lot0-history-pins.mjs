@@ -59,12 +59,21 @@ export function historyGuardPin(path, previous) {
   return j5SourcePin(path, previous);
 }
 
+function b2Successor(path, previous) {
+  const receipt = JSON.parse(readFileSync(new URL("../../docs/design/receipts/block-b2-p1-scope-successor.json", import.meta.url), "utf8"));
+  assert.equal(receipt.format, "block-b2-p1-scope-successor/1");
+  const entry = receipt.supersedesFiles.find(entry => entry.path === path);
+  if (!entry) return previous;
+  assert.deepEqual({ bytes: previous.bytes, sha256: previous.sha256 }, entry.old, `${path} b2 successor predecessor`);
+  return entry.new;
+}
+
 export function j5SourcePin(path, previous) {
   const fix = JSON.parse(readFileSync(new URL("../../docs/design/receipts/block-a-j5-reseal.json", import.meta.url)));
   assert.equal(fix.format, "block-a-j5-source-reseal/1");
   assert.equal(fix.baseCommit, "bfed4a302446a3abbfec8b6bba46843dec432eca");
   const successor = fix.supersedesFiles.find(entry => entry.path === path);
-  if (!successor) return phase2SourcePin(path, phase1SourcePin(path, previous));
+  if (!successor) return b2Successor(path, phase2SourcePin(path, phase1SourcePin(path, previous)));
   const parallel = JSON.parse(readFileSync(new URL("../../docs/design/receipts/lot0-history-guard-2.json", import.meta.url)))
     .supersedesFiles.find(entry => entry.path === path);
   if (parallel && previous.bytes === parallel.new.bytes && previous.sha256 === parallel.new.sha256 &&
@@ -73,5 +82,5 @@ export function j5SourcePin(path, previous) {
     previous = parallel.old;
   }
   assert.deepEqual({ bytes: previous.bytes, sha256: previous.sha256 }, successor.old, `${path} J5 reseal predecessor`);
-  return phase2SourcePin(path, phase1SourcePin(path, successor.new));
+  return b2Successor(path, phase2SourcePin(path, phase1SourcePin(path, successor.new)));
 }

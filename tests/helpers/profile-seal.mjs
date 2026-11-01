@@ -102,6 +102,15 @@ export function verifyFreeze(root = fixture) {
   }
   for (const entry of seal.documents) {
     const bytes = readFileSync(join(repo, safe(entry.path)));
+    if (entry.path === "docs/design/profile-externalization-scope.json") {
+      const successor = JSON.parse(readFileSync(join(repo, "docs/design/receipts/block-b2-p1-scope-successor.json"), "utf8"));
+      assert.equal(successor.format, "block-b2-p1-scope-successor/1");
+      const record = successor.supersedesFiles.find(record => record.path === entry.path);
+      assert.ok(record, `missing successor ${entry.path}`);
+      assert.deepEqual({ bytes: entry.bytes, sha256: entry.sha256 }, record.old, `${entry.path} successor predecessor`);
+      assert.deepEqual({ bytes: bytes.length, sha256: digest(bytes) }, record.new, `${entry.path} successor`);
+      continue;
+    }
     assert.equal(bytes.length, entry.bytes);
     assert.equal(digest(bytes), entry.sha256, `stale frozen document ${entry.path}`);
   }
