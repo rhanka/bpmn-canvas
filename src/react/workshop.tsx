@@ -113,8 +113,6 @@ export interface BpmnWorkshopProps {
   readonly menus?: { readonly chevron?: "svg" | "text" | "none"; readonly icons?: boolean };
   /** Host icons for undo and redo. */
   readonly icons?: { readonly undo?: ReactNode; readonly redo?: ReactNode };
-  /** Marker navigation by rules (see `navigationResolver`); `resolveTarget` gives a resolver of your own instead. */
-  readonly navigation?: { readonly rules: readonly NavigationRule[] };
   /**
    * Receives a validated import. When provided the workshop applies nothing itself: store the xml and pass it back
    * as `xml`. When omitted the workshop applies it to its own canvas.
@@ -137,10 +135,13 @@ export interface BpmnWorkshopProps {
 
 export * from "./navigation-target.js";
 
+/** The business-policy/1 rule category of each published marker navigation rule. */
+const POLICY_RULE: Readonly<Record<string, string>> = { calledElement: "called-element", exactName: "name-equal", sectionNumber: "section-equal", substring: "name-overlap" };
+
 /** Resolve diagrams using caller-provided navigation rule categories. */
 export function navigationResolver(rules: readonly NavigationRule[]): (click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined) => string | null {
   return (click, diagrams, activeId) => {
-    const result = navigationTarget({ click, diagrams, activeId }, { processes: [], entries: [] }, { navigation: { mode: "legacy-rules", rules } });
+    const result = navigationTarget({ click, diagrams, activeId }, { processes: [], entries: [] }, { navigation: { mode: "legacy-rules", rules: rules.map((rule) => POLICY_RULE[rule] ?? rule) } });
     return result.kind === "open" ? result.diagramId : null;
   };
 }
