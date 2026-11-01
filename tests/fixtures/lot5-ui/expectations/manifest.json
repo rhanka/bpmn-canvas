@@ -605,7 +605,7 @@
     "vendor/py/fixture-profile-neutral-lint.json": "66da97228e05ab3aadc56d22a189278306ba4dede028ba3e12cc1026fdc62bac",
     "vendor/py/fixture-profile-neutral.json": "a54b003cf1d4d4c06a1caaf182203d032243307db8fe1f810e73c4ba5b7be1ee",
     "vendor/py/parity/lot5-py-compile-enum-duplicate-records.json": "2d34ad37b976a21994206b967a677cb367f74a5fd41df6b79756f09a4144a5db",
-    "vendor/py/parity/lot5-py-compile-enum-duplicate-values.json": "df1bbee2fd95f0cb503705d07221d4819a2e9998b3b49ca1baaba8814279aabf",
+    "vendor/py/parity/lot5-py-compile-enum-duplicate-values.json": "68302ee3761c739cf641e3a44dcf7e3734e6e76c08c48f03bdc8d400fc82e23d",
     "vendor/py/parity/lot5-py-compile-enum-empty-choices.json": "ddaa944c321566d8d2a9f617f79ab419963d981ec5a76beec7920f62ccea235d",
     "vendor/py/parity/lot5-py-compile-field-parameter-missing.json": "4faad6cad072072c0b78f6bf8c81f9ec96f9d865f2fd9ee03cd6f4da5ebe93ab",
     "vendor/py/parity/lot5-py-compile-grid-l5-ok.json": "8e1db276c3fe837b54293fcbd212631722f9fabc7fa3b9153a40a8ad4acc41de",
@@ -620,7 +620,7 @@
     "vendor/py/parity/lot5-py-compile-ui-label-unknown-message.json": "3be312a9df3325131c90326ff27220b7da388371b30ecbf2d3d787b47ae63c79",
     "vendor/py/parity/lot5-py-compile-ui-parameter-duplicate.json": "eac2d9422d2f6c5c32b3e4325941f0134d5ae98c70b67e3838a3323bee481509",
     "vendor/py/parity/lot5-py-compile-ui-parameter-missing.json": "de18ed1a907a648cbf7f5306f68f81846322a899004a256db6975e64b5fdd41d",
-    "vendor/py/parity/lot5-py-compile-ui-parameter-source-type.json": "ba9456a29d5836eb891856be4044e8f31c57d9bf18a1ea13d95a59b5027b6f5d",
+    "vendor/py/parity/lot5-py-compile-ui-parameter-source-type.json": "60a98e3feabb66dc80753b064a89da76fbea22c2fd12cd9296e9b6b103724785",
     "vendor/py/parity/lot5-py-compile-ui-parameter-unknown.json": "4334c27b0151a7172a067c212c5dc6e6dcead805b6c758af9f2b9dd016ba8f9b",
     "vendor/py/parity/lot5-py-compile-upstream-duplicate-across-entries.json": "084f043e1b630f99d5e4b022b4bac04e1cfcc82cc7ce39b31b9247ae439d2dbf",
     "vendor/py/parity/lot5-py-compile-upstream-duplicate-within-entry.json": "08f41107bf0f5446bc40906e24c97ea82fea3ee878f158f6bb503884167859f4",
@@ -708,7 +708,7 @@
     "Lot-5 UI surface expectations, hand-authored from DESIGN R3.3, the block-A public contracts and the block-B harmonization decisions; no interpreter output was used.",
     "pathBase is the repository-relative directory of every path below; files covers every case, fixture and vendored file; manifest.json, clauses.json, design-excerpts.json, README.md, author/ and comparators/ are pinned by seal.json.",
     "Every comparator is the pinned executable lot5-compare/1 with zero tolerance; a member is excluded only by an explicit $unsealed marker whose reason is listed in unsealedReasons.",
-    "Block-B parity sync (BLOCKB-PARITY-SYNC row PS-H25): the cases lot5-py-* are the Python lot-5 parity records vendored unchanged, except the refusal code of the 2 compile refusals of the CR-10 arbitration (README \"CR-10 arbitration\"); vendor/py/ holds the Python seal's bytes unchanged and the README lists the re-expressed roles and comparator ids."
+    "Block-B parity sync (BLOCKB-PARITY-SYNC row PS-H25): the cases lot5-py-* are the Python lot-5 parity records vendored unchanged, except the refusal code of the 0 compile refusals of the CR-10 arbitration (README \"CR-10 arbitration\"); vendor/py/ holds the Python seal's bytes unchanged and the README lists the re-expressed roles and comparator ids."
   ],
   "pathBase": "tests/fixtures/lot5-ui/expectations/",
   "unsealedReasons": {

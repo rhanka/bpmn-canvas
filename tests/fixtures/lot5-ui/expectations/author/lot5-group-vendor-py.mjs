@@ -29,17 +29,6 @@ const OWNED = "values owned by that seal (BLOCKB-HARMONIZATION §3, BLOCKB-PARIT
  * re-vendor of the updated Python seal removes it.
  */
 export const CODE_CORRECTIONS = Object.freeze({
-  "compile-enum-duplicate-values": Object.freeze({
-    vendored: "profile-ui-parameters", sealed: "profile-type",
-    basis: "DESIGN names no code for the enum clause of CR-10 (§2.4.1 L195 lists profile-ui-parameters and profile-type; §8.3 L655 names profile-ui-parameters for missing or duplicate required parameters only), so the frozen lot-0 case s2b-cr10-enum-values decides",
-    discriminates: "Two choices with different names share the JSON value One; schema uniqueItems accepts the distinct records and the compiler refuses profile-type (CR-10 arbitration: DESIGN names no code for the enum clause and the frozen lot-0 case s2b-cr10-enum-values decides). A compiler that accepts the profile, or reports the repeated value as profile-ui-parameters, fails.",
-  }),
-  "compile-ui-parameter-source-type": Object.freeze({
-    vendored: "profile-ui-parameters", sealed: "profile-type",
-    basis: "§8.3 L655 names profile-ui-parameters for missing or duplicate required parameters only and types every source; a binding of another source type is ill-typed content, profile-type (§2.1 L81, §2.4.1 L195), as the block-A CR-10 compiler test",
-    clauses: Object.freeze([cite("2.1", 81)]),
-    discriminates: "The element parameter owner of task-create is bound from source value (a scalar), so the binding is ill-typed and compilation refuses profile-type (CR-10 arbitration: §8.3 L655 names profile-ui-parameters for missing or duplicate parameters only; §2.1 L81). A compiler that accepts the profile, or reports the ill-typed binding as profile-ui-parameters, fails.",
-  }),
 });
 
 /** Every JSON number token of a vendored text is its own JavaScript rendering: parsing loses no precision and JCS renders the same digits. */

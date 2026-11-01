@@ -1,6 +1,6 @@
 # Block B lot 5 — UI surface expectations
 
-The sealed lot-5 corpus lives in `tests/fixtures/lot5-ui/expectations/` (333 `profile-parity-corpus/1` cases, spec author Opus, reviewer gpt-6-astra max, seal fix round SF; block-B parity sync: the 98 `lot5-py-*` cases are the Python lot-5 parity records vendored unchanged under `vendor/py/`, except 2 refusal codes of the CR-10 arbitration, author spec-seal, BLOCKB-PARITY-SYNC row PS-H25).
+The sealed lot-5 corpus lives in `tests/fixtures/lot5-ui/expectations/` (333 `profile-parity-corpus/1` cases, spec author Opus, reviewer gpt-6-astra max, seal fix round SF; block-B parity sync: the 98 `lot5-py-*` cases are the Python lot-5 parity records vendored unchanged under `vendor/py/`, except 0 refusal codes of the CR-10 arbitration, author spec-seal, BLOCKB-PARITY-SYNC row PS-H25).
 Its README records the method, the harness and observation contract, the pinned comparator executable, the lot-5 defaults, the UNSEALED owner items and members, and the wrong implementation each vector rejects.
 `tests/lot5-ui-expectations.test.mjs` verifies the seal, the comparators (including altered observations) and the independence rules without running any interpreter.
 
@@ -42,7 +42,7 @@ Line numbers refer to DESIGN R3.3 (`48139f5fd5bd789eacbf271081a95432c54d8361b1e5
 | §2.1 L48 | `compile-002-enum-duplicate-records` |
 | §2.1 L50 | `py-pick-paging-bounds` |
 | §2.1 L79 | `fields-006-state-process` |
-| §2.1 L81 | `compile-015-ui-parameter-source-type`, `py-compile-ui-parameter-source-type` |
+| §2.1 L81 | `compile-015-ui-parameter-source-type` |
 | §2.2 L113 | `palette-025-non-string-handle`, `palette-026-dangling-handle`, `palette-027-null-value` |
 | §2.2 L114 | `palette-028-number-value`, `fields-041-check-text`, `fields-024-edit-number-no-coercion`, `fields-051-edit-boolean-no-coercion` |
 | §2.2 L115 | `fields-003-state-aid`, `fields-004-state-aid-no-space`, `py-field-display-prefix-exact` |

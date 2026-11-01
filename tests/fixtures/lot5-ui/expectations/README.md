@@ -92,9 +92,11 @@ The `lot5-py-*` cases are not authored here (see "Vendored Python cases"):
 lists (`author/lot5-vendor-py.json`), registers them unchanged and re-expresses
 each parity record (file layout, roles, comparator ids); it computes no value.
 The clause, derivation and author of each case are transcribed verbatim from the
-Python harness record, whose SHA-256 is recorded. Two compile refusals are the
-exception: their case seals the refusal code of the CR-10 arbitration
-(`CODE_CORRECTIONS`, section "CR-10 arbitration"), the vendored bytes staying
+Python harness record, whose SHA-256 is recorded. Two compile refusals were the
+exception until the twin re-vendor to `6c8cbdb`: their case sealed the refusal
+code of the CR-10 arbitration (`CODE_CORRECTIONS`, section "CR-10 arbitration"),
+the vendored bytes staying unchanged. The owning seal now carries the decided
+code, so the corrections are removed and the cases seal the vendored values
 unchanged.
 
 ## Layout
@@ -125,9 +127,10 @@ unchanged.
   discrimination text and `vendored` (the Python clause verbatim, the vendoring
   derivation and the SHA-256 of the parity and harness records). A Python range
   spanning a blank DESIGN line (L276-L282) is cited as its nonblank runs. For the
-  two cases of the CR-10 arbitration the discrimination text states the decided
-  code and `vendored.correction` records the vendored and sealed codes, the basis
-  and the verbatim Python derivation.
+  two cases of the CR-10 arbitration the discrimination text is the verbatim
+  Python derivation stating the decided code; the twin re-vendor to `6c8cbdb`
+  removed the `vendored.correction` record (vendored and sealed codes are now
+  the same).
 - `design-excerpts.json` — SHA-256 of every cited DESIGN line.
 - `author/` — authoring and seal tools, and `lot5-vendor-py.json` (the
   transcribed vendoring table: source pins, vendored file digests, lot-0 copies
@@ -395,16 +398,16 @@ Harmonization I3 (an unknown member of a command record refuses
 records and decides neither case; `compile-016-ui-parameter-unknown` keeps
 `profile-ui-parameters`.
 
-The Python twins keep their vendored bytes: `CODE_CORRECTIONS` of
-`author/lot5-group-vendor-py.mjs` seals the decided code and fails the build as
-soon as a vendored record carries it, so the re-vendor of the updated Python
-seal removes the entry. Python side to update (owning seal, pathBase
+The Python twins kept their vendored bytes until the twin re-vendor to `6c8cbdb`:
+`CODE_CORRECTIONS` of `author/lot5-group-vendor-py.mjs` sealed the decided code and
+failed the build as soon as a vendored record carried it, so the re-vendor of the
+updated Python seal removed the entry. Python side updated (owning seal, pathBase
 `tests/profile_commands/expected/`): the harness records
 `compile-enum-duplicate-values.json` and `compile-ui-parameter-source-type.json`
 (expected code and derivation), the parity records
 `parity/lot5-py-compile-enum-duplicate-values.json` and
 `parity/lot5-py-compile-ui-parameter-source-type.json`, `MANIFEST.sha256` and
-`parity/manifest.json`. Their vendored copies here are not edited:
+`parity/manifest.json`. Their vendored copies here are now the updated bytes:
 `vendor/py/parity/lot5-py-compile-enum-duplicate-values.json` and
 `vendor/py/parity/lot5-py-compile-ui-parameter-source-type.json`.
 
@@ -520,9 +523,11 @@ with warnings, export requires acceptance: `workshop-008`) and OPEN-SHARING
 The Python lot-5 seal owns these 98 parity cases; this corpus vendors them with
 their values unchanged (BLOCKB-HARMONIZATION §3: "the values stay those of the
 owning seal"; BLOCKB-PARITY-SYNC §1.2: vendored after the owning seal's own
-value changes, with its resealed bytes). One exception, the CR-10 arbitration
-(section "CR-10 arbitration"): two vendored compile refusals seal `profile-type`
-while their Python records, unchanged here, carry `profile-ui-parameters`.
+value changes, with its resealed bytes). Former exception, the CR-10 arbitration
+(section "CR-10 arbitration"): two vendored compile refusals sealed `profile-type`
+while their Python records, unchanged here, carried `profile-ui-parameters`. The
+twin re-vendor to `6c8cbdb` carried the decided code to the Python records, so the
+cases seal the vendored values unchanged.
 Source: the Python lot-5 seal resealed after the parity sync, commit `5f2fa778933097653dc046f802d423f1e11e5112`,
 `MANIFEST.sha256`
 `44bb6b913981cd704637f80e94fa9cc20d59547f94cfdfc7f79432fe2bbd083a`, parity
@@ -866,7 +871,7 @@ cursor are in the case; the Python twin replays steps 1–11.
 | `gates-004-reserved-n-reuse` | §7.2 L552, §5.2 L440, §5.1 L430, §8.2 L632, §8.2 L633, §8.2 L641, §8.1 L606, §10.1 L735, §10.1 L739, §9.2 L690, §10.1 L751, §6.2 L474, §6.4 L515 | Refuses profile-open although the support already exists and is bound, re-creates or renames the bound Collaboration, or drops the binding. |
 | `demo-001-acceptance-script` | §14.2 L954, §8.3 L649, §8.3 L651, §8.3 L653, §8.2 L632, §8.2 L641, §10.2 L803, §2.4 L163 | Any upstream shortcut in the demo path: random IDs, DataInputAssociation for the reference link, an in-place retype keeping the task ID, more than one history entry per gesture, intermediate reports, or a download of a non-final state (the stale name Review request). |
 | `py-compile-enum-duplicate-records` | §8.3 L655 | Two identical choice records violate the pinned schema uniqueItems keyword, so load refuses profile-schema before compilation. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
-| `py-compile-enum-duplicate-values` | §2.4.1 L195 | Two choices with different names share the JSON value One; schema uniqueItems accepts the distinct records and the compiler refuses profile-type (CR-10 arbitration: DESIGN names no code for the enum clause and the frozen lot-0 case s2b-cr10-enum-values decides). A compiler that accepts the profile, or reports the repeated value as profile-ui-parameters, fails. |
+| `py-compile-enum-duplicate-values` | §2.4.1 L195 | Two choices with different names share the JSON value One; schema uniqueItems accepts the distinct records and the compiler refuses profile-type. CR-10 arbitration (JS lot-5 commit ef9e781): L195 lists both codes without assigning the enum rule, §8.3 L655 names profile-ui-parameters only for missing or duplicated parameters, and the frozen lot-0 case s2b-cr10-enum-values and block A refuse profile-type. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-enum-empty-choices` | §8.3 L655 | The link direction enum field (notion index 6) gets an empty choices array; the pinned schema conditional rejects it before compilation, so load refuses profile-schema. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-field-parameter-missing` | §8.3 L655, §2.4.1 L195 | The task name field keeps its rename command but loses the value->name binding; rename's required name parameter is unsupplied, so compilation refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-grid-l5-ok` | §2.4.1 L195, §8.3 L655, §10.1 L737 | The composed grid fixture compiles: its three UI entries and two fields bind every required parameter exactly once and every label and validation message has text for policies.localeFallback (en). Parity sync PS-35 (DESIGN §10.1 L737: PureResult success is exactly {status, payload, diagnostics}): the outcome is {status ok, payload, empty diagnostics} whose payload, the CompiledProfile (no wire shape), is unsealed as compiled-profile; the compiled profile identity of the committed profile bytes is sealed separately as expected.compiledIdentity (parity role compiled-identity). The identity values are unchanged. |
@@ -881,7 +886,7 @@ cursor are in the case; the Python twin replays steps 1–11.
 | `py-compile-ui-label-unknown-message` | §2.4.1 L190 | task-create refers to an undefined message label.unknown, so compilation refuses profile-symbol. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-ui-parameter-duplicate` | §2.4.1 L195, §8.3 L655 | task-create binds key twice; a parameter supplied twice refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-ui-parameter-missing` | §2.4.1 L195, §8.3 L655 | The value->name binding of task-create is removed; required create-task parameter name is no longer supplied, so compilation refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
-| `py-compile-ui-parameter-source-type` | §2.4.1 L195, §8.3 L655, §2.1 L81 | The element parameter owner of task-create is bound from source value (a scalar), so the binding is ill-typed and compilation refuses profile-type (CR-10 arbitration: §8.3 L655 names profile-ui-parameters for missing or duplicate parameters only; §2.1 L81). A compiler that accepts the profile, or reports the ill-typed binding as profile-ui-parameters, fails. |
+| `py-compile-ui-parameter-source-type` | §2.4.1 L195, §8.3 L655 | The element parameter owner of task-create is bound from source value (a scalar), so the binding is ill-typed and compilation refuses profile-type. CR-10 arbitration (JS lot-5 commit ef9e781): §8.3 L655 reserves profile-ui-parameters for missing or duplicated parameters and types every source, §2.1 L81 makes ill-typed content profile-type, and block A J2 refuses profile-type. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-ui-parameter-unknown` | §2.4.1 L195, §8.3 L655 | task-create binds a name extra that create-task does not declare; an undeclared parameter binding refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-upstream-duplicate-across-entries` | §8.3 L659 | UI entry Zeta-task (index 2) is changed to list create.task, already listed by task-create. One upstream ID then maps to two entries; the DESIGN names no code, so the lot-5 binding uses the CR-05 namespace-uniqueness code profile-symbol (DESIGN L190). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |
 | `py-compile-upstream-duplicate-within-entry` | §8.3 L659 | task-create lists create.task twice; the same upstream ID maps twice, which is a duplicate mapping (schema upstreamEntries has no uniqueItems, so the compiler refuses with profile-symbol). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact. |

@@ -1282,16 +1282,16 @@
   },
   "vendoredSeal": {
     "runtime": "python",
-    "commit": "1c2df3166480fe62a233fe91c3ae19bf8839cd2a",
+    "commit": "6c8cbdbaf65b691a6c5e758d5303125ecd513d5f",
     "manifest": {
       "path": "tests/profile_cn/expected/MANIFEST.sha256",
       "vendored": "lot3-cn/expectations/vendor/py/MANIFEST.sha256",
-      "sha256": "0d3922f74fb71e19d305307a3153989dcdf4ba3685e8a6df06c28046cf15ad8e"
+      "sha256": "d764639b040d06fc4f07d9bca7449b4e7963f8ecc7a171792d4ce047fc5d8cfe"
     },
     "parityManifest": {
       "path": "tests/profile_cn/expected/parity/manifest.json",
       "vendored": "lot3-cn/expectations/vendor/py/parity/manifest.json",
-      "sha256": "2a195405f01458521ef951d5b7b14f554b62c9a20b87d83efdca69a6ff234f52"
+      "sha256": "befb6fae2551b6d4b760fd272f167489f7e9e5605640d87183f2c54107096a4c"
     }
   },
   "vendored": [

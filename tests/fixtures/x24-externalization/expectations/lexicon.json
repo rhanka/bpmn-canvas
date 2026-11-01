@@ -1789,7 +1789,7 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/README.md",
       "pathSha256": "4977a16ac8c1086fd033a6bd018f0d157652df380e076c755c005251bf343e39",
-      "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a",
+      "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57",
       "spans": [
        [
         "raw",
@@ -1810,34 +1810,34 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
       "pathSha256": "a3681958c86e75ba0f7014f7bdc205e91e156ddfb84bf8cc140858cd1f0bc2f0",
-      "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+      "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b",
       "spans": [
        [
         "raw",
-        592,
+        594,
         8,
-        592,
+        594,
         16
        ],
        [
         "raw",
-        596,
+        598,
         21,
-        596,
+        598,
         29
        ],
        [
         "raw",
-        3237,
+        3239,
         44,
-        3237,
+        3239,
         52
        ],
        [
         "raw",
-        3266,
+        3268,
         68,
-        3266,
+        3268,
         76
        ]
       ]
@@ -2986,48 +2986,48 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/README.md",
       "pathSha256": "2f2cf7eccf54527ac3ed34283690ed718314c0d86916f8afae027578aba7dee0",
-      "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1",
+      "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7",
       "spans": [
        [
         "raw",
-        275,
+        278,
         136,
-        275,
+        278,
         144
        ],
        [
         "raw",
-        497,
+        500,
         70,
-        497,
+        500,
         78
        ],
        [
         "raw",
-        568,
+        573,
         173,
-        568,
+        573,
         181
        ],
        [
         "raw",
-        892,
+        897,
         598,
-        892,
+        897,
         606
        ],
        [
         "raw",
-        894,
+        899,
         723,
-        894,
+        899,
         731
        ],
        [
         "raw",
-        951,
+        956,
         471,
-        951,
+        956,
         479
        ]
       ]
@@ -3049,7 +3049,7 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/author/lot5-vendor-py.json",
       "pathSha256": "17722ace22308059552400269d43430a4fdb2f14868bab026dc730f9a9295e5d",
-      "sha256": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285",
+      "sha256": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5",
       "spans": [
        [
         "raw",
@@ -3077,27 +3077,27 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/clauses.json",
       "pathSha256": "b146a62aeb871e234c09f3d6394c62dd1842e32e73734e3d586ebce1dd928bf9",
-      "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f",
+      "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299",
       "spans": [
        [
         "raw",
-        4343,
+        4340,
         560,
-        4343,
+        4340,
         568
        ],
        [
         "raw",
-        4382,
+        4379,
         637,
-        4382,
+        4379,
         645
        ],
        [
         "raw",
-        5349,
+        5346,
         438,
-        5349,
+        5346,
         446
        ]
       ]
@@ -3119,7 +3119,7 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/manifest.json",
       "pathSha256": "985c868dae38ac78073f39cd6c264d665e3bb0e576de6843f921345ab371bd7a",
-      "sha256": "eb4260c285d1ef1ed81156e34c499e0aebd5f965edcebaa7225a4aaef5e93119",
+      "sha256": "d7c04d63e175f234883f54e8507eb26127f4de2124c6b5c0289fa6ffb5c2c4f9",
       "spans": [
        [
         "raw",
@@ -7319,7 +7319,7 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/README.md",
       "pathSha256": "4977a16ac8c1086fd033a6bd018f0d157652df380e076c755c005251bf343e39",
-      "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a",
+      "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57",
       "spans": [
        [
         "raw",
@@ -7333,13 +7333,13 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
       "pathSha256": "a3681958c86e75ba0f7014f7bdc205e91e156ddfb84bf8cc140858cd1f0bc2f0",
-      "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+      "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b",
       "spans": [
        [
         "raw",
-        2546,
+        2548,
         87,
-        2546,
+        2548,
         96
        ]
       ]
@@ -7347,7 +7347,7 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/index.json",
       "pathSha256": "e186c5ad78aefea9323f45c6b68bef75a3999e144fe28d138e342104f7f99941",
-      "sha256": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5",
+      "sha256": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519",
       "spans": [
        [
         "raw",
@@ -7361,20 +7361,20 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/README.md",
       "pathSha256": "2f2cf7eccf54527ac3ed34283690ed718314c0d86916f8afae027578aba7dee0",
-      "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1",
+      "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7",
       "spans": [
        [
         "raw",
-        675,
+        680,
         198,
-        675,
+        680,
         207
        ],
        [
         "raw",
-        678,
+        683,
         141,
-        678,
+        683,
         150
        ]
       ]
@@ -7403,7 +7403,7 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/author/lot5-vendor-py.json",
       "pathSha256": "17722ace22308059552400269d43430a4fdb2f14868bab026dc730f9a9295e5d",
-      "sha256": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285",
+      "sha256": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5",
       "spans": [
        [
         "raw",
@@ -7417,7 +7417,7 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/clauses.json",
       "pathSha256": "b146a62aeb871e234c09f3d6394c62dd1842e32e73734e3d586ebce1dd928bf9",
-      "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f",
+      "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299",
       "spans": [
        [
         "raw",
@@ -7435,9 +7435,9 @@
        ],
        [
         "raw",
-        4883,
+        4880,
         168,
-        4883,
+        4880,
         177
        ]
       ]
@@ -7558,7 +7558,7 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/README.md",
       "pathSha256": "4977a16ac8c1086fd033a6bd018f0d157652df380e076c755c005251bf343e39",
-      "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a",
+      "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57",
       "spans": [
        [
         "raw",
@@ -7593,55 +7593,55 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
       "pathSha256": "a3681958c86e75ba0f7014f7bdc205e91e156ddfb84bf8cc140858cd1f0bc2f0",
-      "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+      "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b",
       "spans": [
        [
         "raw",
-        999,
+        1001,
         82,
-        999,
+        1001,
         85
        ],
        [
         "raw",
-        1012,
+        1014,
         118,
-        1012,
+        1014,
         121
        ],
        [
         "raw",
-        1099,
+        1101,
         76,
-        1099,
+        1101,
         79
        ],
        [
         "raw",
-        1619,
+        1621,
         64,
-        1619,
+        1621,
         67
        ],
        [
         "raw",
-        1633,
+        1635,
         107,
-        1633,
+        1635,
         110
        ],
        [
         "raw",
-        3129,
+        3131,
         17,
-        3129,
+        3131,
         20
        ],
        [
         "raw",
-        3903,
+        3906,
         82,
-        3903,
+        3906,
         85
        ]
       ]
@@ -7649,7 +7649,7 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/index.json",
       "pathSha256": "e186c5ad78aefea9323f45c6b68bef75a3999e144fe28d138e342104f7f99941",
-      "sha256": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5",
+      "sha256": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519",
       "spans": [
        [
         "raw",
@@ -7677,13 +7677,13 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/README.md",
       "pathSha256": "2f2cf7eccf54527ac3ed34283690ed718314c0d86916f8afae027578aba7dee0",
-      "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1",
+      "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7",
       "spans": [
        [
         "raw",
-        782,
+        787,
         78,
-        782,
+        787,
         81
        ]
       ]
@@ -7705,7 +7705,7 @@
      {
       "file": "tests/fixtures/lot5-ui/expectations/clauses.json",
       "pathSha256": "b146a62aeb871e234c09f3d6394c62dd1842e32e73734e3d586ebce1dd928bf9",
-      "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f",
+      "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299",
       "spans": [
        [
         "raw",
@@ -7719,27 +7719,27 @@
      {
       "file": "tests/profile-lot3-golden-independence.test.mjs",
       "pathSha256": "2447ac2a91e42ffce910f89b5b20a401e0c78c98c10d07e98a544b1f04579571",
-      "sha256": "1d35c7618a783a5b6d7c16dbb2504fabb3184ec4646e9879252608e94a2c3e52",
+      "sha256": "bcae7c87121b3758bd83520bea6fdd87ebf32188e2a24094e1b9a31fc0b65bb0",
       "spans": [
        [
         "raw",
-        160,
+        163,
         34,
-        160,
+        163,
         37
        ],
        [
         "raw",
-        160,
+        163,
         57,
-        160,
+        163,
         60
        ],
        [
         "raw",
-        169,
+        172,
         31,
-        169,
+        172,
         34
        ]
       ]
@@ -7758,13 +7758,13 @@
      {
       "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
       "pathSha256": "a3681958c86e75ba0f7014f7bdc205e91e156ddfb84bf8cc140858cd1f0bc2f0",
-      "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+      "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b",
       "spans": [
        [
         "raw",
-        629,
+        631,
         115,
-        629,
+        631,
         125
        ]
       ]
