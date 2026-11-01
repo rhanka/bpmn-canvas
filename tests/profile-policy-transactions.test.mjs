@@ -9,7 +9,7 @@ const root = new URL("./fixtures/x24-externalization/expectations/", import.meta
 const load = path => JSON.parse(readFileSync(new URL(path, root)));
 const input = (c, role) => { const a = c.inputArtifacts.find(a => a.role === role); return a?.path ? load(a.path) : a?.json; };
 const drawing = await policyModule("src/profiles/{LX-TH-1:ba29297b}/renderer.ts");
-const aids = drawing.member("63194f6a821b45846017bf0a64cbceca12ab37ae7e41ba868b0accfb25a06f4c");
+const aids = drawing.module.applicationsOf;
 const hidden = drawing.module.isHiddenInAnnotated;
 const follow = Object.values(drawing.module).find(value => typeof value === "function" && value.$inject?.length === 2);
 const layout = (await policyModule("src/internal/layout/autoLayout.ts")).module;
