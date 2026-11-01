@@ -24,8 +24,10 @@ const sha = bytes => createHash("sha256").update(bytes).digest("hex");
 const json = path => JSON.parse(readFileSync(join(root, path), "utf8"));
 const DESIGN_SHA256 = "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f";
 // SF (0353affc…) superseded the first seal (a3a523a9…), the parity sync (7a1c85aa…) superseded SF, the micro-reseal
-// and the twin re-vendor (810c51cc…) superseded the parity sync, and the CR-10 arbitration supersedes the re-vendor.
-const PREVIOUS_SEAL_SHA256 = "810c51cc538b28b6cd4212b40e20f02e6495c124a4afbf021401d7f64d05be8f";
+// and the twin re-vendor (810c51cc…) superseded the parity sync, the CR-10 arbitration (c233dd9f…) superseded the
+// re-vendor, and the twin re-vendor to 6c8cbdb supersedes the arbitration.
+const PREVIOUS_SEAL_SHA256 = "c233dd9f1e0c7522a7691140a56bcda5ac61f6404b811a6ad9db652ad24c647e";
+const CR10_SEAL_SHA256 = "810c51cc538b28b6cd4212b40e20f02e6495c124a4afbf021401d7f64d05be8f";
 const PARITY_SYNC_SEAL_SHA256 = "7a1c85aa4ef6c56cff827980d12b8bddce8157d9b06d683ac9b63c0152fe991d";
 // Sealed directories the manifest pins: cases, generated fixtures and the vendored Python bytes (BLOCKB-PARITY-SYNC §2.2).
 const PINNED_DIRS = ["cases/", "fixtures/", "vendor/"];
@@ -303,11 +305,11 @@ test("lot5 comparators accept the exemplar and reject every altered sealed membe
 });
 
 test("lot5 reseal ledger records the previous seal exactly and every changed file", () => {
-  const ledger = JSON.parse(readFileSync(new URL("docs/design/receipts/block-b-lot5-reseal.json", repo), "utf8"));
+  const ledger = JSON.parse(readFileSync(new URL("docs/design/receipts/block-b-lot5-vendor-py-6c8cbdb.json", repo), "utf8"));
   assert.equal(ledger.format, "block-b-lot5-reseal/1");
   assert.equal(ledger.previousSeal.sha256, PREVIOUS_SEAL_SHA256);
-  // Chain: the predecessor ledger (twin re-vendor) superseded the parity-sync seal and produced the previous seal.
-  assert.equal(ledger.predecessor.previousSeal.sha256, PARITY_SYNC_SEAL_SHA256);
+  // Chain: the predecessor ledger (CR-10 arbitration) superseded its previous seal and produced the previous seal.
+  assert.equal(ledger.predecessor.previousSeal.sha256, CR10_SEAL_SHA256);
   assert.equal(ledger.predecessor.newSeal.sha256, PREVIOUS_SEAL_SHA256);
   // Rebuild the previous seal.json bytes from the ledger: its digest must be the reviewed one.
   const previousFiles = [...ledger.files.filter(f => f.old).map(f => ({ path: f.path, ...f.old }))].sort((a, b) => a.path < b.path ? -1 : 1);

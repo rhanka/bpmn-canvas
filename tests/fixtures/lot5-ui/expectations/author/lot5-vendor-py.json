@@ -3,15 +3,15 @@
   "note": "Vendored Python lot-5 parity cases (block-B parity sync, BLOCKB-PARITY-SYNC sections 2.1, 2.2 and 3.3, rows PS-H25 and PS-35). seal: the owning seal (commit, manifests, the three runtime-specific cases it keeps, section 5). files: raw SHA-256 of every file vendored under vendor/py/ (paths relative to the Python pathBase) as the Python MANIFEST.sha256 lists it. lot0: the lot-0 contract files the vendored files name by Python repository path, with their byte-identical copy in this repository and its raw SHA-256. cases: per vendored harness case, author, clause and derivation transcribed verbatim and the raw SHA-256 of the harness record and of its parity record. Nothing here is computed; author/lot5-group-vendor-py.mjs checks every digest.",
   "seal": {
     "side": "Python lot-5 seal (resealed after the parity sync)",
-    "commit": "1c2df3166480fe62a233fe91c3ae19bf8839cd2a",
+    "commit": "6c8cbdbaf65b691a6c5e758d5303125ecd513d5f",
     "pathBase": "tests/profile_commands/expected/",
     "manifest": {
       "path": "tests/profile_commands/expected/MANIFEST.sha256",
-      "sha256": "6a3cef2eb7233f4cc706d3fb5acde1badc87c41450e2fdf9f47080001bdc8993"
+      "sha256": "216673b5682480a2a2f770732ca2a32464e22a1e49da66bc61acac49f9dc4685"
     },
     "parityManifest": {
       "path": "tests/profile_commands/expected/parity/manifest.json",
-      "sha256": "888465b9bc1734944c331c9ce077b7b8570e71a9991d1e57555b4aba9c8ce181",
+      "sha256": "378b08de7c8a75d1e794d0c4df39a139dae130ed20e9239df68fa26d935c6a61",
       "corpusVersion": "lot5-py-1"
     },
     "runtimeSpecific": [
@@ -58,7 +58,7 @@
     "fixture-profile-neutral-lint.json": "66da97228e05ab3aadc56d22a189278306ba4dede028ba3e12cc1026fdc62bac",
     "fixture-profile-neutral.json": "a54b003cf1d4d4c06a1caaf182203d032243307db8fe1f810e73c4ba5b7be1ee",
     "parity/lot5-py-compile-enum-duplicate-records.json": "2d34ad37b976a21994206b967a677cb367f74a5fd41df6b79756f09a4144a5db",
-    "parity/lot5-py-compile-enum-duplicate-values.json": "df1bbee2fd95f0cb503705d07221d4819a2e9998b3b49ca1baaba8814279aabf",
+    "parity/lot5-py-compile-enum-duplicate-values.json": "68302ee3761c739cf641e3a44dcf7e3734e6e76c08c48f03bdc8d400fc82e23d",
     "parity/lot5-py-compile-enum-empty-choices.json": "ddaa944c321566d8d2a9f617f79ab419963d981ec5a76beec7920f62ccea235d",
     "parity/lot5-py-compile-field-parameter-missing.json": "4faad6cad072072c0b78f6bf8c81f9ec96f9d865f2fd9ee03cd6f4da5ebe93ab",
     "parity/lot5-py-compile-grid-l5-ok.json": "8e1db276c3fe837b54293fcbd212631722f9fabc7fa3b9153a40a8ad4acc41de",
@@ -73,7 +73,7 @@
     "parity/lot5-py-compile-ui-label-unknown-message.json": "3be312a9df3325131c90326ff27220b7da388371b30ecbf2d3d787b47ae63c79",
     "parity/lot5-py-compile-ui-parameter-duplicate.json": "eac2d9422d2f6c5c32b3e4325941f0134d5ae98c70b67e3838a3323bee481509",
     "parity/lot5-py-compile-ui-parameter-missing.json": "de18ed1a907a648cbf7f5306f68f81846322a899004a256db6975e64b5fdd41d",
-    "parity/lot5-py-compile-ui-parameter-source-type.json": "ba9456a29d5836eb891856be4044e8f31c57d9bf18a1ea13d95a59b5027b6f5d",
+    "parity/lot5-py-compile-ui-parameter-source-type.json": "60a98e3feabb66dc80753b064a89da76fbea22c2fd12cd9296e9b6b103724785",
     "parity/lot5-py-compile-ui-parameter-unknown.json": "4334c27b0151a7172a067c212c5dc6e6dcead805b6c758af9f2b9dd016ba8f9b",
     "parity/lot5-py-compile-upstream-duplicate-across-entries.json": "084f043e1b630f99d5e4b022b4bac04e1cfcc82cc7ce39b31b9247ae439d2dbf",
     "parity/lot5-py-compile-upstream-duplicate-within-entry.json": "08f41107bf0f5446bc40906e24c97ea82fea3ee878f158f6bb503884167859f4",
@@ -194,9 +194,9 @@
     "compile-enum-duplicate-values": {
       "author": "spec-seal",
       "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 unique JSON values even when choice names differ",
-      "derivation": "Two choices with different names share the JSON value One; schema uniqueItems accepts the distinct records and the compiler refuses profile-ui-parameters (the code used by the executable design checker for the same negative). Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
-      "harnessSha256": "3e2cc4911dbb23cd902ae75ff94c63213f6ed904fe54e958c80b5723329324a0",
-      "paritySha256": "df1bbee2fd95f0cb503705d07221d4819a2e9998b3b49ca1baaba8814279aabf"
+      "derivation": "Two choices with different names share the JSON value One; schema uniqueItems accepts the distinct records and the compiler refuses profile-type. CR-10 arbitration (JS lot-5 commit ef9e781): L195 lists both codes without assigning the enum rule, §8.3 L655 names profile-ui-parameters only for missing or duplicated parameters, and the frozen lot-0 case s2b-cr10-enum-values and block A refuse profile-type. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "0badc53defc9314d8f9571da83c08678dfa57ba119a56459fb0a1ec127dc3a3f",
+      "paritySha256": "68302ee3761c739cf641e3a44dcf7e3734e6e76c08c48f03bdc8d400fc82e23d"
     },
     "compile-enum-empty-choices": {
       "author": "spec-seal",
@@ -299,9 +299,9 @@
     "compile-ui-parameter-source-type": {
       "author": "spec-seal",
       "clause": "DESIGN R3.3 §2.4.1 L195 CR-10 typed bindings; §8.3 L655 owner/target/source are native handles, value is the typed field value",
-      "derivation": "The element parameter owner of task-create is bound from source value (a scalar), so the binding is ill-typed and compilation refuses profile-ui-parameters. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
-      "harnessSha256": "a160b68fcfc9c84fa93581ed69b10b9fe3afe77d826f49ae3a35aca7bdbb5926",
-      "paritySha256": "ba9456a29d5836eb891856be4044e8f31c57d9bf18a1ea13d95a59b5027b6f5d"
+      "derivation": "The element parameter owner of task-create is bound from source value (a scalar), so the binding is ill-typed and compilation refuses profile-type. CR-10 arbitration (JS lot-5 commit ef9e781): §8.3 L655 reserves profile-ui-parameters for missing or duplicated parameters and types every source, §2.1 L81 makes ill-typed content profile-type, and block A J2 refuses profile-type. Seal fix round: the outcome is the complete PureResult refusal (empty diagnostics) of loading and compiling the committed profile bytes of input.profile.artifact.",
+      "harnessSha256": "f058bf87385ba5ed5664b2e7956d5a88225c60cd855b50631f9f41c170cf859f",
+      "paritySha256": "60a98e3feabb66dc80753b064a89da76fbea22c2fd12cd9296e9b6b103724785"
     },
     "compile-ui-parameter-unknown": {
       "author": "spec-seal",

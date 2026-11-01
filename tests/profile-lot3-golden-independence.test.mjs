@@ -14,13 +14,16 @@ const repo = fileURLToPath(new URL("../", import.meta.url));
 const root = join(repo, "tests/fixtures/lot3-cn/expectations");
 const fixtures = join(repo, "tests/fixtures");
 // Root of trust: resealing requires changing this reviewed pin and the ledger.
-const SEAL_SHA256 = "7bd2d206277c123ad027481a42969f013cd91ddc4a2bfaab0e529fbc7120cb3c";
-const PREVIOUS_SEAL_SHA256 = "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376";
-const RECEIPT = "docs/design/receipts/block-b-lot3-l3tx-rebind.json";
-// History: the literal restoration ledger, which resealed the unicode-names seal; the
-// unicode-names ledger, which resealed the parity-sync seal; the parity-sync ledger,
-// which resealed the seal fix round seal; and the seal fix round ledger, which
-// superseded the first seal.
+const SEAL_SHA256 = "f26980d7d65ab71472178b578f99d86920998bd4dc3113c26d4e3a57e88204dd";
+const PREVIOUS_SEAL_SHA256 = "7bd2d206277c123ad027481a42969f013cd91ddc4a2bfaab0e529fbc7120cb3c";
+const RECEIPT = "docs/design/receipts/block-b-lot3-vendor-py-6c8cbdb.json";
+// History: the twin re-vendor ledger, which resealed the l3-tx rebind seal; the l3-tx
+// rebind ledger, which resealed the literal restoration seal; the literal restoration
+// ledger, which resealed the unicode-names seal; the unicode-names ledger, which
+// resealed the parity-sync seal; the parity-sync ledger, which resealed the seal fix
+// round seal; and the seal fix round ledger, which superseded the first seal.
+const L3TX_RECEIPT = "docs/design/receipts/block-b-lot3-l3tx-rebind.json";
+const LITERALS_SEAL_SHA256 = "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376";
 const LITERALS_RECEIPT = "docs/design/receipts/block-b-lot3-unicode-literals-fix.json";
 const UNICODE_NAMES_SHA256 = "3d98de1dcdc79134e85a85531ae406d0b9633901cfc641ba6668be69ff10d0d1";
 const UNICODE_NAMES_RECEIPT = "docs/design/receipts/block-b-lot3-unicode-names-fix.json";
@@ -184,26 +187,30 @@ test("should keep the restored code points and fail every named normalization (D
   }
 });
 
-test("should chain the l3-tx ledger to the literal, unicode-names, parity-sync and seal fix round ledgers and the first seal", () => {
-  const ledger = json(join(repo, RECEIPT)), literals = json(join(repo, LITERALS_RECEIPT)), names = json(join(repo, UNICODE_NAMES_RECEIPT)), sync = json(join(repo, PARITY_SYNC_RECEIPT)), history = json(join(repo, SEAL_FIX_RECEIPT));
-  for (const earlier of [literals, names, sync, history]) assert.equal(earlier.format, "block-b-lot3-reseal/1");
+test("should chain the twin re-vendor ledger to the l3-tx, literal, unicode-names, parity-sync and seal fix round ledgers and the first seal", () => {
+  const ledger = json(join(repo, RECEIPT)), l3tx = json(join(repo, L3TX_RECEIPT)), literals = json(join(repo, LITERALS_RECEIPT)), names = json(join(repo, UNICODE_NAMES_RECEIPT)), sync = json(join(repo, PARITY_SYNC_RECEIPT)), history = json(join(repo, SEAL_FIX_RECEIPT));
+  for (const earlier of [l3tx, literals, names, sync, history]) assert.equal(earlier.format, "block-b-lot3-reseal/1");
   assert.equal(history.previous.seal.sha256, FIRST_SEAL_SHA256);
   assert.equal(history.current.seal.sha256, SEAL_FIX_SHA256);
   assert.equal(sync.current.seal.sha256, PARITY_SYNC_SHA256);
   assert.equal(names.current.seal.sha256, UNICODE_NAMES_SHA256);
-  assert.equal(literals.current.seal.sha256, PREVIOUS_SEAL_SHA256);
+  assert.equal(literals.current.seal.sha256, LITERALS_SEAL_SHA256);
+  assert.equal(l3tx.previous.seal.sha256, LITERALS_SEAL_SHA256);
+  assert.equal(l3tx.current.seal.sha256, PREVIOUS_SEAL_SHA256);
   assert.deepEqual(sync.previous.seal, history.current.seal, "the parity sync reseals the seal fix round seal");
   assert.deepEqual(names.previous.seal, sync.current.seal, "the unicode-names fix reseals the parity sync seal");
   assert.deepEqual(literals.previous.seal, names.current.seal, "the literal restoration reseals the unicode-names fix seal");
-  assert.deepEqual(ledger.previous.seal, literals.current.seal, "the l3-tx rebind reseals the literal restoration seal");
+  assert.deepEqual(l3tx.previous.seal, literals.current.seal, "the l3-tx rebind reseals the literal restoration seal");
+  assert.deepEqual(ledger.previous.seal, l3tx.current.seal, "the twin re-vendor reseals the l3-tx rebind seal");
   assert.deepEqual(sync.history, [{ ledger: SEAL_FIX_RECEIPT, seal: { sha256: SEAL_FIX_SHA256 }, previousSeal: { sha256: FIRST_SEAL_SHA256 } }]);
   assert.deepEqual(names.history, [{ ledger: PARITY_SYNC_RECEIPT, seal: { sha256: PARITY_SYNC_SHA256 }, previousSeal: { sha256: SEAL_FIX_SHA256 } }, ...sync.history]);
   assert.deepEqual(literals.history, [{ ledger: UNICODE_NAMES_RECEIPT, seal: { sha256: UNICODE_NAMES_SHA256 }, previousSeal: { sha256: PARITY_SYNC_SHA256 } }, ...names.history]);
-  assert.deepEqual(ledger.history, [{ ledger: LITERALS_RECEIPT, seal: { sha256: PREVIOUS_SEAL_SHA256 }, previousSeal: { sha256: UNICODE_NAMES_SHA256 } }, ...literals.history]);
+  assert.deepEqual(l3tx.history, [{ ledger: LITERALS_RECEIPT, seal: { sha256: LITERALS_SEAL_SHA256 }, previousSeal: { sha256: UNICODE_NAMES_SHA256 } }, ...literals.history]);
+  assert.deepEqual(ledger.history, [{ ledger: L3TX_RECEIPT, seal: { sha256: PREVIOUS_SEAL_SHA256 }, previousSeal: { sha256: LITERALS_SEAL_SHA256 } }, ...l3tx.history]);
   assert.ok(history.removedFiles.some(e => e.path === "tests/profile-lot3-admission.test.mjs"), "the library-confirmed admission test is withdrawn");
   assert.ok(!existsSync(join(repo, "tests/profile-lot3-admission.test.mjs")));
   // The previous pins of each round are the pins the round before it produced.
-  for (const [later, earlier] of [[ledger, literals], [literals, names], [names, sync], [sync, history]]) {
+  for (const [later, earlier] of [[ledger, l3tx], [l3tx, literals], [literals, names], [names, sync], [sync, history]]) {
     const produced = new Map([...earlier.supersedesFiles.map(e => [e.path, e.new]), ...earlier.addedFiles.map(e => [e.path, { bytes: e.bytes, sha256: e.sha256 }])]);
     for (const f of later.previous.files) if (produced.has(f.path)) assert.deepEqual({ bytes: f.bytes, sha256: f.sha256 }, produced.get(f.path), f.path);
   }

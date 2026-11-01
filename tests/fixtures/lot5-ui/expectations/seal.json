@@ -1,8 +1,8 @@
 {
   "format": "lot5-ui-expectations-seal/2",
-  "method": "Hand-authored from DESIGN R3.3, the block-A public contracts and the block-B harmonization decisions; the lot5-py-* cases and vendor/py/ are the resealed Python lot-5 seal's parity cases and bytes vendored with their values unchanged (block-B parity sync, BLOCKB-PARITY-SYNC; PS-35 applied by the owning seal to two compile successes), except the refusal code of two compile refusals sealed by the CR-10 arbitration with vendor/py/ unchanged; only JCS/SHA-256 arithmetic was computed; no loader, compiler, evaluator, codec, layout, exporter or command output was observed or used.",
+  "method": "Hand-authored from DESIGN R3.3, the block-A public contracts and the block-B harmonization decisions; the lot5-py-* cases and vendor/py/ are the resealed Python lot-5 seal's parity cases and bytes vendored with their values unchanged (block-B parity sync, BLOCKB-PARITY-SYNC; PS-35 applied by the owning seal to two compile successes), including the two compile refusals the owning seal resealed to the CR-10 decided code profile-type (twin re-vendor to 6c8cbdb; the CR-10 corrections are removed); only JCS/SHA-256 arithmetic was computed; no loader, compiler, evaluator, codec, layout, exporter or command output was observed or used.",
   "author": "Opus spec author (claude-opus-5-5); vendored lot5-py-* values: Python seal author spec-seal",
-  "reviewer": "gpt-6-astra, max effort (review BLOCKB-SEAL-REVIEW-L5: REWORK, applied by the seal fix round SF); block-B parity sync reseal: review pending; integration micro-reseal (history rule I1, two private literals replaced by neutral values): review pending; CR-10 arbitration reseal (profile-type for a repeated enum value and an ill-typed UI binding): review pending",
+  "reviewer": "gpt-6-astra, max effort (review BLOCKB-SEAL-REVIEW-L5: REWORK, applied by the seal fix round SF); block-B parity sync reseal: review pending; integration micro-reseal (history rule I1, two private literals replaced by neutral values): review pending; CR-10 arbitration reseal (profile-type for a repeated enum value and an ill-typed UI binding): review pending; twin re-vendor to 6c8cbdb carrying the CR-10 decided code profile-type (the CR-10 corrections are removed): review pending",
   "executables": [
     {
       "id": "lot5-compare/1",
@@ -16,8 +16,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 152354,
-      "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1"
+      "bytes": 153130,
+      "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
     },
     {
       "path": "author/author-lot5.mjs",
@@ -71,8 +71,8 @@
     },
     {
       "path": "author/lot5-group-vendor-py.mjs",
-      "bytes": 14927,
-      "sha256": "30b4bf6a66ef0cbb996cb6335cce76f08a9e6e8cbb00338c48c437fbbf085a72"
+      "bytes": 13341,
+      "sha256": "f1135740c5ffd8988c9b57289bab6d266ee6ffe5ec5e6af45b2bd7647a4b2132"
     },
     {
       "path": "author/lot5-kit.mjs",
@@ -91,13 +91,13 @@
     },
     {
       "path": "author/lot5-vendor-py.json",
-      "bytes": 103287,
-      "sha256": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285"
+      "bytes": 103693,
+      "sha256": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5"
     },
     {
       "path": "author/seal-lot5.mjs",
-      "bytes": 2687,
-      "sha256": "a3a9129ce7a6f7d78d23503b43a1765c11b24a9cf5912c935a2ac6a0ab03c7cf"
+      "bytes": 2867,
+      "sha256": "9f9d638fe979fc539453727651841fa94090f219a56045794efae20ed7da383d"
     },
     {
       "path": "cases/compile-001-main-profile-admitted.json",
@@ -1766,8 +1766,8 @@
     },
     {
       "path": "clauses.json",
-      "bytes": 436819,
-      "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f"
+      "bytes": 434700,
+      "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
     },
     {
       "path": "comparators/lot5-compare.mjs",
@@ -1987,7 +1987,7 @@
     {
       "path": "manifest.json",
       "bytes": 71828,
-      "sha256": "eb4260c285d1ef1ed81156e34c499e0aebd5f965edcebaa7225a4aaef5e93119"
+      "sha256": "d7c04d63e175f234883f54e8507eb26127f4de2124c6b5c0289fa6ffb5c2c4f9"
     },
     {
       "path": "vendor/py/artifacts/neutral-base.lot5.json",
@@ -2151,8 +2151,8 @@
     },
     {
       "path": "vendor/py/parity/lot5-py-compile-enum-duplicate-values.json",
-      "bytes": 788,
-      "sha256": "df1bbee2fd95f0cb503705d07221d4819a2e9998b3b49ca1baaba8814279aabf"
+      "bytes": 770,
+      "sha256": "68302ee3761c739cf641e3a44dcf7e3734e6e76c08c48f03bdc8d400fc82e23d"
     },
     {
       "path": "vendor/py/parity/lot5-py-compile-enum-empty-choices.json",
@@ -2226,8 +2226,8 @@
     },
     {
       "path": "vendor/py/parity/lot5-py-compile-ui-parameter-source-type.json",
-      "bytes": 794,
-      "sha256": "ba9456a29d5836eb891856be4044e8f31c57d9bf18a1ea13d95a59b5027b6f5d"
+      "bytes": 776,
+      "sha256": "60a98e3feabb66dc80753b064a89da76fbea22c2fd12cd9296e9b6b103724785"
     },
     {
       "path": "vendor/py/parity/lot5-py-compile-ui-parameter-unknown.json",

@@ -9,8 +9,8 @@
     "reviewer": "gpt-6-astra max",
     "review": "first seal REWORK (six MAJOR, one MINOR); resealed in the single seal fix round; resealed for the block-B parity sync; resealed for the l3-id-unicode-names fix (DESIGN L292); resealed for the Unicode literal restoration (DESIGN L260, L967); resealed for the real-canvas rebind of the l3-tx scripts (DESIGN L547, L604, L606, L610, L635, L751, L755), pending review",
     "previousSeal": {
-      "sha256": "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376",
-      "commit": "25a66edebc46ac2504b20cc970cf97eb82b0c170"
+      "sha256": "7bd2d206277c123ad027481a42969f013cd91ddc4a2bfaab0e529fbc7120cb3c",
+      "commit": "fec4dae33beed82f18092e393761695cc9cedc0e"
     }
   },
   "caseCount": 266,
@@ -44,12 +44,12 @@
     {
       "path": "README.md",
       "bytes": 138785,
-      "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a"
+      "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
     },
     {
       "path": "author/author-lot3.mjs",
-      "bytes": 428097,
-      "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e"
+      "bytes": 428774,
+      "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
     },
     {
       "path": "author/digests.json",
@@ -1394,12 +1394,12 @@
     {
       "path": "index.json",
       "bytes": 355407,
-      "sha256": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5"
+      "sha256": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519"
     },
     {
       "path": "manifest.json",
       "bytes": 114774,
-      "sha256": "02cb12489ad2444902b7358e2dd49ea75c41877fe65d3f7201c02d2aa5fe3e7f"
+      "sha256": "9e0cff7d0c85f6263390ccccc360807f354de9f8eda74c98ff90681a4c82cf63"
     },
     {
       "path": "profile/neutral-cn-abort.json",
@@ -1464,7 +1464,7 @@
     {
       "path": "vendor/py/MANIFEST.sha256",
       "bytes": 43980,
-      "sha256": "0d3922f74fb71e19d305307a3153989dcdf4ba3685e8a6df06c28046cf15ad8e"
+      "sha256": "d764639b040d06fc4f07d9bca7449b4e7963f8ecc7a171792d4ce047fc5d8cfe"
     },
     {
       "path": "vendor/py/artifacts/cn-base.json",
@@ -1939,7 +1939,7 @@
     {
       "path": "vendor/py/parity/manifest.json",
       "bytes": 52022,
-      "sha256": "2a195405f01458521ef951d5b7b14f554b62c9a20b87d83efdca69a6ff234f52"
+      "sha256": "befb6fae2551b6d4b760fd272f167489f7e9e5605640d87183f2c54107096a4c"
     },
     {
       "path": "vendor/py/parity/profiles/cn-c-noauth.json",

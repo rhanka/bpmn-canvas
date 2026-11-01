@@ -24,11 +24,13 @@ const fixtures = join(root, "..", "..");
 const repo = join(fixtures, "..", "..");
 const DESIGN_SHA256 = "48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f";
 const DESIGN_LINES = 1162;
-// The Unicode literal restoration seal and its commit; the l3-tx real-canvas rebind reseals from them.
-// History: the literal restoration resealed the unicode-names fix seal, which resealed the
-// parity sync seal, which resealed the seal fix round seal, which superseded the first seal.
-const PREVIOUS_SEAL_SHA256 = "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376";
-const PREVIOUS_SEAL_COMMIT = "25a66edebc46ac2504b20cc970cf97eb82b0c170";
+// The l3-tx real-canvas rebind seal and its commit; the twin re-vendor to 6c8cbdb reseals from it.
+// History: the rebind resealed the literal restoration seal, which resealed the unicode-names
+// fix seal, which resealed the parity sync seal, which resealed the seal fix round seal, which
+// superseded the first seal.
+const PREVIOUS_SEAL_SHA256 = "7bd2d206277c123ad027481a42969f013cd91ddc4a2bfaab0e529fbc7120cb3c";
+const PREVIOUS_SEAL_COMMIT = "fec4dae33beed82f18092e393761695cc9cedc0e";
+const LITERALS_SEAL_SHA256 = "45560aaf66a7192b359c9877b7cd2959b00f50c5166b706ac7e93cc8971a2376";
 const UNICODE_NAMES_SEAL_SHA256 = "3d98de1dcdc79134e85a85531ae406d0b9633901cfc641ba6668be69ff10d0d1";
 const PARITY_SYNC_SEAL_SHA256 = "1adc160ccd3c2567c5f45b1a1b92322a21f0dcccaf9676f3a7901b0642259934";
 const SEAL_FIX_SEAL_SHA256 = "6b807ee2c219f614d0f434cb8568c8d15acc0cc425a11bfdaa5cf027d86e8b06";
@@ -2694,9 +2696,9 @@ const REENTRANT = refusedResult("applyCommands", echoOf(E0), "transaction-reentr
 // seal, reproduces the compiled profile identities with node:crypto, then re-expresses
 // each record in this corpus shape (roles, comparator ids, file layout) without
 // recomputing or changing a value.
-const PY_SEAL = { runtime: "python", commit: "1c2df3166480fe62a233fe91c3ae19bf8839cd2a", manifest: "tests/profile_cn/expected/MANIFEST.sha256",
-  sha256: "0d3922f74fb71e19d305307a3153989dcdf4ba3685e8a6df06c28046cf15ad8e", parityManifest: "tests/profile_cn/expected/parity/manifest.json",
-  parityManifestSha256: "2a195405f01458521ef951d5b7b14f554b62c9a20b87d83efdca69a6ff234f52" };
+const PY_SEAL = { runtime: "python", commit: "6c8cbdbaf65b691a6c5e758d5303125ecd513d5f", manifest: "tests/profile_cn/expected/MANIFEST.sha256",
+  sha256: "d764639b040d06fc4f07d9bca7449b4e7963f8ecc7a171792d4ce047fc5d8cfe", parityManifest: "tests/profile_cn/expected/parity/manifest.json",
+  parityManifestSha256: "befb6fae2551b6d4b760fd272f167489f7e9e5605640d87183f2c54107096a4c" };
 const PY_ROOT = "tests/profile_cn/expected/";
 const PY_CONTRACTS = "contracts/profile-mechanism/1/";
 const VENDOR = `${EXPECT}/vendor/py`;
@@ -3643,17 +3645,18 @@ function readTree(dir) {
   return files;
 }
 const pinOf = bytes => ({ bytes: bytes.length, sha256: B(bytes) });
-// Files outside the expectation tree pinned at the previous (Unicode literal restoration) seal.
-// The seal fix round, parity sync, unicode-names and literal restoration ledgers stay as
-// history; this round writes its own ledger.
+// Files outside the expectation tree pinned at the previous (l3-tx rebind) seal.
+// The seal fix round, parity sync, unicode-names, literal restoration and l3-tx ledgers stay
+// as history; this round writes its own ledger.
 const PREVIOUS_OUTSIDE = {
-  "tests/profile-lot3-golden-independence.test.mjs": { bytes: 51213, sha256: "0f1a279285ba5b1753b1139809615189803da4684d0b183a263e524d58ec65f9" },
+  "tests/profile-lot3-golden-independence.test.mjs": { bytes: 60347, sha256: "1d35c7618a783a5b6d7c16dbb2504fabb3184ec4646e9879252608e94a2c3e52" },
 };
 const SEAL_FIX_RECEIPT = "docs/design/receipts/block-b-lot3-seal-fix.json";
 const PARITY_SYNC_RECEIPT = "docs/design/receipts/block-b-lot3-parity-sync.json";
 const UNICODE_NAMES_RECEIPT = "docs/design/receipts/block-b-lot3-unicode-names-fix.json";
 const LITERALS_RECEIPT = "docs/design/receipts/block-b-lot3-unicode-literals-fix.json";
-const RECEIPT = "docs/design/receipts/block-b-lot3-l3tx-rebind.json";
+const L3TX_RECEIPT = "docs/design/receipts/block-b-lot3-l3tx-rebind.json";
+const RECEIPT = "docs/design/receipts/block-b-lot3-vendor-py-6c8cbdb.json";
 
 // ---------------------------------------------------------------- l3-tx real-canvas rebind
 // The decision of this round, with its DESIGN lines; written into the ledger.
@@ -4028,9 +4031,11 @@ function main() {
   const previousFiles = { ...previous.files, [`tests/fixtures/${EXPECT}/seal.json`]: previous.seal };
   const paths = [...new Set([...Object.keys(previousFiles), ...Object.keys(current)])].sort();
   writeFileSync(join(repo, RECEIPT), prettyBytes({ format: "block-b-lot3-reseal/1", lot: "block B lot 3 (C/N, command authority and early history proof)",
-    reviews: ["block B review of squash 25a66ed (BLOCKER 1) and the code author's report of 2026-10-19: the 18 l3-tx scripts ran through a test double in src/ that stored placeholder presentations, emitted change events without a report, wrote the re-entrancy outcome without a nested call and refused one entry by its name; replayed on the real canvas, the C writes on created tasks came out at the exact coordinates of the staged tree. Spec-author rebind from DESIGN (decisions), the canvas behaviour taken as no source; reseal of the l3-tx cases only, pending review"],
+    reviews: ["block B review of squash 25a66ed (BLOCKER 1) and the code author's report of 2026-10-19: the 18 l3-tx scripts ran through a test double in src/ that stored placeholder presentations, emitted change events without a report, wrote the re-entrancy outcome without a nested call and refused one entry by its name; replayed on the real canvas, the C writes on created tasks came out at the exact coordinates of the staged tree. Spec-author rebind from DESIGN (decisions), the canvas behaviour taken as no source; reseal of the l3-tx cases only, pending review",
+      "twin re-vendor of 2026-11-01 to the decided Python head 6c8cbdb (which re-vendored the JS seals and resealed two lot-5 compile refusals to the CR-10 decided code profile-type): the vendored MANIFEST.sha256 and parity/manifest.json are replaced byte for byte and the ninety re-expressed records are unchanged in value; reseal with old and new pins"],
     decisions: [TX_DECISION],
-    history: [{ ledger: LITERALS_RECEIPT, seal: { sha256: PREVIOUS_SEAL_SHA256 }, previousSeal: { sha256: UNICODE_NAMES_SEAL_SHA256 } },
+    history: [{ ledger: L3TX_RECEIPT, seal: { sha256: PREVIOUS_SEAL_SHA256 }, previousSeal: { sha256: LITERALS_SEAL_SHA256 } },
+      { ledger: LITERALS_RECEIPT, seal: { sha256: LITERALS_SEAL_SHA256 }, previousSeal: { sha256: UNICODE_NAMES_SEAL_SHA256 } },
       { ledger: UNICODE_NAMES_RECEIPT, seal: { sha256: UNICODE_NAMES_SEAL_SHA256 }, previousSeal: { sha256: PARITY_SYNC_SEAL_SHA256 } },
       { ledger: PARITY_SYNC_RECEIPT, seal: { sha256: PARITY_SYNC_SEAL_SHA256 }, previousSeal: { sha256: SEAL_FIX_SEAL_SHA256 } },
       { ledger: SEAL_FIX_RECEIPT, seal: { sha256: SEAL_FIX_SEAL_SHA256 }, previousSeal: { sha256: FIRST_SEAL_SHA256 } }],
