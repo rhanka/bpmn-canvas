@@ -105,8 +105,19 @@
         "sha256": "25f5d37620e38b7e95ab2b08ff5bf9bfc3750ecc68b5d6299f49cf33fecac08b"
       },
       "new": {
-        "bytes": 3826,
-        "sha256": "a00efe33c8696c8fc026e9073895bd767bcfa7c6e3abb548c2430c40a30a3bea"
+        "bytes": 3948,
+        "sha256": "014cb725f1c53becad5e7a03a302ca1213110b72c1090b28adf481568114938f"
+      },
+      "b2p2Transition": {
+        "old": {
+          "bytes": 3826,
+          "sha256": "a00efe33c8696c8fc026e9073895bd767bcfa7c6e3abb548c2430c40a30a3bea"
+        },
+        "new": {
+          "bytes": 3948,
+          "sha256": "014cb725f1c53becad5e7a03a302ca1213110b72c1090b28adf481568114938f"
+        },
+        "reason": "B2 phase 2: map successors through the phase 2 receipt"
       }
     }
   ]

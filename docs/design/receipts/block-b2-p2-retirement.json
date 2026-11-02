@@ -1,0 +1,149 @@
+{
+  "artifacts": [
+    {
+      "kind": "descriptor subpath",
+      "new": null,
+      "path": "package.json#/exports/./{LX-DS-2}"
+    },
+    {
+      "kind": "descriptor member",
+      "new": null,
+      "old": {
+        "bytes": 1027,
+        "sha256": "c274f46f773b5f557f7995fa70aae9d8a50384aedfcc6c3a5d166563a17a7c97"
+      },
+      "path": "dist/io/{LX-DS-2}"
+    },
+    {
+      "kind": "descriptor export",
+      "new": null,
+      "path": "dist/io/index.d.ts"
+    },
+    {
+      "kind": "checksum export",
+      "new": null,
+      "path": "dist/io/index.d.ts"
+    },
+    {
+      "kind": "packed layout corpus",
+      "new": null,
+      "old": {
+        "bytes": 12531,
+        "sha256": "79aa182494ad7c6af2238cddbbd90a9d3c0f0d9ec631a0ccc43ad2bb3464d6f4"
+      },
+      "path": "dist/layout-corpus.json"
+    },
+    {
+      "kind": "workshop navigation prop",
+      "new": null,
+      "path": "src/react/workshop.tsx"
+    }
+  ],
+  "date": "2026-11-02",
+  "design": [
+    "DESIGN.md:895",
+    "DESIGN.md:899",
+    "DESIGN.md:859"
+  ],
+  "exports": {
+    "new": [
+      ".",
+      "./react",
+      "./assistant-ui",
+      "./styles.css",
+      "./package.json",
+      "./io",
+      "./layout",
+      "./profile-lint",
+      "./browser",
+      "./browser/iife",
+      "./profile",
+      "./profile/compiler"
+    ],
+    "old": [
+      ".",
+      "./react",
+      "./assistant-ui",
+      "./styles.css",
+      "./package.json",
+      "./io",
+      "./{LX-DS-2}",
+      "./layout",
+      "./profile-lint",
+      "./browser",
+      "./browser/iife",
+      "./profile",
+      "./profile/compiler"
+    ]
+  },
+  "format": "block-b2-p2-retirement/1",
+  "ioExportsRemoved": [
+    "681db0cc48bf00ed69bf137173442831cc98cbf881f855697acebd6125ee959c",
+    "06c4dc227a7dfb2018e2aa5430702990f45834ec3ba987e5061a305f443a49fb"
+  ],
+  "ownerDecision": "OWNER-GO 2026-11-01, OD-1 option A: retire main-only artifacts before first publication",
+  "packageJson": {
+    "new": {
+      "bytes": 3594,
+      "sha256": "8411267936bcf8b82ba232d7c0d5d3a7adff013cf08974e397c985ed5da8e5da"
+    },
+    "old": {
+      "bytes": 3646,
+      "sha256": "5d7da2def32f6f2e8d6a50d11f6fbd40b98dcdb9691043359f073b7a121a4ff3"
+    }
+  },
+  "props": {
+    "removed": [
+      "BpmnWorkshopProps.navigation"
+    ]
+  },
+  "sealedBy": [
+    "x24-R-004",
+    "x24-P-006",
+    "x24-P-007"
+  ],
+  "tests": [
+    {
+      "disposition": "retire",
+      "docket": "F-012",
+      "new": "retired",
+      "old": "647045731d69",
+      "ordinal": 791
+    },
+    {
+      "disposition": "retire",
+      "docket": "F-065",
+      "new": "retired",
+      "old": "b42d383c73b09",
+      "ordinal": 988
+    },
+    {
+      "disposition": "successor",
+      "docket": "F-098",
+      "new": "8326ef78f2ea",
+      "old": "8326ef78f2ea",
+      "ordinal": 1048
+    },
+    {
+      "disposition": "successor",
+      "docket": "F-099",
+      "new": "7f20e2c4e6c5",
+      "old": "7f20e2c4e6c5",
+      "ordinal": 1049
+    },
+    {
+      "disposition": "successor + retitle",
+      "docket": "F-100",
+      "new": "b5fee4592cb7",
+      "old": "ed40265961dd",
+      "ordinal": 1056
+    },
+    {
+      "disposition": "retire + retitle",
+      "docket": "F-101",
+      "new": "b9a92905654c",
+      "old": "801882742fa7",
+      "ordinal": 1061
+    }
+  ]
+}
