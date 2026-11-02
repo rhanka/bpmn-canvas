@@ -3,7 +3,7 @@
 import type { BusinessPolicy } from "../internal/business-policy.js";
 import { navigationTarget } from "../internal/legacy-policy.js";
 import { documentNavigationIndex } from "../internal/navigation-policy.js";
-import { explicitTargetResolver } from "./navigation-target.js";
+import { explicitTargetResolver, POLICY_RULE } from "./navigation-target.js";
 
 import { useCallback, useEffect, useId, useImperativeHandle, useRef, useState } from "react";
 import type { CSSProperties, ReactElement, ReactNode, Ref } from "react";
@@ -134,9 +134,6 @@ export interface BpmnWorkshopProps {
 }
 
 export * from "./navigation-target.js";
-
-/** The business-policy/1 rule category of each published marker navigation rule. */
-const POLICY_RULE: Readonly<Record<string, string>> = { calledElement: "called-element", exactName: "name-equal", sectionNumber: "section-equal", substring: "name-overlap" };
 
 /** Resolve diagrams using caller-provided navigation rule categories. */
 export function navigationResolver(rules: readonly NavigationRule[]): (click: ElementClick, diagrams: readonly DiagramInfo[], activeId: string | undefined) => string | null {

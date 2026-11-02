@@ -11,3 +11,6 @@ export function defaultResolveTarget(click: ElementClick, diagrams: readonly Dia
 
 /** The resolver the caller passed, if any. */
 export const explicitTargetResolver = (props: BpmnWorkshopProps) => props.resolveTarget;
+
+/** The business-policy/1 rule category of each published marker navigation rule. */
+export const POLICY_RULE: Readonly<Record<string, string>> = { calledElement: "called-element", exactName: "name-equal", sectionNumber: "section-equal", substring: "name-overlap" };
