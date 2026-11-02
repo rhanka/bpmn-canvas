@@ -148,7 +148,7 @@ for (const path of [...new Set([...pack.map(member => member.path), ...tracked.f
     const source = map ? attributed(map, path, branch) : path;
     if (source?.includes("node_modules/")) continue;
     const module = source === null ? `unmapped:${path}` : moduleOf(source);
-    const allowance = probe.rescan.selectorBranch.allowances.find(a => a.module === module && a.use === branch.use && a.entry === branch.entry && a.literal === branch.literal);
+    const allowance = [...probe.rescan.selectorBranch.allowances, ...(probe.rescan.selectorBranch.reviewedAllowances ?? []).filter(a => trackedSet.has(a.module) && sha256(bytesOf(a.module)) === a.sha256).map(a => ({ ...a, row: a.id }))].find(a => a.module === module && a.use === branch.use && a.entry === branch.entry && a.literal === branch.literal);
     const count = allowance ? (used.get(allowance.row) ?? 0) + 1 : 0;
     if (allowance) used.set(allowance.row, count);
     if (!allowance || count > allowance.count) branches.push({ file, line: branch.line, column: branch.column, entry: branch.entry });
