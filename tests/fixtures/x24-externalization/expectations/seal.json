@@ -212,8 +212,8 @@
  "files": [
   {
    "path": "README.md",
-   "bytes": 119045,
-   "sha256": "e84c424b229d3e0701f86c93fe568485bb3002919d0243b7d96fd01e078dcf93"
+   "bytes": 120220,
+   "sha256": "e255ed093299f474b0cf829eb065f4358f0a3ba5e373027d1468af47f09fed35"
   },
   {
    "path": "cases/x24-A-001-classify.json",
@@ -363,22 +363,22 @@
   {
    "path": "cases/x24-L-001-occurrences.json",
    "bytes": 1620,
-   "sha256": "336a137b64ba4ec7fa2ed5cf7729b340979f2246cb3cce8b3042513c5d2c60a9"
+   "sha256": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
   },
   {
    "path": "cases/x24-L-002-distribution-members.json",
    "bytes": 1509,
-   "sha256": "bec0a53529145a0c9263142864637878088b5b32035162731e96908135f89590"
+   "sha256": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
   },
   {
    "path": "cases/x24-L-003-modules.json",
    "bytes": 3241,
-   "sha256": "d4ce1989514fc5d76cec3a34a479d33b0f8af7e28f3bb9456719b39da11595d6"
+   "sha256": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
   },
   {
    "path": "cases/x24-L-004-zero-unmatched.json",
    "bytes": 1336,
-   "sha256": "a77786d98746bc1646822b50c7645cb3ad1c770034555bca85df3ec9a79a0a14"
+   "sha256": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
   },
   {
    "path": "cases/x24-L-005-legacy-value-pins.json",
@@ -388,7 +388,7 @@
   {
    "path": "cases/x24-L-006-literal-free-seal.json",
    "bytes": 1239,
-   "sha256": "0a120f36904b92c8d05fac1da7df336d44e7232751a7cf2080c8d0ed9dff65e3"
+   "sha256": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
   },
   {
    "path": "cases/x24-P-001-probe-1-original.json",
@@ -413,12 +413,12 @@
   {
    "path": "cases/x24-P-005-probe-2-ledger-rows.json",
    "bytes": 1483,
-   "sha256": "c1d80abc130f435cc06341a0d9de98cd6b5a3c6caabfa546ef12449a430b22b3"
+   "sha256": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
   },
   {
    "path": "cases/x24-P-006-probe-2-rescan.json",
    "bytes": 959,
-   "sha256": "434b09f840f0208906b909cb741f9f4ce1168e09831b7476c789cedbfcac4aac"
+   "sha256": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
   },
   {
    "path": "cases/x24-P-007-probe-2-distribution.json",
@@ -958,7 +958,7 @@
   {
    "path": "ledger.json",
    "bytes": 3655802,
-   "sha256": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "sha256": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "legacy-values.json",
@@ -967,8 +967,8 @@
   },
   {
    "path": "lexicon.json",
-   "bytes": 207162,
-   "sha256": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "bytes": 207146,
+   "sha256": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "literal-set.json",
@@ -978,7 +978,7 @@
   {
    "path": "manifest.json",
    "bytes": 48170,
-   "sha256": "b19d7132b280dd34ac680eefcc7a2cb0b7744ed2af523449bd68ff412da12a1d"
+   "sha256": "071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889"
   },
   {
    "path": "policy/business-policy-1.schema.json",

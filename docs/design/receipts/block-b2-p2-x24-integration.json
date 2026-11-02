@@ -1,7 +1,7 @@
 {
  "format": "block-b2-p2-x24-integration/1",
  "date": "2026-11-02",
- "round": "Stage B2 phase 2 integration: the main vendor-py rebind carried (the 19 records rebound by the merge), navigation mapping records RV-22 and RV-23 added for the two rule-resolver spans, rescan rebound, ledger input pin, cases and manifest regenerated, resealed.",
+ "round": "Stage B2 phase 2 integration: the main vendor-py rebind carried (the 19 records rebound by the merge), navigation mapping records RV-22 and RV-23 added for the two rule-mapping spans of the block B module src/react/navigation-target.ts (records RV-13 and RV-15 of that module rebound), rescan rebound, ledger input pin, cases and manifest regenerated, resealed.",
  "history": [
   {
    "receipt": "docs/design/receipts/block-b-x24-history-guard.json",
@@ -81,7 +81,7 @@
  "newSeal": {
   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
   "bytes": 37152,
-  "sha256": "613e77a90f8e0a65e07c575f27b4af5ba01bfb4a36d041687d56bc8f6435ccaf"
+  "sha256": "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb"
  },
  "mergedChanges": [
   {
@@ -1222,7 +1222,7 @@
    },
    "merged": {
     "bytes": 205480,
-    "sha256": "44b89b920c565350f5cb8f6828ee7cbd56a0ff1b17652fc3c380dad42289dd"
+    "sha256": "44b89b920c565350f5cb8c9f6828ee7cbd56a0ff1b17652fc3c380dad42289dd"
    },
    "mainOld": {
     "bytes": 193557,
@@ -1230,7 +1230,7 @@
    },
    "mainNew": {
     "bytes": 193559,
-    "sha256": "73ea6b8b1e1401403dae68c803c9ca8a5866fa211818bceca5f5"
+    "sha256": "73ea6b8b1e1401403dae68f75dc803c59e7843cfca8a5886fa211818bceca5f5"
    }
   }
  ],
@@ -1239,7 +1239,7 @@
    "path": "tests/x24-externalization-seal.test.mjs",
    "name": "SEAL_SHA256",
    "old": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1",
-   "new": "613e77a90f8e0a65e07c575f27b4af5ba01bfb4a36d041687d56bc8f6435ccaf"
+   "new": "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb"
   },
   {
    "path": "tests/x24-externalization-seal.test.mjs",
@@ -2093,8 +2093,8 @@
     "sha256": "b29fad668f643adad612fea8998ed734c561eda6bb3a19157e522ac03887ebbb"
    },
    "new": {
-    "bytes": 119045,
-    "sha256": "e84c424b229d3e0701f86c93fe568485bb3002919d0243b7d96fd01e078dcf93"
+    "bytes": 120220,
+    "sha256": "e255ed093299f474b0cf829eb065f4358f0a3ba5e373027d1468af47f09fed35"
    }
   },
   {
@@ -2105,7 +2105,7 @@
    },
    "new": {
     "bytes": 1620,
-    "sha256": "336a137b64ba4ec7fa2ed5cf7729b340979f2246cb3cce8b3042513c5d2c60a9"
+    "sha256": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
    }
   },
   {
@@ -2116,7 +2116,7 @@
    },
    "new": {
     "bytes": 1509,
-    "sha256": "bec0a53529145a0c9263142864637878088b5b32035162731e96908135f89590"
+    "sha256": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
    }
   },
   {
@@ -2127,7 +2127,7 @@
    },
    "new": {
     "bytes": 3241,
-    "sha256": "d4ce1989514fc5d76cec3a34a479d33b0f8af7e28f3bb9456719b39da11595d6"
+    "sha256": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
    }
   },
   {
@@ -2138,7 +2138,7 @@
    },
    "new": {
     "bytes": 1336,
-    "sha256": "a77786d98746bc1646822b50c7645cb3ad1c770034555bca85df3ec9a79a0a14"
+    "sha256": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
    }
   },
   {
@@ -2149,7 +2149,7 @@
    },
    "new": {
     "bytes": 1239,
-    "sha256": "0a120f36904b92c8d05fac1da7df336d44e7232751a7cf2080c8d0ed9dff65e3"
+    "sha256": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
    }
   },
   {
@@ -2160,7 +2160,7 @@
    },
    "new": {
     "bytes": 1483,
-    "sha256": "c1d80abc130f435cc06341a0d9de98cd6b5a3c6caabfa546ef12449a430b22b3"
+    "sha256": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
    }
   },
   {
@@ -2171,7 +2171,7 @@
    },
    "new": {
     "bytes": 959,
-    "sha256": "434b09f840f0208906b909cb741f9f4ce1168e09831b7476c789cedbfcac4aac"
+    "sha256": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
    }
   },
   {
@@ -2193,7 +2193,7 @@
    },
    "new": {
     "bytes": 3655802,
-    "sha256": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+    "sha256": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
    }
   },
   {
@@ -2203,8 +2203,8 @@
     "sha256": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae"
    },
    "new": {
-    "bytes": 207162,
-    "sha256": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+    "bytes": 207146,
+    "sha256": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
    }
   },
   {
@@ -2215,7 +2215,7 @@
    },
    "new": {
     "bytes": 48170,
-    "sha256": "b19d7132b280dd34ac680eefcc7a2cb0b7744ed2af523449bd68ff412da12a1d"
+    "sha256": "071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889"
    }
   },
   {
@@ -2226,7 +2226,7 @@
    },
    "new": {
     "bytes": 37152,
-    "sha256": "613e77a90f8e0a65e07c575f27b4af5ba01bfb4a36d041687d56bc8f6435ccaf"
+    "sha256": "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb"
    }
   },
   {
@@ -2237,7 +2237,7 @@
    },
    "new": {
     "bytes": 77054,
-    "sha256": "7e4f15986ccb05d4a5a6dbb2e43a1f2a9e6a58e1e4cf19fdc47f46496da9e0ea"
+    "sha256": "313cd8a0340eef84285440df0ce7e3c81c74491fd6a15f18c4992160ad4f0613"
    }
   }
  ],
@@ -2875,7 +2875,227 @@
    "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
    "pointer": "/inputs/lexicon/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/12",
+   "old": {
+    "id": "RV-13",
+    "entry": "LX-NV-1",
+    "literal": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "key": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "class": "legacy-api-value",
+    "justification": "Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. Also bound in the block B module src/react/navigation-target.ts.",
+    "count": 8,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "spans": [
+       [
+        "raw",
+        13,
+        74,
+        13,
+        87
+       ]
+      ]
+     },
+     {
+      "file": "tests/profile-workshop-prop.test.mjs",
+      "pathSha256": "fb9eb1e8935e7b880c2b69727314e4ef906dea8a93921f9b2ee2bd73ac289b35",
+      "sha256": "a506b63d247703551e17f1562eb0ae54807e4a9fec7e61f5a31ec88f2f4bfcd5",
+      "spans": [
+       [
+        "raw",
+        5,
+        16,
+        5,
+        29
+       ],
+       [
+        "raw",
+        9,
+        37,
+        9,
+        50
+       ],
+       [
+        "raw",
+        11,
+        32,
+        11,
+        45
+       ],
+       [
+        "raw",
+        11,
+        93,
+        11,
+        106
+       ],
+       [
+        "raw",
+        15,
+        34,
+        15,
+        47
+       ],
+       [
+        "raw",
+        17,
+        30,
+        17,
+        43
+       ],
+       [
+        "raw",
+        17,
+        87,
+        17,
+        100
+       ]
+      ]
+     }
+    ]
+   },
+   "new": {
+    "id": "RV-13",
+    "entry": "LX-NV-1",
+    "literal": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "key": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "class": "legacy-api-value",
+    "justification": "Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. Also bound in the block B module src/react/navigation-target.ts.",
+    "count": 8,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
+      "spans": [
+       [
+        "raw",
+        13,
+        74,
+        13,
+        87
+       ]
+      ]
+     },
+     {
+      "file": "tests/profile-workshop-prop.test.mjs",
+      "pathSha256": "fb9eb1e8935e7b880c2b69727314e4ef906dea8a93921f9b2ee2bd73ac289b35",
+      "sha256": "a506b63d247703551e17f1562eb0ae54807e4a9fec7e61f5a31ec88f2f4bfcd5",
+      "spans": [
+       [
+        "raw",
+        5,
+        16,
+        5,
+        29
+       ],
+       [
+        "raw",
+        9,
+        37,
+        9,
+        50
+       ],
+       [
+        "raw",
+        11,
+        32,
+        11,
+        45
+       ],
+       [
+        "raw",
+        11,
+        93,
+        11,
+        106
+       ],
+       [
+        "raw",
+        15,
+        34,
+        15,
+        47
+       ],
+       [
+        "raw",
+        17,
+        30,
+        17,
+        43
+       ],
+       [
+        "raw",
+        17,
+        87,
+        17,
+        100
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/14",
+   "old": {
+    "id": "RV-15",
+    "entry": "LX-NV-1",
+    "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "class": "legacy-api-value",
+    "justification": "Published default target resolver of the react entry (0.3.0 and main; base export row I-1412, legacy-api, rule R-149), now evaluating the injected navigation policy.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "spans": [
+       [
+        "raw",
+        7,
+        16,
+        7,
+        36
+       ]
+      ]
+     }
+    ]
+   },
+   "new": {
+    "id": "RV-15",
+    "entry": "LX-NV-1",
+    "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "class": "legacy-api-value",
+    "justification": "Published default target resolver of the react entry (0.3.0 and main; base export row I-1412, legacy-api, rule R-149), now evaluating the injected navigation policy.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
+      "spans": [
+       [
+        "raw",
+        7,
+        16,
+        7,
+        36
+       ]
+      ]
+     }
+    ]
+   }
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
@@ -2891,16 +3111,16 @@
     "count": 1,
     "files": [
      {
-      "file": "src/react/workshop.tsx",
-      "pathSha256": "16949edb6efe7f5c0b91de89b73a5bfa018e0d485ff5a22b0b72a5670e84251c",
-      "sha256": "5d1d03f37f8cfc089270236492b1395fb3fa445e3daac6f3be193b6aea2575de",
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
       "spans": [
        [
         "raw",
-        139,
-        89,
-        139,
-        98
+        16,
+        96,
+        16,
+        105
        ]
       ]
      }
@@ -2921,16 +3141,16 @@
     "count": 1,
     "files": [
      {
-      "file": "src/react/workshop.tsx",
-      "pathSha256": "16949edb6efe7f5c0b91de89b73a5bfa018e0d485ff5a22b0b72a5670e84251c",
-      "sha256": "5d1d03f37f8cfc089270236492b1395fb3fa445e3daac6f3be193b6aea2575de",
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
       "spans": [
        [
         "raw",
-        139,
-        114,
-        139,
-        127
+        16,
+        121,
+        16,
+        134
        ]
       ]
      }
@@ -2941,133 +3161,133 @@
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-L-001-occurrences.json",
    "old": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494",
-   "new": "336a137b64ba4ec7fa2ed5cf7729b340979f2246cb3cce8b3042513c5d2c60a9"
+   "new": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-L-002-distribution-members.json",
    "old": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc",
-   "new": "bec0a53529145a0c9263142864637878088b5b32035162731e96908135f89590"
+   "new": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-L-003-modules.json",
    "old": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad",
-   "new": "d4ce1989514fc5d76cec3a34a479d33b0f8af7e28f3bb9456719b39da11595d6"
+   "new": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-L-004-zero-unmatched.json",
    "old": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b",
-   "new": "a77786d98746bc1646822b50c7645cb3ad1c770034555bca85df3ec9a79a0a14"
+   "new": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-L-006-literal-free-seal.json",
    "old": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21",
-   "new": "0a120f36904b92c8d05fac1da7df336d44e7232751a7cf2080c8d0ed9dff65e3"
+   "new": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-P-005-probe-2-ledger-rows.json",
    "old": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba",
-   "new": "c1d80abc130f435cc06341a0d9de98cd6b5a3c6caabfa546ef12449a430b22b3"
+   "new": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/cases~1x24-P-006-probe-2-rescan.json",
    "old": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae",
-   "new": "434b09f840f0208906b909cb741f9f4ce1168e09831b7476c789cedbfcac4aac"
+   "new": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/ledger.json",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
    "pointer": "/files/lexicon.json",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
    "pointer": "/expectedArtifacts/1/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
    "pointer": "/inputArtifacts/2/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
    "pointer": "/expectedArtifacts/1/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
    "pointer": "/inputArtifacts/2/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
    "pointer": "/expectedArtifacts/1/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
    "pointer": "/inputArtifacts/2/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
    "pointer": "/expectedArtifacts/1/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
    "pointer": "/inputArtifacts/2/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
    "pointer": "/inputArtifacts/1/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
    "pointer": "/inputArtifacts/2/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
    "pointer": "/expectedArtifacts/0/json/1/value",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
    "pointer": "/inputArtifacts/2/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
    "pointer": "/inputArtifacts/1/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
@@ -3079,67 +3299,67 @@
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/30/sha256",
    "old": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494",
-   "new": "336a137b64ba4ec7fa2ed5cf7729b340979f2246cb3cce8b3042513c5d2c60a9"
+   "new": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/31/sha256",
    "old": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc",
-   "new": "bec0a53529145a0c9263142864637878088b5b32035162731e96908135f89590"
+   "new": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/32/sha256",
    "old": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad",
-   "new": "d4ce1989514fc5d76cec3a34a479d33b0f8af7e28f3bb9456719b39da11595d6"
+   "new": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/33/sha256",
    "old": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b",
-   "new": "a77786d98746bc1646822b50c7645cb3ad1c770034555bca85df3ec9a79a0a14"
+   "new": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/35/sha256",
    "old": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21",
-   "new": "0a120f36904b92c8d05fac1da7df336d44e7232751a7cf2080c8d0ed9dff65e3"
+   "new": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/40/sha256",
    "old": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba",
-   "new": "c1d80abc130f435cc06341a0d9de98cd6b5a3c6caabfa546ef12449a430b22b3"
+   "new": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/41/sha256",
    "old": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae",
-   "new": "434b09f840f0208906b909cb741f9f4ce1168e09831b7476c789cedbfcac4aac"
+   "new": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/149/sha256",
    "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
-   "new": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/151/bytes",
    "old": 205478,
-   "new": 207162
+   "new": 207146
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/151/sha256",
    "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
-   "new": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/153/sha256",
    "old": "6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe",
-   "new": "b19d7132b280dd34ac680eefcc7a2cb0b7744ed2af523449bd68ff412da12a1d"
+   "new": "071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889"
   },
   {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
@@ -3172,57 +3392,6 @@
    "new": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; stage B2 phase 2 integration applied; pending targeted verification and conductor acceptance"
   },
   {
-   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
-   "pointer": "/reviewed/eligible",
-   "old": [
-    "tests/fixtures/lot3-cn/expectations/",
-    "tests/fixtures/lot4-layout-export/expectations/",
-    "tests/fixtures/lot5-ui/expectations/",
-    "docs/design/block-b-lot3-expectations.md",
-    "docs/design/block-b-lot4-expectations.md",
-    "docs/design/block-b-lot5-expectations.md",
-    "docs/design/receipts/block-b-lot3-unicode-literals-fix.json",
-    "src/profile/lot4-export.ts",
-    "tests/profile-lot3-golden-independence.test.mjs",
-    "tests/profile-bfix-f2.test.mjs",
-    "tests/profile-workshop-prop.test.mjs",
-    "src/internal/published-token-type.ts",
-    "src/internal/token-options.ts",
-    "src/react/navigation-target.ts",
-    "tests/types/v04-published-token-names.ts",
-    "tests/profile-published-token-names.test.mjs",
-    "src/presentation/annotated/renderer.ts",
-    "src/presentation/annotated/style.ts",
-    "src/internal/swimlane-exports.ts",
-    "src/io/refusal-codes.ts",
-    "src/internal/role-exports.ts"
-   ],
-   "new": [
-    "tests/fixtures/lot3-cn/expectations/",
-    "tests/fixtures/lot4-layout-export/expectations/",
-    "tests/fixtures/lot5-ui/expectations/",
-    "docs/design/block-b-lot3-expectations.md",
-    "docs/design/block-b-lot4-expectations.md",
-    "docs/design/block-b-lot5-expectations.md",
-    "docs/design/receipts/block-b-lot3-unicode-literals-fix.json",
-    "src/profile/lot4-export.ts",
-    "tests/profile-lot3-golden-independence.test.mjs",
-    "tests/profile-bfix-f2.test.mjs",
-    "tests/profile-workshop-prop.test.mjs",
-    "src/internal/published-token-type.ts",
-    "src/internal/token-options.ts",
-    "src/react/navigation-target.ts",
-    "tests/types/v04-published-token-names.ts",
-    "tests/profile-published-token-names.test.mjs",
-    "src/presentation/annotated/renderer.ts",
-    "src/presentation/annotated/style.ts",
-    "src/internal/swimlane-exports.ts",
-    "src/io/refusal-codes.ts",
-    "src/internal/role-exports.ts",
-    "src/react/workshop.tsx"
-   ]
-  },
-  {
    "path": "tests/fixtures/x24-externalization/expectations/seal.json",
    "pointer": "/files/0",
    "old": {
@@ -3232,8 +3401,8 @@
    },
    "new": {
     "path": "README.md",
-    "bytes": 119045,
-    "sha256": "e84c424b229d3e0701f86c93fe568485bb3002919d0243b7d96fd01e078dcf93"
+    "bytes": 120220,
+    "sha256": "e255ed093299f474b0cf829eb065f4358f0a3ba5e373027d1468af47f09fed35"
    }
   },
   {

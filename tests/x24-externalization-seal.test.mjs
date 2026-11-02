@@ -19,7 +19,7 @@ import { rolesOf } from "./fixtures/x24-externalization/expectations/derive/arit
 
 const repo = fileURLToPath(new URL("../", import.meta.url));
 const ROOT = "tests/fixtures/x24-externalization/expectations";
-const SEAL_SHA256 = "613e77a90f8e0a65e07c575f27b4af5ba01bfb4a36d041687d56bc8f6435ccaf";
+const SEAL_SHA256 = "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb";
 const PREVIOUS_SEAL_SHA256 = "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1";
 /** First seal, single seal fix round, integration micro-reseal, Unicode literal restoration, P-006 allowance, I1 relocation, final spec pass, stage B2 micro-reseal, stage B2 step 6 rebind, stage B2 step 9 README correction: seal.json#/previousSeals in order, without the merged vendor-py entry. */
 const SEAL_CHAIN = ["d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5", "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c", "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f", "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b", "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746", "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac", "74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974", "85a68b7a54125f8e57d19bfcb76c685acca8abd328fd10d94eb0172f7ced597c", "32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518", PREVIOUS_SEAL_SHA256];
