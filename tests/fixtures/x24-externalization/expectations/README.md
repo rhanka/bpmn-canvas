@@ -295,16 +295,21 @@ the old and new value at every changed pointer.
 
 The phase 2 integration carries the main vendor-py rebind and adds the navigation mapping records RV-22
 and RV-23. The rebase merged the 19 main records (reviewed tokens RV-01, RV-08, RV-10 and RV-11 on eight
-lot 3 and lot 5 files) without touching the B2-line records; the strict scan then bound the two
-rule-resolver spans of `src/react/workshop.tsx` under the two new records, and the ledger input pin, the
-seven affected cases and the manifest were regenerated before the reseal. Reviewed total 623 to 625; no
-other reviewed record changed content or vanished, and the RV-01 to RV-21 counts are unchanged.
+lot 3 and lot 5 files) without touching the B2-line records. The line that maps the published marker
+navigation rule names to their business-policy/1 categories sits in the block B module
+`src/react/navigation-target.ts`, eligible by exact path since the stage B2 step 6 rebind:
+`src/react/workshop.tsx` is a path of the base tree, and a base file is never bound (design decisions 18
+and 21). The strict scan bound the two mapping spans of that module under the two new records and rebound
+the records RV-13 and RV-15 of the same module (file SHA-256 only; spans, counts and classes unchanged);
+the ledger input pin, the seven affected cases and the manifest were regenerated before the reseal.
+Reviewed total 623 to 625 in 195 files; no other reviewed record changed content or vanished, and the
+RV-01 to RV-21 counts are unchanged.
 
 | File | SHA-256 before | SHA-256 after |
 | --- | --- | --- |
-| `lexicon.json` | `0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae` (previous seal; `44b89b920c565350f5cb8f6828ee7cbd56a0ff1b17652fc3c380dad42289dd` merged) | `54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66` |
-| `ledger.json` | `b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a` | `5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3` |
-| `manifest.json` | `6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe` | `b19d7132b280dd34ac680eefcc7a2cb0b7744ed2af523449bd68ff412da12a1d` |
+| `lexicon.json` | `0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae` (previous seal; `44b89b920c565350f5cb8f6828ee7cbd56a0ff1b17652fc3c380dad42289dd` merged) | `40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740` |
+| `ledger.json` | `b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a` | `229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80` |
+| `manifest.json` | `6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe` | `071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889` |
 
 The previous seal is `f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1`; the merged
 seal is `e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78`
@@ -317,7 +322,7 @@ and P-006 change by the digests of `lexicon.json` and `ledger.json` only;
 
 Derivation. The 19 rebinds were checked against the main receipt (equal records, disjoint from the
 B2-line records) and not re-applied; `derive/reviewed.mjs --write` rebound the reviewed records from
-the eligible files with the eligible exact path added; `ledger.json#/inputs/lexicon` by hand;
+the eligible files (no eligible path added); `ledger.json#/inputs/lexicon` by hand;
 `derive/author-cases.mjs` writes the cases and `manifest.json`; `derive/seal.mjs` (authority, status
 and previous seals), this README, `seal.json` and the seal test (pinned digest, previous seal, chain
 of ten seals with the merged vendor-py entry, and reviewed total 625) follow.
@@ -336,7 +341,7 @@ file and the old and new value at every changed pointer.
 | Cases | 111: L 6, S 28, A 29, R 10, X 31, P 7 |
 | Comparator witnesses | 103 accepted, 459 rejected |
 | Hashed literal set | 189 distinct ledger literals (`literal-set.json`) |
-| Integration scan I1 | 623 reviewed occurrences of 21 tokens in 195 files (`lexicon.json#/reviewed`) and no relocated base row (`lexicon.json#/relocated`); every other occurrence of the tracked tree pairs with a ledger row or is unmatched; at the final spec pass (block B head `20370d3` with this round): 3974 occurrences, 3376 paired, 0 relocated, 598 reviewed, 0 unmatched (counts at each relink: sections "Integration micro-reseal" and "Reviewed occurrences"); at the stage B2 step 6 rebind (section "Stage B2 step 6 rebind"): 2817 occurrences, 2194 paired, 0 relocated, 623 reviewed, 0 unmatched |
+| Integration scan I1 | 625 reviewed occurrences of 23 tokens in 195 files (`lexicon.json#/reviewed`) and no relocated base row (`lexicon.json#/relocated`); every other occurrence of the tracked tree pairs with a ledger row or is unmatched; at the final spec pass (block B head `20370d3` with this round): 3974 occurrences, 3376 paired, 0 relocated, 598 reviewed, 0 unmatched (counts at each relink: sections "Integration micro-reseal" and "Reviewed occurrences"); at the stage B2 step 6 rebind (section "Stage B2 step 6 rebind"): 2817 occurrences, 2194 paired, 0 relocated, 623 reviewed, 0 unmatched; at the stage B2 phase 2 integration (section "Stage B2 phase 2 integration"): 1886 occurrences, 1261 paired, 0 relocated, 625 reviewed, 0 unmatched |
 | Relocated base rows | 0 (RL-01 to RL-03, rows I-1427, I-1462 and I-1464 of `src/react/workshop.tsx`, retired by the final spec pass: the three occurrences pair with their base rows again) |
 | Selector-branch allowances | 2 base (rows I-0757, I-0969), 1 reviewed (RA-01, `src/profile/lot4-export.ts:867`) |
 
@@ -591,7 +596,7 @@ are regenerated (section "Commands"). The selector-branch rule reads one record 
 allowance RA-01, which names the RV-01 record of `src/profile/lot4-export.ts` and one of its spans (section
 "Reviewed selector-branch allowance"); without such an allowance a record binds no branch.
 
-Class (b), 623 occurrences of 21 tokens in 195 files (third-party counts: whole word, any case, in the
+Class (b), 625 occurrences of 23 tokens in 195 files (third-party counts: whole word, any case, in the
 packages installed from the lockfile):
 
 | Token | Entry | Literal SHA-256 | Class | Occurrences (files) | Justification |
@@ -617,6 +622,8 @@ packages installed from the lockfile):
 | RV-19 | LX-CA-1 | `8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2` | legacy-api-value | 1 (1) | Document-role export name that the sealed probe calls by digest (probe1, P-001 to P-003) and that main ships in dist/internal/annotations.js, re-exported as the policy-driven hasDocumentRole; I-0467 (R-002) stays injected. |
 | RV-20 | LX-CA-1 | `8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53` | legacy-api-value | 1 (1) | Application-role export name, same grounds, re-exported as hasApplicationRole; I-0469 (R-003) stays injected. |
 | RV-21 | LX-CA-1 | `e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8` | legacy-api-value | 1 (1) | Display-name export name, same grounds, re-exported as roleText; I-0473 (R-004) stays injected. |
+| RV-22 | LX-NV-1 | `4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d` | legacy-api-value | 1 (1) | Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; the matching is the injected `legacy-rules` evaluation. |
+| RV-23 | LX-NV-1 | `76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45` | legacy-api-value | 1 (1) | Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; same grounds as RV-22, second rule name. |
 
 Class (a), 29 occurrences of 2 tokens, all in lot-5 files, not reviewed and left to the lot-5 seals
 (positions at the integration scan, removed since by the lot-5 micro-reseal):

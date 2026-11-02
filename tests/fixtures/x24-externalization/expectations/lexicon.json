@@ -1742,8 +1742,7 @@
    "src/presentation/annotated/style.ts",
    "src/internal/swimlane-exports.ts",
    "src/io/refusal-codes.ts",
-   "src/internal/role-exports.ts",
-   "src/react/workshop.tsx"
+   "src/internal/role-exports.ts"
   ],
   "tokens": [
    {
@@ -7973,7 +7972,7 @@
      {
       "file": "src/react/navigation-target.ts",
       "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
-      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
       "spans": [
        [
         "raw",
@@ -8079,7 +8078,7 @@
      {
       "file": "src/react/navigation-target.ts",
       "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
-      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
       "spans": [
        [
         "raw",
@@ -8280,16 +8279,16 @@
     "count": 1,
     "files": [
      {
-      "file": "src/react/workshop.tsx",
-      "pathSha256": "16949edb6efe7f5c0b91de89b73a5bfa018e0d485ff5a22b0b72a5670e84251c",
-      "sha256": "5d1d03f37f8cfc089270236492b1395fb3fa445e3daac6f3be193b6aea2575de",
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
       "spans": [
        [
         "raw",
-        139,
-        89,
-        139,
-        98
+        16,
+        96,
+        16,
+        105
        ]
       ]
      }
@@ -8305,16 +8304,16 @@
     "count": 1,
     "files": [
      {
-      "file": "src/react/workshop.tsx",
-      "pathSha256": "16949edb6efe7f5c0b91de89b73a5bfa018e0d485ff5a22b0b72a5670e84251c",
-      "sha256": "5d1d03f37f8cfc089270236492b1395fb3fa445e3daac6f3be193b6aea2575de",
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
       "spans": [
        [
         "raw",
-        139,
-        114,
-        139,
-        127
+        16,
+        121,
+        16,
+        134
        ]
       ]
      }
