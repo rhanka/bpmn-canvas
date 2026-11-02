@@ -22,12 +22,13 @@
   "Block B final spec pass after the fix round (review findings 17 and 20, DESIGN.md:874, 899, 927): reviewed records and RA-01 rebound to the bytes the fix round and the lot-3 and lot-4 reseals left (RA-01 now at src/profile/lot4-export.ts:867, same line bytes), three RV-08 lines reviewed again, eleven occurrences of two block B tests reviewed by exact path (RV-04 and the published API name RV-13), RL-01 to RL-03 retired after the restoration of their base lines",
   "Stage B2 ruling on the replay of C24 onto main fec4dae (spec author, classes A and B3): four inputs whose collaboration shared its ID with a call activity, refused by the public parser (invalid-semantics), get a unique collaboration ID; the rows I-0001 and I-0002 of a squash-preparation note absent from the tracked tree, counted by P-006 as presence conflicts, are reclassified context-generic (rule R-162)",
   "Stage B2 step 6 rebind ruling (spec author, step 6 of the same work order): 28 LX-AT-2 occurrences reviewed (15 renamed away, 4 accepted where they sit, 9 moved to block B modules with records R-11 to R-14; the appended-row pairing of the guard withdrawn); the sealed classifier exports restored through a block B re-export module (records R-15 to R-17 under the R2' ground); the S-1 hook rows reclassified legacy-api (rule R-134) with the S-1 record R-18",
-  "Stage B2 step 9 README correction round (spec author, step 9 of the same work order): two README defects of the step 6 rebind corrected (the RV-21 token-table cell and the receipt list of the seal hygiene), no expected value changes"
+  "Stage B2 step 9 README correction round (spec author, step 9 of the same work order): two README defects of the step 6 rebind corrected (the RV-21 token-table cell and the receipt list of the seal hygiene), no expected value changes",
+  "Stage B2 phase 2 integration (spec author, stage B2 phase 2 of the same work order): main vendor-py rebind carried, navigation mapping records RV-22 and RV-23"
  ],
  "precedence": "DESIGN R3.3 > harmonization > review",
  "author": "Opus (claude-opus-5-5), spec author, owner exception",
  "reviewer": "gpt-6-astra, max effort",
- "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; pending targeted verification and conductor acceptance",
+ "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; stage B2 phase 2 integration applied; pending targeted verification and conductor acceptance",
  "previousSeals": [
   {
    "sha256": "d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5",
@@ -91,6 +92,20 @@
    "cases": 111,
    "occurrenceRows": 3381,
    "verdict": "integrated into the workbench branch; the step 9 README correction fixes two defects of this round (the RV-21 token-table cell and the receipt list of the seal hygiene)"
+  },
+  {
+   "sha256": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1",
+   "round": "stage B2 step 9 README correction",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated into the workbench branch; the stage B2 phase 2 integration carries the main vendor-py rebind and adds the navigation mapping records RV-22 and RV-23"
+  },
+  {
+   "sha256": "e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78",
+   "round": "vendor-py re-vendor rebind (main)",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "merged": true
   }
  ],
  "authoringMethod": "Expected values read from the cited base lines and DESIGN clauses or computed by derive/arith.mjs, an independent re-implementation of the legacy formulas; no product module, codec, layout, renderer, exporter or command was executed and nothing was updated from actual output.",
@@ -197,8 +212,8 @@
  "files": [
   {
    "path": "README.md",
-   "bytes": 116423,
-   "sha256": "b29fad668f643adad612fea8998ed734c561eda6bb3a19157e522ac03887ebbb"
+   "bytes": 119045,
+   "sha256": "e84c424b229d3e0701f86c93fe568485bb3002919d0243b7d96fd01e078dcf93"
   },
   {
    "path": "cases/x24-A-001-classify.json",
@@ -348,22 +363,22 @@
   {
    "path": "cases/x24-L-001-occurrences.json",
    "bytes": 1620,
-   "sha256": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494"
+   "sha256": "336a137b64ba4ec7fa2ed5cf7729b340979f2246cb3cce8b3042513c5d2c60a9"
   },
   {
    "path": "cases/x24-L-002-distribution-members.json",
    "bytes": 1509,
-   "sha256": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc"
+   "sha256": "bec0a53529145a0c9263142864637878088b5b32035162731e96908135f89590"
   },
   {
    "path": "cases/x24-L-003-modules.json",
    "bytes": 3241,
-   "sha256": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad"
+   "sha256": "d4ce1989514fc5d76cec3a34a479d33b0f8af7e28f3bb9456719b39da11595d6"
   },
   {
    "path": "cases/x24-L-004-zero-unmatched.json",
    "bytes": 1336,
-   "sha256": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b"
+   "sha256": "a77786d98746bc1646822b50c7645cb3ad1c770034555bca85df3ec9a79a0a14"
   },
   {
    "path": "cases/x24-L-005-legacy-value-pins.json",
@@ -373,7 +388,7 @@
   {
    "path": "cases/x24-L-006-literal-free-seal.json",
    "bytes": 1239,
-   "sha256": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21"
+   "sha256": "0a120f36904b92c8d05fac1da7df336d44e7232751a7cf2080c8d0ed9dff65e3"
   },
   {
    "path": "cases/x24-P-001-probe-1-original.json",
@@ -398,12 +413,12 @@
   {
    "path": "cases/x24-P-005-probe-2-ledger-rows.json",
    "bytes": 1483,
-   "sha256": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba"
+   "sha256": "c1d80abc130f435cc06341a0d9de98cd6b5a3c6caabfa546ef12449a430b22b3"
   },
   {
    "path": "cases/x24-P-006-probe-2-rescan.json",
    "bytes": 959,
-   "sha256": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae"
+   "sha256": "434b09f840f0208906b909cb741f9f4ce1168e09831b7476c789cedbfcac4aac"
   },
   {
    "path": "cases/x24-P-007-probe-2-distribution.json",
@@ -847,8 +862,8 @@
   },
   {
    "path": "derive/seal.mjs",
-   "bytes": 12635,
-   "sha256": "cad28267fcdf42281d47d9f662e8f9e6a1489dcea44b0869ef1a548af253fc30"
+   "bytes": 13408,
+   "sha256": "658f0d73d4ed4dce0d12fdd500275b19d22891bb6923d62051d829eeb068a31e"
   },
   {
    "path": "derive/sourcemap.mjs",
@@ -943,7 +958,7 @@
   {
    "path": "ledger.json",
    "bytes": 3655802,
-   "sha256": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a"
+   "sha256": "5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3"
   },
   {
    "path": "legacy-values.json",
@@ -952,8 +967,8 @@
   },
   {
    "path": "lexicon.json",
-   "bytes": 205478,
-   "sha256": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae"
+   "bytes": 207162,
+   "sha256": "54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66"
   },
   {
    "path": "literal-set.json",
@@ -963,7 +978,7 @@
   {
    "path": "manifest.json",
    "bytes": 48170,
-   "sha256": "6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe"
+   "sha256": "b19d7132b280dd34ac680eefcc7a2cb0b7744ed2af523449bd68ff412da12a1d"
   },
   {
    "path": "policy/business-policy-1.schema.json",

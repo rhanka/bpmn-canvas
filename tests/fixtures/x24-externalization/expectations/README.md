@@ -291,6 +291,39 @@ Derivation. `derive/seal.mjs` (authority, status and previous seal), this README
 `docs/design/receipts/block-b2-x24-step9-readme-fix.json` records the old and new pins of every changed file and
 the old and new value at every changed pointer.
 
+## Stage B2 phase 2 integration
+
+The phase 2 integration carries the main vendor-py rebind and adds the navigation mapping records RV-22
+and RV-23. The rebase merged the 19 main records (reviewed tokens RV-01, RV-08, RV-10 and RV-11 on eight
+lot 3 and lot 5 files) without touching the B2-line records; the strict scan then bound the two
+rule-resolver spans of `src/react/workshop.tsx` under the two new records, and the ledger input pin, the
+seven affected cases and the manifest were regenerated before the reseal. Reviewed total 623 to 625; no
+other reviewed record changed content or vanished, and the RV-01 to RV-21 counts are unchanged.
+
+| File | SHA-256 before | SHA-256 after |
+| --- | --- | --- |
+| `lexicon.json` | `0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae` (previous seal; `44b89b920c565350f5cb8f6828ee7cbd56a0ff1b17652fc3c380dad42289dd` merged) | `54af868fb65a9e92993de91d97d1a4b93d0e6717d7a33df5ef341c91e0832c66` |
+| `ledger.json` | `b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a` | `5113ab92ed8dce374a6ee3279b9040955262df61c0405e46a137ee11b22511f3` |
+| `manifest.json` | `6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe` | `b19d7132b280dd34ac680eefcc7a2cb0b7744ed2af523449bd68ff412da12a1d` |
+
+The previous seal is `f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1`; the merged
+seal is `e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78`
+(`tests/fixtures/x24-externalization/expectations/seal.json` of
+`docs/design/receipts/block-b-vendor-py-x24-rebind.json`, 34334 bytes), whose previous seal is the
+final-spec seal. The new seal is recorded in
+`docs/design/receipts/block-b2-p2-x24-integration.json`. The seven cases L-001 to L-004, L-006, P-005
+and P-006 change by the digests of `lexicon.json` and `ledger.json` only;
+`derive/clause-table.mjs` reproduces its file byte for byte.
+
+Derivation. The 19 rebinds were checked against the main receipt (equal records, disjoint from the
+B2-line records) and not re-applied; `derive/reviewed.mjs --write` rebound the reviewed records from
+the eligible files with the eligible exact path added; `ledger.json#/inputs/lexicon` by hand;
+`derive/author-cases.mjs` writes the cases and `manifest.json`; `derive/seal.mjs` (authority, status
+and previous seals), this README, `seal.json` and the seal test (pinned digest, previous seal, chain
+of ten seals with the merged vendor-py entry, and reviewed total 625) follow.
+`docs/design/receipts/block-b2-p2-x24-integration.json` records the old and new pins of every changed
+file and the old and new value at every changed pointer.
+
 ## Gate summary
 
 | Item | Count |

@@ -1742,7 +1742,8 @@
    "src/presentation/annotated/style.ts",
    "src/internal/swimlane-exports.ts",
    "src/io/refusal-codes.ts",
-   "src/internal/role-exports.ts"
+   "src/internal/role-exports.ts",
+   "src/react/workshop.tsx"
   ],
   "tokens": [
    {
@@ -8264,6 +8265,56 @@
         101,
         2,
         115
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-22",
+    "entry": "LX-NV-1",
+    "literal": "4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d",
+    "key": "4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d",
+    "class": "legacy-api-value",
+    "justification": "Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; the matching is the injected `legacy-rules` evaluation.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/workshop.tsx",
+      "pathSha256": "16949edb6efe7f5c0b91de89b73a5bfa018e0d485ff5a22b0b72a5670e84251c",
+      "sha256": "5d1d03f37f8cfc089270236492b1395fb3fa445e3daac6f3be193b6aea2575de",
+      "spans": [
+       [
+        "raw",
+        139,
+        89,
+        139,
+        98
+       ]
+      ]
+     }
+    ]
+   },
+   {
+    "id": "RV-23",
+    "entry": "LX-NV-1",
+    "literal": "76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45",
+    "key": "76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45",
+    "class": "legacy-api-value",
+    "justification": "Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; same grounds as RV-22, second rule name.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/workshop.tsx",
+      "pathSha256": "16949edb6efe7f5c0b91de89b73a5bfa018e0d485ff5a22b0b72a5670e84251c",
+      "sha256": "5d1d03f37f8cfc089270236492b1395fb3fa445e3daac6f3be193b6aea2575de",
+      "spans": [
+       [
+        "raw",
+        139,
+        114,
+        139,
+        127
        ]
       ]
      }
