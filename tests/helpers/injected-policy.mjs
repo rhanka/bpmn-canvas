@@ -25,3 +25,6 @@ for (const key of Object.keys(fixturePolicy.exportFacts.properties)) {
   if (field) fixturePolicy.exportFacts.properties[key] = local(field);
 }
 export const fixtureOptions = { businessPolicy: fixturePolicy, descriptor: fixtureDescriptor };
+/** Explicit caller palette (browser twins of the package palette CSS): one entry per action that the CSS styles, under the id `annotated.<action>`. */
+export const cssPalettePolicy = { ...fixturePolicy, presentation: { ...fixturePolicy.presentation, palette: { entries: ["start", "end", "intermediate-event", "task", "subprocess", "external-process", "gateway-or", "gateway-and", "data-input", "data-output", "external-input", "process-output", "document", "application", "lane", "sequence-flow"].map((action) => ({ id: `annotated.${action}`, title: action, bpmnType: "bpmn:Task", group: "activities", icon: "bpmn-icon-task" })) } } };
+export const cssPaletteOptions = { ...fixtureOptions, businessPolicy: cssPalettePolicy };

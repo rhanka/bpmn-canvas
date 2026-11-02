@@ -11,7 +11,8 @@ data through `renderOptions`; their cache distinguishes those inputs.
 `createLegacyAdapter(policy)` binds the compatibility readers to a snapshot of that record. This record
 is independent of a compiled profile; native profile consumers evaluate their compiled profile directly.
 Codec callers also supply their descriptor package and its declared `descriptorId`. No descriptor is
-registered by default. Ambiguous Process IO creation requires an explicit set selection.
+registered by default. Ambiguous Process IO creation requires an explicit set selection. Moving a 0.3
+caller to this model is a checklist, not a rename: see `docs/migration-0.3-to-0.4.md`.
 
 Older compatibility examples below describe caller-owned data. Bracketed LX references identify a
 category from the migration inventory rather than a value supplied by this package.
@@ -27,7 +28,7 @@ Status: 0.4.0. The API below is implemented and tested but not frozen (0.x). Cha
 ## Demo
 
 **[Try it in the browser](https://rhanka.github.io/bpmn-canvas/)**: the complete canvas in an app. The workshop
-(multi-tab document, Custom and BPMN looks, editing, undo, auto-layout, import and export) sits next to an
+(multi-tab document, Annotated and BPMN looks, editing, undo, auto-layout, import and export) sits next to an
 assistant-ui chat whose assistant is simulated (no model, no network): it drafts processes as tool calls with a
 preview card (`/assistant-ui` adapter), opens them in the canvas, arranges the open diagram and switches looks.
 
@@ -41,8 +42,9 @@ The same diagram drawn by the static renderer (`renderDiagrams`, no editing engi
 Diagrams: reference models B.1.0, C.4.0 and C.5.0 of the OMG BPMN Model Interchange Working Group
 ([bpmn-miwg-test-suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite)), CC BY 3.0 (changes listed in
 `THIRD_PARTY_NOTICES.md`). The images show B.1.0: two sub-processes (expanded and collapsed), three call activities,
-two lanes and a second pool. The `colored` image uses the neutral palette of `docs/demo/palette.mjs`. Regenerate the
-images with `node scripts/gen-demo-svg.mjs` after `npm run build`; the live app is built by `node scripts/build-demo.mjs`.
+two lanes and a second pool. The live demo runs on the sealed synthetic policy; the three images above are renders
+of the 0.3 looks. The generator produced them with 0.3 and refuses at 0.4 without those looks (`profile-symbol`);
+the live app is built by `node scripts/build-demo.mjs`.
 
 ```ts
 import { createBpmnCanvas } from "@sentropic/bpmn-canvas";
@@ -112,10 +114,10 @@ Diagnostic codes: `invalid-xml`, `import-failed`, `import-warning`, `unresolved-
 
 ## Profiles
 
-`profile: "standard"` (default) is upstream bpmn-js: its renderer, palette and context pad, so every
-BPMN element is drawn with standard notation. `profile: "legend"` is an opt-in look (rounded task
-boxes, `[LX-MK-2]`/`[LX-MK-1]` annotations, its own palette) that draws only the shapes it can draw
-faithfully; everything else falls through to the upstream renderer.
+A look is selected by the injected alias, not by a built-in name: `profile: "look-annotated"` draws the
+annotated look, `profile: "look-recolor"` the recolor look, `profile: "look-plain"` the upstream notation.
+Defaults are the injected look's `tokens`; the [migration guide](docs/migration-0.3-to-0.4.md) lists every
+removed default and its injected replacement.
 
 ## The workshop (`/react`)
 
@@ -130,7 +132,7 @@ import { BpmnWorkshop } from "@sentropic/bpmn-canvas/react";
   revision={revision}
   onXmlChange={(next, change) => { setXml(next); setRevision(change.revision); }}
   readOnly={busy}
-  formats={[{ id: "bpmn", label: "BPMN", profile: "standard" }, { id: "legend", label: "Legend", profile: "legend", tokens }]}
+  formats={[{ id: "annotated", label: "Annotated", profile: "look-annotated", tokens }, { id: "bpmn", label: "BPMN", profile: "look-recolor" }]}
   labels={{ undo: "Annuler", export: "Exporter" /* …every text is a prop */ }}
 />
 ```
@@ -215,15 +217,15 @@ const titles = io.listDiagrams(xmlInput).map((d) => d.name); // diagram, else pr
 - `wheel: "zoom-cursor"`: a plain wheel zooms around the cursor (x1.15 in, x0.87 out, within the limits);
   Ctrl/Meta+wheel and pinch stay native. `"page-scroll"` and `"zoom"` are unchanged.
 - `onElementClick({ id, type, name, calledElement?, marker })`: fires for clicks on elements, also when read-only,
-  never for the empty canvas. `marker` is true for a click on a sub-process expansion marker (`legend` profile)
-  or on the bpmn-js drill-down button (both profiles). The host decides what a marker click means, for
+  never for the empty canvas. `marker` is true for a click on a sub-process expansion marker (annotated look)
+  or on the bpmn-js drill-down button (every look). The host decides what a marker click means, for
   instance a lookup by `name`/`calledElement` followed by `selectDiagram(id)`.
 - `drilldown: "native" | "event"`: `native` (default) lets bpmn-js navigate to the sub-process plane; the active
   diagram follows and `onChange` fires with cause `diagram-switch`. `event` reports the drill-down click as a marker
   click and navigates nowhere.
 - `onHistoryChange({ canUndo, canRedo })`: fires when undo/redo availability may have changed, including after a
   diagram or profile switch, so toolbar buttons need no polling.
-- `setProfile(profile, legendTokens?)`: changes the look without changing the document. The modeler is recreated
+- `setProfile(profile, tokens?)`: changes the look without changing the document. The modeler is recreated
   with the same XML, active diagram and viewbox; read-only is kept. Undo and redo keep working across the switch:
   the previous steps are replayed into document snapshots and one step back re-imports the previous snapshot on the
   same diagram and view (`onChange` cause `undo`/`redo`). Edits made after the switch stay native steps; crossing
@@ -234,7 +236,8 @@ const titles = io.listDiagrams(xmlInput).map((d) => d.name); // diagram, else pr
   switch rejects and the canvas, its undo stack and its revision stay as they were. `onChange` fires
   with cause `profile-switch` and no new content revision. If nothing was edited, `getXml()` still returns the
   input bytes. A switch pending at `destroy()` rejects with an `AbortError`.
-- `legendTokens` on `createBpmnCanvas` and `renderDiagrams`: see "Legend profile".
+- Per-call look tokens on `createBpmnCanvas` and `renderDiagrams`: see "Annotated look" below; the
+  category aliases `annotatedTokens`, `recolorTokens` and `AnnotatedTokens` are equivalent.
 
 ## Layout
 
@@ -280,7 +283,7 @@ the npm package files as they are (jsDelivr, unpkg):
   with source maps. All runtime dependencies are inside (bpmn-js, diagram-js, bpmn-moddle,
   bpmn-auto-layout, tiny-svg and theirs).
 - Content: the framework-free API, that is `createBpmnCanvas`, `renderDiagrams`, `analyzeXml`, the
-  legend and colored token helpers, `/layout` and `/io`. The React and assistant-ui adapters are not in it.
+  look-token helpers, `/layout` and `/io`. The React and assistant-ui adapters are not in it.
 - Fonts and images stay files under `dist/assets/`, resolved next to the bundle: any versioned CDN path
   works, with no `data:` URI and no network call of its own. Fonts and mask images are fetched with CORS,
   which jsDelivr and unpkg send.
@@ -292,7 +295,7 @@ the npm package files as they are (jsDelivr, unpkg):
 ```html
 <script type="module">
   import { createBpmnCanvas } from "https://cdn.jsdelivr.net/npm/@sentropic/bpmn-canvas@<version>/dist/browser/bpmn-canvas.min.js";
-  const canvas = createBpmnCanvas(document.getElementById("host"), { xml, profile: "legend" });
+  const canvas = createBpmnCanvas(document.getElementById("host"), { xml, profile: "look-annotated" });
 </script>
 
 <!-- or, as a global -->
@@ -316,7 +319,7 @@ the npm package files as they are (jsDelivr, unpkg):
 The test `tests/browser-dist.browser.test.mjs` serves the packed package from a second origin under a
 nested versioned path and loads only the minified file: ESM, IIFE, strict CSP with nonce, strict CSP with
 the external stylesheet, the IIFE inlined in an `iframe srcdoc` under `connect-src 'none'` with `assetBase`,
-each with the legend look, an edit read back through `getXml()` and the watermark option. It also checks the
+each with the annotated look, an edit read back through `getXml()` and the watermark option. It also checks the
 visible diagnostics: inlined without `assetBase`, `assetBase` to a missing directory, stylesheet not loaded.
 
 ## Errors and edge cases
@@ -337,34 +340,11 @@ visible diagnostics: inlined without `assetBase`, `assetBase` to a missing direc
 
 ## Upgrading from 0.3
 
-0.4 adds the reference exports and the options a host needs to show the canvas exactly as it shipped before. Every
-0.3 entry and call is kept; the changes below are visible.
-
-- **Exports.** `drawio` is now the reference codec (see [Draw.io and Sparx](#drawio-and-sparx-io)); the 0.3 encoder
-  is `drawio: { codec: "generic" }`. `sparx` no longer returns the input bytes: it writes the reference Sparx file
-  (`application/xml`). Both return an empty `fidelity` and refuse what is outside the legend vocabulary.
-- **New `IoOptions`:** `drawio`, `sparx`, `facts`, `served`, `touched`. New `IoErrorCode`s:
-  `free-annotation`, `orphan-application`, `invalid-facts`, `not-served`. New: `readFacts`, `listDiagrams`.
-- **Canvas.** `setXml(xml, { layoutOnLoad: true })` and `createBpmnCanvas(host, { layoutOnLoad: true })` lay the
-  document out as part of its load (no undo step, no `onChange`, `getXml()` keeps the input bytes until an edit;
-  other diagrams on their first display; a failure keeps the document as given and emits the new diagnostic
-  `load-layout-failed`). `setProfile(profile, tokens, options)` and `profileOptions` take
-  `{ palette: "legend", drawing: "classic" }`. The handle gains `snapshot()`: one capture of the document, revision,
-  diagram, profile and whether it was edited since it was loaded; host mocks implementing `BpmnCanvasHandle` need it.
-  Exhaustive `switch`es over `DiagnosticCode` need `load-layout-failed`.
-- **Looks.** `colored` with `drawing: "classic"` draws flat shapes in its colours (1.4 lines, end ring with an inner
-  dot, open-bracket annotations, header lines on pools and lanes, labels inside). The legend `[+]` marker of a
-  sub-process now sits above its application band.
-- **Workshop.** `onDownload(file, context)` receives the capture of the export (`xml`, `revision`, `diagramId`,
-  `profile`, `touched`); an export spanning a new document is dropped with a notice, and one is refused during a
-  drag. New props: `layoutOnLoad`, `served`, `facts`, `toolbar`, `menus`, `icons`, `navigation`; `FormatOption`
-  gains `palette` and `drawing`. Once a host passes `served`, an unedited document without the file for a format has
-  that export item disabled. The Export trigger is disabled while read-only. The Format menu starts with a header and a
-  separator and its items carry `aria-pressed` (they were `menuitemradio`); the Format trigger sits in a
-  `role="group"`; the Fit menu has a separator. The default label
-  `exportSparx` is `Sparx`. `navigationResolver(rules)` builds a marker resolver from rules.
-- **Layout corpus.** `dist/layout-corpus.json` ships the canonical layout cases, their expected layouts and a
-  `VERSION` (hashes of both, of the layout sources, and the layout dependencies), for a host to mirror.
+0.4 injects the compatibility data 0.3 used to ship. Every 0.3 default has a replacement in the business
+policy; nothing is kept. What changed, row by row, is listed in
+[`docs/migration-0.3-to-0.4.md`](docs/migration-0.3-to-0.4.md): the removed defaults and their injected
+replacement, the legacy adapter, the published names that stay, and the artifacts that never shipped.
+A host that stays on `^0.3.0` or `~0.3.0` keeps resolving 0.3.0, which stays published and unchanged.
 
 ## Upgrading from 0.2
 
@@ -423,9 +403,9 @@ are unchanged.
 - The workshop has no persistence of its own: the chosen format, the document and the downloads belong to the host.
   There is no BPMN-in-Color popover, no `onModeler` escape hatch and no snapshot callback (use the `ref`).
 - The format menu appears only when more than one `formats` entry is given.
-- The `colored` profile changes colours only: no `strokeWidth`, no gradient (`taskFillEnd`), no fonts, and groups and
+- The recolor look changes colours only: no `strokeWidth`, no gradient (`taskFillEnd`), no fonts, and groups and
   plain markers keep the upstream colours. Only nine palette entries of the upstream palette are recoloured.
-- The `legend` palette icons are monochrome masks: only line colours feed them, not fills.
+- The annotated palette icons are monochrome masks: only line colours feed them, not fills.
 - Layout parity with the original Python implementation is proven on two golden cases only; boundary events have no
   golden because the original does not handle them.
 - Draw.io import regenerates ids and DI and turns data links into associations (declared in `fidelity`).
@@ -455,24 +435,24 @@ MIT for this package's own source. The bpmn.io watermark required by bpmn-js sta
 linked on every instance by default (see below to hide it under a license that allows it). Third-party terms, including the OFL-1.1 BPMN font and Adobe AFM metrics,
 are in `THIRD_PARTY_NOTICES.md` and `licenses/`.
 
-## Legend profile
+## Annotated look
 
-Opt-in look: `createBpmnCanvas(host, { profile: "legend", legendTokens })` and
-`renderDiagrams(xml, { profile: "legend", legendTokens })`. Without tokens it draws the reference Custom look:
-black lines, beige task gradient (`[LX-PR-3]` → `[LX-PR-3]`), red events (`[LX-PR-3]`), green gateways (`[LX-PR-3]`), yellow
-external processes (`[LX-PR-3]`) and documents (`[LX-PR-3]`), cyan application boxes (`[LX-PR-3]`), pool strip `[LX-PR-3]`,
-white lane headers, red dashed links (`[LX-PR-3]`, `5 5`, no arrow head on task input/output links). Any token overrides it.
+Opt-in look: `createBpmnCanvas(host, { profile: "look-annotated", annotatedTokens })` and
+`renderDiagrams(xml, { profile: "look-annotated", annotatedTokens })`. Looks are selected by the injected
+alias, and defaults are the injected look's `tokens`. Without tokens the canvas draws the injected look as
+the policy defines it; any token overrides it. The removed defaults and their injected replacements are
+listed in the [migration guide](docs/migration-0.3-to-0.4.md).
 
 ### Tokens
 
-The look-token option is a `Partial` of the token type. Missing keys use the defaults above (`[LX-TH-6]`). Two conveniences: `stroke` feeds
+The look-token option is a `Partial` of the token type. Missing keys use the injected defaults. Two conveniences: `stroke` feeds
 every `*Line` and `flow` you did not name, `fill` feeds `taskFill`; `taskFillEnd` is derived from `taskFill`
 when you do not name it. An explicit per-type value always wins. The category names `annotatedTokens`,
 `recolorTokens` and `AnnotatedTokens` are aliases of the published look-token options and type documented above.
 
 | Group | Keys |
 |---|---|
-| Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns), `labelText` (labels outside their shape; `colored`: follows `text`, `legend`: upstream colour unless named) |
+| Text | `fontFamily`, `fontSize`, `text`, `headerText` (pool and lane header columns), `labelText` (labels outside their shape) |
 | Strokes | `strokeWidth`, `stroke`, `flow` (sequence flows), `link` (associations, data links), `docLink` + `docLinkDash` (associations to a `[LX-MK-1]`, directional ones included and drawn without arrow; default: same as `link`, `5 5`) |
 | Task | `taskLine`, `taskFill`, `taskFillEnd` (horizontal gradient from `taskFill` to `taskFillEnd`) |
 | Event, gateway | `eventLine`, `eventFill`, `gatewayLine`, `gatewayFill` |
@@ -486,59 +466,55 @@ A BPMN-in-Color fill or stroke set on an element in the XML wins over the token.
 
 ### Palette action ids
 
-The legend palette replaces the default palette. Each entry carries a stable `data-action` equal to its id, also
-exported as `LEGEND_ACTION_IDS` by `@sentropic/bpmn-canvas/browser` (the profile module itself is not a public entry).
-The icon CSS ships with the package (monochrome masks, SVG files under `dist/assets/inline/`) and only matches
-`data-action^="legend."`; recolor with `--bpmn-canvas-legend-icon` and
-`--bpmn-canvas-legend-accent`.
-
-`legend.start`, `legend.end`, `legend.intermediate-event`, `legend.task`, `legend.subprocess`,
-`legend.external-process`, `legend.gateway-or`, `legend.gateway-and`, `legend.data-input`,
-`legend.data-output`, `legend.external-input`, `legend.process-output`, `legend.document`,
-`legend.application`, `legend.lane`, `legend.sequence-flow`.
+The annotated palette replaces the default palette. Each entry carries a stable `data-action` equal to its
+id, from `presentation.palette.entries`; there is no package default and no exported id list. The icon CSS
+ships with the package (monochrome masks, SVG files under `dist/assets/inline/`) and only matches
+`data-action^="annotated."`; recolor with `--bpmn-canvas-annotated-icon` and
+`--bpmn-canvas-annotated-accent`. The package styles one entry per action, under the id
+`annotated.<action>`, for `start`, `end`, `intermediate-event`, `task`, `subprocess`, `external-process`,
+`gateway-or`, `gateway-and`, `data-input`, `data-output`, `external-input`, `process-output`, `document`,
+`application`, `lane` and `sequence-flow`; a caller palette uses the same ids to get the package icons.
 
 ### Navigation markers
 
 The collapsed sub-process `[+]` and the external-process icon carry `data-marker` and the class
-`legend-marker`. The lib's CSS lets a click land on the marker itself and keeps the body of the element
-selectable and draggable, so a host can tell a body click from a marker click. These hooks are a stable DOM
-contract pinned under LX-NV-1 (R-038).
+`annotated-marker`. The lib's CSS lets a click land on the marker itself and keeps the body of the element
+selectable and draggable, so a host can tell a body click from a marker click. A host that resolves diagrams
+from marker clicks supplies its own rule through the workshop resolver prop or `businessPolicy.navigation`.
 
 ## Palette layout and icon colours
 
 - `paletteColumns: 1 | 2 | "auto"`: one column, two columns, or the diagram-js default (`auto`, which switches to two
   columns when the canvas is short). The choice survives resizes, read-only toggles and `setProfile`. The measured
   palette width (48 px in one column, 94 px in two) is what `fit` keeps clear.
-- For the `legend` and `colored` profiles the palette icons take their colour from tokens, through CSS custom
-  properties set on the canvas root (`--bpmn-canvas-icon-start`, `-end`, `-intermediate` from `eventLine`; `-task`,
-  `-subprocess` from `taskLine`; `-external` from `externalLine`; `-gateway` from `gatewayLine`; `-data` from
-  `dataLine`; `-document` from `docLine`; `-application` from `appLine`; `-lane` from `laneLine`; `-pool` from
-  `poolLine`; `-flow` from `flow`). They are set with the CSSOM, so a strict `style-src` CSP is not violated, and they are
-  scoped to one instance. In the `colored` profile the upstream palette entries carry the class `bpmn-canvas--colored`.
-  A legend canvas without tokens uses the reference Custom look; a colored canvas without tokens is exactly upstream.
-  The `standard` profile palette is exactly upstream.
+- For the annotated and recolor looks the palette icons take their colour from tokens, through variables
+  set on the canvas root (`--bpmn-canvas-annotated-icon-start`, `-end`, `-intermediate` and the
+  matching `-task`, `-subprocess`, `-external`, `-gateway`, `-data`, `-document`, `-application`, `-lane`,
+  `-pool`, `-flow`, `-accent` and `-glyph` from the look's tokens). They are set with the CSSOM, so a strict
+  `style-src` CSP is not violated, and they are scoped to one instance. In the recolor look the upstream
+  palette entries carry the class `bpmn-canvas--recolor`.
 
-## Colored profile
+## Recolor look
 
-`profile: "colored"` keeps the **upstream bpmn-js notation** and recolours it per element kind from tokens. The
-upstream renderer draws every element, its inner decorations and its markers; this profile only chooses the
+`profile: "look-recolor"` keeps the **upstream bpmn-js notation** and recolours it per element kind from tokens. The
+upstream renderer draws every element, its inner decorations and its markers; this look only chooses the
 `fill` and `stroke` it is given, then sets the text colour. No geometry changes, so inclusive, event-based and
-complex gateways, boundary events, groups, data stores and transactions keep their standard notation.
+complex gateways, boundary events, groups, data stores and transactions keep their upstream notation.
 
 ```ts
-createBpmnCanvas(host, { xml, profile: "colored", coloredTokens: { taskLine: "#1f3a5f", taskFill: "#eaf1fb", flow: "#37475a" } });
-renderDiagrams(xml, { profile: "colored", coloredTokens });
-await canvas.setProfile("colored", coloredTokens);
+createBpmnCanvas(host, { xml, profile: "look-recolor", recolorTokens: { taskLine: "#1f3a5f", taskFill: "#eaf1fb", flow: "#37475a" } });
+renderDiagrams(xml, { profile: "look-recolor", recolorTokens });
+await canvas.setProfile("look-recolor", recolorTokens);
 ```
 
-- **Tokens** are the 33 `LegendTokens` fields; any subset is accepted and missing keys fall back to neutral defaults
-  (`[LX-TH-6]`; only the named keys recolour) (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at all** the profile adds
-  no module and draws exactly like `standard`.
+- **Tokens** are the 33 look-token fields; any subset is accepted and missing keys fall back to the injected
+  defaults (`stroke` feeds every `*Line` and `flow` not given; `fill` feeds `taskFill`). With **no token at
+  all** the look adds no module and draws exactly like the upstream renderer.
 - **Kinds**: task (every activity except call activity), event, gateway, pool, lane, external (call activity, data
   input and output), data (data object and data store), doc and app (text annotations starting `[LX-MK-1]` / `[LX-MK-2]`),
   flow (sequence and message flows), link (associations and data associations). Plain annotations use `stroke`; groups
-  keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`, external labels use `labelText` (default: `text`). `dataLinkArrow: false` (legend look) draws task input and output associations without the arrow head.
-- Only the tokens the host names recolour: a kind whose token is missing keeps the upstream colour (name `taskFill` alone and flows, events and texts stay as in `standard`). `stroke` names every line colour, `fill` the task fill, `text` the labels too.
+  keep the upstream colours. Text uses `text`, pool and lane titles use `headerText`, external labels use `labelText` (default: `text`).
+- Only the tokens the host names recolour: a kind whose token is missing keeps the upstream colour.
 - Colours set on an element itself (BPMN-in-Color) keep priority over the tokens.
 - Markers (arrowheads, message-flow ends, conditional markers) are created by the upstream renderer with the flow
   colour and with ids unique to the instance, so two instances with different tokens never share one.

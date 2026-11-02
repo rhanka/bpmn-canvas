@@ -1,7 +1,7 @@
 {
  "source": "SVG primitives of this library's rendering of R1.bpmn (invented) in both looks of the sealed synthetic policy, recorded by tests/fixtures/ui/build-successors.mjs (stage B2 phase 2); the step-0 recording is verified by the private lot 6 gate",
  "looks": {
-  "custom": {
+  "annotated": {
    "Service_desk_pool": {
     "hidden": false,
     "primitives": [

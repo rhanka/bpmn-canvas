@@ -123,7 +123,7 @@ window.runSmoke = async () => {
   const doc = new DOMParser().parseFromString(saved, "application/xml");
   const q = (name) => [...doc.getElementsByTagNameNS("http://www.omg.org/spec/BPMN/20100524/MODEL", name)];
   out.updater = {
-    legendInstanceUpdaterClass: protoBefore,
+    annotatedInstanceUpdaterClass: protoBefore,
     createInLegend: createErr ?? "ok",
     ioSpecification: q("ioSpecification").length,
     inputSet: q("inputSet").length,
@@ -141,7 +141,7 @@ window.runSmoke = async () => {
 
   // Destroy A: B keeps drawing, its ids remain.
   a.m.destroy(); a.host.remove();
-  out.afterDestroyA = { bDefIds: defIds(b.host), bTaskStillLegend: info(b.host, "T1").annotated };
+  out.afterDestroyA = { bDefIds: defIds(b.host), bTaskStillAnnotated: info(b.host, "T1").annotated };
 
   // The [+] marker of a sub-process stays above its application band; without a band it is where it was.
   {

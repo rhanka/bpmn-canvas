@@ -68,17 +68,14 @@ window.pal = {
     const r = items.get(id).el.querySelector(".bpmn-canvas");
     const vars = {};
     for (let i = 0; i < r.style.length; i++) { const n = r.style[i]; if (n.startsWith("--bpmn-canvas-icon")) vars[n] = r.style.getPropertyValue(n); }
-    return { vars, colored: r.classList.contains("bpmn-canvas--recolor") };
+    return { vars, recolor: r.classList.contains("bpmn-canvas--recolor") };
   },
   styles: (id) => entryStyles(items.get(id).el),
   maskImages(id) {
     const out = {};
-    const ids = new Set(window.__fixture.businessPolicy.presentation.palette.entries.map((entry) => entry.id));
-    for (const e of items.get(id).el.querySelectorAll(".djs-palette .entry")) {
-      const action = e.getAttribute("data-action");
-      if (!ids.has(action)) continue;
+    for (const e of items.get(id).el.querySelectorAll('.djs-palette .entry[data-action^="annotated."]')) {
       const b = getComputedStyle(e, "::before");
-      out[action] = b.webkitMaskImage || b.maskImage;
+      out[e.getAttribute("data-action")] = b.webkitMaskImage || b.maskImage;
     }
     return out;
   },

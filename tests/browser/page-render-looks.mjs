@@ -9,7 +9,7 @@ import { normalizeElement } from "../fixtures/ui/normalize-render.mjs";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const FORMATS = [
-  { id: "custom", label: "Annotated", profile: "look-annotated", palette: "palette-annotated" },
+  { id: "annotated", label: "Annotated", profile: "look-annotated", palette: "palette-annotated" },
   { id: "bpmn", label: "BPMN", profile: "look-recolor", palette: "palette-annotated", drawing: "drawing-flat" },
 ];
 
@@ -64,7 +64,7 @@ window.renderLooks = {
     host.style.cssText = "width:1200px;height:700px;position:relative";
     const root = createRoot(host);
     const ref = { current: null };
-    for (const look of ["custom", "bpmn"]) {
+    for (const look of ["annotated", "bpmn"]) {
       // The recorded step-0 editor lays out server documents on load.
       root.render(h(BpmnWorkshop, { ref, xml: r1, layoutOnLoad: true, formats: FORMATS, format: look }));
       for (let i = 0; i < 150 && !host.querySelector('.djs-element[data-element-id="Log_request"]'); i++) await sleep(30);

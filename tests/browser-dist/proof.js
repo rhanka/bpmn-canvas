@@ -38,13 +38,13 @@ export async function runProof(api, variant) {
   await document.fonts.load("14px bpmn").catch(() => []);
   await new Promise((r) => setTimeout(r, 1500)); // the canvas checks its styles, font and images after the first import
   window.__api = { main, changes, getXml: () => main.getXml() };
-  const glyph = getComputedStyle(document.querySelector(".djs-palette .entry[data-action]")).getPropertyValue("--bpmn-canvas-legend-glyph").trim();
+  const glyph = getComputedStyle(document.querySelector(".djs-palette .entry[data-action^='annotated.']")).getPropertyValue("--bpmn-canvas-annotated-glyph").trim();
   const badge = (sel) => { const b = document.querySelector(`${sel} .bjs-powered-by`); return b ? getComputedStyle(b).display !== "none" : null; };
   return {
     variant,
     exports: Object.keys(api).sort(),
     state: main.state,
-    legendShapes: document.querySelectorAll("#canvas .annotated-shape").length,
+    annotatedShapes: document.querySelectorAll("#canvas .annotated-shape").length,
     fontReady: document.fonts.check("14px bpmn"),
     glyph,
     badgeDefaultVisible: badge("#canvas"),

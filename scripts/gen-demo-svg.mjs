@@ -18,8 +18,7 @@ try {
   const page = ctx.pages()[0] ?? (await ctx.newPage());
   await page.goto(`${server.origin}/page/index.html`);
   await page.waitForFunction(() => window.__ready === true);
-  const businessPolicy = JSON.parse(readFileSync(join(root, "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json"), "utf8"));
-  const cases = { standard: { profile: "look-plain", businessPolicy }, legend: { profile: "look-annotated", businessPolicy }, colored: { profile: "look-recolor", recolorTokens: DEMO_TOKENS, businessPolicy } };
+  const cases = { standard: { profile: "standard" }, legend: { profile: "legend" }, colored: { profile: "colored", coloredTokens: DEMO_TOKENS } };
   for (const [name, options] of Object.entries(cases)) {
     const r = await page.evaluate(([x, o]) => window.demo.render(x, o), [xml, options]);
     const svg = r.diagrams[0].svg.replace(/^<\?xml[^>]*>\s*/, "").replace(/<!DOCTYPE[^>]*>\s*/, "");

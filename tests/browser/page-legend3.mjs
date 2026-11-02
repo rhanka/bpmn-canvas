@@ -82,7 +82,7 @@ window.runLegend3 = async () => {
   // (1) [Reference] link and lane header tokens.
   const neutral = await make();
   out.neutral = { directional: { doc: linkOf(neutral.host, "AO"), note: linkOf(neutral.host, "AP") }, doc: linkOf(neutral.host, "AD"), note: linkOf(neutral.host, "AN"), header: headerFill(neutral.host), warnings: neutral.warnings };
-  const given = await make({ link: tok.link, docLink: tok.docLink, docLinkDash: tok.docLinkDash, laneFill: tok.laneFill, laneHeaderFill: tok.laneHeaderFill });
+  const given = await make({ link: "#112233", docLink: tok.docLink, docLinkDash: "3 4", laneFill: "#aabbcc", laneHeaderFill: "#fbf9f6" });
   out.given = { directional: linkOf(given.host, "AO"), doc: linkOf(given.host, "AD"), note: linkOf(given.host, "AN"), header: headerFill(given.host) };
   out.arrow = { neutral: dataArrow(neutral.host, "DA") };
   out.labels = { neutral: labelFill(neutral.host) };

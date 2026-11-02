@@ -140,7 +140,7 @@ window.runLegend2 = async () => {
 
   // standard profile: the legend palette rules never apply.
   const std = await open({ profile: "look-plain" });
-  out.standard = {
+  out.plain = {
     annotatedEntries: std.host.querySelectorAll('.djs-palette .entry[data-action^="annotated."]').length,
     entries: std.host.querySelectorAll(".djs-palette .entry").length,
     annotatedShapes: std.host.querySelectorAll(".annotated-shape").length,
@@ -148,7 +148,7 @@ window.runLegend2 = async () => {
   std.h.destroy();
 
   // (d) custom tokens reach the SVG.
-  const c = await open({ annotatedTokens: CUSTOM });
+  const c = await open({ legendTokens: CUSTOM });
   const H = c.host;
   // tiny-svg writes presentation properties into the style attribute: read the computed style.
   const attr = (el, name) => (el ? hex(getComputedStyle(el).getPropertyValue(name)) : null);

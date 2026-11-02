@@ -64,14 +64,14 @@ const LABELS = {
   export: "Export", exportBpmn: "BPMN", exportDrawio: "Drawio", exportSparx: "Sparx",
 };
 const FORMATS = [
-  { id: "custom", label: "Annotated", profile: "look-annotated", palette: "palette-annotated" },
+  { id: "annotated", label: "Annotated", profile: "look-annotated", palette: "palette-annotated" },
   { id: "bpmn", label: "BPMN", profile: "look-recolor", palette: "palette-annotated", drawing: "drawing-flat" },
 ];
 const contract = (extra = {}) => ({
   xml, labels: LABELS, formats: FORMATS, paletteColumns: 2,
   toolbar: { zoomButtons: false, autoLayout: "text", importButton: false },
   menus: { chevron: "text", icons: false },
-  icons: { undo: icon(fixture.looks.custom.controls[0].svg), redo: icon(fixture.looks.custom.controls[1].svg) },
+  icons: { undo: icon(fixture.looks.bpmn.controls[0].svg), redo: icon(fixture.looks.bpmn.controls[1].svg) },
   ...extra,
 });
 
@@ -108,12 +108,12 @@ window.structure = {
     const host = document.getElementById("app");
     host.style.cssText = "width:1000px;height:600px;position:relative";
     const root = createRoot(host);
-    out.custom = await capture(host, root, contract({ format: "custom" }));
+    out.annotated = await capture(host, root, contract({ format: "annotated" }));
     out.bpmn = await capture(host, root, contract({ format: "bpmn" }));
-    out.readOnly = await capture(host, root, contract({ format: "custom", readOnly: true }));
+    out.readOnly = await capture(host, root, contract({ format: "annotated", readOnly: true }));
     // No notice after an export whose fidelity is empty (local Draw.io from semantic metadata).
     const downloads = [];
-    root.render(h(BpmnWorkshop, contract({ format: "custom", onDownload: (file) => downloads.push(file.filename) })));
+    root.render(h(BpmnWorkshop, contract({ format: "annotated", onDownload: (file) => downloads.push(file.filename) })));
     await sleep(200);
     const exportTrigger = [...host.querySelectorAll('[role="toolbar"] button')].find((b) => (b.textContent ?? "").includes("Export"));
     exportTrigger.click();

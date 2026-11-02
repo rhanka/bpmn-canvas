@@ -8,7 +8,7 @@ import { fixtureOptions } from "./helpers/injected-policy.mjs";
 const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 /** Overlap of the application band on its activity (the layout and the renderer share it). */
-const APP_BOX = { overlap: 10 };
+const APP_BOX = { overlap: fixtureOptions.businessPolicy.presentation.layout.appBadge.overlap };
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 
@@ -36,15 +36,15 @@ test("legend profile in a real browser", { timeout: 120000 }, async (t) => {
     assert.deepEqual([withApp.pointer, withoutApp.pointer], ["all", "all"]);
   });
   await t.test("an instance without the profile draws nothing in legend style", () => {
-    for (const id of Object.keys(o.plain)) assert.equal(o.plain[id].legend, false, id);
+    for (const id of Object.keys(o.plain)) assert.equal(o.plain[id].annotated, false, id);
   });
   await t.test("marker and gradient ids are prefixed by instance and unique", () => {
-    assert.ok(o.defIds.a.includes("ia-legend-arrow") && o.defIds.a.includes("ia-legend-task-gradient"));
-    assert.ok(o.defIds.b.includes("ib-legend-arrow") && o.defIds.b.includes("ib-legend-task-gradient"));
+    assert.ok(o.defIds.a.includes("ia-annotated-arrow") && o.defIds.a.includes("ia-annotated-task-gradient"));
+    assert.ok(o.defIds.b.includes("ib-annotated-arrow") && o.defIds.b.includes("ib-annotated-task-gradient"));
     assert.deepEqual(o.duplicateDocumentIds, []);
   });
   await t.test("the data-IO updater is per instance and creates inputSet and outputSet", () => {
-    assert.equal(o.updater.legendInstanceUpdaterClass, "LegendBpmnUpdater");
+    assert.equal(o.updater.annotatedInstanceUpdaterClass, "AnnotatedBpmnUpdater");
     assert.equal(o.updater.createInLegend, "ok");
     assert.deepEqual([o.updater.ioSpecification, o.updater.inputSet, o.updater.outputSet, o.updater.dataInputRefInSet], [1, 1, 1, 1]);
     assert.equal(o.updater.dataInputsAfterUndo, 0);
@@ -54,8 +54,8 @@ test("legend profile in a real browser", { timeout: 120000 }, async (t) => {
     assert.match(o.updater.plainInstanceCreate, /no parent for/, "upstream baseline behavior unchanged");
   });
   await t.test("destroying one instance leaves the other drawing", () => {
-    assert.equal(o.afterDestroyA.bTaskStillLegend, true);
-    assert.ok(o.afterDestroyA.bDefIds.includes("ib-legend-arrow"));
+    assert.equal(o.afterDestroyA.bTaskStillAnnotated, true);
+    assert.ok(o.afterDestroyA.bDefIds.includes("ib-annotated-arrow"));
   });
   await t.test("no warnings and no console errors", () => {
     assert.deepEqual([...o.warnings.a, ...o.warnings.b, ...o.warnings.plain], []);

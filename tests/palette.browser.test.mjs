@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { runInBrowser as runPage } from "./browser/harness.mjs";
-import { fixtureOptions } from "./helpers/injected-policy.mjs";
+import { cssPalettePolicy, fixtureOptions } from "./helpers/injected-policy.mjs";
 
 // Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
 const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
@@ -51,13 +51,13 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
     }
 
     // legend colours
-    const L = await ev(([tk]) => window.pal.mount({ profile: "look-annotated", annotatedTokens: tk }), [TOKENS]);
-    out.legendRoot = await ev((i) => window.pal.root(i), L);
-    out.legendStyles = await ev((i) => window.pal.styles(i), L);
+    const L = await ev(([tk, bp]) => window.pal.mount({ profile: "look-annotated", annotatedTokens: tk, businessPolicy: bp }), [TOKENS, cssPalettePolicy]);
+    out.annotatedRoot = await ev((i) => window.pal.root(i), L);
+    out.annotatedStyles = await ev((i) => window.pal.styles(i), L);
     out.legendMasks = await ev((i) => window.pal.maskImages(i), L);
     out.legendBadge = await ev((i) => window.pal.badge(i), L);
     // independence: second instance with other tokens, then destroy the first
-    const L2 = await ev(([tk]) => window.pal.mount({ profile: "look-annotated", annotatedTokens: tk }), [OTHER]);
+    const L2 = await ev(([tk, bp]) => window.pal.mount({ profile: "look-annotated", annotatedTokens: tk, businessPolicy: bp }), [OTHER, cssPalettePolicy]);
     out.second = { root: await ev((i) => window.pal.root(i), L2), styles: await ev((i) => window.pal.styles(i), L2), firstRootStill: await ev((i) => window.pal.root(i), L) };
     out.firstStylesStill = await ev((i) => window.pal.styles(i), L);
     await ev((i) => window.pal.destroy(i), L2);
@@ -74,7 +74,7 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
     await ev((i) => window.pal.destroy(i), C);
     // ... and through the public API
     const CP = await ev(([tk]) => window.pal.mount({ profile: "look-recolor", recolorTokens: tk }), [TOKENS]);
-    out.publicColored = { root: await ev((i) => window.pal.root(i), CP), styles: await ev((i) => window.pal.styles(i), CP) };
+    out.publicRecolor = { root: await ev((i) => window.pal.root(i), CP), styles: await ev((i) => window.pal.styles(i), CP) };
     await ev((i) => window.pal.destroy(i), CP);
 
     // standard unchanged vs plain upstream
@@ -116,7 +116,7 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
   }
 
   await t.test("legend profile: variables set on the root from the tokens", () => {
-    const v = o.legendRoot.vars;
+    const v = o.annotatedRoot.vars;
     assert.equal(v["--bpmn-canvas-icon-start"], TOKENS.eventLine);
     assert.equal(v["--bpmn-canvas-icon-task"], TOKENS.taskLine);
     assert.equal(v["--bpmn-canvas-icon-gateway"], TOKENS.gatewayLine);
@@ -128,24 +128,24 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
     assert.equal(v["--bpmn-canvas-icon-document"], TOKENS.docLine);
     assert.equal(v["--bpmn-canvas-icon-application"], TOKENS.appLine);
     assert.equal(Object.keys(v).length, 13);
-    assert.equal(o.legendRoot.colored, false, "the colored scope class belongs to the colored profile only");
+    assert.equal(o.annotatedRoot.recolor, false, "the recolor scope class belongs to the recolor look only");
   });
   await t.test("legend profile: each of the 16 palette icons is painted with the colour of its group", () => {
     for (const [action, token] of Object.entries(LEGEND_GROUP)) {
-      assert.equal(o.legendStyles[`legend.${action}`].beforeBg, rgb(TOKENS[token]), action);
+      assert.equal(o.annotatedStyles[`annotated.${action}`].beforeBg, rgb(TOKENS[token]), action);
     }
   });
   await t.test("two instances with different tokens are independent, and destroying one changes nothing in the other", () => {
     for (const [action, token] of Object.entries(LEGEND_GROUP)) {
-      assert.equal(o.second.styles[`legend.${action}`].beforeBg, rgb(OTHER[token]), `second ${action}`);
-      assert.equal(o.firstStylesStill[`legend.${action}`].beforeBg, rgb(TOKENS[token]), `first ${action}`);
+      assert.equal(o.second.styles[`annotated.${action}`].beforeBg, rgb(OTHER[token]), `second ${action}`);
+      assert.equal(o.firstStylesStill[`annotated.${action}`].beforeBg, rgb(TOKENS[token]), `first ${action}`);
     }
     assert.equal(o.second.root.vars["--bpmn-canvas-icon-task"], OTHER.taskLine);
     assert.equal(o.second.firstRootStill.vars["--bpmn-canvas-icon-task"], TOKENS.taskLine);
     assert.equal(o.firstAfterSecondDestroyed.vars["--bpmn-canvas-icon-task"], TOKENS.taskLine);
   });
   await t.test("switching to standard on the same root removes every variable and the scope class", () => {
-    assert.deepEqual(o.afterSwitch, { vars: {}, colored: false });
+    assert.deepEqual(o.afterSwitch, { vars: {}, recolor: false });
   });
   await t.test("without tokens, legend icons use the neutral fallback", () => {
     // standard canvas has no legend entries; the neutral fallback is exercised by the stylesheet default value
@@ -153,15 +153,15 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
   });
 
   await t.test("colored palette module: the upstream palette entries take the token colours (plain modeler)", () => {
-    assert.equal(o.colorRoot.colored, true);
+    assert.equal(o.colorRoot.recolor, true);
     for (const [action, token] of Object.entries(UPSTREAM_GROUP)) {
       assert.equal(o.colorStyles[action].color, rgb(TOKENS[token]), action);
     }
   });
   await t.test("colored profile through the public API paints the upstream palette with the tokens", () => {
-    assert.equal(o.publicColored.root.colored, true, JSON.stringify(o.publicColored.root));
+    assert.equal(o.publicRecolor.root.recolor, true, JSON.stringify(o.publicRecolor.root));
     for (const [action, token] of Object.entries(UPSTREAM_GROUP)) {
-      assert.equal(o.publicColored.styles[action].color, rgb(TOKENS[token]), action);
+      assert.equal(o.publicRecolor.styles[action].color, rgb(TOKENS[token]), action);
     }
   });
 
@@ -173,9 +173,9 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
 
   await t.test("data-input and data-output icons differ, and all legend masks are distinct from each other", () => {
     const m = o.legendMasks;
-    assert.notEqual(m["legend.data-input"], m["legend.data-output"]);
-    assert.notEqual(m["legend.data-input"], m["legend.external-input"]);
-    assert.notEqual(m["legend.data-output"], m["legend.process-output"]);
+    assert.notEqual(m["annotated.data-input"], m["annotated.data-output"]);
+    assert.notEqual(m["annotated.data-input"], m["annotated.external-input"]);
+    assert.notEqual(m["annotated.data-output"], m["annotated.process-output"]);
     const values = Object.values(m);
     assert.equal(values.length, 16);
     assert.equal(new Set(values).size, 16, "no two palette entries share a mask");

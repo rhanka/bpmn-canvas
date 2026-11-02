@@ -2,10 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { runInBrowser as runPage } from "./browser/harness.mjs";
-import { fixtureOptions } from "./helpers/injected-policy.mjs";
+import { cssPaletteOptions, fixtureOptions } from "./helpers/injected-policy.mjs";
 
 // Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
-const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, cssPaletteOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const look = fixtureOptions.businessPolicy.presentation.looks.find((entry) => entry.renderer === "annotated");
@@ -92,9 +92,9 @@ test("legend profile parity in a real browser", { timeout: 180000 }, async (t) =
   await t.test("the bpmn.io badge is still visible in a legend canvas", () => assert.equal(o.palette.badge, true));
 
   await t.test("the standard profile never gets legend palette entries or shapes", () => {
-    assert.equal(o.standard.annotatedEntries, 0);
-    assert.ok(o.standard.entries > 0);
-    assert.equal(o.standard.annotatedShapes, 0);
+    assert.equal(o.plain.annotatedEntries, 0);
+    assert.ok(o.plain.entries > 0);
+    assert.equal(o.plain.annotatedShapes, 0);
   });
 
   await t.test("no console errors", () => {

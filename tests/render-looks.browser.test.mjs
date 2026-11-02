@@ -33,7 +33,7 @@ const CUSTOM_LOOK = {
 test("rendering in both looks", { timeout: 240000 }, async (t) => {
   const { result: o, consoleLines } = await runInBrowser(root + "tests/browser/page-render-looks.mjs", "render-looks", (page) => page.evaluate(() => window.renderLooks.run()));
   const expected = {};
-  for (const look of ["custom", "bpmn"]) {
+  for (const look of ["annotated", "bpmn"]) {
     expected[look] = Object.fromEntries(Object.entries(step0[look]).map(([id, e]) => [id, normalizePaint(e)]));
     o[look].elements = Object.fromEntries(Object.entries(o[look].elements).map(([id, e]) => [id, normalizePaint(e)]));
   }
@@ -52,15 +52,15 @@ test("rendering in both looks", { timeout: 240000 }, async (t) => {
   });
   for (const [name, ids] of Object.entries(CUSTOM_LOOK)) {
     await t.test(`(kept) Custom look: ${name}`, () => {
-      for (const id of ids) assert.deepEqual(o.custom.elements[id], expected.custom[id], id);
+      for (const id of ids) assert.deepEqual(o.annotated.elements[id], expected.annotated[id], id);
     });
   }
   await t.test("(kept) Custom look: labels inside, above the application band", () => {
-    assert.ok(o.custom.overflow.long.every((x) => x.inside) && o.custom.overflow.app.every((x) => x.inside));
+    assert.ok(o.annotated.overflow.long.every((x) => x.inside) && o.annotated.overflow.app.every((x) => x.inside));
   });
   await t.test("(kept) initial view identical in both looks, the whole diagram visible", () => {
-    assert.deepEqual(o.custom.view, o.bpmn.view);
-    assert.equal(o.custom.view.contentFits, true);
+    assert.deepEqual(o.annotated.view, o.bpmn.view);
+    assert.equal(o.annotated.view.contentFits, true);
   });
   await t.test("no console errors", () => {
     assert.deepEqual(consoleLines.filter((l) => /^\[(error|pageerror)\]/.test(l)), []);

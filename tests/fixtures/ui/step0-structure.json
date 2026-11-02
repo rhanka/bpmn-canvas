@@ -1,609 +1,609 @@
 {
- "source": "Normalised toolbar, open menus and palette of the step-0 canvas (recorded once, limited extraction: UI strings, roles, states, SVG geometry; no project ids, classes or diagram text).",
- "looks": {
-  "custom": {
-   "controls": [
-    {
-     "role": "button",
-     "name": "Undo",
-     "title": "Undo",
-     "text": "",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": [
-      "svg:width=24,height=24,viewBox=0 0 24 24",
-      "path:d=M9 14 4 9l5-5",
-      "path:d=M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"
-     ]
+  "source": "Normalised toolbar, open menus and palette of this library's workshop with the step-0 contract options in the looks of the sealed synthetic policy, recorded by tests/fixtures/ui/build-successors.mjs (stage B2 phase 2; limited extraction: UI strings, roles, states, SVG geometry; no project ids, classes or diagram text); the step-0 recording is verified by the private lot 6 gate",
+  "looks": {
+    "annotated": {
+      "controls": [
+        {
+          "role": "button",
+          "name": "Undo",
+          "title": "Undo",
+          "text": "",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": [
+            "svg:width=24,height=24,viewBox=0 0 24 24",
+            "path:d=M9 14 4 9l5-5",
+            "path:d=M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"
+          ]
+        },
+        {
+          "role": "button",
+          "name": "Redo",
+          "title": "Redo",
+          "text": "",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": [
+            "svg:width=24,height=24,viewBox=0 0 24 24",
+            "path:d=m15 14 5-5-5-5",
+            "path:d=M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"
+          ]
+        },
+        {
+          "role": "button",
+          "name": "Fit",
+          "title": "Fit (Auto)",
+          "text": "Fit ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Auto-layout",
+          "title": "Lay the diagram out again, instantly (sizes fitted to the text, no overlap); content unchanged, undoable",
+          "text": "Auto-layout",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "group",
+          "name": "Format",
+          "title": "Display only: the BPMN model is the same in both formats",
+          "text": "Annotated ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Format",
+          "title": "Display only: the BPMN model is the same in both formats",
+          "text": "Annotated ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": "Format",
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Export ▾",
+          "title": null,
+          "text": "Export ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": null,
+          "svg": []
+        }
+      ],
+      "menus": {
+        "Fit": [
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Fit (Auto)",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "separator"
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "50%",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "100%",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          }
+        ],
+        "Format": [
+          {
+            "kind": "header",
+            "text": "Format"
+          },
+          {
+            "kind": "separator"
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Annotated",
+            "disabled": false,
+            "ariaPressed": "true",
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "BPMN",
+            "disabled": false,
+            "ariaPressed": "false",
+            "ariaChecked": null,
+            "svg": []
+          }
+        ],
+        "Export ▾": [
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "BPMN",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Drawio",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Sparx",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          }
+        ]
+      },
+      "palette": [
+        {
+          "entry": "start",
+          "title": "Create Start",
+          "classes": [
+            "bpmn-icon-start-event-none"
+          ]
+        },
+        {
+          "entry": "subprocess",
+          "title": "Create Sub-process (collapsed)",
+          "classes": [
+            "bpmn-icon-subprocess-collapsed"
+          ]
+        },
+        {
+          "entry": "data-input",
+          "title": "Create Task input",
+          "classes": [
+            "bpmn-icon-data-object"
+          ]
+        },
+        {
+          "entry": "document",
+          "title": "Create Document reference",
+          "classes": [
+            "bpmn-icon-text-annotation"
+          ]
+        },
+        {
+          "entry": "application",
+          "title": "Create Application",
+          "classes": [
+            "bpmn-icon-text-annotation"
+          ]
+        },
+        {
+          "entry": "sequence-flow",
+          "title": "Create Sequence flow",
+          "classes": [
+            "bpmn-icon-connection-multi"
+          ]
+        }
+      ],
+      "paletteTwoColumns": true
     },
-    {
-     "role": "button",
-     "name": "Redo",
-     "title": "Redo",
-     "text": "",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": [
-      "svg:width=24,height=24,viewBox=0 0 24 24",
-      "path:d=m15 14 5-5-5-5",
-      "path:d=M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"
-     ]
+    "bpmn": {
+      "controls": [
+        {
+          "role": "button",
+          "name": "Undo",
+          "title": "Undo",
+          "text": "",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": [
+            "svg:width=24,height=24,viewBox=0 0 24 24",
+            "path:d=M9 14 4 9l5-5",
+            "path:d=M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"
+          ]
+        },
+        {
+          "role": "button",
+          "name": "Redo",
+          "title": "Redo",
+          "text": "",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": [
+            "svg:width=24,height=24,viewBox=0 0 24 24",
+            "path:d=m15 14 5-5-5-5",
+            "path:d=M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"
+          ]
+        },
+        {
+          "role": "button",
+          "name": "Fit",
+          "title": "Fit (Auto)",
+          "text": "Fit ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Auto-layout",
+          "title": "Lay the diagram out again, instantly (sizes fitted to the text, no overlap); content unchanged, undoable",
+          "text": "Auto-layout",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "group",
+          "name": "Format",
+          "title": "Display only: the BPMN model is the same in both formats",
+          "text": "BPMN ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Format",
+          "title": "Display only: the BPMN model is the same in both formats",
+          "text": "BPMN ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": "Format",
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Export ▾",
+          "title": null,
+          "text": "Export ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": null,
+          "svg": []
+        }
+      ],
+      "menus": {
+        "Fit": [
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Fit (Auto)",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "separator"
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "50%",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "100%",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          }
+        ],
+        "Format": [
+          {
+            "kind": "header",
+            "text": "Format"
+          },
+          {
+            "kind": "separator"
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Annotated",
+            "disabled": false,
+            "ariaPressed": "false",
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "BPMN",
+            "disabled": false,
+            "ariaPressed": "true",
+            "ariaChecked": null,
+            "svg": []
+          }
+        ],
+        "Export ▾": [
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "BPMN",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Drawio",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          },
+          {
+            "kind": "item",
+            "role": "menuitem",
+            "text": "Sparx",
+            "disabled": false,
+            "ariaPressed": null,
+            "ariaChecked": null,
+            "svg": []
+          }
+        ]
+      },
+      "palette": [
+        {
+          "entry": "start",
+          "title": "Create Start",
+          "classes": [
+            "bpmn-icon-start-event-none"
+          ]
+        },
+        {
+          "entry": "subprocess",
+          "title": "Create Sub-process (collapsed)",
+          "classes": [
+            "bpmn-icon-subprocess-collapsed"
+          ]
+        },
+        {
+          "entry": "data-input",
+          "title": "Create Task input",
+          "classes": [
+            "bpmn-icon-data-object"
+          ]
+        },
+        {
+          "entry": "document",
+          "title": "Create Document reference",
+          "classes": [
+            "bpmn-icon-text-annotation"
+          ]
+        },
+        {
+          "entry": "application",
+          "title": "Create Application",
+          "classes": [
+            "bpmn-icon-text-annotation"
+          ]
+        },
+        {
+          "entry": "sequence-flow",
+          "title": "Create Sequence flow",
+          "classes": [
+            "bpmn-icon-connection-multi"
+          ]
+        }
+      ],
+      "paletteTwoColumns": true
     },
-    {
-     "role": "button",
-     "name": "Fit",
-     "title": "Fit (Auto)",
-     "text": "Fit ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Auto-layout",
-     "title": "Lay the diagram out again, instantly (sizes fitted to the text, no overlap); content unchanged, undoable",
-     "text": "Auto-layout",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "group",
-     "name": "Format",
-     "title": "Display only: the BPMN model is the same in both formats",
-     "text": "Annotated ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Format",
-     "title": "Display only: the BPMN model is the same in both formats",
-     "text": "Annotated ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": "Format",
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Export ▾",
-     "title": null,
-     "text": "Export ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": null,
-     "svg": []
+    "readOnly": {
+      "controls": [
+        {
+          "role": "button",
+          "name": "Undo",
+          "title": "Undo",
+          "text": "",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": [
+            "svg:width=24,height=24,viewBox=0 0 24 24",
+            "path:d=M9 14 4 9l5-5",
+            "path:d=M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"
+          ]
+        },
+        {
+          "role": "button",
+          "name": "Redo",
+          "title": "Redo",
+          "text": "",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": [
+            "svg:width=24,height=24,viewBox=0 0 24 24",
+            "path:d=m15 14 5-5-5-5",
+            "path:d=M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"
+          ]
+        },
+        {
+          "role": "button",
+          "name": "Fit",
+          "title": "Fit (Auto)",
+          "text": "Fit ▾",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Auto-layout",
+          "title": "Lay the diagram out again, instantly (sizes fitted to the text, no overlap); content unchanged, undoable",
+          "text": "Auto-layout",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "group",
+          "name": "Format",
+          "title": "Display only: the BPMN model is the same in both formats",
+          "text": "Annotated ▾",
+          "disabled": false,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": null,
+          "inGroup": null,
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Format",
+          "title": "Display only: the BPMN model is the same in both formats",
+          "text": "Annotated ▾",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": "Format",
+          "svg": []
+        },
+        {
+          "role": "button",
+          "name": "Export ▾",
+          "title": null,
+          "text": "Export ▾",
+          "disabled": true,
+          "ariaPressed": null,
+          "ariaChecked": null,
+          "hasPopup": "menu",
+          "inGroup": null,
+          "svg": []
+        }
+      ],
+      "menus": {},
+      "palette": [
+        {
+          "entry": "start",
+          "title": "Create Start",
+          "classes": [
+            "bpmn-icon-start-event-none"
+          ]
+        },
+        {
+          "entry": "subprocess",
+          "title": "Create Sub-process (collapsed)",
+          "classes": [
+            "bpmn-icon-subprocess-collapsed"
+          ]
+        },
+        {
+          "entry": "data-input",
+          "title": "Create Task input",
+          "classes": [
+            "bpmn-icon-data-object"
+          ]
+        },
+        {
+          "entry": "document",
+          "title": "Create Document reference",
+          "classes": [
+            "bpmn-icon-text-annotation"
+          ]
+        },
+        {
+          "entry": "application",
+          "title": "Create Application",
+          "classes": [
+            "bpmn-icon-text-annotation"
+          ]
+        },
+        {
+          "entry": "sequence-flow",
+          "title": "Create Sequence flow",
+          "classes": [
+            "bpmn-icon-connection-multi"
+          ]
+        }
+      ],
+      "paletteTwoColumns": true
     }
-   ],
-   "menus": {
-    "Fit": [
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Fit (Auto)",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "separator"
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "50%",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "100%",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     }
-    ],
-    "Format": [
-     {
-      "kind": "header",
-      "text": "Format"
-     },
-     {
-      "kind": "separator"
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Annotated",
-      "disabled": false,
-      "ariaPressed": "true",
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "BPMN",
-      "disabled": false,
-      "ariaPressed": "false",
-      "ariaChecked": null,
-      "svg": []
-     }
-    ],
-    "Export ▾": [
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "BPMN",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Drawio",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Sparx",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     }
-    ]
-   },
-   "palette": [
-    {
-     "entry": "start",
-     "title": "Create Start",
-     "classes": [
-      "bpmn-icon-start-event-none"
-     ]
-    },
-    {
-     "entry": "subprocess",
-     "title": "Create Sub-process (collapsed)",
-     "classes": [
-      "bpmn-icon-subprocess-collapsed"
-     ]
-    },
-    {
-     "entry": "data-input",
-     "title": "Create Task input",
-     "classes": [
-      "bpmn-icon-data-object"
-     ]
-    },
-    {
-     "entry": "document",
-     "title": "Create Document reference",
-     "classes": [
-      "bpmn-icon-text-annotation"
-     ]
-    },
-    {
-     "entry": "application",
-     "title": "Create Application",
-     "classes": [
-      "bpmn-icon-text-annotation"
-     ]
-    },
-    {
-     "entry": "sequence-flow",
-     "title": "Create Sequence flow",
-     "classes": [
-      "bpmn-icon-connection-multi"
-     ]
-    }
-   ],
-   "paletteTwoColumns": true
-  },
-  "bpmn": {
-   "controls": [
-    {
-     "role": "button",
-     "name": "Undo",
-     "title": "Undo",
-     "text": "",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": [
-      "svg:width=24,height=24,viewBox=0 0 24 24",
-      "path:d=M9 14 4 9l5-5",
-      "path:d=M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"
-     ]
-    },
-    {
-     "role": "button",
-     "name": "Redo",
-     "title": "Redo",
-     "text": "",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": [
-      "svg:width=24,height=24,viewBox=0 0 24 24",
-      "path:d=m15 14 5-5-5-5",
-      "path:d=M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"
-     ]
-    },
-    {
-     "role": "button",
-     "name": "Fit",
-     "title": "Fit (Auto)",
-     "text": "Fit ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Auto-layout",
-     "title": "Lay the diagram out again, instantly (sizes fitted to the text, no overlap); content unchanged, undoable",
-     "text": "Auto-layout",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "group",
-     "name": "Format",
-     "title": "Display only: the BPMN model is the same in both formats",
-     "text": "BPMN ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Format",
-     "title": "Display only: the BPMN model is the same in both formats",
-     "text": "BPMN ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": "Format",
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Export ▾",
-     "title": null,
-     "text": "Export ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": null,
-     "svg": []
-    }
-   ],
-   "menus": {
-    "Fit": [
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Fit (Auto)",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "separator"
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "50%",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "100%",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     }
-    ],
-    "Format": [
-     {
-      "kind": "header",
-      "text": "Format"
-     },
-     {
-      "kind": "separator"
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Annotated",
-      "disabled": false,
-      "ariaPressed": "false",
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "BPMN",
-      "disabled": false,
-      "ariaPressed": "true",
-      "ariaChecked": null,
-      "svg": []
-     }
-    ],
-    "Export ▾": [
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "BPMN",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Drawio",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     },
-     {
-      "kind": "item",
-      "role": "menuitem",
-      "text": "Sparx",
-      "disabled": false,
-      "ariaPressed": null,
-      "ariaChecked": null,
-      "svg": []
-     }
-    ]
-   },
-   "palette": [
-    {
-     "entry": "start",
-     "title": "Create Start",
-     "classes": [
-      "bpmn-icon-start-event-none"
-     ]
-    },
-    {
-     "entry": "subprocess",
-     "title": "Create Sub-process (collapsed)",
-     "classes": [
-      "bpmn-icon-subprocess-collapsed"
-     ]
-    },
-    {
-     "entry": "data-input",
-     "title": "Create Task input",
-     "classes": [
-      "bpmn-icon-data-object"
-     ]
-    },
-    {
-     "entry": "document",
-     "title": "Create Document reference",
-     "classes": [
-      "bpmn-icon-text-annotation"
-     ]
-    },
-    {
-     "entry": "application",
-     "title": "Create Application",
-     "classes": [
-      "bpmn-icon-text-annotation"
-     ]
-    },
-    {
-     "entry": "sequence-flow",
-     "title": "Create Sequence flow",
-     "classes": [
-      "bpmn-icon-connection-multi"
-     ]
-    }
-   ],
-   "paletteTwoColumns": true
-  },
-  "readOnly": {
-   "controls": [
-    {
-     "role": "button",
-     "name": "Undo",
-     "title": "Undo",
-     "text": "",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": [
-      "svg:width=24,height=24,viewBox=0 0 24 24",
-      "path:d=M9 14 4 9l5-5",
-      "path:d=M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"
-     ]
-    },
-    {
-     "role": "button",
-     "name": "Redo",
-     "title": "Redo",
-     "text": "",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": [
-      "svg:width=24,height=24,viewBox=0 0 24 24",
-      "path:d=m15 14 5-5-5-5",
-      "path:d=M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"
-     ]
-    },
-    {
-     "role": "button",
-     "name": "Fit",
-     "title": "Fit (Auto)",
-     "text": "Fit ▾",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Auto-layout",
-     "title": "Lay the diagram out again, instantly (sizes fitted to the text, no overlap); content unchanged, undoable",
-     "text": "Auto-layout",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "group",
-     "name": "Format",
-     "title": "Display only: the BPMN model is the same in both formats",
-     "text": "Annotated ▾",
-     "disabled": false,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": null,
-     "inGroup": null,
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Format",
-     "title": "Display only: the BPMN model is the same in both formats",
-     "text": "Annotated ▾",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": "Format",
-     "svg": []
-    },
-    {
-     "role": "button",
-     "name": "Export ▾",
-     "title": null,
-     "text": "Export ▾",
-     "disabled": true,
-     "ariaPressed": null,
-     "ariaChecked": null,
-     "hasPopup": "menu",
-     "inGroup": null,
-     "svg": []
-    }
-   ],
-   "menus": {},
-   "palette": [
-    {
-     "entry": "start",
-     "title": "Create Start",
-     "classes": [
-      "bpmn-icon-start-event-none"
-     ]
-    },
-    {
-     "entry": "subprocess",
-     "title": "Create Sub-process (collapsed)",
-     "classes": [
-      "bpmn-icon-subprocess-collapsed"
-     ]
-    },
-    {
-     "entry": "data-input",
-     "title": "Create Task input",
-     "classes": [
-      "bpmn-icon-data-object"
-     ]
-    },
-    {
-     "entry": "document",
-     "title": "Create Document reference",
-     "classes": [
-      "bpmn-icon-text-annotation"
-     ]
-    },
-    {
-     "entry": "application",
-     "title": "Create Application",
-     "classes": [
-      "bpmn-icon-text-annotation"
-     ]
-    },
-    {
-     "entry": "sequence-flow",
-     "title": "Create Sequence flow",
-     "classes": [
-      "bpmn-icon-connection-multi"
-     ]
-    }
-   ],
-   "paletteTwoColumns": true
   }
- }
 }

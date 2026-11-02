@@ -16,7 +16,7 @@ const fixture = JSON.parse(readFileSync(new URL("./fixtures/ui/step0-structure.j
 test("workshop structure with the step-0 contract options", { timeout: 240000 }, async (t) => {
   const { result: o, consoleLines } = await runInBrowser(root + "tests/browser/page-workshop-structure.mjs", "workshop-structure", (page) => page.evaluate(() => window.structure.run()));
 
-  for (const look of ["custom", "bpmn"]) {
+  for (const look of ["annotated", "bpmn"]) {
     await t.test(`${look}: toolbar controls equal to step 0`, () => assert.deepEqual(o[look].controls, fixture.looks[look].controls));
     await t.test(`${look}: Fit, Format and Export menus equal to step 0`, () => assert.deepEqual(o[look].menus, fixture.looks[look].menus));
     await t.test(`${look}: palette = the injected annotated entries, two columns`, () => {

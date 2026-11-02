@@ -1,0 +1,1489 @@
+{
+ "format": "block-b2-p2-successors/1",
+ "date": "2026-11-01",
+ "stage": "B2 phase 2",
+ "rulings": [
+  "B2-P2-RULING §3.7, §3.8, §4",
+  "B2-P2-RULING-ADD1",
+  "B2-P2-S6-RULING"
+ ],
+ "measuredAt": {
+  "head": "365752db8ff4140c3a35d995e9b553eca09543eb",
+  "base": "98cca8bd5fde99fc793ee1b1c30f45a127facd46",
+  "predecessorTree": "ea71905195c58a1545f984e00be1715cbc1d9eb3"
+ },
+ "policy": {
+  "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+  "sha256": "7e3162eaa47ea25df97fdb55cdcc4d96c36f1155634abfa2d07b23d5465aa65b",
+  "annotatedLook": "/presentation/looks/1",
+  "recolorLook": "/presentation/looks/2"
+ },
+ "pathMasking": "path: the sealed scanner mask (derive/scan.mjs maskPath); pathSha256: SHA-256 of the repository path, the key a consumer matches",
+ "supersedesFiles": [
+  {
+   "path": "tests/core.browser.test.mjs",
+   "pathSha256": "4532e721e3223881894a829bfa337cfcb347f8ff12672da7bc8a44e0abc477ef",
+   "old": {
+    "bytes": 1818,
+    "sha256": "273528163d29781db16f7a78a67c5b2535c3e576045353981f720c56972e3d06"
+   },
+   "new": null,
+   "reason": "§3.7"
+  },
+  {
+   "path": "tests/helpers/lot0-history-pins.mjs",
+   "pathSha256": "e98c39777f03037a57ed88b777bd7307faeda2bb9fabc4844ecd6af499f3eba9",
+   "old": {
+    "bytes": 4752,
+    "sha256": "ae0ef1361b49d558dddc336b2375592190fe801f2f7dc01f005eddd9a530ff35"
+   },
+   "new": null,
+   "reason": "consumer edit (F-001 needs it under either OD-1 option)"
+  },
+  {
+   "path": "tests/io-consumer-types.test.mjs",
+   "pathSha256": "88dd1a62a6992263109029c456af97e58d7502d2beb739bbf576f1920d63bfed",
+   "old": {
+    "bytes": 3321,
+    "sha256": "86268065ec2f5b5904b8390cf3718910325090cd86b4eef672884b122c1958b1"
+   },
+   "new": null,
+   "reason": "C24 edit (F-105)"
+  },
+  {
+   "path": "tests/package-shape.test.mjs",
+   "pathSha256": "38bba23558c677d96b721631a0b8ad29d949d870325eba1e7d84d7bf9e277574",
+   "old": {
+    "bytes": 11621,
+    "sha256": "e66e35da9eec42abe114b101249de252b681b28b244ddd17c8cb87282ddb98b6"
+   },
+   "new": null,
+   "reason": "§2.2 (F-098, F-099, F-100, F-101)"
+  },
+  {
+   "path": "tests/profile-public-api.test.mjs",
+   "pathSha256": "a6bce439864ecfaf70ed3ddc476b7252dd6950ee785f455a54982c7bb148c0cd",
+   "old": {
+    "bytes": 13492,
+    "sha256": "d44b958fa5b82b749fe6b9a49edc669c0a79ade358b0b62e45f8daa9d056a4ba"
+   },
+   "new": null,
+   "reason": "C24 edit (F-001, F-002)"
+  },
+  {
+   "path": "tests/{LX-TH-1:ba29297b}.browser.test.mjs",
+   "pathSha256": "1acf4614784e78b20e30d4021f87b0605fb74dfa300f328c551fa3f4149b911e",
+   "old": {
+    "bytes": 3845,
+    "sha256": "1d5f8a9a6774b31e443662dbc788d51a7ee3c631b95d9fac90bb63aa1de0d470"
+   },
+   "new": null,
+   "reason": "§3.7"
+  },
+  {
+   "path": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "pathSha256": "203c277899c5203b7841ad4f918423e1e189f012ca6cb8a5b149612dfb66a8c0",
+   "old": {
+    "bytes": 6200,
+    "sha256": "738573920485e69b6f887f5709c02d6f05c77cf235fd0f1253b405ae8d612df6"
+   },
+   "new": null,
+   "reason": "§3.7"
+  },
+  {
+   "path": "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+   "pathSha256": "a858db8bec45424c63c9312ac27b853bb9f37c3ca24370a35de58114ca296837",
+   "old": {
+    "bytes": 4410,
+    "sha256": "60ba14ab05a5ffcb7c9bd95d701fe6f5f1cef362b347d91013b400f11bab2c2"
+   },
+   "new": null,
+   "reason": "§3.7"
+  },
+  {
+   "path": "tests/{LX-TH-2:ca8c522a}.browser.test.mjs",
+   "pathSha256": "c29dc8c71b65242cb2c8072877c829b23b488c330b993b3869a95b8ca7afdfa2",
+   "old": {
+    "bytes": 14545,
+    "sha256": "11cf65df3a5fdf89f1fb84baef02d142ddfc482cf770e31f7f54f012d0982dc0"
+   },
+   "new": null,
+   "reason": "§3.7"
+  }
+ ],
+ "completion": {
+  "supersedesFiles": "new pins and the entries of every other mismatching phase 2 edited path: final pin pass (S10, B2-P2-RULING §3.8)"
+ },
+ "successorFixtures": [
+  {
+   "path": "tests/fixtures/io/reference/C1/expected.drawio",
+   "pathSha256": "d5d27b4943273a5c364ba427d177367e63e942cba0b4bd8ee7a6c28d4e796804",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 9094,
+    "sha256": "4ebc4f02d982c78462e2d9d71dfca5ad57c761e1ad0d1930113fbe4f25656e6c"
+   },
+   "new": {
+    "bytes": 5646,
+    "sha256": "66c0320b162805fdd1e237bba601b48636753c42b8c270b8e0be6312f72afb27"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C2/expected.drawio",
+   "pathSha256": "7c53d30615cbcf61358dc03e9a55ec55ac26d7686f8b5c617cb76fdcd4fe01d8",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 14009,
+    "sha256": "514ed3e4408e885b0ea25b065b210a36bd4bbff241e591dd7cb828908743a029"
+   },
+   "new": {
+    "bytes": 8234,
+    "sha256": "a92eddb3c41263a005e80f3a1119712917e91c6fcd87997cbd1cd259913b9b47"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C3/expected.drawio",
+   "pathSha256": "efb62ff277edfb524ee7e067513e2bec0fd43b1ae9d85c22d65902239a492805",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 6531,
+    "sha256": "ea3def2cebe1b84856f7845ddd631c9fbc0271104ed8a7e72d0657d4274fed35"
+   },
+   "new": {
+    "bytes": 4026,
+    "sha256": "30c0b3aebc61960042fdf0be8b4c4a464881fcc4a39829b9c92218d1f4cfe3a2"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C4/expected.drawio",
+   "pathSha256": "e0e0460aa89169a432f4388c2411beed3be76ebb2ab4727ca0b2cde6333f8620",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 6919,
+    "sha256": "947abb14ef569e328275f8ddbc8607d518e86ba8fa3ebcc0af3a225f89ce92c8"
+   },
+   "new": {
+    "bytes": 4332,
+    "sha256": "d315ecf0a38cbd7f940326b761837e1deb28683770e3f6f33e3d527f02411ca2"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C5/expected.drawio",
+   "pathSha256": "38884ae16840dd6813d6bd219997302d5bad69ac297bd6a5bdd9ad8edf67c07a",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 9095,
+    "sha256": "41bff08814bd18020487d5b5008d1411b5e5e984df891fba98a2cce321f44530"
+   },
+   "new": {
+    "bytes": 5647,
+    "sha256": "cfd381ea5d6ea13ea59c2f742929761fcf0fe0802228179579564e736515a90f"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C6/expected.drawio",
+   "pathSha256": "c3a927faacec43434fef1cdb9591c6dcf5042c081da14bf211b2f80e00a64615",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 4331,
+    "sha256": "23324a919f256d9b7a498d86f81bac2137264c30ec97f10225db456ea2521395"
+   },
+   "new": {
+    "bytes": 2648,
+    "sha256": "14703ae2a85ce2b58257dc4d138b542ef5ca54bcd5e521ce68254d8c8e9a3266"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C7/expected.drawio",
+   "pathSha256": "52abb4e7cd6ca5c2189f6768d067536ac13ffe3ce23d4f2266655d3687094a1d",
+   "section": "§4.1",
+   "kind": "draw.io golden: reference codec output with the sealed synthetic policy",
+   "producer": "tests/fixtures/io/reference/build-successors.mjs",
+   "old": {
+    "bytes": 8686,
+    "sha256": "d43b33ef971f1ccb734bbb7c93250376cd02245bd55a366306a8e9f5eee0fefb"
+   },
+   "new": {
+    "bytes": 5483,
+    "sha256": "b3be96a444c4a3d5d214eb73a32319fb93b1fe8efc36f97a2e3e552dece37070"
+   }
+  },
+  {
+   "path": "tests/fixtures/io/reference/C1/expected-nofacts.drawio",
+   "pathSha256": "0237072c25f74983a93617e5201f42d45c4855a5c5acb518085105dc08775e2b",
+   "section": "§4.1",
+   "kind": "draw.io golden without facts: retired (no consumer, no producer)",
+   "producer": null,
+   "old": {
+    "bytes": 9094,
+    "sha256": "4ebc4f02d982c78462e2d9d71dfca5ad57c761e1ad0d1930113fbe4f25656e6c"
+   },
+   "new": null
+  },
+  {
+   "path": "tests/fixtures/io/reference/C2/expected-nofacts.drawio",
+   "pathSha256": "a62754be4a5450b5fc76495318a2cb64183591616090c678edec36966b78d31e",
+   "section": "§4.1",
+   "kind": "draw.io golden without facts: retired (no consumer, no producer)",
+   "producer": null,
+   "old": {
+    "bytes": 13979,
+    "sha256": "aa9ba08c99729e50aee0c2e188a62af0fae15bd1d6725fb0c02cb0f10201d403"
+   },
+   "new": null
+  },
+  {
+   "path": "tests/fixtures/io/reference/C3/expected-nofacts.drawio",
+   "pathSha256": "004e6b5a57efad4c1ee0060080efdd85beb4a8aa2ffe5c0ba50ffd9aff40420a",
+   "section": "§4.1",
+   "kind": "draw.io golden without facts: retired (no consumer, no producer)",
+   "producer": null,
+   "old": {
+    "bytes": 6531,
+    "sha256": "e7b17a1831bcf7da704b66a1c9b985736ea49cd8232a18803f1b3c9986877808"
+   },
+   "new": null
+  },
+  {
+   "path": "tests/fixtures/io/reference/C4/expected-nofacts.drawio",
+   "pathSha256": "f6a53efbf255e1dd686be0b5e1885e255d297e83bbc1019aec5f3f6660888cb2",
+   "section": "§4.1",
+   "kind": "draw.io golden without facts: retired (no consumer, no producer)",
+   "producer": null,
+   "old": {
+    "bytes": 6904,
+    "sha256": "f513d8f48942da456cf134227ac29e591318238893b694d8adcf43cf447adb48"
+   },
+   "new": null
+  },
+  {
+   "path": "tests/fixtures/io/reference/C7/expected-nofacts.drawio",
+   "pathSha256": "621a07010269246f5b14281540603efc6b0a2fc16c69b9d21d588451b0dfa035",
+   "section": "§4.1",
+   "kind": "draw.io golden without facts: retired (no consumer, no producer)",
+   "producer": null,
+   "old": {
+    "bytes": 8686,
+    "sha256": "8ea930de8393e556d6d295dbd0cba3045f714b30e2ac6fe86e5f864959754ac8"
+   },
+   "new": null
+  },
+  {
+   "path": "tests/fixtures/ui/step0-render.json",
+   "pathSha256": "5f41b0e4236c4d175b23dfad15d98f61931842a2722117a916b48550e6b38b36",
+   "section": "§4.1",
+   "kind": "SVG primitives of both workshop looks of the sealed synthetic policy (looks annotated, bpmn; 32 elements each, element id sets equal to the old file)",
+   "producer": "tests/fixtures/ui/build-successors.mjs",
+   "page": "tests/browser/page-render-looks.mjs",
+   "serialization": "JSON.stringify(value, null, 1) + newline",
+   "old": {
+    "bytes": 27713,
+    "sha256": "493b8ddc20aaedf4ae0073ea299c26297524e0a1cc138dc41f757b7d8199bc05"
+   },
+   "new": {
+    "bytes": 28686,
+    "sha256": "ecad7517411478aae2f04df3155fcf75880ea4dbaa052393191c67ba88007b55"
+   }
+  },
+  {
+   "path": "tests/fixtures/ui/step0-structure.json",
+   "pathSha256": "5da9376940134f38f0ce46fc848b68b657810ebd01b8d093e5f0cd806db2a93d",
+   "section": "§4.1",
+   "kind": "workshop toolbar, open menus and palette with the step-0 contract options (looks annotated, bpmn, readOnly; fields controls, menus, palette, paletteTwoColumns)",
+   "producer": "tests/fixtures/ui/build-successors.mjs",
+   "page": "tests/browser/page-workshop-structure.mjs",
+   "serialization": "JSON.stringify(value, null, 2) + newline",
+   "old": {
+    "bytes": 20286,
+    "sha256": "7e7b4392ae7786e6add22d19f78fbf165afc2f8f1dbc7647c81919b560388efb"
+   },
+   "new": {
+    "bytes": 16259,
+    "sha256": "afc62218f54b4da3ce735c29ea8d74c42b4200b68230a1b8d616c68382dfd174"
+   }
+  },
+  {
+   "path": "tests/fixtures/layout/loop-pin.json",
+   "pathSha256": "2db5203d416908fb8b5d157a3fa8258690a4bcd347b7e56c84e2fba7368c3925",
+   "section": "§3.2",
+   "kind": "layout successor pin: output of layoutProcess with the sealed synthetic policy",
+   "producer": null,
+   "old": {
+    "bytes": 3809,
+    "sha256": "9090f75c64b3236d2e8616d6fbb442ce4c157666d31518c6b093a4e5c7a8d66c"
+   },
+   "new": {
+    "bytes": 3806,
+    "sha256": "931370b06d7054b58e1af51b74060dacbbb159afb0fd81aacdac40471833eb97"
+   }
+  },
+  {
+   "path": "tests/fixtures/layout-corpus/cases.json",
+   "pathSha256": "14ad4070bc6f373ba41c40e0ce867ac38dd150dc1373d2a51212f8b2213a56bc",
+   "section": "§3.2",
+   "kind": "layout corpus: reference diagrams read as the canvas reads them, laid out with the sealed synthetic policy",
+   "producer": "tests/fixtures/layout-corpus/build.mjs",
+   "old": {
+    "bytes": 6803,
+    "sha256": "4e156220c92cdafe18131b78bb1c483928d2aa8382a6a5fcc3c08b42f8c7ac44"
+   },
+   "new": {
+    "bytes": 8318,
+    "sha256": "a2eec0781b785f94712af4d066e647a509ed104f20aa1ce14e2c8ce017527810"
+   }
+  },
+  {
+   "path": "tests/fixtures/layout-corpus/expected.json",
+   "pathSha256": "ba480624f5b8e4fae2efa30c11f75cdf4c0c93e264f39e3795f0176369bf6aa8",
+   "section": "§3.2",
+   "kind": "layout corpus: reference diagrams read as the canvas reads them, laid out with the sealed synthetic policy",
+   "producer": "tests/fixtures/layout-corpus/build.mjs",
+   "old": {
+    "bytes": 15522,
+    "sha256": "1fe993144bd4e9eb6763a0113dc4fb44412ff41a61ada3faa9f985963426aa53"
+   },
+   "new": {
+    "bytes": 16446,
+    "sha256": "663b25137382bdb11e4fc0c5a9e2620a224477bd8686a244b06d955e1cce50c0"
+   }
+  },
+  {
+   "path": "tests/fixtures/layout-corpus/VERSION",
+   "pathSha256": "0d4761c595f37c0ed0c06767b18624fb87ad640eabfa63b7ca1d94d7407c7426",
+   "section": "§3.2",
+   "kind": "layout corpus: reference diagrams read as the canvas reads them, laid out with the sealed synthetic policy",
+   "producer": "tests/fixtures/layout-corpus/build.mjs",
+   "old": {
+    "bytes": 325,
+    "sha256": "4dfe3be8d3eb5b3398fb67259d019c9a2bd540c964d86e8d8bc918847c6c5d81"
+   },
+   "new": {
+    "bytes": 325,
+    "sha256": "90c9da33df6819204d0a595ecd616cc24487971ee08cd65a828ff9a3da6d93be"
+   }
+  }
+ ],
+ "callerData": {
+  "path": "tests/helpers/injected-policy.mjs",
+  "exports": [
+   "cssPalettePolicy",
+   "cssPaletteOptions"
+  ],
+  "palette": "16 entries: id annotated.<action> for each action that the package palette CSS styles, title <action>, bpmnType bpmn:Task, group activities, icon bpmn-icon-task; looks, layout, metrics and the other policy sections are those of the sealed synthetic policy",
+  "consumers": [
+   1021,
+   1063,
+   69
+  ],
+  "precedent": "B2-P2-RULING §3.7 ordinal 980 (explicit caller decode rule)"
+ },
+ "successorValues": [
+  {
+   "ordinal": 1020,
+   "path": "tests/{LX-TH-1:ba29297b}.browser.test.mjs",
+   "pathSha256": "1acf4614784e78b20e30d4021f87b0605fb74dfa300f328c551fa3f4149b911e",
+   "page": "tests/browser/page-{LX-TH-1:ba29297b}.mjs",
+   "values": [
+    {
+     "line": 11,
+     "subtest": 4,
+     "what": "overlap of the application band used by the sub-process marker check",
+     "old": 10,
+     "new": {
+      "pointer": "/presentation/layout/appBadge/overlap",
+      "value": 9
+     },
+     "kind": "value"
+    },
+    {
+     "line": 39,
+     "subtest": 5,
+     "what": "result key read for the plain instance (value false unchanged)",
+     "old": {
+      "key": "{LX-TH-1:ba29297b}"
+     },
+     "new": {
+      "key": "annotated"
+     },
+     "kind": "reader follows the page key renamed at S5"
+    },
+    {
+     "line": 42,
+     "subtest": 6,
+     "what": "marker and gradient ids of instance a",
+     "old": [
+      "ia-{LX-TH-1:ba29297b}-arrow",
+      "ia-{LX-TH-1:ba29297b}-task-gradient"
+     ],
+     "new": [
+      "ia-annotated-arrow",
+      "ia-annotated-task-gradient"
+     ],
+     "kind": "value"
+    },
+    {
+     "line": 43,
+     "subtest": 6,
+     "what": "marker and gradient ids of instance b",
+     "old": [
+      "ib-{LX-TH-1:ba29297b}-arrow",
+      "ib-{LX-TH-1:ba29297b}-task-gradient"
+     ],
+     "new": [
+      "ib-annotated-arrow",
+      "ib-annotated-task-gradient"
+     ],
+     "kind": "value"
+    },
+    {
+     "line": 47,
+     "subtest": 7,
+     "what": "updater class of the profiled instance",
+     "old": {
+      "key": "{LX-TH-1:ba29297b}InstanceUpdaterClass",
+      "value": "{LX-TH-1:7482e374}BpmnUpdater"
+     },
+     "new": {
+      "key": "annotatedInstanceUpdaterClass",
+      "value": "AnnotatedBpmnUpdater"
+     },
+     "kind": "value + key rename (page line 126)"
+    },
+    {
+     "line": 57,
+     "subtest": 9,
+     "what": "result key after destroying instance a (value true unchanged)",
+     "old": {
+      "key": "bTaskStill{LX-TH-1:7482e374}"
+     },
+     "new": {
+      "key": "bTaskStillAnnotated"
+     },
+     "kind": "key rename (page line 144)"
+    },
+    {
+     "line": 58,
+     "subtest": 9,
+     "what": "marker id kept by instance b",
+     "old": "ib-{LX-TH-1:ba29297b}-arrow",
+     "new": "ib-annotated-arrow",
+     "kind": "value"
+    }
+   ]
+  },
+  {
+   "ordinal": 1021,
+   "path": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "pathSha256": "203c277899c5203b7841ad4f918423e1e189f012ca6cb8a5b149612dfb66a8c0",
+   "page": "tests/browser/page-{LX-TH-1:ba29297b}2.mjs",
+   "values": [
+    {
+     "line": 8,
+     "subtest": null,
+     "what": "page init (window.__fixture)",
+     "old": "fixtureOptions",
+     "new": "cssPaletteOptions (tests/helpers/injected-policy.mjs)",
+     "kind": "explicit caller palette"
+    },
+    {
+     "line": 80,
+     "subtest": 8,
+     "what": "default tokens of the annotated look (B2 I-3239..I-3250)",
+     "old": {
+      "rows": "I-3239..I-3250"
+     },
+     "new": {
+      "pointer": "/presentation/looks/1/tokens",
+      "expression": "{ ...look.tokens }"
+     },
+     "kind": "B2 replacement (S5)"
+    },
+    {
+     "line": 85,
+     "subtest": 9,
+     "what": "palette entries styled by the package CSS",
+     "old": 16,
+     "new": 16,
+     "kind": "unchanged: S5 candidate 0 rejected; the caller palette carries the 16 action ids that the CSS styles"
+    },
+    {
+     "line": 95,
+     "subtest": 11,
+     "what": "result key of the plain look",
+     "old": {
+      "key": "{LX-TH-3:fe6d3468}"
+     },
+     "new": {
+      "key": "plain"
+     },
+     "kind": "key rename (page line 143)",
+     "lines": [
+      95,
+      96,
+      97
+     ]
+    },
+    {
+     "line": null,
+     "subtest": 6,
+     "what": "page line 151: the look-token option of the canvas with caller tokens",
+     "old": "S5 rename on a line not otherwise edited",
+     "new": "base bytes restored (the published look-token option, D5)",
+     "kind": "restore: byte-identical line pairs with its base rows",
+     "pageLine": 151
+    }
+   ]
+  },
+  {
+   "ordinal": 1022,
+   "path": "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+   "pathSha256": "a858db8bec45424c63c9312ac27b853bb9f37c3ca24370a35de58114ca296837",
+   "page": "tests/browser/page-{LX-TH-1:ba29297b}3.mjs",
+   "values": [
+    {
+     "line": null,
+     "subtest": null,
+     "what": "page line 85: tokens given to the second canvas",
+     "old": {
+      "link": "#112233",
+      "docLink": {
+       "row": "I-1779"
+      },
+      "docLinkDash": "3 4",
+      "laneFill": "#aabbcc",
+      "laneHeaderFill": "#fbf9f6"
+     },
+     "new": {
+      "link": "#112233",
+      "docLink": {
+       "pointer": "/presentation/looks/1/tokens/docLink",
+       "expression": "tok.docLink"
+      },
+      "docLinkDash": "3 4",
+      "laneFill": "#aabbcc",
+      "laneHeaderFill": "#fbf9f6"
+     },
+     "kind": "B2 replacement of I-1779 only; S5 had replaced the four test-chosen values too, S6 restores them",
+     "pageLine": 85
+    },
+    {
+     "line": 18,
+     "subtest": 1,
+     "what": "neutral document link",
+     "old": {
+      "stroke": {
+       "row": "I-3266"
+      },
+      "dash": "5 5"
+     },
+     "new": {
+      "stroke": {
+       "pointer": "/presentation/looks/1/tokens/docLink",
+       "value": "#161616"
+      },
+      "dash": {
+       "pointer": "/presentation/looks/1/tokens/docLinkDash",
+       "value": "5 5"
+      }
+     },
+     "kind": "B2 replacement (S5)"
+    },
+    {
+     "line": 19,
+     "subtest": 1,
+     "what": "neutral note link",
+     "old": {
+      "stroke": {
+       "row": "I-3267"
+      },
+      "dash": "5 5"
+     },
+     "new": {
+      "stroke": {
+       "pointer": "/presentation/looks/1/tokens/link",
+       "value": "#131313"
+      },
+      "dash": "5 5"
+     },
+     "kind": "B2 replacement; dash is the renderer constant (S5 token read corrected)"
+    },
+    {
+     "line": 23,
+     "subtest": 2,
+     "what": "given document link",
+     "old": {
+      "stroke": {
+       "row": "I-3269"
+      },
+      "dash": "3 4"
+     },
+     "new": {
+      "stroke": {
+       "pointer": "/presentation/looks/1/tokens/docLink",
+       "value": "#161616"
+      },
+      "dash": "3 4"
+     },
+     "kind": "B2 replacement; dash is the given value (S5 token read corrected)"
+    },
+    {
+     "line": 24,
+     "subtest": 2,
+     "what": "given note link",
+     "old": {
+      "stroke": "#112233",
+      "dash": "5 5"
+     },
+     "new": {
+      "stroke": "#112233",
+      "dash": "5 5"
+     },
+     "kind": "unchanged: S5 candidate rejected (artifact of the S5 page line 85 edit)"
+    },
+    {
+     "line": 27,
+     "subtest": 3,
+     "what": "given directional link",
+     "old": {
+      "stroke": {
+       "row": "I-3271"
+      },
+      "dash": "3 4"
+     },
+     "new": {
+      "stroke": {
+       "pointer": "/presentation/looks/1/tokens/docLink",
+       "value": "#161616"
+      },
+      "dash": "3 4"
+     },
+     "kind": "B2 replacement; dash is the given value (S5 token read corrected)"
+    },
+    {
+     "line": 35,
+     "subtest": 5,
+     "what": "neutral external label colour",
+     "old": "#22242a",
+     "new": {
+      "pointer": "/presentation/looks/1/tokens/labelText",
+      "value": "#0a0a0a"
+     },
+     "kind": "value"
+    },
+    {
+     "line": 42,
+     "subtest": 7,
+     "what": "given lane header fill",
+     "old": "#fbf9f6",
+     "new": "#fbf9f6",
+     "kind": "unchanged: S5 candidate rejected (artifact of the S5 page line 85 edit)"
+    },
+    {
+     "line": 44,
+     "subtest": 7,
+     "what": "neutral lane header fill",
+     "old": "#ffffff",
+     "new": {
+      "pointer": "/presentation/looks/1/tokens/laneHeaderFill",
+      "value": "#3a3a3a"
+     },
+     "kind": "value"
+    }
+   ]
+  },
+  {
+   "ordinal": 1063,
+   "path": "tests/palette.browser.test.mjs",
+   "pathSha256": "75baafa54869e9eb598cca8df43d43bcb51c8dee23db8d3f1ce4fb94db49beb3",
+   "page": "tests/browser/page-palette.mjs",
+   "values": [
+    {
+     "line": 54,
+     "subtest": null,
+     "what": "annotated canvases L and L2 (lines 54, 60)",
+     "old": "fixture palette (6 entries, no id styled by the package CSS)",
+     "new": "businessPolicy: cssPalettePolicy (16 entries annotated.<action>)",
+     "kind": "explicit caller palette",
+     "lines": [
+      54,
+      60
+     ]
+    },
+    {
+     "line": 135,
+     "subtest": 6,
+     "what": "icon background of each of the 16 actions",
+     "old": {
+      "key": "{LX-TH-1:ba29297b}.<action>",
+      "value": "rgb(TOKENS[group token])"
+     },
+     "new": {
+      "key": "annotated.<action>",
+      "value": "rgb(TOKENS[group token])"
+     },
+     "kind": "key prefix rename; values unchanged (S5 candidate rejected: TypeError at 365752db)"
+    },
+    {
+     "line": 140,
+     "subtest": 7,
+     "what": "independence of two instances (lines 140, 141)",
+     "old": {
+      "key": "{LX-TH-1:ba29297b}.<action>"
+     },
+     "new": {
+      "key": "annotated.<action>"
+     },
+     "kind": "key prefix rename; values unchanged (S5 candidate rejected: TypeError at 365752db)",
+     "lines": [
+      140,
+      141
+     ]
+    },
+    {
+     "line": 176,
+     "subtest": 13,
+     "what": "distinct masks (lines 176-178; 16 masks, 16 distinct)",
+     "old": {
+      "key": "{LX-TH-1:ba29297b}.<action>"
+     },
+     "new": {
+      "key": "annotated.<action>"
+     },
+     "kind": "key prefix rename; values unchanged (S5 candidate rejected: missing elements)",
+     "lines": [
+      176,
+      177,
+      178
+     ]
+    },
+    {
+     "line": 131,
+     "subtest": 5,
+     "what": "root flag of the recolor scope class (lines 131, 148, 156, 162)",
+     "old": {
+      "key": "{LX-TH-2:ca8c522a}"
+     },
+     "new": {
+      "key": "recolor"
+     },
+     "kind": "key rename (page line 71); values unchanged",
+     "lines": [
+      131,
+      148,
+      156,
+      162
+     ]
+    },
+    {
+     "line": 55,
+     "subtest": null,
+     "what": "test-local result keys (lines 55, 56, 77, 119, 131, 135, 162, 164)",
+     "old": [
+      "{LX-TH-1:ba29297b}Root",
+      "{LX-TH-1:ba29297b}Styles",
+      "public{LX-TH-2:71456594}"
+     ],
+     "new": [
+      "annotatedRoot",
+      "annotatedStyles",
+      "publicRecolor"
+     ],
+     "kind": "key rename on edited lines"
+    }
+   ]
+  },
+  {
+   "ordinal": 3720,
+   "path": "tests/render-looks.browser.test.mjs",
+   "pathSha256": "314a084ecb8d5b0c7ca1e5d8405d791f448c97817f7f964f9d19e15c07c72a28",
+   "page": "tests/browser/page-render-looks.mjs",
+   "values": [
+    {
+     "line": 36,
+     "subtest": null,
+     "what": "format id of the annotated format (test lines 36, 55, 59, 62, 63; page lines 12, 67)",
+     "old": "{LX-TH-4:6cdfd271}",
+     "new": "annotated",
+     "kind": "format-id rename (rename table); readers follow",
+     "lines": [
+      36,
+      55,
+      59,
+      62,
+      63
+     ]
+    },
+    {
+     "line": null,
+     "subtest": null,
+     "what": "every compared element",
+     "old": "step-0 recording",
+     "new": "tests/fixtures/ui/step0-render.json new (successorFixtures)",
+     "kind": "successor capture"
+    }
+   ]
+  },
+  {
+   "ordinal": 3833,
+   "path": "tests/workshop-structure.browser.test.mjs",
+   "pathSha256": "c55978ae9e67e4119451063c3513806c6a2eb8721a1d62d4f5192f8060473f7c",
+   "page": "tests/browser/page-workshop-structure.mjs",
+   "values": [
+    {
+     "line": 19,
+     "subtest": null,
+     "what": "format id of the annotated format (test line 19; page lines 67, 111, 113, 116)",
+     "old": "{LX-TH-4:6cdfd271}",
+     "new": "annotated",
+     "kind": "format-id rename (rename table); readers follow"
+    },
+    {
+     "line": null,
+     "subtest": null,
+     "what": "page line 74: toolbar icons passed to the contract",
+     "old": {
+      "look": "{LX-TH-4:6cdfd271}"
+     },
+     "new": {
+      "look": "bpmn"
+     },
+     "kind": "reader of the capture: the bpmn look controls (same svg content)",
+     "pageLine": 74
+    },
+    {
+     "line": null,
+     "subtest": null,
+     "what": "controls, menus, palette, read-only controls",
+     "old": "step-0 recording (format label, 16 entries)",
+     "new": "tests/fixtures/ui/step0-structure.json new: label Annotated, the 6 injected entries with their bpmn-icon classes",
+     "kind": "successor capture"
+    }
+   ]
+  },
+  {
+   "ordinal": 69,
+   "path": "tests/browser-dist.browser.test.mjs",
+   "pathSha256": "69b11d5484bfd7b1701c74eb718f84eddd3c9cb14c2622367e98fc220a986fcf",
+   "page": "tests/browser-dist/proof.js",
+   "values": [
+    {
+     "line": 140,
+     "subtest": null,
+     "what": "page init (window.__fixture)",
+     "old": "fixtureOptions",
+     "new": "cssPaletteOptions",
+     "kind": "explicit caller palette"
+    },
+    {
+     "line": 184,
+     "subtest": null,
+     "what": "palette glyph CSS variable of the first annotated entry (proof line 41)",
+     "old": {
+      "property": "--bpmn-canvas-{LX-TH-1:ba29297b}-glyph",
+      "selector": "[data-action^='{LX-TH-1:ba29297b}.']"
+     },
+     "new": {
+      "property": "--bpmn-canvas-annotated-glyph",
+      "selector": "[data-action^='annotated.']"
+     },
+     "kind": "rename table; assertion unchanged (S5 candidate empty string rejected)"
+    },
+    {
+     "line": 167,
+     "subtest": null,
+     "what": "proof result key (proof line 47)",
+     "old": {
+      "key": "{LX-TH-1:ba29297b}Shapes"
+     },
+     "new": {
+      "key": "annotatedShapes"
+     },
+     "kind": "key rename (rename table)"
+    }
+   ]
+  },
+  {
+   "ordinal": 85,
+   "path": "tests/demo.browser.test.mjs",
+   "pathSha256": "4d7d1e433334a6a9cc4e29b7f601df809619499117a4c49ec60750bdd7b9b8ae",
+   "page": "docs/demo/app.mjs",
+   "values": [
+    {
+     "line": 45,
+     "subtest": null,
+     "what": "assertion message of the default look",
+     "old": "{LX-TH-4:494ca78f} look by default",
+     "new": "Annotated look by default",
+     "kind": "message reword"
+    },
+    {
+     "line": null,
+     "subtest": null,
+     "what": "app format id (app lines 22, 51, 134)",
+     "old": "{LX-TH-4:6cdfd271}",
+     "new": "annotated",
+     "kind": "format-id rename; intent and initial-format readers follow",
+     "appLines": [
+      22,
+      51,
+      134
+     ]
+    },
+    {
+     "line": null,
+     "subtest": null,
+     "what": "app texts (lines 36, 90)",
+     "old": "0.3 look names",
+     "new": "Annotated look; upstream notation in the demo palette",
+     "kind": "coherence of the visible texts",
+     "appLines": [
+      36,
+      90
+     ]
+    }
+   ]
+  }
+ ],
+ "b2Replacements": [
+  {
+   "row": "I-1647",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 13,
+   "column": 34,
+   "endColumn": 41,
+   "entry": "LX-PR-3",
+   "literal": "c0a686418666768b0fc273c590bf663bf98a10eec603a8fbb6dca1e71b248b96",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1648",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 13,
+   "column": 58,
+   "endColumn": 65,
+   "entry": "LX-PR-3",
+   "literal": "a3bf52119390d8128b0990ace70e3de2eea22f02c8c817372398edd8ed44a470",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1649",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 13,
+   "column": 106,
+   "endColumn": 113,
+   "entry": "LX-PR-3",
+   "literal": "14bc6fa4a2ba99729908cd4c19b9780d990f3044ce47bc207b0e1b966b12c762",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1650",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 14,
+   "column": 36,
+   "endColumn": 43,
+   "entry": "LX-PR-3",
+   "literal": "be4f2650d06aa5f6af22fdda893a422b729909001cc5965afef07535ce3840b0",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1651",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 15,
+   "column": 53,
+   "endColumn": 60,
+   "entry": "LX-PR-3",
+   "literal": "ab5c2bf8a1fc90f26c8be2d729fb83115dd86e34b7341c83af35cbb942112332",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1652",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 15,
+   "column": 93,
+   "endColumn": 100,
+   "entry": "LX-PR-3",
+   "literal": "d410d55e642cb900a0afc654596ac897c5ad7401ffcbf133d1e9b68d53997159",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1653",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 16,
+   "column": 55,
+   "endColumn": 62,
+   "entry": "LX-PR-3",
+   "literal": "0cd059af63e25fd42f00a0bb7859077580b571b5b42d6ca16939e551502ec178",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1654",
+   "file": "tests/browser/page-render-looks.mjs",
+   "line": 16,
+   "column": 76,
+   "endColumn": 83,
+   "entry": "LX-PR-3",
+   "literal": "ba9c40d05783dd592bdf89209317a5288b50e3f50926752fb7b9b798f8e83336",
+   "step": "S5",
+   "replacement": "line deleted (BPMN_TOKENS); the BPMN format renders with the injected recolor look",
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/2/tokens"
+   },
+   "recordedIn": "tests/fixtures/ui/step0-render.json new"
+  },
+  {
+   "row": "I-1779",
+   "file": "tests/browser/page-{LX-TH-1:ba29297b}3.mjs",
+   "line": 84,
+   "column": 56,
+   "endColumn": 63,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S7",
+   "replacement": {
+    "line": 85,
+    "expression": "docLink: tok.docLink"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens/docLink"
+   }
+  },
+  {
+   "row": "I-3182",
+   "file": "tests/{LX-TH-1:ba29297b}-style.test.mjs",
+   "line": 173,
+   "column": 68,
+   "endColumn": 75,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S3",
+   "replacement": {
+    "line": 165,
+    "value": "#0a0b0c",
+    "field": "docLink (given)"
+   },
+   "source": "B2-P2-RULING §3.4 F-092"
+  },
+  {
+   "row": "I-3183",
+   "file": "tests/{LX-TH-1:ba29297b}-style.test.mjs",
+   "line": 174,
+   "column": 87,
+   "endColumn": 94,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S3",
+   "replacement": {
+    "line": 166,
+    "value": "#0a0b0c",
+    "field": "docLink (expected list)"
+   },
+   "source": "B2-P2-RULING §3.4 F-092"
+  },
+  {
+   "row": "I-3239",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 77,
+   "column": 94,
+   "endColumn": 101,
+   "entry": "LX-PR-3",
+   "literal": "f3e153ade415c74960e4f61202b3610d38afb2d392d9699373a0a112a15c8525",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3240",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 78,
+   "column": 13,
+   "endColumn": 20,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3241",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 78,
+   "column": 33,
+   "endColumn": 40,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3242",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 79,
+   "column": 38,
+   "endColumn": 45,
+   "entry": "LX-PR-3",
+   "literal": "c0a686418666768b0fc273c590bf663bf98a10eec603a8fbb6dca1e71b248b96",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3243",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 79,
+   "column": 62,
+   "endColumn": 69,
+   "entry": "LX-PR-3",
+   "literal": "a3bf52119390d8128b0990ace70e3de2eea22f02c8c817372398edd8ed44a470",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3244",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 79,
+   "column": 106,
+   "endColumn": 113,
+   "entry": "LX-PR-3",
+   "literal": "be4f2650d06aa5f6af22fdda893a422b729909001cc5965afef07535ce3840b0",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3245",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 80,
+   "column": 44,
+   "endColumn": 51,
+   "entry": "LX-PR-3",
+   "literal": "14bc6fa4a2ba99729908cd4c19b9780d990f3044ce47bc207b0e1b966b12c762",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3246",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 80,
+   "column": 86,
+   "endColumn": 93,
+   "entry": "LX-PR-3",
+   "literal": "ba9c40d05783dd592bdf89209317a5288b50e3f50926752fb7b9b798f8e83336",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3247",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 81,
+   "column": 94,
+   "endColumn": 101,
+   "entry": "LX-PR-3",
+   "literal": "81c88047bd528fcea1bbfe71f14e424776e3e6f4f80817e3705108cd462f6e57",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3248",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 82,
+   "column": 36,
+   "endColumn": 43,
+   "entry": "LX-PR-3",
+   "literal": "ab5c2bf8a1fc90f26c8be2d729fb83115dd86e34b7341c83af35cbb942112332",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3249",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 82,
+   "column": 78,
+   "endColumn": 85,
+   "entry": "LX-PR-3",
+   "literal": "c0a686418666768b0fc273c590bf663bf98a10eec603a8fbb6dca1e71b248b96",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3250",
+   "file": "tests/{LX-TH-1:ba29297b}2.browser.test.mjs",
+   "line": 82,
+   "column": 118,
+   "endColumn": 125,
+   "entry": "LX-PR-3",
+   "literal": "d410d55e642cb900a0afc654596ac897c5ad7401ffcbf133d1e9b68d53997159",
+   "step": "S5",
+   "replacement": {
+    "line": 80,
+    "expression": "{ ...look.tokens }"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens"
+   }
+  },
+  {
+   "row": "I-3266",
+   "file": "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+   "line": 13,
+   "column": 47,
+   "endColumn": 54,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S5",
+   "replacement": {
+    "line": 18,
+    "expression": "stroke: tok.docLink"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens/docLink"
+   }
+  },
+  {
+   "row": "I-3267",
+   "file": "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+   "line": 14,
+   "column": 48,
+   "endColumn": 55,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S5",
+   "replacement": {
+    "line": 19,
+    "expression": "stroke: tok.link"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens/link"
+   }
+  },
+  {
+   "row": "I-3269",
+   "file": "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+   "line": 18,
+   "column": 45,
+   "endColumn": 52,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S5",
+   "replacement": {
+    "line": 23,
+    "expression": "stroke: tok.docLink"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens/docLink"
+   }
+  },
+  {
+   "row": "I-3271",
+   "file": "tests/{LX-TH-1:ba29297b}3.browser.test.mjs",
+   "line": 22,
+   "column": 53,
+   "endColumn": 60,
+   "entry": "LX-PR-3",
+   "literal": "8c2bd8e256ba39a501923a99a5fb2006553595a7cee261ba975ac7e14a3cdce9",
+   "step": "S5",
+   "replacement": {
+    "line": 27,
+    "expression": "stroke: tok.docLink"
+   },
+   "source": {
+    "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+    "pointer": "/presentation/looks/1/tokens/docLink"
+   }
+  },
+  {
+   "row": "I-3334",
+   "file": "tests/{LX-TH-2:ca8c522a}-style.test.mjs",
+   "line": 99,
+   "column": 48,
+   "endColumn": 55,
+   "entry": "LX-PR-3",
+   "literal": "c0a686418666768b0fc273c590bf663bf98a10eec603a8fbb6dca1e71b248b96",
+   "step": "S3",
+   "replacement": "lines deleted (F-010, retired toward x24-R-005, x24-R-008, x24-A-012)",
+   "source": "B2-P2-RULING §3.4"
+  },
+  {
+   "row": "I-3337",
+   "file": "tests/{LX-TH-2:ca8c522a}-style.test.mjs",
+   "line": 100,
+   "column": 49,
+   "endColumn": 56,
+   "entry": "LX-PR-3",
+   "literal": "be4f2650d06aa5f6af22fdda893a422b729909001cc5965afef07535ce3840b0",
+   "step": "S3",
+   "replacement": "lines deleted (F-010, retired toward x24-R-005, x24-R-008, x24-A-012)",
+   "source": "B2-P2-RULING §3.4"
+  }
+ ],
+ "keptFiles": [
+  {
+   "path": "docs/demo/{LX-TH-3:fe6d3468}.svg",
+   "pathSha256": "cd25050b39cd9f4ff0bb3e281e1eb995112353420029f64ea1fadd6e4bb82b1c",
+   "pin": {
+    "bytes": 70881,
+    "sha256": "f078a56da63ac936e05d42c291e167ecb505ae87355394bab0cc6caaedabec6f"
+   },
+   "reason": "B2-P2-RULING O2: the README images stay renders of the 0.3 looks; the S5 recapture and generator edit are reverted to these base bytes"
+  },
+  {
+   "path": "docs/demo/{LX-TH-1:ba29297b}.svg",
+   "pathSha256": "fc95c08781e6c79e219b88c13388ce66bd61945ca4d433ddc26e1f832e3eefff",
+   "pin": {
+    "bytes": 61890,
+    "sha256": "050daa65f9fd21deb145150e3f222a0e5de0ef855b8511fa400bdc65bf64d8a8"
+   },
+   "reason": "B2-P2-RULING O2: the README images stay renders of the 0.3 looks; the S5 recapture and generator edit are reverted to these base bytes"
+  },
+  {
+   "path": "docs/demo/{LX-TH-2:ca8c522a}.svg",
+   "pathSha256": "00fdba4e83ecd8adfe5ac25db4f4a821bd04ed78a89a9c085611f66585f31971",
+   "pin": {
+    "bytes": 71572,
+    "sha256": "069c23a80ee02d49690f2b45233cb2475777291cc78974be54f09eb5c1989997"
+   },
+   "reason": "B2-P2-RULING O2: the README images stay renders of the 0.3 looks; the S5 recapture and generator edit are reverted to these base bytes"
+  },
+  {
+   "path": "scripts/gen-demo-svg.mjs",
+   "pathSha256": "be0519fa47246708df38b0c4267be12690407e194caedcf14139783ace97800d",
+   "pin": {
+    "bytes": 1959,
+    "sha256": "6a1e251743bfad6f9fbf54cdbeb1290a3b6a4cf27033a2151f523b9d6e62e872"
+   },
+   "reason": "B2-P2-RULING O2: the README images stay renders of the 0.3 looks; the S5 recapture and generator edit are reverted to these base bytes"
+  }
+ ]
+}

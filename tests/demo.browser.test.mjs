@@ -42,7 +42,7 @@ test("the demo app: multi-tab workshop and a chat with a simulated assistant tha
     const tabs = () => page.$$eval('[role="tab"]', (ts) => ts.map((t) => t.textContent.trim()));
     // First document: four diagrams, one tab each, in the default (Custom) look.
     assert.deepEqual(await tabs(), ["Onboarding employee", "IT", "Payroll", "Facilities"]);
-    assert.ok((await page.locator(".annotated-shape").count()) > 5, "Custom look by default");
+    assert.ok((await page.locator(".annotated-shape").count()) > 5, "Annotated look by default");
     await page.click('[role="tab"]:has-text("Payroll")');
     await page.waitForFunction(() => document.querySelector('[role="tab"][aria-selected="true"]')?.textContent.trim() === "Payroll");
 
