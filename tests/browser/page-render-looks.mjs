@@ -2,22 +2,15 @@
 // step-0 rendering; labels inside their shapes; the initial view.
 import { createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { BpmnWorkshop } from "../../dist/react/index.js";
+import { BpmnWorkshop as BpmnWorkshopBase } from "../../dist/react/index.js";
+const BpmnWorkshop = (props) => h(BpmnWorkshopBase, { businessPolicy: window.__fixture?.businessPolicy, ...props, ioOptions: { ...window.__fixture, ...props.ioOptions } });
 import r1 from "../fixtures/ui/R1.bpmn";
 import { normalizeElement } from "../fixtures/ui/normalize-render.mjs";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-/** The step-0 BPMN-look colours, passed as the host's tokens. */
-const BPMN_TOKENS = {
-  text: "#3a3a3a", headerText: "#3a3a3a", labelText: "hsl(225, 10%, 15%)",
-  taskLine: "#8a7f72", taskFill: "#f6f1ea", taskFillEnd: "#ECE2D4", gatewayLine: "#2f7a4f", gatewayFill: "#60BE89",
-  eventLine: "#8a2d2d", eventFill: "#E27676", externalLine: "#b59b00", externalFill: "#fff59d", dataLine: "#8a7f72",
-  dataFill: "#efe9e1", docLine: "#b8860b", docFill: "#ffe599", appLine: "#3a8a8a", appFill: "#99ffff",
-  laneLine: "#b9b2a8", laneFill: "#fbf9f6", poolLine: "#0F3180", poolFill: "#eee7df",
-};
 const FORMATS = [
-  { id: "custom", label: "Custom", profile: "legend", palette: "legend" },
-  { id: "bpmn", label: "BPMN", profile: "colored", tokens: BPMN_TOKENS, palette: "legend", drawing: "classic" },
+  { id: "custom", label: "Annotated", profile: "look-annotated", palette: "palette-annotated" },
+  { id: "bpmn", label: "BPMN", profile: "look-recolor", palette: "palette-annotated", drawing: "drawing-flat" },
 ];
 
 const GEOM = ["x", "y", "width", "height", "rx", "ry", "cx", "cy", "r", "d", "points", "x1", "y1", "x2", "y2", "transform"];
@@ -57,7 +50,7 @@ function overflow(host, id) {
   const w = Number(shape.getAttribute("width"));
   const hgt = Number(shape.getAttribute("height"));
   // Application labels belong to their own box below the activity, not its embedded label.
-  return [...g.querySelectorAll(":scope > .djs-visual text")].filter((t) => !t.closest(".legend-app")).map((t) => {
+  return [...g.querySelectorAll(":scope > .djs-visual text")].filter((t) => !t.closest(".annotated-app")).map((t) => {
     const b = t.getBBox();
     const m = g.getCTM().inverse().multiply(t.getCTM());
     return { inside: b.x + m.e >= -0.5 && b.y + m.f >= -0.5 && b.x + m.e + b.width <= w + 0.5 && b.y + m.f + b.height <= hgt + 0.5 };

@@ -3,10 +3,14 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions, fixturePolicy } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const STEP0_TITLES = ["Start", "End", "Intermediate event", "Task", "Sub-process (collapsed)", "External call", "Gateway OR", "Gateway AND", "Task input", "Task output", "External input", "Process output", "Document reference", "Application", "Lane", "Sequence flow"];
+const STEP0_TITLES = fixturePolicy.presentation.palette.entries.map((e) => e.title);
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/ui/step0-structure.json", import.meta.url), "utf8"));
 
 test("workshop structure with the step-0 contract options", { timeout: 240000 }, async (t) => {
@@ -15,8 +19,8 @@ test("workshop structure with the step-0 contract options", { timeout: 240000 },
   for (const look of ["custom", "bpmn"]) {
     await t.test(`${look}: toolbar controls equal to step 0`, () => assert.deepEqual(o[look].controls, fixture.looks[look].controls));
     await t.test(`${look}: Fit, Format and Export menus equal to step 0`, () => assert.deepEqual(o[look].menus, fixture.looks[look].menus));
-    await t.test(`${look}: palette = the 16 annotated entries, two columns`, () => {
-      assert.equal(o[look].palette.length, 16);
+    await t.test(`${look}: palette = the injected annotated entries, two columns`, () => {
+      assert.equal(o[look].palette.length, fixturePolicy.presentation.palette.entries.length);
       assert.deepEqual(o[look].palette.map((p) => [p.entry, p.classes]), fixture.looks[look].palette.map((p) => [p.entry, p.classes]));
       assert.equal(o[look].paletteTwoColumns, true);
       // Titles: the step-0 source titles (its recording in a DOM without layout has none).

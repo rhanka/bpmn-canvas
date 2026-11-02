@@ -1,6 +1,6 @@
 // Legend profile parity (headers, [Component] box, marker hit areas, tokens, palette) through the public API.
-import { createBpmnCanvas } from "../../dist/index.js";
-import { DEFAULT_LEGEND_TOKENS, LEGEND_ACTION_IDS } from "../../dist/profiles/legend/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase } from "../../dist/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
 
 const XML = `<?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="D" targetNamespace="http://example.org/legend2">
@@ -67,7 +67,7 @@ const visual = (host, id) => gfx(host, id)?.querySelector(".djs-visual");
 async function open(options = {}) {
   const host = mount();
   const diags = [];
-  const h = createBpmnCanvas(host, { xml: XML, profile: "legend", onDiagnostic: (d) => diags.push(d), ...options });
+  const h = createBpmnCanvas(host, { xml: XML, profile: "look-annotated", onDiagnostic: (d) => diags.push(d), ...options });
   await h.ready;
   return { host, h, diags };
 }
@@ -80,13 +80,13 @@ function headerReport(host, cls) {
 }
 
 function hitAt(host, element, where) {
-  const marker = element.querySelector(".legend-marker");
-  const body = element.querySelector(".djs-visual > .legend-shape > rect");
+  const marker = element.querySelector(".annotated-marker");
+  const body = element.querySelector(".djs-visual > .annotated-shape > rect");
   const rect = (where === "marker" ? marker : body).getBoundingClientRect();
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
   const hit = document.elementFromPoint(x, y);
-  return { insideElement: !!hit && element.contains(hit), isMarker: !!hit?.closest(".legend-marker"), cls: hit?.getAttribute("class") ?? hit?.tagName ?? null };
+  return { insideElement: !!hit && element.contains(hit), isMarker: !!hit?.closest(".annotated-marker"), cls: hit?.getAttribute("class") ?? hit?.tagName ?? null };
 }
 
 window.runLegend2 = async () => {
@@ -96,12 +96,12 @@ window.runLegend2 = async () => {
   out.diagnostics = diags.map((d) => d.code);
 
   // (a) pool and lane header labels.
-  out.poolHeaders = headerReport(host, "legend-pool-strip");
-  out.laneHeaders = headerReport(host, "legend-lane-header");
+  out.poolHeaders = headerReport(host, "annotated-pool-strip");
+  out.laneHeaders = headerReport(host, "annotated-lane-header");
 
   // (b) [Component] box under its task; [Component] and its link hidden, [Reference] and its link kept.
   const task = gfx(host, "T");
-  const app = task.querySelector("g.legend-app");
+  const app = task.querySelector("g.annotated-app");
   out.app = app && {
     transform: app.getAttribute("transform"),
     width: app.querySelector("rect")?.getAttribute("width"),
@@ -119,17 +119,17 @@ window.runLegend2 = async () => {
     subProcessBody: hitAt(host, gfx(host, "SP"), "body"),
     subProcessMarker: hitAt(host, gfx(host, "SP"), "marker"),
     taskBody: (() => {
-      const r = visual(host, "T").querySelector(".legend-task").getBoundingClientRect();
+      const r = visual(host, "T").querySelector(".annotated-task").getBoundingClientRect();
       const hit = document.elementFromPoint(r.left + 8, r.top + 8);
-      return { insideElement: !!hit && gfx(host, "T").contains(hit), isMarker: !!hit?.closest(".legend-marker") };
+      return { insideElement: !!hit && gfx(host, "T").contains(hit), isMarker: !!hit?.closest(".annotated-marker") };
     })(),
   };
 
   // palette.
   out.palette = {
     entries: [...host.querySelectorAll(".djs-palette .entry")].map((e) => e.getAttribute("data-action")),
-    ids: [...LEGEND_ACTION_IDS],
-    styled: [...host.querySelectorAll('.djs-palette .entry[data-action^="legend."]')].map((e) => {
+    ids: window.__fixture.businessPolicy.presentation.palette.entries.map((entry) => entry.id),
+    styled: [...host.querySelectorAll('.djs-palette .entry[data-action^="annotated."]')].map((e) => {
       const cs = getComputedStyle(e, "::before");
       const box = e.getBoundingClientRect();
       return { id: e.getAttribute("data-action"), mask: (cs.maskImage || cs.webkitMaskImage || "").startsWith("url("), w: cs.width, boxW: box.width, boxH: box.height };
@@ -139,55 +139,55 @@ window.runLegend2 = async () => {
   h.destroy();
 
   // standard profile: the legend palette rules never apply.
-  const std = await open({ profile: "standard" });
+  const std = await open({ profile: "look-plain" });
   out.standard = {
-    legendEntries: std.host.querySelectorAll('.djs-palette .entry[data-action^="legend."]').length,
+    annotatedEntries: std.host.querySelectorAll('.djs-palette .entry[data-action^="annotated."]').length,
     entries: std.host.querySelectorAll(".djs-palette .entry").length,
-    legendShapes: std.host.querySelectorAll(".legend-shape").length,
+    annotatedShapes: std.host.querySelectorAll(".annotated-shape").length,
   };
   std.h.destroy();
 
   // (d) custom tokens reach the SVG.
-  const c = await open({ legendTokens: CUSTOM });
+  const c = await open({ annotatedTokens: CUSTOM });
   const H = c.host;
   // tiny-svg writes presentation properties into the style attribute: read the computed style.
   const attr = (el, name) => (el ? hex(getComputedStyle(el).getPropertyValue(name)) : null);
-  const firstShape = (id, sel) => visual(H, id)?.querySelector(`.legend-shape ${sel}`);
-  const gradient = H.querySelector("linearGradient[id$='legend-task-gradient']");
+  const firstShape = (id, sel) => visual(H, id)?.querySelector(`.annotated-shape ${sel}`);
+  const gradient = H.querySelector("linearGradient[id$='annotated-task-gradient']");
   const stops = gradient ? [...gradient.querySelectorAll("stop")].map((s) => hex(getComputedStyle(s).stopColor)) : [];
   const labelFill = (el) => (el ? hex(getComputedStyle(el).fill) : null);
   out.custom = {
-    taskStroke: attr(firstShape("T", "rect.legend-task"), "stroke"),
-    taskBody: (getComputedStyle(firstShape("T", "rect.legend-task")).fill ?? "").startsWith("url("),
+    taskStroke: attr(firstShape("T", "rect.annotated-task"), "stroke"),
+    taskBody: (getComputedStyle(firstShape("T", "rect.annotated-task")).fill ?? "").startsWith("url("),
     gradient: stops,
     eventFill: attr(firstShape("S", "circle"), "fill"),
     eventStroke: attr(firstShape("S", "circle"), "stroke"),
     gatewayFill: attr(firstShape("G", "path"), "fill"),
     gatewayStroke: attr(firstShape("G", "path"), "stroke"),
-    poolFill: attr(H.querySelector(".legend-pool-strip"), "fill"),
-    poolStroke: attr(H.querySelector(".legend-pool-strip"), "stroke"),
-    laneFill: attr(H.querySelector(".legend-lane-header"), "fill"),
-    laneStroke: attr(H.querySelector(".legend-lane-header"), "stroke"),
+    poolFill: attr(H.querySelector(".annotated-pool-strip"), "fill"),
+    poolStroke: attr(H.querySelector(".annotated-pool-strip"), "stroke"),
+    laneFill: attr(H.querySelector(".annotated-lane-header"), "fill"),
+    laneStroke: attr(H.querySelector(".annotated-lane-header"), "stroke"),
     externalFill: attr(firstShape("CA", "rect"), "fill"),
     externalStroke: attr(firstShape("CA", "rect"), "stroke"),
-    dataFill: attr(firstShape("DO", ".legend-data-page"), "fill"),
-    dataStroke: attr(firstShape("DO", ".legend-data-page"), "stroke"),
+    dataFill: attr(firstShape("DO", ".annotated-data-page"), "fill"),
+    dataStroke: attr(firstShape("DO", ".annotated-data-page"), "stroke"),
     docFill: attr(firstShape("DOC", "path"), "fill"),
     docStroke: attr(firstShape("DOC", "path"), "stroke"),
-    appFill: attr(gfx(H, "T").querySelector("g.legend-app rect"), "fill"),
-    appStroke: attr(gfx(H, "T").querySelector("g.legend-app rect"), "stroke"),
-    flow: attr(H.querySelector(".legend-flow"), "stroke"),
-    flowMarker: (() => { const m = H.querySelector("marker[id$='legend-arrow'] path"); return m ? hex(getComputedStyle(m).fill) : null; })(),
-    link: attr(H.querySelector(".legend-link"), "stroke"),
-    headerText: labelFill(H.querySelector(".legend-pool-strip")?.parentElement.querySelector("text.djs-label")),
-    strokeWidth: getComputedStyle(H.querySelector(".legend-flow")).strokeWidth,
+    appFill: attr(gfx(H, "T").querySelector("g.annotated-app rect"), "fill"),
+    appStroke: attr(gfx(H, "T").querySelector("g.annotated-app rect"), "stroke"),
+    flow: attr(H.querySelector(".annotated-flow"), "stroke"),
+    flowMarker: (() => { const m = H.querySelector("marker[id$='annotated-arrow'] path"); return m ? hex(getComputedStyle(m).fill) : null; })(),
+    link: attr(H.querySelector(".annotated-link"), "stroke"),
+    headerText: labelFill(H.querySelector(".annotated-pool-strip")?.parentElement.querySelector("text.djs-label")),
+    strokeWidth: getComputedStyle(H.querySelector(".annotated-flow")).strokeWidth,
   };
   c.h.destroy();
 
   // defaults.
   const d = await open();
-  const dg = d.host.querySelector("linearGradient[id$='legend-task-gradient']");
-  out.defaults = { tokens: { ...DEFAULT_LEGEND_TOKENS }, gradient: dg ? [...dg.querySelectorAll("stop")].map((s) => hex(getComputedStyle(s).stopColor)) : [] };
+  const dg = d.host.querySelector("linearGradient[id$='annotated-task-gradient']");
+  out.defaults = { tokens: { ...window.__fixture.businessPolicy.presentation.looks.find((entry) => entry.renderer === "annotated").tokens }, gradient: dg ? [...dg.querySelectorAll("stop")].map((s) => hex(getComputedStyle(s).stopColor)) : [] };
   d.h.destroy();
   return out;
 };

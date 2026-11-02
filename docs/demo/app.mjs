@@ -10,6 +10,7 @@ import onboarding from "./C.4.0.bpmn";
 import customer from "./C.5.0.bpmn";
 import reference from "./B.1.0.bpmn";
 import { DEMO_TOKENS } from "./palette.mjs";
+import businessPolicy from "../../tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json";
 
 const MODELS = {
   onboarding: { title: "Employee onboarding", xml: onboarding, tabs: 4, source: "C.4.0" },
@@ -18,8 +19,8 @@ const MODELS = {
 };
 
 const FORMATS = [
-  { id: "custom", label: "Custom", profile: "legend" },
-  { id: "bpmn", label: "BPMN", profile: "colored", tokens: DEMO_TOKENS },
+  { id: "custom", label: "Annotated", profile: "look-annotated" },
+  { id: "bpmn", label: "BPMN", profile: "look-recolor", tokens: DEMO_TOKENS },
 ];
 
 const SUGGESTIONS = [
@@ -103,6 +104,7 @@ function Chat({ host }) {
   const runtime = useLocalRuntime(model);
   const toolkit = useMemo(() => createBpmnToolkit({
     toolNames: ["draw_process"],
+    renderOptions: { businessPolicy },
     resolveArtifact: (part) => {
       const key = part.args?.model;
       const m = MODELS[key];
@@ -143,6 +145,7 @@ function App() {
         ref: workshop,
         xml: doc.xml,
         revision: doc.revision,
+        businessPolicy,
         formats: FORMATS,
         format,
         onFormatChange: setFormat,

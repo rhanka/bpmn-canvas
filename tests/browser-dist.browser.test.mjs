@@ -12,6 +12,7 @@ import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { chromium } from "playwright-core";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
@@ -136,6 +137,7 @@ test("browser build from a CDN path: ESM and IIFE, with and without strict CSP",
         page.on("pageerror", (e) => consoleLines.push(`[pageerror] ${e.message}`));
         page.on("requestfailed", (r) => failed.push(`${r.url()} ${r.failure()?.errorText}`));
         page.on("response", (r) => { if (r.status() >= 400) failed.push(`${r.status()} ${r.url()}`); });
+        await page.addInitScript((v) => { window.__fixture = v; }, fixtureOptions);
         await page.goto(`${appOrigin}${appBase}${name}.html`);
         const frame = name.startsWith("srcdoc") ? await (async () => { await page.waitForSelector("iframe[name=ge]"); return page.frame({ name: "ge" }); })() : page;
         await frame.waitForFunction(() => window.__proof !== undefined, null, { timeout: 60000 });

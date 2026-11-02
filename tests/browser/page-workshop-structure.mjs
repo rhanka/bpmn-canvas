@@ -2,7 +2,8 @@
 // same way as the recorded fixture (tests/fixtures/ui/step0-structure.json).
 import { createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { BpmnWorkshop } from "../../dist/react/index.js";
+import { BpmnWorkshop as BpmnWorkshopBase } from "../../dist/react/index.js";
+const BpmnWorkshop = (props) => h(BpmnWorkshopBase, { businessPolicy: window.__fixture?.businessPolicy, ...props, ioOptions: { ...window.__fixture, ...props.ioOptions } });
 import xml from "../fixtures/io/reference/C1/semantic.bpmn";
 import fixture from "../fixtures/ui/step0-structure.json";
 
@@ -63,8 +64,8 @@ const LABELS = {
   export: "Export", exportBpmn: "BPMN", exportDrawio: "Drawio", exportSparx: "Sparx",
 };
 const FORMATS = [
-  { id: "custom", label: "Custom", profile: "legend", palette: "legend" },
-  { id: "bpmn", label: "BPMN", profile: "colored", palette: "legend", drawing: "classic" },
+  { id: "custom", label: "Annotated", profile: "look-annotated", palette: "palette-annotated" },
+  { id: "bpmn", label: "BPMN", profile: "look-recolor", palette: "palette-annotated", drawing: "drawing-flat" },
 ];
 const contract = (extra = {}) => ({
   xml, labels: LABELS, formats: FORMATS, paletteColumns: 2,

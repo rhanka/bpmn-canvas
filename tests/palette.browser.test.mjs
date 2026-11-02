@@ -1,7 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const rgb = (hex) => {
@@ -35,9 +39,9 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
       s.shortResize = await ev((i) => window.pal.info(i), id);
       await ev(([i]) => window.pal.resize(i, 800, 900), [id]);
       s.tallResize = await ev((i) => window.pal.info(i), id);
-      await ev(([i]) => window.pal.call(i, "setProfile", "legend"), [id]);
+      await ev(([i]) => window.pal.call(i, "setProfile", "look-annotated"), [id]);
       s.legend = await ev((i) => window.pal.info(i), id);
-      await ev(([i]) => window.pal.call(i, "setProfile", "standard"), [id]);
+      await ev(([i]) => window.pal.call(i, "setProfile", "look-plain"), [id]);
       s.standard = await ev((i) => window.pal.info(i), id);
       await ev(([i]) => window.pal.call(i, "setReadOnly", true), [id]);
       await ev(([i]) => window.pal.call(i, "setReadOnly", false), [id]);
@@ -47,29 +51,29 @@ test("palette layout and token-driven icons in a real browser", { timeout: 30000
     }
 
     // legend colours
-    const L = await ev(([tk]) => window.pal.mount({ profile: "legend", legendTokens: tk }), [TOKENS]);
+    const L = await ev(([tk]) => window.pal.mount({ profile: "look-annotated", annotatedTokens: tk }), [TOKENS]);
     out.legendRoot = await ev((i) => window.pal.root(i), L);
     out.legendStyles = await ev((i) => window.pal.styles(i), L);
     out.legendMasks = await ev((i) => window.pal.maskImages(i), L);
     out.legendBadge = await ev((i) => window.pal.badge(i), L);
     // independence: second instance with other tokens, then destroy the first
-    const L2 = await ev(([tk]) => window.pal.mount({ profile: "legend", legendTokens: tk }), [OTHER]);
+    const L2 = await ev(([tk]) => window.pal.mount({ profile: "look-annotated", annotatedTokens: tk }), [OTHER]);
     out.second = { root: await ev((i) => window.pal.root(i), L2), styles: await ev((i) => window.pal.styles(i), L2), firstRootStill: await ev((i) => window.pal.root(i), L) };
     out.firstStylesStill = await ev((i) => window.pal.styles(i), L);
     await ev((i) => window.pal.destroy(i), L2);
     out.firstAfterSecondDestroyed = await ev((i) => window.pal.root(i), L);
     // switching to standard on the same root removes the variables
-    await ev((i) => window.pal.call(i, "setProfile", "standard"), L);
+    await ev((i) => window.pal.call(i, "setProfile", "look-plain"), L);
     out.afterSwitch = await ev((i) => window.pal.root(i), L);
     await ev((i) => window.pal.destroy(i), L);
 
     // colored colours: the module on a plain modeler (independent of the colored renderer) ...
-    const C = await ev(async ([tk]) => window.pal.plain({ rootClass: "bpmn-canvas", modules: [window.pal.PaletteSupportModule], config: { instanceId: "t1", colored: tk } }), [TOKENS]);
+    const C = await ev(async ([tk]) => window.pal.plain({ rootClass: "bpmn-canvas", modules: [window.pal.PaletteSupportModule], config: { instanceId: "t1", lookTokens: tk, renderer: "recolor" } }), [TOKENS]);
     out.colorRoot = await ev((i) => window.pal.root(i), C);
     out.colorStyles = await ev((i) => window.pal.styles(i), C);
     await ev((i) => window.pal.destroy(i), C);
     // ... and through the public API
-    const CP = await ev(([tk]) => window.pal.mount({ profile: "colored", coloredTokens: tk }), [TOKENS]);
+    const CP = await ev(([tk]) => window.pal.mount({ profile: "look-recolor", recolorTokens: tk }), [TOKENS]);
     out.publicColored = { root: await ev((i) => window.pal.root(i), CP), styles: await ev((i) => window.pal.styles(i), CP) };
     await ev((i) => window.pal.destroy(i), CP);
 

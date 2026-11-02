@@ -1,6 +1,6 @@
 // Replayable smoke of the legend profile in a real browser (originally written by the profile worker).
 import Modeler from "bpmn-js/lib/Modeler";
-import { legendProfile } from "../../dist/profiles/legend/index.js";
+import { annotatedProfile } from "../../dist/presentation/annotated/index.js";
 
 const XML = `<?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="D" targetNamespace="http://example.org/legend">
@@ -67,13 +67,13 @@ const gfxOf = (host, id) => host.querySelector(`.djs-element[data-element-id="${
 const info = (host, id) => {
   const g = gfxOf(host, id);
   if (!g) return { present: false };
-  const legendClasses = [...g.querySelectorAll('[class*="legend-"]')].map((n) => n.getAttribute("class"));
+  const annotatedClasses = [...g.querySelectorAll('[class*="annotated-"]')].map((n) => n.getAttribute("class"));
   return {
     present: true,
     display: g.style.display || getComputedStyle(g).display,
-    legend: legendClasses.length > 0,
-    shapeClass: !!g.querySelector(".legend-shape"),
-    legendClasses: [...new Set(legendClasses)],
+    annotated: annotatedClasses.length > 0,
+    shapeClass: !!g.querySelector(".annotated-shape"),
+    annotatedClasses: [...new Set(annotatedClasses)],
     circles: g.querySelectorAll("circle").length,
     rects: g.querySelectorAll("rect").length,
     paths: [...g.querySelectorAll("path")].map((p) => p.getAttribute("d")?.slice(0, 40)),
@@ -83,13 +83,14 @@ const info = (host, id) => {
 };
 
 window.runSmoke = async () => {
-  const profile = legendProfile();
+  const look = window.__fixture.businessPolicy.presentation.looks.find((entry) => entry.renderer === "annotated");
+  const profile = annotatedProfile(look.tokens, window.__fixture.businessPolicy);
   const make = async (id, withLegend) => {
     const host = mount(id);
     const options = { container: host };
     if (withLegend) {
       options.additionalModules = [...profile.modelerModules];
-      options.bpmnCanvas = { instanceId: id, legend: profile.tokens };
+      options.bpmnCanvas = { instanceId: id, lookTokens: profile.tokens, businessPolicy: window.__fixture.businessPolicy };
     }
     const m = new Modeler(options);
     const { warnings } = await m.importXML(XML);
@@ -107,7 +108,7 @@ window.runSmoke = async () => {
   const defIds = (host) => [...host.querySelectorAll("marker[id], linearGradient[id]")].map((n) => n.id);
   out.defIds = { a: defIds(a.host), b: defIds(b.host), plain: defIds(plain.host) };
   const all = [...document.querySelectorAll("[id]")].map((n) => n.id);
-  out.duplicateDocumentIds = all.filter((v, i) => all.indexOf(v) !== i && /legend|marker|gradient/.test(v));
+  out.duplicateDocumentIds = all.filter((v, i) => all.indexOf(v) !== i && /annotated|marker|gradient/.test(v));
 
   // Instance-safe updater: create DataInput in A (works), in the plain instance (upstream throws), proto untouched.
   const create = (m) => {
@@ -140,7 +141,7 @@ window.runSmoke = async () => {
 
   // Destroy A: B keeps drawing, its ids remain.
   a.m.destroy(); a.host.remove();
-  out.afterDestroyA = { bDefIds: defIds(b.host), bTaskStillLegend: info(b.host, "T1").legend };
+  out.afterDestroyA = { bDefIds: defIds(b.host), bTaskStillLegend: info(b.host, "T1").annotated };
 
   // The [+] marker of a sub-process stays above its application band; without a band it is where it was.
   {
