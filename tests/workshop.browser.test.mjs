@@ -3,7 +3,11 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const r = (p) => readFileSync(root + p, "utf8");
@@ -131,24 +135,24 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     await ev(([i]) => window.ws.unmount(i), [b.id]);
 
     // ---- 7 format switch (uncontrolled and controlled) ----------------------------------------------------
-    const formats = [{ id: "std", label: "BPMN", profile: "standard" }, { id: "leg", label: "Legend", profile: "legend" }, { id: "col", label: "Colored", profile: "colored", tokens: { taskFill: "#aabbcc", taskLine: "#112233" } }];
+    const formats = [{ id: "std", label: "BPMN", profile: "look-plain" }, { id: "leg", label: "Annotated", profile: "look-annotated" }, { id: "col", label: "Recolor", profile: "look-recolor", tokens: { taskFill: "#aabbcc", taskLine: "#112233" } }];
     const f = await mount(ce4, { extra: { formats } });
     await ev(([i]) => window.ws.canvasHandle(i), [f.id]);
     await ev(([i]) => { const m = window.ws.canvasHandle(i).modeler; m.get("modeling").updateProperties(m.get("elementRegistry").get("T1"), { name: "EDIT" }); }, [f.id]);
     await page.locator(`${tb(f.id)} [data-testid="bpmn-workshop-format"] button`).first().click();
-    await page.getByRole("menuitem", { name: "Legend", exact: true }).click();
+    await page.getByRole("menuitem", { name: "Annotated", exact: true }).click();
     await sleep(700);
-    o.format = await ev(async ([i]) => ({ legend: window.ws.qa(i, ".legend-shape") > 0, xml: (await window.ws.getXml(i)).includes('name="EDIT"'), canUndo: window.ws.canvasHandle(i).canUndo(), containers: window.ws.qa(i, ".djs-container"), onFormatChange: window.ws.log(i).formats, triggerText: window.ws.text(i, '[data-testid="bpmn-workshop-format"] .bpmn-workshop-menu__label'), checked: window.ws.attr(i, '[role="menuitem"][aria-pressed="true"]', "aria-pressed") }), [f.id]);
+    o.format = await ev(async ([i]) => ({ annotated: window.ws.qa(i, ".annotated-shape") > 0, xml: (await window.ws.getXml(i)).includes('name="EDIT"'), canUndo: window.ws.canvasHandle(i).canUndo(), containers: window.ws.qa(i, ".djs-container"), onFormatChange: window.ws.log(i).formats, triggerText: window.ws.text(i, '[data-testid="bpmn-workshop-format"] .bpmn-workshop-menu__label'), checked: window.ws.attr(i, '[role="menuitem"][aria-pressed="true"]', "aria-pressed") }), [f.id]);
     await page.locator(`${tb(f.id)} [data-testid="bpmn-workshop-format"] button`).first().click();
-    await page.getByRole("menuitem", { name: "Colored", exact: true }).click();
+    await page.getByRole("menuitem", { name: "Recolor", exact: true }).click();
     await sleep(700);
-    o.formatColored = await ev(([i]) => ({ legend: window.ws.qa(i, ".legend-shape"), fill: [...window.ws.it(i).mountEl.querySelectorAll('.djs-element[data-element-id="T1"] rect')].map((x) => x.style.fill || x.getAttribute("fill")).filter(Boolean).slice(0, 2) }), [f.id]);
+    o.formatRecolor = await ev(([i]) => ({ annotated: window.ws.qa(i, ".annotated-shape"), fill: [...window.ws.it(i).mountEl.querySelectorAll('.djs-element[data-element-id="T1"] rect')].map((x) => x.style.fill || x.getAttribute("fill")).filter(Boolean).slice(0, 2) }), [f.id]);
     await ev(([i]) => window.ws.unmount(i), [f.id]);
     const fc = await mount(ce4, { extra: { formats, format: "leg" } });
-    o.formatControlled = await ev(([i]) => window.ws.qa(i, ".legend-shape") > 0, [fc.id]);
+    o.formatControlled = await ev(([i]) => window.ws.qa(i, ".annotated-shape") > 0, [fc.id]);
     await ev(([i]) => window.ws.setExtra(i, { format: "std" }), [fc.id]);
     await sleep(700);
-    o.formatControlledBack = await ev(([i]) => window.ws.qa(i, ".legend-shape"), [fc.id]);
+    o.formatControlledBack = await ev(([i]) => window.ws.qa(i, ".annotated-shape"), [fc.id]);
     await ev(([i]) => window.ws.unmount(i), [fc.id]);
 
     // ---- 8 export ---------------------------------------------------------------------------------------------
@@ -332,14 +336,14 @@ test("workshop in a real browser", { timeout: 580000 }, async (t) => {
     assert.deepEqual(o.busyOff, { veil: false, readOnly: false });
   });
   await t.test("format switch: pressed menu items, look changes live, document, tab and undo kept, host notified; controlled mode follows the prop", () => {
-    assert.equal(o.format.legend, true);
+    assert.equal(o.format.annotated, true);
     assert.equal(o.format.xml, true);
     assert.equal(o.format.canUndo, true, "undo survives the switch");
     assert.equal(o.format.containers, 1);
     assert.deepEqual(o.format.onFormatChange, ["leg"]);
-    assert.equal(o.format.triggerText.trim(), "Legend");
+    assert.equal(o.format.triggerText.trim(), "Annotated");
     assert.equal(o.format.checked, "true");
-    assert.equal(o.formatColored.legend, 0, "the colored look is not the legend look");
+    assert.equal(o.formatRecolor.annotated, 0, "the recolor look is not the annotated look");
     assert.equal(o.formatControlled, true);
     assert.equal(o.formatControlledBack, 0);
   });

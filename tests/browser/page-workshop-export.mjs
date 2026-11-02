@@ -1,8 +1,24 @@
 // Workshop exports: served passthrough (test list §4.3–4.10) and atomicity (§8).
 import { createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { BpmnWorkshop } from "../../dist/react/index.js";
-import * as io from "../../dist/io/index.js";
+import { BpmnWorkshop as BpmnWorkshopBase } from "../../dist/react/index.js";
+import * as ioBase from "../../dist/io/index.js";
+// Browser twin: the io calls receive the fixture descriptor and policy of the Node twins (window.__fixture).
+const OPTION_INDEX = { createModdle: 0, parseDefinitions: 1, listDiagrams: 1, importDiagram: 1, decodeDrawio: 1, encodeDrawio: 1, bpmnGraph: 1, export: 2 };
+const injected = (mod) => new Proxy(mod, {
+  get: (target, name) => {
+    const fn = target[name];
+    if (typeof fn !== "function" || !(name in OPTION_INDEX)) return fn;
+    const index = OPTION_INDEX[name];
+    return (...args) => {
+      const next = args.slice();
+      next[index] = { ...window.__fixture, ...next[index] };
+      return fn(...next);
+    };
+  },
+});
+const BpmnWorkshop = (props) => h(BpmnWorkshopBase, { businessPolicy: window.__fixture?.businessPolicy, ...props, ioOptions: { ...window.__fixture, ...props.ioOptions } });
+const io = injected(ioBase);
 import c1 from "../fixtures/io/reference/C1/semantic.bpmn";
 import c1drawio from "../fixtures/io/reference/C1/expected.drawio";
 import c2 from "../fixtures/io/reference/C2/semantic.bpmn";
@@ -87,7 +103,7 @@ window.exportsPage = {
     const out = {};
     // 8.1 / 8.7: one capture; the downloaded bytes are exportDiagram(context.xml) with the effective options.
     {
-      const w = mountWorkshop({ xml: c1, formats: [{ id: "custom", label: "Custom", profile: "legend" }] });
+      const w = mountWorkshop({ xml: c1, formats: [{ id: "annotated", label: "Annotated", profile: "look-annotated" }] });
       await ready(w);
       rename(w, "Check_order", "Check it");
       await sleep(100);
@@ -124,7 +140,7 @@ window.exportsPage = {
     }
     // 8.3: undo, page switch and look switch right after the export click: file and context stay consistent.
     for (const action of ["undo", "page", "look"]) {
-      const w = mountWorkshop({ xml: c2, formats: [{ id: "a", label: "A", profile: "legend" }, { id: "b", label: "B", profile: "colored" }] });
+      const w = mountWorkshop({ xml: c2, formats: [{ id: "a", label: "A", profile: "look-annotated" }, { id: "b", label: "B", profile: "look-recolor" }] });
       await ready(w);
       await w.ref.current.canvas.selectDiagram(w.ref.current.canvas.getDiagrams()[1].id);
       rename(w, "Price_items", "Price all items");

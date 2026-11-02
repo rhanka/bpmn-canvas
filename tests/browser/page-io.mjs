@@ -1,4 +1,20 @@
-import * as io from "../../dist/io/index.js";
+import * as ioBase from "../../dist/io/index.js";
+// Browser twin: the io calls receive the fixture descriptor and policy of the Node twins (window.__fixture).
+const OPTION_INDEX = { createModdle: 0, parseDefinitions: 1, listDiagrams: 1, importDiagram: 1, decodeDrawio: 1, encodeDrawio: 1, bpmnGraph: 1, export: 2 };
+const injected = (mod) => new Proxy(mod, {
+  get: (target, name) => {
+    const fn = target[name];
+    if (typeof fn !== "function" || !(name in OPTION_INDEX)) return fn;
+    const index = OPTION_INDEX[name];
+    return (...args) => {
+      const next = args.slice();
+      next[index] = { ...window.__fixture, ...next[index] };
+      return fn(...next);
+    };
+  },
+});
+window.injected = injected;
+const io = injected(ioBase);
 
 const wrap = async (fn) => {
   try {

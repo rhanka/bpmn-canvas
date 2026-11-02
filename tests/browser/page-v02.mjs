@@ -1,4 +1,5 @@
-import { createBpmnCanvas } from "../../dist/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase } from "../../dist/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
 
 const app = document.getElementById("app");
 const items = new Map();

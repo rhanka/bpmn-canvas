@@ -2,7 +2,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 

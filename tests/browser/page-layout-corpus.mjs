@@ -1,6 +1,7 @@
 // Layout corpus, geometry applied to the DI (test list §10.2): the canvas's auto-layout of an invented document gives
 // the corpus boxes and waypoints.
-import { createBpmnCanvas } from "../../dist/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase } from "../../dist/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
 import c1 from "../fixtures/io/reference/C1/diagram.bpmn";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -14,7 +15,7 @@ window.corpus = {
     // Pools retain their origin during auto-layout; perturb their contents only.
     const moved = c1.replace(/(<bpmndi:BPMNShape\b[^>]*>[\s\S]*?<dc:Bounds x=")(\d+)(" y=")(\d+)"/g, (all, a, x, b, y) =>
       a.includes('bpmnElement="Order_handling_pool"') ? all : `${a}${Number(x) + 7}${b}${Number(y) + 3}"`);
-    const h = createBpmnCanvas(host, { xml: moved });
+    const h = createBpmnCanvas(host, { xml: moved, businessPolicy: window.__fixture.businessPolicy });
     await h.ready;
     await h.autoLayout();
     await sleep(100);

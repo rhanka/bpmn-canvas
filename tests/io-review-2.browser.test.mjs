@@ -1,7 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 import { config, descriptor, fixture, model, outputs } from "./helpers/semantic.mjs";
 
 test("shipped browser IIFE: C1–C7 parity and second-review refusals", async (t) => {
@@ -9,7 +13,7 @@ test("shipped browser IIFE: C1–C7 parity and second-review refusals", async (t
     await page.addScriptTag({ path: fileURLToPath(new URL("../dist/browser/bpmn-canvas.iife.min.js", import.meta.url)) });
     for (let i = 1; i <= 7; i++) await t.test(`C${i}: repeated Node/browser bytes equal unchanged goldens`, async () => {
       const actual = await page.evaluate(async ({ xml, config }) => {
-        const io = window.BpmnCanvas;
+        const io = window.injected(window.BpmnCanvas);
         io.initializeCodecs(config);
         const { rootElement } = await io.parseDefinitions(xml);
         const out = {};
@@ -28,7 +32,7 @@ test("shipped browser IIFE: C1–C7 parity and second-review refusals", async (t
       const xml = fixture("C1").replace('xmlns:sem=', `xmlns:alias="${descriptor.uri}" xmlns:sem=`)
         .replace(/(<bpmn:dataObjectReference id="Order_form"[\s\S]*?)<sem:info[^>]*\/>/, (_, owner) => `${owner}<alias:${tag} ${attr}="9876junk" laneRef="Sales" direction="in" primaryAssociationRef="In_Order_form_Check_order"/>`);
       const result = await page.evaluate(async (xml) => {
-        try { await window.BpmnCanvas.parseDefinitions(xml); return { accepted: true }; }
+        try { await window.injected(window.BpmnCanvas).parseDefinitions(xml); return { accepted: true }; }
         catch (e) { return { code: e.code, ids: e.ids }; }
       }, xml);
       assert.deepEqual(result, { code: "invalid-semantics", ids: ["Order_form"] });

@@ -1,8 +1,10 @@
 // Active diagram across a new document version, and undo/redo across a profile switch (core and workshop).
 import { createElement, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { createBpmnCanvas } from "../../dist/index.js";
-import { BpmnWorkshop } from "../../dist/react/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase } from "../../dist/index.js";
+import { BpmnWorkshop as BpmnWorkshopBase } from "../../dist/react/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
+const BpmnWorkshop = (props) => createElement(BpmnWorkshopBase, { businessPolicy: window.__fixture?.businessPolicy, ...props, ioOptions: { ...window.__fixture, ...props.ioOptions } });
 import ce3 from "../../experiments/e3/corpus/ce3-collapsed-subprocess.bpmn";
 
 const NS = 'xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"';
@@ -70,7 +72,7 @@ window.hist = {
       const h = createBpmnCanvas(host, { xml: TWO(), onChange: (c) => log.push(c.cause) });
       await h.ready;
       rename(h, "P1_T", "A");
-      await h.setProfile("legend");
+      await h.setProfile("look-annotated");
       rename(h, "P1_T", "B");
       h.undo(); await settle();
       const afterU1 = nameOf(h, "P1_T");
@@ -92,7 +94,7 @@ window.hist = {
       await h.ready;
       rename(h, "P1_T", "A1");
       rename(h, "P1_T", "A2");
-      await h.setProfile("colored", { taskFill: "#eeeeff" });
+      await h.setProfile("look-recolor", { taskFill: "#eeeeff" });
       h.undo(); await waitChange(log, "undo", 1);
       const afterSnapshotUndo = nameOf(h, "P1_T");
       rename(h, "P1_T", "C");
@@ -118,7 +120,7 @@ window.hist = {
       let calls = 0;
       h.modeler.saveXML = (...a) => (++calls === 2 ? Promise.reject(new Error("injected save failure")) : real(...a));
       let error = null;
-      try { await h.setProfile("legend"); } catch (e) { error = String(e.message); }
+      try { await h.setProfile("look-annotated"); } catch (e) { error = String(e.message); }
       h.modeler.saveXML = real;
       out.captureFailure = { error, before: { ...before, xml: undefined }, after: { name: nameOf(h, "P1_T"), idx: stack._stackIdx, canUndo: h.canUndo(), canRedo: h.canRedo(), rev: h.lastRevision }, sameXml: (await h.getXml()) === before.xml, sameModeler: h.modeler.get("commandStack") === stack };
       h.destroy(); host.remove();
@@ -131,7 +133,7 @@ window.hist = {
       for (let i = 1; i <= 205; i++) rename(h, "P1_T", "N" + i);
       for (let i = 0; i < 102; i++) h.undo();
       const current = nameOf(h, "P1_T");
-      await h.setProfile("legend");
+      await h.setProfile("look-annotated");
       out.cap = { current, kept: nameOf(h, "P1_T"), past: h.history.past.length, future: h.history.future.length };
       h.undo();
       await sleep(300);
@@ -165,7 +167,7 @@ window.hist = {
         const changesBefore = changes.length;
         const diagnosticsBefore = diagnostics.length;
         let error = null;
-        try { await h.setProfile("legend"); } catch (e) { error = e?.name ?? String(e); }
+        try { await h.setProfile("look-annotated"); } catch (e) { error = e?.name ?? String(e); }
         await sleep(50);
         out.destroyDuringCapture.push({
           at, fail, calls, error, state: h.state,
@@ -196,7 +198,7 @@ window.hist = {
       h.createModeler = (...a) => { const m = create(...a); return typeof m?.then === "function" ? m.then(hook) : hook(m); };
       const before = diagnostics.length;
       let error = null;
-      try { await h.setProfile("legend"); } catch (e) { error = e?.name ?? String(e); }
+      try { await h.setProfile("look-annotated"); } catch (e) { error = e?.name ?? String(e); }
       out.destroyDuringImport = { reached, error, state: h.state, newDiagnostics: diagnostics.length - before };
       host.remove();
     }
@@ -211,7 +213,7 @@ window.hist = {
       h.layoutModules = () => { reached = true; h.destroy(); return Promise.reject(new Error("module failed after destroy")); };
       const before = diagnostics.length;
       let error = null;
-      try { await h.setProfile("legend"); } catch (e) { error = e?.name ?? String(e); }
+      try { await h.setProfile("look-annotated"); } catch (e) { error = e?.name ?? String(e); }
       out.destroyDuringLoad = { reached, error, state: h.state, newDiagnostics: diagnostics.length - before };
       host.remove();
     }
@@ -278,7 +280,7 @@ window.hist = {
       const h = createBpmnCanvas(host, { xml: TWO(), onChange: (c) => log.push(c.revision) });
       await h.ready;
       rename(h, "P1_T", "A");
-      await h.setProfile("legend");
+      await h.setProfile("look-annotated");
       const revs = log.length;
       h.undo();
       h.setReadOnly(true);
@@ -294,7 +296,7 @@ window.hist = {
       const h = createBpmnCanvas(host, { xml: ce3, onHistoryChange: (x) => histories.push(x) });
       await h.ready;
       rename(h, "Sub_1", "Sub edited");
-      await h.setProfile("legend");
+      await h.setProfile("look-annotated");
       const before = { active: h.getActiveDiagramId(), past: h.history.past.length, canUndo: h.canUndo() };
       window.__drill = { h, before, histories, host };
       out.drillReady = before;
@@ -329,25 +331,25 @@ window.hist = {
     const host2 = mount();
     const history = [];
     const changes = [];
-    const c = createBpmnCanvas(host2, { xml: POOL, profile: "legend", onHistoryChange: (s) => history.push(s), onChange: (ch) => changes.push(ch.cause) });
+    const c = createBpmnCanvas(host2, { xml: POOL, profile: "look-annotated", onHistoryChange: (s) => history.push(s), onChange: (ch) => changes.push(ch.cause) });
     await c.ready;
     const x0 = await c.getXml();
     await c.autoLayout();
     const x1 = await c.getXml();
     out.layoutMoved = taskX(x1, "P1") !== taskX(x0, "P1");
     out.beforeSwitch = { canUndo: c.canUndo(), canRedo: c.canRedo() };
-    await c.setProfile("colored", { taskFill: "#eeeeff" });
-    out.afterSwitch = { canUndo: c.canUndo(), canRedo: c.canRedo(), legendShapes: host2.querySelectorAll(".legend-shape").length };
+    await c.setProfile("look-recolor", { taskFill: "#eeeeff" });
+    out.afterSwitch = { canUndo: c.canUndo(), canRedo: c.canRedo(), annotatedShapes: host2.querySelectorAll(".annotated-shape").length };
     c.undo();
     for (let i = 0; i < 100 && !changes.includes("undo"); i++) await sleep(20);
     const xu = await c.getXml();
-    out.afterUndo = { taskX: taskX(xu, "P1"), x0: taskX(x0, "P1"), canUndo: c.canUndo(), canRedo: c.canRedo(), profileKept: host2.querySelectorAll(".legend-shape").length === 0 };
+    out.afterUndo = { taskX: taskX(xu, "P1"), x0: taskX(x0, "P1"), canUndo: c.canUndo(), canRedo: c.canRedo(), profileKept: host2.querySelectorAll(".annotated-shape").length === 0 };
     c.redo();
     for (let i = 0; i < 100 && !changes.includes("redo"); i++) await sleep(20);
     const xr = await c.getXml();
     out.afterRedo = { taskX: taskX(xr, "P1"), x1: taskX(x1, "P1"), canUndo: c.canUndo(), canRedo: c.canRedo() };
     // A second switch keeps the whole history: two steps back reach the original layout.
-    await c.setProfile("legend");
+    await c.setProfile("look-annotated");
     c.undo();
     for (let i = 0; i < 100 && changes.filter((x) => x === "undo").length < 2; i++) await sleep(20);
     out.afterSecondSwitchUndo = { taskX: taskX(await c.getXml(), "P1"), canRedo: c.canRedo() };
@@ -364,12 +366,12 @@ window.hist = {
     const api = {};
     function Harness() {
       const [doc, setDoc] = useState({ xml: TWO(), revision: undefined });
-      const [format, setFormat] = useState("custom");
+      const [format, setFormat] = useState("annotated");
       api.update = (xml) => setDoc({ xml, revision: undefined });
       return createElement(BpmnWorkshop, {
         xml: doc.xml,
         revision: doc.revision,
-        formats: [{ id: "custom", label: "Custom", profile: "legend" }, { id: "bpmn", label: "BPMN", profile: "colored", tokens: { taskFill: "#eeeeff" } }],
+        formats: [{ id: "annotated", label: "Annotated", profile: "look-annotated" }, { id: "bpmn", label: "BPMN", profile: "look-recolor", tokens: { taskFill: "#eeeeff" } }],
         format,
         onFormatChange: setFormat,
         onXmlChange: (xml, change) => setDoc({ xml, revision: change.revision }),

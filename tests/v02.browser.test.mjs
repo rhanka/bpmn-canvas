@@ -2,7 +2,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const r = (p) => readFileSync(root + p, "utf8");
@@ -22,7 +26,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
 
     // ---- L1: element clicks, marker detection, drill-down modes ----------------------------------
     const bodyPoint = (b) => ({ x: b.x + 6, y: b.y + b.height - 8 }); // away from the bottom-centre marker
-    const std = await ev(([x]) => window.v02.mount(x, { profile: "standard", drilldown: "event" }), [ce3]);
+    const std = await ev(([x]) => window.v02.mount(x, { profile: "look-plain", drilldown: "event" }), [ce3]);
     const stdBody = await ev(([i]) => window.v02.rectOf(i, '.djs-element[data-element-id="Sub_1"] .djs-hit-all'), [std.id]);
     await clickAt(bodyPoint(stdBody));
     const stdDrill = await ev(([i]) => window.v02.rectOf(i, ".bjs-drilldown"), [std.id]);
@@ -32,10 +36,10 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     o.standardEventModeNavigated = await ev(([i]) => window.v02.get(i).handle.modeler.get("canvas").getRootElement().id, [std.id]);
     await ev(([i]) => window.v02.destroy(i), [std.id]);
 
-    const leg = await ev(([x]) => window.v02.mount(x, { profile: "legend", drilldown: "event" }), [ce3]);
+    const leg = await ev(([x]) => window.v02.mount(x, { profile: "look-annotated", drilldown: "event" }), [ce3]);
     const legBody = await ev(([i]) => window.v02.rectOf(i, '.djs-element[data-element-id="Sub_1"] .djs-hit-all'), [leg.id]);
     await clickAt(bodyPoint(legBody));
-    const legMarker = await ev(([i]) => window.v02.rectOf(i, '[data-element-id="Sub_1"] .legend-marker'), [leg.id]);
+    const legMarker = await ev(([i]) => window.v02.rectOf(i, '[data-element-id="Sub_1"] .annotated-marker'), [leg.id]);
     o.legendMarkerFound = !!legMarker;
     if (legMarker) await clickAt(centre(legMarker));
     o.legendClicks = await ev(([i]) => window.v02.log(i).clicks, [leg.id]);
@@ -44,7 +48,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     o.legendDrillClicks = (await ev(([i]) => window.v02.log(i).clicks.length, [leg.id])) - o.legendClicks.length;
     await ev(([i]) => window.v02.destroy(i), [leg.id]);
 
-    const nat = await ev(([x]) => window.v02.mount(x, { profile: "standard" }), [ce3]);
+    const nat = await ev(([x]) => window.v02.mount(x, { profile: "look-plain" }), [ce3]);
     const natDrill = await ev(([i]) => window.v02.rectOf(i, ".bjs-drilldown"), [nat.id]);
     await clickAt(centre(natDrill));
     o.native = await ev(([i]) => ({ active: window.v02.get(i).handle.getActiveDiagramId(), root: window.v02.get(i).handle.modeler.get("canvas").getRootElement().id, changes: window.v02.log(i).changes.map((c) => c.cause + ":" + c.diagramId), clicks: window.v02.log(i).clicks.length }), [nat.id]);
@@ -123,7 +127,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     await ev(([i]) => window.v02.destroy(i), [w.id]);
 
     // ---- L6: profile switch ---------------------------------------------------------------------------
-    const p = await ev(([x]) => window.v02.mount(x, { profile: "standard" }), [ce5]);
+    const p = await ev(([x]) => window.v02.mount(x, { profile: "look-plain" }), [ce5]);
     await ev(([i]) => window.v02.edit(i, "TS", "SWITCHED"), [p.id]);
     await ev(([i]) => window.v02.call(i, "selectDiagram", "DiagB"), [p.id]);
     await ev(([i]) => window.v02.edit(i, "TO", "OTHER"), [p.id]);
@@ -131,11 +135,11 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     const preRev = await ev(([i]) => window.v02.log(i).changes.at(-1).revision, [p.id]);
     const preCount = await ev(([i]) => window.v02.log(i).changes.length, [p.id]);
     const preX = await ev(([i]) => window.v02.get(i).handle.modeler.get("canvas").viewbox().x, [p.id]);
-    await ev(([i]) => window.v02.call(i, "setProfile", "legend", { taskFill: "#123456" }), [p.id]);
+    await ev(([i]) => window.v02.call(i, "setProfile", "look-annotated", { taskFill: "#123456" }), [p.id]);
     const after = await ev(([i]) => {
       const it = window.v02.get(i);
       return {
-        legendShapes: it.host.querySelectorAll(".legend-shape").length,
+        annotatedShapes: it.host.querySelectorAll(".annotated-shape").length,
         containers: it.host.querySelectorAll(".djs-container").length,
         badges: it.host.querySelectorAll(".bjs-powered-by").length,
         active: it.handle.getActiveDiagramId(),
@@ -151,23 +155,23 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     }, [p.id]);
     const xmlAfter = await ev(([i]) => window.v02.call(i, "getXml"), [p.id]);
     o.profileSwitch = { preRev, preCount, preX, after, hasEdits: xmlAfter.includes('name="SWITCHED"') && xmlAfter.includes('name="OTHER"') };
-    await ev(([i]) => window.v02.call(i, "setProfile", "standard"), [p.id]);
-    o.backToStandard = await ev(([i]) => ({ legendShapes: window.v02.get(i).host.querySelectorAll(".legend-shape").length, containers: window.v02.get(i).host.querySelectorAll(".djs-container").length }), [p.id]);
+    await ev(([i]) => window.v02.call(i, "setProfile", "look-plain"), [p.id]);
+    o.backToStandard = await ev(([i]) => ({ annotatedShapes: window.v02.get(i).host.querySelectorAll(".annotated-shape").length, containers: window.v02.get(i).host.querySelectorAll(".djs-container").length }), [p.id]);
     await ev(([i]) => window.v02.destroy(i), [p.id]);
 
     const u = await ev(([x]) => window.v02.mount(x), [ce4]);
-    await ev(([i]) => window.v02.call(i, "setProfile", "legend"), [u.id]);
+    await ev(([i]) => window.v02.call(i, "setProfile", "look-annotated"), [u.id]);
     o.untouchedBytes = await ev(async ([i, x]) => (await window.v02.call(i, "getXml")) === x, [u.id, ce4]);
     await ev(([i]) => window.v02.destroy(i), [u.id]);
 
     const ro2 = await ev(([x]) => window.v02.mount(x, { readOnly: true }), [ce4]);
-    await ev(([i]) => window.v02.call(i, "setProfile", "legend"), [ro2.id]);
+    await ev(([i]) => window.v02.call(i, "setProfile", "look-annotated"), [ro2.id]);
     o.readOnlyKept = await ev(([i]) => window.v02.get(i).handle.isReadOnly(), [ro2.id]);
     await ev(([i]) => window.v02.destroy(i), [ro2.id]);
 
     const ab = await ev(([x]) => window.v02.mount(x), [ce4]);
     o.abortedSwitch = await ev(async ([i]) => {
-      const pr = window.v02.get(i).handle.setProfile("legend");
+      const pr = window.v02.get(i).handle.setProfile("look-annotated");
       window.v02.get(i).handle.destroy();
       try { await pr; return "resolved"; } catch (e) { return e.name; }
     }, [ab.id]);
@@ -242,7 +246,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.equal(s.after.active, "DiagB");
     assert.equal(s.after.showsB, true);
     assert.equal(s.after.showsA, false);
-    assert.ok(s.after.legendShapes > 0, "legend look applied");
+    assert.ok(s.after.annotatedShapes > 0, "annotated look applied");
     assert.equal(s.after.containers, 1);
     assert.equal(s.after.badges, 1);
     assert.equal(s.after.canUndo, true, "the edits can still be undone after the switch");
@@ -262,7 +266,7 @@ test("0.2 canvas API in a real browser", { timeout: 300000 }, async (t) => {
     assert.ok(out.profileSwitch.after.gradientColors.some((c) => /123456/i.test(c) || /rgb\(18, 52, 86\)/.test(c)), JSON.stringify(out.profileSwitch.after.gradientColors));
   });
   await t.test("L6 switching back to standard leaves no legend shape and one container", () => {
-    assert.deepEqual(out.backToStandard, { legendShapes: 0, containers: 1 });
+    assert.deepEqual(out.backToStandard, { annotatedShapes: 0, containers: 1 });
   });
   await t.test("L6 an untouched document keeps its exact bytes across a switch; read-only is preserved; a destroyed switch aborts", () => {
     assert.equal(out.untouchedBytes, true);

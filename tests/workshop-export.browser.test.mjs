@@ -2,7 +2,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 
@@ -12,7 +16,7 @@ test("workshop: atomic exports", { timeout: 240000 }, async (t) => {
   await t.test("onDownload(file, context): one capture, every format equal to descriptor-aware export of captured model", () => {
     assert.deepEqual(o.context.keys, ["diagramId", "profile", "revision", "touched", "xml"]);
     assert.equal(o.context.diagramId, o.context.active);
-    assert.deepEqual([o.context.profile, o.context.touched, o.context.revisionIsString], ["legend", true, true]);
+    assert.deepEqual([o.context.profile, o.context.touched, o.context.revisionIsString], ["look-annotated", true, true]);
     assert.deepEqual(o.bytes, { bpmn: true, drawio: true, sparx: true });
   });
   await t.test("a pending direct edit is in the file; a drag in progress refuses the export", () => {
