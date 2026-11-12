@@ -1,7 +1,8 @@
 import { bpmnGraph, encodeDrawio } from "../../dist/io/index.js";
 import { StrictMode, createElement, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BpmnWorkshop } from "../../dist/react/index.js";
+import { BpmnWorkshop as BpmnWorkshopBase } from "../../dist/react/index.js";
+const BpmnWorkshop = (props) => createElement(BpmnWorkshopBase, { businessPolicy: window.__fixture?.businessPolicy, formats: [{ id: "", label: "BPMN", profile: "look-plain" }], ...props, ioOptions: { ...window.__fixture, ...props.ioOptions } });
 
 const app = document.getElementById("app");
 const items = new Map();

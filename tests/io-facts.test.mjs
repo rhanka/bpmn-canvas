@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
 import { replaceType, io, model, info, pages, outputs, refuses } from "./helpers/semantic.mjs";
+import { fixturePolicy } from "./helpers/injected-policy.mjs";
 test("facts API is removed", () => assert.equal(io.readFacts, undefined));
 test("live labels, types and lane IDs supply the export", async () => {
   const m = await model();
@@ -12,14 +13,14 @@ test("live labels, types and lane IDs supply the export", async () => {
   const out = await outputs(m);
   assert.match(out.drawio, /Current name/);
   assert.match(out.sparx, /Current name/);
-  assert.equal(pages(m)[0].nodes.get("Check_order").type, "TASK");
-  assert.deepEqual([pages(m)[0].nodes.get(task.id).type, pages(m)[0].nodes.get(task.id).laneIndex], ["SUB-PROCESS", 0]);
+  assert.equal(pages(m)[0].nodes.get("Check_order").type, "task");
+  assert.deepEqual([pages(m)[0].nodes.get(task.id).type, pages(m)[0].nodes.get(task.id).laneIndex], ["subprocess", 0]);
   const drawio = new JSDOM(out.drawio, { contentType: "application/xml" });
   const sparx = new JSDOM(out.sparx, { contentType: "application/xml" });
   try {
     const cells = [...drawio.window.document.querySelectorAll("mxCell")];
     const node = cells.find((c) => c.getAttribute("value") === "Request details");
-    assert.match(node.getAttribute("style"), /isLoopSub=1;/);
+    assert.equal(node.getAttribute("style"), fixturePolicy.presentation.exportStyles.drawio.subprocess);
     assert.equal(node.getAttribute("parent"), cells.find((c) => c.getAttribute("value") === "Sales").getAttribute("id"));
     const doc = sparx.window.document;
     const subprocess = [...doc.getElementsByTagName("bpmn:subProcess")].find((e) => e.getAttribute("name") === "Request details");

@@ -1,3 +1,4 @@
+import { fixtureDescriptor } from "./helpers/injected-descriptor.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -42,7 +43,7 @@ async function setup(change = () => {}, inputs = compilerInputs()) {
   const signatures = Object.fromEntries(Object.entries(groups).flatMap(([capability, ops]) => ops.map(op => [op, { capability, version: "1", argumentSchemaDigest: "0".repeat(64) }])));
   const compiled = api.compileProfile(validated.payload, { ...compilerRegistry(), capabilities: document.capabilities, signatures,
     descriptors: JSON.parse(descriptorBytes).types, requiredStandardRules: ["label-required"],
-    codecConfiguration: { contractVersion: "1", defaults: "explicit", descriptors: { sem: io.semanticDescriptor } } });
+    codecConfiguration: { contractVersion: "1", defaults: "explicit", descriptors: { [fixtureDescriptor.prefix]: fixtureDescriptor } } });
   assert.equal(compiled.status, "ok", compiled.code);
   const tree = { $type: "bpmn:Definitions", id: "D", targetNamespace: "urn:neutral:test",
     rootElements: [{ $type: "bpmn:Process", id: "P", name: "Process", flowElements: [{ $type: "bpmn:Task", id: "T" }] }] };

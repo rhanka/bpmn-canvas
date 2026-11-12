@@ -1,6 +1,7 @@
 import { StrictMode, createElement, useState, useCallback, useRef } from "react";
 import { createRoot } from "react-dom/client";
-import { BpmnCanvas } from "../../dist/react/index.js";
+import { BpmnCanvas as BpmnCanvasBase } from "../../dist/react/index.js";
+const BpmnCanvas = (props) => createElement(BpmnCanvasBase, { businessPolicy: window.__fixture?.businessPolicy, ...props });
 import { BpmnToolCard, createBpmnToolkit, toolPartState } from "../../dist/assistant-ui/index.js";
 
 const results = [];
@@ -91,9 +92,9 @@ window.runReact = async ({ corpus }) => {
   {
     const el = mountPoint();
     const root = createRoot(el);
-    root.render(createElement(BpmnCanvas, { xml: corpus.ce4, profile: "standard" }));
+    root.render(createElement(BpmnCanvas, { xml: corpus.ce4, profile: "look-plain" }));
     await waitFor(() => el.querySelectorAll(".djs-container").length === 1);
-    root.render(createElement(BpmnCanvas, { xml: corpus.ce4, profile: "legend" }));
+    root.render(createElement(BpmnCanvas, { xml: corpus.ce4, profile: "look-annotated" }));
     await sleep(600);
     check("React profile change recreates a single canvas", el.querySelectorAll(".djs-container").length === 1, el.querySelectorAll(".djs-container").length);
     root.unmount();

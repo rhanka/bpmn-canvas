@@ -1,8 +1,10 @@
 // layoutOnLoad (test list §5), on invented documents whose tasks were shrunk to 60×40 so a layout is visible.
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
-import { createBpmnCanvas } from "../../dist/index.js";
-import { BpmnWorkshop } from "../../dist/react/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase } from "../../dist/index.js";
+import { BpmnWorkshop as BpmnWorkshopBase } from "../../dist/react/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
+const BpmnWorkshop = (props) => createElement(BpmnWorkshopBase, { businessPolicy: window.__fixture?.businessPolicy, ...props, ioOptions: { ...window.__fixture, ...props.ioOptions } });
 import c1 from "../fixtures/io/reference/C1/diagram.bpmn";
 import c2 from "../fixtures/io/reference/C2/diagram.bpmn";
 
@@ -125,7 +127,7 @@ window.loadLayout = {
       await h.setXml(TINY, { layoutOnLoad: true, revision: "r1" });
       rename(h, "Ship_order", "Edited");
       await sleep(30);
-      await h.setProfile("colored");
+      await h.setProfile("look-recolor");
       const afterSwitch = countRuns(h);
       h.undo();
       await sleep(300);

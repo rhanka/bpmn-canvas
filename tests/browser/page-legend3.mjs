@@ -1,6 +1,6 @@
 // Legend profile: [Reference] link and lane-header tokens, DataInput/DataOutput lifecycle, getShapePath hit outlines.
 import Modeler from "bpmn-js/lib/Modeler";
-import { legendProfile } from "../../dist/profiles/legend/index.js";
+import { annotatedProfile } from "../../dist/presentation/annotated/index.js";
 
 const NS = 'xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"';
 const XML = `<?xml version="1.0" encoding="UTF-8"?>
@@ -38,11 +38,11 @@ const XML = `<?xml version="1.0" encoding="UTF-8"?>
 
 let seq = 0;
 async function make(tokens) {
-  const profile = legendProfile(tokens);
+  const profile = annotatedProfile(tokens, window.__fixture.businessPolicy);
   const host = document.createElement("div");
   host.style.cssText = "width:1000px;height:420px;position:relative";
   document.body.appendChild(host);
-  const m = new Modeler({ container: host, additionalModules: [...profile.modelerModules], bpmnCanvas: { instanceId: `l3-${++seq}`, legend: profile.tokens } });
+  const m = new Modeler({ container: host, additionalModules: [...profile.modelerModules], bpmnCanvas: { instanceId: `l3-${++seq}`, lookTokens: profile.tokens, businessPolicy: window.__fixture.businessPolicy } });
   const { warnings } = await m.importXML(XML);
   return { host, m, warnings: warnings.map((w) => w.message) };
 }
@@ -52,13 +52,13 @@ const hex = (v) => {
 };
 const visual = (host, id) => host.querySelector(`.djs-element[data-element-id="${id}"] .djs-visual`);
 const linkOf = (host, id) => {
-  const p = visual(host, id)?.querySelector("path.legend-link");
+  const p = visual(host, id)?.querySelector("path.annotated-link");
   if (!p) return null;
   const cs = getComputedStyle(p);
   return { stroke: hex(cs.stroke), dash: cs.strokeDasharray.replace(/px/g, "").replace(/,\s*/g, " ") };
 };
 const dataArrow = (host, id) => {
-  const p = visual(host, id)?.querySelector("path.legend-link");
+  const p = visual(host, id)?.querySelector("path.annotated-link");
   return p ? getComputedStyle(p).markerEnd !== "none" : null;
 };
 const labelFill = (host) => {
@@ -66,7 +66,7 @@ const labelFill = (host) => {
   return t ? hex(getComputedStyle(t).fill) : null;
 };
 const headerFill = (host) => {
-  const r = host.querySelector(".legend-lane-header");
+  const r = host.querySelector(".annotated-lane-header");
   return r ? hex(getComputedStyle(r).fill) : null;
 };
 const countIo = async (m) => {
@@ -77,11 +77,12 @@ const countIo = async (m) => {
 
 window.runLegend3 = async () => {
   const out = {};
+  const tok = window.__fixture.businessPolicy.presentation.looks.find((entry) => entry.renderer === "annotated").tokens;
 
   // (1) [Reference] link and lane header tokens.
   const neutral = await make();
   out.neutral = { directional: { doc: linkOf(neutral.host, "AO"), note: linkOf(neutral.host, "AP") }, doc: linkOf(neutral.host, "AD"), note: linkOf(neutral.host, "AN"), header: headerFill(neutral.host), warnings: neutral.warnings };
-  const given = await make({ link: "#112233", docLink: "#b85450", docLinkDash: "3 4", laneFill: "#aabbcc", laneHeaderFill: "#fbf9f6" });
+  const given = await make({ link: "#112233", docLink: tok.docLink, docLinkDash: "3 4", laneFill: "#aabbcc", laneHeaderFill: "#fbf9f6" });
   out.given = { directional: linkOf(given.host, "AO"), doc: linkOf(given.host, "AD"), note: linkOf(given.host, "AN"), header: headerFill(given.host) };
   out.arrow = { neutral: dataArrow(neutral.host, "DA") };
   out.labels = { neutral: labelFill(neutral.host) };

@@ -50,7 +50,6 @@
       "types": "./dist/io/index.d.ts",
       "import": "./dist/io/index.js"
     },
-    "./semantics.json": "./dist/io/semantics.json",
     "./layout": {
       "types": "./dist/layout/index.d.ts",
       "import": "./dist/layout/index.js"

@@ -1,6 +1,7 @@
 import Modeler from "bpmn-js/lib/Modeler";
-import { createBpmnCanvas } from "../../dist/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase } from "../../dist/index.js";
 import { PaletteSupportModule } from "../../dist/internal/palette.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
 
 const NS = 'xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"';
 const XML = `<?xml version="1.0"?><bpmn:definitions ${NS} id="D" targetNamespace="x"><bpmn:process id="P" isExecutable="false"><bpmn:task id="T" name="Task"/></bpmn:process><bpmndi:BPMNDiagram id="BD"><bpmndi:BPMNPlane id="PL" bpmnElement="P"><bpmndi:BPMNShape id="dT" bpmnElement="T"><dc:Bounds x="200" y="100" width="100" height="80"/></bpmndi:BPMNShape></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>`;
@@ -67,12 +68,12 @@ window.pal = {
     const r = items.get(id).el.querySelector(".bpmn-canvas");
     const vars = {};
     for (let i = 0; i < r.style.length; i++) { const n = r.style[i]; if (n.startsWith("--bpmn-canvas-icon")) vars[n] = r.style.getPropertyValue(n); }
-    return { vars, colored: r.classList.contains("bpmn-canvas--colored") };
+    return { vars, recolor: r.classList.contains("bpmn-canvas--recolor") };
   },
   styles: (id) => entryStyles(items.get(id).el),
   maskImages(id) {
     const out = {};
-    for (const e of items.get(id).el.querySelectorAll('.djs-palette .entry[data-action^="legend."]')) {
+    for (const e of items.get(id).el.querySelectorAll('.djs-palette .entry[data-action^="annotated."]')) {
       const b = getComputedStyle(e, "::before");
       out[e.getAttribute("data-action")] = b.webkitMaskImage || b.maskImage;
     }

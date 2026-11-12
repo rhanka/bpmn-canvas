@@ -1,4 +1,6 @@
-import { createBpmnCanvas, renderDiagrams } from "../../dist/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase, renderDiagrams as renderDiagramsBase } from "../../dist/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
+const renderDiagrams = (xml, options = {}) => renderDiagramsBase(xml, { businessPolicy: window.__fixture?.businessPolicy, ...options });
 
 const results = [];
 const check = (name, pass, detail) => results.push({ name, pass: !!pass, detail: detail ?? null });
@@ -338,13 +340,13 @@ window.runCore = async ({ corpus }) => {
   // legend profile (opt-in): renders, edits, upstream notation falls through, isolation.
   {
     const diags = [];
-    const h = createBpmnCanvas(mount(), { xml: corpus.notation, profile: "legend", onDiagnostic: (d) => diags.push(d) });
+    const h = createBpmnCanvas(mount(), { xml: corpus.notation, profile: "look-annotated", onDiagnostic: (d) => diags.push(d) });
     await h.ready;
     check("legend: ready without diagnostics", h.state === "ready" && diags.length === 0, diags.map((d) => d.code));
-    check("legend: legend-drawn shapes present", h.root.querySelectorAll(".legend-shape").length > 0);
+    check("annotated: annotated-drawn shapes present", h.root.querySelectorAll(".annotated-shape").length > 0);
     const std = createBpmnCanvas(mount(), { xml: corpus.notation });
     await std.ready;
-    check("standard (default): no legend-drawn shape", std.root.querySelectorAll(".legend-shape").length === 0);
+    check("look-plain (default): no annotated-drawn shape", std.root.querySelectorAll(".annotated-shape").length === 0);
     const markers = [...document.querySelectorAll("marker[id], linearGradient[id]")].map((n) => n.id);
     check("legend + standard instances: unique marker/gradient ids", new Set(markers).size === markers.length, { total: markers.length, unique: new Set(markers).size });
     const pre = std.root.querySelectorAll("[data-element-id='G'] ellipse, [data-element-id='G'] polygon, [data-element-id='G'] path").length;

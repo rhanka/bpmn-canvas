@@ -1,7 +1,7 @@
 {
-  "source": "Normalised toolbar, open menus and palette of the step-0 canvas (recorded once, limited extraction: UI strings, roles, states, SVG geometry; no project ids, classes or diagram text).",
+  "source": "Normalised toolbar, open menus and palette of this library's workshop with the step-0 contract options in the looks of the sealed synthetic policy, recorded by tests/fixtures/ui/build-successors.mjs (stage B2 phase 2; limited extraction: UI strings, roles, states, SVG geometry; no project ids, classes or diagram text); the step-0 recording is verified by the private lot 6 gate",
   "looks": {
-    "custom": {
+    "annotated": {
       "controls": [
         {
           "role": "button",
@@ -63,7 +63,7 @@
           "role": "group",
           "name": "Format",
           "title": "Display only: the BPMN model is the same in both formats",
-          "text": "Custom ▾",
+          "text": "Annotated ▾",
           "disabled": false,
           "ariaPressed": null,
           "ariaChecked": null,
@@ -75,7 +75,7 @@
           "role": "button",
           "name": "Format",
           "title": "Display only: the BPMN model is the same in both formats",
-          "text": "Custom ▾",
+          "text": "Annotated ▾",
           "disabled": false,
           "ariaPressed": null,
           "ariaChecked": null,
@@ -140,7 +140,7 @@
           {
             "kind": "item",
             "role": "menuitem",
-            "text": "Custom",
+            "text": "Annotated",
             "disabled": false,
             "ariaPressed": "true",
             "ariaChecked": null,
@@ -189,112 +189,42 @@
       "palette": [
         {
           "entry": "start",
-          "title": null,
+          "title": "Create Start",
           "classes": [
             "bpmn-icon-start-event-none"
           ]
         },
         {
-          "entry": "end",
-          "title": null,
-          "classes": [
-            "bpmn-icon-end-event-none"
-          ]
-        },
-        {
-          "entry": "intermediate-event",
-          "title": null,
-          "classes": [
-            "bpmn-icon-intermediate-event-none"
-          ]
-        },
-        {
-          "entry": "task",
-          "title": null,
-          "classes": [
-            "bpmn-icon-task"
-          ]
-        },
-        {
           "entry": "subprocess",
-          "title": null,
+          "title": "Create Sub-process (collapsed)",
           "classes": [
             "bpmn-icon-subprocess-collapsed"
           ]
         },
         {
-          "entry": "external-process",
-          "title": null,
-          "classes": [
-            "bpmn-icon-call-activity"
-          ]
-        },
-        {
-          "entry": "gateway-or",
-          "title": null,
-          "classes": [
-            "bpmn-icon-gateway-xor"
-          ]
-        },
-        {
-          "entry": "gateway-and",
-          "title": null,
-          "classes": [
-            "bpmn-icon-gateway-parallel"
-          ]
-        },
-        {
           "entry": "data-input",
-          "title": null,
+          "title": "Create Task input",
           "classes": [
             "bpmn-icon-data-object"
-          ]
-        },
-        {
-          "entry": "data-output",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-object"
-          ]
-        },
-        {
-          "entry": "external-input",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-input"
-          ]
-        },
-        {
-          "entry": "process-output",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-output"
           ]
         },
         {
           "entry": "document",
-          "title": null,
+          "title": "Create Document reference",
           "classes": [
             "bpmn-icon-text-annotation"
           ]
         },
         {
           "entry": "application",
-          "title": null,
+          "title": "Create Application",
           "classes": [
             "bpmn-icon-text-annotation"
           ]
         },
         {
-          "entry": "lane",
-          "title": null,
-          "classes": [
-            "bpmn-icon-lane-insert-below"
-          ]
-        },
-        {
           "entry": "sequence-flow",
-          "title": null,
+          "title": "Create Sequence flow",
           "classes": [
             "bpmn-icon-connection-multi"
           ]
@@ -441,7 +371,7 @@
           {
             "kind": "item",
             "role": "menuitem",
-            "text": "Custom",
+            "text": "Annotated",
             "disabled": false,
             "ariaPressed": "false",
             "ariaChecked": null,
@@ -490,112 +420,42 @@
       "palette": [
         {
           "entry": "start",
-          "title": null,
+          "title": "Create Start",
           "classes": [
             "bpmn-icon-start-event-none"
           ]
         },
         {
-          "entry": "end",
-          "title": null,
-          "classes": [
-            "bpmn-icon-end-event-none"
-          ]
-        },
-        {
-          "entry": "intermediate-event",
-          "title": null,
-          "classes": [
-            "bpmn-icon-intermediate-event-none"
-          ]
-        },
-        {
-          "entry": "task",
-          "title": null,
-          "classes": [
-            "bpmn-icon-task"
-          ]
-        },
-        {
           "entry": "subprocess",
-          "title": null,
+          "title": "Create Sub-process (collapsed)",
           "classes": [
             "bpmn-icon-subprocess-collapsed"
           ]
         },
         {
-          "entry": "external-process",
-          "title": null,
-          "classes": [
-            "bpmn-icon-call-activity"
-          ]
-        },
-        {
-          "entry": "gateway-or",
-          "title": null,
-          "classes": [
-            "bpmn-icon-gateway-xor"
-          ]
-        },
-        {
-          "entry": "gateway-and",
-          "title": null,
-          "classes": [
-            "bpmn-icon-gateway-parallel"
-          ]
-        },
-        {
           "entry": "data-input",
-          "title": null,
+          "title": "Create Task input",
           "classes": [
             "bpmn-icon-data-object"
-          ]
-        },
-        {
-          "entry": "data-output",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-object"
-          ]
-        },
-        {
-          "entry": "external-input",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-input"
-          ]
-        },
-        {
-          "entry": "process-output",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-output"
           ]
         },
         {
           "entry": "document",
-          "title": null,
+          "title": "Create Document reference",
           "classes": [
             "bpmn-icon-text-annotation"
           ]
         },
         {
           "entry": "application",
-          "title": null,
+          "title": "Create Application",
           "classes": [
             "bpmn-icon-text-annotation"
           ]
         },
         {
-          "entry": "lane",
-          "title": null,
-          "classes": [
-            "bpmn-icon-lane-insert-below"
-          ]
-        },
-        {
           "entry": "sequence-flow",
-          "title": null,
+          "title": "Create Sequence flow",
           "classes": [
             "bpmn-icon-connection-multi"
           ]
@@ -665,7 +525,7 @@
           "role": "group",
           "name": "Format",
           "title": "Display only: the BPMN model is the same in both formats",
-          "text": "Custom ▾",
+          "text": "Annotated ▾",
           "disabled": false,
           "ariaPressed": null,
           "ariaChecked": null,
@@ -677,7 +537,7 @@
           "role": "button",
           "name": "Format",
           "title": "Display only: the BPMN model is the same in both formats",
-          "text": "Custom ▾",
+          "text": "Annotated ▾",
           "disabled": true,
           "ariaPressed": null,
           "ariaChecked": null,
@@ -702,112 +562,42 @@
       "palette": [
         {
           "entry": "start",
-          "title": null,
+          "title": "Create Start",
           "classes": [
             "bpmn-icon-start-event-none"
           ]
         },
         {
-          "entry": "end",
-          "title": null,
-          "classes": [
-            "bpmn-icon-end-event-none"
-          ]
-        },
-        {
-          "entry": "intermediate-event",
-          "title": null,
-          "classes": [
-            "bpmn-icon-intermediate-event-none"
-          ]
-        },
-        {
-          "entry": "task",
-          "title": null,
-          "classes": [
-            "bpmn-icon-task"
-          ]
-        },
-        {
           "entry": "subprocess",
-          "title": null,
+          "title": "Create Sub-process (collapsed)",
           "classes": [
             "bpmn-icon-subprocess-collapsed"
           ]
         },
         {
-          "entry": "external-process",
-          "title": null,
-          "classes": [
-            "bpmn-icon-call-activity"
-          ]
-        },
-        {
-          "entry": "gateway-or",
-          "title": null,
-          "classes": [
-            "bpmn-icon-gateway-xor"
-          ]
-        },
-        {
-          "entry": "gateway-and",
-          "title": null,
-          "classes": [
-            "bpmn-icon-gateway-parallel"
-          ]
-        },
-        {
           "entry": "data-input",
-          "title": null,
+          "title": "Create Task input",
           "classes": [
             "bpmn-icon-data-object"
-          ]
-        },
-        {
-          "entry": "data-output",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-object"
-          ]
-        },
-        {
-          "entry": "external-input",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-input"
-          ]
-        },
-        {
-          "entry": "process-output",
-          "title": null,
-          "classes": [
-            "bpmn-icon-data-output"
           ]
         },
         {
           "entry": "document",
-          "title": null,
+          "title": "Create Document reference",
           "classes": [
             "bpmn-icon-text-annotation"
           ]
         },
         {
           "entry": "application",
-          "title": null,
+          "title": "Create Application",
           "classes": [
             "bpmn-icon-text-annotation"
           ]
         },
         {
-          "entry": "lane",
-          "title": null,
-          "classes": [
-            "bpmn-icon-lane-insert-below"
-          ]
-        },
-        {
           "entry": "sequence-flow",
-          "title": null,
+          "title": "Create Sequence flow",
           "classes": [
             "bpmn-icon-connection-multi"
           ]

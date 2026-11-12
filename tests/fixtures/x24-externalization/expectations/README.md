@@ -23,16 +23,27 @@ acceptance probes must satisfy once green.
   occurrences", "Lot-5 CR-10 rebind"): the seal `682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746`.
   The next revision relocated three base rows of `src/react/workshop.tsx` whose lines a block B edit changed, the
   residual of the I1 scan (section "Reviewed occurrences", "Relocated base rows"): the seal
-  `7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac`. This revision is the block B final spec pass
-  after the fix round (section "Reviewed occurrences", "Final spec rebind"): it rebinds the reviewed records and the
-  reviewed allowance RA-01 to the bytes that the fix round and the lot-3 and lot-4 reseals left, reviews eleven
-  occurrences of two block B tests eligible by exact path (one new token, RV-13) and retires the three relocated
-  rows, whose base lines the fix round restored; its digest is `seal.json`, pinned by
-  `tests/x24-externalization-seal.test.mjs`.
+  `7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac`. The next revision was the block B final spec
+  pass after the fix round (section "Reviewed occurrences", "Final spec rebind"): it rebound the reviewed records and
+  the reviewed allowance RA-01 to the bytes that the fix round and the lot-3 and lot-4 reseals left, reviewed eleven
+  occurrences of two block B tests eligible by exact path (one new token, RV-13) and retired the three relocated
+  rows, whose base lines the fix round restored; with the later RA-01 rebinds recorded in place in its receipt, the
+  seal `74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974`. The next revision was the stage B2
+  micro-reseal (section "Stage B2 micro-reseal"): a unique collaboration ID in four inputs and two ledger rows
+  reclassified context-generic. The next revision was the stage B2 step 6 rebind (section "Stage B2 step 6 rebind"):
+  records R-04 to R-18 (R-04 to R-11 under the existing tokens, R-08 and R-12 to R-18 under the eight new tokens
+  RV-14 to RV-21), the R2' ground, the S-1 reclassification of the rows I-1157 and I-1159 to legacy-api, and the
+  F-18 to F-22 code fixes by location; its seal `32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518`.
+  This revision is the stage B2 step 9 README correction (section "Stage B2 step 9 README correction"): two README
+  defects of the step 6 rebind corrected (the token-table cell of RV-21 and the receipt list of the seal hygiene),
+  no case, manifest entry, lexicon record, ledger row, rule, probe assertion, comparator or clause row changes.
   `docs/design/receipts/block-b-x24-history-guard.json`, `docs/design/receipts/block-b-x24-unicode-literals-fix.json`,
-  `docs/design/receipts/block-b-x24-p006-selector-allowance.json`, `docs/design/receipts/block-b-x24-i1-relocated-rows.json`
-  and `docs/design/receipts/block-b-x24-final-spec-rebind.json` record the old and new values of every file each of
-  the five rounds changes; the second also records the old and new values of the exact-path relink (`relinks`).
+  `docs/design/receipts/block-b-x24-p006-selector-allowance.json`, `docs/design/receipts/block-b-x24-i1-relocated-rows.json`,
+  `docs/design/receipts/block-b-x24-final-spec-rebind.json`, `docs/design/receipts/block-b2-x24-micro-reseal.json`,
+  `docs/design/receipts/block-b2-x24-step6-rebind.json` and
+  `docs/design/receipts/block-b2-x24-step9-readme-fix.json`
+  record the old and new values of every file each of the eight rounds changes; the second also records the old and
+  new values of the exact-path relink (`relinks`).
 - Authorities, in precedence order: DESIGN.md R3.3 (SHA-256
   `48139f5fd5bd789eacbf271081a95432c54d8361b1e52404e3443a25fa65782f`), the block B seal harmonization
   (section 3.4, X24, and section 7, hygiene residual HY-1), the review findings. Clause references are
@@ -182,6 +193,142 @@ reason; only `sha256`, `line` and `endLine` change (section "Reviewed occurrence
 build of this tree the package member attributed to the module carries the branch at
 `dist/profile/lot4-export.js:886`, columns 8 to 16 (a scope exception of the code, not a seal value).
 
+## Stage B2 micro-reseal
+
+The stage B2 ruling on the replay of C24 onto main `fec4dae` (spec author; classes A and B3, step 1 of its work order)
+attributes two defects to this seal. The round changes no expected output of a consumer, no parser and no probe.
+
+| Class | Finding | Correction |
+| --- | --- | --- |
+| A | The inputs `export-a.bpmn`, `export-b.bpmn`, `export-legacy.bpmn` and `surface.bpmn` gave the collaboration the ID of the call activity `C1`. The public parser refuses a document with a duplicated ID (`invalid-semantics`), while the cases that read these inputs expect an export or a surface. | The collaboration of the three reference export scenes (`derive/scenes.mjs`, `exportScene`) and of the surface input (`derive/inputs.mjs`) is `Collab1`, and the plane of each diagram references it. The call activity keeps `C1`; every other byte of the four inputs is unchanged. The facts inputs keep their collaboration ID, which none of their elements shares. |
+| B3 | The ledger rows I-0001 and I-0002 (entry LX-TH-4, rule R-162, the only rows of that rule) sit in a squash-preparation note that the tracked tree no longer holds at the block B head. Their disposition `history-record` allows the single post-migration status `retained-history`, which requires the occurrence to stay present, so P-006 counted two presence conflicts. | Rule R-162 and the two rows take the disposition `context-generic` (a generic word of a context entry; status `retained-context` or `removed`), so that the scope may record the two occurrences removed. Category, consumer, policy, target, every other field and every other row are unchanged. The probe, its P-006 assertions and the post-migration status table are unchanged. |
+
+Expected values. For class A, the twelve cases that read the four inputs (A-017, A-018, A-019, A-021, A-025, A-026,
+A-027, X-015, X-016, X-017, X-028 and X-029) change only by the SHA-256 of their `bpmn` input artifact. No expected
+artifact names the collaboration: each `C1` of these cases is the call activity (the `call` node of the reference
+pages and its connections, the `external` element of the surfaces), the participant is `Pool1`, and the Sparx plane ID
+is derived from the participant name. For class B3, `ledger.json` changes by the two dispositions, by
+`summary.byDisposition` (context-generic 175 to 177, history-record 161 to 159) and by `inputs.rules`; the expected
+section of L-001 carries the same two counts; L-001 to L-004, L-006 and P-005 otherwise change by the digests of
+`ledger.json` and `classification-rules.json` only. The justification of the reviewed token RV-04 counts 28
+context-generic rows of its literal, the count before this round; with I-0002 the ledger holds 29. `lexicon.json` is
+unchanged.
+
+| File | SHA-256 before | SHA-256 after |
+| --- | --- | --- |
+| `inputs/export-a.bpmn` | `7c0888f6138e94674e8fe081a9073b88003b69462b3548e442ce485c0a33a73f` | `14686fdea32dd84484e229c37f5a71dae1a79a9d678a5f3049074f956e6fd0cd` |
+| `inputs/export-b.bpmn` | `73c9a0b9e818c76af1b6a339e2f58912c7e63de869a87ef6d8e419b0c5a87606` | `577c179caaadc7867016bf05f1e364fe06274722df3224f38ec054c75c662221` |
+| `inputs/export-legacy.bpmn` | `e55294836fe9b264f6fde94d7ef13d8cbf5545dc0dd7fb41a4a67f54fb3c51fe` | `d42b928f798a21741c906d055410e523fe6786481a97db01670b0eb156cfffcd` |
+| `inputs/surface.bpmn` | `3514d83fce0e64e297232810443050f25a0689cc4e444c883642b7a49a788aa3` | `12dd6b9119e54940a2f8803686fb7ae191d4833297c26fc49dfb684bc9ca544a` |
+| `classification-rules.json` | `193cb1547d4ab8b319a1aa5cf9d5bbbb0bfd27d3429c89a17cad70a9b0172ec7` | `ffe834a42857a548a2af76801041ab9a43a1d6d1faed28da815c4382bdb14c00` |
+| `ledger.json` | `cc09d3097731650bd935328d7cd37ca036c5b85aad3ac5945c110bdf8edf8679` | `f1da5d9e6e7175e67350fe959761dd80bbd8b88335f3e2f3f997189523cd0b9d` |
+
+Derivation. `derive/inputs.mjs` writes the four inputs from the edited scenes, and `derive/author-cases.mjs` writes
+the eighteen cases and `manifest.json`; `derive/policies.mjs`, `derive/clause-table.mjs` and the coverage analysis
+reproduce their files byte for byte. Rule R-162 and the ledger were edited by hand; the normative recomputation
+(`derive/ledger.mjs` on a checkout of the base commit) was not rerun in this round. It applies the same first-match
+rules, and R-162 matches these two occurrences only, so no other row depends on the edit. `derive/seal.mjs` (authority,
+status and previous seal), this README, `seal.json` and the seal test (pinned digest and a chain of six receipts)
+follow. `docs/design/receipts/block-b2-x24-micro-reseal.json` records the old and new pins of every changed file and
+the old and new value at every changed pointer.
+
+## Stage B2 step 6 rebind
+
+The step 6 ruling on the remaining guard hits (spec author) reviews the 28 LX-AT-2 occurrences that the strict
+scan still reported after the block B fixes: 15 in group (a) are renamed away (F-18 in
+`src/io/reference-model.ts`, F-19 in `src/presentation/annotated/renderer.ts` and
+`src/presentation/recolor/flat.ts`), 4 in group (b) are accepted where they sit (records R-13 and R-14), and 9
+in group (c) move to block B modules (F-20 in `src/io/refusal-codes.ts` and `src/io/reference-model.ts`, F-21 in
+`src/internal/swimlaneLayout.ts`, `src/internal/swimlane-exports.ts` and `tests/profile-policy-layout.test.mjs`)
+with records R-11 and R-12. The appended-row pairing of the guard is withdrawn (F-23 in
+`tests/profile-src-literal-free.test.mjs`): a scope computed from the tree cannot vouch for the tree. The sealed
+classifier exports are restored through a block B re-export module (F-22 in `src/internal/role-exports.ts` and
+`src/internal/annotations.ts`) under the R2' ground (records R-15 to R-17): an export name that a sealed case of
+this seal calls by its SHA-256. The S-1 hook rows I-1157 and I-1159 are reclassified legacy-api (rule R-134)
+with the hook record R-18; the S-1 witness (`tests/s1-navigation-marker.test.mjs`) no longer reads a Git object
+(F-24). I-1647 stays neutral-successor with its recorded presence conflict, held for OD-1.
+
+Expected values. The step 5 records R-04 to R-10 bind under the existing tokens (RV-03 86 to 90, RV-05 51 to 55,
+RV-06 4 to 8 with class legacy-api-value, RV-13 7 to 8); R-11 binds under RV-09 (7 to 8); R-12 to R-18 bind under
+the eight new tokens RV-14 to RV-21 (1, 1, 2, 1, 3, 1, 1 and 1 occurrences in 10 files newly eligible by exact
+path). The strict scan reports 2817 occurrences, 2194 paired, 0 relocated, 623 reviewed, 0 unmatched.
+`ledger.json` changes by the two dispositions, by `summary.byDisposition` (inject 598, legacy-api 150) and by
+`inputs`; the cases L-001 to L-004, L-006, P-005 and P-006 change by the digests of `lexicon.json` and
+`classification-rules.json` only (L-001 also by the two counts); `manifest.json` changes by digests only;
+`derive/clause-table.mjs` reproduces its file byte for byte.
+
+| File | SHA-256 before | SHA-256 after |
+| --- | --- | --- |
+| `lexicon.json` | `8702c25694eba7045b01563533269f04984d0b3a5e3d14a90fde2150c06b3511` | `0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae` |
+| `classification-rules.json` | `ffe834a42857a548a2af76801041ab9a43a1d6d1faed28da815c4382bdb14c00` | `d41a14b580b012ee68cdeb677672c41bd501f2dfdf6d5182d1824d49cfde3b6b` |
+| `ledger.json` | `f1da5d9e6e7175e67350fe959761dd80bbd8b88335f3e2f3f997189523cd0b9d` | `b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a` |
+
+Derivation. `derive/reviewed.mjs --write` rebinds the reviewed records from the eligible files; rule R-134 and
+the ledger were edited by hand, and the normative recomputation (`derive/ledger.mjs` on a checkout of the base
+commit) was not rerun in this round. It applies the same first-match rules, and R-134 matches these two rows
+only, so no other row depends on the edit. `derive/author-cases.mjs` writes the cases and `manifest.json`;
+`derive/seal.mjs` (authority, status and previous seal), this README, `seal.json` and the seal test (pinned
+digest, a chain of eight receipts and reviewed total 623) follow.
+`docs/design/receipts/block-b2-x24-step6-rebind.json` records the old and new pins of every changed file and
+the old and new value at every changed pointer.
+
+## Stage B2 step 9 README correction
+
+The step 9 ruling on the stopped campaign (spec author) corrects two README defects of the step 6 rebind: the
+token-table cell of RV-21 holds 60 hex digits that match no file of the tree, and the receipt list of
+"Literal-free seal" omits the step 6 receipt that the seal test's hygiene scope reads. The rescan without
+`--write` reports 2817 occurrences, 2194 paired, 0 relocated, 623 reviewed, 0 unmatched; no case, manifest
+entry, lexicon record, ledger row, rule, probe assertion, comparator or clause row changes.
+
+| Location | Old | New |
+| --- | --- | --- |
+| `README.md` token table, row RV-21, column "Literal SHA-256" | `e2dc1fad01302375df2f9eb74a0bac2008e664761466a6d574812a7bfb8f` (60 hex digits, found in no other file) | `e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8` (the RV-21 literal and key of `lexicon.json`, the display-name digest of `probe-expectations.json#/probe1/functions`, record R-17 of the step 6 ruling) |
+| `README.md` section "Literal-free seal", receipt list | six receipts | the eight receipts of the seal test's hygiene scope after this round: the six listed, `docs/design/receipts/block-b2-x24-step6-rebind.json` and `docs/design/receipts/block-b2-x24-step9-readme-fix.json` |
+| `derive/seal.mjs` header comment | six receipts | the same eight receipts |
+
+Derivation. `derive/seal.mjs` (authority, status and previous seal), this README, `seal.json` and the seal test
+(pinned digest, a chain of eight receipts and reviewed total 623) follow.
+`docs/design/receipts/block-b2-x24-step9-readme-fix.json` records the old and new pins of every changed file and
+the old and new value at every changed pointer.
+
+## Stage B2 phase 2 integration
+
+The phase 2 integration carries the main vendor-py rebind and adds the navigation mapping records RV-22
+and RV-23. The rebase merged the 19 main records (reviewed tokens RV-01, RV-08, RV-10 and RV-11 on eight
+lot 3 and lot 5 files) without touching the B2-line records. The line that maps the published marker
+navigation rule names to their business-policy/1 categories sits in the block B module
+`src/react/navigation-target.ts`, eligible by exact path since the stage B2 step 6 rebind:
+`src/react/workshop.tsx` is a path of the base tree, and a base file is never bound (design decisions 18
+and 21). The strict scan bound the two mapping spans of that module under the two new records and rebound
+the records RV-13 and RV-15 of the same module (file SHA-256 only; spans, counts and classes unchanged);
+the ledger input pin, the seven affected cases and the manifest were regenerated before the reseal.
+Reviewed total 623 to 625 in 195 files; no other reviewed record changed content or vanished, and the
+RV-01 to RV-21 counts are unchanged.
+
+| File | SHA-256 before | SHA-256 after |
+| --- | --- | --- |
+| `lexicon.json` | `0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae` (previous seal; `44b89b920c565350f5cb8c9f6828ee7cbd56a0ff1b17652fc3c380dad42289dd` merged) | `40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740` |
+| `ledger.json` | `b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a` | `229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80` |
+| `manifest.json` | `6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe` | `071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889` |
+
+The previous seal is `f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1`; the merged
+seal is `e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78`
+(`tests/fixtures/x24-externalization/expectations/seal.json` of
+`docs/design/receipts/block-b-vendor-py-x24-rebind.json`, 34334 bytes), whose previous seal is the
+final-spec seal. The new seal is recorded in
+`docs/design/receipts/block-b2-p2-x24-integration.json`. The seven cases L-001 to L-004, L-006, P-005
+and P-006 change by the digests of `lexicon.json` and `ledger.json` only;
+`derive/clause-table.mjs` reproduces its file byte for byte.
+
+Derivation. The 19 rebinds were checked against the main receipt (equal records, disjoint from the
+B2-line records) and not re-applied; `derive/reviewed.mjs --write` rebound the reviewed records from
+the eligible files (no eligible path added); `ledger.json#/inputs/lexicon` by hand;
+`derive/author-cases.mjs` writes the cases and `manifest.json`; `derive/seal.mjs` (authority, status
+and previous seals), this README, `seal.json` and the seal test (pinned digest, previous seal, chain
+of ten seals with the merged vendor-py entry, and reviewed total 625) follow.
+`docs/design/receipts/block-b2-p2-x24-integration.json` records the old and new pins of every changed
+file and the old and new value at every changed pointer.
+
 ## Gate summary
 
 | Item | Count |
@@ -194,7 +341,7 @@ build of this tree the package member attributed to the module carries the branc
 | Cases | 111: L 6, S 28, A 29, R 10, X 31, P 7 |
 | Comparator witnesses | 103 accepted, 459 rejected |
 | Hashed literal set | 189 distinct ledger literals (`literal-set.json`) |
-| Integration scan I1 | 598 reviewed occurrences of 13 tokens in 185 files (`lexicon.json#/reviewed`) and no relocated base row (`lexicon.json#/relocated`); every other occurrence of the tracked tree pairs with a ledger row or is unmatched; at the final spec pass (block B head `20370d3` with this round): 3974 occurrences, 3376 paired, 0 relocated, 598 reviewed, 0 unmatched (counts at each relink: sections "Integration micro-reseal" and "Reviewed occurrences") |
+| Integration scan I1 | 625 reviewed occurrences of 23 tokens in 195 files (`lexicon.json#/reviewed`) and no relocated base row (`lexicon.json#/relocated`); every other occurrence of the tracked tree pairs with a ledger row or is unmatched; at the final spec pass (block B head `20370d3` with this round): 3974 occurrences, 3376 paired, 0 relocated, 598 reviewed, 0 unmatched (counts at each relink: sections "Integration micro-reseal" and "Reviewed occurrences"); at the stage B2 step 6 rebind (section "Stage B2 step 6 rebind"): 2817 occurrences, 2194 paired, 0 relocated, 623 reviewed, 0 unmatched; at the stage B2 phase 2 integration (section "Stage B2 phase 2 integration"): 1886 occurrences, 1261 paired, 0 relocated, 625 reviewed, 0 unmatched |
 | Relocated base rows | 0 (RL-01 to RL-03, rows I-1427, I-1462 and I-1464 of `src/react/workshop.tsx`, retired by the final spec pass: the three occurrences pair with their base rows again) |
 | Selector-branch allowances | 2 base (rows I-0757, I-0969), 1 reviewed (RA-01, `src/profile/lot4-export.ts:867`) |
 
@@ -280,9 +427,10 @@ lines, families, entries, keys and forms match an occurrence gives its row field
 listing all its occurrences at the base and reading the lines; an occurrence that no rule matches fails
 the build. Counts by family: theme 1592, descriptor 559, presentation 483, type-vocabulary 158, marker
 140, attachment 88, export-style 85, classification-api 82, navigation 81, metrics 71, palette 41,
-private 1. By disposition: test-input 1310, inject 600, doc-update 356, neutral-successor 344, replace
-261, context-generic 175, history-record 161, legacy-api 148, remove 21, retain-notice 5. The disposition
-vocabulary is `classification-rules.json#/vocabulary/disposition`.
+private 1. By disposition: test-input 1310, inject 598, doc-update 356, neutral-successor 344, replace
+261, context-generic 177, history-record 159, legacy-api 150, remove 21, retain-notice 5 (context-generic 175 and
+history-record 161 before the stage B2 micro-reseal; inject 600 and legacy-api 148 before the stage B2 step 6
+rebind). The disposition vocabulary is `classification-rules.json#/vocabulary/disposition`.
 
 ### Commands
 
@@ -374,8 +522,11 @@ clauses, the wrong implementation (`W-*`) the case rejects and the data sets the
 reseal receipts `docs/design/receipts/block-b-x24-history-guard.json`,
 `docs/design/receipts/block-b-x24-unicode-literals-fix.json`,
 `docs/design/receipts/block-b-x24-p006-selector-allowance.json`,
-`docs/design/receipts/block-b-x24-i1-relocated-rows.json` and
-`docs/design/receipts/block-b-x24-final-spec-rebind.json`. The literal set is `literal-set.json`:
+`docs/design/receipts/block-b-x24-i1-relocated-rows.json`,
+`docs/design/receipts/block-b-x24-final-spec-rebind.json`,
+`docs/design/receipts/block-b2-x24-micro-reseal.json`,
+`docs/design/receipts/block-b2-x24-step6-rebind.json` and
+`docs/design/receipts/block-b2-x24-step9-readme-fix.json`. The literal set is `literal-set.json`:
 one hashed record per distinct exact text of the ledger occurrences, derived by `derive/literal-set.mjs`
 from the base tree at each row's span and checked against the row's literal SHA-256. A record holds the
 SHA-256 and the length of the text, the entry of its first row, the word class of its first and last unit and,
@@ -422,41 +573,57 @@ their clause tables. Each was classified by token (one exact literal: entry and 
 - (a) a business literal used with its business meaning: never reviewed; it must leave the file that
   carries it, replaced by its category or a digest;
 - (b) a generic word or phrase, a published legacy API value that the base ledger retains as legacy API
-  and that a block B legacy adapter case reproduces, or a homograph: reviewed in `lexicon.json#/reviewed`.
+  and that a block B legacy adapter case reproduces, an export name that a sealed case of this seal calls by
+  its SHA-256 (R2'), or a homograph: reviewed in `lexicon.json#/reviewed`.
 
 A reviewed record binds its token's occurrences in one eligible file (by prefix, the lot-3, lot-4 and lot-5
 expectation trees and their three clause tables; by exact path, `src/profile/lot4-export.ts`,
 `tests/profile-lot3-golden-independence.test.mjs`, `docs/design/receipts/block-b-lot3-unicode-literals-fix.json`,
-`tests/profile-bfix-f2.test.mjs` and `tests/profile-workshop-prop.test.mjs`)
+`tests/profile-bfix-f2.test.mjs`, `tests/profile-workshop-prop.test.mjs`, `src/internal/published-token-type.ts`,
+`src/internal/token-options.ts`, `src/react/navigation-target.ts`, `tests/types/v04-published-token-names.ts`,
+`tests/profile-published-token-names.test.mjs`, `src/presentation/annotated/renderer.ts`,
+`src/presentation/annotated/style.ts`, `src/internal/swimlane-exports.ts`, `src/io/refusal-codes.ts` and
+`src/internal/role-exports.ts`)
 by path SHA-256, file SHA-256 and span; the strict scan does not report a bound occurrence, and reports it
 again as soon as one byte of the file, its path or the span changes. The relaxed scan of the seal hygiene
 and the selector-branch rule ignore the records; a record has no effect on the zero-list rescan of `src/`
-and of the package, since no package member is eligible and the only eligible `src/` file binds a token of
-entry LX-TH-3, which is not a zero-list entry. No entry, matcher or hash of the lexicon is removed or
+and of the package, since no package member is eligible and the eligible `src/` files bind tokens of LX-TH-1,
+LX-TH-2, LX-TH-3, LX-NV-1, LX-AT-2 and LX-CA-1, none a zero-list entry, and no bound span is a selector branch.
+No entry, matcher or hash of the lexicon is removed or
 narrowed. The seal test checks that every record binds exactly its token's occurrences in its file at the
 bound bytes; after a reseal of a bound file, `derive/reviewed.mjs --write` rebinds and the derived files
 are regenerated (section "Commands"). The selector-branch rule reads one record only through the reviewed
 allowance RA-01, which names the RV-01 record of `src/profile/lot4-export.ts` and one of its spans (section
 "Reviewed selector-branch allowance"); without such an allowance a record binds no branch.
 
-Class (b), 598 occurrences of 13 tokens in 185 files (third-party counts: whole word, any case, in the
+Class (b), 625 occurrences of 23 tokens in 195 files (third-party counts: whole word, any case, in the
 packages installed from the lockfile):
 
 | Token | Entry | Literal SHA-256 | Class | Occurrences (files) | Justification |
 | --- | --- | --- | --- | --- | --- |
 | RV-01 | LX-TH-3 | `fe6d3468cf5c74d8ec2a95b40f2e05338c37a4202f8fad692d2b64a9cf9b468a` | generic-word | 153 (49) | Lower-case form of an English adjective that the base library also uses as a look selector name; the entry is of kind context (generic word reviewed as a context match, DESIGN.md:872). In the lot-3, lot-4 and lot-5 sealed files it qualifies the upstream lint rules and settings in prose, names legacy theme ids and compatibility alias records of the lot-4 neutral profiles (the injected form of DESIGN.md:837: theme ids and compatibilityAliases of kind theme), the legacy-name inputs of the lot-4 legacy theme cases, and appears in the vendored Python lot-4 and lot-5 records. Whole word in 178 files of 57 installed third-party packages. The base keeps 124 context-generic rows of it (for example I-0757 and I-0969, the two allowances of the selector-branch rule). In the block B source src/profile/lot4-export.ts (2 occurrences, one line) it is the key of the request that the lot-4 pre-normalize lint passes to runLintSync and the read of the same-named property of the compileLintPolicy result: the upstream lint settings (rule name to severity and options) of the exported interface LintRunRequest (src/profile/lint-bridge.ts:223, base row I-0960) and of the result type of compileLintPolicy (src/profile/lint-contracts.ts:47, I-0965). Both declarations are byte-identical on main (63a9258), ship in its package declarations (dist/**) and are kept by the base as context-generic rows of rule R-093; a declaration published on main is not renamed. |
 | RV-02 | LX-TH-3 | `ef6691545d2c5523efed00424407cb261aeb0037d165ca5792f7f8bac3381362` | generic-word | 186 (101) | Capitalized form of the word of RV-01. In the lot-5 synthetic documents, envelopes and cases it is the name of one of two input sets (an ordinary option name next to another one), and in lot 4 it is the exact-name negative vector of the legacy alias cases and of their vendored Python copies. The base rows of this exact form are context-generic or history-record (I-0294, I-0418, I-0452, I-0453, I-2516, I-2605, I-2607). |
-| RV-03 | LX-TH-2 | `ca8c522af0a0dfc10c8747ed205c4a650df4ccb350adbd450bbce753f6385c51` | legacy-api-value | 86 (25) | An English adjective that is a published look name of the legacy 0.3 and 0.4 API: the base retains it as legacy API (I-1417, I-1421, I-1575, I-1589, I-1594). In lot 4 it is legacy compatibility data: the old name of an alias record, a legacy theme id, the id and file name of a legacy theme case and of its main render artifacts, and prose; it never selects behaviour in library code (the selector-branch rule of src/ and the package is unchanged). Whole word in 5 files of 4 installed third-party packages. |
+| RV-03 | LX-TH-2 | `ca8c522af0a0dfc10c8747ed205c4a650df4ccb350adbd450bbce753f6385c51` | legacy-api-value | 90 (28) | An English adjective that is a published look name of the legacy 0.3 and 0.4 API: the base retains it as legacy API (I-1417, I-1421, I-1575, I-1589, I-1594). In lot 4 it is legacy compatibility data: the old name of an alias record, a legacy theme id, the id and file name of a legacy theme case and of its main render artifacts, and prose; it never selects behaviour in library code (the selector-branch rule of src/ and the package is unchanged). Whole word in 5 files of 4 installed third-party packages. Also bound in the block B module src/internal/token-options.ts, the D5 witness tests/profile-published-token-names.test.mjs and the block B compat proof tests/types/v04-published-token-names.ts. |
 | RV-04 | LX-TH-4 | `6cdfd271da635d491e37a2b4a1044b306e6e9e039aeadee95bb355efadf8cb33` | generic-word | 57 (23) | An English adjective; the entry is of kind context (generic word reviewed as a context match). In lot 4 it names an injected legacy theme id, the main render artifacts of a legacy theme case and prose about caller-supplied tokens. Whole word in 458 files of 78 installed third-party packages; the base keeps 28 context-generic rows of it. In the block B test tests/profile-bfix-f2.test.mjs (4 occurrences, review findings 2 and 28) it is the first word of a synthetic draw.io serializer version value: the second-profile value that writerOptions and a serializer record inject, which the written mxfile header must carry; it names no look and selects no theme. |
-| RV-05 | LX-TH-1 | `ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033` | legacy-api-value | 51 (29) | An English noun that is a published look name of the legacy API: the base retains it as legacy API (I-1416, I-1419, I-1420, I-1574, I-1578, I-1585, I-1592). In lot 4 it is the old name of a compatibility alias record, a legacy-name input, the id and file name of a legacy theme case, the occurrence key of a synthetic band stripe in the export and render records and in their vendored Python copies, and prose about the legacy look. Whole word in 20 files of 9 installed third-party packages. |
-| RV-06 | LX-TH-1 | `7482e374b5bddc0a48ea3b3430de633b7938e3045e64aebca2574a50a53a5719` | generic-word | 4 (4) | Capitalized form of the noun of RV-05, used in lot 4 as the occurrence key of a synthetic band stripe of a foreign layout record, in its derivation text and in their vendored Python copies. The base retains this exact form as legacy API in 21 rows (for example I-0463, I-0475). |
+| RV-05 | LX-TH-1 | `ba29297b6c4f8486cb3f92f5ff09f93ca5e16ceb198d9b5e159aa0ca47f94033` | legacy-api-value | 55 (32) | An English noun that is a published look name of the legacy API: the base retains it as legacy API (I-1416, I-1419, I-1420, I-1574, I-1578, I-1585, I-1592). In lot 4 it is the old name of a compatibility alias record, a legacy-name input, the id and file name of a legacy theme case, the occurrence key of a synthetic band stripe in the export and render records and in their vendored Python copies, and prose about the legacy look. Whole word in 20 files of 9 installed third-party packages. Also bound in the block B module src/internal/token-options.ts, the D5 witness tests/profile-published-token-names.test.mjs and the block B compat proof tests/types/v04-published-token-names.ts. |
+| RV-06 | LX-TH-1 | `7482e374b5bddc0a48ea3b3430de633b7938e3045e64aebca2574a50a53a5719` | legacy-api-value | 8 (6) | Capitalized form of the noun of RV-05, used in lot 4 as the occurrence key of a synthetic band stripe of a foreign layout record, in its derivation text and in their vendored Python copies. The base retains this exact form as legacy API in 21 rows (for example I-0463, I-0475). Also bound in the block B module src/internal/published-token-type.ts and the block B compat proof tests/types/v04-published-token-names.ts. |
 | RV-07 | LX-DS-4 | `e604f8c97caaadb4c15db94f28d54802722aeba64e375071e4d1eeb1a3cc68fa` | homograph | 13 (4) | A short binding name of the vendored Python lot-4 neutral profiles (the bind, read, write and loss steps of their export recipes) and of the Python derivation text that the lot-4 index quotes; it coincides with the private descriptor prefix of the entry, whose matcher and hash stay unchanged. Whole word in 12 files of 5 installed third-party packages. The vendored files are byte copies of the twin seal (cross-parity) and cannot carry another name. |
 | RV-08 | LX-PL-1 | `75f02da68647be51e5a675b5fc5b9a521d589a09d50103ed5e227cccc3d02056` | generic-word | 11 (7) | A two-word English phrase that the lot-3 and lot-5 discrimination texts, clause notes and vendored Python clause note use to describe the wrong implementation that updates one input set silently. The base has a single row of it (I-1064, rule R-123, disposition remove, the palette updater in src/); the block B occurrences are prose only. The block B lot-3 transaction reseal (1aa0d6f) appended one sentence after the phrase to the discrimination text of l3-tx-io-set-selection-required in the lot-3 README, index and authoring script (the single InputSet control of the C recipe): the phrase keeps its columns and its meaning there; the final spec pass reviewed the three changed lines and rebound them. |
-| RV-09 | LX-AT-2 | `3cc838aabc52939c80e95e5036de2835c01cad9569b33364be0744be9692cc58` | legacy-api-value | 7 (4) | A refusal code of the published legacy exporter: the base retains it as legacy API (I-0769, rule R-066). Lot 4 seals the closed refusal-code set of the legacy adapter (legacy-adapter manifest, two legacy-adapter cases and the derivation list of the export cases), which must reproduce the legacy codes exactly (OPEN-LEGACY, DESIGN section 12.2). |
+| RV-09 | LX-AT-2 | `3cc838aabc52939c80e95e5036de2835c01cad9569b33364be0744be9692cc58` | legacy-api-value | 8 (5) | A refusal code of the published legacy exporter: the base retains it as legacy API (I-0769, rule R-066). Lot 4 seals the closed refusal-code set of the legacy adapter (legacy-adapter manifest, two legacy-adapter cases and the derivation list of the export cases), which must reproduce the legacy codes exactly (OPEN-LEGACY, DESIGN section 12.2). Also bound in the block B module src/io/refusal-codes.ts. |
 | RV-10 | LX-MT-4 | `8088da219c162b1c3733594fe2015156ee7b84042ea821ad552e9448e8cbbcdd` | generic-word | 21 (8) | The name of a Unicode normalization form. In the lot-3 README, index and authoring script (14 occurrences) it names, in discrimination texts, comments and the Unicode restoration note, a normalizing candidate that l3-id-stable-vectors, l3-id-unicode-names and l3-n-unicode-names reject; it is written in the lot-5 README, clause index and field-group discrimination text that reject a normalizing candidate match. In the lot-3 golden-independence test tests/profile-lot3-golden-independence.test.mjs (3 occurrences) it is the label and the String.prototype.normalize argument of one named wrong normalization, and one label of the list whose wrong candidates must change the sealed ID list of l3-id-stable-vectors; in the lot-3 reseal receipt docs/design/receipts/block-b-lot3-unicode-literals-fix.json (1 occurrence) it names the form whose witness is the decomposed twin added at index 1 of that list. The policy of the entry is the ambient width fallback of the base text metrics (I-0750, rule R-034), not the mention of the form. Whole word in 6 files of 3 installed third-party packages. |
 | RV-11 | LX-MK-5 | `c587ed01690ac075254788e77d8a5c068cf756579ef25db134984655add8d778` | homograph | 1 (1) | A JavaScript slicing fragment of the lot-3 authoring script that takes the tail of the command list; the policy of the entry is the marker-length body extraction of the base sources (I-0570, I-0573, I-0911, I-0916). |
 | RV-12 | LX-MK-1 | `44328fb796413802ec7f238f64c1663ee88c2b91f00a408bd44b32c5ada8372c` | homograph | 1 (1) | A JavaScript array literal of the lot-5 sequence authoring script that holds one element variable in a relabel option; it shares the normalized key of the document-role marker (a bracketed word, any case), whose matcher and hash stay unchanged. No ledger row has this exact form, and the file writes no annotation text with it. |
-| RV-13 | LX-NV-1 | `e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284` | legacy-api-value | 7 (1) | Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. |
+| RV-13 | LX-NV-1 | `e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284` | legacy-api-value | 8 (2) | Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. Also bound in the block B module src/react/navigation-target.ts. |
+| RV-14 | LX-AT-2 | `0ec4cd4f9cc1d85f0d2a93c3440aa5f8702305ecdb26dd33bc789ba73301a0f0` | legacy-api-value | 1 (1) | Base export name of the legacy layout module (I-0671, R-024: generic badge-sizing algorithm name, every value injected), kept for its base callers; the layout module re-exports this block B module. |
+| RV-15 | LX-NV-1 | `5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6` | legacy-api-value | 1 (1) | Published default target resolver of the react entry (0.3.0 and main; base export row I-1412, legacy-api, rule R-149), now evaluating the injected navigation policy. |
+| RV-16 | LX-NV-1 | `9e653023115a4c9ae92cdd3e985cd0fa5dfe018244d1e877a5857a0b7c29414e` | legacy-api-value | 2 (1) | The two documented DOM hooks the block B renderer emits on the process icon (base rows I-1157 and I-1159, reclassified legacy-api), carrying the pinned legacy marker hash of base row I-0477, rule R-038. |
+| RV-17 | LX-AT-2 | `f3902178f562e8df73808d57ce2ebcc7229b6982698d917ddfd47d1627c3e9e9` | legacy-api-value | 1 (1) | Badge-size algorithm name of the legacy style module (base rows legacy-api, R-119), defined in the block B style module with the injected policy. |
+| RV-18 | LX-AT-2 | `1b82f18171ee7a4975410dc43411ae61aae3b4b7c26245d4aaf0e3453e81130f` | legacy-api-value | 3 (2) | Badge-row algorithm name of the legacy style module (base row legacy-api, R-119), defined in the block B style module and imported and called by the block B renderer with the injected policy; its base call rows (R-131, inject) stay injected. |
+| RV-19 | LX-CA-1 | `8cb41a62833eea8c8d49348ba4bc10a8713758012326864f4520857f35f2e5c2` | legacy-api-value | 1 (1) | Document-role export name that the sealed probe calls by digest (probe1, P-001 to P-003) and that main ships in dist/internal/annotations.js, re-exported as the policy-driven hasDocumentRole; I-0467 (R-002) stays injected. |
+| RV-20 | LX-CA-1 | `8ef9a482886c2f6e1d98e24734371c40802822aff5049bca57604dbaf8a84a53` | legacy-api-value | 1 (1) | Application-role export name, same grounds, re-exported as hasApplicationRole; I-0469 (R-003) stays injected. |
+| RV-21 | LX-CA-1 | `e2dc1fad01302375df2f9eb74a0bac2008e664761466acf6d64d574812a7bfb8` | legacy-api-value | 1 (1) | Display-name export name, same grounds, re-exported as roleText; I-0473 (R-004) stays injected. |
+| RV-22 | LX-NV-1 | `4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d` | legacy-api-value | 1 (1) | Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; the matching is the injected `legacy-rules` evaluation. |
+| RV-23 | LX-NV-1 | `76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45` | legacy-api-value | 1 (1) | Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; same grounds as RV-22, second rule name. |
 
 Class (a), 29 occurrences of 2 tokens, all in lot-5 files, not reviewed and left to the lot-5 seals
 (positions at the integration scan, removed since by the lot-5 micro-reseal):

@@ -1,3 +1,4 @@
+import { fixtureDescriptor } from "./helpers/injected-descriptor.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -11,7 +12,7 @@ import { previewNativeJson, buildPortableManifest, readPortableManifest } from "
 const fixture = readFileSync(new URL("./fixtures/profile-native/stable.bpmn", import.meta.url), "utf8");
 const taskFixture = readFileSync(new URL("./fixtures/profile-native/stable-task.bpmn", import.meta.url), "utf8");
 
-const configuration = { contractVersion: "1", defaults: "explicit", descriptors: { sem: io.semanticDescriptor } };
+const configuration = { contractVersion: "1", defaults: "explicit", descriptors: { [fixtureDescriptor.prefix]: fixtureDescriptor } };
 const writerOptions = { format: false, preamble: true };
 const digest = value => createHash("sha256").update(value).digest("hex");
 

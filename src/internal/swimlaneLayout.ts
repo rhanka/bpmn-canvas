@@ -1,3 +1,5 @@
+import { applicationHost, type BusinessPolicy } from "./business-policy.js";
+import { layoutPolicy } from "./legacy-policy.js";
 // On-demand swimlane layout. Adapted from an internal TypeScript implementation,
 // itself a client-side port of an internal Python layout (swimlane layout, text fit,
 // bpmn-io grid). Columns come from bpmn-io's auto-layout (npm bpmn-auto-layout,
@@ -7,7 +9,7 @@
 
 import { layoutProcess as bpmnAutoLayout } from "bpmn-auto-layout";
 
-import { textWidth, wrapText } from "./textMetrics.js";
+import { textWidth as measureWidth, wrapText as wrapMeasured } from "./textMetrics.js";
 
 export type LayoutNode = {
   type?: string | null;
@@ -15,12 +17,12 @@ export type LayoutNode = {
   label: string;
   /** Displayed name when `label` is a technical key (editor adapter); defaults to `label`. */
   text?: string;
-  app_label?: string | null;
+  application?: string | null;
   _task?: string;
   _dir?: string;
 };
-export type LayoutConnection = { source: string; target: string; label?: string | null; kind?: string };
-export type LayoutProcessInput = { name?: string; lanes: Array<{ name?: string; nodes: LayoutNode[] }>; connections: LayoutConnection[] };
+export type LayoutConnection = { id?: string; source: string; target: string; label?: string | null; kind?: string };
+export type LayoutProcessInput = { diagnostics?: any[]; name?: string; lanes: Array<{ name?: string; nodes: LayoutNode[] }>; connections: LayoutConnection[] };
 
 export type Box = { x: number; y: number; w: number; h: number };
 export type Point = [number, number];
@@ -35,46 +37,46 @@ export type ProcessLayout = {
   labels: Record<string, Box>;
 };
 
-export const FLOW_TYPES = new Set(["START", "END", "TASK", "SUB-PROCESS", "GATEWAY", "EVENT", "EXTERNAL_PROCESS"]);
+export const FLOW_TYPES = new Set(["start", "end", "task", "subprocess", "gateway", "event", "call"]);
 export const ARTIFACT_TYPES = new Set([
-  "TASK_INPUT", "TASK_OUTPUT", "EXTERNAL_INPUT", "PROCESS_OUTPUT", "DOCUMENT", "DATA_OBJECT", "EXTERNAL_DATA_OBJECT",
+  "object-in", "object-out", "port-in", "port-out", "document", "object-in", "object-in",
 ]);
 
-const POOL_HEADER = 30;
-const LANE_HEADER = 30;
-const LEFT_PAD = 40;
-const COL_GAP = 70;
-const CHANNEL = 26;
-const ROW_GAP = 24;
-const MIN_LANE_H = 200;
-const RIGHT_PAD = 70;
-const GROUP_GAP = 10;
-const CENTRE_GAP = 10;
-const FONT = 12;
-const LABEL_FONT = 11;
-const LINE_HEIGHT = 1.2;
-const EVENT = 50;
-const ITEM_W = 40;
-const ITEM_H = 50;
-const LABEL_MAX_W = { EVENT: 120, ITEM: 100 };
-const SIZES: Record<string, [number, number]> = {
-  TASK: [120, 80], "SUB-PROCESS": [120, 80], EXTERNAL_PROCESS: [108, 62],
-  GATEWAY: [EVENT, EVENT], START: [EVENT, EVENT], END: [EVENT, EVENT], EVENT: [EVENT, EVENT],
-  TASK_INPUT: [ITEM_W, ITEM_H], TASK_OUTPUT: [ITEM_W, ITEM_H], EXTERNAL_INPUT: [ITEM_W, ITEM_H],
-  PROCESS_OUTPUT: [ITEM_W, ITEM_H], DOCUMENT: [110, 50],
-};
-const ACTIVITIES = new Set(["TASK", "SUB-PROCESS", "EXTERNAL_PROCESS"]);
-const APP_MIN_W = 80;
-const APP_H = 30;
-export const APP_OVERLAP = 10;
-const APP_CHROME = 31;
-const APP_MARGIN = 10;
-const DOC_W = 120;
-const DOC_TEXT_TOP = 20;
-const DOC_WAVE_TOP = 0.74;
-const DOC_PAD_X = 6;
-const DOC_PAD_BOTTOM = 4;
-const CELL_W = 150;
+export function createLayout(input?: BusinessPolicy) {
+  const policy = input ?? (() => { throw new Error("profile-resource-missing"); })();
+  const l = layoutPolicy(policy);
+  const textWidth = (text: string, size: number, bold = false): number => measureWidth(text, size, bold, policy);
+  const wrapText = (text: string, size: number, width: number, bold = false): string[] => wrapMeasured(text, size, width, bold, policy);
+const poolHeader = l.poolHeader;
+const laneHeader = l.laneHeader;
+const leftPad = 40;
+const colGap = 70;
+const layoutChannel = l.channel;
+const fixedRowGap = 24;
+const minLaneH = l.minLaneHeight;
+const rightPad = 70;
+const groupGap = 10;
+const centreGap = 10;
+const font = l.fontSize;
+const labelFont = l.labelFontSize;
+const lineHeight = policy.metrics.lineHeight;
+const event = l.nodeSizes.find((n: any) => n.kind === "start").width;
+const itemW = l.nodeSizes.find((n: any) => n.kind === "object-in").width;
+const itemH = l.nodeSizes.find((n: any) => n.kind === "object-in").height;
+const labelMaxW = { event: l.labelMaxWidth.event, ITEM: l.labelMaxWidth.item };
+const sizes: Record<string, [number, number]> = Object.fromEntries(l.nodeSizes.map((n: any) => [n.kind, [n.width, n.height]]));
+const activities = new Set(["task", "subprocess", "call"]);
+const appMinW = l.appBadge.minWidth;
+const appH = l.appBadge.height;
+const appOverlap = l.appBadge.overlap;
+const appChrome = l.appBadge.chrome;
+const appMargin = l.appBadge.margin;
+const docW = l.document.width;
+const docTextTop = l.document.textTop;
+const docWaveTop = l.document.waveTop;
+const docPadX = l.document.padX;
+const docPadBottom = l.document.padBottom;
+const cellW = 150;
 
 const cx = (b: Box): number => b.x + Math.floor(b.w / 2);
 const textOf = (n: LayoutNode): string => n.text ?? n.label ?? "";
@@ -83,7 +85,7 @@ const box = (x: number, y: number, w: number, h: number): Box => ({ x, y, w, h }
 
 // --- text_fit ---------------------------------------------------------------
 
-export function fit(
+function fit(
   text: string, size: number,
   o: { minW: number; maxW: number; minH: number; padX?: number; padY?: number; bold?: boolean; extraH?: number },
 ): [number, number] {
@@ -99,70 +101,68 @@ export function fit(
     w = o.maxW;
     lines = wrapText(text, size, o.maxW - 2 * padX, o.bold).length;
   }
-  const h = Math.max(o.minH, lines * size * LINE_HEIGHT + 2 * padY + (o.extraH ?? 0));
+  const h = Math.max(o.minH, lines * size * lineHeight + 2 * padY + (o.extraH ?? 0));
   return [Math.ceil(w), Math.ceil(h)];
 }
 
-export function labelBox(text: string, size: number, maxW: number, bold = false): [number, number] {
+function labelBox(text: string, size: number, maxW: number, bold = false): [number, number] {
   if (!(text ?? "").trim()) return [0, 0];
   const lines = wrapText(text, size, maxW, bold);
   const w = Math.max(...lines.map((l) => textWidth(l, size, bold)));
-  return [Math.ceil(Math.min(maxW, w) + 4), Math.ceil(lines.length * size * LINE_HEIGHT + 2)];
+  return [Math.ceil(Math.min(maxW, w) + 4), Math.ceil(lines.length * size * lineHeight + 2)];
 }
 
 // --- sizes ------------------------------------------------------------------
 
-export function appBoxSizeLayout(name: string, hostW: number): [number, number] {
-  const wanted = textWidth(name, FONT, true) + APP_CHROME;
-  const maxW = Math.max(APP_MIN_W, hostW - 2 * APP_MARGIN);
-  const w = Math.trunc(Math.min(maxW, Math.max(APP_MIN_W, Math.ceil(wanted))));
-  if (wanted <= w) return [w, APP_H];
-  const lines = wrapText(name, FONT, w - APP_CHROME, true).length;
-  return [w, Math.trunc(Math.max(APP_H, Math.ceil(lines * FONT * 1.2 + 8)))];
+function badgeSize(name: string, hostW: number): [number, number] {
+  const wanted = textWidth(name, l.appBadge.font, true) + appChrome;
+  const maxW = Math.max(appMinW, hostW - 2 * appMargin);
+  const w = Math.trunc(Math.min(maxW, Math.max(appMinW, Math.ceil(wanted))));
+  if (wanted <= w) return [w, appH];
+  const lines = wrapText(name, l.appBadge.font, w - appChrome, true).length;
+  return [w, Math.trunc(Math.max(appH, Math.ceil(lines * l.appBadge.font * policy.metrics.lineHeight + 8)))];
 }
 
-function appMinHostW(name: string): number {
+function badgeMinHostWidth(name: string): number {
   const words = (name ?? "").split(/\s+/).filter(Boolean);
-  const longest = words.length ? Math.max(...words.map((w) => textWidth(w, FONT, true))) : 0;
-  return Math.trunc(Math.ceil(longest + APP_CHROME + 2 * APP_MARGIN));
+  const longest = words.length ? Math.max(...words.map((w) => textWidth(w, l.appBadge.font, true))) : 0;
+  return Math.trunc(Math.ceil(longest + appChrome + 2 * appMargin));
 }
 
-export function docHeight(label: string): number {
-  const block = wrapText(label, LABEL_FONT, DOC_W - 2 * DOC_PAD_X).length * LABEL_FONT * 1.2;
-  return Math.trunc(Math.max(50, Math.ceil((DOC_TEXT_TOP + block + DOC_PAD_BOTTOM) / DOC_WAVE_TOP)));
+function docHeight(label: string): number {
+  const block = wrapText(label, labelFont, docW - 2 * docPadX).length * labelFont * policy.metrics.lineHeight;
+  return Math.trunc(Math.max(l.document.minHeight, Math.ceil((docTextTop + block + docPadBottom) / docWaveTop)));
 }
 
 function kindOf(n: LayoutNode): string {
-  const t = (n.type || "TASK").trim().toUpperCase();
-  return t in SIZES ? t : "TASK";
+  const t = (n.type || "task").trim().toLowerCase();
+  return t in sizes ? t : "task";
 }
 
 function nodeSize(n: LayoutNode, kind: string): [number, number] {
-  const label = textOf(n);
-  const app = String(n.app_label || "");
-  const minW = app ? Math.min(200, Math.max(120, appMinHostW(app))) : 120;
-  if (kind === "TASK" || kind === "SUB-PROCESS") {
-    return fit(label, FONT, { minW, maxW: Math.max(200, minW), minH: 80, padX: 8, padY: 8, extraH: app ? APP_OVERLAP : 0 });
-  }
-  if (kind === "EXTERNAL_PROCESS") {
-    return fit(label, FONT, { minW: Math.max(108, app ? minW : 108), maxW: 200, minH: 62, padX: 14, padY: 8, extraH: 10 });
-  }
-  if (kind === "DOCUMENT") return [DOC_W, docHeight(label)];
-  return SIZES[kind] ?? [120, 80];
+  const own = sizes[kind] ?? sizes.task!;
+  const nativeType = ({ task: "bpmn:Task", subprocess: "bpmn:SubProcess", call: "bpmn:CallActivity" } as Record<string, string>)[kind];
+  const app = nativeType && applicationHost({ $type: nativeType }, policy) ? String(n.application || "") : "";
+  const base = kind === "subprocess" ? sizes.subprocess! : sizes.task!;
+  const minimum = app ? Math.min(200, Math.max(base[0]!, badgeMinHostWidth(app))) : base[0]!;
+  if (kind === "task" || kind === "subprocess") return fit(textOf(n), font, { minW: minimum, maxW: Math.max(200, minimum), minH: base[1]!, padX: 8, padY: 8, extraH: app ? appOverlap : 0 });
+  if (kind === "call") return fit(textOf(n), font, { minW: Math.max(own[0]!, app ? minimum : own[0]!), maxW: 200, minH: own[1]!, padX: 14, padY: 8, extraH: 10 });
+  if (kind === "document") return [docW, docHeight(textOf(n))];
+  return own as [number, number];
 }
 
 // --- bpmn-io columns (bpmnio_grid.py) ---------------------------------------
 
-const TAG: Record<string, string> = {
-  START: "startEvent", END: "endEvent", EVENT: "intermediateThrowEvent",
-  "SUB-PROCESS": "subProcess", EXTERNAL_PROCESS: "callActivity",
+const nativeTags: Record<string, string> = {
+  "start": "startEvent", "end": "endEvent", "event": "intermediateThrowEvent",
+  "subprocess": "subProcess", "call": "callActivity",
 };
 
 function xmlEscape(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-export function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>): { xml: string; ids: Map<string, string> } {
+function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>): { xml: string; ids: Map<string, string> } {
   const ids = new Map(nodes.map((n, i) => [n.label, `n${i}`]));
   const inc = new Map<string, string[]>([...ids.values()].map((i) => [i, []]));
   const out = new Map<string, string[]>([...ids.values()].map((i) => [i, []]));
@@ -179,8 +179,8 @@ export function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>): { 
   });
   const parts = nodes.map((n) => {
     const i = ids.get(n.label)!;
-    const t = (n.type || "TASK").trim().toUpperCase();
-    const tag = t === "GATEWAY" ? ((n.subtype || "").trim().toUpperCase() === "AND" ? "parallelGateway" : "exclusiveGateway") : (TAG[t] ?? "task");
+    const t = (n.type || "task").trim().toLowerCase();
+    const tag = t === "gateway" ? ((n.subtype || "").trim().toUpperCase() === "AND" ? "parallelGateway" : "exclusiveGateway") : (nativeTags[t] ?? "task");
     const refs = inc.get(i)!.map((f) => `<bpmn:incoming>${f}</bpmn:incoming>`).join("") +
       out.get(i)!.map((f) => `<bpmn:outgoing>${f}</bpmn:outgoing>`).join("");
     return `<bpmn:${tag} id="${i}" name="${xmlEscape(textOf(n))}">${refs}</bpmn:${tag}>`;
@@ -192,9 +192,9 @@ export function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>): { 
   return { xml, ids };
 }
 
-const BOUNDS = /bpmnElement="(n\d+)"[^>]*>\s*<dc:Bounds x="(-?[\d.]+)" y="(-?[\d.]+)" width="([\d.]+)" height="([\d.]+)"/g;
+const bounds = /bpmnElement="(n\d+)"[^>]*>\s*<dc:Bounds x="(-?[\d.]+)" y="(-?[\d.]+)" width="([\d.]+)" height="([\d.]+)"/g;
 
-export async function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string, string]>): Promise<Map<string, number> | null> {
+async function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string, string]>): Promise<Map<string, number> | null> {
   if (!nodes.length) return new Map();
   const { xml, ids } = flowXml(nodes, flows);
   let out: string;
@@ -204,7 +204,7 @@ export async function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string, s
     return null;
   }
   const col = new Map<string, number>();
-  for (const m of out.matchAll(BOUNDS)) col.set(m[1] ?? "", Math.floor((Number(m[2]) + Number(m[4]) / 2) / CELL_W));
+  for (const m of out.matchAll(bounds)) col.set(m[1] ?? "", Math.floor((Number(m[2]) + Number(m[4]) / 2) / cellW));
   if (col.size !== ids.size) return null;
   const base = Math.min(...col.values());
   const res = new Map<string, number>();
@@ -214,7 +214,7 @@ export async function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string, s
 
 // --- layout -----------------------------------------------------------------
 
-export async function layoutProcess(
+async function layoutProcess(
   proc: LayoutProcessInput,
   opts: { originY?: number; columns?: "bpmn-io" | "longest-path" } = {},
 ): Promise<ProcessLayout> {
@@ -237,14 +237,14 @@ export async function layoutProcess(
   });
   const flowSet = new Set(flowOrder);
   const allConns = (proc.connections ?? []).filter((c) => laneOf.has(c.source) && laneOf.has(c.target));
-  const flow = allConns.filter((c) => (c.kind || "FLOW") === "FLOW" && flowSet.has(c.source) && flowSet.has(c.target));
-  const other = allConns.filter((c) => (c.kind || "FLOW") !== "FLOW");
+  const flow = allConns.filter((c) => (c.kind || "sequence") === "sequence" && flowSet.has(c.source) && flowSet.has(c.target));
+  const other = allConns.filter((c) => (c.kind || "sequence") !== "sequence");
 
   // columns: longest-path layering without back edges
   const succ = new Map<string, string[]>();
   const succOf = (n: string): string[] => succ.get(n) ?? [];
   for (const c of flow) succ.set(c.source, [...succOf(c.source), c.target]);
-  const starts = [...flowOrder.filter((n) => kind.get(n) === "START"), ...flowOrder];
+  const starts = [...flowOrder.filter((n) => kind.get(n) === "start"), ...flowOrder];
   const back = new Set<string>();
   const key2 = (a: string, b: string): string => `${a}\u0000${b}`;
   const state = new Map<string, number>();
@@ -314,13 +314,13 @@ export async function layoutProcess(
   const labelsWh = new Map<string, [number, number]>();
   for (const [n, nd] of nodeOf) {
     const k = kind.get(n)!;
-    if (k === "START" || k === "END" || k === "EVENT" || k === "GATEWAY") labelsWh.set(n, labelBox(textOf(nd), LABEL_FONT, LABEL_MAX_W.EVENT));
-    else if (ARTIFACT_TYPES.has(k) && k !== "DOCUMENT") labelsWh.set(n, labelBox(textOf(nd), LABEL_FONT, LABEL_MAX_W.ITEM));
+    if (k === "start" || k === "end" || k === "event" || k === "gateway") labelsWh.set(n, labelBox(textOf(nd), labelFont, labelMaxW.event));
+    else if (ARTIFACT_TYPES.has(k) && k !== "document") labelsWh.set(n, labelBox(textOf(nd), labelFont, labelMaxW.ITEM));
   }
   const appWh = new Map<string, [number, number]>();
   for (const n of flowOrder) {
     const nd = nodeOf.get(n)!;
-    if (nd.app_label && ACTIVITIES.has(kind.get(n)!)) appWh.set(n, appBoxSizeLayout(String(nd.app_label), size.get(n)![0]));
+    if (nd.application && applicationHost({ $type: ({ task: "bpmn:Task", subprocess: "bpmn:SubProcess", call: "bpmn:CallActivity" } as Record<string, string>)[kind.get(n)!] }, policy)) appWh.set(n, badgeSize(String(nd.application), size.get(n)![0]));
   }
   const docs = new Map<string, string[]>();
   const ins = new Map<string, string[]>();
@@ -338,9 +338,9 @@ export async function layoutProcess(
     push(dir === "doc" ? docs : dir === "in" ? ins : outs, host, lbl);
   }
   const lw0 = (l: string): [number, number] => labelsWh.get(l) ?? [0, 0];
-  const blockW = (l: string): number => (kind.get(l) === "DOCUMENT" ? size.get(l)![0] : Math.max(size.get(l)![0], lw0(l)[0]));
+  const blockW = (l: string): number => (kind.get(l) === "document" ? size.get(l)![0] : Math.max(size.get(l)![0], lw0(l)[0]));
   const itemH = (l: string): number => size.get(l)![1] + (lw0(l)[1] ? 4 + lw0(l)[1] : 0);
-  const groupW = (items: string[]): number => items.reduce((a, i) => a + blockW(i), 0) + GROUP_GAP * Math.max(0, items.length - 1);
+  const groupW = (items: string[]): number => items.reduce((a, i) => a + blockW(i), 0) + groupGap * Math.max(0, items.length - 1);
   const splitDocs = (n: string): [string[], string[]] => {
     const d = docs.get(n) ?? [];
     const half = Math.floor((d.length + 1) / 2);
@@ -371,18 +371,18 @@ export async function layoutProcess(
     const up = h / 2 + (ds.length ? rowHalf.get(k)! - h / 2 + Math.max(...ds.map((d) => size.get(d)![1])) + 14 : 0);
     const appHalf = appWh.has(n) ? appWh.get(n)![0] / 2 : 0;
     let below = 0;
-    if (appWh.has(n)) below = appWh.get(n)![1] - APP_OVERLAP;
+    if (appWh.has(n)) below = appWh.get(n)![1] - appOverlap;
     const itemStart = below + 14;
     const its = [...(ins.get(n) ?? []), ...(outs.get(n) ?? [])];
     if (its.length) below = itemStart + Math.max(...its.map(itemH));
     if (labelsWh.has(n) && lw0(n)[1]) below = Math.max(below, 4 + lw0(n)[1]);
-    const side = Math.max(appHalf, CENTRE_GAP);
-    const left = Math.max(w / 2, CENTRE_GAP + groupW(leftDocs), side + 8 + groupW(ins.get(n) ?? []), lw0(n)[0] / 2);
-    const right = Math.max(w / 2, CENTRE_GAP + groupW(rightDocs), side + 8 + groupW(outs.get(n) ?? []), lw0(n)[0] / 2);
+    const side = Math.max(appHalf, centreGap);
+    const left = Math.max(w / 2, centreGap + groupW(leftDocs), side + 8 + groupW(ins.get(n) ?? []), lw0(n)[0] / 2);
+    const right = Math.max(w / 2, centreGap + groupW(rightDocs), side + 8 + groupW(outs.get(n) ?? []), lw0(n)[0] / 2);
     ext.set(n, { left, right, up, down: h / 2 + below, itemStart });
   }
 
-  const contentX = POOL_HEADER + LANE_HEADER + LEFT_PAD;
+  const contentX = poolHeader + laneHeader + leftPad;
   const colMax = (c: number, f: (e: Ext) => number): number => {
     const v = flowOrder.filter((n) => rank.get(n) === c).map((n) => f(ext.get(n)!));
     return v.length ? Math.max(...v) : 60;
@@ -398,10 +398,10 @@ export async function layoutProcess(
   for (let c = 0; c <= maxRank; c++) {
     x += colLeft[c] ?? 0;
     colX.push(x);
-    x += (colRight[c] ?? 0) + COL_GAP;
+    x += (colRight[c] ?? 0) + colGap;
   }
-  const looseW = lanes.map((_, li) => (loose.get(li) ?? []).reduce((a, i) => a + blockW(i) + GROUP_GAP, 0));
-  const poolW = Math.trunc(Math.max(x - COL_GAP + RIGHT_PAD, contentX + (looseW.length ? Math.max(...looseW) : 0) + RIGHT_PAD));
+  const looseW = lanes.map((_, li) => (loose.get(li) ?? []).reduce((a, i) => a + blockW(i) + groupGap, 0));
+  const poolW = Math.trunc(Math.max(x - colGap + rightPad, contentX + (looseW.length ? Math.max(...looseW) : 0) + rightPad));
 
   const rowUp = new Map<string, number>();
   const rowDown = new Map<string, number>();
@@ -422,19 +422,19 @@ export async function layoutProcess(
       const up = rowUp.has(k) ? rowUp.get(k)! : 40;
       const down = rowDown.has(k) ? rowDown.get(k)! : 40;
       rowTop.set(k, y);
-      rowCy.set(k, Math.trunc(y + CHANNEL + up));
-      y = Math.trunc(y + CHANNEL + up + down + ROW_GAP);
+      rowCy.set(k, Math.trunc(y + layoutChannel + up));
+      y = Math.trunc(y + layoutChannel + up + down + fixedRowGap);
     }
     const ls = loose.get(li) ?? [];
     if (ls.length) {
       looseY.set(li, y);
-      y += Math.max(...ls.map((i) => (kind.get(i) !== "DOCUMENT" ? itemH(i) : size.get(i)![1]))) + ROW_GAP;
+      y += Math.max(...ls.map((i) => (kind.get(i) !== "document" ? itemH(i) : size.get(i)![1]))) + fixedRowGap;
     }
-    const h = Math.max(MIN_LANE_H, y - top);
+    const h = Math.max(minLaneH, y - top);
     y = top + h;
-    laneBoxes.push([lane.name || "", box(POOL_HEADER, top, poolW - POOL_HEADER, h)]);
+    laneBoxes.push([lane.name || "", box(poolHeader, top, poolW - poolHeader, h)]);
   });
-  const pool = box(0, originY, poolW, Math.max(y - originY, MIN_LANE_H));
+  const pool = box(0, originY, poolW, Math.max(y - originY, minLaneH));
 
   const nodes: Record<string, Box> = {};
   const at = (id: string): Box => nodes[id] as Box;
@@ -462,46 +462,46 @@ export async function layoutProcess(
     }
     if (appWh.has(n)) {
       const [aw, ah] = appWh.get(n)!;
-      apps[n] = box(ncx - Math.floor(aw / 2), b.y + b.h - APP_OVERLAP, aw, ah);
+      apps[n] = box(ncx - Math.floor(aw / 2), b.y + b.h - appOverlap, aw, ah);
     }
     const [leftDocs, rightDocs] = splitDocs(n);
     const docBottom = ncy - Math.trunc(rowHalf.get(k)!) - 14;
-    let xr = ncx - CENTRE_GAP;
+    let xr = ncx - centreGap;
     for (const d of [...leftDocs].reverse()) {
       const [dw, dh] = size.get(d)!;
       xr -= dw;
       nodes[d] = box(xr, docBottom - dh, dw, dh);
-      xr -= GROUP_GAP;
+      xr -= groupGap;
     }
-    let xl = ncx + CENTRE_GAP;
+    let xl = ncx + centreGap;
     for (const d of rightDocs) {
       const [dw, dh] = size.get(d)!;
       nodes[d] = box(xl, docBottom - dh, dw, dh);
-      xl += dw + GROUP_GAP;
+      xl += dw + groupGap;
     }
-    const side = Math.max(apps[n] ? Math.floor(apps[n].w / 2) : 0, CENTRE_GAP) + 8;
+    const side = Math.max(apps[n] ? Math.floor(apps[n].w / 2) : 0, centreGap) + 8;
     const top = Math.trunc(ncy + h / 2 + ext.get(n)!.itemStart);
     xr = ncx - side;
     for (const i of [...(ins.get(n) ?? [])].reverse()) {
       const bw = blockW(i);
       xr -= bw;
       placeItem(i, xr, top, bw);
-      xr -= GROUP_GAP;
+      xr -= groupGap;
     }
     xl = ncx + side;
     for (const i of outs.get(n) ?? []) {
       const bw = blockW(i);
       placeItem(i, xl, top, bw);
-      xl += bw + GROUP_GAP;
+      xl += bw + groupGap;
     }
   }
   for (const [li, items] of loose) {
     let xl = contentX;
     for (const i of items) {
       const bw = blockW(i);
-      if (kind.get(i) === "DOCUMENT") nodes[i] = box(xl, looseY.get(li)!, size.get(i)![0], size.get(i)![1]);
+      if (kind.get(i) === "document") nodes[i] = box(xl, looseY.get(li)!, size.get(i)![0], size.get(i)![1]);
       else placeItem(i, xl, looseY.get(li)!, bw);
-      xl += bw + GROUP_GAP;
+      xl += bw + groupGap;
     }
   }
 
@@ -521,7 +521,7 @@ export async function layoutProcess(
     const hi = Math.max(x0, x1);
     return flowOrder.some((n) => !skip.includes(n) && at(n).x < hi && at(n).x + at(n).w > lo && at(n).y <= yy && yy <= at(n).y + at(n).h);
   };
-  const gapX = (c: number): number => Math.trunc((colX[c] ?? 0) - (colLeft[c] ?? 0) - COL_GAP / 2);
+  const gapX = (c: number): number => Math.trunc((colX[c] ?? 0) - (colLeft[c] ?? 0) - colGap / 2);
   for (const c of flow) {
     const sn = c.source;
     const tn = c.target;
@@ -554,7 +554,7 @@ export async function layoutProcess(
     }
     edges.push(pts);
     if (c.label) {
-      const [lw, lh] = labelBox(c.label, LABEL_FONT, 120);
+      const [lw, lh] = labelBox(c.label, labelFont, 120);
       const [p0, p1, p2, p3] = pts as [Point, Point, Point, Point];
       const elbow = pts.length === 4 && p1[0] === p2[0] && p0[1] === p1[1];
       const [[x1, y1], [x2, y2]] = elbow ? [p2, p3] : [p0, p1];
@@ -592,7 +592,7 @@ function link(
   colX: number[], colLeft: number[], rank: Map<string, number>, own: boolean,
 ): Point[] {
   const gx = rank.has(actN) ? Math.trunc((colX[rank.get(actN)!] ?? 0) - (colLeft[rank.get(actN)!] ?? 0) - 12) : act.x - 12;
-  if (kind.get(artN) === "DOCUMENT") {
+  if (kind.get(artN) === "document") {
     const lo = act.x + 14;
     const hi = act.x + act.w - 14;
     const top = act.y;
@@ -615,3 +615,14 @@ function link(
   const ay = art.y - 8;
   return [[cx(art), art.y], [cx(art), ay], [gx, ay], [gx, yy], [lo, yy], [lo, bottom]];
 }
+
+return { fit, labelBox, badgeSize, docHeight, flowXml, bpmnioColumns, layoutProcess, badgeMinHostWidth, nodeSize };
+}
+
+export function fit(text: string, size: number, options: { minW: number; maxW: number; minH: number; padX?: number; padY?: number; bold?: boolean; extraH?: number }, policy?: BusinessPolicy): [number, number] { return createLayout(policy).fit(text, size, options); }
+export function labelBox(text: string, size: number, width: number, bold = false, policy?: BusinessPolicy): [number, number] { return createLayout(policy).labelBox(text, size, width, bold); }
+export * from "./swimlane-exports.js";
+export function docHeight(text: string, policy?: BusinessPolicy): number { return createLayout(policy).docHeight(text); }
+export function flowXml(nodes: LayoutNode[], flows: Array<[string, string]>, policy?: BusinessPolicy): { xml: string; ids: Map<string,string> } { return createLayout(policy).flowXml(nodes, flows); }
+export function bpmnioColumns(nodes: LayoutNode[], flows: Array<[string,string]>, policy?: BusinessPolicy): Promise<Map<string,number> | null> { return createLayout(policy).bpmnioColumns(nodes, flows); }
+export function layoutProcess(proc: LayoutProcessInput, options: { originY?: number; columns?: "bpmn-io" | "longest-path" } = {}, policy?: BusinessPolicy): Promise<ProcessLayout> { return createLayout(policy).layoutProcess(proc, options); }

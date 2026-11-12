@@ -7,16 +7,16 @@
  *   `style.setProperty` (CSSOM, so a strict CSP `style-src` is not violated). They are removed when
  *   the modeler is destroyed, so a profile switch on the same root never leaves stale colours.
  */
-import type { BpmnCanvasConfig, LegendTokens } from "./contracts.js";
+import type { BpmnCanvasConfig, AnnotatedTokens } from "./contracts.js";
 
 /** Palette widths of diagram-js (px). The core measures the real width; these are for documentation and tests. */
 export const PALETTE_FOOTPRINT = { oneColumn: 48, twoColumns: 94 } as const;
 
-/** Root class that scopes the colours of the upstream palette to the `colored` profile. */
-export const COLORED_ROOT_CLASS = "bpmn-canvas--colored";
+/** Root class that scopes the colours of the upstream palette to the `recolor` profile. */
+export const RECOLOR_ROOT_CLASS = "bpmn-canvas--recolor";
 
 /** CSS custom property per palette group, and the token that feeds it. */
-export const ICON_VARIABLES: Readonly<Record<string, keyof LegendTokens>> = Object.freeze({
+export const paletteTokenFields: Readonly<Record<string, keyof AnnotatedTokens>> = Object.freeze({
   "--bpmn-canvas-icon-start": "eventLine",
   "--bpmn-canvas-icon-end": "eventLine",
   "--bpmn-canvas-icon-intermediate": "eventLine",
@@ -33,9 +33,9 @@ export const ICON_VARIABLES: Readonly<Record<string, keyof LegendTokens>> = Obje
 });
 
 /** Variable name -> colour, for the tokens given. */
-export function iconColors(tokens: Partial<LegendTokens>): Record<string, string> {
+export function iconColors(tokens: Partial<AnnotatedTokens>): Record<string, string> {
   const out: Record<string, string> = {};
-  for (const [variable, token] of Object.entries(ICON_VARIABLES)) {
+  for (const [variable, token] of Object.entries(paletteTokenFields)) {
     const value = tokens[token];
     if (typeof value === "string" && value) out[variable] = value;
   }
@@ -66,8 +66,8 @@ class PaletteSupport {
       palette._toggleState = (state = {}) => toggle("twoColumn" in state ? state : { ...state, twoColumn: columns === 2 });
     }
 
-    const tokens = config?.legend ?? config?.colored;
-    const colored = !!config?.colored;
+    const tokens = config?.lookTokens ?? config?.lookTokens;
+    const recolor = config?.renderer === "recolor";
     let applied: string[] = [];
     let root: HTMLElement | null = null;
 
@@ -78,12 +78,12 @@ class PaletteSupport {
       const colors = iconColors(tokens);
       for (const [variable, value] of Object.entries(colors)) root.style.setProperty(variable, value);
       applied = Object.keys(colors);
-      if (colored) root.classList.add(COLORED_ROOT_CLASS);
+      if (recolor) root.classList.add(RECOLOR_ROOT_CLASS);
     };
     const clear = (): void => {
       if (!root) return;
       for (const variable of applied) root.style.removeProperty(variable);
-      root.classList.remove(COLORED_ROOT_CLASS);
+      root.classList.remove(RECOLOR_ROOT_CLASS);
       applied = [];
       root = null;
     };

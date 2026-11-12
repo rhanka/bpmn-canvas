@@ -1,25 +1,30 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+const tok = fixtureOptions.businessPolicy.presentation.looks.find((entry) => entry.renderer === "annotated").tokens;
 
 test("legend tokens, data IO lifecycle and hit outlines in a real browser", { timeout: 180000 }, async (t) => {
   const { result: o, consoleLines } = await runInBrowser(root + "tests/browser/page-legend3.mjs", "legend3", (page) => page.evaluate(() => window.runLegend3()));
-  if (process.env.LEGEND3_DUMP) console.log(JSON.stringify(o, null, 1));
+  if (process.env.ANNOTATED3_DUMP) console.log(JSON.stringify(o, null, 1));
 
   await t.test("[Reference] association: the defaults (reference look) draw it red, dashed 5 5, like the plain link", () => {
-    assert.deepEqual(o.neutral.doc, { stroke: "#b85450", dash: "5 5" });
-    assert.deepEqual(o.neutral.note, { stroke: "#b85450", dash: "5 5" });
+    assert.deepEqual(o.neutral.doc, { stroke: tok.docLink, dash: tok.docLinkDash });
+    assert.deepEqual(o.neutral.note, { stroke: tok.link, dash: "5 5" });
     assert.deepEqual(o.neutral.warnings, []);
   });
   await t.test("docLink and docLinkDash colour only the associations to a [Reference]", () => {
-    assert.deepEqual(o.given.doc, { stroke: "#b85450", dash: "3 4" });
+    assert.deepEqual(o.given.doc, { stroke: tok.docLink, dash: "3 4" });
     assert.deepEqual(o.given.note, { stroke: "#112233", dash: "5 5" });
   });
   await t.test("a directional association to a [Reference] is drawn the same way (no arrow); to a plain note it stays upstream's", () => {
-    assert.deepEqual(o.given.directional, { stroke: "#b85450", dash: "3 4" });
+    assert.deepEqual(o.given.directional, { stroke: tok.docLink, dash: "3 4" });
     assert.equal(o.neutral.directional.note, null, "upstream draws it");
   });
   await t.test("dataLinkArrow: no arrow head by default (reference look), the BPMN arrow when the host turns it on", () => {
@@ -27,7 +32,7 @@ test("legend tokens, data IO lifecycle and hit outlines in a real browser", { ti
     assert.equal(o.arrow.on, true);
   });
   await t.test("labelText colours external labels; without it they keep the upstream colour", () => {
-    assert.equal(o.labels.neutral, "#22242a");
+    assert.equal(o.labels.neutral, tok.labelText);
     assert.equal(o.labels.named, "#445566");
   });
   await t.test("without docLink the [Reference] association follows the host's link", () => {
@@ -36,7 +41,7 @@ test("legend tokens, data IO lifecycle and hit outlines in a real browser", { ti
   await t.test("laneHeaderFill paints the lane header; a host naming laneFill alone gets it on the header; default white", () => {
     assert.equal(o.given.header, "#fbf9f6");
     assert.equal(o.followed.header, "#aabbcc");
-    assert.equal(o.neutral.header, "#ffffff");
+    assert.equal(o.neutral.header, tok.laneHeaderFill);
   });
 
   await t.test("DataInput/DataOutput: create writes ioSpecification with both sets", () => {

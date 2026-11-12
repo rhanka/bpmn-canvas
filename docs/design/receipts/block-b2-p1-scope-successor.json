@@ -1,0 +1,40 @@
+{
+  "format": "block-b2-p1-scope-successor/1",
+  "date": "2026-11-01",
+  "reason": "Measured scope regenerated to the sealed form; helpers consume the successor while the frozen seal stays intact.",
+  "supersedesFiles": [
+    {
+      "path": "docs/design/profile-externalization-scope.json",
+      "old": {
+        "bytes": 1391,
+        "sha256": "ac38283d0850e3a2b911aaabdb65b44a153ace1e8b2615e24146eb74aff4ca93"
+      },
+      "new": {
+        "bytes": 2536489,
+        "sha256": "a48d54857f0606cdf57465567331333c2b36b84f9563a9ae184921e568193673"
+      }
+    },
+    {
+      "path": "tests/helpers/profile-seal.mjs",
+      "old": {
+        "bytes": 13819,
+        "sha256": "1e8dd90470b200e104043694e35c2e6a35d2393377ad52996409c9b1ce13e9b4"
+      },
+      "new": {
+        "bytes": 14497,
+        "sha256": "7328af87af13a467c9c2a71ca42e492c93949f41f528de0181020f395d37399a"
+      }
+    },
+    {
+      "path": "tests/helpers/lot0-history-pins.mjs",
+      "old": {
+        "bytes": 4220,
+        "sha256": "6f0681393ae18aeacb968f819c5f802af3e9bcbf28c7d4a9d1b61575d67db878"
+      },
+      "new": {
+        "bytes": 4752,
+        "sha256": "ae0ef1361b49d558dddc336b2375592190fe801f2f7dc01f005eddd9a530ff35"
+      }
+    }
+  ]
+}

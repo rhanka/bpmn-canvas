@@ -1,7 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 import { config, fixture, io, model, outputs, text } from "./helpers/semantic.mjs";
 import { artifactPlacements, associationEndpoints, moveArtifacts } from "./helpers/review-4.mjs";
 
@@ -12,7 +16,7 @@ test("shipped browser IIFE: fourth-review supported placements and endpoint iden
       const m = await model(); moveArtifacts(m, ids);
       const xml = text(await io.export(m.definitions, "bpmn"));
       const actual = await page.evaluate(async ({ xml, config }) => {
-        const io = window.BpmnCanvas; io.initializeCodecs(config);
+        const io = window.injected(window.BpmnCanvas); io.initializeCodecs(config);
         const { rootElement, warnings } = await io.parseDefinitions(xml), out = {};
         if (warnings.length) throw new Error("Supported placement produced parse warnings");
         for (const format of ["drawio", "sparx"]) {
@@ -26,7 +30,7 @@ test("shipped browser IIFE: fourth-review supported placements and endpoint iden
     });
     for (const [name, associationId, field] of associationEndpoints) await t.test(`detached same-ID ${name}: both browser exporters refuse`, async () => {
       const actual = await page.evaluate(async ({ xml, config, associationId, field }) => {
-        const io = window.BpmnCanvas; io.initializeCodecs(config);
+        const io = window.injected(window.BpmnCanvas); io.initializeCodecs(config);
         const { rootElement, elementsById } = await io.parseDefinitions(xml);
         const association = elementsById[associationId], moddle = io.createModdle();
         association[field] = moddle.create("bpmn:SubProcess", {
@@ -46,7 +50,7 @@ test("shipped browser IIFE: fourth-review supported placements and endpoint iden
       const m = await model(); moveArtifacts(m, ["Doc_Shipping_policy"]);
       m.elementsById.Order_handling_collab.participants.push(m.moddle.create("bpmn:Participant", { id: "Second_pool", processRef: m.elementsById.Order_handling }));
       const actual = await page.evaluate(async (xml) => {
-        const io = window.BpmnCanvas;
+        const io = window.injected(window.BpmnCanvas);
         try { await io.parseDefinitions(xml); return { accepted: true }; }
         catch (e) { return { typed: e instanceof io.IoError, code: e.code, ids: e.ids }; }
       }, text(await io.export(m.definitions, "bpmn")));

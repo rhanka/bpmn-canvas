@@ -2,7 +2,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const react = await import("../dist/react/index.js");
+const reactEntry = await import("../dist/react/index.js");
+const { fixturePolicy } = await import("./helpers/injected-policy.mjs");
+const react = Object.fromEntries(Object.entries(reactEntry).map(([key, value]) => [key, typeof value === "function" && key.endsWith("Target") ? (click, diagrams, active) => value(click, diagrams, active, fixturePolicy) : value]));
 const STEP0 = ["calledElement", "exactName", "sectionNumber"];
 const ALL = [...STEP0, "substring"];
 const D = [

@@ -9,6 +9,7 @@ globalThis.DOMParser = new JSDOM("").window.DOMParser;
 const { layoutProcess, parseProcesses } = await import("../dist/layout/index.js");
 const { normalize } = await import("../dist/internal/processModel.js");
 const { sourcesSha256 } = await import("./fixtures/layout-corpus/build.mjs");
+const { fixturePolicy } = await import("./helpers/injected-policy.mjs");
 
 const dir = new URL("./fixtures/layout-corpus/", import.meta.url);
 const raw = (f) => readFileSync(new URL(f, dir), "utf8");
@@ -20,7 +21,7 @@ const sha = (s) => createHash("sha256").update(s).digest("hex");
 test("(kept) every ProcessLayout field equal on every corpus case", async () => {
   assert.deepEqual(Object.keys(cases), ["base-order", "base-review", "homonymous-lanes", "lane-block-boundary", "unnamed-lane", "shared-item", "duplicate-names"]);
   for (const [name, proc] of Object.entries(cases)) {
-    const got = JSON.parse(JSON.stringify(await layoutProcess(normalize(structuredClone(proc)))));
+    const got = JSON.parse(JSON.stringify(await layoutProcess(normalize(structuredClone(proc)), undefined, fixturePolicy)));
     for (const field of ["pool", "lanes", "nodes", "labels", "apps", "edges", "edgeLabels", "connections"]) assert.deepEqual(got[field], expected[name][field], `${name}.${field}`);
   }
 });
@@ -39,10 +40,4 @@ test("VERSION: format, hashes of both files and of the layout sources, dependenc
   assert.equal(version.expectedSha256, sha(raw("expected.json")));
   assert.equal(version["bpmn-auto-layout"], JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")).dependencies["bpmn-auto-layout"]);
   assert.equal(version.sourcesSha256, sourcesSha256(), "a layout source changed: rebuild expected.json and VERSION (tests/fixtures/layout-corpus/build.mjs)");
-});
-
-test("dist/layout-corpus.json ships the corpus and its VERSION", () => {
-  const file = new URL("../dist/layout-corpus.json", import.meta.url);
-  assert.ok(existsSync(file), "dist/layout-corpus.json is built");
-  assert.deepEqual(JSON.parse(readFileSync(file, "utf8")), { version, cases, expected });
 });

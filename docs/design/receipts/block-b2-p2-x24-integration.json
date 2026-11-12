@@ -1,0 +1,3423 @@
+{
+ "format": "block-b2-p2-x24-integration/1",
+ "date": "2026-11-02",
+ "round": "Stage B2 phase 2 integration: the main vendor-py rebind carried (the 19 records rebound by the merge), navigation mapping records RV-22 and RV-23 added for the two rule-mapping spans of the block B module src/react/navigation-target.ts (records RV-13 and RV-15 of that module rebound), rescan rebound, ledger input pin, cases and manifest regenerated, resealed.",
+ "history": [
+  {
+   "receipt": "docs/design/receipts/block-b-x24-history-guard.json",
+   "bytes": 24207,
+   "sha256": "2809c9addd728d098fabe0986a4014634a64fe752d17c31c301a2fbebcd0f5ad",
+   "seal": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f",
+   "previousSeal": "0b17ff222da3332f06e622dc787cbe9c42d9c4050a53a58a27e1b7156dfb1d8c"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b-x24-unicode-literals-fix.json",
+   "bytes": 88309,
+   "sha256": "565d0b7d60c25711f1528da7b81c56e9dc365a5da5a1ef40c806c6ea34888908",
+   "seal": "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b",
+   "previousSeal": "e47a3328828d3d6a77370a83d8704657a00301136b83261e7cb9ebf11dbf225f"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b-x24-p006-selector-allowance.json",
+   "bytes": 88201,
+   "sha256": "d5b2439211013acab846dc113fe5714d9e87145c5f87625c4fb603ed607508bc",
+   "seal": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746",
+   "previousSeal": "c3e99dc5e8544a6de0e04423516fcd28fcd7d16ac004ef010e526ccb4af0898b"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b-x24-i1-relocated-rows.json",
+   "bytes": 91193,
+   "sha256": "0b490ecb8631af4bfae5ee3da996019a60325fb034990cc9fc031d5a43ed7963",
+   "seal": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac",
+   "previousSeal": "682ac140cef29f74c0092a8f6b1e64f77e8959b1b1f003dce893da7b56cfe746"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b-x24-final-spec-rebind.json",
+   "bytes": 152177,
+   "sha256": "10564a8259d22cb42f8c6aa4e147e2753ee32776d7d63ab5f5d8feae164e223c",
+   "seal": "74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974",
+   "previousSeal": "7f15b3512dd4ccd7b9e355f0b834a65adbdba654f2c52996011b84e741cb27ac"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b2-x24-micro-reseal.json",
+   "bytes": 83197,
+   "sha256": "3f8f5dd525084dcd4648bd8de75c9f65a046fe3ba26ec808c4e1278c38d6b39f",
+   "seal": "85a68b7a54125f8e57d19bfcb76c685acca8abd328fd10d94eb0172f7ced597c",
+   "previousSeal": "74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b2-x24-step6-rebind.json",
+   "bytes": 92334,
+   "sha256": "80455881f7663607e5f82a056503421f10fbae8da0f8a8d01ab5fd026ddf9c1d",
+   "seal": "32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518",
+   "previousSeal": "85a68b7a54125f8e57d19bfcb76c685acca8abd328fd10d94eb0172f7ced597c"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b2-x24-step9-readme-fix.json",
+   "bytes": 45298,
+   "sha256": "610ab8bd75ce05a26f1c9e90bf8e2e0b51d678f5b3d9a56d9a07dde29423ded8",
+   "seal": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1",
+   "previousSeal": "32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518"
+  },
+  {
+   "receipt": "docs/design/receipts/block-b-vendor-py-x24-rebind.json",
+   "bytes": 90597,
+   "sha256": "f2178a620df58bf5ec0425ed310d5d8491c1bfe185867ddc46b40b104dc28214",
+   "seal": "e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78",
+   "previousSeal": "74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974"
+  }
+ ],
+ "previousSeal": {
+  "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+  "bytes": 36389,
+  "sha256": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1"
+ },
+ "mergedSeal": {
+  "receipt": "docs/design/receipts/block-b-vendor-py-x24-rebind.json",
+  "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+  "bytes": 34334,
+  "sha256": "e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78"
+ },
+ "newSeal": {
+  "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+  "bytes": 37152,
+  "sha256": "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb"
+ },
+ "mergedChanges": [
+  {
+   "token": "RV-01",
+   "file": "tests/fixtures/lot3-cn/expectations/README.md",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a"
+   },
+   "new": {
+    "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      131,
+      39,
+      131,
+      47
+     ],
+     "new": [
+      "raw",
+      131,
+      39,
+      131,
+      47
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "76ddc97b1f1bca1b6d3367ef594d10b49ea7f467eb8156feb315c05bfb886861"
+    },
+    {
+     "old": [
+      "raw",
+      160,
+      63,
+      160,
+      71
+     ],
+     "new": [
+      "raw",
+      160,
+      63,
+      160,
+      71
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "b6568e2ec206f5061696a150794ef87796d2f7985b9247ecd64a5f06b4717710"
+    }
+   ]
+  },
+  {
+   "token": "RV-01",
+   "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e"
+   },
+   "new": {
+    "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      592,
+      8,
+      592,
+      16
+     ],
+     "new": [
+      "raw",
+      594,
+      8,
+      594,
+      16
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "3899bff73576a7e6a1482ee2d294d3ccf29130494927f9e63782a1140d6efd38"
+    },
+    {
+     "old": [
+      "raw",
+      596,
+      21,
+      596,
+      29
+     ],
+     "new": [
+      "raw",
+      598,
+      21,
+      598,
+      29
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "9aab0d9d363212305db31c9bbfc19cd2c3eb28402b100cae7347f780a24f30fa"
+    },
+    {
+     "old": [
+      "raw",
+      3237,
+      44,
+      3237,
+      52
+     ],
+     "new": [
+      "raw",
+      3239,
+      44,
+      3239,
+      52
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "8466eec30f64cfe5716ed0791644049610f63656cbae562a0ca5772f231abb1f"
+    },
+    {
+     "old": [
+      "raw",
+      3266,
+      68,
+      3266,
+      76
+     ],
+     "new": [
+      "raw",
+      3268,
+      68,
+      3268,
+      76
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "10ed2bf93d3da2d24a70c0c4bf7415df5da65978973cd033b6a4732bc97fc326"
+    }
+   ]
+  },
+  {
+   "token": "RV-01",
+   "file": "tests/fixtures/lot5-ui/expectations/README.md",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1"
+   },
+   "new": {
+    "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      275,
+      136,
+      275,
+      144
+     ],
+     "new": [
+      "raw",
+      278,
+      136,
+      278,
+      144
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "6989b4ba8a7e98446cf8c7e80849b2a072ed064a6c2a363238b23de2097a5213"
+    },
+    {
+     "old": [
+      "raw",
+      497,
+      70,
+      497,
+      78
+     ],
+     "new": [
+      "raw",
+      500,
+      70,
+      500,
+      78
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "88277acb03c26bc0f6bfb8c4f5c5a0b1548fe78ef63766a00b73a5b055b8b84e"
+    },
+    {
+     "old": [
+      "raw",
+      568,
+      173,
+      568,
+      181
+     ],
+     "new": [
+      "raw",
+      573,
+      173,
+      573,
+      181
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "736491d603d20a391ee2d4a04eb719f0897a455a015ac6da37c4efb155cad094"
+    },
+    {
+     "old": [
+      "raw",
+      892,
+      598,
+      892,
+      606
+     ],
+     "new": [
+      "raw",
+      897,
+      598,
+      897,
+      606
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "bb40d03acab7050e80276a270c222ebbaf3909fd20578cfe1b05bdbf6f28f3a9"
+    },
+    {
+     "old": [
+      "raw",
+      894,
+      723,
+      894,
+      731
+     ],
+     "new": [
+      "raw",
+      899,
+      723,
+      899,
+      731
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "ad6308cd1be90275c44cd249945d1157837e882f63bb6a87f3fb3a3434811645"
+    },
+    {
+     "old": [
+      "raw",
+      951,
+      471,
+      951,
+      479
+     ],
+     "new": [
+      "raw",
+      956,
+      471,
+      956,
+      479
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "2195414a5c1e2997d3e753d06950ef05e2cd4129b6914df7580dc12911b73f96"
+    }
+   ]
+  },
+  {
+   "token": "RV-01",
+   "file": "tests/fixtures/lot5-ui/expectations/author/lot5-vendor-py.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285"
+   },
+   "new": {
+    "sha256": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      358,
+      557,
+      358,
+      565
+     ],
+     "new": [
+      "raw",
+      358,
+      557,
+      358,
+      565
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "741ef6f5225a82b8cb736a8fd4fb64006639723ac1c0e0eb011bfa11a92b2eff"
+    },
+    {
+     "old": [
+      "raw",
+      372,
+      634,
+      372,
+      642
+     ],
+     "new": [
+      "raw",
+      372,
+      634,
+      372,
+      642
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "96962ed8de63441e51f9934adb7603b5bda36621577f50797a0f27e15b0de469"
+    },
+    {
+     "old": [
+      "raw",
+      771,
+      435,
+      771,
+      443
+     ],
+     "new": [
+      "raw",
+      771,
+      435,
+      771,
+      443
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "1764ff428d76a6e88bc1284825464cff1b7a12068397d070afd34991071a5cce"
+    }
+   ]
+  },
+  {
+   "token": "RV-01",
+   "file": "tests/fixtures/lot5-ui/expectations/clauses.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f"
+   },
+   "new": {
+    "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      4343,
+      560,
+      4343,
+      568
+     ],
+     "new": [
+      "raw",
+      4340,
+      560,
+      4340,
+      568
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "cef2fa08598c856f546673d37fdf5a6d89b3ecd9d025e037d36a3c39c9e1bd53"
+    },
+    {
+     "old": [
+      "raw",
+      4382,
+      637,
+      4382,
+      645
+     ],
+     "new": [
+      "raw",
+      4379,
+      637,
+      4379,
+      645
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "14f51284d59de8a09217cb064c2ee17e0ab036e1d8352dfc567de20e4e258f58"
+    },
+    {
+     "old": [
+      "raw",
+      5349,
+      438,
+      5349,
+      446
+     ],
+     "new": [
+      "raw",
+      5346,
+      438,
+      5346,
+      446
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "d9caf0b2dbcf9298a8ee169d0aae60b8bfc043bc3c551e8336b47a48af966336"
+    }
+   ]
+  },
+  {
+   "token": "RV-01",
+   "file": "tests/fixtures/lot5-ui/expectations/manifest.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "eb4260c285d1ef1ed81156e34c499e0aebd5f965edcebaa7225a4aaef5e93119"
+   },
+   "new": {
+    "sha256": "d7c04d63e175f234883f54e8507eb26127f4de2124c6b5c0289fa6ffb5c2c4f9"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      721,
+      123,
+      721,
+      131
+     ],
+     "new": [
+      "raw",
+      721,
+      123,
+      721,
+      131
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "ca6c95510b562f47bec7a89bae4fad260738ce0ece343a52b6afa0d31b9a9de8"
+    }
+   ]
+  },
+  {
+   "token": "RV-08",
+   "file": "tests/fixtures/lot3-cn/expectations/README.md",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a"
+   },
+   "new": {
+    "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      694,
+      103,
+      694,
+      112
+     ],
+     "new": [
+      "raw",
+      694,
+      103,
+      694,
+      112
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "a2eea50dfeb01579e65900276fdc1c5f1eb5ac7477f3497c09e387566c0a8268"
+    }
+   ]
+  },
+  {
+   "token": "RV-08",
+   "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e"
+   },
+   "new": {
+    "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      2546,
+      87,
+      2546,
+      96
+     ],
+     "new": [
+      "raw",
+      2548,
+      87,
+      2548,
+      96
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "668dd8d5cbb8a5b52c97d24073af926e9c9183e435698b34a9615ed442b62966"
+    }
+   ]
+  },
+  {
+   "token": "RV-08",
+   "file": "tests/fixtures/lot3-cn/expectations/index.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5"
+   },
+   "new": {
+    "sha256": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      6130,
+      89,
+      6130,
+      98
+     ],
+     "new": [
+      "raw",
+      6130,
+      89,
+      6130,
+      98
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "d5f8ee9274f9547044c145af432dd4428bf67989ab25094154083dd0d8daedf1"
+    }
+   ]
+  },
+  {
+   "token": "RV-08",
+   "file": "tests/fixtures/lot5-ui/expectations/README.md",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1"
+   },
+   "new": {
+    "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      675,
+      198,
+      675,
+      207
+     ],
+     "new": [
+      "raw",
+      680,
+      198,
+      680,
+      207
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "66f9feafd433e606f8ab14623a5776cf01faf573812df2a3af948cea49296c2f"
+    },
+    {
+     "old": [
+      "raw",
+      678,
+      141,
+      678,
+      150
+     ],
+     "new": [
+      "raw",
+      683,
+      141,
+      683,
+      150
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "f60c64953aa9963fd195b9e779e9d8ef27adbb87e9731b576c998e618c862e5c"
+    }
+   ]
+  },
+  {
+   "token": "RV-08",
+   "file": "tests/fixtures/lot5-ui/expectations/author/lot5-vendor-py.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285"
+   },
+   "new": {
+    "sha256": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      574,
+      166,
+      574,
+      175
+     ],
+     "new": [
+      "raw",
+      574,
+      166,
+      574,
+      175
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "682b4d660229c934d8d133cf929915488043272c6f359922df9bb444d6cb4d9d"
+    }
+   ]
+  },
+  {
+   "token": "RV-08",
+   "file": "tests/fixtures/lot5-ui/expectations/clauses.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f"
+   },
+   "new": {
+    "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      758,
+      60,
+      758,
+      69
+     ],
+     "new": [
+      "raw",
+      758,
+      60,
+      758,
+      69
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "f17074f89493611f13f445bb52f9bd051bb81b96785b88cbc5d0f27a1f440b8f"
+    },
+    {
+     "old": [
+      "raw",
+      817,
+      66,
+      817,
+      75
+     ],
+     "new": [
+      "raw",
+      817,
+      66,
+      817,
+      75
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "d5e9c62afbddb949fa6118bef229054013006592fb8ec71cac3b283bc2265863"
+    },
+    {
+     "old": [
+      "raw",
+      4883,
+      168,
+      4883,
+      177
+     ],
+     "new": [
+      "raw",
+      4880,
+      168,
+      4880,
+      177
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "41700f4300a916e8cdfb065f14e9763533671ca96030430da3dbbf01186e6890"
+    }
+   ]
+  },
+  {
+   "token": "RV-10",
+   "file": "tests/fixtures/lot3-cn/expectations/README.md",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a"
+   },
+   "new": {
+    "sha256": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      23,
+      12,
+      23,
+      15
+     ],
+     "new": [
+      "raw",
+      23,
+      12,
+      23,
+      15
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "c90ac77dd3ec7488af8246a920082f8362356f4ffea42bd5b22d9e58b87b7c32"
+    },
+    {
+     "old": [
+      "raw",
+      527,
+      125,
+      527,
+      128
+     ],
+     "new": [
+      "raw",
+      527,
+      125,
+      527,
+      128
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "58ff68c92b6c2be194395ceb3b60fe74b2ff8501dc039ca8b1e4f7a809531236"
+    },
+    {
+     "old": [
+      "raw",
+      534,
+      82,
+      534,
+      85
+     ],
+     "new": [
+      "raw",
+      534,
+      82,
+      534,
+      85
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "676e205fca2a1391ccabec3c70bdfb906a52b78e0f3da7c69f7c3b1e67f72350"
+    },
+    {
+     "old": [
+      "raw",
+      591,
+      112,
+      591,
+      115
+     ],
+     "new": [
+      "raw",
+      591,
+      112,
+      591,
+      115
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "ce534c12e0f9391ad9e13106630b7ea936dcc2459d2ab2a477a469a52de82d93"
+    }
+   ]
+  },
+  {
+   "token": "RV-10",
+   "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e"
+   },
+   "new": {
+    "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      999,
+      82,
+      999,
+      85
+     ],
+     "new": [
+      "raw",
+      1001,
+      82,
+      1001,
+      85
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "ae39af963c2a156a9b82e003775214d95ecfda37b59ed135be95a403b4899acf"
+    },
+    {
+     "old": [
+      "raw",
+      1012,
+      118,
+      1012,
+      121
+     ],
+     "new": [
+      "raw",
+      1014,
+      118,
+      1014,
+      121
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "62bfd42ebb43e5a52954f6aef3ccb11d6d2312f3f0b8eef376a881a168d6653f"
+    },
+    {
+     "old": [
+      "raw",
+      1099,
+      76,
+      1099,
+      79
+     ],
+     "new": [
+      "raw",
+      1101,
+      76,
+      1101,
+      79
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "eb9525fca79a11af9a35be3b50a45775f4aef4888d8fc313b6ad40ff3ee85074"
+    },
+    {
+     "old": [
+      "raw",
+      1619,
+      64,
+      1619,
+      67
+     ],
+     "new": [
+      "raw",
+      1621,
+      64,
+      1621,
+      67
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "e078c421c4a36c9e132c06873ce1e6483145ca3d055049e0edf6f8c2fc3512ad"
+    },
+    {
+     "old": [
+      "raw",
+      1633,
+      107,
+      1633,
+      110
+     ],
+     "new": [
+      "raw",
+      1635,
+      107,
+      1635,
+      110
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "47da5d4df70950b72b9ef03dc21af82df10c0edb1ae23e816e8fda230c757f4c"
+    },
+    {
+     "old": [
+      "raw",
+      3129,
+      17,
+      3129,
+      20
+     ],
+     "new": [
+      "raw",
+      3131,
+      17,
+      3131,
+      20
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "daec1c9dc43cdd4df6eb056bbbbe26f5215d106872fb83dbea1ef87b4e5364a9"
+    },
+    {
+     "old": [
+      "raw",
+      3903,
+      82,
+      3903,
+      85
+     ],
+     "new": [
+      "raw",
+      3906,
+      82,
+      3906,
+      85
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "e51095b0a8a60b569d31405638de2effb894c41c323637eb8c3d1b24ac64069d"
+    }
+   ]
+  },
+  {
+   "token": "RV-10",
+   "file": "tests/fixtures/lot3-cn/expectations/index.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5"
+   },
+   "new": {
+    "sha256": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      533,
+      122,
+      533,
+      125
+     ],
+     "new": [
+      "raw",
+      533,
+      122,
+      533,
+      125
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "ac2150ecf38e7bb952890452a0bad71b640670991d3acacaf1af90677e996aa0"
+    },
+    {
+     "old": [
+      "raw",
+      764,
+      80,
+      764,
+      83
+     ],
+     "new": [
+      "raw",
+      764,
+      80,
+      764,
+      83
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "6e0e3ee60766b7a37bdd18db8ea495d97a4e331ad8abd19d7463e7384b2fe863"
+    },
+    {
+     "old": [
+      "raw",
+      2689,
+      111,
+      2689,
+      114
+     ],
+     "new": [
+      "raw",
+      2689,
+      111,
+      2689,
+      114
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "8a329f0dcc131fec41ec21355fae5378f140e022942ae2705bd99789fb3fc9a5"
+    }
+   ]
+  },
+  {
+   "token": "RV-10",
+   "file": "tests/fixtures/lot5-ui/expectations/README.md",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1"
+   },
+   "new": {
+    "sha256": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      782,
+      78,
+      782,
+      81
+     ],
+     "new": [
+      "raw",
+      787,
+      78,
+      787,
+      81
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "315cbff2fb12dbbd996c44d9f8cb883cda614c2153338df17f430877db6dd909"
+    }
+   ]
+  },
+  {
+   "token": "RV-10",
+   "file": "tests/fixtures/lot5-ui/expectations/clauses.json",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f"
+   },
+   "new": {
+    "sha256": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
+   },
+   "outcome": "same spans, bytes changed elsewhere: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      2606,
+      36,
+      2606,
+      39
+     ],
+     "new": [
+      "raw",
+      2606,
+      36,
+      2606,
+      39
+     ],
+     "line": "same line, byte-identical",
+     "lineSha256": "d40a2f0467c725f3d013e3021a6005c19684426e84a3349a9962871bcea6b436"
+    }
+   ]
+  },
+  {
+   "token": "RV-10",
+   "file": "tests/profile-lot3-golden-independence.test.mjs",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "1d35c7618a783a5b6d7c16dbb2504fabb3184ec4646e9879252608e94a2c3e52"
+   },
+   "new": {
+    "sha256": "bcae7c87121b3758bd83520bea6fdd87ebf32188e2a24094e1b9a31fc0b65bb0"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      160,
+      34,
+      160,
+      37
+     ],
+     "new": [
+      "raw",
+      163,
+      34,
+      163,
+      37
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "4356f8674d55d357fac7f7b8cc517de56c6180b03e8000329e6a63d9b56a9098"
+    },
+    {
+     "old": [
+      "raw",
+      160,
+      57,
+      160,
+      60
+     ],
+     "new": [
+      "raw",
+      163,
+      57,
+      163,
+      60
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "4356f8674d55d357fac7f7b8cc517de56c6180b03e8000329e6a63d9b56a9098"
+    },
+    {
+     "old": [
+      "raw",
+      169,
+      31,
+      169,
+      34
+     ],
+     "new": [
+      "raw",
+      172,
+      31,
+      172,
+      34
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "436059e4c6d9107a0d16cf2036efc73bb1ed6963e44eb4e28f2b4b0d5683641d"
+    }
+   ]
+  },
+  {
+   "token": "RV-11",
+   "file": "tests/fixtures/lot3-cn/expectations/author/author-lot3.mjs",
+   "boundAt": "fec4dae3",
+   "old": {
+    "sha256": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e"
+   },
+   "new": {
+    "sha256": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+   },
+   "outcome": "moved lines only: rebound",
+   "spans": [
+    {
+     "old": [
+      "raw",
+      629,
+      115,
+      629,
+      125
+     ],
+     "new": [
+      "raw",
+      631,
+      115,
+      631,
+      125
+     ],
+     "line": "moved, byte-identical",
+     "lineSha256": "2a38768525f33edd88a50399cf25d1bae14ef007a6e8b65123fc6068a61df651"
+    }
+   ]
+  },
+  {
+   "file": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "previous": {
+    "bytes": 205478,
+    "sha256": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae"
+   },
+   "merged": {
+    "bytes": 205480,
+    "sha256": "44b89b920c565350f5cb8c9f6828ee7cbd56a0ff1b17652fc3c380dad42289dd"
+   },
+   "mainOld": {
+    "bytes": 193557,
+    "sha256": "8702c25694eba7045b01563533269f04984d0b3a5e3d14a90fde2150c06b3511"
+   },
+   "mainNew": {
+    "bytes": 193559,
+    "sha256": "73ea6b8b1e1401403dae68f75dc803c59e7843cfca8a5886fa211818bceca5f5"
+   }
+  }
+ ],
+ "testConstants": [
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "SEAL_SHA256",
+   "old": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1",
+   "new": "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb"
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "PREVIOUS_SEAL_SHA256",
+   "old": "32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518",
+   "new": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1"
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "SEAL_CHAIN",
+   "old": "nine seals: the stage B2 step 6 rebind seal written out, the last PREVIOUS_SEAL_SHA256",
+   "new": "ten seals: the stage B2 step 9 README correction seal written out, the last PREVIOUS_SEAL_SHA256"
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "VENDORPY_RECEIPT",
+   "old": null,
+   "new": "docs/design/receipts/block-b-vendor-py-x24-rebind.json"
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "P2_RECEIPT",
+   "old": null,
+   "new": "docs/design/receipts/block-b2-p2-x24-integration.json"
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "total",
+   "old": 623,
+   "new": 625
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "name": "checks",
+   "old": "receipt chain of eight receipts; the new receipt in the hygiene scope",
+   "new": "receipt chain of nine receipts; the P2 receipt and the vendor-py receipt in the hygiene scope"
+  }
+ ],
+ "previousSealFiles": [
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/README.md",
+   "bytes": 116423,
+   "sha256": "b29fad668f643adad612fea8998ed734c561eda6bb3a19157e522ac03887ebbb"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-001-classify.json",
+   "bytes": 4596,
+   "sha256": "f5db25e74d4b9d5ff848f7f5ab00abcd9a0961f680fb8472b89f4905cf7bb3dd"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-002-kind-annotated.json",
+   "bytes": 3176,
+   "sha256": "82f29a2e676e2efb97d1ab861b9d3bb718b778cb10f3a193dd7c15cabaf020b7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-003-kind-recolor.json",
+   "bytes": 3262,
+   "sha256": "99fc6a7eac7a05725c31aacbe093f960e845d3a570319ec88c1995398703f52e"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-004-kind-flat.json",
+   "bytes": 3328,
+   "sha256": "7ebf6490effa575221c2becb78a39dc57f685b5d645b21690d0b62235a78f9bf"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-005-layout-input.json",
+   "bytes": 1469,
+   "sha256": "bcf7cb1a463aec41ff9bd3179d5b5f048117997105100829d2219f68d96a97be"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-006-layout-size.json",
+   "bytes": 3863,
+   "sha256": "4a69cbd34244c548dc0e6ebfdfdf28840e64fe4f96bdd699351cc8a4310f8740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-007-metrics.json",
+   "bytes": 4168,
+   "sha256": "50d0a4b4a101ab40ea37954cb6f6f75843ca42f51fc5fa5bc0af3ebe17e0ca70"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-008-render-badges.json",
+   "bytes": 1207,
+   "sha256": "71bf1d8ea5acde00268d0ddb1636764184e6c8043298dae7985426c2d2bb3d35"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-009-render-attachment.json",
+   "bytes": 1694,
+   "sha256": "d6f39a2f9755cbc3d6b169974daf1d76a274373aa465358edfc4dec6efd11d4c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-010-transactions-follow.json",
+   "bytes": 1765,
+   "sha256": "9f02bb82749283a5edca41b9c2c756e00ae631c6221b1dba3c2f132cd79153f7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-011-tokens-annotated.json",
+   "bytes": 7305,
+   "sha256": "62561b1488f8ee064350db18dffb9f6639d73d29259873584d06a159609fae9f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-012-tokens-recolor.json",
+   "bytes": 7613,
+   "sha256": "b46fd57fa6d6588197c837671a093268a70684ff6fd800e51bb2e64a7b0ef35a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-013-theme-select.json",
+   "bytes": 7878,
+   "sha256": "26c986dc06bb65fe7512178a9b77a20045448f816614d4139db027da4375fe32"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-014-palette.json",
+   "bytes": 2115,
+   "sha256": "3746e53d243930102207cff2ea5951c41099c6e6d585d073df186666b7bb5903"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-015-navigation-legacy-default.json",
+   "bytes": 2843,
+   "sha256": "6f736c71356e60dc3a03fb8330ac7dd232ef85121b1d8e7b8d4b87d401e56b18"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-016-navigation-legacy-rules.json",
+   "bytes": 16764,
+   "sha256": "065da6046f818fde07e1450ce38f6d560eadaa968c1bed4d91d09d82b171432e"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-017-export-reference-page.json",
+   "bytes": 3797,
+   "sha256": "88558adc8cc3bb2656794e7222b83608580ac74fec2c172243c293da31fc1b16"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-018-export-sparx.json",
+   "bytes": 4679,
+   "sha256": "cec26548f509e261f02b38dc6230c31c246da04c850669856ace40bf9a02bc71"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-019-export-drawio.json",
+   "bytes": 4972,
+   "sha256": "d0a55dd7d45e85d8bae176e44b39f07f89dd807b7642afb12259a583e10bde8a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-020-import-drawio.json",
+   "bytes": 1560,
+   "sha256": "215afe5476f9cb406573c71027b0fd74551985e75cef1c3ea350b31c46a6c81a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-021-export-free-annotation.json",
+   "bytes": 1021,
+   "sha256": "04549beef05506cfe1c75c710156a3bf6654a0d8470ae1cead4c763337acbcd2"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-022-transactions-autolayout.json",
+   "bytes": 1964,
+   "sha256": "e774f6ecc77f9acfb93b6b39336b6eddbcb4377a89bd6a9ffab5ad15792ecce4"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-023-layout-process.json",
+   "bytes": 2717,
+   "sha256": "c0b871dade207b7bd10240a5391ed701bd7d6eece78bacac174c39710efab067"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-024-export-facts.json",
+   "bytes": 9390,
+   "sha256": "c9c880cd004fad0449cec84a5e4530dff0d6dba9d9aee95b679d99ca98f9bfa0"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-025-facts-descriptor-mismatch.json",
+   "bytes": 1039,
+   "sha256": "9e1842930c5fc2c85261d718a4b93e97de3463934a49a700ce5cfeceb0185067"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-026-static-surface.json",
+   "bytes": 7618,
+   "sha256": "7df5a39edfc8e8615cf4db5f9da3559ae82cae27f6149e87fbf9cdffbdd0b226"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-027-preview-surface.json",
+   "bytes": 4207,
+   "sha256": "482152e0b82c8d93428e1501669f2070d1e8a06684d3ba7e0159619d46e54091"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-028-workshop-surface.json",
+   "bytes": 4383,
+   "sha256": "c26694002d5540aa4e0b7e0c9a2ee3cce6d5f798696f6f6183214944eec3ce58"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-A-029-facts-unknown-version.json",
+   "bytes": 1039,
+   "sha256": "a0e9ef13821f118d0d2bea4df05196703a06826e39286ad23e98adf5938f821b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+   "bytes": 1620,
+   "sha256": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+   "bytes": 1509,
+   "sha256": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+   "bytes": 3241,
+   "sha256": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+   "bytes": 1336,
+   "sha256": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-005-legacy-value-pins.json",
+   "bytes": 1766,
+   "sha256": "951627f986316b41fd91d42fb7a4ad4edb8a5bd52707a0a52edc5c4e636b35a1"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+   "bytes": 1239,
+   "sha256": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-001-probe-1-original.json",
+   "bytes": 960,
+   "sha256": "5b627d02c3e68c49e177819ceb77e6806f61a1eb7c028c35cee676142fdf29cd"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-002-probe-1-no-policy.json",
+   "bytes": 4815,
+   "sha256": "bbc3e24bb75b0ae94eca804f7a5a415d4e50c0bb70a22c728be5cb0566ce2ba3"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-003-probe-1-injected.json",
+   "bytes": 2753,
+   "sha256": "cb90a4f99f15efd4c91970a7430cc407f04382a30d5cefa1402f1bdaec4d8247"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-004-probe-2-original.json",
+   "bytes": 577,
+   "sha256": "210c8ee8fe223446dba96d22b6aa4a88d48cc263c5586c37fc70846c1a00695a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+   "bytes": 1483,
+   "sha256": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+   "bytes": 959,
+   "sha256": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-007-probe-2-distribution.json",
+   "bytes": 909,
+   "sha256": "cce54bfc0e623f8d23721bd24f9ebef87461dcaae4eda93d277adf941ae96632"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-001-nonactivity-host-preserved.json",
+   "bytes": 1478,
+   "sha256": "4f85da8dba11bf7215d7fe6921aa7d2eee02f81c2e6b1d2c576d10293ecbb84f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-002-navigation-called-element.json",
+   "bytes": 1935,
+   "sha256": "6d2204d3064ddcf45c0793b5984392977f621a1de2aedd968147a3c9d618afe3"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-003-no-ambient-decomposition.json",
+   "bytes": 987,
+   "sha256": "bfc2f4b5fe04594820d693127fdf129ef3e24395f4d1915f8ab11d7b9d363012"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-004-no-forced-descriptor.json",
+   "bytes": 1153,
+   "sha256": "9a99abac943b517d50ebe4b1a6c03ea55a1e05c62840dbd793a0106ed4775115"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-005-no-built-in-look.json",
+   "bytes": 1390,
+   "sha256": "612d36c4d5f2a23125b3bda6a01d8e5d1bc68cbaa878d9501d7f7755bc4bf1a7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-006-io-set-selection.json",
+   "bytes": 791,
+   "sha256": "541171c5b0ab24eb64d524b2433f1ac66bdab0b26b59e6335c39f7f23fea00cf"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-007-no-policy-recognises-nothing.json",
+   "bytes": 2585,
+   "sha256": "c3a4a99a7e3a3fdf0442f95608dc967aa6c0412d231a0d772363e21d3cc7e4b3"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-008-browser-entry-defaults.json",
+   "bytes": 676,
+   "sha256": "715c45c4e73504319390f44f813fb9ed43fc9d4778afb707c62c53cf89178201"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-009-facts-version-a.json",
+   "bytes": 1032,
+   "sha256": "37db670b8b6546c35031cc1bf73d7a2a0d246dd07839e41fe13e5abce58f83a0"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-R-010-facts-version-b.json",
+   "bytes": 1036,
+   "sha256": "cfdbaafb8f1e71b01836408ad57ba2acb8f4bb25aae05a56632be81f869f5204"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-001-valid-x24-neutral-a.json",
+   "bytes": 920,
+   "sha256": "4d43b130e0efd125c243db81a1716c39f30c1a02e6b88a78712161cd260752a4"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-002-valid-x24-neutral-b.json",
+   "bytes": 920,
+   "sha256": "b6a5575ab1d3e1d1927fba69a8a879df6d29d493e3f783384f3b8850d4b289a2"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-003-valid-x24-legacy-synthetic.json",
+   "bytes": 941,
+   "sha256": "61b7bd8fa7129c8eb410eb31ffb6a233f3ddce54e8bdc5c4e425003267c19ebc"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-004-unknown-field.json",
+   "bytes": 7033,
+   "sha256": "df4f5d7d88fa32ba59aa874b18f8a8d40e04300ca079e8c5af2c98aae49e0323"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-005-null-value.json",
+   "bytes": 7014,
+   "sha256": "c124ea393c9f99b844fa08be14547126a468ef7ed17f789567d30077074e5445"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-006-empty-prefix.json",
+   "bytes": 7013,
+   "sha256": "d68f06bb6787e51653d13c5ad9c5fe8aa146e2ca5cc03152dc9709d345ceab18"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-007-unknown-trim.json",
+   "bytes": 7018,
+   "sha256": "ccf597e19fb4799abe81c98b5f2ddb9315293d79e1ca15e694bdafe519bb95d7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-008-duplicate-role.json",
+   "bytes": 7025,
+   "sha256": "68411431e80397ae45d434794a7b204b9c4e6b34f638e271c8d9848a555622fd"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-009-overlapping-prefix.json",
+   "bytes": 7136,
+   "sha256": "767c9b41914c0204223693a47bfa0694568a1436484b373f54370865fe7630ac"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-010-short-width-table.json",
+   "bytes": 7018,
+   "sha256": "550d09a1a85c99a5893a79ae830a1857e5bb20c0113b73da267183774eb508eb"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-011-legacy-retarget.json",
+   "bytes": 8495,
+   "sha256": "c4f3a978ffa2ab2057c1a126fda9bd583471a806112163bd52e5166e98203b5f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-012-empty-rules.json",
+   "bytes": 8478,
+   "sha256": "e90a3c7f61efebfffcd6cd5c358c4be1c91b1ef64fa2219281f8bec78d39369d"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-013-missing-metrics.json",
+   "bytes": 5993,
+   "sha256": "af3fef1f6b46ca0a83e2435061e9e25e19350c7a9f86a7b606d3c31781d78ee1"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-014-alias-target-outside-table.json",
+   "bytes": 7242,
+   "sha256": "84d755c7e8fbfc06c3258dd633c7312c9b7705546117a08cc56e5f76d25bf234"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-015-alias-source-inside-table.json",
+   "bytes": 7228,
+   "sha256": "1cf990c472f4cfb9a8255eb13813669fbcc0bf63c1a1abcd8b8816278df74472"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-016-duplicate-alias.json",
+   "bytes": 8505,
+   "sha256": "a0a6d8df453849336acb667799bbe5ef32fc7727f89842dc792a2b6d5ef1e93c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-017-duplicate-look.json",
+   "bytes": 8487,
+   "sha256": "d8a1a691305a2a05264683aa158bb5b07ba63587475c97555873bc9ea7e5dde5"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-018-upstream-look-with-tokens.json",
+   "bytes": 9311,
+   "sha256": "9345814067158786a2c4bb797aa6716e699db15ce34e262a304c91694f110083"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-019-duplicate-node-size.json",
+   "bytes": 7084,
+   "sha256": "a42472076a172c4ef769744ba72589460efedf2472d167a4dc7df624f461961e"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-020-decode-unknown-kind.json",
+   "bytes": 7028,
+   "sha256": "7eae97ea30e9146650bb7177762c1eb7c4b00b65d0645a3ead6f1ccea96f7479"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-021-lexical-number.json",
+   "bytes": 7027,
+   "sha256": "367944ba4453fc9cbbc557b229b6ce3c6e20a85e6681e577f0aceb2b4775402a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-022-lexical-duplicate-key.json",
+   "bytes": 7080,
+   "sha256": "2726c7da57ac0dd9741fe0c6ce8aa8b00727e106ad783edee6b4f9549d4c08cc"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-023-lexical-lone-surrogate.json",
+   "bytes": 7033,
+   "sha256": "8d5c9f784369fdde23eeff1fa30ee0c4518843179747b43d8355e4951f4390dc"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-024-overlapping-prefix-admitted.json",
+   "bytes": 7208,
+   "sha256": "1548bc0f6e25ac1dd7ef513c6d0eb255191c916c8a7e90de1b49336fadfb8b06"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-025-overlapping-prefix-unambiguous.json",
+   "bytes": 7736,
+   "sha256": "fb8e4dfe947ef5c5fedc47aeceb4cd949103695510e13d337fe345add0ce3f2a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-026-unknown-node-slot.json",
+   "bytes": 7028,
+   "sha256": "4e64ed6af4459dbed9c751bedd57ad63a6b5ce1998281085ab278ff3a96fd919"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-027-unknown-navigation-rule.json",
+   "bytes": 7225,
+   "sha256": "2caec8a2512551be189c58ea2e5247f555389947492514a9f98809000a3fc840"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-S-028-missing-facts-property.json",
+   "bytes": 7015,
+   "sha256": "af707e7496a5393c7f010e2163159d9e4ef85f214cedc07624f4d8c2c2575a09"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-001-classify.json",
+   "bytes": 8672,
+   "sha256": "10e23c553e0c82167b72801dcc83e9b908573a8ab1f76e9727a622c01be495a2"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-002-kind-annotated.json",
+   "bytes": 4460,
+   "sha256": "7317fa4553dd05db2747d8f500869105746a62aa48c10b3518576b4393ee259b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-003-kind-recolor.json",
+   "bytes": 4769,
+   "sha256": "07a3482a9ae14825b6ce2734e796fadbbd34adec98e05ae565723e75cfa17d13"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-004-kind-flat.json",
+   "bytes": 4809,
+   "sha256": "d6f2a2dbf0321744532896bc7def7582019b6fd93cd04cab68420d59d24b1242"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-005-layout-input.json",
+   "bytes": 2478,
+   "sha256": "baafdb9870465eca852428f7e19e0327802bd644d4343aab12db57cd2db085f9"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-006-layout-size.json",
+   "bytes": 6522,
+   "sha256": "020e53242f4ad98f915a84379c57b509e0b7e657040c9ca4e433ef31f89c329a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-007-metrics.json",
+   "bytes": 6671,
+   "sha256": "8afa1902a7eab6c3f7dd7300fe5cded81e9ce4b02c008a4d6f896db37a021fdc"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-008-render-badges.json",
+   "bytes": 2065,
+   "sha256": "b99d7cd6a64d44d1c832662dc533ad72885657e54c750aae6a446449b36b51b7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-009-render-attachment.json",
+   "bytes": 2017,
+   "sha256": "f2be8de194fc6691b776a048bba58769ee886e8a39c40234fa6953f5f4a5fb0c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-010-transactions-follow.json",
+   "bytes": 2000,
+   "sha256": "00be9664352f86b856be2ea7d11af8665912f490868cfd3a5e61c01fc27ea746"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-011-tokens.json",
+   "bytes": 21171,
+   "sha256": "3bee08005568f7217077176c15347806384055bbe3240e3461d19c982864d42d"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-012-theme-select.json",
+   "bytes": 11260,
+   "sha256": "5d8a2a04d9ebeaf70ad52d467a2f80f40b70e18ab5568afcc55bca7f035a0f22"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-013-palette.json",
+   "bytes": 2587,
+   "sha256": "126888e87b4336fd30e8d72a794ee6c26b75e9ad1b6b524313701d623a04ef88"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-014-navigation.json",
+   "bytes": 2666,
+   "sha256": "22cd99043060af76aae850967cccc7e795baf60a4031f86ea076fa087722bb8b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-015-export-a-input.json",
+   "bytes": 12032,
+   "sha256": "aad972ffe7265b26957ab4c85e9d00c7e2f980513043a6993638f12e74fac581"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-016-export-b-input.json",
+   "bytes": 12053,
+   "sha256": "9f4c617bd03a30cdd6f47cca6d55f4d6b9390d42e4d7122b6f9a0519af8ee71c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-017-export-legacy-input.json",
+   "bytes": 1449,
+   "sha256": "e06ab27e19e137cbbb3aac6d0bffd4fc4ec6fad493736b3e23f870c03e8f9861"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-018-import-neutral.json",
+   "bytes": 1721,
+   "sha256": "62dd400b6c4f622d4cc35efd10314b768f0ba0b2fbb24fd46a82179a7ad88667"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-019-import-legacy-symbols.json",
+   "bytes": 1019,
+   "sha256": "4b94718936f7bc2ae35d849fa9fb2c9fdd5d7a7cfcbf0a2da22f3eb56a7d3ab8"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-020-profile-recognition.json",
+   "bytes": 2407,
+   "sha256": "ab05b53949a7818ff545ec8ad2786bcf89762ba7eebe09f4341b990e6efb598d"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-021-profile-render-label.json",
+   "bytes": 2062,
+   "sha256": "d8985e261932f549b4b35050e0418d01b5c5e7c9e6ae06d672b473ba15349924"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-022-profile-create-text.json",
+   "bytes": 1413,
+   "sha256": "18074f8bd53eb2977ebb8530cc6906ff3f47237d6e3c1e170fa497d9541d4ec0"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-023-profile-render-bindings.json",
+   "bytes": 2712,
+   "sha256": "eced0b895584cd92e4410262036a1c41f833cfc500c68e1bc553b22ea8b2f881"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-024-transactions-autolayout.json",
+   "bytes": 2600,
+   "sha256": "3ccb3548fe57d5c71dcdfdafe3c703f40c3ba0feb0042e58d7cfd616054f6c31"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-025-layout-process.json",
+   "bytes": 10546,
+   "sha256": "e29ef6af07e63af890c857bbbb71a44b4e2d7bef433f790b4be3d34301fd23ae"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-026-export-facts.json",
+   "bytes": 9847,
+   "sha256": "68c9bf92a29d015a0c0aa6e0dcb2662ec60032b1f5469caf5e75515280bb581c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-027-import-b.json",
+   "bytes": 1713,
+   "sha256": "89ae7b12a7b0eb34fbb36217f34087e18ac1879776ff1467cdcfdcf659e58235"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-028-static-surface.json",
+   "bytes": 12488,
+   "sha256": "96735ce92f52b84a14dd4d693ae1f48c62d638d7b6bef13558391f94de2cb93c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-029-preview-surface.json",
+   "bytes": 4780,
+   "sha256": "ea77c57bf641a6928f5448a028bb730608ac2739025bcc8519f1a0fe467af716"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-030-workshop-surface.json",
+   "bytes": 5415,
+   "sha256": "4c2895d83842044ae19cdb1c7c914142886d9562dd2320dee75a863ee618b9a4"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-X-031-export-facts-b.json",
+   "bytes": 9848,
+   "sha256": "35df3f3bfa076f8d1b5f9f17245b82fd61889bb4b92d50e29a6f38089f2e7530"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/classification-rules.json",
+   "bytes": 77147,
+   "sha256": "d41a14b580b012ee68cdeb677672c41bd501f2dfdf6d5182d1824d49cfde3b6b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/comparators.json",
+   "bytes": 2999,
+   "sha256": "c38c0039c7e0a3a3e74022a0ef76ddf92e127565f34d3f2f299dc8a40f140873"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/arith.mjs",
+   "bytes": 57500,
+   "sha256": "791df7670d0366836ff4901ebde483ac2c80f4b9d6267abbd8c50b4032890566"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/author-cases.mjs",
+   "bytes": 89471,
+   "sha256": "ce35678dd5637850fb3f9df4d0d0e4d379755de0c7a0ea677f086404cd4057a7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/base-check.mjs",
+   "bytes": 10198,
+   "sha256": "d76e5921bdc9359f893af9b9bde4d533a20fa95a7a0c71fe1774650741308e78"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/canonical.mjs",
+   "bytes": 918,
+   "sha256": "a5faa7421a912030075000d469cb73844decd93a786f8247a87abd0b1662a948"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/classify.mjs",
+   "bytes": 1217,
+   "sha256": "5d88f9eb4af186e24e321e35b6b58f2d750cdfe578ae88b8be310da28effef6c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/clause-table.mjs",
+   "bytes": 4446,
+   "sha256": "ee4be1167e3b116b1cbe681d9e91768326d9c06ce2b480aa3228333b85b22217"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/comparators.mjs",
+   "bytes": 12267,
+   "sha256": "4cf181c64e548aeac3f6ecc92a46c135edb6b3cc876e0c819b22aa5879c36aac"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/inputs.mjs",
+   "bytes": 13740,
+   "sha256": "066b51b30185b7ccc2c02dc0536f43e302a6c3d8c6a9c993f4aa0bfe21cc1b7e"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/ledger.mjs",
+   "bytes": 16434,
+   "sha256": "90a3decfa592e2a0ab100076f38f74068ad14917801620676ee6f503a00b214c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/legacy-values.mjs",
+   "bytes": 17526,
+   "sha256": "362446847e85ad229feb45f21c0bf9056baaaf2f40d762018f21ed261d8f70dd"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/literal-set.mjs",
+   "bytes": 3559,
+   "sha256": "893e48245008c9680b76fe661c78de122e3d915112a111609faf03dc8dfb629a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/literals.mjs",
+   "bytes": 8683,
+   "sha256": "42fa0761cac5ed3929df5171f0f8421ed03651a734c19e3019063ccef26f2873"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/policies.mjs",
+   "bytes": 14927,
+   "sha256": "2c51f59657903cbb1dc93f8dd66854388ba57017b1e76b7237befaa0298a0077"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/reviewed.mjs",
+   "bytes": 4936,
+   "sha256": "308a570aacec0241a390a503e5e2f3d8358017d3d621aa94e91dcb1527e02e7f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/scan.mjs",
+   "bytes": 34731,
+   "sha256": "40b89ab416a0af6978b95448b090b5e60597650ebe2cb36e9b40a01bee8a8834"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/scenes.mjs",
+   "bytes": 15090,
+   "sha256": "cc5039bbc3eeecfc44cfe1ddd925c74298349768bf65532b3d0e11d95dab7bb2"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+   "bytes": 12635,
+   "sha256": "cad28267fcdf42281d47d9f662e8f9e6a1489dcea44b0869ef1a548af253fc30"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/sourcemap.mjs",
+   "bytes": 2074,
+   "sha256": "270b77614135904b2e3b9cf52ea7c0ae207854313b1c3286cf953d9b79619bf6"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/dimension-coverage.json",
+   "bytes": 182893,
+   "sha256": "6a3d239ec7b7dfa79ac7bcc4055ccc715b1405e9a81d7d2e9969b4d995d5e195"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/decode-b.drawio",
+   "bytes": 977,
+   "sha256": "6cf723f2e5e6f02c72700b7ccfff8d633efb6208a2022a48b079fc1008ee301b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/decode-legacy.drawio",
+   "bytes": 1190,
+   "sha256": "808bdaa489cf9e76e21e39df08f706717637564998e77d623501d20550d14f0b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/decode-neutral.drawio",
+   "bytes": 1008,
+   "sha256": "12321516a7e907ce613e03d93b188b92efa60589aabda443ebb25178ae6ea554"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-a.bpmn",
+   "bytes": 6390,
+   "sha256": "14686fdea32dd84484e229c37f5a71dae1a79a9d678a5f3049074f956e6fd0cd"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-b.bpmn",
+   "bytes": 6391,
+   "sha256": "577c179caaadc7867016bf05f1e364fe06274722df3224f38ec054c75c662221"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts-b.bpmn",
+   "bytes": 5136,
+   "sha256": "520a3fcd848fec29e6a61a75ae5df5d00890660bf49a87a0b85463799d1bd746"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts-version-a.bpmn",
+   "bytes": 1872,
+   "sha256": "3a9812856cb86a04a902c0b30927189441f410e4352946769ced74af3d8d6176"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts-version-b.bpmn",
+   "bytes": 1874,
+   "sha256": "0982882cf38363985ca4821b0760291a16f0b6318828f66bff1de4da83aca89b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-facts.bpmn",
+   "bytes": 5143,
+   "sha256": "ddf7b6ebce0a426d3adf59625ff3f4aa7af99cddf6fe16fba229265bbb3c7d10"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/export-legacy.bpmn",
+   "bytes": 6392,
+   "sha256": "d42b928f798a21741c906d055410e523fe6786481a97db01670b0eb156cfffcd"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/layout-input.bpmn",
+   "bytes": 2248,
+   "sha256": "c09cd68ff5bf3db234106f7d51e2da39d7e5f26984041fb0febeb24a3fbb4946"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/layout-nonactivity.bpmn",
+   "bytes": 1067,
+   "sha256": "85eaac78b18221b8ba6c3204a1a736bf802e7b918448166955cb49915d185f7a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/layout-process.json",
+   "bytes": 3542,
+   "sha256": "91e233f1c12e14af64ffb44064c72530cff0225343d12e8539a0666224e30631"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/surface.bpmn",
+   "bytes": 9261,
+   "sha256": "12dd6b9119e54940a2f8803686fb7ae191d4833297c26fc49dfb684bc9ca544a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/x24-facts-descriptor-b.json",
+   "bytes": 958,
+   "sha256": "b9e8c5b4baee6919225eb30695518e4aead88ac63e10e6468e8267264267430f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/inputs/x24-facts-descriptor.json",
+   "bytes": 963,
+   "sha256": "dad1e898930b1d4e020c66484abc1a3dc299e3bd13383f7f20bea5246152fe86"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+   "bytes": 3655802,
+   "sha256": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/legacy-values.json",
+   "bytes": 8768,
+   "sha256": "5169a58662f4d1e786e23fc04358d6c961e36cda4f59eea19fab47006c202a85"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "bytes": 205478,
+   "sha256": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/literal-set.json",
+   "bytes": 32745,
+   "sha256": "94bbb8eace69d546ce1fdd0792af4bfd6abb689f7c5a70a3b17f4c1b6024022c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "bytes": 48170,
+   "sha256": "6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/policy/business-policy-1.schema.json",
+   "bytes": 16377,
+   "sha256": "79ad6e0b5f3ab31209e6effadca7a5653b2838bc1d7da3b55a402571d8ec9094"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json",
+   "bytes": 12523,
+   "sha256": "7e3162eaa47ea25df97fdb55cdcc4d96c36f1155634abfa2d07b23d5465aa65b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/policy/policy-neutral-a.json",
+   "bytes": 10351,
+   "sha256": "b3d4e0ab6dd3657d51ad700e28f6cce77ce1848175fed7f71284a27568013e28"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/policy/policy-neutral-b.json",
+   "bytes": 10674,
+   "sha256": "f043e2bebdcc45e1227f71cc15666293092f531bc51f4bb0015a7a6bec578dae"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/probe-expectations.json",
+   "bytes": 21513,
+   "sha256": "8fe906614c1461363f336bbb10893caea0b9cfe1092028e20a4a0e3ae27cec78"
+  },
+  {
+   "path": "tests/profile-externalization.probe.mjs",
+   "bytes": 23137,
+   "sha256": "9faf9e7a59bfea04036a0a59a31804066ae29461671fe5c4e8b0d1492eb1a51c"
+  },
+  {
+   "path": "docs/design/block-b-x24-expectations.md",
+   "bytes": 11019,
+   "sha256": "28ec958ea9673fa386053ff41707bee28b38dd3a8eccd727dae9e9420a972592"
+  }
+ ],
+ "supersedesFiles": [
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/README.md",
+   "old": {
+    "bytes": 116423,
+    "sha256": "b29fad668f643adad612fea8998ed734c561eda6bb3a19157e522ac03887ebbb"
+   },
+   "new": {
+    "bytes": 120220,
+    "sha256": "e255ed093299f474b0cf829eb065f4358f0a3ba5e373027d1468af47f09fed35"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+   "old": {
+    "bytes": 1620,
+    "sha256": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494"
+   },
+   "new": {
+    "bytes": 1620,
+    "sha256": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+   "old": {
+    "bytes": 1509,
+    "sha256": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc"
+   },
+   "new": {
+    "bytes": 1509,
+    "sha256": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+   "old": {
+    "bytes": 3241,
+    "sha256": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad"
+   },
+   "new": {
+    "bytes": 3241,
+    "sha256": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+   "old": {
+    "bytes": 1336,
+    "sha256": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b"
+   },
+   "new": {
+    "bytes": 1336,
+    "sha256": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+   "old": {
+    "bytes": 1239,
+    "sha256": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21"
+   },
+   "new": {
+    "bytes": 1239,
+    "sha256": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+   "old": {
+    "bytes": 1483,
+    "sha256": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba"
+   },
+   "new": {
+    "bytes": 1483,
+    "sha256": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+   "old": {
+    "bytes": 959,
+    "sha256": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae"
+   },
+   "new": {
+    "bytes": 959,
+    "sha256": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/derive/seal.mjs",
+   "old": {
+    "bytes": 12635,
+    "sha256": "cad28267fcdf42281d47d9f662e8f9e6a1489dcea44b0869ef1a548af253fc30"
+   },
+   "new": {
+    "bytes": 13408,
+    "sha256": "658f0d73d4ed4dce0d12fdd500275b19d22891bb6923d62051d829eeb068a31e"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+   "old": {
+    "bytes": 3655802,
+    "sha256": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a"
+   },
+   "new": {
+    "bytes": 3655802,
+    "sha256": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "old": {
+    "bytes": 205478,
+    "sha256": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae"
+   },
+   "new": {
+    "bytes": 207146,
+    "sha256": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "old": {
+    "bytes": 48170,
+    "sha256": "6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe"
+   },
+   "new": {
+    "bytes": 48170,
+    "sha256": "071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "old": {
+    "bytes": 36389,
+    "sha256": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1"
+   },
+   "new": {
+    "bytes": 37152,
+    "sha256": "0fabab755365beaee76460180a2cdbc812a25aa3ce1029125cc67da2de04a1fb"
+   }
+  },
+  {
+   "path": "tests/x24-externalization-seal.test.mjs",
+   "old": {
+    "bytes": 75495,
+    "sha256": "a8795643ebf0f6097791ee60cea8f3a9daf12edc754378865a8f5c68373e9ae6"
+   },
+   "new": {
+    "bytes": 77054,
+    "sha256": "313cd8a0340eef84285440df0ce7e3c81c74491fd6a15f18c4992160ad4f0613"
+   }
+  }
+ ],
+ "addedFiles": [],
+ "valueChanges": [
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/41/sha256",
+   "old": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1",
+   "new": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/41/spans",
+   "old": [
+    [
+     "raw",
+     275,
+     136,
+     275,
+     144
+    ],
+    [
+     "raw",
+     497,
+     70,
+     497,
+     78
+    ],
+    [
+     "raw",
+     568,
+     173,
+     568,
+     181
+    ],
+    [
+     "raw",
+     892,
+     598,
+     892,
+     606
+    ],
+    [
+     "raw",
+     894,
+     723,
+     894,
+     731
+    ],
+    [
+     "raw",
+     951,
+     471,
+     951,
+     479
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     278,
+     136,
+     278,
+     144
+    ],
+    [
+     "raw",
+     500,
+     70,
+     500,
+     78
+    ],
+    [
+     "raw",
+     573,
+     173,
+     573,
+     181
+    ],
+    [
+     "raw",
+     897,
+     598,
+     897,
+     606
+    ],
+    [
+     "raw",
+     899,
+     723,
+     899,
+     731
+    ],
+    [
+     "raw",
+     956,
+     471,
+     956,
+     479
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/44/sha256",
+   "old": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f",
+   "new": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/44/spans",
+   "old": [
+    [
+     "raw",
+     4343,
+     560,
+     4343,
+     568
+    ],
+    [
+     "raw",
+     4382,
+     637,
+     4382,
+     645
+    ],
+    [
+     "raw",
+     5349,
+     438,
+     5349,
+     446
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     4340,
+     560,
+     4340,
+     568
+    ],
+    [
+     "raw",
+     4379,
+     637,
+     4379,
+     645
+    ],
+    [
+     "raw",
+     5346,
+     438,
+     5346,
+     446
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/46/sha256",
+   "old": "eb4260c285d1ef1ed81156e34c499e0aebd5f965edcebaa7225a4aaef5e93119",
+   "new": "d7c04d63e175f234883f54e8507eb26127f4de2124c6b5c0289fa6ffb5c2c4f9"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/3/sha256",
+   "old": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1",
+   "new": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/3/spans",
+   "old": [
+    [
+     "raw",
+     675,
+     198,
+     675,
+     207
+    ],
+    [
+     "raw",
+     678,
+     141,
+     678,
+     150
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     680,
+     198,
+     680,
+     207
+    ],
+    [
+     "raw",
+     683,
+     141,
+     683,
+     150
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/6/sha256",
+   "old": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f",
+   "new": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/6/spans",
+   "old": [
+    [
+     "raw",
+     758,
+     60,
+     758,
+     69
+    ],
+    [
+     "raw",
+     817,
+     66,
+     817,
+     75
+    ],
+    [
+     "raw",
+     4883,
+     168,
+     4883,
+     177
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     758,
+     60,
+     758,
+     69
+    ],
+    [
+     "raw",
+     817,
+     66,
+     817,
+     75
+    ],
+    [
+     "raw",
+     4880,
+     168,
+     4880,
+     177
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/4/sha256",
+   "old": "c43afb579aff0647786c5eea39d18ff8baf90684784c28d36b964efa399c79f1",
+   "new": "e362261a61e98a361820b457be68f39750c7af380391a79ffce3ecd3968deca7"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/4/spans",
+   "old": [
+    [
+     "raw",
+     782,
+     78,
+     782,
+     81
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     787,
+     78,
+     787,
+     81
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/6/sha256",
+   "old": "5cc2bf2eb78752e96de5a47e80deda57b7d5b269979c2669a5897b3ea67d4c0f",
+   "new": "13fd3edec5c53ce6844f09dbefa5f25488ed59ae2333589b496a67de67797299"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/2/sha256",
+   "old": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a",
+   "new": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/3/sha256",
+   "old": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+   "new": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/3/spans",
+   "old": [
+    [
+     "raw",
+     592,
+     8,
+     592,
+     16
+    ],
+    [
+     "raw",
+     596,
+     21,
+     596,
+     29
+    ],
+    [
+     "raw",
+     3237,
+     44,
+     3237,
+     52
+    ],
+    [
+     "raw",
+     3266,
+     68,
+     3266,
+     76
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     594,
+     8,
+     594,
+     16
+    ],
+    [
+     "raw",
+     598,
+     21,
+     598,
+     29
+    ],
+    [
+     "raw",
+     3239,
+     44,
+     3239,
+     52
+    ],
+    [
+     "raw",
+     3268,
+     68,
+     3268,
+     76
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/0/sha256",
+   "old": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a",
+   "new": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/1/sha256",
+   "old": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+   "new": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/1/spans",
+   "old": [
+    [
+     "raw",
+     2546,
+     87,
+     2546,
+     96
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     2548,
+     87,
+     2548,
+     96
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/2/sha256",
+   "old": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5",
+   "new": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/1/sha256",
+   "old": "17a1036bcf2059c99064e7465f59ca269afd8e63cb60259523c99d5f4c6e034a",
+   "new": "9ec581db09e5b5090386957d9f4633643b7b9145c9f3a7f714d09676b811cf57"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/2/sha256",
+   "old": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+   "new": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/2/spans",
+   "old": [
+    [
+     "raw",
+     999,
+     82,
+     999,
+     85
+    ],
+    [
+     "raw",
+     1012,
+     118,
+     1012,
+     121
+    ],
+    [
+     "raw",
+     1099,
+     76,
+     1099,
+     79
+    ],
+    [
+     "raw",
+     1619,
+     64,
+     1619,
+     67
+    ],
+    [
+     "raw",
+     1633,
+     107,
+     1633,
+     110
+    ],
+    [
+     "raw",
+     3129,
+     17,
+     3129,
+     20
+    ],
+    [
+     "raw",
+     3903,
+     82,
+     3903,
+     85
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     1001,
+     82,
+     1001,
+     85
+    ],
+    [
+     "raw",
+     1014,
+     118,
+     1014,
+     121
+    ],
+    [
+     "raw",
+     1101,
+     76,
+     1101,
+     79
+    ],
+    [
+     "raw",
+     1621,
+     64,
+     1621,
+     67
+    ],
+    [
+     "raw",
+     1635,
+     107,
+     1635,
+     110
+    ],
+    [
+     "raw",
+     3131,
+     17,
+     3131,
+     20
+    ],
+    [
+     "raw",
+     3906,
+     82,
+     3906,
+     85
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/3/sha256",
+   "old": "082eed1d3de8745156e608a7f26fca565ebc26dc65424792e16e021cdef3c0b5",
+   "new": "a9cfd8eb533cf3ea3c316b1ff2b0ab48dbf8b31081e7539397c9473835dea519"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/7/sha256",
+   "old": "1d35c7618a783a5b6d7c16dbb2504fabb3184ec4646e9879252608e94a2c3e52",
+   "new": "bcae7c87121b3758bd83520bea6fdd87ebf32188e2a24094e1b9a31fc0b65bb0"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/9/files/7/spans",
+   "old": [
+    [
+     "raw",
+     160,
+     34,
+     160,
+     37
+    ],
+    [
+     "raw",
+     160,
+     57,
+     160,
+     60
+    ],
+    [
+     "raw",
+     169,
+     31,
+     169,
+     34
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     163,
+     34,
+     163,
+     37
+    ],
+    [
+     "raw",
+     163,
+     57,
+     163,
+     60
+    ],
+    [
+     "raw",
+     172,
+     31,
+     172,
+     34
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/10/files/0/sha256",
+   "old": "961c6f13b68843d5ee70157f6b2fdd3f0d655aa5e7f717fa48e63adb6c02f28e",
+   "new": "e38e0c326d9ab231ae08ec6177d54cd8bfb2a3414b79cf0288e9c9d975f9bc8b"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/10/files/0/spans",
+   "old": [
+    [
+     "raw",
+     629,
+     115,
+     629,
+     125
+    ]
+   ],
+   "new": [
+    [
+     "raw",
+     631,
+     115,
+     631,
+     125
+    ]
+   ]
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/0/files/43/sha256",
+   "old": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285",
+   "new": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/7/files/5/sha256",
+   "old": "8c0861edd634b085ac8540ba3da65589b444a24f07ca3e9723f3dab9c4a00285",
+   "new": "c5a1028a736f1ff82b2324ac8d543a9cc01defde51ea95582e2a252c1cf5c0c5"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/ledger.json",
+   "pointer": "/inputs/lexicon/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/12",
+   "old": {
+    "id": "RV-13",
+    "entry": "LX-NV-1",
+    "literal": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "key": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "class": "legacy-api-value",
+    "justification": "Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. Also bound in the block B module src/react/navigation-target.ts.",
+    "count": 8,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "spans": [
+       [
+        "raw",
+        13,
+        74,
+        13,
+        87
+       ]
+      ]
+     },
+     {
+      "file": "tests/profile-workshop-prop.test.mjs",
+      "pathSha256": "fb9eb1e8935e7b880c2b69727314e4ef906dea8a93921f9b2ee2bd73ac289b35",
+      "sha256": "a506b63d247703551e17f1562eb0ae54807e4a9fec7e61f5a31ec88f2f4bfcd5",
+      "spans": [
+       [
+        "raw",
+        5,
+        16,
+        5,
+        29
+       ],
+       [
+        "raw",
+        9,
+        37,
+        9,
+        50
+       ],
+       [
+        "raw",
+        11,
+        32,
+        11,
+        45
+       ],
+       [
+        "raw",
+        11,
+        93,
+        11,
+        106
+       ],
+       [
+        "raw",
+        15,
+        34,
+        15,
+        47
+       ],
+       [
+        "raw",
+        17,
+        30,
+        17,
+        43
+       ],
+       [
+        "raw",
+        17,
+        87,
+        17,
+        100
+       ]
+      ]
+     }
+    ]
+   },
+   "new": {
+    "id": "RV-13",
+    "entry": "LX-NV-1",
+    "literal": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "key": "e40ce9d32fa2483ea41f0596a7ded974c5ba269f1fe540f5d0955d54778d2284",
+    "class": "legacy-api-value",
+    "justification": "Published API name: the optional target resolver prop of the published workshop props (BpmnWorkshopProps), which the block B fix of review finding 17 restored after a rename (OPEN-LEGACY, DESIGN.md:899 and the OPEN register row DESIGN.md:927: existing callers keep the published API; a published name is not renamed). The base ledger keeps its declaration and its documentation comment in src/react/workshop.tsx as legacy-api rows of rule R-144 (I-1428, I-1430), its read in the click handler of the base line of the name fallback as a row of rule R-147 (I-1463, disposition inject), the README mention (I-0026) and the browser harness of the original test (I-1682); at the block B head these five occurrences are back on their base lines and pair with their base rows, so no reviewed record binds them. In the block B regression test tests/profile-workshop-prop.test.mjs (7 occurrences) it is the prop name that the test requires in the published declarations and in the browser harness: a comment, two test titles, two assertion patterns and two assertion messages. No business classification reads it; the name-based target heuristic of the navigation family (DESIGN.md:859) is carried by other tokens. Also bound in the block B module src/react/navigation-target.ts.",
+    "count": 8,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
+      "spans": [
+       [
+        "raw",
+        13,
+        74,
+        13,
+        87
+       ]
+      ]
+     },
+     {
+      "file": "tests/profile-workshop-prop.test.mjs",
+      "pathSha256": "fb9eb1e8935e7b880c2b69727314e4ef906dea8a93921f9b2ee2bd73ac289b35",
+      "sha256": "a506b63d247703551e17f1562eb0ae54807e4a9fec7e61f5a31ec88f2f4bfcd5",
+      "spans": [
+       [
+        "raw",
+        5,
+        16,
+        5,
+        29
+       ],
+       [
+        "raw",
+        9,
+        37,
+        9,
+        50
+       ],
+       [
+        "raw",
+        11,
+        32,
+        11,
+        45
+       ],
+       [
+        "raw",
+        11,
+        93,
+        11,
+        106
+       ],
+       [
+        "raw",
+        15,
+        34,
+        15,
+        47
+       ],
+       [
+        "raw",
+        17,
+        30,
+        17,
+        43
+       ],
+       [
+        "raw",
+        17,
+        87,
+        17,
+        100
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/14",
+   "old": {
+    "id": "RV-15",
+    "entry": "LX-NV-1",
+    "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "class": "legacy-api-value",
+    "justification": "Published default target resolver of the react entry (0.3.0 and main; base export row I-1412, legacy-api, rule R-149), now evaluating the injected navigation policy.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "cc1efea777871385f45f2923a588670af903b320f83a995bad7b9245d6ed4ee5",
+      "spans": [
+       [
+        "raw",
+        7,
+        16,
+        7,
+        36
+       ]
+      ]
+     }
+    ]
+   },
+   "new": {
+    "id": "RV-15",
+    "entry": "LX-NV-1",
+    "literal": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "key": "5a43428137bd7b3fa58c487b2eacbbf249149c96301bd969e521bf03408ae0f6",
+    "class": "legacy-api-value",
+    "justification": "Published default target resolver of the react entry (0.3.0 and main; base export row I-1412, legacy-api, rule R-149), now evaluating the injected navigation policy.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
+      "spans": [
+       [
+        "raw",
+        7,
+        16,
+        7,
+        36
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/21",
+   "old": null,
+   "new": {
+    "id": "RV-22",
+    "entry": "LX-NV-1",
+    "literal": "4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d",
+    "key": "4dc927cfa766eec141e5d8bff44c7e53f957e975d8a7482fd8afe0cc2613f83d",
+    "class": "legacy-api-value",
+    "justification": "Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; the matching is the injected `legacy-rules` evaluation.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
+      "spans": [
+       [
+        "raw",
+        16,
+        96,
+        16,
+        105
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/lexicon.json",
+   "pointer": "/reviewed/tokens/22",
+   "old": null,
+   "new": {
+    "id": "RV-23",
+    "entry": "LX-NV-1",
+    "literal": "76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45",
+    "key": "76f57ec1a82970f128499e88c7423a1ffd577be7f73689c4d410cbc3dc067e45",
+    "class": "legacy-api-value",
+    "justification": "Published marker navigation rule name of the 0.4 workshop API, mapped to its business-policy/1 category for the rule resolver export; same grounds as RV-22, second rule name.",
+    "count": 1,
+    "files": [
+     {
+      "file": "src/react/navigation-target.ts",
+      "pathSha256": "0c2c7fb33a8d2975604ed4aa5891e81828922d6901e4a360b45a9b87ac6b7d9c",
+      "sha256": "6c2c0d964ae06a02b6a67fc0d8c3131136d6d00f01fc781c7f7b3463128595b4",
+      "spans": [
+       [
+        "raw",
+        16,
+        121,
+        16,
+        134
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-L-001-occurrences.json",
+   "old": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494",
+   "new": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-L-002-distribution-members.json",
+   "old": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc",
+   "new": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-L-003-modules.json",
+   "old": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad",
+   "new": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-L-004-zero-unmatched.json",
+   "old": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b",
+   "new": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-L-006-literal-free-seal.json",
+   "old": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21",
+   "new": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-P-005-probe-2-ledger-rows.json",
+   "old": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba",
+   "new": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/cases~1x24-P-006-probe-2-rescan.json",
+   "old": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae",
+   "new": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/ledger.json",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/manifest.json",
+   "pointer": "/files/lexicon.json",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+   "pointer": "/expectedArtifacts/1/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-001-occurrences.json",
+   "pointer": "/inputArtifacts/2/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+   "pointer": "/expectedArtifacts/1/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-002-distribution-members.json",
+   "pointer": "/inputArtifacts/2/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+   "pointer": "/expectedArtifacts/1/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-003-modules.json",
+   "pointer": "/inputArtifacts/2/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+   "pointer": "/expectedArtifacts/1/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-004-zero-unmatched.json",
+   "pointer": "/inputArtifacts/2/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+   "pointer": "/inputArtifacts/1/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-L-006-literal-free-seal.json",
+   "pointer": "/inputArtifacts/2/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+   "pointer": "/expectedArtifacts/0/json/1/value",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-005-probe-2-ledger-rows.json",
+   "pointer": "/inputArtifacts/2/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/cases/x24-P-006-probe-2-rescan.json",
+   "pointer": "/inputArtifacts/1/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/authorities/12",
+   "old": null,
+   "new": "Stage B2 phase 2 integration (spec author, stage B2 phase 2 of the same work order): main vendor-py rebind carried, navigation mapping records RV-22 and RV-23"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/30/sha256",
+   "old": "0ba76dad47c13181368f0c4f59851ef32b74ac3e83b215a8d154ee6a373bc494",
+   "new": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/31/sha256",
+   "old": "1884db27c44f35c6219c3dba910f96bf16002ddfa6d16fd95b75148c8d394efc",
+   "new": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/32/sha256",
+   "old": "601e2906bdefec4f6ab4e0ca7812f77d6db8d10f5e70057767b95d570b325dad",
+   "new": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/33/sha256",
+   "old": "afa483ddd00eeb920d19b593d47f8db2f239215b44ac8bf7541be06ab006c89b",
+   "new": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/35/sha256",
+   "old": "ef5205980b29a239b9ffdae48f6661acfe0b40d434905b3fff6aeefabc1b0a21",
+   "new": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/40/sha256",
+   "old": "0f6c21104709fab702eb8b587f958b5cf38fdf5a270e75b88da766a3529fd4ba",
+   "new": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/41/sha256",
+   "old": "da619f59fdedfb2294b089640ece9ad25717fc3bbaf9d7ea60f7dbd68fce78ae",
+   "new": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/149/sha256",
+   "old": "b3f71abb1ecbe42b225772717d3a0679bf93c0284d8704b66104d0c494fa339a",
+   "new": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/151/bytes",
+   "old": 205478,
+   "new": 207146
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/151/sha256",
+   "old": "0c142615e8990c7b47c6051be1593df55cf3520b59f7f4a988fd4af0677408ae",
+   "new": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/153/sha256",
+   "old": "6a214a3c37a8e9fffaf40d8a69941c7b308095027244f23381a7dcfb2d259ffe",
+   "new": "071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/previousSeals/9",
+   "old": null,
+   "new": {
+    "sha256": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1",
+    "round": "stage B2 step 9 README correction",
+    "cases": 111,
+    "occurrenceRows": 3381,
+    "verdict": "integrated into the workbench branch; the stage B2 phase 2 integration carries the main vendor-py rebind and adds the navigation mapping records RV-22 and RV-23"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/previousSeals/10",
+   "old": null,
+   "new": {
+    "sha256": "e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78",
+    "round": "vendor-py re-vendor rebind (main)",
+    "cases": 111,
+    "occurrenceRows": 3381,
+    "merged": true
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/reviewStatus",
+   "old": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; pending targeted verification and conductor acceptance",
+   "new": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; stage B2 phase 2 integration applied; pending targeted verification and conductor acceptance"
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/0",
+   "old": {
+    "path": "README.md",
+    "bytes": 116423,
+    "sha256": "b29fad668f643adad612fea8998ed734c561eda6bb3a19157e522ac03887ebbb"
+   },
+   "new": {
+    "path": "README.md",
+    "bytes": 120220,
+    "sha256": "e255ed093299f474b0cf829eb065f4358f0a3ba5e373027d1468af47f09fed35"
+   }
+  },
+  {
+   "path": "tests/fixtures/x24-externalization/expectations/seal.json",
+   "pointer": "/files/130",
+   "old": {
+    "path": "derive/seal.mjs",
+    "bytes": 12635,
+    "sha256": "cad28267fcdf42281d47d9f662e8f9e6a1489dcea44b0869ef1a548af253fc30"
+   },
+   "new": {
+    "path": "derive/seal.mjs",
+    "bytes": 13408,
+    "sha256": "658f0d73d4ed4dce0d12fdd500275b19d22891bb6923d62051d829eeb068a31e"
+   }
+  }
+ ]
+}

@@ -10,6 +10,7 @@ import onboarding from "./C.4.0.bpmn";
 import customer from "./C.5.0.bpmn";
 import reference from "./B.1.0.bpmn";
 import { DEMO_TOKENS } from "./palette.mjs";
+import businessPolicy from "../../tests/fixtures/x24-externalization/expectations/policy/policy-legacy-synthetic.json";
 
 const MODELS = {
   onboarding: { title: "Employee onboarding", xml: onboarding, tabs: 4, source: "C.4.0" },
@@ -18,8 +19,8 @@ const MODELS = {
 };
 
 const FORMATS = [
-  { id: "custom", label: "Custom", profile: "legend" },
-  { id: "bpmn", label: "BPMN", profile: "colored", tokens: DEMO_TOKENS },
+  { id: "annotated", label: "Annotated", profile: "look-annotated" },
+  { id: "bpmn", label: "BPMN", profile: "look-recolor", tokens: DEMO_TOKENS },
 ];
 
 const SUGGESTIONS = [
@@ -32,7 +33,7 @@ const SUGGESTIONS = [
 const HELP =
   "I am a simulated assistant: no model runs here. Ask me to draw an employee onboarding process (4 diagrams, " +
   "one tab each), a new customer process (2 diagrams) or the notation reference (sub-processes, call activities). " +
-  "I can also arrange the open diagram or switch between the Custom and BPMN looks. Everything else is in the canvas: " +
+  "I can also arrange the open diagram or switch between the Annotated and BPMN looks. Everything else is in the canvas: " +
   "edit, undo, tabs, zoom, export.";
 
 const sleep = (ms, signal) => new Promise((resolve) => {
@@ -47,7 +48,7 @@ function intentOf(text) {
   if (/reference|référence|sub-?process|sous-processus|notation|call activit/.test(t)) return { kind: "draw", model: "reference" };
   if (/arrange|layout|tidy|mise en page|range|organis/.test(t)) return { kind: "layout" };
   if (/bpmn look|look bpmn|vue bpmn|bpmn view|standard look|notation look/.test(t)) return { kind: "look", format: "bpmn" };
-  if (/custom/.test(t)) return { kind: "look", format: "custom" };
+  if (/annotated/.test(t)) return { kind: "look", format: "annotated" };
   return { kind: "help" };
 }
 
@@ -86,7 +87,7 @@ function simulatedModel(host) {
       }
       if (intent.kind === "look") {
         host.setFormat(intent.format);
-        yield* say(intent.format === "bpmn" ? "Switched to the BPMN look: the standard notation, recoloured." : "Switched to the Custom look.");
+        yield* say(intent.format === "bpmn" ? "Switched to the BPMN look: the upstream notation in the demo palette." : "Switched to the Annotated look.");
         return;
       }
       yield* say(HELP);
@@ -103,6 +104,7 @@ function Chat({ host }) {
   const runtime = useLocalRuntime(model);
   const toolkit = useMemo(() => createBpmnToolkit({
     toolNames: ["draw_process"],
+    renderOptions: { businessPolicy },
     resolveArtifact: (part) => {
       const key = part.args?.model;
       const m = MODELS[key];
@@ -129,7 +131,7 @@ function Chat({ host }) {
 function App() {
   const workshop = useRef(null);
   const [doc, setDoc] = useState({ key: "onboarding", xml: MODELS.onboarding.xml, revision: undefined });
-  const [format, setFormat] = useState("custom");
+  const [format, setFormat] = useState("annotated");
   const host = useMemo(() => ({
     open: (key) => { const m = MODELS[key]; if (m) setDoc({ key, xml: m.xml, revision: undefined }); },
     layout: async () => { const c = workshop.current?.canvas; return c ? c.autoLayout() : null; },
@@ -143,6 +145,7 @@ function App() {
         ref: workshop,
         xml: doc.xml,
         revision: doc.revision,
+        businessPolicy,
         formats: FORMATS,
         format,
         onFormatChange: setFormat,

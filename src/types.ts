@@ -1,10 +1,13 @@
+import type { BusinessPolicy } from "./internal/business-policy.js";
 /** Public types. Nothing here references bpmn-js, diagram-js or any DOM-only global at runtime. */
 
+import type { AnnotatedTokens } from "./internal/contracts.js";
 import type { LegendTokens } from "./internal/contracts.js";
 
+export type { AnnotatedTokens };
 export type { LegendTokens };
-/** `standard`: upstream bpmn-js. `legend`: the legend look. `colored`: upstream notation, drawn by upstream, recoloured by tokens. */
-export type ProfileId = "standard" | "legend" | "colored";
+/** Opaque look id: the alias of an injected look. Without one, upstream bpmn-js draws the diagram. */
+export type ProfileId = string;
 
 export type PaletteColumns = 1 | 2 | "auto";
 
@@ -107,10 +110,10 @@ export interface SetXmlOptions {
 
 /** Look options of a profile. */
 export interface ProfileOptions {
-  /** `legend`: the legend palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
-  readonly palette?: "legend" | "upstream";
-  /** `colored` only. `classic`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes recoloured. */
-  readonly drawing?: "upstream" | "classic";
+  /** `annotated`: the annotated palette (16 entries) whatever the profile; `upstream`: the profile's own palette. */
+  readonly palette?: string;
+  /** `recolor` only. `flat`: shapes drawn flat in the profile's colours; `upstream`: the upstream shapes, tinted. */
+  readonly drawing?: string;
 }
 
 /** One consistent capture of the canvas for an export (see `BpmnCanvasHandle.snapshot`). */
@@ -146,6 +149,9 @@ export interface WatermarkOptions {
 }
 
 export interface BpmnCanvasOptions {
+  readonly ioSetSelections?: Readonly<Record<string, string>>;
+  readonly tokens?: Partial<AnnotatedTokens>;
+  readonly businessPolicy?: BusinessPolicy;
   readonly xml?: string;
   readonly revision?: string;
   readonly profile?: ProfileId;
@@ -153,6 +159,10 @@ export interface BpmnCanvasOptions {
   readonly profileOptions?: ProfileOptions;
   /** `layoutOnLoad` for the first document (see `SetXmlOptions`). */
   readonly layoutOnLoad?: boolean;
+  /** Look inputs for the `annotated` profile. Missing keys fall back to the tokens of the injected look. */
+  readonly annotatedTokens?: Partial<AnnotatedTokens>;
+  /** Colours of the `recolor` profile, same fields as the annotated tokens. Only the keys given recolour; see the README. */
+  readonly recolorTokens?: Partial<AnnotatedTokens>;
   /** Look inputs for the `legend` profile. Missing keys fall back to its defaults, the reference Custom look. */
   readonly legendTokens?: Partial<LegendTokens>;
   /** Colours of the `colored` profile, same fields as the legend tokens. Only the keys given recolour; see the README. */
@@ -231,7 +241,7 @@ export interface BpmnCanvasHandle {
    * `destroy()`). Emits `onChange` with cause `profile-switch`
    * and no new content revision.
    */
-  setProfile(profile: ProfileId, tokens?: Partial<LegendTokens>, options?: ProfileOptions): Promise<void>;
+  setProfile(profile: ProfileId, tokens?: Partial<AnnotatedTokens>, options?: ProfileOptions): Promise<void>;
   /** One consistent capture for an export: document, revision, diagram, profile and `touched`. Refused during a drag. */
   snapshot(): Promise<CanvasSnapshot>;
   canUndo(): boolean;
@@ -245,7 +255,12 @@ export interface BpmnCanvasHandle {
 }
 
 export interface RenderOptions {
+  readonly tokens?: Partial<AnnotatedTokens>;
+  readonly profileOptions?: ProfileOptions;
+  readonly businessPolicy?: BusinessPolicy;
   readonly profile?: ProfileId;
+  readonly annotatedTokens?: Partial<AnnotatedTokens>;
+  readonly recolorTokens?: Partial<AnnotatedTokens>;
   readonly legendTokens?: Partial<LegendTokens>;
   readonly coloredTokens?: Partial<LegendTokens>;
   /** Diagrams whose SVG is smaller than this edge length in px are reported as `filtered-small` (default 20). */

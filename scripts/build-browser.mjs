@@ -5,7 +5,7 @@ import { build } from "esbuild";
 import { bundledPackages, licensesDocument } from "./licenses.mjs";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { brotliCompressSync, constants, gzipSync } from "node:zlib";
+import { brotliCompressSync, constants } from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
@@ -57,11 +57,10 @@ for (const f of ["bpmn-canvas.min.js", "bpmn-canvas.iife.min.js"]) {
   const bytes = readFileSync(join(out, f));
   report[f] = {
     bytes: bytes.length,
-    gzip: gzipSync(bytes, { level: 9 }).length,
     brotli: brotliCompressSync(bytes, { params: { [constants.BROTLI_PARAM_QUALITY]: 11 } }).length,
     integrity: "sha384-" + createHash("sha384").update(bytes).digest("base64"),
   };
 }
 writeFileSync(join(out, "sri.json"), JSON.stringify({ version: pkg.version, files: report, bundled: [...packages.keys()].sort() }, null, 2) + "\n");
-for (const [f, r] of Object.entries(report)) console.log(`${f}: ${r.bytes} B, gzip ${r.gzip} B, brotli ${r.brotli} B, ${r.integrity}`);
+for (const [f, r] of Object.entries(report)) console.log(`${f}: ${r.bytes} B, brotli ${r.brotli} B, ${r.integrity}`);
 console.log(`bundled packages: ${packages.size}; licenses in dist/browser/bpmn-canvas.licenses.txt`);

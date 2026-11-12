@@ -3,21 +3,24 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { baselineHashAllowlist, outsideBaselineHashes } from "./helpers/brand-baseline.mjs";
+import { fixturePolicy } from "./helpers/injected-policy.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const dist = (p) => import(root + "dist/profiles/colored/" + p);
+const dist = (p) => import(root + "dist/presentation/recolor/" + p);
+const look = fixturePolicy.presentation.looks.find((entry) => entry.renderer === "recolor");
+const marked = (role, text) => `${fixturePolicy.classification.annotationRoles.find((entry) => entry.role === role).prefix} ${text}`;
 
 test("coloredProfile without tokens adds no module and no tokens: it is the upstream drawing", async () => {
-  const { coloredProfile } = await dist("index.js");
+  const { recolorProfile } = await dist("index.js");
   for (const tokens of [undefined, {}, { taskLine: undefined }]) {
-    const p = coloredProfile(tokens);
-    assert.deepEqual({ id: p.id, modelerModules: p.modelerModules, viewerModules: p.viewerModules, tokens: p.tokens }, { id: "colored", modelerModules: [], viewerModules: [], tokens: undefined });
+    const p = recolorProfile(tokens, fixturePolicy);
+    assert.deepEqual({ id: p.id, modelerModules: p.modelerModules, viewerModules: p.viewerModules, tokens: p.tokens }, { id: "look-recolor", modelerModules: [], viewerModules: [], tokens: undefined });
   }
 });
 
 test("coloredProfile with tokens adds the renderer to the modeler and to the viewer, and resolves the 33 tokens", async () => {
-  const { coloredProfile } = await dist("index.js");
-  const p = coloredProfile({ taskLine: "#101010" });
+  const { recolorProfile } = await dist("index.js");
+  const p = recolorProfile({ taskLine: "#101010" }, fixturePolicy);
   assert.equal(p.modelerModules.length, 1);
   assert.equal(p.viewerModules.length, 1);
   assert.equal(Object.keys(p.tokens).length, 33);
@@ -25,18 +28,18 @@ test("coloredProfile with tokens adds the renderer to the modeler and to the vie
 });
 
 test("token fallbacks: stroke feeds the lines, fill feeds the task fill, explicit values win, the gradient end is derived", async () => {
-  const { resolveColoredTokens, DEFAULT_COLORED_TOKENS } = await dist("tokens.js");
-  const a = resolveColoredTokens({ stroke: "#123456" });
+  const { resolveRecolorTokens } = await dist("tokens.js");
+  const a = resolveRecolorTokens({ stroke: "#123456" }, look.tokens);
   for (const k of ["flow", "taskLine", "eventLine", "gatewayLine", "poolLine", "laneLine", "externalLine", "docLine", "dataLine", "appLine"]) assert.equal(a[k], "#123456", k);
-  assert.equal(a.link, DEFAULT_COLORED_TOKENS.link, "link is not a line key");
-  const b = resolveColoredTokens({ fill: "#abcdef", taskLine: "#000001" });
+  assert.equal(a.link, look.tokens.link, "link is not a line key");
+  const b = resolveRecolorTokens({ fill: "#abcdef", taskLine: "#000001" }, look.tokens);
   assert.equal(b.taskFill, "#abcdef");
   assert.equal(b.taskLine, "#000001");
-  assert.equal(resolveColoredTokens({ taskLine: "#000002" }).eventFill, DEFAULT_COLORED_TOKENS.eventFill);
+  assert.equal(resolveRecolorTokens({ taskLine: "#000002" }, look.tokens).eventFill, look.tokens.eventFill);
 });
 
 test("kind mapping of element types", async () => {
-  const { coloredKind } = await dist("renderer.js");
+  const { recolorKind } = await dist("renderer.js");
   const el = (types, extra = {}) => ({ type: "x", businessObject: { $instanceOf: (t) => types.includes(t), ...extra }, ...("label" in extra ? { labelTarget: {} } : {}) });
   const cases = [
     [["bpmn:Participant", "bpmn:BaseElement"], "pool"],
@@ -55,18 +58,18 @@ test("kind mapping of element types", async () => {
     [["bpmn:DataInputAssociation", "bpmn:DataAssociation"], "link"],
     [["bpmn:Group"], undefined],
   ];
-  for (const [types, kind] of cases) assert.equal(coloredKind(el(types)), kind, types.join());
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "[Reference] x" })), "doc");
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: " [Component] y" })), "app");
-  assert.equal(coloredKind(el(["bpmn:TextAnnotation"], { text: "plain" })), "annotation");
-  assert.equal(coloredKind({ type: "label", labelTarget: {}, businessObject: { $instanceOf: () => true } }), "label");
+  for (const [types, kind] of cases) assert.equal(recolorKind(el(types), fixturePolicy), kind, types.join());
+  assert.equal(recolorKind(el(["bpmn:TextAnnotation"], { text: marked("document", "x") }), fixturePolicy), "doc");
+  assert.equal(recolorKind(el(["bpmn:TextAnnotation"], { text: ` ${marked("application", "y")}` }), fixturePolicy), "app");
+  assert.equal(recolorKind(el(["bpmn:TextAnnotation"], { text: "plain" }), fixturePolicy), "annotation");
+  assert.equal(recolorKind({ type: "label", labelTarget: {}, businessObject: { $instanceOf: () => true } }, fixturePolicy), "label");
 });
 
 test("the profile sources and build carry no banned word, no storage, no prototype patch, no watermark handling", () => {
   const allowed = baselineHashAllowlist();
   const banned = /localStorage|sessionStorage|@\/lib|bjs-powered-by|prototype\.\w+\s*=/i;
   const files = [];
-  for (const dir of ["src/profiles/colored/", "dist/profiles/colored/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
+  for (const dir of ["src/presentation/recolor/", "dist/presentation/recolor/"]) for (const f of readdirSync(root + dir)) if (/\.(ts|js)$/.test(f)) files.push(dir + f);
   assert.ok(files.length >= 6);
   for (const f of files) {
     const text = readFileSync(root + f, "utf8");
@@ -76,28 +79,16 @@ test("the profile sources and build carry no banned word, no storage, no prototy
 });
 
 test("colored tokens: labelText follows text unless named", async () => {
-  const { resolveColoredTokens } = await import("../dist/profiles/colored/tokens.js");
-  assert.equal(resolveColoredTokens({ text: "#111111" }).labelText, "#111111");
-  assert.equal(resolveColoredTokens({ text: "#111111", labelText: "#22242a" }).labelText, "#22242a");
+  const { resolveRecolorTokens } = await dist("tokens.js");
+  assert.equal(resolveRecolorTokens({ text: "#111111" }, look.tokens).labelText, "#111111");
+  assert.equal(resolveRecolorTokens({ text: "#111111", labelText: "#22242a" }, look.tokens).labelText, "#22242a");
 });
 
 test("namedColoredTokens: the names the host gave, with stroke, fill and text expanded", async () => {
-  const { namedColoredTokens } = await dist("tokens.js");
-  assert.deepEqual(namedColoredTokens({ taskFill: "#aa0001" }), ["taskFill"]);
-  const named = namedColoredTokens({ stroke: "#000000", fill: "#ffffff", text: "#111111" });
+  const { namedRecolorTokens } = await dist("tokens.js");
+  assert.deepEqual(namedRecolorTokens({ taskFill: "#aa0001" }), ["taskFill"]);
+  const named = namedRecolorTokens({ stroke: "#000000", fill: "#ffffff", text: "#111111" });
   for (const k of ["flow", "taskLine", "appLine", "taskFill", "labelText", "text"]) assert.ok(named.includes(k), k);
   assert.ok(!named.includes("link"), "link is not a line key");
-  assert.deepEqual(namedColoredTokens({ taskFill: undefined }), []);
-});
-
-test("colored defaults stay neutral; the legend defaults are the reference Custom look", async () => {
-  const { DEFAULT_COLORED_TOKENS } = await dist("tokens.js");
-  const { DEFAULT_LEGEND_TOKENS } = await import(root + "dist/profiles/legend/tokens.js");
-  assert.equal(DEFAULT_COLORED_TOKENS.stroke, "#333333");
-  assert.equal(DEFAULT_COLORED_TOKENS.taskFill, "#ffffff");
-  assert.equal(DEFAULT_COLORED_TOKENS.dataLinkArrow, true);
-  assert.equal(DEFAULT_LEGEND_TOKENS.taskFill, "#f6f1ea");
-  assert.equal(DEFAULT_LEGEND_TOKENS.eventFill, "#E27676");
-  const shared = Object.keys(DEFAULT_COLORED_TOKENS).filter((k) => typeof DEFAULT_COLORED_TOKENS[k] === "string" && DEFAULT_COLORED_TOKENS[k].startsWith("#") && DEFAULT_COLORED_TOKENS[k] === DEFAULT_LEGEND_TOKENS[k]);
-  assert.deepEqual(shared.sort(), ["fill", "labelText", "laneFill"], "only white fill, upstream label colour and lane fill coincide");
+  assert.deepEqual(namedRecolorTokens({ taskFill: undefined }), []);
 });

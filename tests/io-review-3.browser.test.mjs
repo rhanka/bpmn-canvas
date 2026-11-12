@@ -1,7 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 import { config, fixture, io, model, text } from "./helpers/semantic.mjs";
 import { choreographyXml, namespaceCases, splitIo } from "./helpers/review-3.mjs";
 
@@ -10,7 +14,7 @@ test("shipped browser IIFE: third-review refusals and resolved namespaces", asyn
     await page.addScriptTag({ path: fileURLToPath(new URL("../dist/browser/bpmn-canvas.iife.min.js", import.meta.url)) });
     const refusal = async (xml, code, ids, parseOnly = false) => {
       const actual = await page.evaluate(async ({ xml, config, parseOnly }) => {
-        const io = window.BpmnCanvas; io.initializeCodecs(config);
+        const io = window.injected(window.BpmnCanvas); io.initializeCodecs(config);
         try {
           const { rootElement, warnings } = await io.parseDefinitions(xml);
           if (parseOnly) return { accepted: true };
@@ -39,7 +43,7 @@ test("shipped browser IIFE: third-review refusals and resolved namespaces", asyn
     });
     for (const [name, xml] of namespaceCases) await t.test(`${name} retains C1 goldens`, async () => {
       const actual = await page.evaluate(async ({ xml }) => {
-        const io = window.BpmnCanvas, parsed = await io.parseDefinitions(xml), out = {};
+        const io = window.injected(window.BpmnCanvas), parsed = await io.parseDefinitions(xml), out = {};
         for (const f of ["drawio", "sparx"]) out[f] = new TextDecoder().decode(await io.export(parsed.rootElement, f));
         return out;
       }, { xml });

@@ -18,6 +18,7 @@ export type {
   FitOptions,
   HistoryState,
   LayoutResult,
+  AnnotatedTokens,
   LegendTokens,
   PaletteColumns,
   ProfileId,
@@ -29,3 +30,7 @@ export type {
   WatermarkOptions,
   WheelMode,
 } from "./types.js";
+
+export { createLegacyAdapter } from "./internal/legacy-policy.js";
+export { readBusinessPolicy, validateBusinessPolicy } from "./internal/policy-admission.js";
+export type { BusinessPolicy } from "./internal/business-policy.js";

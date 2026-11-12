@@ -20,12 +20,15 @@
   "Lot-5 CR-10 seal round (ef9e781): three bound lot-5 files changed after the exact-path relink; the pending x24 rebind of their reviewed records",
   "Spec author ruling on the I1 residual of src/react/workshop.tsx (DESIGN.md:859, 863, 874): the three unmatched occurrences are the base rows I-1427, I-1462 and I-1464, whose lines the block B commit dc183c2 edited; sealed as the relocated rows RL-01 to RL-03",
   "Block B final spec pass after the fix round (review findings 17 and 20, DESIGN.md:874, 899, 927): reviewed records and RA-01 rebound to the bytes the fix round and the lot-3 and lot-4 reseals left (RA-01 now at src/profile/lot4-export.ts:867, same line bytes), three RV-08 lines reviewed again, eleven occurrences of two block B tests reviewed by exact path (RV-04 and the published API name RV-13), RL-01 to RL-03 retired after the restoration of their base lines",
-  "Vendor-py rebind after the twin re-vendor (twin commit 6c8cbdb, lots 3 and 5): the reviewed records of the eight bound files the lot reseals left (19 records of RV-01, RV-08, RV-10 and RV-11) rebound to the new bytes; every moved span sits on a byte-identical line with identical columns; no other reviewed record, allowance, ledger row, rule or case changes"
+  "Stage B2 ruling on the replay of C24 onto main fec4dae (spec author, classes A and B3): four inputs whose collaboration shared its ID with a call activity, refused by the public parser (invalid-semantics), get a unique collaboration ID; the rows I-0001 and I-0002 of a squash-preparation note absent from the tracked tree, counted by P-006 as presence conflicts, are reclassified context-generic (rule R-162)",
+  "Stage B2 step 6 rebind ruling (spec author, step 6 of the same work order): 28 LX-AT-2 occurrences reviewed (15 renamed away, 4 accepted where they sit, 9 moved to block B modules with records R-11 to R-14; the appended-row pairing of the guard withdrawn); the sealed classifier exports restored through a block B re-export module (records R-15 to R-17 under the R2' ground); the S-1 hook rows reclassified legacy-api (rule R-134) with the S-1 record R-18",
+  "Stage B2 step 9 README correction round (spec author, step 9 of the same work order): two README defects of the step 6 rebind corrected (the RV-21 token-table cell and the receipt list of the seal hygiene), no expected value changes",
+  "Stage B2 phase 2 integration (spec author, stage B2 phase 2 of the same work order): main vendor-py rebind carried, navigation mapping records RV-22 and RV-23"
  ],
  "precedence": "DESIGN R3.3 > harmonization > review",
  "author": "Opus (claude-opus-5-5), spec author, owner exception",
  "reviewer": "gpt-6-astra, max effort",
- "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); vendor-py rebind after the twin re-vendor applied (19 reviewed records of eight bound files rebound to the new bytes, spans byte-identical); pending targeted verification and conductor acceptance",
+ "reviewStatus": "single seal fix round applied; integration micro-reseal (history guard and I1) applied; Unicode literal restoration (leading U+00A0 classification vector) applied; P-006 reviewed selector-branch allowance RA-01 and lot-5 CR-10 rebind applied; I1 relocation of three base rows of src/react/workshop.tsx (RL-01 to RL-03) applied; final spec rebind after the block B fix round applied (RL-01 to RL-03 retired); stage B2 micro-reseal applied (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic); stage B2 step 6 rebind applied (records R-04 to R-18 under existing and new reviewed tokens RV-14 to RV-21, rule R-134 and rows I-1157 and I-1159 reclassified legacy-api, appended-row pairing of the guard withdrawn, S-1 witness without Git object reads); stage B2 step 9 README correction applied; stage B2 phase 2 integration applied; pending targeted verification and conductor acceptance",
  "previousSeals": [
   {
    "sha256": "d432a1d5cb3a727debc7d51dffa2fd1446a30d64a5c97d645108dd1b58777ff5",
@@ -71,10 +74,38 @@
   },
   {
    "sha256": "74745d66d8f49a27d4eb87ef7cf04bef0b0855959e8339bcc0119f01106f6974",
-   "round": "block B final spec pass after the fix round",
+   "round": "block B final spec pass after the fix round, with the later RA-01 rebinds recorded in place in its receipt",
    "cases": 111,
    "occurrenceRows": 3381,
-   "verdict": "integrated into main fec4dae; the vendor-py re-vendor from the twin commit advanced eight bound files and their reviewed records were rebound"
+   "verdict": "integrated into main fec4dae; the stage B2 ruling on the C24 replay found four inputs whose collaboration shared its ID with a call activity and two history-record rows of a file absent from the tracked tree"
+  },
+  {
+   "sha256": "85a68b7a54125f8e57d19bfcb76c685acca8abd328fd10d94eb0172f7ced597c",
+   "round": "stage B2 micro-reseal (unique collaboration ID in four inputs, rows I-0001 and I-0002 reclassified context-generic)",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated into the workbench branch; the step 6 rebind reviewed the remaining guard hits, renamed legacy-code identifiers, moved the refusal code and two legacy exports to block B modules, restored the sealed classifier exports and rewrote the S-1 witness"
+  },
+  {
+   "sha256": "32c2370fdc929f6daa58ea8e4a5caf180cc7b56d64970b28e5f432222abf8518",
+   "round": "stage B2 step 6 rebind",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated into the workbench branch; the step 9 README correction fixes two defects of this round (the RV-21 token-table cell and the receipt list of the seal hygiene)"
+  },
+  {
+   "sha256": "f457b5b2ff471c0357a5178156ab45d351207087d9e649d53ee996cec9e1dfa1",
+   "round": "stage B2 step 9 README correction",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "verdict": "integrated into the workbench branch; the stage B2 phase 2 integration carries the main vendor-py rebind and adds the navigation mapping records RV-22 and RV-23"
+  },
+  {
+   "sha256": "e9eb3c559822e8e128b37651a1380debef7b1f7c7a809e689b2010fe1ed16d78",
+   "round": "vendor-py re-vendor rebind (main)",
+   "cases": 111,
+   "occurrenceRows": 3381,
+   "merged": true
   }
  ],
  "authoringMethod": "Expected values read from the cited base lines and DESIGN clauses or computed by derive/arith.mjs, an independent re-implementation of the legacy formulas; no product module, codec, layout, renderer, exporter or command was executed and nothing was updated from actual output.",
@@ -181,8 +212,8 @@
  "files": [
   {
    "path": "README.md",
-   "bytes": 101392,
-   "sha256": "3dc657569cbd6d253aac8ac499c869683cfbf5170d18af1a35e7fb27d59d0548"
+   "bytes": 120220,
+   "sha256": "e255ed093299f474b0cf829eb065f4358f0a3ba5e373027d1468af47f09fed35"
   },
   {
    "path": "cases/x24-A-001-classify.json",
@@ -267,17 +298,17 @@
   {
    "path": "cases/x24-A-017-export-reference-page.json",
    "bytes": 3797,
-   "sha256": "365879fd0c95f777236926cb566683819defc0e3f9d8e48fcc720dec20c87961"
+   "sha256": "88558adc8cc3bb2656794e7222b83608580ac74fec2c172243c293da31fc1b16"
   },
   {
    "path": "cases/x24-A-018-export-sparx.json",
    "bytes": 4679,
-   "sha256": "6ae7566520c7046a93fd896fd964221a004f854ff6edb87ae9ae7526cfcfe942"
+   "sha256": "cec26548f509e261f02b38dc6230c31c246da04c850669856ace40bf9a02bc71"
   },
   {
    "path": "cases/x24-A-019-export-drawio.json",
    "bytes": 4972,
-   "sha256": "504e9bb784f01430ab96bbaef3f500f47923b88bb85a6f74898d6a406ab09222"
+   "sha256": "d0a55dd7d45e85d8bae176e44b39f07f89dd807b7642afb12259a583e10bde8a"
   },
   {
    "path": "cases/x24-A-020-import-drawio.json",
@@ -287,7 +318,7 @@
   {
    "path": "cases/x24-A-021-export-free-annotation.json",
    "bytes": 1021,
-   "sha256": "22f94ea465d9f436930ef8157f2b6042210b139eb69daff1e84bda921bb292a7"
+   "sha256": "04549beef05506cfe1c75c710156a3bf6654a0d8470ae1cead4c763337acbcd2"
   },
   {
    "path": "cases/x24-A-022-transactions-autolayout.json",
@@ -307,17 +338,17 @@
   {
    "path": "cases/x24-A-025-facts-descriptor-mismatch.json",
    "bytes": 1039,
-   "sha256": "f4fd1fde8a7a09dc09f981b4cd32bc0a5be816b5b0bc0be1392a6ad53f7ab848"
+   "sha256": "9e1842930c5fc2c85261d718a4b93e97de3463934a49a700ce5cfeceb0185067"
   },
   {
    "path": "cases/x24-A-026-static-surface.json",
    "bytes": 7618,
-   "sha256": "1d7fd648d505ea3afb285a8c166702189034fa6162663ed5a615e1517bfbaa72"
+   "sha256": "7df5a39edfc8e8615cf4db5f9da3559ae82cae27f6149e87fbf9cdffbdd0b226"
   },
   {
    "path": "cases/x24-A-027-preview-surface.json",
    "bytes": 4207,
-   "sha256": "7f8d996eedfea6487f0fd1eaa0c99cec4bb15053bfdd64ee8d4cdd79d55221b5"
+   "sha256": "482152e0b82c8d93428e1501669f2070d1e8a06684d3ba7e0159619d46e54091"
   },
   {
    "path": "cases/x24-A-028-workshop-surface.json",
@@ -332,22 +363,22 @@
   {
    "path": "cases/x24-L-001-occurrences.json",
    "bytes": 1620,
-   "sha256": "5287a58f634e02494b5bc0de621690bd5f9402af3fb40479f1204d72fd44601f"
+   "sha256": "03fd0edc7fc068f55aa70cf4fe1d5f3fa528c40cf4be58d8466bb26497f38835"
   },
   {
    "path": "cases/x24-L-002-distribution-members.json",
    "bytes": 1509,
-   "sha256": "10fea66f39599e9f12aa04cea24aeac3af1df0667604d23376cb18cc27f3d4a9"
+   "sha256": "cf73152c898b7b0e3ca4f665fa7aec868f8563b856d4e5718fb74d83c5910875"
   },
   {
    "path": "cases/x24-L-003-modules.json",
    "bytes": 3241,
-   "sha256": "42abbfaaec2977c79ea6b0d991489ca42c62675206feaec3ac4e6d883a441419"
+   "sha256": "b027616925b01943ba85bb9537aefc912d5952620bcf42d5fb881f289b8c83b6"
   },
   {
    "path": "cases/x24-L-004-zero-unmatched.json",
    "bytes": 1336,
-   "sha256": "9cad4eac6bfdc0444be67695fc970d55636779bcb374ccffdde6a8634c6bbb7b"
+   "sha256": "a00dc5630f4917426baa76bee3c6400aa0948f4265f7286562941e3f510886bb"
   },
   {
    "path": "cases/x24-L-005-legacy-value-pins.json",
@@ -357,7 +388,7 @@
   {
    "path": "cases/x24-L-006-literal-free-seal.json",
    "bytes": 1239,
-   "sha256": "751f510c89f5765ed5bef04267029445961b963ecde48309b4258692b60c5284"
+   "sha256": "bb91b7b54840062f1ea032582a8387726292696cc1751f3adfde5c90cc92009f"
   },
   {
    "path": "cases/x24-P-001-probe-1-original.json",
@@ -382,12 +413,12 @@
   {
    "path": "cases/x24-P-005-probe-2-ledger-rows.json",
    "bytes": 1483,
-   "sha256": "1d81b3367dcd11684637f84086ab11356b011d1e039844b5181a84598cf5c0ed"
+   "sha256": "9a5aa26c52cc8ae8a6ce77f7acf3937166bd94509fe811f63332bb3a4ca1298e"
   },
   {
    "path": "cases/x24-P-006-probe-2-rescan.json",
    "bytes": 959,
-   "sha256": "460363aa25fb80c4ab094afe166765861a5932dde14ab115e85db5de06e6afa6"
+   "sha256": "c0acf9628bf5f99cf01704b96f4e7e00c1d9a07a3d7a84e1ddc3750321d6da2c"
   },
   {
    "path": "cases/x24-P-007-probe-2-distribution.json",
@@ -657,17 +688,17 @@
   {
    "path": "cases/x24-X-015-export-a-input.json",
    "bytes": 12032,
-   "sha256": "849186b1d521acd568ff8f32b95e94dc106af0cf1db778c5a5ea5ff18a399426"
+   "sha256": "aad972ffe7265b26957ab4c85e9d00c7e2f980513043a6993638f12e74fac581"
   },
   {
    "path": "cases/x24-X-016-export-b-input.json",
    "bytes": 12053,
-   "sha256": "df3e86e11b9a287b269c36079899000a5650924b014071a8a8b02ee54d82c787"
+   "sha256": "9f4c617bd03a30cdd6f47cca6d55f4d6b9390d42e4d7122b6f9a0519af8ee71c"
   },
   {
    "path": "cases/x24-X-017-export-legacy-input.json",
    "bytes": 1449,
-   "sha256": "188b5a0fdf7946830a51c85e208f12d534ba62c7dd3d291c27d80498056dea49"
+   "sha256": "e06ab27e19e137cbbb3aac6d0bffd4fc4ec6fad493736b3e23f870c03e8f9861"
   },
   {
    "path": "cases/x24-X-018-import-neutral.json",
@@ -722,12 +753,12 @@
   {
    "path": "cases/x24-X-028-static-surface.json",
    "bytes": 12488,
-   "sha256": "c5b48eb018f3759b8de1e1a13978c88cf686d34a52fdf625906994eed0e8ab11"
+   "sha256": "96735ce92f52b84a14dd4d693ae1f48c62d638d7b6bef13558391f94de2cb93c"
   },
   {
    "path": "cases/x24-X-029-preview-surface.json",
    "bytes": 4780,
-   "sha256": "40fbc99c28d8d04ee052531750a8f6ea62193f0478e131b2d7c86bc223603a1d"
+   "sha256": "ea77c57bf641a6928f5448a028bb730608ac2739025bcc8519f1a0fe467af716"
   },
   {
    "path": "cases/x24-X-030-workshop-surface.json",
@@ -741,8 +772,8 @@
   },
   {
    "path": "classification-rules.json",
-   "bytes": 77142,
-   "sha256": "193cb1547d4ab8b319a1aa5cf9d5bbbb0bfd27d3429c89a17cad70a9b0172ec7"
+   "bytes": 77147,
+   "sha256": "d41a14b580b012ee68cdeb677672c41bd501f2dfdf6d5182d1824d49cfde3b6b"
   },
   {
    "path": "comparators.json",
@@ -786,8 +817,8 @@
   },
   {
    "path": "derive/inputs.mjs",
-   "bytes": 13730,
-   "sha256": "4a44d013f343064cc93ba983b6556bcb7bf59e6a936c9e60e1925cce9d52e24c"
+   "bytes": 13740,
+   "sha256": "066b51b30185b7ccc2c02dc0536f43e302a6c3d8c6a9c993f4aa0bfe21cc1b7e"
   },
   {
    "path": "derive/ledger.mjs",
@@ -826,13 +857,13 @@
   },
   {
    "path": "derive/scenes.mjs",
-   "bytes": 15085,
-   "sha256": "3496bdb31e8b2a4e91d2f77bc32af7d440be2118e3901fa4af631cde87ac6aa1"
+   "bytes": 15090,
+   "sha256": "cc5039bbc3eeecfc44cfe1ddd925c74298349768bf65532b3d0e11d95dab7bb2"
   },
   {
    "path": "derive/seal.mjs",
-   "bytes": 10454,
-   "sha256": "45258c3f91ee036fa2ae98a93e885801f87d3815fa9a77099b26102f785e36c7"
+   "bytes": 13408,
+   "sha256": "658f0d73d4ed4dce0d12fdd500275b19d22891bb6923d62051d829eeb068a31e"
   },
   {
    "path": "derive/sourcemap.mjs",
@@ -861,13 +892,13 @@
   },
   {
    "path": "inputs/export-a.bpmn",
-   "bytes": 6380,
-   "sha256": "7c0888f6138e94674e8fe081a9073b88003b69462b3548e442ce485c0a33a73f"
+   "bytes": 6390,
+   "sha256": "14686fdea32dd84484e229c37f5a71dae1a79a9d678a5f3049074f956e6fd0cd"
   },
   {
    "path": "inputs/export-b.bpmn",
-   "bytes": 6381,
-   "sha256": "73c9a0b9e818c76af1b6a339e2f58912c7e63de869a87ef6d8e419b0c5a87606"
+   "bytes": 6391,
+   "sha256": "577c179caaadc7867016bf05f1e364fe06274722df3224f38ec054c75c662221"
   },
   {
    "path": "inputs/export-facts-b.bpmn",
@@ -891,8 +922,8 @@
   },
   {
    "path": "inputs/export-legacy.bpmn",
-   "bytes": 6382,
-   "sha256": "e55294836fe9b264f6fde94d7ef13d8cbf5545dc0dd7fb41a4a67f54fb3c51fe"
+   "bytes": 6392,
+   "sha256": "d42b928f798a21741c906d055410e523fe6786481a97db01670b0eb156cfffcd"
   },
   {
    "path": "inputs/layout-input.bpmn",
@@ -911,8 +942,8 @@
   },
   {
    "path": "inputs/surface.bpmn",
-   "bytes": 9251,
-   "sha256": "3514d83fce0e64e297232810443050f25a0689cc4e444c883642b7a49a788aa3"
+   "bytes": 9261,
+   "sha256": "12dd6b9119e54940a2f8803686fb7ae191d4833297c26fc49dfb684bc9ca544a"
   },
   {
    "path": "inputs/x24-facts-descriptor-b.json",
@@ -926,8 +957,8 @@
   },
   {
    "path": "ledger.json",
-   "bytes": 3655792,
-   "sha256": "8d58ff05e9908c037cfdcbf4c96ca3d12886d118f5b7690c5bf71c40ed46e4e6"
+   "bytes": 3655802,
+   "sha256": "229b1d77a288d3ee1a13dba7a31467d73464def5f1a8673afe7138500c25bb80"
   },
   {
    "path": "legacy-values.json",
@@ -936,8 +967,8 @@
   },
   {
    "path": "lexicon.json",
-   "bytes": 193559,
-   "sha256": "73ea6b8b1e1401403dae68f75dc803c59e7843cfca8a5886fa211818bceca5f5"
+   "bytes": 207146,
+   "sha256": "40288706f671d9fb0bced2ceef67241c3bf80498bfe14c439b5b78c75aa19740"
   },
   {
    "path": "literal-set.json",
@@ -947,7 +978,7 @@
   {
    "path": "manifest.json",
    "bytes": 48170,
-   "sha256": "480c1d6ef9400e450762d8daeda68b1200f7abc1d78a1f4dbb68a662d79b8a5e"
+   "sha256": "071d9bb52f1a8c8f32a8019537ec930a0647039bdf15aff953cd6ac867f3a889"
   },
   {
    "path": "policy/business-policy-1.schema.json",

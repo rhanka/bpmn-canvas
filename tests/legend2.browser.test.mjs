@@ -1,9 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { cssPaletteOptions, fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, cssPaletteOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+const look = fixtureOptions.businessPolicy.presentation.looks.find((entry) => entry.renderer === "annotated");
 const CUSTOM = {
   stroke: "#aa0001", text: "#aa0003", headerText: "#aa0004", flow: "#aa0005", link: "#aa0006", taskLine: "#aa0007", taskFill: "#aa0008", taskFillEnd: "#aa0009",
   eventLine: "#aa000a", eventFill: "#aa000b", gatewayLine: "#aa000c", gatewayFill: "#aa000d", poolLine: "#aa000e", poolFill: "#aa000f", laneLine: "#aa0010",
@@ -72,15 +77,7 @@ test("legend profile parity in a real browser", { timeout: 180000 }, async (t) =
   });
 
   await t.test("defaults are the reference Custom look, exactly, every field present", () => {
-    assert.deepEqual(o.defaults.tokens, {
-      fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif", fontSize: 12, strokeWidth: 1,
-      stroke: "#000000", fill: "#ffffff", text: "#000000", labelText: "#22242a", headerText: "#595959", flow: "#000000",
-      link: "#b85450", docLink: "#b85450", docLinkDash: "5 5", dataLinkArrow: false,
-      taskLine: "#000000", taskFill: "#f6f1ea", taskFillEnd: "#ECE2D4", eventLine: "#000000", eventFill: "#E27676",
-      gatewayLine: "#000000", gatewayFill: "#60BE89", poolLine: "#000000", poolFill: "#eee7df", laneLine: "#000000",
-      laneFill: "#f6f6f6", laneHeaderFill: "#ffffff", externalLine: "#000000", externalFill: "#ffff99",
-      docLine: "#000000", docFill: "#ffe599", dataLine: "#000000", dataFill: "#f6f1ea", appLine: "#000000", appFill: "#99ffff",
-    });
+    assert.deepEqual(o.defaults.tokens, { ...look.tokens });
   });
 
   await t.test("palette: entries equal the exported action ids, each styled by the lib CSS", () => {
@@ -95,9 +92,9 @@ test("legend profile parity in a real browser", { timeout: 180000 }, async (t) =
   await t.test("the bpmn.io badge is still visible in a legend canvas", () => assert.equal(o.palette.badge, true));
 
   await t.test("the standard profile never gets legend palette entries or shapes", () => {
-    assert.equal(o.standard.legendEntries, 0);
-    assert.ok(o.standard.entries > 0);
-    assert.equal(o.standard.legendShapes, 0);
+    assert.equal(o.plain.annotatedEntries, 0);
+    assert.ok(o.plain.entries > 0);
+    assert.equal(o.plain.annotatedShapes, 0);
   });
 
   await t.test("no console errors", () => {

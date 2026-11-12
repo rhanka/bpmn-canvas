@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs" targetNamespace="urn:x24:surface">
-  <bpmn:collaboration id="C1">
+  <bpmn:collaboration id="Collab1">
     <bpmn:participant id="Pool1" name="Intake" processRef="P1"/>
   </bpmn:collaboration>
   <bpmn:process id="P1" isExecutable="false">
@@ -54,7 +54,7 @@
     <bpmn:association id="As_N12" sourceRef="N12" targetRef="U1"/>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="D1">
-    <bpmndi:BPMNPlane id="Plane1" bpmnElement="C1">
+    <bpmndi:BPMNPlane id="Plane1" bpmnElement="Collab1">
       <bpmndi:BPMNShape id="Pool1_di" bpmnElement="Pool1" isHorizontal="true"><dc:Bounds x="0" y="0" width="900" height="400"/></bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="L1_di" bpmnElement="L1" isHorizontal="true"><dc:Bounds x="30" y="0" width="870" height="400"/></bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="S1_di" bpmnElement="S1"><dc:Bounds x="80" y="182" width="36" height="36"/></bpmndi:BPMNShape>

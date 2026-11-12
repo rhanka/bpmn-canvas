@@ -1,3 +1,4 @@
+import { annotationRole, applicationHost, insertRole, type BusinessPolicy } from "../internal/business-policy.js";
 // Draw.io -> page graph. Anything not understood is refused, never guessed.
 // Adapted from an internal implementation.
 import { drawioPages } from "./drawio-pages.js";
@@ -19,12 +20,14 @@ function styleOf(cell: Element): Map<string, string> {
   );
 }
 
-function kindOf(cell: Element, parent: Element | undefined, kindAttributes: readonly string[]): NodeKind {
+function kindOf(cell: Element, parent: Element | undefined, kindAttributes: readonly string[], policy?: BusinessPolicy): NodeKind {
   for (const name of kindAttributes) {
     const explicit = cell.getAttribute(name);
     if (explicit && Object.hasOwn(DRAWIO_STYLES, explicit)) return explicit as NodeKind;
   }
   const style = styleOf(cell);
+  const injected = policy?.presentation?.exportStyles?.decode?.kinds?.find((rule: any) => rule.match.every((part: any) => style.get(part.key) === part.value));
+  if (injected) return injected.kind as NodeKind;
   const shape = style.get("shape");
   if (style.has("swimlane") || shape === "swimlane") {
     const ps = parent && styleOf(parent);
@@ -47,11 +50,6 @@ function kindOf(cell: Element, parent: Element | undefined, kindAttributes: read
     if (found) return found;
   }
   if (shape === "mxgraph.bpmn.data") return "dataObjectReference";
-  if (shape === "mxgraph.archimate3.application") {
-    if (style.get("appType") === "proc") return "callActivity";
-    if (style.get("appType") === "comp") return "textAnnotation";
-  }
-  if (["mxgraph.archimate3.representation", "note"].includes(shape || "")) return "textAnnotation";
   throw new IoError("unsupported-shape", `Unsupported Draw.io shape: ${shape || cell.getAttribute("id")}`, [cell.getAttribute("id") ?? ""]);
 }
 
@@ -100,12 +98,12 @@ export async function decodeDrawio(xml: string, options?: IoOptions): Promise<Gr
     const nodes = vertices.map((cell): GraphNode => {
       const id = cell.getAttribute("id") ?? "";
       const parent = byId.get(cell.getAttribute("parent"));
-      const kind = kindOf(cell, parent, kindAttributes);
+      const kind = kindOf(cell, parent, kindAttributes, options?.businessPolicy);
       const style = styleOf(cell);
       const value = cell.getAttribute("value") || "";
       let label = style.get("html") === "1" ? new DOMParser().parseFromString(value, "text/html").body.textContent || "" : value;
-      if (style.get("appType") === "comp") label = `[Component] ${label}`;
-      if (style.get("shape") === "mxgraph.archimate3.representation") label = `[Reference] ${label}`;
+      const role = options?.businessPolicy?.presentation?.exportStyles?.decode?.roles?.find((rule: any) => rule.match.every((part: any) => style.get(part.key) === part.value));
+      if (role) label = insertRole(label, role.role, options?.businessPolicy);
       return { id: idMap.get(id) ?? id, kind, label, bounds: absolute(id), parent: idMap.get(cell.getAttribute("parent") || "") };
     });
     const nodeIds = new Set(nodes.map((n) => n.id));
@@ -126,8 +124,9 @@ export async function decodeDrawio(xml: string, options?: IoOptions): Promise<Gr
       });
     for (const node of nodes) {
       const parent = nodes.find((n) => n.id === node.parent);
-      if (parent?.kind === "task" && node.label.startsWith("[Component] ")) {
-        edges.push({ id: `${node.id}_attachment`, kind: "association", label: "", source: node.id, target: parent.id, points: [] });
+      const parentType = parent ? ({ task: "bpmn:Task", subProcess: "bpmn:SubProcess", callActivity: "bpmn:CallActivity" } as Record<string, string>)[parent.kind] : undefined;
+      if (parent && parentType && applicationHost({ $type: parentType }, options?.businessPolicy) && annotationRole(node.label, options?.businessPolicy)?.role === "application") {
+        edges.push({ id: node.id + options!.businessPolicy!.presentation.exportStyles.decode.associationIdSuffix, kind: "association", label: "", source: node.id, target: parent.id, points: [] });
       }
       if (parent && !["participant", "lane"].includes(parent.kind)) node.parent = parent.parent;
       if (!nodes.some((n) => n.id === node.parent)) node.parent = undefined;

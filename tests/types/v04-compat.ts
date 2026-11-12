@@ -32,7 +32,6 @@ export const props: BpmnWorkshopProps = {
   toolbar: { zoomButtons: false, autoLayout: "text", importButton: false },
   menus: { chevron: "text", icons: false },
   icons: { undo: icon, redo: icon },
-  navigation: { rules },
   onDownload: (f: DiagramFile, context: DownloadContext) => {
     const parts: [string, string | undefined, string | undefined, string, boolean] = [context.xml, context.revision, context.diagramId, context.profile, context.touched];
     void f;

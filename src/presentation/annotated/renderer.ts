@@ -1,0 +1,711 @@
+import { ProfileContractError } from "../../profile/canonical.js";
+import { applicationHost, type BusinessPolicy } from "../../internal/business-policy.js";
+import { attachedAnnotations, layoutPolicy } from "../../internal/legacy-policy.js";
+// `annotated` renderer for bpmn-js. Display only: the BPMN XML is never written by it.
+// Adapted from an internal implementation of a draw.io-reference look.
+//
+// An "[LX-MK-2] X" text annotation associated to an activity is drawn as an
+// application component box under that activity (part of the activity's
+// graphics, so it moves and selects with it); the annotation and its
+// association are hidden (display="none"). BPMN-in-Color attributes always win
+// over the token defaults.
+//
+// The renderer draws only what `annotatedKind` / `annotatedConnectionKind` accept.
+// Everything else falls through to the upstream bpmn-js renderer.
+
+import BaseRenderer from "diagram-js/lib/draw/BaseRenderer.js";
+import CommandInterceptor from "diagram-js/lib/command/CommandInterceptor.js";
+import { getDi, is } from "bpmn-js/lib/util/ModelUtil.js";
+import { isExpanded, isHorizontal } from "bpmn-js/lib/util/DiUtil.js";
+import { getFillColor, getLabelColor, getStrokeColor } from "bpmn-js/lib/draw/BpmnRenderUtil.js";
+import { append as svgAppend, attr as svgAttr, classes as svgClasses, create as svgCreate, selectAll as svgSelectAll } from "tiny-svg";
+
+import type { BpmnCanvasConfig, AnnotatedTokens } from "../../internal/contracts.js";
+import {
+  roleText,
+  appBoxes,
+  contrastText,
+  documentPath,
+  documentTextRect,
+  hasApplicationRole,
+  annotatedConnectionKind,
+  annotatedKind,
+  waypointsPath,
+  type AnnotatedBoLike,
+  type AnnotatedShapeKind,
+} from "./style.js";
+
+const RENDER_PRIORITY = 1500;
+/** Sentinel default: tells "no BPMN-in-Color fill set" apart from a colour. */
+const NO_COLOUR = "annotated-no-colour";
+
+// diagram-js services and elements are structurally typed here: the package
+// does not freeze bpmn-js internals in its own types.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Any = any;
+
+export interface DiagramElement {
+  id?: string;
+  type?: string;
+  businessObject?: Any;
+  x?: number;
+  y?: number;
+  width: number;
+  height: number;
+  label?: unknown;
+  waypoints?: Array<{ x: number; y: number }>;
+  source?: DiagramElement;
+  target?: DiagramElement;
+  incoming?: DiagramElement[];
+  outgoing?: DiagramElement[];
+  parent?: DiagramElement;
+  hidden?: boolean;
+}
+
+// --- model helpers ------------------------------------------------------------
+
+function isApplicationShape(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+  const bo = el?.businessObject;
+  return Boolean(bo) && bo.$type === "bpmn:TextAnnotation" && hasApplicationRole(typeof bo.text === "string" ? bo.text : "", policy);
+}
+
+function isActivity(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+  return !!el?.businessObject && applicationHost(el.businessObject, policy);
+}
+
+/** Other ends of the bpmn:Association connections of an element. */
+function associated(el: DiagramElement): DiagramElement[] {
+  const out: DiagramElement[] = [];
+  for (const c of [...(el.incoming ?? []), ...(el.outgoing ?? [])]) {
+    if (c.type !== "bpmn:Association") continue;
+    const other = c.source === el ? c.target : c.source;
+    if (other) out.push(other);
+  }
+  return out;
+}
+
+/** [LX-MK-2] annotations associated to this activity (none for other types). */
+export function applicationsOf(host: DiagramElement, policy?: BusinessPolicy): DiagramElement[] {
+  return attachedAnnotations(host, policy) as DiagramElement[];
+}
+
+/** An [LX-MK-2] annotation linked to at least one activity. */
+export function isAttachedApplication(el: DiagramElement | undefined, policy?: BusinessPolicy): boolean {
+  return Boolean(el) && isApplicationShape(el, policy) && associated(el as DiagramElement).some(e => isActivity(e, policy));
+}
+
+/** Elements the annotated hides: linked [LX-MK-2] annotations and their links. */
+export function isHiddenInAnnotated(el: DiagramElement, policy?: BusinessPolicy): boolean {
+  if (el.waypoints) {
+    return (
+      el.type === "bpmn:Association" &&
+      ((isAttachedApplication(el.source, policy) && isActivity(el.target, policy)) || (isAttachedApplication(el.target, policy) && isActivity(el.source, policy)))
+    );
+  }
+  return isAttachedApplication(el, policy);
+}
+
+function shapeKind(element: object, policy?: BusinessPolicy): AnnotatedShapeKind | undefined {
+  const bo = (element as DiagramElement).businessObject as AnnotatedBoLike | undefined;
+  if (!bo) return undefined;
+  const facts: { expanded?: boolean; horizontal?: boolean } = {};
+  if (bo.$type === "bpmn:SubProcess" || bo.$type === "bpmn:Participant") {
+    facts.expanded = Boolean(isExpanded(element as never, getDi(element as never)));
+  }
+  if (bo.$type === "bpmn:Participant" || bo.$type === "bpmn:Lane") {
+    facts.horizontal = Boolean(isHorizontal(element as never));
+  }
+  return annotatedKind(bo, facts, policy);
+}
+
+// --- renderer ------------------------------------------------------------------
+
+export class AnnotatedRenderer extends BaseRenderer {
+  static $inject = ["eventBus", "textRenderer", "canvas", "config.bpmnCanvas", "bpmnRenderer"];
+
+  private readonly upstream: Any;
+  private readonly textRenderer: Any;
+  private readonly canvas: Any;
+  private readonly instanceId: string;
+  private readonly tokens: AnnotatedTokens;
+
+  private readonly businessPolicy: BusinessPolicy | undefined;
+  constructor(eventBus: Any, textRenderer: Any, canvas: Any, config: BpmnCanvasConfig | undefined, bpmnRenderer: Any) {
+    super(eventBus, RENDER_PRIORITY);
+    this.businessPolicy = config?.businessPolicy;
+    this.upstream = bpmnRenderer;
+    this.textRenderer = textRenderer;
+    this.canvas = canvas;
+    this.instanceId = config?.instanceId ?? `annotated-${Math.random().toString(36).slice(2, 8)}`;
+    this.tokens = config?.lookTokens ?? (() => { throw new ProfileContractError("profile-resource-missing"); })();
+  }
+
+  private get arrowId(): string {
+    return `${this.instanceId}-annotated-arrow`;
+  }
+
+  private get gradientId(): string {
+    return `${this.instanceId}-annotated-task-gradient`;
+  }
+
+  override canRender(element: Any): boolean {
+    const el = element as DiagramElement;
+    // External labels are separate diagram-js elements: the upstream renderer draws them, tinted only when asked.
+    if (el.type === "label") return this.recolorsLabels && Boolean(el.businessObject);
+    if (!el.businessObject) return false;
+    if (el.waypoints) return this.connectionKind(el) !== undefined;
+    return shapeKind(element, this.businessPolicy) !== undefined;
+  }
+
+  private endsOnDoc(el: DiagramElement): boolean {
+    return [el.source, el.target].some((end) => end?.businessObject && annotatedKind(end.businessObject as AnnotatedBoLike, {}, this.businessPolicy) === "document");
+  }
+
+  /**
+   * The annotated draws plain associations, and every association to a `[LX-MK-1]` annotation, whatever its
+   * direction (the reference look has no arrow on it). Other directional ones stay upstream's.
+   */
+  private connectionKind(el: DiagramElement): ReturnType<typeof annotatedConnectionKind> {
+    const kind = annotatedConnectionKind(el.businessObject);
+    if (kind === undefined && el.businessObject?.$type === "bpmn:Association" && this.endsOnDoc(el)) return "link";
+    return kind;
+  }
+
+  private get recolorsLabels(): boolean {
+    return true;
+  }
+
+  override drawConnection(parentGfx: Any, connection: Any): SVGElement {
+    const el = connection as DiagramElement;
+    const kind = this.connectionKind(el);
+    const t = this.tokens;
+    const path = svgCreate("path");
+    if (kind === "sequence") {
+      svgAttr(path, {
+        d: waypointsPath(el.waypoints),
+        fill: "none",
+        stroke: getStrokeColor(el as never, t.flow),
+        "stroke-width": t.strokeWidth,
+        "stroke-linejoin": "round",
+        "marker-end": `url(#${this.arrowMarker(getStrokeColor(el as never, t.flow))})`,
+      });
+      svgClasses(path).add("annotated-flow");
+    } else {
+      // Associations. Data associations carry a direction, so they keep their arrow.
+      const toDoc = this.endsOnDoc(el);
+      const colour = getStrokeColor(el as never, toDoc ? t.docLink : t.link);
+      svgAttr(path, {
+        d: waypointsPath(el.waypoints),
+        fill: "none",
+        stroke: colour,
+        "stroke-width": t.strokeWidth,
+        "stroke-dasharray": toDoc ? t.docLinkDash : "5 5",
+        ...(kind === "data-link" && t.dataLinkArrow ? { "marker-end": `url(#${this.arrowMarker(colour)})` } : {}),
+      });
+      svgClasses(path).add("annotated-link");
+    }
+    svgAppend(parentGfx, path);
+    return path as unknown as SVGElement;
+  }
+
+  /** Upstream label, with the colour of the `labelText` token unless the user tinted that label. */
+  private drawLabel(parentGfx: Any, shape: Any): SVGElement {
+    const drawn = this.upstream.drawShape(parentGfx, shape) as SVGElement;
+    let userTinted = false;
+    try {
+      userTinted = !!getDi(shape.labelTarget ?? shape).get("label")?.get("color:color");
+    } catch {
+      /* no DI: keep the token */
+    }
+    if (!userTinted) {
+      for (const text of svgSelectAll(parentGfx, "text") as SVGElement[]) {
+        svgAttr(text, { fill: this.tokens.labelText });
+        for (const span of svgSelectAll(text, "tspan") as SVGElement[]) if (span.style.fill) svgAttr(span, { fill: this.tokens.labelText });
+      }
+    }
+    return drawn;
+  }
+
+  override getConnectionPath(connection: Any): string {
+    return waypointsPath((connection as DiagramElement).waypoints);
+  }
+
+  override drawShape(parentGfx: Any, shape: Any): SVGElement {
+    if ((shape as DiagramElement).type === "label") return this.drawLabel(parentGfx, shape);
+    const gfx = svgCreate("g");
+    svgClasses(gfx).add("annotated-shape");
+    svgAppend(parentGfx, gfx);
+    this.draw(gfx, shape as DiagramElement);
+    return gfx as unknown as SVGElement;
+  }
+
+  private draw(gfx: Any, element: DiagramElement): void {
+    const kind = shapeKind(element, this.businessPolicy);
+    if (!kind) return;
+    const t = this.tokens;
+    const defaultFill = this.defaultFill(kind);
+    const ownFill = getFillColor(element as never, NO_COLOUR);
+    const fill = ownFill === NO_COLOUR ? defaultFill : ownFill;
+    const stroke = getStrokeColor(element as never, this.lineFor(kind));
+    const sw = t.strokeWidth;
+    const w = element.width;
+    const h = element.height;
+
+    switch (kind) {
+      case "task":
+      case "subprocess": {
+        const rect = svgCreate("rect");
+        const body = ownFill === NO_COLOUR ? `url(#${this.taskGradient()})` : fill;
+        svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill: body, stroke, "stroke-width": sw });
+        svgClasses(rect).add("annotated-task");
+        svgAppend(gfx, rect);
+        if (kind === "subprocess") this.subprocessMarker(gfx, w, h, stroke, applicationsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0);
+        this.label(gfx, element, fill, stroke, w, h);
+        this.drawApps(gfx, element);
+        break;
+      }
+      case "external": {
+        const rect = svgCreate("rect");
+        svgAttr(rect, { x: 0, y: 0, width: w, height: h, rx: 10, fill, stroke, "stroke-width": sw });
+        svgAppend(gfx, rect);
+        // Process icon (arrow, top-right).
+        const icon = svgCreate("path");
+        svgAttr(icon, {
+          d: `M${w - 24} ${9}h9v-3l6 5l-6 5v-3h-9Z`,
+          fill: "none",
+          stroke,
+          "stroke-width": sw,
+          "pointer-events": "all",
+          "data-marker": "process-icon",
+        });
+        svgClasses(icon).add("annotated-process-icon");
+        svgClasses(icon).add("annotated-marker");
+        svgAppend(gfx, icon);
+        this.label(gfx, element, fill, stroke, w, h);
+        this.drawApps(gfx, element);
+        break;
+      }
+      case "event": {
+        const cx = w / 2;
+        const cy = h / 2;
+        const r = Math.min(w, h) / 2;
+        const end = is(element as object, "bpmn:EndEvent");
+        const start = is(element as object, "bpmn:StartEvent");
+        const circle = svgCreate("circle");
+        svgAttr(circle, { cx, cy, r: end ? r - 1.5 : r, fill, stroke, "stroke-width": end ? 3 * sw : sw });
+        svgAppend(gfx, circle);
+        if (!end && !start) {
+          const inner = svgCreate("circle");
+          svgAttr(inner, { cx, cy, r: Math.max(1, r - 3), fill: "none", stroke, "stroke-width": sw });
+          svgAppend(gfx, inner);
+        }
+        break;
+      }
+      case "gateway": {
+        this.diamond(gfx, w, h, fill, stroke, sw);
+        this.gatewayMarker(gfx, element, w, h, stroke);
+        break;
+      }
+      case "data":
+        this.dataPage(gfx, w, h, fill, stroke);
+        break;
+      case "input":
+      case "output": {
+        this.dataPage(gfx, w, h, fill, stroke);
+        const arrow = svgCreate("path");
+        svgAttr(arrow, {
+          d: "M4 7h6v-3l6 5l-6 5v-3h-6Z",
+          fill: kind === "output" ? stroke : "none",
+          stroke,
+          "stroke-width": 1.2,
+        });
+        svgClasses(arrow).add(kind === "output" ? "annotated-output" : "annotated-input");
+        svgAppend(gfx, arrow);
+        break;
+      }
+      case "document": {
+        const body = svgCreate("path");
+        svgAttr(body, { d: documentPath(w, h), fill, stroke, "stroke-width": sw });
+        svgAppend(gfx, body);
+        const bar = svgCreate("line");
+        svgAttr(bar, { x1: 0, y1: layoutPolicy(this.businessPolicy).document.band, x2: w, y2: layoutPolicy(this.businessPolicy).document.band, stroke, "stroke-width": sw });
+        svgAppend(gfx, bar);
+        // Text between the band and the wave crest (the layout sized the height for it).
+        const inner = documentTextRect(w, h, this.businessPolicy);
+        const docText = this.textRenderer.createText(roleText(element.businessObject?.text, this.businessPolicy), {
+          box: { width: inner.width, height: inner.height },
+          align: "center-top",
+          padding: 0,
+          style: {
+            fill: getLabelColor(element as never, t.text, stroke),
+            fontSize: Math.max(8, t.fontSize - 1),
+            fontFamily: t.fontFamily,
+            lineHeight: this.businessPolicy!.metrics.lineHeight,
+          },
+        });
+        svgAttr(docText, { transform: `translate(${inner.x} ${inner.y})` });
+        svgClasses(docText).add("djs-label");
+        svgAppend(gfx, docText);
+        break;
+      }
+      case "application": {
+        // Unlinked [LX-MK-2] annotation (linked ones are hidden and drawn under their activity).
+        this.appBox(gfx, { name: roleText(element.businessObject?.text, this.businessPolicy), x: 0, y: 0, width: w, height: h }, fill, stroke);
+        break;
+      }
+      case "lane": {
+        const rect = svgCreate("rect");
+        svgAttr(rect, { x: 0, y: 0, width: w, height: h, fill: "none", stroke, "stroke-width": sw });
+        svgAppend(gfx, rect);
+        const header = svgCreate("rect");
+        svgAttr(header, { x: 0, y: 0, width: layoutPolicy(this.businessPolicy).laneHeaderWidth, height: h, fill: t.laneHeaderFill, stroke, "stroke-width": sw });
+        svgClasses(header).add("annotated-lane-header");
+        svgAppend(gfx, header);
+        this.verticalHeader(gfx, element, h, layoutPolicy(this.businessPolicy).laneHeaderWidth, t.fontSize + 2);
+        break;
+      }
+      case "pool": {
+        const body = svgCreate("rect");
+        svgAttr(body, { x: 0, y: 0, width: w, height: h, fill: "none", stroke, "stroke-width": sw });
+        svgAppend(gfx, body);
+        const strip = svgCreate("rect");
+        svgAttr(strip, { x: 0, y: 0, width: layoutPolicy(this.businessPolicy).poolStrip, height: h, fill, stroke, "stroke-width": sw });
+        svgClasses(strip).add("annotated-pool-strip");
+        svgAppend(gfx, strip);
+        this.verticalHeader(gfx, element, h, layoutPolicy(this.businessPolicy).poolStrip, t.fontSize + 2);
+        break;
+      }
+    }
+  }
+
+  private defaultFill(kind: AnnotatedShapeKind): string {
+    const t = this.tokens;
+    switch (kind) {
+      case "task":
+      case "subprocess":
+        return t.taskFill;
+      case "external":
+      case "input":
+      case "output":
+        return t.externalFill;
+      case "event":
+        return t.eventFill;
+      case "gateway":
+        return t.gatewayFill;
+      case "data":
+        return t.dataFill;
+      case "document":
+        return t.docFill;
+      case "application":
+        return t.appFill;
+      case "lane":
+        return t.laneFill;
+      case "pool":
+        return t.poolFill;
+    }
+  }
+
+  private lineFor(kind: AnnotatedShapeKind): string {
+    const t = this.tokens;
+    switch (kind) {
+      case "task":
+      case "subprocess":
+        return t.taskLine;
+      case "external":
+      case "input":
+      case "output":
+        return t.externalLine;
+      case "event":
+        return t.eventLine;
+      case "gateway":
+        return t.gatewayLine;
+      case "data":
+        return t.dataLine;
+      case "document":
+        return t.docLine;
+      case "application":
+        return t.appLine;
+      case "lane":
+        return t.laneLine;
+      case "pool":
+        return t.poolLine;
+    }
+  }
+
+  /** Application component boxes of an activity, under its bottom edge. */
+  private drawApps(gfx: Any, element: DiagramElement): void {
+    const apps = applicationsOf(element, this.businessPolicy);
+    if (apps.length === 0) return;
+    const names = apps.map((a) => roleText(a.businessObject?.text, this.businessPolicy));
+    // The layout stores the annotation where the box goes (text-fitted, space
+    // reserved): use that DI when it sits in the activity's bottom band, else
+    // compute the box (applications added in the editor).
+    const one = apps.length === 1 ? (apps[0] as DiagramElement) : null;
+    const rel = one ? { x: (one.x ?? 0) - (element.x ?? 0), y: (one.y ?? 0) - (element.y ?? 0) } : null;
+    const boxes =
+      one && rel && rel.y >= element.height - 20 && rel.y <= element.height + 5 && rel.x >= -5 && rel.x + one.width <= element.width + 5
+        ? [{ name: names[0] as string, x: rel.x, y: rel.y, width: one.width, height: one.height }]
+        : appBoxes(names, element.width, element.height, this.businessPolicy);
+    boxes.forEach((box, i) => {
+      const app = apps[i] as DiagramElement;
+      this.appBox(gfx, box, getFillColor(app as never, this.tokens.appFill), getStrokeColor(app as never, this.tokens.appLine));
+    });
+  }
+
+  private appBox(gfx: Any, box: { name: string; x: number; y: number; width: number; height: number }, fill: string, stroke: string): void {
+    const t = this.tokens;
+    const g = svgCreate("g");
+    svgClasses(g).add("annotated-app");
+    svgAttr(g, { transform: `translate(${box.x} ${box.y})` });
+    const rect = svgCreate("rect");
+    svgAttr(rect, { x: 0, y: 0, width: box.width, height: box.height, fill, stroke, "stroke-width": t.strokeWidth });
+    svgAppend(g, rect);
+    // Component icon (top-right): body + two tabs.
+    const ix = box.width - 17;
+    const icon = svgCreate("path");
+    svgAttr(icon, {
+      d: `M${ix + 3} 5h9v12h-9ZM${ix} 7.5h6v2.5h-6ZM${ix} 12h6v2.5h-6Z`,
+      fill,
+      stroke,
+      "stroke-width": t.strokeWidth,
+    });
+    svgAppend(g, icon);
+    const text = this.textRenderer.createText(box.name, {
+      box: { width: Math.max(10, box.width - 27), height: box.height },
+      align: "right-middle",
+      padding: 2,
+      style: { fill: contrastText(fill, t.text, t.fill), fontSize: t.fontSize, fontFamily: t.fontFamily, fontWeight: 700 },
+    });
+    svgAttr(text, { transform: "translate(5 0)" });
+    svgClasses(text).add("djs-label");
+    svgAppend(g, text);
+    svgAppend(gfx, g);
+  }
+
+  /** The canvas <defs> when `id` is not defined yet, else null. */
+  private defsFor(id: string): SVGElement | null {
+    const svg = this.canvas?._svg as SVGSVGElement | undefined;
+    if (!svg || svg.querySelector(`[id="${id}"]`)) return null;
+    let defs = svg.querySelector(":scope > defs");
+    if (!defs) {
+      defs = svgCreate("defs") as unknown as SVGDefsElement;
+      svgAppend(svg, defs as unknown as SVGElement);
+    }
+    return defs as unknown as SVGElement;
+  }
+
+  /** Flat end arrow, one per canvas and colour. The id is prefixed by the instance id. */
+  private arrowMarker(colour: string): string {
+    const id = colour === this.tokens.flow ? this.arrowId : `${this.arrowId}-${colour.replace(/[^0-9a-zA-Z]/g, "")}`;
+    const defs = this.defsFor(id);
+    if (!defs) return id;
+    const marker = svgCreate("marker");
+    svgAttr(marker, { id, viewBox: "0 0 10 10", refX: "9.5", refY: "5", markerWidth: "7", markerHeight: "7", orient: "auto" });
+    const head = svgCreate("path");
+    svgAttr(head, { d: "M0 0L10 5L0 10L2.5 5Z", fill: colour, stroke: "none" });
+    svgAppend(marker, head);
+    svgAppend(defs, marker);
+    return id;
+  }
+
+  private taskGradient(): string {
+    const id = this.gradientId;
+    const defs = this.defsFor(id);
+    if (!defs) return id;
+    const gradient = svgCreate("linearGradient");
+    svgAttr(gradient, { id, x1: "0", y1: "0", x2: "1", y2: "0" });
+    for (const [offset, colour] of [
+      ["0", this.tokens.taskFill],
+      ["1", this.tokens.taskFillEnd],
+    ] as const) {
+      const stop = svgCreate("stop");
+      svgAttr(stop, { offset, "stop-color": colour });
+      svgAppend(gradient, stop);
+    }
+    svgAppend(defs, gradient);
+    return id;
+  }
+
+  private label(gfx: Any, element: DiagramElement, fill: string, stroke: string, w: number, h: number): void {
+    const t = this.tokens;
+    // Above the application band when the activity has one (the layout reserved that height).
+    const band = applicationsOf(element, this.businessPolicy).length ? layoutPolicy(this.businessPolicy).appBadge.overlap : 0;
+    const text = this.textRenderer.createText((element.businessObject?.name as string) || "", {
+      box: { width: w, height: h - band },
+      align: "center-middle",
+      padding: 7,
+      style: { fill: getLabelColor(element as never, contrastText(fill, t.text, t.fill), stroke), fontSize: t.fontSize, fontFamily: t.fontFamily },
+    });
+    svgClasses(text).add("djs-label");
+    svgAppend(gfx, text);
+  }
+
+  private verticalHeader(gfx: Any, element: DiagramElement, h: number, width: number, fontSize: number): void {
+    const t = this.tokens;
+    const name = (element.businessObject?.name as string) || "";
+    const label = this.textRenderer.createText(name, {
+      box: { width: h, height: width },
+      align: "center-middle",
+      padding: 6,
+      style: { fill: getLabelColor(element as never, t.headerText), fontSize, fontFamily: t.fontFamily, fontWeight: 700 },
+    });
+    svgAttr(label, { transform: `translate(0 ${h}) rotate(-90)` });
+    svgClasses(label).add("djs-label");
+    svgAppend(gfx, label);
+  }
+
+  /** The [+] marker, kept above the application band when the activity has one (`band`, its overlap). */
+  private subprocessMarker(gfx: Any, w: number, h: number, stroke: string, band = 0): void {
+    h -= band;
+    const group = svgCreate("g");
+    svgClasses(group).add("annotated-subprocess-marker");
+    svgClasses(group).add("annotated-marker");
+    svgAttr(group, { "data-marker": "sub-process", "pointer-events": "all" });
+    group.setAttribute("pointer-events", "all");
+    const box = svgCreate("rect");
+    svgAttr(box, { x: w / 2 - 7, y: h - 18, width: 14, height: 14, fill: "transparent", stroke, "stroke-width": 1.2, "pointer-events": "all" });
+    svgClasses(box).add("annotated-marker");
+    svgAppend(group, box);
+    const plus = svgCreate("path");
+    svgAttr(plus, { d: `M${w / 2 - 4} ${h - 11}h8M${w / 2} ${h - 15}v8`, stroke, "stroke-width": 1.2, "pointer-events": "all" });
+    svgClasses(plus).add("annotated-marker");
+    svgAppend(group, plus);
+    svgAppend(gfx, group);
+  }
+
+  private diamond(gfx: Any, w: number, h: number, fill: string, stroke: string, width: number): void {
+    const cx = w / 2;
+    const cy = h / 2;
+    const diamond = svgCreate("path");
+    svgAttr(diamond, { d: `M${cx} 0L${w} ${cy}L${cx} ${h}L0 ${cy}Z`, fill, stroke, "stroke-width": width });
+    svgAppend(gfx, diamond);
+  }
+
+  /** `+` for parallel, `X` for exclusive. `annotatedKind` admits no other gateway. */
+  private gatewayMarker(gfx: Any, element: DiagramElement, w: number, h: number, colour: string): void {
+    const cx = w / 2;
+    const cy = h / 2;
+    const parallel = is(element as object, "bpmn:ParallelGateway");
+    const mark = svgCreate("path");
+    svgAttr(mark, {
+      d: parallel ? `M${cx - 10} ${cy}h20M${cx} ${cy - 10}v20` : `M${cx - 8} ${cy - 8}l16 16M${cx + 8} ${cy - 8}l-16 16`,
+      stroke: colour,
+      "stroke-width": 5 * this.tokens.strokeWidth,
+      "stroke-linecap": "butt",
+    });
+    svgAppend(gfx, mark);
+  }
+
+  /** Data object: page with a small dog-ear top-right (20 % of the width). */
+  private dataPage(gfx: Any, w: number, h: number, fill: string, stroke: string): void {
+    const sw = this.tokens.strokeWidth;
+    const path = svgCreate("path");
+    const dog = Math.round(Math.min(w, h) * 0.2);
+    svgAttr(path, { d: `M0 0h${w - dog}l${dog} ${dog}v${h - dog}h-${w}Z`, fill, stroke, "stroke-width": sw });
+    svgClasses(path).add("annotated-data-page");
+    svgAppend(gfx, path);
+    const fold = svgCreate("path");
+    svgAttr(fold, { d: `M${w - dog} 0v${dog}h${dog}`, fill: "none", stroke, "stroke-width": sw });
+    svgClasses(fold).add("annotated-data-fold");
+    svgAppend(gfx, fold);
+  }
+
+  override getShapePath(shape: Any): string {
+    const element = shape as DiagramElement;
+    const kind = shapeKind(shape, this.businessPolicy);
+    const w = element.width;
+    const h = element.height;
+    // Hit/interaction outlines follow the drawn shape, not the bounding box.
+    if (kind === "event") {
+      const r = Math.min(w, h) / 2;
+      const cx = w / 2;
+      const cy = h / 2;
+      return `M${cx - r} ${cy}` + `a${r} ${r} 0 1 0 ${2 * r} 0` + `a${r} ${r} 0 1 0 ${-2 * r} 0Z`;
+    }
+    if (kind === "gateway") return `M${w / 2} 0L${w} ${h / 2}L${w / 2} ${h}L0 ${h / 2}Z`;
+    if (kind === "document") return documentPath(w, h);
+    return `M0 0h${w}v${h}h-${w}Z`;
+  }
+}
+
+// --- sync: hide linked [LX-MK-2] annotations, redraw their hosts -------------------
+
+interface Registry {
+  getAll(): DiagramElement[];
+  getGraphics(el: DiagramElement): SVGElement | undefined;
+}
+
+export class AnnotatedSync {
+  static $inject = ["eventBus", "elementRegistry", "graphicsFactory", "config.bpmnCanvas"];
+
+  private readonly registry: Registry;
+  private readonly graphicsFactory: Any;
+
+  private readonly businessPolicy: BusinessPolicy | undefined;
+  constructor(eventBus: Any, elementRegistry: Registry, graphicsFactory: Any, config?: BpmnCanvasConfig) {
+    this.businessPolicy = config?.businessPolicy;
+    this.registry = elementRegistry;
+    this.graphicsFactory = graphicsFactory;
+    // import.render.complete: after importXML and after every open(diagram).
+    eventBus.on("import.render.complete", () => this.refresh(true));
+    // After ChangeSupport (priority 1000) redrew the changed elements: a new or
+    // removed association changes which annotation is absorbed where.
+    eventBus.on("elements.changed", 500, () => this.refresh(false));
+  }
+
+  refresh(all: boolean): void {
+    for (const el of this.registry.getAll()) {
+      if (el.type === "label" || !el.parent) continue;
+      const gfx = this.registry.getGraphics(el);
+      if (!gfx) continue;
+      // diagram-js `hidden`: GraphicsFactory.update sets display="none" (kept
+      // across ChangeSupport redraws; display-only, never exported to XML).
+      const hide = isHiddenInAnnotated(el, this.businessPolicy);
+      const toggled = Boolean(el.hidden) !== hide;
+      el.hidden = hide;
+      const kind = shapeKind(el, this.businessPolicy);
+      const host = !el.waypoints && (isActivity(el, this.businessPolicy) || kind === "data" || kind === "input" || kind === "output");
+      if (all || host || toggled) {
+        try {
+          this.graphicsFactory.update(el.waypoints ? "connection" : "shape", el, gfx);
+        } catch {
+          // Element being removed mid-command: skip, the next change redraws.
+        }
+      }
+    }
+  }
+}
+
+// --- editing: the hidden annotation follows its activity -----------------------
+
+export class AnnotatedAppFollow {
+  static $inject = ["eventBus", "config.bpmnCanvas"];
+
+  private readonly businessPolicy: BusinessPolicy | undefined;
+  constructor(eventBus: Any, config?: BpmnCanvasConfig) {
+    this.businessPolicy = config?.businessPolicy;
+    const interceptor = new CommandInterceptor(eventBus);
+    interceptor.preExecute("elements.move", (event: { context: { shapes: DiagramElement[] } }) => {
+      const shapes = event.context.shapes;
+      for (const shape of [...shapes]) {
+        for (const app of applicationsOf(shape, this.businessPolicy)) {
+          if (!shapes.includes(app)) shapes.push(app);
+        }
+      }
+    });
+  }
+}
+
+/** Renderer + sync. Safe in a render-only Viewer. */
+export const AnnotatedRendererModule = {
+  __init__: ["annotatedRenderer", "annotatedSync"],
+  annotatedRenderer: ["type", AnnotatedRenderer],
+  annotatedSync: ["type", AnnotatedSync],
+};
+
+/** Editing behaviour on top of the renderer. Modeler only. */
+export const AnnotatedFollowModule = {
+  __init__: ["annotatedAppFollow"],
+  annotatedAppFollow: ["type", AnnotatedAppFollow],
+};
+

@@ -1,4 +1,6 @@
-import { createBpmnCanvas, renderDiagrams } from "../../dist/index.js";
+import { createBpmnCanvas as createBpmnCanvasBase, renderDiagrams as renderDiagramsBase } from "../../dist/index.js";
+const createBpmnCanvas = (host, options = {}) => createBpmnCanvasBase(host, { businessPolicy: window.__fixture?.businessPolicy, ...options });
+const renderDiagrams = (xml, options = {}) => renderDiagramsBase(xml, { businessPolicy: window.__fixture?.businessPolicy, ...options });
 
 const app = document.getElementById("app");
 const items = new Map();
@@ -47,7 +49,7 @@ window.col = {
     const handle = createBpmnCanvas(host, { xml, ...options, onDiagnostic: (d) => diagnostics.push(d) });
     items.set(id, { id, host, handle, diagnostics });
     await handle.ready;
-    return { id, state: handle.state, hasRenderer: !!handle.modeler?.get("coloredRenderer", false) };
+    return { id, state: handle.state, hasRenderer: !!handle.modeler?.get("recolorRenderer", false) };
   },
   markup(id, strip) {
     const out = {};

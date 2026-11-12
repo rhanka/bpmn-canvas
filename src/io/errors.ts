@@ -1,4 +1,7 @@
+import type { BusinessPolicy } from "../internal/business-policy.js";
+
 export type IoErrorCode =
+  | "profile-symbol"
   | "too-large"
   | "dtd"
   | "invalid-xml"
@@ -98,6 +101,9 @@ export interface FidelityNotice {
 }
 
 export interface IoOptions {
+  readonly businessPolicy?: BusinessPolicy;
+  readonly descriptor?: Record<string, any>;
+  readonly descriptorId?: string;
   /** Ceiling for a raw or decompressed document. Default 8 MiB. */
   readonly maxBytes?: number;
   /** Attribute written on Draw.io cells to carry the BPMN kind. Default `bpmnKind`. */

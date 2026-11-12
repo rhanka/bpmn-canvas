@@ -1,8 +1,9 @@
+import { fixtureDescriptor } from "./injected-descriptor.mjs";
 import { createModdle } from "../../dist/io/index.js";
 
 // Hand-built native model: no F1, layout, colorizer or compatibility export as oracle.
 export function nativeModel() {
-  const m = createModdle();
+  const m = createModdle({ descriptor: fixtureDescriptor });
   const create = (type, attrs = {}) => m.create(type, attrs);
   const definitions = create("bpmn:Definitions", { id: "Defs_Booklet", targetNamespace: "urn:example:booklet", rootElements: [], diagrams: [] });
   definitions.$attrs["xmlns:sem"] = "https://sentropic.com/schema/bpmn/semantics/1";

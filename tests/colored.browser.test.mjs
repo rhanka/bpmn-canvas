@@ -2,7 +2,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { runInBrowser } from "./browser/harness.mjs";
+import { runInBrowser as runPage } from "./browser/harness.mjs";
+import { fixtureOptions } from "./helpers/injected-policy.mjs";
+
+// Browser twin: the page receives the fixture descriptor and policy of the Node twins (window.__fixture).
+const runInBrowser = (entry, name, fn) => runPage(entry, name, fn, fixtureOptions);
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const r = (p) => readFileSync(root + p, "utf8");
@@ -40,9 +44,9 @@ test("colored profile in a real browser", { timeout: 400000 }, async (t) => {
     const out = { plain: {}, tok: {}, std: {} };
 
     for (const [name, xml] of Object.entries(DOCS)) {
-      const std = await mount(xml, { profile: "standard" });
-      const none = await mount(xml, { profile: "colored" });
-      const tok = await mount(xml, { profile: "colored", coloredTokens: TOK });
+      const std = await mount(xml, { profile: "look-plain" });
+      const none = await mount(xml, { profile: "look-recolor" });
+      const tok = await mount(xml, { profile: "look-recolor", recolorTokens: TOK });
       out.plain[name] = {
         hasRenderer: none.hasRenderer,
         equal: JSON.stringify(await ev(([i]) => window.col.markup(i, false), [std.id])) === JSON.stringify(await ev(([i]) => window.col.markup(i, false), [none.id])),
@@ -56,19 +60,19 @@ test("colored profile in a real browser", { timeout: 400000 }, async (t) => {
     }
 
     // user colours (BPMN-in-Color) win over tokens
-    const u = await mount(userDoc, { profile: "colored", coloredTokens: TOK });
+    const u = await mount(userDoc, { profile: "look-recolor", recolorTokens: TOK });
     out.user = await ev(([i]) => window.col.facts(i), [u.id]);
     await ev(([i]) => window.col.destroy(i), [u.id]);
 
     // a token the host did not name leaves the upstream colour
-    const sp = await mount(pool, { profile: "standard" });
-    const pp = await mount(pool, { profile: "colored", coloredTokens: { taskFill: "#aa0001" } });
+    const sp = await mount(pool, { profile: "look-plain" });
+    const pp = await mount(pool, { profile: "look-recolor", recolorTokens: { taskFill: "#aa0001" } });
     out.partial = { std: await ev(([i]) => window.col.facts(i), [sp.id]), part: await ev(([i]) => window.col.facts(i), [pp.id]) };
     for (const x of [sp, pp]) await ev(([i]) => window.col.destroy(i), [x.id]);
 
     // (d) two instances with different tokens
-    const a = await mount(pool, { profile: "colored", coloredTokens: TOK });
-    const b = await mount(pool, { profile: "colored", coloredTokens: TOK2 });
+    const a = await mount(pool, { profile: "look-recolor", recolorTokens: TOK });
+    const b = await mount(pool, { profile: "look-recolor", recolorTokens: TOK2 });
     const fa = await ev(([i]) => window.col.facts(i), [a.id]);
     const fb = await ev(([i]) => window.col.facts(i), [b.id]);
     const ids = await ev(() => window.col.markerIds());
@@ -79,13 +83,13 @@ test("colored profile in a real browser", { timeout: 400000 }, async (t) => {
 
     // (e) static render
     out.render = {
-      std: await ev(([x, op]) => window.col.render(x, op), [pool, { profile: "standard" }]),
-      none: await ev(([x, op]) => window.col.render(x, op), [pool, { profile: "colored" }]),
-      tok: await ev(([x, op]) => window.col.render(x, op), [pool, { profile: "colored", coloredTokens: TOK }]),
+      std: await ev(([x, op]) => window.col.render(x, op), [pool, { profile: "look-plain" }]),
+      none: await ev(([x, op]) => window.col.render(x, op), [pool, { profile: "look-recolor" }]),
+      tok: await ev(([x, op]) => window.col.render(x, op), [pool, { profile: "look-recolor", recolorTokens: TOK }]),
     };
 
     // (f) editing keeps colours
-    const e = await mount(pool, { profile: "colored", coloredTokens: TOK });
+    const e = await mount(pool, { profile: "look-recolor", recolorTokens: TOK });
     await ev(([i]) => window.col.edit(i, { move: ["Fill", 40, 0] }), [e.id]);
     await ev(([i]) => window.col.edit(i, { rename: ["Fill", "Renamed task"] }), [e.id]);
     const newId = await ev(([i]) => window.col.edit(i, { create: { type: "bpmn:Task", x: 700, y: 120, parent: "LaneA" } }), [e.id]);

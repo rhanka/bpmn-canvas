@@ -1,9 +1,14 @@
+import { selectLook } from "./legacy-policy.js";
+import type { BusinessPolicy } from "./business-policy.js";
+import { ProfileContractError } from "../profile/canonical.js";
 /**
  * Lazy engine loading. Importing the package root never touches bpmn-js or the DOM;
  * the engine is loaded when a canvas or a render is actually created.
  */
 import type { BpmnCanvasConfig, ProfileDefinition } from "./contracts.js";
-import type { LegendTokens, ProfileId, ProfileOptions } from "../types.js";
+import type { AnnotatedTokens, ProfileId, ProfileOptions } from "../types.js";
+
+export { tokensFromOptions } from "./token-options.js";
 
 export interface ModdleLike {
   fromXML(xml: string): Promise<{ rootElement: DefinitionsLike; warnings: Array<{ message: string; element?: { id?: string }; value?: string }> }>;
@@ -71,37 +76,23 @@ export function loadViewer(): Promise<ViewerCtor> {
   return viewerPromise;
 }
 
-export async function loadProfile(id: ProfileId, tokens?: Partial<LegendTokens>, options: ProfileOptions = {}): Promise<ProfileDefinition> {
-  let profile: ProfileDefinition;
-  if (id === "legend") {
-    const mod = (await import("../profiles/legend/index.js")) as unknown as { legendProfile(tokens?: Partial<LegendTokens>): ProfileDefinition };
-    profile = mod.legendProfile(tokens);
-  } else if (id === "colored") {
-    const mod = await import("../profiles/colored/index.js");
-    profile = mod.coloredProfile(tokens);
-    if (options.drawing === "classic") {
-      const { ClassicRendererModule } = await import("../profiles/colored/classic.js");
-      profile = {
-        ...profile,
-        tokens: profile.tokens ?? mod.resolveColoredTokens(tokens),
-        modelerModules: [...profile.modelerModules, ClassicRendererModule],
-        viewerModules: [...profile.viewerModules, ClassicRendererModule],
-      };
-    }
-  } else {
-    profile = { id: "standard", modelerModules: [], viewerModules: [] };
+export async function loadProfile(id: ProfileId, tokens?: Partial<AnnotatedTokens>, options: ProfileOptions = {}, businessPolicy?: BusinessPolicy): Promise<ProfileDefinition> {
+  const request = { ...(id ? { look: id } : {}), tokens, options };
+  const selection = selectLook(request, businessPolicy);
+  if (selection.status === "refused") throw new ProfileContractError(selection.code);
+  const registry: Record<string, unknown> = {};
+  if (selection.modelerModules.includes("annotated-renderer")) {
+    const mod = await import("../presentation/annotated/renderer.js");
+    registry["annotated-renderer"] = mod.AnnotatedRendererModule; registry["annotated-follow"] = mod.AnnotatedFollowModule;
   }
-  if (options.palette === "legend" && id !== "legend") {
-    const palette = (await import("../profiles/legend/palette.js")) as unknown as { LegendPaletteModule: unknown };
-    profile = { ...profile, modelerModules: [...profile.modelerModules, palette.LegendPaletteModule] };
-  }
-  return profile;
+  if (selection.modelerModules.includes("recolor-renderer")) registry["recolor-renderer"] = (await import("../presentation/recolor/renderer.js")).RecolorRendererModule;
+  if (selection.modelerModules.includes("flat-renderer")) registry["flat-renderer"] = (await import("../presentation/recolor/flat.js")).FlatRendererModule;
+  if (selection.modelerModules.includes("annotated-palette")) registry["annotated-palette"] = (await import("../presentation/annotated/palette.js")).AnnotatedPaletteModule;
+  return { id, renderer: selection.renderer, modelerModules: selection.modelerModules.map((id: string) => registry[id]), viewerModules: selection.viewerModules.map((id: string) => registry[id]), paletteFloor: selection.paletteFloor, markerSelectors: selection.markerSelectors, ...(selection.tokens ? { tokens: selection.tokens } : {}), ...(selection.named ? { named: selection.named } : {}), ...(businessPolicy ? { businessPolicy } : {}) };
 }
 
-export function profileConfig(instanceId: string, profile: ProfileDefinition, paletteColumns?: "auto" | 1 | 2): BpmnCanvasConfig {
-  const columns = paletteColumns ? { paletteColumns } : {};
-  if (!profile.tokens) return { instanceId, ...columns };
-  return profile.id === "colored" ? { instanceId, colored: profile.tokens, ...(profile.named ? { coloredNamed: profile.named } : {}), ...columns } : { instanceId, legend: profile.tokens, ...columns };
+export function profileConfig(instanceId: string, profile: ProfileDefinition, paletteColumns?: "auto" | 1 | 2, ioSetSelections?: Readonly<Record<string, string>>): BpmnCanvasConfig {
+  return { instanceId, ...(ioSetSelections ? { ioSetSelections } : {}), ...(profile.tokens ? { lookTokens: profile.tokens } : {}), ...(profile.named ? { namedTokens: profile.named } : {}), ...(profile.businessPolicy ? { businessPolicy: profile.businessPolicy } : {}), ...(profile.renderer ? { renderer: profile.renderer } : {}), ...(paletteColumns ? { paletteColumns } : {}) };
 }
 
 /** Unique per canvas or render. Prefixes any id a profile or module creates. */

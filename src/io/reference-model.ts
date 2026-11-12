@@ -1,40 +1,41 @@
+import { annotationRole, roleLabel, applicationHost, type BusinessPolicy } from "../internal/business-policy.js";
+import { factElement, factsOf } from "./facts.js";
 // Ephemeral formatting projection of one immutable moddle Definitions snapshot.
 // Semantic identity, membership, ordering and attachment never come from DI.
 import { IoError } from "./errors.js";
+import { UNHOSTED_ANNOTATION } from "./refusal-codes.js";
 import type { BpmnDefinitions, ModdleElement } from "../types.js";
-import semantics from "./semantics.json" with { type: "json" };
 type E = ModdleElement;
 export interface RefBox { readonly x: number; readonly y: number; readonly w: number; readonly h: number }
 export type RefPoint = readonly [number, number];
 export interface RefNode {
   readonly id: string; type: string; readonly subtype?: "AND" | "OR"; readonly label: string;
   readonly box: RefBox; readonly labelBox?: RefBox; laneIndex?: number; laneName?: string;
-  appLabel?: string; task?: string; dir?: "in" | "out" | "doc"; readonly targetProcessId?: string;
+  application?: string; task?: string; dir?: "in" | "out" | "doc"; readonly calledProcess?: string;
   readonly semanticOrder: number;
 }
 export interface RefConnection {
   readonly id: string; readonly source: string; readonly target: string;
-  readonly kind: "FLOW" | "DATA" | "DOC"; readonly label: string; readonly points: readonly RefPoint[];
+  readonly kind: "sequence" | "data" | "document"; readonly label: string; readonly points: readonly RefPoint[];
   readonly semanticOrder: number;
 }
 export interface RefPage {
   readonly processId: string; readonly index: number; readonly name: string; readonly pool: RefBox;
   readonly lanes: ReadonlyArray<{ readonly id: string; readonly name: string; readonly box: RefBox }>;
   readonly nodes: ReadonlyMap<string, RefNode>; readonly order: readonly string[]; readonly flowOrder: readonly string[];
-  readonly apps: ReadonlyMap<string, { readonly box: RefBox; readonly text: string }>; readonly connections: readonly RefConnection[];
+  readonly applicationsByHost: ReadonlyMap<string, { readonly box: RefBox; readonly text: string }>; readonly connections: readonly RefConnection[];
 }
 const FLOW_TAG: Readonly<Record<string, string>> = {
-  StartEvent: "START", EndEvent: "END", Task: "TASK", SubProcess: "SUB-PROCESS", CallActivity: "EXTERNAL_PROCESS",
-  ExclusiveGateway: "GATEWAY", ParallelGateway: "GATEWAY", IntermediateThrowEvent: "EVENT",
+  StartEvent: "start", EndEvent: "end", Task: "task", SubProcess: "subprocess", CallActivity: "call",
+  ExclusiveGateway: "gateway", ParallelGateway: "gateway", IntermediateThrowEvent: "event",
 };
 export const FLOW_TYPES: ReadonlySet<string> = new Set(Object.values(FLOW_TAG));
-export const ITEM_TYPES: ReadonlySet<string> = new Set(["TASK_INPUT", "TASK_OUTPUT", "EXTERNAL_INPUT", "PROCESS_OUTPUT", "DATA_OBJECT", "EXTERNAL_DATA_OBJECT"]);
-const ACTIVITIES = new Set(["TASK", "SUB-PROCESS", "EXTERNAL_PROCESS"]);
+export const ITEM_TYPES: ReadonlySet<string> = new Set(["object-in", "object-out", "port-in", "port-out", "object-in", "object-in"]);
+const ACTIVITIES = new Set(["task", "subprocess", "call"]);
 const kind = (e: E): string => e.$type.split(":")[1] ?? "";
 const artifact = (e: E): boolean => ["DataObjectReference", "DataInput", "DataOutput", "TextAnnotation"].includes(kind(e));
 function fail(code: ConstructorParameters<typeof IoError>[0], e: E, message: string): never { throw new IoError(code, message, [e.id ?? ""]); }
 const list = (e: Partial<E>, key: string): E[] => e[key] ?? [];
-export const semanticInfo = (e: E): E | undefined => list(e.extensionElements ?? {}, "values").find((v) => v.$type === "sem:Info");
 
 function validateIoSpecification(owner: E): void {
   const io = owner.ioSpecification;
@@ -85,20 +86,22 @@ export function containedElements(definitions: E): E[] {
  * and extension types are closed by default, including children of consumed scaffolding.
  * References are checked as properties, but never followed to resurrect removed content. */
 class ProjectionConsumption {
+  constructor(private readonly policy?: BusinessPolicy) {}
   private readonly used = new Map<E, Set<string>>();
   consume(e: E, ...properties: string[]): void {
     const fields = this.used.get(e) ?? new Set<string>();
     properties.forEach((p) => fields.add(p));
     this.used.set(e, fields);
   }
-  info(e: E): E | undefined {
-    const v = semanticInfo(e);
-    if (v) {
+  categoryFacts(e: E): Record<string, any> | undefined {
+    const facts = factsOf(e, this.policy);
+    if (facts) {
       this.consume(e, "extensionElements");
       this.consume(e.extensionElements, "values");
-      this.consume(v, "laneRef", "primaryAssociationRef", "processRef");
+      const native = factElement(e, this.policy);
+      if (native) this.consume(native, ...Object.values(this.policy!.exportFacts.properties));
     }
-    return v;
+    return facts;
   }
   io(owner: E): void {
     const io = owner.ioSpecification;
@@ -128,7 +131,7 @@ class ProjectionConsumption {
       for (const p of e.$descriptor?.properties ?? []) {
         if (p.isVirtual || fields.has(p.name)) continue;
         const value = e[p.name], children = Array.isArray(value) ? value : [value];
-        const child = children.find((v) => v?.$type && !di.has(v));
+        const child = children.find((facts) => facts?.$type && !di.has(facts));
         if (!child) continue;
         if (p.isReference) throw new IoError("unsupported-element", `${e.$type}.${p.name} is not consumed`, [e.$type === "bpmn:Process" ? "" : e.id ?? ""]);
         // Preserve the historical owner diagnostic for anonymous activity loops.
@@ -139,7 +142,7 @@ class ProjectionConsumption {
   }
 }
 /** Integrity checks shared by parsing and formatted export. No mutations or repairs. */
-export function validateSemantics(definitions: E): Map<string, E> {
+export function validateSemantics(definitions: E, policy?: BusinessPolicy, descriptorUri?: string): Map<string, E> {
   if (definitions?.$type !== "bpmn:Definitions") throw new IoError("not-bpmn", "Expected moddle bpmn:Definitions");
   const all = containedElements(definitions), byId = new Map<string, E>(), contained = new Set(all);
   for (const e of all) if (e.id) {
@@ -164,26 +167,26 @@ export function validateSemantics(definitions: E): Map<string, E> {
   for (const e of all) {
     validateIoSpecification(e);
     const values = list(e.extensionElements ?? {}, "values");
-    const infos = values.filter((v) => v.$type === "sem:Info");
-    const unknown = values.find((v) => {
+    const infos = values.filter((facts) => facts.$type === policy?.exportFacts?.extensionType);
+    const unknown = values.find((facts) => {
       // Typed descriptors carry the URI on their registered package, not on ns.
-      const uri = v.$descriptor?.$pkg?.uri ?? v.$descriptor?.ns?.uri ?? v.$attrs?.xmlns ?? "";
-      return v.$type === "sem:Info" ? uri !== semantics.uri : uri.startsWith("https://sentropic.com/schema/bpmn/semantics/");
+      const uri = facts.$descriptor?.$pkg?.uri ?? facts.$descriptor?.ns?.uri ?? facts.$attrs?.xmlns ?? "";
+      return facts.$type === policy?.exportFacts?.extensionType ? uri !== descriptorUri : !!policy?.exportFacts?.namespaceFamily && uri.startsWith(policy.exportFacts.namespaceFamily);
     });
     if (unknown) fail("unknown-semantics-version", e, "Unknown semantic namespace version");
-    if (infos.length > 1) fail("invalid-semantics", e, "Duplicate sem:Info");
-    const v = infos[0]; if (!v) continue;
+    if (infos.length > 1) fail("invalid-semantics", e, "Duplicate facts element");
+    const facts = factsOf(e, policy); if (!facts) continue;
     const k = kind(e), item = artifact(e);
-    if (v.order !== undefined) {
-      if (!Number.isSafeInteger(v.order) || v.order < 0) fail("invalid-semantics", e, "Order must be a nonnegative integer");
+    if (facts.order !== undefined) {
+      if (!Number.isSafeInteger(facts.order) || facts.order < 0) fail("invalid-semantics", e, "Order must be a nonnegative integer");
       const p = processOf.get(e);
-      if (p) { const used = orders.get(p) ?? new Set<number>(); if (used.has(v.order)) fail("invalid-semantics", e, "Duplicate semantic order"); used.add(v.order); orders.set(p, used); }
+      if (p) { const used = orders.get(p) ?? new Set<number>(); if (used.has(facts.order)) fail("invalid-semantics", e, "Duplicate semantic order"); used.add(facts.order); orders.set(p, used); }
     }
-    if (v.direction !== undefined && (k !== "DataObjectReference" || !["in", "out"].includes(v.direction))) fail("invalid-semantics", e, "Invalid direction or owner");
-    if (v.label !== undefined && !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(k)) fail("invalid-semantics", e, "Relation label on wrong owner");
-    if (v.laneRef !== undefined && (!item || v.laneRef.$type !== "bpmn:Lane" || !contained.has(v.laneRef) || processOf.get(v.laneRef) !== processOf.get(e))) fail("invalid-semantics", e, "Lane reference must belong to this process");
-    if (v.primaryAssociationRef !== undefined && (!item || !contained.has(v.primaryAssociationRef) || !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(kind(v.primaryAssociationRef)))) fail("invalid-semantics", e, "Invalid primary association");
-    if (v.processRef !== undefined && (!["Task", "SubProcess"].includes(k) || !processes.includes(v.processRef))) fail("invalid-semantics", e, "Navigation target must be a root Process");
+    if (facts.direction !== undefined && (k !== "DataObjectReference" || !["in", "out"].includes(facts.direction))) fail("invalid-semantics", e, "Invalid direction or owner");
+    if (facts.label !== undefined && !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(k)) fail("invalid-semantics", e, "Relation label on wrong owner");
+    if (facts.lane !== undefined && (!item || facts.lane.$type !== "bpmn:Lane" || !contained.has(facts.lane) || processOf.get(facts.lane) !== processOf.get(e))) fail("invalid-semantics", e, "Lane reference must belong to this process");
+    if (facts.primary !== undefined && (!item || !contained.has(facts.primary) || !["Association", "DataInputAssociation", "DataOutputAssociation"].includes(kind(facts.primary)))) fail("invalid-semantics", e, "Invalid primary association");
+    if (facts.process !== undefined && (!["Task", "SubProcess"].includes(k) || !processes.includes(facts.process))) fail("invalid-semantics", e, "Navigation target must be a root Process");
   }
   return byId;
 }
@@ -193,8 +196,8 @@ const boxOf = (shape: E | undefined, e: E): RefBox => {
   if (![b.x, b.y, b.width, b.height].every((n) => typeof n === "number" && Number.isFinite(n)) || b.width < 0 || b.height < 0) return fail("invalid-geometry", e, "Invalid bounds");
   return { x: b.x, y: b.y, w: b.width, h: b.height };
 };
-export function readReferencePages(definitions: BpmnDefinitions): RefPage[] {
-  const byId = validateSemantics(definitions);
+export function readReferencePages(definitions: BpmnDefinitions, policy?: BusinessPolicy, descriptorUri?: string): RefPage[] {
+  const byId = validateSemantics(definitions, policy, descriptorUri);
   const roots = definitions.rootElements ?? [];
   for (const c of roots) if (c.$type === "bpmn:Collaboration" && c.messageFlows?.length) fail("unsupported-element", c.messageFlows[0], "Message flows are not exported");
   const unsupportedRoot = roots.find((e) => !["bpmn:Process", "bpmn:Collaboration"].includes(e.$type));
@@ -212,7 +215,7 @@ export function readReferencePages(definitions: BpmnDefinitions): RefPage[] {
     }
     fail("unsupported-element", unsupportedRoot, "Unsupported root element or page");
   }
-  const consumed = new ProjectionConsumption();
+  const consumed = new ProjectionConsumption(policy);
   consumed.consume(definitions, "rootElements");
   const processes = roots.filter((e) => e.$type === "bpmn:Process");
   const participants = new Map<E, { collaboration: E; participant: E }>();
@@ -227,11 +230,11 @@ export function readReferencePages(definitions: BpmnDefinitions): RefPage[] {
     consumed.consume(part, "processRef");
   }
   if (!processes.length) throw new IoError("no-pages", "No root process");
-  const pages = processes.map((process, index) => readPage(definitions, process, index, participants.get(process), byId, consumed));
+  const pages = processes.map((process, index) => readPage(definitions, process, index, participants.get(process), byId, consumed, policy));
   consumed.assertComplete(definitions);
   return pages;
 }
-function readPage(definitions: E, process: E, index: number, poolOwner: { collaboration: E; participant: E } | undefined, byId: Map<string, E>, consumed: ProjectionConsumption): RefPage {
+function readPage(definitions: E, process: E, index: number, poolOwner: { collaboration: E; participant: E } | undefined, byId: Map<string, E>, consumed: ProjectionConsumption, policy?: BusinessPolicy): RefPage {
   consumed.consume(process, "flowElements", "artifacts", "laneSets");
   consumed.io(process);
   const semantic = [...list(process, "flowElements"), ...list(process, "artifacts"), ...list(process.ioSpecification ?? {}, "dataInputs"), ...list(process.ioSpecification ?? {}, "dataOutputs"), ...list(poolOwner?.collaboration ?? {}, "artifacts")];
@@ -268,12 +271,12 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
   for (const lane of laneEls) consumed.consume(lane, "flowNodeRef");
   const rank = new Map<E, number>();
   semantic.forEach((e, i) => {
-    if (kind(e) !== "DataObject") rank.set(e, consumed.info(e)?.order ?? i);
+    if (kind(e) !== "DataObject") rank.set(e, consumed.categoryFacts(e)?.order ?? i);
   });
-  const nodes = new Map<string, RefNode>(), appAnnotations = new Map<string, { box: RefBox; text: string }>();
+  const nodes = new Map<string, RefNode>(), annotationBoxes = new Map<string, { box: RefBox; text: string }>();
   const drawable = semantic.filter((e) => kind(e) in FLOW_TAG || artifact(e));
   for (const e of drawable) {
-    const k = kind(e), v = consumed.info(e), shape = shapes.get(e), box = boxOf(shape, e);
+    const k = kind(e), facts = consumed.categoryFacts(e), shape = shapes.get(e), box = boxOf(shape, e);
     consumed.consume(e);
     if (k in FLOW_TAG) {
       consumed.consume(e, "incoming", "outgoing");
@@ -288,32 +291,33 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
       consumed.consume(e.dataObjectRef);
     }
     if (k === "SubProcess" && shape?.isExpanded) fail("unsupported-element", e, "Expanded subprocess is not exported");
-    let label = e.name ?? "", type = FLOW_TAG[k] ?? (k === "DataInput" ? "EXTERNAL_INPUT" : k === "DataOutput" ? "PROCESS_OUTPUT" : "DATA_OBJECT");
+    let label = e.name ?? "", type = FLOW_TAG[k] ?? (k === "DataInput" ? "port-in" : k === "DataOutput" ? "port-out" : "object-in");
     if (k === "TextAnnotation") {
-      const t = (e.text ?? "").trim();
-      if (t.startsWith("[Component]")) { appAnnotations.set(e.id, { box, text: t.slice(11).trim() }); continue; }
-      if (!t.startsWith("[Reference]")) fail("free-annotation", e, "Only [Component] and [Reference] annotations are exported");
-      type = "DOCUMENT"; label = t.slice(11).trim();
+      const t = e.text ?? "";
+      const role = annotationRole(t, policy)?.role;
+      if (role === "application") { annotationBoxes.set(e.id, { box, text: roleLabel(t, policy, true) }); continue; }
+      if (role !== "document") fail("free-annotation", e, "Unrecognised annotation role");
+      type = "document"; label = roleLabel(t, policy, true);
     }
-    const li = artifact(e) ? laneEls.indexOf(v?.laneRef) : laneOf.get(e);
+    const li = artifact(e) ? laneEls.indexOf(facts?.lane) : laneOf.get(e);
     if (artifact(e) && (li === undefined || li < 0)) fail("missing-semantics", e, "Artifact lane is required");
-    let target = v?.processRef;
+    let target = facts?.process;
     if (k === "CallActivity" && e.calledElement !== undefined) {
       target = list(definitions, "rootElements").find((p) => p.$type === "bpmn:Process" && p.id === e.calledElement);
       if (!target) fail("invalid-semantics", e, "calledElement must identify a root Process");
     }
-    const n: RefNode = { id: e.id, type, label, box, semanticOrder: rank.get(e)!, ...(k.endsWith("Gateway") ? { subtype: k === "ParallelGateway" ? "AND" : "OR" } : {}), ...(target ? { targetProcessId: target.id } : {}), ...(shape?.label?.bounds ? { labelBox: boxOf(shape.label, e) } : {}) };
+    const n: RefNode = { id: e.id, type, label, box, semanticOrder: rank.get(e)!, ...(k.endsWith("Gateway") ? { subtype: k === "ParallelGateway" ? "AND" : "OR" } : {}), ...(target ? { calledProcess: target.id } : {}), ...(shape?.label?.bounds ? { labelBox: boxOf(shape.label, e) } : {}) };
     if (li !== undefined && li >= 0) { n.laneIndex = li; n.laneName = lanes[li]!.name; }
     nodes.set(e.id, n);
   }
-  const apps = new Map<string, { box: RefBox; text: string }>(), usedApps = new Set<string>();
+  const applicationsByHost = new Map<string, { box: RefBox; text: string }>(), usedAnnotations = new Set<string>();
   const relations = semantic.filter((e) => ["SequenceFlow", "Association"].includes(kind(e)));
   const ownerOf = new Map<E, E>();
   for (const e of semantic) if (ACTIVITIES.has(FLOW_TAG[kind(e)]!)) {
     consumed.consume(e, "dataInputAssociations", "dataOutputAssociations");
     for (const a of [...list(e, "dataInputAssociations"), ...list(e, "dataOutputAssociations")]) { relations.push(a); ownerOf.set(a, e); }
   }
-  relations.forEach((e, i) => rank.set(e, consumed.info(e)?.order ?? i));
+  relations.forEach((e, i) => rank.set(e, consumed.categoryFacts(e)?.order ?? i));
   relations.sort((a, b) => rank.get(a)! - rank.get(b)!);
   const connections: RefConnection[] = [];
   for (const a of relations) {
@@ -323,7 +327,7 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     }
     consumed.consume(a, "sourceRef", "targetRef");
     let s = a.sourceRef, t = a.targetRef;
-    let ck: RefConnection["kind"] = k === "SequenceFlow" ? "FLOW" : k === "Association" ? "DOC" : "DATA";
+    let ck: RefConnection["kind"] = k === "SequenceFlow" ? "sequence" : k === "Association" ? "document" : "data";
     if (owner) {
       if (k === "DataInputAssociation") {
         if (!Array.isArray(s) || s.length !== 1 || !semantic.includes(s[0]) || !ITEM_TYPES.has(nodes.get(s[0].id)?.type ?? "")) fail("invalid-semantics", a, "Input association needs one item source");
@@ -344,43 +348,43 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
     if (k === "SequenceFlow") {
       if (!semantic.includes(s) || !semantic.includes(t) || !list(s, "outgoing").includes(a) || !list(t, "incoming").includes(a)) fail("invalid-semantics", a, "Flow endpoints and incoming/outgoing must agree");
     }
-    if (k === "Association" && (appAnnotations.has(s?.id) || appAnnotations.has(t?.id))) {
-      const ann = appAnnotations.has(s?.id) ? s : t, host = ann === s ? t : s;
-      if (!ACTIVITIES.has(nodes.get(host?.id)?.type ?? "")) fail("orphan-application", ann, "Application needs an activity");
-      if (usedApps.has(ann.id) || apps.has(host.id)) fail("unsupported-element", a, "Multiple application attachments are not exported");
-      usedApps.add(ann.id); if (!apps.has(host.id)) { apps.set(host.id, appAnnotations.get(ann.id)!); nodes.get(host.id)!.appLabel = appAnnotations.get(ann.id)!.text; }
+    if (k === "Association" && (annotationBoxes.has(s?.id) || annotationBoxes.has(t?.id))) {
+      const ann = annotationBoxes.has(s?.id) ? s : t, host = ann === s ? t : s;
+      if (!host || !applicationHost(host, policy)) fail(UNHOSTED_ANNOTATION, ann, "Application needs an activity");
+      if (usedAnnotations.has(ann.id) || applicationsByHost.has(host.id)) fail("unsupported-element", a, "Multiple application attachments are not exported");
+      usedAnnotations.add(ann.id); if (!applicationsByHost.has(host.id)) { applicationsByHost.set(host.id, annotationBoxes.get(ann.id)!); nodes.get(host.id)!.application = annotationBoxes.get(ann.id)!.text; }
       continue;
     }
     if (!nodes.has(s?.id) || !nodes.has(t?.id)) fail("missing-endpoint", a, "Relation endpoint is not exported");
-    if (ck === "DOC" && nodes.get(s.id)!.type !== "DOCUMENT" && nodes.get(t.id)!.type !== "DOCUMENT") fail("unsupported-element", a, "Association must attach a document");
+    if (ck === "document" && nodes.get(s.id)!.type !== "document" && nodes.get(t.id)!.type !== "document") fail("unsupported-element", a, "Association must attach a document");
     const edge = edges.get(a);
     if (!edge || edge.waypoint?.length < 2 || !edge.waypoint) fail("element-without-di", a, "Relation requires DI with two waypoints");
     const points: RefPoint[] = edge.waypoint.map((p: E) => {
       if (![p.x, p.y].every((n) => typeof n === "number" && Number.isFinite(n))) fail("invalid-geometry", a, "Invalid waypoints");
       return [p.x, p.y] as const;
     });
-    connections.push({ id: a.id, source: s.id, target: t.id, kind: ck, label: ck === "FLOW" ? a.name ?? "" : semanticInfo(a)?.label ?? "", points, semanticOrder: rank.get(a)! });
+    connections.push({ id: a.id, source: s.id, target: t.id, kind: ck, label: ck === "sequence" ? a.name ?? "" : factsOf(a, policy)?.label ?? "", points, semanticOrder: rank.get(a)! });
   }
-  for (const id of appAnnotations.keys()) if (!usedApps.has(id)) fail("orphan-application", byId.get(id)!, "Application is not attached");
-  connections.sort((a, b) => Number(a.kind !== "FLOW") - Number(b.kind !== "FLOW") || a.semanticOrder - b.semanticOrder);
+  for (const id of annotationBoxes.keys()) if (!usedAnnotations.has(id)) fail(UNHOSTED_ANNOTATION, byId.get(id)!, "Application is not attached");
+  connections.sort((a, b) => Number(a.kind !== "sequence") - Number(b.kind !== "sequence") || a.semanticOrder - b.semanticOrder);
   for (const e of drawable.filter(artifact)) {
     const n = nodes.get(e.id); if (!n) continue;
-    const v = semanticInfo(e), incident = connections.filter((c) => c.kind !== "FLOW" && (c.source === n.id || c.target === n.id));
+    const facts = factsOf(e, policy), incident = connections.filter((c) => c.kind !== "sequence" && (c.source === n.id || c.target === n.id));
     const role = (c: RefConnection): "in" | "out" => c.source === n.id ? "in" : "out";
-    const roles = new Set(incident.filter((c) => c.kind === "DATA").map(role));
+    const roles = new Set(incident.filter((c) => c.kind === "data").map(role));
     if (kind(e) === "DataObjectReference") {
-      const direction = v?.direction ?? (roles.size === 1 ? [...roles][0] : undefined);
+      const direction = facts?.direction ?? (roles.size === 1 ? [...roles][0] : undefined);
       if (!direction) fail("missing-semantics", e, "Ambiguous or unlinked item requires direction");
-      n.type = direction === "in" ? "TASK_INPUT" : "TASK_OUTPUT";
+      n.type = direction === "in" ? "object-in" : "object-out";
     }
-    const primary = v?.primaryAssociationRef;
+    const primary = facts?.primary;
     const c = primary ? incident.find((a) => a.id === primary.id) : incident[0];
     if (primary && !c) fail("invalid-semantics", e, "Primary association must be incident");
     if (c) {
       const host = c.source === n.id ? c.target : c.source;
       if (!ACTIVITIES.has(nodes.get(host)?.type ?? "")) fail("invalid-semantics", e, "Attachment requires an activity");
-      n.task = host; n.dir = n.type === "DOCUMENT" ? "doc" : role(c);
-    } else n.dir = n.type === "DOCUMENT" ? "doc" : ["TASK_INPUT", "EXTERNAL_INPUT"].includes(n.type) ? "in" : "out";
+      n.task = host; n.dir = n.type === "document" ? "doc" : role(c);
+    } else n.dir = n.type === "document" ? "doc" : ["object-in", "port-in"].includes(n.type) ? "in" : "out";
   }
   const seq = [...nodes.values()].sort((a, b) => a.semanticOrder - b.semanticOrder);
   const flowOrder = seq.filter((n) => FLOW_TYPES.has(n.type)).map((n) => n.id), order: string[] = [];
@@ -394,5 +398,5 @@ function readPage(definitions: E, process: E, index: number, poolOwner: { collab
   const boxes = [...lanes.map((l) => l.box), ...seq.map((n) => n.box)];
   const x = boxes.length ? Math.min(...boxes.map((b) => b.x)) : 0, y = boxes.length ? Math.min(...boxes.map((b) => b.y)) : 0;
   const pool = poolOwner ? boxOf(shapes.get(poolOwner.participant), poolOwner.participant) : { x, y, w: boxes.length ? Math.max(...boxes.map((b) => b.x + b.w)) - x : 0, h: boxes.length ? Math.max(...boxes.map((b) => b.y + b.h)) - y : 0 };
-  return { processId: process.id, index, name: poolOwner?.participant.name || process.name || `Process ${index + 1}`, pool, lanes, nodes, order, flowOrder, apps, connections };
+  return { processId: process.id, index, name: poolOwner?.participant.name || process.name || `Process ${index + 1}`, pool, lanes, nodes, order, flowOrder, applicationsByHost, connections };
 }

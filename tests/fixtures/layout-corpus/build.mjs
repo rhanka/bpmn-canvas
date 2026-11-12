@@ -5,18 +5,30 @@ import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { layoutProcess } from "../../../dist/layout/index.js";
+import { JSDOM } from "jsdom";
+import { layoutProcess, parseProcesses } from "../../../dist/layout/index.js";
 import { normalize } from "../../../dist/internal/processModel.js";
-import { C1, C3, C4 } from "../io/reference/cases.mjs";
+import { fixturePolicy } from "../../helpers/injected-policy.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "../../../");
 const n = (type, label, extra = {}) => ({ type, label, ...extra });
 const c = (source, target, extra = {}) => ({ source, target, ...extra });
 
+// A reference diagram read as the canvas reads it (injected fixture policy), its nodes keyed by display name.
+globalThis.DOMParser ??= new JSDOM("").window.DOMParser;
+function fromDiagram(name) {
+  const [{ proc }] = parseProcesses(readFileSync(join(here, `../io/reference/${name}/diagram.bpmn`), "utf8"), fixturePolicy);
+  const shown = new Map(proc.lanes.flatMap((lane) => lane.nodes).map((node) => [node.label, node.text ?? node.label]));
+  // Document links run from the document to its activity, as in a saved process list.
+  const documents = new Set(proc.lanes.flatMap((lane) => lane.nodes).filter((node) => node.type === "document").map((node) => node.label));
+  const node = ({ label, text, _task, ...rest }) => ({ ...rest, label: shown.get(label), ...(_task === undefined ? {} : { _task: shown.get(_task) }) });
+  return { ...proc, lanes: proc.lanes.map((lane) => ({ ...lane, nodes: lane.nodes.map(node) })), connections: proc.connections.map((link) => documents.has(link.target) ? { ...link, source: shown.get(link.target), target: shown.get(link.source) } : { ...link, source: shown.get(link.source), target: shown.get(link.target) }) };
+}
+
 export const CASES = {
-  "base-order": C1.processes[0],
-  "base-review": C4.processes[0],
+  "base-order": fromDiagram("C1"),
+  "base-review": fromDiagram("C4"),
   "homonymous-lanes": {
     name: "Homonymous lanes",
     lanes: [
@@ -26,7 +38,7 @@ export const CASES = {
     ],
     connections: [c("Begin", "First step"), c("First step", "Partner step"), c("Partner step", "Last step"), c("Last step", "Finish")],
   },
-  "lane-block-boundary": C3.processes[0],
+  "lane-block-boundary": fromDiagram("C3"),
   "unnamed-lane": {
     name: "Unnamed lane",
     lanes: [
@@ -37,7 +49,7 @@ export const CASES = {
   },
   "shared-item": {
     name: "Shared item",
-    lanes: [{ name: "Desk", nodes: [n("START", "In"), n("TASK", "Write"), n("TASK_OUTPUT", "Draft"), n("TASK", "Read"), n("DOCUMENT", "Style guide"), n("END", "Out")] }],
+    lanes: [{ name: "Desk", nodes: [n("START", "In"), n("TASK", "Write"), n("object-out", "Draft"), n("TASK", "Read"), n("document", "Style guide"), n("END", "Out")] }],
     connections: [
       c("In", "Write"), c("Write", "Read"), c("Read", "Out"),
       c("Write", "Draft", { kind: "DATA" }), c("Draft", "Read", { kind: "DATA" }),
@@ -65,7 +77,7 @@ const sha = (s) => createHash("sha256").update(s).digest("hex");
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const expected = {};
-  for (const [name, proc] of Object.entries(CASES)) expected[name] = await layoutProcess(normalize(structuredClone(proc)));
+  for (const [name, proc] of Object.entries(CASES)) expected[name] = await layoutProcess(normalize(structuredClone(proc)), undefined, fixturePolicy);
   const cases = JSON.stringify(CASES, null, 1) + "\n";
   const exp = JSON.stringify(expected, null, 1) + "\n";
   writeFileSync(join(here, "cases.json"), cases);

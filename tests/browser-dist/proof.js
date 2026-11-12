@@ -26,24 +26,25 @@ export async function runProof(api, variant) {
   const changes = [];
   const main = api.createBpmnCanvas(document.getElementById("canvas"), {
     xml: XML,
-    profile: "legend",
+    profile: "look-annotated",
+    businessPolicy: window.__fixture.businessPolicy,
     fitMode: "none",
     ...styleOpts,
     onChange: (c) => changes.push(c.cause),
   });
   await main.ready;
-  const hidden = api.createBpmnCanvas(document.getElementById("canvas2"), { xml: XML, watermark: { hidden: true, license: "proof-license" }, ...styleOpts });
+  const hidden = api.createBpmnCanvas(document.getElementById("canvas2"), { xml: XML, businessPolicy: window.__fixture.businessPolicy, watermark: { hidden: true, license: "proof-license" }, ...styleOpts });
   await hidden.ready;
   await document.fonts.load("14px bpmn").catch(() => []);
   await new Promise((r) => setTimeout(r, 1500)); // the canvas checks its styles, font and images after the first import
   window.__api = { main, changes, getXml: () => main.getXml() };
-  const glyph = getComputedStyle(document.querySelector(".djs-palette .entry[data-action^='legend.']")).getPropertyValue("--bpmn-canvas-legend-glyph").trim();
+  const glyph = getComputedStyle(document.querySelector(".djs-palette .entry[data-action^='annotated.']")).getPropertyValue("--bpmn-canvas-annotated-glyph").trim();
   const badge = (sel) => { const b = document.querySelector(`${sel} .bjs-powered-by`); return b ? getComputedStyle(b).display !== "none" : null; };
   return {
     variant,
     exports: Object.keys(api).sort(),
     state: main.state,
-    legendShapes: document.querySelectorAll("#canvas .legend-shape").length,
+    annotatedShapes: document.querySelectorAll("#canvas .annotated-shape").length,
     fontReady: document.fonts.check("14px bpmn"),
     glyph,
     badgeDefaultVisible: badge("#canvas"),

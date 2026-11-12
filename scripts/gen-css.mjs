@@ -17,16 +17,16 @@ const iconRules = fontCss
   .trim();
 
 import { existsSync } from "node:fs";
-const legendCss = ["legend-palette.css", "palette-colors.css", "workshop.css", "workshop-shell.css"].map((f) => (existsSync(root + "src/styles/" + f) ? read("src/styles/" + f) : "")).join("\n");
+const annotatedCss = ["annotated-palette.css", "palette-colors.css", "workshop.css", "workshop-shell.css"].map((f) => (existsSync(root + "src/styles/" + f) ? read("src/styles/" + f) : "")).join("\n").replace(/\/\*[\s\S]*?\*\//g, "");
 const base = [
   read("node_modules/diagram-js/assets/diagram-js.css"),
   read("node_modules/bpmn-js/dist/assets/bpmn-js.css"),
   iconRules,
   read("src/styles/canvas.css"),
-  legendCss,
+  annotatedCss,
 ].join("\n");
 
-// data: URIs (legend palette glyphs, upstream breadcrumb arrow) become files shipped under
+// data: URIs (annotated palette glyphs, upstream breadcrumb arrow) become files shipped under
 // dist/assets/inline/, so a strict CSP needs no `data:` source and a CDN serves them like the fonts.
 // The CSS keeps a placeholder per file; the runtime resolves it with one literal
 // `new URL(..., import.meta.url)` per file (see assets.generated.ts), which bundlers can detect.

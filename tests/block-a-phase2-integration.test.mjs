@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { microfixSourcePin, phase2SourcePin } from "./helpers/block-a-phase2-pins.mjs";
+import { b2SuccessorPin } from "./helpers/lot0-history-pins.mjs";
 
 const load = path => JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url)));
 const receipt = load("docs/design/receipts/block-a-phase2-reseal.json");
@@ -27,7 +28,7 @@ test("Block A phase 2 should verify integrated successors from both lint branche
     const current = microfixSourcePin(entry.path, entry.current);
     const next = successor(entry.path);
     if (next) assert.deepEqual({ bytes: next.old.bytes, sha256: next.old.sha256 }, current, `${entry.path} fix3 predecessor`);
-    assert.deepEqual(pin(readFileSync(new URL(`../${entry.path}`, import.meta.url))), next ? { bytes: next.new.bytes, sha256: next.new.sha256 } : current, entry.path);
+    assert.deepEqual(pin(readFileSync(new URL(`../${entry.path}`, import.meta.url))), b2SuccessorPin(entry.path, next ? { bytes: next.new.bytes, sha256: next.new.sha256 } : current), entry.path);
     for (const previous of entry.predecessors) assert.deepEqual(phase2SourcePin(entry.path, previous), current, entry.path);
     assert.throws(() => phase2SourcePin(entry.path, { bytes: 0, sha256: "0".repeat(64) }), /phase 2 reseal predecessor/);
   }
@@ -40,7 +41,7 @@ test("Block A microfix should retain predecessor checks and verify every targete
   for (const entry of followup.files) {
     const next = successor(entry.path);
     if (next) assert.deepEqual({ bytes: next.old.bytes, sha256: next.old.sha256 }, entry.current, `${entry.path} fix3 predecessor`);
-    assert.deepEqual(pin(readFileSync(new URL(`../${entry.path}`, import.meta.url))), next ? { bytes: next.new.bytes, sha256: next.new.sha256 } : entry.current, entry.path);
+    assert.deepEqual(pin(readFileSync(new URL(`../${entry.path}`, import.meta.url))), b2SuccessorPin(entry.path, next ? { bytes: next.new.bytes, sha256: next.new.sha256 } : entry.current), entry.path);
     assert.deepEqual(microfixSourcePin(entry.path, entry.old), entry.current, entry.path);
     assert.throws(() => microfixSourcePin(entry.path, { bytes: 0, sha256: "0".repeat(64) }), /microfix reseal predecessor/);
   }

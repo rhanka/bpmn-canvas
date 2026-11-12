@@ -7,7 +7,6 @@ import { encodeDrawio } from "./drawio-encode.js";
 import { IoError } from "./errors.js";
 import type { FidelityNotice, IoOptions } from "./errors.js";
 import { BpmnModdle } from "bpmn-moddle";
-import semantics from "./semantics.json" with { type: "json" };
 import type { BpmnDefinitions, ModdleElement } from "../types.js";
 import { containedElements, readReferencePages, validateSemantics } from "./reference-model.js";
 import { referenceDrawio } from "./reference-drawio.js";
@@ -29,33 +28,34 @@ function freeze<T>(value: T): T {
   if (value && typeof value === "object") { for (const v of Object.values(value)) freeze(v); Object.freeze(value); }
   return value;
 }
-export const semanticDescriptor = freeze(semantics);
-export const semanticsChecksum = "c274f46f773b5f557f7995fa70aae9d8a50384aedfcc6c3a5d166563a17a7c97";
 /** Public moddle operations, independent of the upstream package's untyped declarations. */
 export interface ModdleModel {
   create<T extends ModdleElement = ModdleElement>(type: string, attributes?: Record<string, unknown>): T;
   fromXML(xml: string, options?: { lax?: boolean }): Promise<ParsedDefinitions>;
   toXML(element: ModdleElement, options?: { format?: boolean; preamble?: boolean }): Promise<{ xml: string }>;
 }
-export function createModdle(): ModdleModel { return new BpmnModdle({ sem: structuredClone(semanticDescriptor) }); }
+export function createModdle(options?: IoOptions): ModdleModel { return new BpmnModdle(packagesOf(options)); }
+const packagesOf = (options?: IoOptions): Record<string, unknown> => options?.descriptor ? { [options.descriptor.prefix]: structuredClone(options.descriptor) } : {};
 export interface ParsedDefinitions {
   readonly rootElement: BpmnDefinitions;
   readonly elementsById: Readonly<Record<string, ModdleElement>>;
   readonly warnings: readonly unknown[];
 }
 /** Descriptor-aware parse: required semantic facts may not disappear as reader warnings. */
-export async function parseDefinitions(xml: string): Promise<ParsedDefinitions> {
+export async function parseDefinitions(xml: string, options?: IoOptions): Promise<ParsedDefinitions> {
+  if (options?.descriptorId !== undefined && options.businessPolicy?.exportFacts?.descriptorId !== options.descriptorId) throw new IoError("profile-symbol", "Descriptor selection does not match policy", options.businessPolicy?.exportFacts?.descriptorId ? [options.businessPolicy.exportFacts.descriptorId] : []);
   if (/<!DOCTYPE/i.test(xml)) throw new IoError("dtd", "DTD is not supported");
   // Use the registered reader's exact tag/attribute resolution, but retain order as a String.
   // This covers Info/info and qualified aliases without Integer coercion erasing wire values.
-  const lexicalDescriptor = structuredClone(semanticDescriptor);
-  lexicalDescriptor.types[0]!.properties.find((p) => p.name === "order")!.type = "String";
+  const lexicalDescriptor = options?.descriptor ? structuredClone(options.descriptor) : undefined;
+  const orderField = options?.businessPolicy?.exportFacts?.properties.order;
+  if (lexicalDescriptor && orderField) for (const type of lexicalDescriptor.types) for (const property of type.properties ?? []) if (property.name.split(":").at(-1) === orderField.split(":").at(-1)) property.type = "String";
   let wire;
-  try { wire = await new BpmnModdle({ sem: lexicalDescriptor }).fromXML(xml); }
+  try { wire = await new BpmnModdle(lexicalDescriptor ? { [lexicalDescriptor.prefix]: lexicalDescriptor } : {}).fromXML(xml); }
   catch (error) { throw new IoError("invalid-xml", String(error)); }
   for (const e of containedElements(wire.rootElement)) for (const v of e.extensionElements?.values ?? []) {
-    if (v.$type !== "sem:Info" || v.order === undefined) continue;
-    const lexical = v.order.trim();
+    if (v.$type !== options?.businessPolicy?.exportFacts?.extensionType || !orderField || v[orderField] === undefined) continue;
+    const lexical = String(v[orderField!]).trim();
     if (!/^[+-]?\d+$/.test(lexical) || !Number.isSafeInteger(Number(lexical)) || Number(lexical) < 0) throw new IoError("invalid-semantics", "Order must be a nonnegative integer", [e.id]);
   }
   // Some upstream generic readers lose a URI when an unknown namespace shadows
@@ -63,16 +63,16 @@ export async function parseDefinitions(xml: string): Promise<ParsedDefinitions> 
   // reader; their resolved descriptors then retain the URI independently of scope.
   // Declarations come from parsed model attributes, so comments cannot create them.
   const nsMap: Record<string, string> = {};
-  const knownUris = new Set(new BpmnModdle({ sem: structuredClone(semanticDescriptor) }).getPackages().map((p: { uri: string }) => p.uri));
+  const knownUris = new Set(new BpmnModdle(packagesOf(options)).getPackages().map((p: { uri: string }) => p.uri));
   for (const e of containedElements(wire.rootElement)) for (const [key, uri] of Object.entries(e.$descriptor?.isGeneric ? e : e.$attrs ?? {})) {
     if ((key === "xmlns" || key.startsWith("xmlns:")) && typeof uri === "string" && !knownUris.has(uri) && !nsMap[uri]) nsMap[uri] = `extension${Object.keys(nsMap).length}`;
   }
   let parsed;
-  try { parsed = await new BpmnModdle({ sem: structuredClone(semanticDescriptor) }, { nsMap }).fromXML(xml); }
+  try { parsed = await new BpmnModdle(packagesOf(options), { nsMap }).fromXML(xml); }
   catch (error) { throw new IoError("invalid-xml", String(error)); }
   const root = parsed.rootElement as BpmnDefinitions;
   // Required namespace versions are checked on resolved model extensions, not text.
-  validateSemantics(root);
+  validateSemantics(root, options?.businessPolicy, options?.descriptor?.uri);
   if (parsed.warnings.length) {
     const w = parsed.warnings[0] as { message: string; element?: ModdleElement; context?: { element?: ModdleElement } };
     throw new IoError("invalid-semantics", w.message, [w.element?.id ?? w.context?.element?.id ?? root.id ?? ""]);
@@ -95,16 +95,17 @@ export function initializeCodecs(configuration: CodecConfiguration = {}): void {
 /** Existing-consumer adapter. Workbench proofs use the separately exported native functions.
  * Never parse XML, normalize, lay out or read side facts here.
  */
-async function exportModel(definitions: BpmnDefinitions, format: ExportFormat): Promise<Uint8Array> {
+async function exportModel(definitions: BpmnDefinitions, format: ExportFormat, options?: IoOptions): Promise<Uint8Array> {
+  if (options?.descriptorId !== undefined && options.businessPolicy?.exportFacts?.descriptorId !== options.descriptorId) throw new IoError("profile-symbol", "Descriptor selection does not match policy", options.businessPolicy?.exportFacts?.descriptorId ? [options.businessPolicy.exportFacts.descriptorId] : []);
   if (definitions?.$type !== "bpmn:Definitions") throw new IoError("not-bpmn", "Expected moddle bpmn:Definitions");
   if (format === "bpmn") {
-    const serialized = await createModdle().toXML(definitions, { format: true });
+    const serialized = await createModdle(options).toXML(definitions, { format: true });
     return new TextEncoder().encode(serialized.xml);
   }
   if (format !== "drawio" && format !== "sparx") throw new IoError("unsupported-model", "Unknown export format");
-  const pages = readReferencePages(definitions);
+  const pages = readReferencePages(definitions, options?.businessPolicy, options?.descriptor?.uri);
   const config = fixedConfig ??= freeze(resolveConfig({}));
-  return new TextEncoder().encode(format === "drawio" ? referenceDrawio(pages, config) : referenceSparx(pages, config));
+  return new TextEncoder().encode(format === "drawio" ? referenceDrawio(pages, { ...config, ...options }) : referenceSparx(pages, { ...config, ...options }));
 }
 export { exportModel as export };
 

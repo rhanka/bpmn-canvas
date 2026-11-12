@@ -30,7 +30,8 @@ export async function bundlePage(entry, name) {
   return { url: pathToFileURL(join(pagedir, "index.html")).href, outdir };
 }
 
-export async function runInBrowser(entry, name, fn) {
+/** `init` (optional, JSON): set as `window.__fixture` before the page loads (browser twins of the Node fixture options). */
+export async function runInBrowser(entry, name, fn, init) {
   const { url, outdir } = await bundlePage(entry, name);
   const profile = mkdtempSync(join(tmpdir(), "b-"));
   // Unix-domain sockets are limited to 107 chars and Chromium nests its IPC
@@ -46,6 +47,7 @@ export async function runInBrowser(entry, name, fn) {
       args: ["--no-first-run", "--no-default-browser-check", "--allow-file-access-from-files"],
     });
     const page = context.pages()[0] ?? (await context.newPage());
+    if (init !== undefined) await page.addInitScript((value) => { window.__fixture = value; }, init);
     page.on("console", (m) => consoleLines.push(`[${m.type()}] ${m.text()}`));
     page.on("pageerror", (e) => consoleLines.push(`[pageerror] ${e.message}`));
     await page.goto(url);

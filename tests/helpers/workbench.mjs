@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { semanticDescriptor } from "../../dist/io/index.js";
+import { fixtureDescriptor } from "./injected-descriptor.mjs";
 
 export function freeze(value, seen = new Set()) {
   if (value && typeof value === "object" && !seen.has(value)) {
@@ -10,7 +10,7 @@ export function freeze(value, seen = new Set()) {
   }
   return value;
 }
-export const configuration = freeze({ contractVersion: "1", defaults: "explicit", descriptors: { sem: structuredClone(semanticDescriptor) } });
+export const configuration = freeze({ contractVersion: "1", defaults: "explicit", descriptors: { [fixtureDescriptor.prefix]: structuredClone(fixtureDescriptor) } });
 export const localJson = () => JSON.parse(readFileSync(new URL("../fixtures/io/workbench/local-model.json", import.meta.url), "utf8"));
 export const canon = (value) => JSON.stringify(sort(value));
 function sort(v) {

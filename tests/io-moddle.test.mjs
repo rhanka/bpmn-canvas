@@ -6,13 +6,6 @@ import { BpmnModdle } from "bpmn-moddle";
 import { JSDOM } from "jsdom";
 import { replaceType, io, descriptor, model, info, pages, outputs, refuses, freezeGraph, fixture, text } from "./helpers/semantic.mjs";
 
-test("shared descriptor is packaged verbatim with checksum and subpath", async () => {
-  const packed = readFileSync(new URL("../dist/io/semantics.json", import.meta.url));
-  assert.deepEqual(JSON.parse(packed), descriptor);
-  assert.equal(io.semanticsChecksum, createHash("sha256").update(packed).digest("hex"));
-  const sub = await import("@sentropic/bpmn-canvas/semantics.json", { with: { type: "json" } });
-  assert.deepEqual(sub.default, descriptor);
-});
 test("all six attributes round-trip as typed moddle references without warnings", async () => {
   const m = await model("C2");
   const c4 = await model("C4");
@@ -37,7 +30,7 @@ test("process IO uses standard DataInput/DataOutput and sets", async () => {
   p.ioSpecification = ioSpec;
   p.flowElements = p.flowElements.filter((e) => e !== input && e !== output && !["Order_form_obj", "Shipping_note_obj"].includes(e.id));
   delete info(input).direction; delete info(output).direction;
-  assert.deepEqual([pages(m)[0].nodes.get(input.id).type, pages(m)[0].nodes.get(output.id).type], ["EXTERNAL_INPUT", "PROCESS_OUTPUT"]);
+  assert.deepEqual([pages(m)[0].nodes.get(input.id).type, pages(m)[0].nodes.get(output.id).type], ["port-in", "port-out"]);
   await outputs(m);
 });
 test("unlinked explicit input and output roles survive without attachments", async () => {
@@ -47,7 +40,7 @@ test("unlinked explicit input and output roles survive without attachments", asy
   m.elementsById.Ship_order.dataOutputAssociations = [];
   for (const id of ["Order_form", "Shipping_note"]) delete info(m.elementsById[id]).primaryAssociationRef;
   const p = pages(m)[0];
-  assert.deepEqual([p.nodes.get("Order_form").type, p.nodes.get("Shipping_note").type], ["TASK_INPUT", "TASK_OUTPUT"]);
+  assert.deepEqual([p.nodes.get("Order_form").type, p.nodes.get("Shipping_note").type], ["object-in", "object-out"]);
   assert.equal(p.nodes.get("Order_form").task, undefined);
   await outputs(m);
 });
@@ -55,8 +48,8 @@ test("dual role separates declared role from primary attachment and preserves ev
   const m = await model("C4");
   info(m.elementsById.Request_file).direction = "in";
   const p = pages(m)[0], n = p.nodes.get("Request_file");
-  assert.deepEqual([n.type, n.task, n.dir], ["TASK_INPUT", "Prepare", "out"]);
-  assert.equal(p.connections.filter((c) => c.kind === "DATA").length, 2);
+  assert.deepEqual([n.type, n.task, n.dir], ["object-in", "Prepare", "out"]);
+  assert.equal(p.connections.filter((c) => c.kind === "data").length, 2);
   const out = await outputs(m);
   const dom = new JSDOM(out.drawio, { contentType: "application/xml" });
   try {
@@ -71,7 +64,7 @@ test("shared document selects explicit primary and keeps both endpoint orders", 
   info(m.elementsById.Doc_Guide).primaryAssociationRef = m.elementsById.DocLink_Guide_Review;
   const p = pages(m)[0];
   assert.equal(p.nodes.get("Doc_Guide").task, "Review");
-  assert.deepEqual(p.connections.filter((c) => c.kind === "DOC").map((c) => [c.source, c.target]), [["Doc_Guide", "Prepare"], ["Doc_Guide", "Review"]]);
+  assert.deepEqual(p.connections.filter((c) => c.kind === "document").map((c) => [c.source, c.target]), [["Doc_Guide", "Prepare"], ["Doc_Guide", "Review"]]);
   await outputs(m);
 });
 test("artifact lane membership follows IDs despite homonymous lanes and host", async () => {
@@ -85,15 +78,15 @@ test("relation labels and endpoints survive contradictory waypoints", async () =
   const m = await model("C4");
   for (const e of m.definitions.diagrams[0].plane.planeElement) if (e.waypoint) e.waypoint.reverse();
   const p = pages(m)[0];
-  assert.deepEqual(p.connections.filter((c) => c.kind === "DOC").map((c) => [c.source, c.target, c.label]), [["Doc_Guide", "Prepare", "see part 4"], ["Doc_Guide", "Review", ""]]);
-  assert.equal(p.connections.find((c) => c.kind === "DATA").label, "draft");
+  assert.deepEqual(p.connections.filter((c) => c.kind === "document").map((c) => [c.source, c.target, c.label]), [["Doc_Guide", "Prepare", "see part 4"], ["Doc_Guide", "Review", ""]]);
+  assert.equal(p.connections.find((c) => c.kind === "data").label, "draft");
   await outputs(m);
 });
 test("FLOW precedes DATA/DOC regardless of relation metadata and DI order", async () => {
   const m = await model("C4");
   info(m.elementsById.Out_Prepare_Request_file).order = 99;
   m.definitions.diagrams[0].plane.planeElement.reverse();
-  assert.deepEqual(pages(m)[0].connections.map((c) => c.kind), ["FLOW", "FLOW", "FLOW", "DATA", "DATA", "DOC", "DOC"]);
+  assert.deepEqual(pages(m)[0].connections.map((c) => c.kind), ["sequence", "sequence", "sequence", "data", "data", "document", "document"]);
   await outputs(m);
 });
 test("node grouping uses semantic order despite scrambled DI", async () => {
@@ -109,8 +102,8 @@ test("navigation follows exact Process IDs across homonyms, Unicode digits, rena
   m.elementsById.Archive_records.name = "Same page";
   const r = await io.parseDefinitions(text(await io.export(m.definitions, "bpmn")));
   const p = readPages(r);
-  assert.equal(p[0].nodes.get("Quote_preparation").targetProcessId, "Quote_preparation_2");
-  assert.equal(p[0].nodes.get("Run_2_1_checks").targetProcessId, "Process_2_1_Credit_check");
+  assert.equal(p[0].nodes.get("Quote_preparation").calledProcess, "Quote_preparation_2");
+  assert.equal(p[0].nodes.get("Run_2_1_checks").calledProcess, "Process_2_1_Credit_check");
   assert.equal(r.elementsById.Quote_preparation.$type, "bpmn:SubProcess");
   const d = text(await io.export(r.rootElement, "drawio"));
   assert.match(d, /value="Stage ٢.١"[^>]*link="data:page\/id,diagram-1"/);
@@ -147,7 +140,7 @@ test("missing DI on one page refuses the whole formatted export", async () => {
 for (const [id, role, host] of [["Order_form", "in", "Check_order"], ["Shipping_note", "out", "Ship_order"]]) test(`standard associations derive ${role} without direction`, async () => {
   const m = await model(); delete info(m.elementsById[id]).direction;
   const p = pages(m)[0], n = p.nodes.get(id);
-  assert.deepEqual([n.type, n.dir, n.task], [role === "in" ? "TASK_INPUT" : "TASK_OUTPUT", role, host]);
+  assert.deepEqual([n.type, n.dir, n.task], [role === "in" ? "object-in" : "object-out", role, host]);
   assert.deepEqual(await outputs(m), { drawio: fixture("C1", "expected.drawio"), sparx: fixture("C1", "expected.sparx.xml") });
 });
 for (const id of ["Request_file", "Doc_Guide"]) test(`${id}: absent primary uses semantic relation order against DI`, async () => {

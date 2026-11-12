@@ -1,10 +1,12 @@
+import { fixtureOptions, fixturePolicy } from "./injected-policy.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { BpmnModdle } from "bpmn-moddle";
-import * as io from "../../dist/io/index.js";
+import * as nativeIo from "../../dist/io/index.js";
 import { readReferencePages } from "../../dist/io/reference-model.js";
 
-export { io, readReferencePages };
+export { readReferencePages };
+export const io = { ...nativeIo, createModdle: (options = {}) => nativeIo.createModdle({ ...fixtureOptions, ...options }), parseDefinitions: (xml, options = {}) => nativeIo.parseDefinitions(xml, { ...fixtureOptions, ...options }), export: (definitions, format, options = {}) => nativeIo.export(definitions, format, { ...fixtureOptions, ...options }) };
 export const descriptor = JSON.parse(readFileSync(new URL("../fixtures/io/reference/semantics.json", import.meta.url)));
 export const config = { host: "test-host", drawio: { agent: "test-agent" }, sparx: { exporter: "test-exporter", exporterVersion: "9.9" } };
 export const text = (bytes) => new TextDecoder().decode(bytes);
@@ -35,7 +37,7 @@ export function replaceType(m, id, type) {
   m.elementsById[id] = replacement;
   return replacement;
 }
-export const pages = (m) => readReferencePages(m.definitions);
+export const pages = (m) => readReferencePages(m.definitions, fixturePolicy, fixtureOptions.descriptor.uri);
 export async function outputs(m) {
   io.initializeCodecs(config);
   return { drawio: text(await io.export(m.definitions, "drawio")), sparx: text(await io.export(m.definitions, "sparx")) };
