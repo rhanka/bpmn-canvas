@@ -287,8 +287,8 @@ the npm package files as they are (jsDelivr, unpkg):
 - Fonts and images stay files under `dist/assets/`, resolved next to the bundle: any versioned CDN path
   works, with no `data:` URI and no network call of its own. Fonts and mask images are fetched with CORS,
   which jsDelivr and unpkg send.
-- `dist/browser/sri.json` gives, for that version, each file's size (raw, gzip, brotli) and its
-  `integrity` hash (sha384). At 0.2: about 768 kB raw, 224 kB gzip, 188 kB brotli. The source maps name
+- `dist/browser/sri.json` gives, for that version, each file's size (raw and brotli) and its
+  `integrity` hash (sha384). At 0.2: about 768 kB raw, 188 kB brotli. The source maps name
   the sources without embedding them.
 - Licenses of every bundled package: `dist/browser/bpmn-canvas.licenses.txt`.
 
